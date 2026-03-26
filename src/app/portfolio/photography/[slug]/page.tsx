@@ -4,8 +4,10 @@ import {
   photographyProjects,
   getSlugsByType,
 } from "@/lib/portfolio-config";
+import { SITE_URL } from "@/lib/constants";
 import { getGalleryImages } from "@/lib/gallery-images";
 import GalleryWithLightbox from "@/components/gallery/GalleryWithLightbox";
+import GalleryWithDownload from "@/components/download/GalleryWithDownload";
 
 interface Params {
   slug: string;
@@ -44,15 +46,36 @@ export default async function PhotographyProjectPage({
 
   const images = getGalleryImages(slug, "photography");
 
+  const galleryJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    name: project.title,
+    description: project.description,
+    url: `${SITE_URL}/portfolio/photography/${slug}/`,
+    author: {
+      "@type": "Person",
+      name: "Jinee Chen",
+      url: `${SITE_URL}/`,
+    },
+  };
+
   return (
     <main className="project-page container">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(galleryJsonLd) }}
+      />
       <h1 className="project-heading">{project.heading}</h1>
       {project.description && (
         <p className="project-description">{project.description}</p>
       )}
 
       {images.length > 0 ? (
-        <GalleryWithLightbox images={images} />
+        project.enableDownload ? (
+          <GalleryWithDownload images={images} project={slug} />
+        ) : (
+          <GalleryWithLightbox images={images} />
+        )
       ) : (
         <p className="gallery-empty">No images available yet.</p>
       )}

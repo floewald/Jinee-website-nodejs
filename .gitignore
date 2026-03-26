@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Backend config (contain credentials — use *.example.php as templates)
+backend/contact/config.php
+backend/download/download_config.php
+backend/contact/logs/
+backend/download/rate-limit/
+backend/download/tmp/
+
+# Legacy site (separate git repo — do not commit as submodule)
+Jinee_website/

@@ -38,7 +38,7 @@
     "portfolioCard": {
       "cardTitle": "CNA | Dear Singapore",
       "thumbnail": "/assets/video/singer-jasmin-sokko/singer-jasmin-sokko-800.webp",
-      "order": 2
+      "order": 4
     }
   },
   {
@@ -79,7 +79,7 @@
     "portfolioCard": {
       "cardTitle": "8world | RE: Old Times",
       "thumbnail": "/assets/video/re-old-times/re-old-times-1-800.webp",
-      "order": 3
+      "order": 5
     }
   },
   {
@@ -140,7 +140,7 @@
     "portfolioCard": {
       "cardTitle": "Johnson Health Tech",
       "thumbnail": "/assets/video/into-the-gym/into-the-gym-1-800.webp",
-      "order": 4
+      "order": 6
     }
   },
   {
@@ -171,7 +171,7 @@
     "portfolioCard": {
       "cardTitle": "CNA Insider | Our Blind Kitchen",
       "thumbnail": "/assets/video/blind-kitchen-chefs/blind-kitchen-chefs-1-800.webp",
-      "order": 5
+      "order": 7
     }
   },
   {
@@ -207,7 +207,7 @@
     "portfolioCard": {
       "cardTitle": "CNA Insider | Lunch With Us",
       "thumbnail": "/assets/video/lunch-with-us/lunch-with-us-1-800.webp",
-      "order": 6
+      "order": 8
     }
   },
   {
@@ -277,7 +277,12 @@
         "embedUrl": "https://www.youtube.com/embed/9PjWLStxWCc",
         "uploadDate": "2023-01-01T00:00:00+08:00"
       }
-    ]
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA Insider | SCDF",
+      "thumbnail": "/assets/video/scdf-project/scdf-project-1-800.webp",
+      "order": 9
+    }
   },
   {
     "type": "video",
@@ -293,7 +298,12 @@
         "embedUrl": "https://www.youtube.com/embed/8nRIG_hO_PU",
         "uploadDate": "2023-01-01T00:00:00+08:00"
       }
-    ]
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA Insider | Stay at Home Dad",
+      "thumbnail": "/assets/video/stay-at-home-dad/stay-at-home-dad-800.webp",
+      "order": 12
+    }
   },
   {
     "type": "video",
@@ -309,7 +319,12 @@
         "embedUrl": "https://www.youtube.com/embed/asVm61iRhmA",
         "uploadDate": "2023-01-01T00:00:00+08:00"
       }
-    ]
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA Insider | MOM",
+      "thumbnail": "/assets/video/work-in-sgp/work-in-sgp-800.webp",
+      "order": 11
+    }
   },
   {
     "type": "video",
@@ -330,7 +345,12 @@
         "embedUrl": "https://www.youtube.com/embed/bzWprvJyzZs",
         "uploadDate": "2023-01-01T00:00:00+08:00"
       }
-    ]
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA Insider | Scam",
+      "thumbnail": "/assets/video/i-fell/i-fell-1-800.webp",
+      "order": 10
+    }
   },
   {
     "type": "video",
@@ -346,6 +366,31 @@
         "embedUrl": "https://www.youtube.com/embed/hJn7y2VvjQs",
         "uploadDate": "2023-01-01T00:00:00+08:00"
       }
-    ]
+    ],
+    "portfolioCard": {
+      "cardTitle": "8world |《看见主播》40、50岁建康外食",
+      "thumbnail": "/assets/video/healthy-dining/healthy-dining-800.webp",
+      "order": 2
+    }
+  },
+  {
+    "type": "video",
+    "slug": "social-media-addiction",
+    "title": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
+    "description": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
+    "heading": "📍 Singapore | Videographer",
+    "ogImage": "https://jineechen.com/assets/video/social-media-addiction/social-media-addiction-800.webp",
+    "videos": [
+      {
+        "title": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
+        "embedUrl": "https://www.youtube.com/embed/tZ5tjTqomvg",
+        "uploadDate": "2023-01-01T00:00:00+08:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
+      "thumbnail": "/assets/video/social-media-addiction/social-media-addiction-800.webp",
+      "order": 3
+    }
   }
 ]

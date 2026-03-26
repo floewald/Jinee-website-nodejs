@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { videoProjects, getSlugsByType } from "@/lib/portfolio-config";
+import { SITE_URL } from "@/lib/constants";
 import VideoPlayer from "@/components/video/VideoPlayer";
 
 interface Params {
@@ -38,8 +39,22 @@ export default async function VideoProjectPage({
   const project = videoProjects.find((p) => p.slug === slug);
   if (!project) notFound();
 
+  const videoJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: project.videos[0]?.title ?? project.title,
+    description: project.description,
+    thumbnailUrl: [`${SITE_URL}/assets/video/${slug}/${slug}-800.webp`],
+    embedUrl: project.videos[0]?.embedUrl,
+    uploadDate: project.videos[0]?.uploadDate ?? "2023-01-01T00:00:00+08:00",
+  };
+
   return (
     <main className="project-page container">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoJsonLd) }}
+      />
       <h1 className="project-heading">{project.heading}</h1>
       {project.longDescription && (
         <p className="project-description">{project.longDescription}</p>

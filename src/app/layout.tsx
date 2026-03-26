@@ -56,6 +56,17 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE_NAME,
+  url: `${SITE_URL}/`,
+  sameAs: [
+    "https://www.instagram.com/",
+    "https://www.linkedin.com/",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -63,6 +74,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} h-full`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <Header />
         <main id="main-content" className="flex-1">

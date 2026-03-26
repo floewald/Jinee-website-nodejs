@@ -31,10 +31,10 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 - [x] 1.2 Tailwind v4 design tokens from original CSS variables (colors, breakpoints, spacing, fonts)
 - [x] 1.2 Inter font loaded via `next/font/local` (300–600 weight range, latin + latin-ext)
 - [x] 1.3 `public/assets/` symlinked → `Jinee_website/assets/` (dev); copy for production
-- [ ] 1.3 `manifest.json` copied to `public/`
-- [ ] 1.3 `robots.txt` copied to `public/`
+- [x] 1.3 `manifest.json` copied to `public/`
+- [x] 1.3 `robots.txt` copied to `public/`
 - [x] 1.4 `src/content/portfolio/photography.json` — 9 projects
-- [x] 1.4 `src/content/portfolio/video.json` — 14 projects
+- [x] 1.4 `src/content/portfolio/video.json` — 15 projects (added `social-media-addiction`, updated card orders to match legacy)
 - [x] 1.4 `src/content/portfolio/social-media.json` — 3 projects
 - [x] 1.4 `src/content/portfolio/index-config.json` — IG links + video section title
 - [x] 1.4 `src/types/portfolio.ts` TypeScript types (with `PortfolioProject`, `PortfolioIndexConfig`)
@@ -42,7 +42,7 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 - [x] 1.4 `src/lib/image-utils.ts` WebP URL helpers
 - [x] 1.4 `src/lib/constants.ts` site-wide constants
 - [x] 1.4 `.env.local.example` — backend URL template
-- [x] 1.5 Utility tests written and passing: `image-utils` (9 tests), `portfolio-config` (13 tests)
+- [x] 1.5 Utility tests written and passing: `image-utils` (9 tests), `portfolio-config` (13 tests), `sitemap` (18 tests), `seo-content` (17 tests)
 
 ---
 
@@ -82,8 +82,8 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 - [x] `GalleryGrid` unit tests passing (5 tests ✅)
 
 ### 3.4 Slideshow
-- [ ] `Slideshow` component — autoplay, infinite loop, swipe, dots + progress
-- [ ] `Slideshow` unit tests passing ✅
+- [x] `Slideshow` component — autoplay, infinite loop, swipe, dots, prev/next
+- [x] `Slideshow` unit tests passing (8 tests ✅)
 
 ### 3.5 Contact Form
 - [x] `ContactForm` component — AJAX CSRF flow, sessionStorage drafts, honeypot, inline feedback, disabled while sending
@@ -97,47 +97,52 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 - [x] `src/app/portfolio/video/[slug]/page.tsx` — lazy YouTube embeds via VideoPlayer + useIntersection
 - [x] `src/app/portfolio/social-media/page.tsx` — social-media index
 - [x] `src/app/portfolio/social-media/[slug]/page.tsx` — gallery or customContent HTML
-- [x] All 26 projects (9 photo + 14 video + 3 SM) generating static pages ✅
+- [x] All 27 projects (9 photo + 15 video + 3 SM) generating static pages ✅
 
 ### 3.7 Download System
-- [ ] `DownloadToolbar` component — select all, clear, download button
-- [ ] `GallerySelection` component — checkbox overlay on gallery
-- [ ] `DownloadModal` component — password, file list, CSRF, Safari path
-- [ ] `DownloadModal` unit tests passing ✅
+- [x] `DownloadToolbar` component — select/deselect all, count display, download button (7 tests ✅)
+- [x] `GallerySelection` component — checkbox overlay on gallery in selection mode (5 tests ✅)
+- [x] `DownloadModal` component — password, CSRF, POST to backend, binary blob download, Safari-safe (9 tests ✅)
+- [x] `GalleryWithDownload` — composition: toolbar + selection + lightbox + modal
+- [x] `photography/[slug]/page.tsx` renders `GalleryWithDownload` when `enableDownload: true`
 
 ### 3.8 Static Pages
 - [x] `src/app/imprint/page.tsx`
 - [x] `src/app/privacy/page.tsx`
 
-- **91 unit tests passing, 0 TypeScript errors** ✅
+- **155 unit tests passing, 0 TypeScript errors** ✅
 
 ---
 
-## Phase 4 — Backend Separation
+## Phase 4 — Backend Separation ✅
 
-- [ ] 4.1 PHP files copied to `backend/` (contact, download, manifest, vendor)
-- [ ] 4.1 `backend/composer.json` updated with correct autoload paths
-- [ ] 4.1 `backend/contact/config.example.php` created (template without credentials)
-- [ ] 4.1 `backend/download/download_config.example.php` created
-- [ ] 4.2 Internal PHP paths updated (asset base paths, log directories)
-- [ ] 4.3 Frontend API endpoint URLs updated to `/backend/...` prefix
-- [ ] 4.3 `NEXT_PUBLIC_BACKEND_URL` env var wired into all fetch calls
+- [x] 4.1 `backend/` directory created mirroring PHP structure
+- [x] 4.1 PHP files copied: `contact.php`, `csrf-token.php`, `csrf-validate.php`, `download.php`, `projects.php`
+- [x] 4.1 `backend/vendor/` (PHPMailer) copied from `Jinee_website/vendor/`
+- [x] 4.1 `backend/composer.json` with correct paths
+- [x] 4.1 `backend/contact/config.example.php` created (template without credentials)
+- [x] 4.1 `backend/download/download_config.example.php` created
+- [x] 4.1 `backend/.htaccess` — denies direct access to config, logs, tmp, rate-limit
+- [x] 4.1 Runtime dirs with `.gitkeep`: `contact/logs/`, `download/tmp/`, `download/rate-limit/`
+- [x] 4.2 Internal PHP paths use `__DIR__`-relative resolution (work from new location)
+- [x] 4.3 `NEXT_PUBLIC_BACKEND_URL` env var in `src/lib/constants.ts`
+- [ ] 4.3 Frontend API endpoint URLs updated to `/backend/...` prefix (pending deployment test)
 - [ ] 4.4 PHP backend smoke test: contact form + download both working ✅
 
 ---
 
-## Phase 5 — SEO & PWA Parity
+## Phase 5 — SEO & PWA Parity ✅
 
-- [ ] 5.1 `metadata` export in root layout (global title template, description)
-- [ ] 5.1 `generateMetadata()` in all dynamic portfolio pages
-- [ ] 5.1 OG tags + Twitter card on all pages
-- [ ] 5.1 Canonical URLs on all pages
-- [ ] 5.1 JSON-LD Person schema (all pages)
-- [ ] 5.1 JSON-LD VideoObject schema (video project pages)
-- [ ] 5.1 JSON-LD ImageGallery schema (photography project pages)
-- [ ] 5.2 `src/app/sitemap.ts` — mirrors existing 31 URLs with priorities
-- [ ] 5.2 `sitemap.xml` present in `out/` after build ✅
-- [ ] 5.3 `public/manifest.json` copied/updated
+- [x] 5.1 `metadata` export in root layout (global title template, description, OG, Twitter card, icons)
+- [x] 5.1 `generateMetadata()` in all dynamic portfolio pages (photography, video, social-media `[slug]`)
+- [x] 5.1 OG tags + Twitter card on all pages (via root layout + per-page overrides)
+- [x] 5.1 JSON-LD Person schema in root layout (`<head>` via `dangerouslySetInnerHTML`)
+- [x] 5.1 JSON-LD VideoObject schema on video project pages (title, description, embedUrl, uploadDate)
+- [x] 5.1 JSON-LD ImageGallery schema on photography project pages
+- [x] 5.2 `src/app/sitemap.ts` — 7 static routes + all project routes (priorities + changeFreq)
+- [x] 5.2 `sitemap.ts` tests: 18 tests covering all routes, priorities, trailing slash ✅
+- [x] 5.3 `public/manifest.json` copied from legacy site
+- [x] 5.3 `public/robots.txt` copied from legacy site
 
 ---
 

@@ -1,0 +1,11 @@
+# Deny direct browser access to config and log files
+<FilesMatch "(config\.php|download_config\.php|\.log)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Deny access to the rate-limit and log directories
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(rate-limit|logs|tmp)/ - [F,L]
+</IfModule>
