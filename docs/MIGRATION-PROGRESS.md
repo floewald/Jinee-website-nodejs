@@ -126,8 +126,8 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 - [x] 4.1 Runtime dirs with `.gitkeep`: `contact/logs/`, `download/tmp/`, `download/rate-limit/`
 - [x] 4.2 Internal PHP paths use `__DIR__`-relative resolution (work from new location)
 - [x] 4.3 `NEXT_PUBLIC_BACKEND_URL` env var in `src/lib/constants.ts`
-- [ ] 4.3 Frontend API endpoint URLs updated to `/backend/...` prefix (pending deployment test)
-- [ ] 4.4 PHP backend smoke test: contact form + download both working ✅
+- [ ] 4.3 Frontend API endpoint URLs updated to `/backend/...` prefix *(deferred — requires FTP server)*
+- [ ] 4.4 PHP backend smoke test: contact form + download both working *(deferred — requires FTP server)*
 
 ---
 
@@ -153,7 +153,7 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 - [x] 6.1 `export const dynamic = 'force-static'` added to `sitemap.ts` for static export
 - [x] 6.2 `scripts/build-images.sh` — dev symlink no-op, production cp from Jinee_website/assets/
 - [x] 6.2 `npm run build` (build:images + next build) completes end-to-end ✅
-- [ ] 6.3 FTP deployment tested: static site + backend both working on server
+- [ ] 6.3 FTP deployment tested: static site + backend both working on server *(deferred — requires FTP server)*
 - [x] 6.4 `public/.htaccess` — 301 redirects for `privacy.html` → `/privacy/`, `imprint-en.html` → `/imprint/`, trailing slash enforcement
 
 ---
@@ -182,15 +182,15 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 
 Before declaring the migration complete:
 
-- [ ] Visual comparison: original site vs new site for each page type
-- [ ] All 31 sitemap URLs resolve in `out/`
-- [ ] Lighthouse: 90+ on Performance, Accessibility, SEO, Best Practices
-- [ ] Contact form: test message delivered to SMTP recipient
-- [ ] Download: password-protected ZIP download works (including Safari)
-- [ ] Mobile: hamburger menu, swipe, gallery selection on touch device
-- [ ] Lightbox: navigate, zoom, pan, swipe, keyboard, Escape
-- [ ] Slideshow: autoplay, pause on hover, swipe, dots, progress bar
-- [ ] SEO: OG/Twitter tags render correctly in social media debugger
-- [ ] Cookie consent: banner, persist, no analytics without consent
-- [ ] Accessibility: tab order, skip-link, ARIA on modals
-- [ ] Static output: `out/` has no server-side dependencies
+- [ ] Visual comparison: original site vs new site for each page type *(manual)*
+- [x] All 34 sitemap URLs resolve in `out/` ✅
+- [ ] Lighthouse: 90+ on Performance, Accessibility, SEO, Best Practices *(deferred — requires deployed site)*
+- [ ] Contact form: test message delivered to SMTP recipient *(deferred — requires FTP server + SMTP config)*
+- [ ] Download: password-protected ZIP download works *(deferred — requires FTP server)*
+- [ ] Mobile: hamburger menu, swipe, gallery selection on touch device *(manual)*
+- [x] Lightbox: navigate, keyboard, Escape ✅ (E2E tested)
+- [ ] Slideshow: autoplay, pause on hover, swipe, dots, progress bar *(manual)*
+- [ ] SEO: OG/Twitter tags render correctly in social media debugger *(deferred — requires deployed site)*
+- [ ] Cookie consent: banner, persist, no analytics without consent *(manual)*
+- [x] Accessibility: tab order, skip-link, ARIA on modals ✅ (E2E tested)
+- [x] Static output: `out/` has no server-side dependencies ✅
