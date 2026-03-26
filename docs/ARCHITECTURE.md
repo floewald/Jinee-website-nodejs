@@ -6,7 +6,7 @@ Technical deep-dive into the Jinee Chen portfolio website. For local setup see [
 
 ## Overview
 
-The site is a **static Next.js 15 application** — pages are rendered to pure HTML at build time (`output: 'export'`) and deployed via FTP. A separate PHP backend handles the two server-side features (contact form and download system).
+The site is a **static Next.js 16 application** — pages are rendered to pure HTML at build time (`output: 'export'`) and deployed via FTP. A separate PHP backend handles the two server-side features (contact form and download system).
 
 ```
 Content JSON files
@@ -106,32 +106,29 @@ RootLayout (src/app/layout.tsx)
 └─ Footer
 
 Homepage (src/app/page.tsx)
-├─ HeroSection            — full-viewport header area
-├─ GallerySection         — 3×3 collage + Lightbox
+├─ GallerySection         — 3×3 collage + GalleryWithLightbox
 │   ├─ GalleryGrid
-│   └─ Lightbox           — portal, keyboard/swipe nav, zoom/pan
+│   └─ Lightbox           — keyboard/swipe nav (Esc/←/→)
 ├─ FeaturedSection        — video project cards + IG previews
-│   ├─ ProjectCard[]      — each with Slideshow
-│   └─ InstagramPreview[]
 ├─ AboutSection           — avatar, bilingual bio
 └─ ContactSection
-    ├─ ContactInfo
     └─ ContactForm        — AJAX, CSRF, sessionStorage drafts
 
 Photography project page (src/app/portfolio/photography/[slug]/page.tsx)
-├─ ProjectHeader          — title, back link
-├─ DownloadToolbar        — select-all, clear, download button
-├─ GalleryGrid            — with GallerySelection overlay
+├─ GalleryWithLightbox    — standard gallery (if enableDownload: false)
+│   ├─ GalleryGrid
 │   └─ Lightbox
-└─ DownloadModal          — password input, file selection, CSRF
+└─ GalleryWithDownload    — gallery + download (if enableDownload: true)
+    ├─ DownloadToolbar    — select-all, clear, download button
+    ├─ GallerySelection   — GalleryGrid with checkbox overlay
+    ├─ Lightbox
+    └─ DownloadModal      — password input, CSRF, ZIP download
 
 Video project page (src/app/portfolio/video/[slug]/page.tsx)
-├─ ProjectHeader
-└─ YouTubeEmbed[]         — lazy-loaded via IntersectionObserver
+└─ VideoPlayer[]          — lazy-loaded YouTube embeds via IntersectionObserver
 
 Social media project page (src/app/portfolio/social-media/[slug]/page.tsx)
-├─ ProjectHeader
-├─ GalleryGrid (optional) — hasGallery flag in config
+├─ GalleryWithLightbox (optional) — hasGallery flag in config
 └─ CustomContent (optional) — raw HTML from config
 ```
 

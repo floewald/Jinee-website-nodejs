@@ -52,7 +52,7 @@ It also generates a `images.json` manifest in the folder — the gallery reads t
 
 ### Step 3: Add the project config
 
-Open `src/content/portfolio/photography.json` and add a new entry to the `pages` array:
+Open `src/content/portfolio/photography.json` and add a new entry to the JSON array:
 
 ```json
 {
@@ -60,7 +60,6 @@ Open `src/content/portfolio/photography.json` and add a new entry to the `pages`
   "slug": "my-new-project",
   "title": "Client Name | Project Title",
   "description": "Short description for search engines (120–160 characters).",
-  "canonicalPath": "/portfolio/photography/my-new-project/",
   "heading": "📍 Singapore | Event Photography",
   "ogImage": "https://jineechen.com/assets/photography/my-new-project/IMG_001-800.webp",
   "enableDownload": false,
@@ -81,7 +80,6 @@ Open `src/content/portfolio/photography.json` and add a new entry to the `pages`
 | `slug` | ✅ | URL-safe, e.g. `"my-new-project"` (no spaces, lowercase, hyphens) |
 | `title` | ✅ | Page `<title>` tag — shown in browser tab and Google results |
 | `description` | ✅ | Meta description for SEO (120–160 chars) |
-| `canonicalPath` | ✅ | Must match `/portfolio/photography/{slug}/` |
 | `heading` | ✅ | Large heading shown at top of the project page |
 | `ogImage` | ✅ | Full URL (with `https://jineechen.com`) used for social media sharing previews |
 | `enableDownload` | ✅ | `true` to show the Download button; `false` to hide it |
@@ -134,7 +132,7 @@ Run `npm run build:images` to generate WebP versions.
 
 ### Step 3: Add the project config
 
-Open `src/content/portfolio/video.json` and add:
+Open `src/content/portfolio/video.json` and add a new entry to the JSON array:
 
 ```json
 {
@@ -143,7 +141,6 @@ Open `src/content/portfolio/video.json` and add:
   "title": "Client Name | Video Series Title",
   "description": "Short description (120–160 chars).",
   "longDescription": "Longer intro paragraph shown at the top of the project page. Can be multiple sentences.",
-  "canonicalPath": "/portfolio/video/my-video-project/",
   "heading": "📍 Singapore | Producer | Director | Videographer",
   "ogImage": "https://jineechen.com/assets/video/my-video-project/thumbnail-800.webp",
   "videos": [
@@ -194,7 +191,7 @@ Place images in `assets-raw/social-media/my-social-project/` and run `npm run bu
 
 ### Step 3: Add the project config
 
-Open `src/content/portfolio/social-media.json` and add:
+Open `src/content/portfolio/social-media.json` and add a new entry to the JSON array:
 
 **Gallery variant:**
 ```json
@@ -203,7 +200,6 @@ Open `src/content/portfolio/social-media.json` and add:
   "slug": "my-social-project",
   "title": "My Social Media Project",
   "description": "Short description.",
-  "canonicalPath": "/portfolio/social-media/my-social-project/",
   "heading": "📱 Social Media | My Category",
   "ogImage": "https://jineechen.com/assets/social-media/my-social-project/img-001-800.webp",
   "hasGallery": true,
@@ -218,7 +214,6 @@ Open `src/content/portfolio/social-media.json` and add:
   "slug": "ig-motivational",
   "title": "Motivational Content | Social Media",
   "description": "Social Media Content",
-  "canonicalPath": "/portfolio/social-media/ig-motivational/",
   "heading": "📱 Social Media | Motivational Content",
   "ogImage": "https://jineechen.com/assets/social-media/ig-motivational/preview-800.webp",
   "hasGallery": false,
@@ -281,4 +276,6 @@ The underlying JSON structure stays the same — you can always switch back to e
 
 ## Site-wide Configuration
 
-Global settings (site name, social links, about/contact info) are in `src/content/site.json`. Edit this file and rebuild to update footer links, contact info, or social media URLs across the whole site.
+Global settings like the site name, email, Calendly link, and social media URLs are currently hardcoded in the relevant components (`Footer.tsx`, `ContactSection.tsx`, `AboutSection.tsx`). To change them, edit the component directly and rebuild.
+
+Once [Phase 7 (TinaCMS)](MIGRATION-PROGRESS.md) is complete, these will be editable via the visual editor.

@@ -1,6 +1,6 @@
 # Jinee Chen — Portfolio Website
 
-Personal portfolio website for **Jinee Chen**, a female photographer and videographer based in Singapore. Built with Next.js 15, TypeScript, and Tailwind CSS. Exported as a pure static site and deployed via FTP.
+Personal portfolio website for **Jinee Chen**, a female photographer and videographer based in Singapore. Built with Next.js 16, TypeScript, and Tailwind CSS. Exported as a pure static site and deployed via FTP.
 
 ---
 
@@ -8,7 +8,7 @@ Personal portfolio website for **Jinee Chen**, a female photographer and videogr
 
 | Layer | Technology |
 |-------|-----------|
-| Framework | [Next.js 15](https://nextjs.org/) — App Router |
+| Framework | [Next.js 16](https://nextjs.org/) — App Router |
 | Language | TypeScript |
 | Styling | [Tailwind CSS v4](https://tailwindcss.com/) |
 | CMS (optional) | [TinaCMS](https://tina.io/) — file-based visual editing, Phase 7 |
@@ -60,14 +60,13 @@ npm run dev
 | `npm run dev` | Start Next.js dev server (Turbopack, http://localhost:3000) |
 | `npm run build` | Full production build: images → Next.js → static `out/` |
 | `npm run build:images` | Run image pipeline only (WebP conversion + manifests) |
-| `npm run export` | Alias for `next build` with static output |
+| `npm run build:next` | Next.js build only (skip image pipeline) |
 | `npm run lint` | ESLint across all TS/TSX files |
 | `npm run type-check` | TypeScript compiler check (no emit) |
 | `npm run test` | Run Jest unit + component tests |
 | `npm run test:watch` | Jest in watch mode |
 | `npm run test:coverage` | Jest with coverage report |
 | `npm run test:e2e` | Playwright end-to-end tests |
-| `npm run tina` | Start TinaCMS visual editor at http://localhost:4001/admin |
 
 ---
 
@@ -87,13 +86,13 @@ npm run dev
 │   │   ├── imprint/page.tsx
 │   │   └── privacy/page.tsx
 │   ├── components/
-│   │   ├── layout/            # Header, Footer, Navigation, Logo
-│   │   ├── gallery/           # GalleryGrid, Lightbox, GallerySelection
-│   │   ├── slideshow/         # Slideshow (project cards)
-│   │   ├── contact/           # ContactForm
-│   │   ├── download/          # DownloadModal, DownloadToolbar
-│   │   ├── video/             # YouTubeEmbed (lazy-loaded)
-│   │   └── ui/                # Button, CookieBanner, SkipLink
+│   │   ├─ layout/            # Header, Footer, Navigation
+│   │   ├─ gallery/           # GalleryGrid, Lightbox, Slideshow, GalleryWithLightbox
+│   │   ├─ sections/          # GallerySection, FeaturedSection, AboutSection, ContactSection
+│   │   ├─ forms/             # ContactForm
+│   │   ├─ download/          # DownloadModal, DownloadToolbar, GallerySelection, GalleryWithDownload
+│   │   ├─ video/             # VideoPlayer (lazy-loaded YouTube embeds)
+│   │   └─ ui/                # CookieBanner
 │   ├── hooks/
 │   │   ├── useSwipe.ts        # Touch swipe detection
 │   │   ├── useLightbox.ts     # Lightbox open/close/navigate state
@@ -106,11 +105,11 @@ npm run dev
 │   ├── types/
 │   │   └── portfolio.ts         # TypeScript types for portfolio data
 │   └── content/
-│       ├── portfolio/
-│       │   ├── photography.json  # Photography project definitions
-│       │   ├── video.json        # Video project definitions
-│       │   └── social-media.json # Social media project definitions
-│       └── site.json             # Global config (name, social links, etc.)
+│       └─ portfolio/
+│           ├─ photography.json  # Photography project definitions (9 projects)
+│           ├─ video.json        # Video project definitions (15 projects)
+│           ├─ social-media.json # Social media project definitions (3 projects)
+│           └─ index-config.json # Homepage featured section config
 ├── public/
 │   ├── assets/                # Images, fonts (symlinked from Jinee_website/assets/)
 │   ├── manifest.json          # PWA manifest
@@ -132,7 +131,7 @@ npm run dev
 │   └── MIGRATION-PROGRESS.md
 ├── Jinee_website/             # Original site (kept as reference)
 ├── next.config.ts
-├── tailwind.config.ts
+├─ postcss.config.mjs
 └── tsconfig.json
 ```
 

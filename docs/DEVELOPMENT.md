@@ -181,11 +181,10 @@ E2E tests target `http://localhost:3000` (configurable in `playwright.config.ts`
 
 ## Pre-commit Hooks
 
-[Husky](https://typicode.github.io/husky/) runs automatically before each `git commit`:
+[Husky](https://typicode.github.io/husky/) runs `lint-staged` automatically before each `git commit`. For staged `.ts`/`.tsx` files, it runs:
 
-1. `lint-staged` — runs ESLint on staged `.ts`/`.tsx` files
-2. TypeScript check — `tsc --noEmit` across the project
-3. Unit tests — `jest --passWithNoTests --bail` (stops on first failure)
+1. `eslint --fix` — auto-fixes lint issues on staged files
+2. `jest --bail --findRelatedTests` — runs only tests related to changed files (stops on first failure)
 
 To skip the pre-commit hook in an emergency:
 ```bash
@@ -225,8 +224,6 @@ Install the recommended extensions for the best DX:
 - **Prettier** (`esbenp.prettier-vscode`)
 - **TypeScript** (built-in, ensure `typescript.tsdk` is set to workspace version)
 - **Playwright Test** (`ms-playwright.playwright`)
-
-A `.vscode/extensions.json` file is included that prompts VS Code to suggest these automatically.
 
 ---
 

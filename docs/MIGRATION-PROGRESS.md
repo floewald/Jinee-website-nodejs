@@ -66,9 +66,9 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 ### 3.1 Homepage
 - [x] ~~`HeroSection` component~~ — header is the hero; homepage adds sr-only `<h1>` only
 - [x] `GallerySection` — 3×3 travel-photography collage with `GalleryWithLightbox` (4 tests ✅)
-- [x] `FeaturedSection` — 6 video project cards + 4 IG previews
-- [x] `AboutSection` — avatar, bilingual bio (EN + Traditional Chinese)
-- [x] `ContactSection` — info card + `ContactForm`
+- [x] `FeaturedSection` — 6 video project cards + 4 IG previews (6 tests ✅)
+- [x] `AboutSection` — avatar, bilingual bio (EN + Traditional Chinese) (5 tests ✅)
+- [x] `ContactSection` — info card + `ContactForm` (5 tests ✅)
 - [x] `src/app/page.tsx` assembles all sections (h1 + Gallery + Featured + About + Contact)
 
 ### 3.2 Lightbox
@@ -94,7 +94,7 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 - [x] `src/app/portfolio/photography/page.tsx` — photography index (sorted by portfolioCard.order)
 - [x] `src/app/portfolio/photography/[slug]/page.tsx` — gallery + generateStaticParams + generateMetadata
 - [x] `src/app/portfolio/video/page.tsx` — video index
-- [x] `src/app/portfolio/video/[slug]/page.tsx` — lazy YouTube embeds via VideoPlayer + useIntersection
+- [x] `src/app/portfolio/video/[slug]/page.tsx` — lazy YouTube embeds via VideoPlayer + useIntersection (5 tests ✅)
 - [x] `src/app/portfolio/social-media/page.tsx` — social-media index
 - [x] `src/app/portfolio/social-media/[slug]/page.tsx` — gallery or customContent HTML
 - [x] All 27 projects (9 photo + 15 video + 3 SM) generating static pages ✅
@@ -110,7 +110,7 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 - [x] `src/app/imprint/page.tsx`
 - [x] `src/app/privacy/page.tsx`
 
-- **159 unit tests passing, 0 TypeScript errors** ✅
+- **180 unit tests passing, 0 TypeScript errors** ✅
 
 ---
 
@@ -174,7 +174,7 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 - [x] `e2e/lightbox.spec.ts` — open, next/prev buttons, arrow keys, Escape, close button, backdrop (7 tests ✅)
 - [x] `e2e/download-modal.spec.ts` — toolbar, select all, modal open, wrong password, close, Escape, cancel (8 tests ✅)
 
-**37 E2E tests passing (Chromium), 159 unit tests passing — 196 total tests** ✅
+**37 E2E tests passing (Chromium), 180 unit tests passing — 217 total tests** ✅
 
 ---
 
