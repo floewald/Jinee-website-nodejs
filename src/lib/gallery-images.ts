@@ -1,0 +1,50 @@
+import fs from "fs";
+import path from "path";
+
+export interface GalleryImage {
+  src: string;
+  alt: string;
+  srcFull: string;
+}
+
+interface ImageManifestItem {
+  basename: string;
+  thumb: string | null;
+  md: string | null;
+  lg: string | null;
+  original: string | null;
+}
+
+/**
+ * Reads the images.json manifest for a project at build time.
+ * Returns images ready for use in GalleryGrid / Lightbox.
+ */
+export function getGalleryImages(
+  slug: string,
+  type: "photography" | "social-media" | "video"
+): GalleryImage[] {
+  const manifestPath = path.join(
+    process.cwd(),
+    "Jinee_website",
+    "assets",
+    type,
+    slug,
+    "images.json"
+  );
+
+  if (!fs.existsSync(manifestPath)) return [];
+
+  const data: ImageManifestItem[] = JSON.parse(
+    fs.readFileSync(manifestPath, "utf-8")
+  );
+
+  const baseUrl = `/assets/${type}/${slug}`;
+
+  return data
+    .filter((item) => item.md)
+    .map((item) => ({
+      src: `${baseUrl}/${item.md}`,
+      alt: item.basename,
+      srcFull: item.lg ? `${baseUrl}/${item.lg}` : `${baseUrl}/${item.md}`,
+    }));
+}
