@@ -1,0 +1,13 @@
+# Redirects from legacy .html URLs to Next.js clean URLs
+# Place this in the web root alongside out/ contents
+
+RewriteEngine On
+
+# Legacy HTML pages → new clean URLs (301 permanent redirect)
+RewriteRule ^privacy\.html$ /privacy/ [R=301,L]
+RewriteRule ^imprint-en\.html$ /imprint/ [R=301,L]
+
+# Ensure trailing slashes for clean URL consistency
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteRule ^(.*)$ /$1/ [R=301,L]

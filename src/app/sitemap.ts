@@ -6,6 +6,9 @@ import {
   socialMediaProjects,
 } from "@/lib/portfolio-config";
 
+// Required for Next.js static export (`output: 'export'`)
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date("2026-03-26");
 
