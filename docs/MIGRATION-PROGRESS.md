@@ -48,13 +48,16 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 
 ## Phase 2 — Core Layout & Components
 
-- [x] 2.1 Root layout (`src/app/layout.tsx`) — metadata, font, header/footer wired
+- [x] 2.1 Root layout (`src/app/layout.tsx`) — metadata, font, header/footer + CookieBanner wired
 - [x] 2.2 `Header` component — logo + tagline + nav (test-first, 4 tests ✅)
 - [x] 2.2 `Navigation` component — desktop hover submenu + mobile hamburger toggle (test-first, 6 tests ✅)
 - [x] 2.3 `Footer` component — copyright, email, Calendly, Imprint, Privacy (test-first, 5 tests ✅)
-- [ ] 2.4 `CookieBanner` component — consent cookie, Accept/Reject (test written first)
-- [ ] 2.4 Custom hooks implemented: `useSwipe`, `useLightbox`, `useIntersection`, `useMediaQuery`
-- **36 unit tests passing, 0 TypeScript errors** ✅
+- [x] 2.4 `CookieBanner` component — consent cookie `site_consent`, Accept/Reject, pre-existing consent skip (test-first, 8 tests ✅)
+- [x] 2.4 `useSwipe` hook — threshold + vertical-axis guard (test-first, 4 tests ✅)
+- [x] 2.4 `useMediaQuery` hook — SSR-safe, live updates (test-first, 3 tests ✅)
+- [x] 2.4 `useIntersection` hook — `once` mode, observe/disconnect lifecycle (test-first, 4 tests ✅)
+- [x] 2.4 `useLightbox` hook — open/close/next/prev/goTo/wrap-around (test-first, 10 tests ✅)
+- **66 unit tests passing, 0 TypeScript errors** ✅
 
 ---
 
