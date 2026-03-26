@@ -19,7 +19,7 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 - [x] 0.3 Jest + React Testing Library installed and configured
 - [x] 0.3 `jest.config.ts`, `jest.setup.ts`, `src/__mocks__/fileMock.ts` created
 - [x] 0.3 Playwright installed and configured (`playwright.config.ts`)
-- [ ] 0.3 Husky + lint-staged pre-commit hooks configured
+- [x] 0.3 Husky + lint-staged pre-commit hooks configured (eslint --fix + jest --findRelatedTests)
 - [x] 0.4 `docs/MIGRATION-PROGRESS.md` created (this file)
 
 ---
