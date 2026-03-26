@@ -1,0 +1,35 @@
+[
+  {
+    "type": "social-media",
+    "slug": "ig-motivational",
+    "title": "Motivational Content | Social Media",
+    "description": "Social Media Content",
+    "heading": "📱 Social Media | Motivational Content",
+    "ogImage": "https://jineechen.com/assets/social-media/ig-motivational/ig-motivational-1-800.webp",
+    "enableDownload": false,
+    "hasGallery": false,
+    "customContent": "<p class=\"lead\">Check out my motivational content on <a href=\"https://www.instagram.com/\" target=\"_blank\" rel=\"noopener\">Instagram</a>.</p>"
+  },
+  {
+    "type": "social-media",
+    "slug": "ig-house-unboxing",
+    "title": "House Unboxing | Social Media",
+    "description": "House unboxing social media content.",
+    "heading": "📱 Social Media | House Unboxing",
+    "ogImage": "https://jineechen.com/assets/social-media/ig-house-unboxing/ig-house-unboxing-1-800.webp",
+    "enableDownload": false,
+    "hasGallery": true,
+    "imageCount": 15
+  },
+  {
+    "type": "social-media",
+    "slug": "ig-own-travel-log",
+    "title": "Travel Log | Social Media",
+    "description": "Personal travel log social media content.",
+    "heading": "📱 Social Media | Travel Log",
+    "ogImage": "https://jineechen.com/assets/social-media/ig-own-travel-log/ig-own-travel-log-1-800.webp",
+    "enableDownload": false,
+    "hasGallery": true,
+    "imageCount": 25
+  }
+]

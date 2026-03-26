@@ -1,0 +1,30 @@
+{
+  "socialMediaLinks": [
+    {
+      "url": "https://www.instagram.com/reel/C-m-9EyO0aa/?igsh=MXY0NnQ2dzQwMXY0Mw%3D%3D",
+      "image": "/assets/social-media/ig-own-travel-log/ig-own-travel-log-1.webp",
+      "alt": "Instagram own travel log 1"
+    },
+    {
+      "url": "https://www.instagram.com/reel/DJHEeO-NH3B/?igsh=ZnRwd2NwbjllZW9j",
+      "image": "/assets/social-media/ig-own-travel-log/ig-own-travel-log-2.webp",
+      "alt": "Instagram own travel log 2"
+    },
+    {
+      "url": "https://www.instagram.com/p/DHz8PZCS181/",
+      "image": "/assets/social-media/ig-motivational/ig-motivational.webp",
+      "alt": "Instagram motivational"
+    },
+    {
+      "url": "https://www.instagram.com/p/DLH-jGtIxf3/",
+      "image": "/assets/social-media/ig-house-unboxing/ig-house-unboxing-2.webp",
+      "alt": "Instagram House unboxing 2"
+    },
+    {
+      "url": "https://www.instagram.com/p/DLUWjMjIaYo/",
+      "image": "/assets/social-media/ig-house-unboxing/ig-house-unboxing-4.webp",
+      "alt": "Instagram House unboxing 4"
+    }
+  ],
+  "videoSectionTitle": "Video - Youtube Content"
+}
