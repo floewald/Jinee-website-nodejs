@@ -64,12 +64,12 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 ## Phase 3 — Pages & Features
 
 ### 3.1 Homepage
-- [ ] `HeroSection` component
-- [ ] `GallerySection` — 3×3 collage with `GalleryGrid` + `Lightbox`
+- [x] ~~`HeroSection` component~~ — header is the hero; homepage adds sr-only `<h1>` only
+- [x] `GallerySection` — 3×3 travel-photography collage with `GalleryWithLightbox` (4 tests ✅)
 - [x] `FeaturedSection` — 6 video project cards + 4 IG previews
 - [x] `AboutSection` — avatar, bilingual bio (EN + Traditional Chinese)
 - [x] `ContactSection` — info card + `ContactForm`
-- [x] `src/app/page.tsx` assembles all sections
+- [x] `src/app/page.tsx` assembles all sections (h1 + Gallery + Featured + About + Contact)
 
 ### 3.2 Lightbox
 - [x] `Lightbox` component — dialog, keyboard (Esc/←/→), backdrop click, prev/next/close, counter
@@ -110,7 +110,7 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 - [x] `src/app/imprint/page.tsx`
 - [x] `src/app/privacy/page.tsx`
 
-- **155 unit tests passing, 0 TypeScript errors** ✅
+- **159 unit tests passing, 0 TypeScript errors** ✅
 
 ---
 
