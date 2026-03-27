@@ -7,6 +7,7 @@ import {
   portfolioIndexConfig,
   projectPath,
 } from "@/lib/portfolio-config";
+import { getProjectSlideshowImages } from "@/lib/gallery-images";
 import CardSlideshow from "@/components/gallery/CardSlideshow";
 
 export const metadata: Metadata = {
@@ -34,16 +35,21 @@ export default function PortfolioPage() {
           <h2 className="section-title section-title--center">Photography</h2>
           <hr className="section-title-divider" aria-hidden="true" />
           <div className="project-grid">
-            {photographyCards.map((project) => (
+            {photographyCards.map((project) => {
+              const slideshowImages = getProjectSlideshowImages(project.slug, "photography");
+              const previewImages = slideshowImages.length > 1
+                ? slideshowImages
+                : project.portfolioCard!.previewImages;
+              return (
               <Link
                 key={project.slug}
                 href={projectPath(project)}
                 className="project-card"
               >
                 <div className="project-card__thumb">
-                  {project.portfolioCard!.previewImages && project.portfolioCard!.previewImages.length > 1 ? (
+                  {previewImages && previewImages.length > 1 ? (
                     <CardSlideshow
-                      images={project.portfolioCard!.previewImages}
+                      images={previewImages}
                       alt={project.portfolioCard!.cardTitle}
                     />
                   ) : (
@@ -64,7 +70,8 @@ export default function PortfolioPage() {
                   </h3>
                 </div>
               </Link>
-            ))}
+              );
+            })}
           </div>
           <div className="section-cta">
             <Link href="/portfolio/photography/" className="btn btn--primary">

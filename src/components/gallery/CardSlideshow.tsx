@@ -64,18 +64,24 @@ export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
             className={`card-slideshow__slide${i === idx ? " card-slideshow__slide--active" : ""}${isPortrait ? " card-slideshow__slide--portrait" : ""}`}
           >
             {isPortrait && (
-              <div
-                className="card-slideshow__bg"
-                style={{ backgroundImage: `url(${src})` }}
-                aria-hidden="true"
-              />
+              <>
+                <div
+                  className="card-slideshow__bg"
+                  style={{ backgroundImage: `url("${src}")` }}
+                  aria-hidden="true"
+                />
+                <div className="card-slideshow__bg-overlay" aria-hidden="true" />
+              </>
             )}
             <Image
               src={src}
               alt={i === 0 ? alt : ""}
               fill
               className="project-card__img"
-              style={{ objectFit: isPortrait ? "contain" : "cover" }}
+              style={{
+                objectFit: isPortrait ? "contain" : "cover",
+                zIndex: isPortrait ? 2 : undefined,
+              }}
               unoptimized
               onLoad={(e) => handleLoad(e, i)}
             />

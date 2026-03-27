@@ -576,6 +576,8 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   position: relative;
   grid-row: span 2;
   border-radius: 8px;
+  /* clip-path reliably clips absolute/transformed children (e.g. blur ::before) */
+  clip-path: inset(0 round 8px);
 }
 .gallery-item--portrait .gallery-img {
   position: absolute;
@@ -586,26 +588,24 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   z-index: 1;
   border-radius: 0;
 }
-/* Next.js Image fill-mode wrapper inside portrait item must be transparent */
-.gallery-item--portrait > span {
+/* Next.js 15 Image fill renders a plain <img data-nimg="fill"> (no span wrapper) */
+.gallery-item--portrait img[data-nimg="fill"] {
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  overflow: hidden !important;
-  background: transparent !important;
+  object-fit: contain !important;
+  z-index: 1;
 }
 .gallery-item--portrait::before {
   content: '';
   position: absolute;
-  inset: 0;
+  inset: -12%;   /* extend so blur doesn't show hard edges */
   background-image: var(--portrait-bg-src);
   background-size: cover;
   background-position: center;
   filter: blur(14px);
-  transform: scale(1.12);
   z-index: 0;
-  border-radius: inherit;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -1125,12 +1125,15 @@ input::placeholder, textarea::placeholder {
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
+  background: #111;  /* dark fallback visible only before first image loads */
 }
 .card-slideshow__slide {
   position: absolute;
   inset: 0;
   opacity: 0;
   transition: opacity 0.5s ease;
+  background: transparent;
+  isolation: isolate;
 }
 .card-slideshow__slide--active {
   opacity: 1;
@@ -1138,18 +1141,20 @@ input::placeholder, textarea::placeholder {
 /* Portrait images inside card slide: blurred background fills the frame */
 .card-slideshow__bg {
   position: absolute;
-  inset: 0;
+  inset: -12%;       /* extends beyond frame so blur doesn't show hard edges */
   background-size: cover;
   background-position: center;
   filter: blur(14px);
-  transform: scale(1.12);
   z-index: 0;
 }
-/* Portrait images sit above blur bg; Next.js fill span must be transparent */
-.card-slideshow__slide--portrait > span {
+/* Semi-transparent overlay on top of the blur to soften/dim it */
+.card-slideshow__bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
   z-index: 1;
-  background: transparent !important;
 }
+/* Portrait image sits above blur bg and overlay (z-index set inline in JSX) */
 
 /* ══════════════════════════════════════════════════════════════════════════════
    SLIDESHOW

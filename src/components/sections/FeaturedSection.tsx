@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getVideoCards, portfolioIndexConfig } from "@/lib/portfolio-config";
+import { getProjectSlideshowImages } from "@/lib/gallery-images";
 import CardSlideshow from "@/components/gallery/CardSlideshow";
 
 export default function FeaturedSection() {
@@ -17,16 +18,21 @@ export default function FeaturedSection() {
 
         {/* Video cards */}
         <div className="project-cards">
-          {videoCards.map((project) => (
+          {videoCards.map((project) => {
+            const slideshowImages = getProjectSlideshowImages(project.slug, "video");
+            const previewImages = slideshowImages.length > 1
+              ? slideshowImages
+              : project.portfolioCard!.previewImages;
+            return (
             <Link
               key={project.slug}
               href={`/portfolio/video/${project.slug}/`}
               className="project-card"
             >
               <div className="project-card__thumb">
-                {project.portfolioCard!.previewImages && project.portfolioCard!.previewImages.length > 1 ? (
+                {previewImages && previewImages.length > 1 ? (
                   <CardSlideshow
-                    images={project.portfolioCard!.previewImages}
+                    images={previewImages}
                     alt={project.portfolioCard!.cardTitle}
                   />
                 ) : (
@@ -47,7 +53,8 @@ export default function FeaturedSection() {
                 </h3>
               </div>
             </Link>
-          ))}
+            );
+          })}
         </div>
 
         {/* Instagram previews */}

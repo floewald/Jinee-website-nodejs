@@ -89,7 +89,7 @@ Open `src/content/portfolio/photography.json` and add a new entry to the JSON ar
 | `portfolioCard.cardTitle` | Only if `portfolioCard` | Title shown below the card thumbnail |
 | `portfolioCard.thumbnail` | Only if `portfolioCard` | Card thumbnail image path (use `-800.webp`) |
 | `portfolioCard.order` | Only if `portfolioCard` | Lower numbers appear first |
-| `portfolioCard.previewImages` | Optional | Array of 2–3 image paths for the card slideshow (uses `-800.webp`). When provided, the card auto-cycles through the images with a staggered interval. Omit for a static thumbnail. |
+| `portfolioCard.previewImages` | Optional | Fallback array of 2–3 image paths for the card slideshow (uses `-800.webp`). Not normally needed — the card slideshow automatically uses all images from the project's `images.json` manifest. Only set this if you want to override and limit to specific images. |
 | `showSlideshow` | Optional | `true` (default) adds an auto-advance full-image slideshow above the gallery on the project page. Set `false` to disable — recommended for large galleries where the top slideshow is not needed. |
 | `visible` | Optional | Set `false` to hide the project entirely (default: `true`) |
 

@@ -16,6 +16,35 @@ interface ImageManifestItem {
 }
 
 /**
+ * Returns all image src paths (-800.webp) from the images.json manifest
+ * for use in card slideshows.  Falls back to an empty array when no manifest
+ * exists (e.g. video projects that only have a thumbnail).
+ */
+export function getProjectSlideshowImages(
+  slug: string,
+  type: "photography" | "social-media" | "video"
+): string[] {
+  const manifestPath = path.join(
+    process.cwd(),
+    "Jinee_website",
+    "assets",
+    type,
+    slug,
+    "images.json"
+  );
+
+  if (!fs.existsSync(manifestPath)) return [];
+
+  const data: ImageManifestItem[] = JSON.parse(
+    fs.readFileSync(manifestPath, "utf-8")
+  );
+
+  const baseUrl = `/assets/${type}/${slug}`;
+
+  return data.filter((item) => item.md).map((item) => `${baseUrl}/${item.md}`);
+}
+
+/**
  * Reads the images.json manifest for a project at build time.
  * Returns images ready for use in GalleryGrid / Lightbox.
  */
