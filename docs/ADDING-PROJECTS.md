@@ -86,8 +86,17 @@ Open `src/content/portfolio/photography.json` and add a new entry to the JSON ar
 | `downloadPassword` | Only if `enableDownload: true` | Password clients use to download files |
 | `imageCount` | ✅ | Number of images (used for structured data) |
 | `portfolioCard` | Optional | Shows this project as a card on the portfolio category page |
+| `portfolioCard.cardTitle` | Only if `portfolioCard` | Title shown below the card thumbnail |
+| `portfolioCard.thumbnail` | Only if `portfolioCard` | Card thumbnail image path (use `-800.webp`) |
 | `portfolioCard.order` | Only if `portfolioCard` | Lower numbers appear first |
+| `portfolioCard.previewImages` | Optional | Array of 2–3 image paths for the card slideshow (uses `-800.webp`). When provided, the card auto-cycles through the images with a staggered interval. Omit for a static thumbnail. |
+| `showSlideshow` | Optional | `true` (default) adds an auto-advance full-image slideshow above the gallery on the project page. Set `false` to disable — recommended for large galleries where the top slideshow is not needed. |
 | `visible` | Optional | Set `false` to hide the project entirely (default: `true`) |
+
+> **Card slideshow vs page slideshow — key distinction:**
+> - `portfolioCard.previewImages` controls the small cycling thumbnail on the *index/overview cards*
+> - `showSlideshow` controls the large auto-advance strip shown *at the top of the project's own page*
+> These are independent. You can have a card slideshow without a page slideshow or vice versa.
 
 ### Step 4: Enable downloads (optional)
 
@@ -168,6 +177,8 @@ Open `src/content/portfolio/video.json` and add a new entry to the JSON array:
 - `uploadDate` format: ISO 8601 date and time with timezone (`+08:00` for Singapore time)
 - Videos are shown in the order listed in the `videos` array
 - `portfolioCard` is optional — omit if you don't want a card on the portfolio category page
+- `portfolioCard.previewImages`: optional array of 2–3 image paths (use `-800.webp`). When provided, the card auto-cycles through the images. If the project folder has multiple `*-800.webp` thumbnails, add up to 3 here.
+- `showSlideshow` is not used for video projects (video pages show YouTube embeds, not a photo slideshow)
 
 ### Step 4: Build
 

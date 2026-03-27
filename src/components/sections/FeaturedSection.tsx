@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getVideoCards, portfolioIndexConfig } from "@/lib/portfolio-config";
+import CardSlideshow from "@/components/gallery/CardSlideshow";
 
 export default function FeaturedSection() {
   const videoCards = getVideoCards().slice(0, 6);
@@ -23,15 +24,22 @@ export default function FeaturedSection() {
               className="project-card"
             >
               <div className="project-card__thumb">
-                <Image
-                  src={project.portfolioCard!.thumbnail}
-                  alt={project.portfolioCard!.cardTitle}
-                  width={800}
-                  height={450}
-                  loading="lazy"
-                  className="project-card__img"
-                  unoptimized
-                />
+                {project.portfolioCard!.previewImages && project.portfolioCard!.previewImages.length > 1 ? (
+                  <CardSlideshow
+                    images={project.portfolioCard!.previewImages}
+                    alt={project.portfolioCard!.cardTitle}
+                  />
+                ) : (
+                  <Image
+                    src={project.portfolioCard!.thumbnail}
+                    alt={project.portfolioCard!.cardTitle}
+                    width={800}
+                    height={450}
+                    loading="lazy"
+                    className="project-card__img"
+                    unoptimized
+                  />
+                )}
               </div>
               <div className="project-card__body">
                 <h3 className="project-card__title">

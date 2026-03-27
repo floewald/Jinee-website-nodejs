@@ -41,16 +41,28 @@ export default function GalleryGrid({ images, onImageClick }: GalleryGridProps) 
           onClick={() => onImageClick(i)}
           aria-label={`Open image: ${img.alt}`}
         >
-          <Image
-            src={img.src}
-            alt={img.alt}
-            width={800}
-            height={534}
-            loading="lazy"
-            className="gallery-img"
-            unoptimized
-            onLoad={(e) => handleLoad(e, i)}
-          />
+          {portraitFlags[i] ? (
+            <Image
+              src={img.src}
+              alt={img.alt}
+              fill
+              className="gallery-img"
+              style={{ objectFit: "contain" }}
+              unoptimized
+              onLoad={(e) => handleLoad(e, i)}
+            />
+          ) : (
+            <Image
+              src={img.src}
+              alt={img.alt}
+              width={800}
+              height={534}
+              loading="lazy"
+              className="gallery-img"
+              unoptimized
+              onLoad={(e) => handleLoad(e, i)}
+            />
+          )}
         </button>
       ))}
     </div>

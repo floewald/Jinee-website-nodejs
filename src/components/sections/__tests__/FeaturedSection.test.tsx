@@ -31,6 +31,12 @@ jest.mock("@/lib/portfolio-config", () => ({
   },
 }));
 
+// Mock CardSlideshow (only rendered when previewImages.length > 1)
+jest.mock("@/components/gallery/CardSlideshow", () => ({
+  __esModule: true,
+  default: ({ alt }: { alt: string }) => <div data-testid="card-slideshow" aria-label={alt} />,
+}));
+
 // Mock next/image
 jest.mock("next/image", () => ({
   __esModule: true,

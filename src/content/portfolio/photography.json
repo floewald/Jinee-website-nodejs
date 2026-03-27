@@ -47,6 +47,7 @@
     "heading": "📍 Singapore | Event Photography",
     "ogImage": "https://jineechen.com/assets/photography/event-photography/event-001-800.webp",
     "enableDownload": false,
+    "showSlideshow": false,
     "imageCount": 30,
     "portfolioCard": {
       "cardTitle": "Event Photography",

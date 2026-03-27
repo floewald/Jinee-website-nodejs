@@ -586,6 +586,15 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   z-index: 1;
   border-radius: 0;
 }
+/* Next.js Image fill-mode wrapper inside portrait item must be transparent */
+.gallery-item--portrait > span {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
 .gallery-item--portrait::before {
   content: '';
   position: absolute;
@@ -602,7 +611,8 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 /* ══════════════════════════════════════════════════════════════════════════════
    FEATURED SECTION (homepage "Portfolio")
    ══════════════════════════════════════════════════════════════════════════════ */
-.featured-projects { padding-top: 1rem; padding-bottom: 1rem; }
+.gallery-section { padding-bottom: 0; }
+.featured-projects { padding-top: 0; padding-bottom: 1rem; }
 .section-title {
   font-size: 1.5rem;
   font-weight: 600;
@@ -1126,20 +1136,19 @@ input::placeholder, textarea::placeholder {
   opacity: 1;
 }
 /* Portrait images inside card slide: blurred background fills the frame */
-.card-slideshow__slide--portrait::before {
-  content: '';
+.card-slideshow__bg {
   position: absolute;
   inset: 0;
-  background-image: var(--cs-portrait-bg);
   background-size: cover;
   background-position: center;
   filter: blur(14px);
   transform: scale(1.12);
   z-index: 0;
 }
-.card-slideshow__slide--portrait img {
-  position: relative;
+/* Portrait images sit above blur bg; Next.js fill span must be transparent */
+.card-slideshow__slide--portrait > span {
   z-index: 1;
+  background: transparent !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
