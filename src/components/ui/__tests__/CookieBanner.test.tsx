@@ -31,7 +31,7 @@ describe("CookieBanner", () => {
   it("renders a link to the Privacy Policy", () => {
     render(<CookieBanner />);
     const link = screen.getByRole("link", { name: /privacy policy/i });
-    expect(link).toHaveAttribute("href", "/privacy.html");
+    expect(link).toHaveAttribute("href", "/privacy/");
   });
 
   it("hides the banner when Accept is clicked", () => {

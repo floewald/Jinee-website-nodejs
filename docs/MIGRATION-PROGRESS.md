@@ -59,6 +59,26 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 - [x] 2.4 `useLightbox` hook — open/close/next/prev/goTo/wrap-around (test-first, 10 tests ✅)
 - **66 unit tests passing, 0 TypeScript errors** ✅
 
+### 2.5 CSS Port
+- [x] Full component CSS ported from legacy `Jinee_website/css/styles.css` (1,765 lines) → `globals.css`
+- [x] `:root` variable aliases bridging Tailwind tokens → legacy names
+- [x] Header (`.site-header`), Navigation (desktop submenu + mobile hamburger + X animation)
+- [x] Section backgrounds (full-bleed `.section-bg-white`, `.section-bg-charcoal`)
+- [x] Gallery collage (3×3 grid), project gallery grid (3→2→1 responsive)
+- [x] Featured section (project cards, IG previews, section CTA)
+- [x] Buttons (`.btn--primary`, `--outline`, `--ghost`, `--inverted`, `--large`)
+- [x] About section, contact section + form styling
+- [x] Footer (3-column flex)
+- [x] Lightbox (overlay, frame, controls, counter)
+- [x] Slideshow (track, prev/next, dots)
+- [x] Video player (lazy embed, responsive iframe)
+- [x] Download toolbar + modal
+- [x] Cookie consent banner
+- [x] Portfolio hub (category cards), portfolio index (project cards), project pages
+- [x] Static pages (imprint, privacy — headings, lists, compact sections)
+- [x] Skip-link visible on focus, global `img { height: auto }` fix
+- [x] Mobile responsive rules at 800px, 700px, 600px, 480px breakpoints
+
 ---
 
 ## Phase 3 — Pages & Features
@@ -109,6 +129,7 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 ### 3.8 Static Pages
 - [x] `src/app/imprint/page.tsx`
 - [x] `src/app/privacy/page.tsx`
+- [x] Footer + CookieBanner links fixed: `/imprint-en.html` → `/imprint/`, `/privacy.html` → `/privacy/`
 
 - **180 unit tests passing, 0 TypeScript errors** ✅
 

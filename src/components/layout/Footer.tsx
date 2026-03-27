@@ -28,17 +28,13 @@ export default function Footer() {
       <div className="site-footer__col site-footer__links">
         <a
           className="site-footer__link"
-          href="/imprint-en.html"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/imprint/"
         >
           Imprint / Author
         </a>
         <a
           className="site-footer__link"
-          href="/privacy.html"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/privacy/"
         >
           Privacy Policy
         </a>

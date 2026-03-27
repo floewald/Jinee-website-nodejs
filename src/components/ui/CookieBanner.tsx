@@ -38,7 +38,9 @@ export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (!getCookie(COOKIE_NAME)) setVisible(true);
+    if (!getCookie(COOKIE_NAME))
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- mount-only: read cookie then show banner (SSR-safe)
+      setVisible(true);
   }, []);
 
   function accept() {
@@ -62,11 +64,7 @@ export default function CookieBanner() {
       <div className="cookie-consent__message">
         We use cookies to improve the site. Non-essential cookies (analytics)
         are only set with your consent. See our{" "}
-        <a
-          href="/privacy.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="/privacy/">
           Privacy Policy
         </a>
         .
