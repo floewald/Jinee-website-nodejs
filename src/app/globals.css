@@ -604,8 +604,8 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
    .section-divider-line must be a direct child of a full-bleed section
    (i.e. inside .section-bg-white or .section-bg-charcoal which are width:100vw) */
 .section-divider-line {
-  /* ── To toggle the separator on/off: comment out the border-top line below ── */
-  border-top: 1px solid #d1d5db; /* light grey — change to 'border-top: none' to hide */
+  /* ── To toggle the separator on/off: comment out the border-bottom line below ── */
+  border-bottom: 1px solid #d1d5db; /* light grey — change to 'border-bottom: none' to hide */
   width: 100%;
   margin-bottom: 1.75rem;
 }
@@ -676,6 +676,8 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.3rem;
 }
 /* Also style legacy .project-grid (used on portfolio category pages) */
 .project-grid {
@@ -928,6 +930,8 @@ input[type="text"], input[type="email"], input[type="tel"], textarea {
   width: 100%;
   font-family: inherit;
   line-height: 1.5;
+  color: var(--charcoal); /* prevent inheriting white text from dark section backgrounds */
+  background: #fff;
 }
 textarea { resize: vertical; max-height: 160px; }
 input::placeholder, textarea::placeholder {
@@ -1147,9 +1151,21 @@ input::placeholder, textarea::placeholder {
 /* ══════════════════════════════════════════════════════════════════════════════
    VIDEO PLAYER
    ══════════════════════════════════════════════════════════════════════════════ */
-.video-player { margin-top: 1rem; }
-.video-player__item { margin-bottom: 2rem; }
+.video-player {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.video-player__item { /* gap handles spacing */ }
 .video-player__title { font-size: 1.05rem; margin-bottom: .6rem; }
+/* Responsive video grid: 3 → 2 → 1 columns */
+@media (max-width: 900px) {
+  .video-player { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 540px) {
+  .video-player { grid-template-columns: 1fr; }
+}
 .video-embed-wrap { margin-bottom: 0; }
 .video-embed {
   position: relative;

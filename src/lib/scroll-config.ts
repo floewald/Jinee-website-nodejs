@@ -6,4 +6,4 @@
  *
  * Used by: src/components/SmoothScroll.tsx
  */
-export const SCROLL_DURATION_MS = 800;
+export const SCROLL_DURATION_MS = 3000;

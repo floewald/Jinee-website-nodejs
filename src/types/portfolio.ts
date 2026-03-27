@@ -28,6 +28,8 @@ export interface PhotographyProject extends BaseProject {
   enableDownload: boolean;
   /** Number of images (used for structured data) */
   imageCount: number;
+  /** Show the Slideshow hero above the gallery grid (default: true) */
+  showSlideshow?: boolean;
 }
 
 export interface VideoItem {

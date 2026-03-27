@@ -141,6 +141,7 @@ npm run dev
 
 | Document | Audience | Purpose |
 |----------|----------|---------|
+| [docs/GETTING-STARTED.md](docs/GETTING-STARTED.md) | **New developers** | Complete beginner's guide — zero-knowledge intro to the tech stack, first-time setup, and day-to-day workflow |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Developers | Component hierarchy, data flow, image pipeline, PHP endpoints |
 | [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | Developers | Full local setup, running PHP side-by-side, debugging |
 | [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | Developers | FTP build & deploy, `.htaccess` redirects, smoke test |
