@@ -25,19 +25,21 @@ jest.mock("@/lib/portfolio-config", () => ({
       portfolioCard: { cardTitle: "Stuck with Low Pay", thumbnail: "/stuck-t.webp", order: 1 },
     },
   ],
-  getSocialMediaCards: () => [
-    {
-      slug: "ig-own-travel-log",
-      type: "social-media",
-      title: "Own Travel Log",
-      description: "Travel IG",
-      heading: "📍 Asia | Content Creator",
-      ogImage: "/ig-travel.webp",
-      hasGallery: true,
-      portfolioCard: { cardTitle: "Own Travel Log", thumbnail: "/ig-travel-t.webp", order: 1 },
-    },
-  ],
+  portfolioIndexConfig: {
+    socialMediaLinks: [
+      {
+        url: "https://www.instagram.com/reel/test/",
+        image: "/assets/social-media/ig-own-travel-log/ig-own-travel-log-1.webp",
+        alt: "Instagram own travel log 1",
+      },
+    ],
+  },
   projectPath: (p: { type: string; slug: string }) => `/portfolio/${p.type}/${p.slug}/`,
+}));
+
+jest.mock("@/components/gallery/CardSlideshow", () => ({
+  __esModule: true,
+  default: ({ alt }: { alt: string }) => <div data-testid="card-slideshow" aria-label={alt} />,
 }));
 
 jest.mock("next/image", () => ({
@@ -61,7 +63,7 @@ describe("PortfolioPage (hub)", () => {
   });
 
   it("renders a Video section heading", () => {
-    expect(screen.getByText("Video")).toBeInTheDocument();
+    expect(screen.getByText("Videography")).toBeInTheDocument();
   });
 
   it("renders a Social Media section heading", () => {
@@ -71,7 +73,12 @@ describe("PortfolioPage (hub)", () => {
   it("renders project cards with cardTitle", () => {
     expect(screen.getByText("Travel Photography")).toBeInTheDocument();
     expect(screen.getByText("Stuck with Low Pay")).toBeInTheDocument();
-    expect(screen.getByText("Own Travel Log")).toBeInTheDocument();
+  });
+
+  it("renders social media instagram previews", () => {
+    // The play overlay ▶ is rendered inside each instagram preview link
+    const overlays = screen.getAllByText("▶");
+    expect(overlays.length).toBeGreaterThan(0);
   });
 
   it("renders no description paragraph in project cards", () => {

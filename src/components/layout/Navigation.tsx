@@ -89,7 +89,7 @@ export default function Navigation() {
                 <Link href="/portfolio/photography/">Photography</Link>
               </li>
               <li>
-                <Link href="/portfolio/video/">Video</Link>
+                <Link href="/portfolio/video/">Videography</Link>
               </li>
               <li>
                 <Link href="/portfolio/social-media/">Social Media</Link>

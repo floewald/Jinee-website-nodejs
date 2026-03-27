@@ -13,7 +13,7 @@ export default function VideoIndexPage() {
 
   return (
     <main className="portfolio-category container">
-      <h1 className="page-title">Video</h1>
+      <h1 className="page-title">Videography</h1>
       <hr className="section-title-divider" aria-hidden="true" />
 
       <div className="project-cards">

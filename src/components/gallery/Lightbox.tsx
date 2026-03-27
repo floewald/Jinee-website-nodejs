@@ -69,8 +69,10 @@ export default function Lightbox({
   const imgSrc = current.srcFull ?? current.src;
 
   const isPortrait = naturalSize ? naturalSize.h > naturalSize.w : false;
+  // Portrait images use the standard 3/2 landscape ratio so the frame shape
+  // stays consistent — the image fits fully inside with blurred fill on the sides.
   const lbRatio =
-    naturalSize && naturalSize.w > 0
+    !isPortrait && naturalSize && naturalSize.w > 0
       ? `${naturalSize.w} / ${naturalSize.h}`
       : "3 / 2";
 

@@ -1026,8 +1026,6 @@ input::placeholder, textarea::placeholder {
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 .lightbox__content {
   position: relative;
@@ -1052,6 +1050,10 @@ input::placeholder, textarea::placeholder {
   max-height: calc(100vh - 120px);
   width: 100%; /* fill the lightbox__content width; aspect-ratio drives height */
   max-width: 100%;
+  /* Frosted-glass background visible beneath portrait images */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(0,0,0,0.3);
 }
 .lightbox__img-wrap {
   position: absolute;
