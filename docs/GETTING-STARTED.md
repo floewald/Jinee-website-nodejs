@@ -274,6 +274,47 @@ Tests run automatically before every `git commit` (via Husky). If they fail, the
 
 ---
 
+## Deploying to the Live Server
+
+### How it works — no Node.js needed on the server
+
+When you run `npm run build`, Next.js compiles the whole site into a folder called `out/`. That folder contains only plain HTML/CSS/JS files — ordinary web files a browser can read directly. You upload `out/` to the web server via FTP. The server just stores and delivers the files; **it does not need Node.js installed.**
+
+Node.js and npm are only needed **on your local machine** (or in GitHub Actions) to run the build. Once `out/` is produced, Node.js is no longer part of the picture.
+
+### Option A — Automatic deploy via GitHub Actions (recommended)
+
+Push your commit to the `main` branch and GitHub builds and deploys the site automatically. No manual FTP needed.
+
+**One-time setup (5 minutes):**
+
+1. Go to your GitHub repository → **Settings** → **Secrets and variables** → **Actions**
+2. Add these secrets (click "New repository secret" for each):
+
+| Secret name | What to put in |
+|-------------|----------------|
+| `FTP_SERVER` | FTP hostname, e.g. `ftp.jineechen.com` |
+| `FTP_USERNAME` | FTP username |
+| `FTP_PASSWORD` | FTP password |
+| `FTP_SERVER_DIR` | Remote path, e.g. `/public_html/` (must end with `/`) |
+
+After that, every `git push origin main` triggers a deploy automatically. Check progress under the **Actions** tab on GitHub.
+
+### Option B — Manual deploy
+
+If you prefer to upload manually:
+
+```bash
+npm run build          # produces the out/ folder
+# → then upload out/ contents to your FTP server document root
+```
+
+Use Cyberduck, FileZilla, or `lftp` to drag/mirror `out/` to `/public_html/` on the server.
+
+> Full instructions for both options are in [DEPLOYMENT.md](DEPLOYMENT.md).
+
+---
+
 ## Glossary
 
 | Term | Plain English meaning |
