@@ -208,7 +208,7 @@ section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
 }
 .logo {
   max-height: var(--logo-size-fluid);
-  width: auto;
+  width: auto;   /* both dims auto — suppresses Next.js image warning */
   height: auto;
   display: block;
 }
@@ -262,6 +262,28 @@ section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
 }
 .main-nav a:hover, .main-nav a:focus {
   border-bottom: 2px solid var(--charcoal);
+}
+
+/* ── Explicit desktop nav: override any reset on ≥801px ──────────────────── */
+@media (min-width: 801px) {
+  .main-nav > ul {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: flex-end;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: static;
+    max-height: none;
+    overflow: visible;
+    opacity: 1;
+    visibility: visible;
+    background: none;
+    box-shadow: none;
+    border: none;
+  }
 }
 
 /* Hamburger button — hidden on desktop */
@@ -469,30 +491,30 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
    GALLERY COLLAGE (homepage 3×3)
    ══════════════════════════════════════════════════════════════════════════════ */
 .collage-hv.collage-3x3 {
+  width: 100%;
+  overflow: hidden;
+}
+/* Make the project-gallery inside the collage the actual CSS grid */
+.collage-hv.collage-3x3 .project-gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(12px, 1.5vw, 24px);
-  grid-auto-rows: clamp(160px, 18vw, 420px);
-}
-.collage-hv.collage-3x3 img {
+  grid-auto-rows: clamp(180px, 22vw, 460px);
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: var(--radius);
-  display: block;
-}
-/* The gallery wrapper inside the collage should fill the grid */
-.collage-hv.collage-3x3 .project-gallery {
-  display: contents;
 }
 .collage-hv.collage-3x3 .gallery-item {
   overflow: hidden;
   border-radius: var(--radius);
+  display: block;
+  width: 100%;
+  /* height fills grid row via align-self:stretch (grid default) */
 }
-.collage-hv.collage-3x3 .gallery-item img {
+.collage-hv.collage-3x3 .gallery-img {
   width: 100%;
   height: 100%;
+  aspect-ratio: unset; /* override the 16/9 default for collage */
   object-fit: cover;
+  border-radius: 0; /* border-radius lives on the gallery-item */
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════

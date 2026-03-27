@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import Navigation from "./Navigation";
 
@@ -6,7 +7,7 @@ export default function Header() {
     <header className="site-header">
       <div className="header-left">
         <div className="logo-tagline-wrap logo-stack">
-          <a href="/" aria-label="Home">
+          <Link href="/" aria-label="Home">
             <Image
               className="logo"
               src="/assets/photos/Jinee_Chen_logo4.webp"
@@ -14,8 +15,9 @@ export default function Header() {
               width={220}
               height={60}
               priority
+              style={{ width: 'auto', height: 'auto' }}
             />
-          </a>
+          </Link>
           <p className="tagline tagline-subtle">
             Visual storyteller for brands and creators — videography and
             photography.
