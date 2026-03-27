@@ -527,8 +527,10 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 .project-gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: clamp(110px, 13vw, 210px);
   gap: 0.9rem;
   margin-top: var(--gallery-content-gap);
+  align-items: stretch;
 }
 .gallery-item {
   display: block;
@@ -538,6 +540,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   cursor: pointer;
   overflow: hidden;
   border-radius: 8px;
+  height: 100%;
 }
 .gallery-item__trigger {
   display: block;
@@ -548,13 +551,14 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   overflow: hidden;
   border-radius: 8px;
   width: 100%;
+  height: 100%;
 }
 .gallery-img {
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
+  height: 100%;
+  aspect-ratio: unset;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 0;
   display: block;
 }
 /* Tablet: 2 columns */
@@ -566,19 +570,21 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   .project-gallery { grid-template-columns: 1fr; }
 }
 
-/* Portrait gallery items — blurred background fills the cell behind the image */
+/* Portrait gallery items — span 2 rows and use blurred background */
 .gallery-item--portrait {
   overflow: hidden;
   position: relative;
+  grid-row: span 2;
+  border-radius: 8px;
 }
 .gallery-item--portrait .gallery-img {
-  position: relative;
-  z-index: 1;
-  max-height: 340px;
-  width: auto;
-  margin: 0 auto;
-  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  z-index: 1;
+  border-radius: 0;
 }
 .gallery-item--portrait::before {
   content: '';
@@ -596,7 +602,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 /* ══════════════════════════════════════════════════════════════════════════════
    FEATURED SECTION (homepage "Portfolio")
    ══════════════════════════════════════════════════════════════════════════════ */
-.featured-projects { padding-bottom: 1rem; }
+.featured-projects { padding-top: 1rem; padding-bottom: 1rem; }
 .section-title {
   font-size: 1.5rem;
   font-weight: 600;
@@ -1118,6 +1124,22 @@ input::placeholder, textarea::placeholder {
 }
 .card-slideshow__slide--active {
   opacity: 1;
+}
+/* Portrait images inside card slide: blurred background fills the frame */
+.card-slideshow__slide--portrait::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--cs-portrait-bg);
+  background-size: cover;
+  background-position: center;
+  filter: blur(14px);
+  transform: scale(1.12);
+  z-index: 0;
+}
+.card-slideshow__slide--portrait img {
+  position: relative;
+  z-index: 1;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════

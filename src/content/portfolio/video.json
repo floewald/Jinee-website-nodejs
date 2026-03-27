@@ -79,6 +79,11 @@
     "portfolioCard": {
       "cardTitle": "8world | RE: Old Times",
       "thumbnail": "/assets/video/re-old-times/re-old-times-1-800.webp",
+      "previewImages": [
+        "/assets/video/re-old-times/re-old-times-1-800.webp",
+        "/assets/video/re-old-times/re-old-times-2-800.webp",
+        "/assets/video/re-old-times/re-old-times-3-800.webp"
+      ],
       "order": 5
     }
   },
@@ -140,6 +145,11 @@
     "portfolioCard": {
       "cardTitle": "Johnson Health Tech",
       "thumbnail": "/assets/video/into-the-gym/into-the-gym-1-800.webp",
+      "previewImages": [
+        "/assets/video/into-the-gym/into-the-gym-1-800.webp",
+        "/assets/video/into-the-gym/into-the-gym-2-800.webp",
+        "/assets/video/into-the-gym/into-the-gym-3-800.webp"
+      ],
       "order": 6
     }
   },
@@ -171,6 +181,11 @@
     "portfolioCard": {
       "cardTitle": "CNA Insider | Our Blind Kitchen",
       "thumbnail": "/assets/video/blind-kitchen-chefs/blind-kitchen-chefs-1-800.webp",
+      "previewImages": [
+        "/assets/video/blind-kitchen-chefs/blind-kitchen-chefs-1-800.webp",
+        "/assets/video/blind-kitchen-chefs/blind-kitchen-chefs-2-800.webp",
+        "/assets/video/blind-kitchen-chefs/blind-kitchen-chefs-3-800.webp"
+      ],
       "order": 7
     }
   },
@@ -207,6 +222,11 @@
     "portfolioCard": {
       "cardTitle": "CNA Insider | Lunch With Us",
       "thumbnail": "/assets/video/lunch-with-us/lunch-with-us-1-800.webp",
+      "previewImages": [
+        "/assets/video/lunch-with-us/lunch-with-us-1-800.webp",
+        "/assets/video/lunch-with-us/lunch-with-us-2-800.webp",
+        "/assets/video/lunch-with-us/lunch-with-us-3-800.webp"
+      ],
       "order": 8
     }
   },
@@ -281,6 +301,10 @@
     "portfolioCard": {
       "cardTitle": "CNA Insider | SCDF",
       "thumbnail": "/assets/video/scdf-project/scdf-project-1-800.webp",
+      "previewImages": [
+        "/assets/video/scdf-project/scdf-project-1-800.webp",
+        "/assets/video/scdf-project/scdf-project-2-800.webp"
+      ],
       "order": 9
     }
   },
@@ -349,6 +373,10 @@
     "portfolioCard": {
       "cardTitle": "CNA Insider | Scam",
       "thumbnail": "/assets/video/i-fell/i-fell-1-800.webp",
+      "previewImages": [
+        "/assets/video/i-fell/i-fell-1-800.webp",
+        "/assets/video/i-fell/i-fell-2-800.webp"
+      ],
       "order": 10
     }
   },

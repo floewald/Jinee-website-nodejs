@@ -17,6 +17,9 @@ const NUM_BUCKETS = 3;
 
 export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
   const [idx, setIdx] = useState(0);
+  const [portraitFlags, setPortraitFlags] = useState<boolean[]>(() =>
+    Array(images.length).fill(false)
+  );
   // Capture the stagger offset once on mount via a ref so it never changes.
   const delay = useRef((instanceCounter++ % NUM_BUCKETS) * STAGGER_STEP);
 
@@ -38,23 +41,39 @@ export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
     };
   }, [images.length]);
 
+  function handleLoad(e: React.SyntheticEvent<HTMLImageElement>, i: number) {
+    const img = e.currentTarget;
+    if (img.naturalWidth > 0 && img.naturalHeight > img.naturalWidth) {
+      setPortraitFlags((prev) => {
+        const next = [...prev];
+        next[i] = true;
+        return next;
+      });
+    }
+  }
+
   return (
     <div className="card-slideshow">
-      {images.map((src, i) => (
-        <div
-          key={src}
-          className={`card-slideshow__slide${i === idx ? " card-slideshow__slide--active" : ""}`}
-        >
-          <Image
-            src={src}
-            alt={i === 0 ? alt : ""}
-            fill
-            className="project-card__img"
-            style={{ objectFit: "cover" }}
-            unoptimized
-          />
-        </div>
-      ))}
+      {images.map((src, i) => {
+        const isPortrait = portraitFlags[i];
+        return (
+          <div
+            key={src}
+            className={`card-slideshow__slide${i === idx ? " card-slideshow__slide--active" : ""}${isPortrait ? " card-slideshow__slide--portrait" : ""}`}
+            style={isPortrait ? ({ "--cs-portrait-bg": `url(${src})` } as React.CSSProperties) : undefined}
+          >
+            <Image
+              src={src}
+              alt={i === 0 ? alt : ""}
+              fill
+              className="project-card__img"
+              style={{ objectFit: isPortrait ? "contain" : "cover" }}
+              unoptimized
+              onLoad={(e) => handleLoad(e, i)}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }

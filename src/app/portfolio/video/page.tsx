@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { getVideoCards, projectPath } from "@/lib/portfolio-config";
+import CardSlideshow from "@/components/gallery/CardSlideshow";
 
 export const metadata: Metadata = {
   title: "Video",
@@ -24,15 +25,22 @@ export default function VideoIndexPage() {
             className="project-card"
           >
             <div className="project-card__thumb">
-              <Image
-                src={project.portfolioCard!.thumbnail}
-                alt={project.portfolioCard!.cardTitle}
-                width={800}
-                height={450}
-                loading="lazy"
-                className="project-card__img"
-                unoptimized
-              />
+              {project.portfolioCard!.previewImages && project.portfolioCard!.previewImages.length > 1 ? (
+                <CardSlideshow
+                  images={project.portfolioCard!.previewImages}
+                  alt={project.portfolioCard!.cardTitle}
+                />
+              ) : (
+                <Image
+                  src={project.portfolioCard!.thumbnail}
+                  alt={project.portfolioCard!.cardTitle}
+                  width={800}
+                  height={450}
+                  loading="lazy"
+                  className="project-card__img"
+                  unoptimized
+                />
+              )}
             </div>
             <div className="project-card__body">
               <h2 className="project-card__title">
