@@ -576,8 +576,10 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   position: relative;
   grid-row: span 2;
   border-radius: 8px;
-  /* clip-path reliably clips absolute/transformed children (e.g. blur ::before) */
   clip-path: inset(0 round 8px);
+  /* translateZ(0) forces GPU compositing — makes border-radius+overflow:hidden
+     reliably clip absolutely-positioned children in all browsers (incl. Safari) */
+  transform: translateZ(0);
 }
 .gallery-item--portrait .gallery-img {
   position: absolute;
@@ -591,17 +593,19 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 /* Next.js 15 Image fill renders a plain <img data-nimg="fill"> (no span wrapper) */
 .gallery-item--portrait img[data-nimg="fill"] {
   position: absolute !important;
-  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
   width: 100% !important;
   height: 100% !important;
   object-fit: contain !important;
   z-index: 1;
 }
-.gallery-item--portrait::before {
-  content: '';
+/* Blurred fill background rendered as an explicit child div (z-index:0, below img) */
+.gallery-portrait-bg {
   position: absolute;
   inset: -12%;   /* extend so blur doesn't show hard edges */
-  background-image: var(--portrait-bg-src);
   background-size: cover;
   background-position: center;
   filter: blur(14px);

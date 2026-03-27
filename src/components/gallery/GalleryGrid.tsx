@@ -33,21 +33,23 @@ export default function GalleryGrid({ images, onImageClick }: GalleryGridProps) 
         <button
           key={`${img.src}-${i}`}
           className={`gallery-item${portraitFlags[i] ? " gallery-item--portrait" : ""}`}
-          style={
-            portraitFlags[i]
-              ? ({ "--portrait-bg-src": `url(${img.src})` } as React.CSSProperties)
-              : undefined
-          }
           onClick={() => onImageClick(i)}
           aria-label={`Open image: ${img.alt}`}
         >
+          {portraitFlags[i] && (
+            <div
+              className="gallery-portrait-bg"
+              style={{ backgroundImage: `url("${img.src}")` }}
+              aria-hidden="true"
+            />
+          )}
           {portraitFlags[i] ? (
             <Image
               src={img.src}
               alt={img.alt}
               fill
               className="gallery-img"
-              style={{ objectFit: "contain" }}
+              style={{ objectFit: "contain", zIndex: 1 }}
               unoptimized
               onLoad={(e) => handleLoad(e, i)}
             />
