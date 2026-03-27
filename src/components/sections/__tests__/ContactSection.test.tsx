@@ -3,7 +3,8 @@ import ContactSection from "../ContactSection";
 
 jest.mock("next/image", () => ({
   __esModule: true,
-  default: (props: Record<string, unknown>) => <img {...props} />,
+  // eslint-disable-next-line @next/next/no-img-element
+  default: (props: Record<string, unknown>) => <img alt="" {...props} />,
 }));
 
 // Mock ContactForm to isolate section-level tests

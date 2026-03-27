@@ -179,6 +179,36 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 
 ---
 
+## Phase 8 — Detail Refinements (design parity with legacy) ✅
+
+### 8.1 Homepage
+- [x] Smooth scroll — `html { scroll-behavior: smooth }` in globals.css (Phase A-1)
+- [x] "Portfolio" section heading with full-width charcoal divider (Phase A-2, B-10)
+- [x] Featured cards → show `project.heading` (role/location) instead of `cardTitle` (Phase B-11)
+- [x] Instagram previews → ▶ play overlay (Phase A-3, B-12)
+- [x] "View More Projects" button → dark/primary theme (Phase A-4, B-13)
+- [x] About image → height-constrained, not width-constrained (Phase A-5)
+- [x] White spacer bar between About and Contact sections (Phase A-6, D-15)
+- [x] Contact form inputs → placeholder text (Phase C-14)
+- [x] Send button → charcoal even inside dark section (Phase A-7)
+
+### 8.2 Portfolio Hub (`/portfolio/`)
+- [x] Show 3 sections with project cards (6 per category) + "More" CTAs (Phase E-16)
+- [x] Update E2E test for new hub structure (Phase E-17)
+
+### 8.3 Portfolio Category Index Pages
+- [x] Cards → title only (bold), remove description text (Phase F-18)
+
+### 8.4 Gallery — Portrait Images
+- [x] GalleryGrid: portrait image detection + blurred background (Phase G-19)
+- [x] Lightbox: frame fits actual image ratio; portrait images get blurred background (Phase H-20)
+
+### 8.5 Slideshow
+- [x] Wire `Slideshow` component above gallery grid on all `hasGallery: true` project pages (Phase I-21)
+- [x] Create `GallerySection` client component (Slideshow + GalleryGrid + Lightbox)
+
+---
+
 ## Phase 7 — TinaCMS (Deferred)
 
 - [ ] 7.1 TinaCMS initialized (`npx @tinacms/cli init`)
@@ -195,7 +225,7 @@ For the full migration plan see the plan in `/memories/session/plan.md` and the 
 - [x] `e2e/lightbox.spec.ts` — open, next/prev buttons, arrow keys, Escape, close button, backdrop (7 tests ✅)
 - [x] `e2e/download-modal.spec.ts` — toolbar, select all, modal open, wrong password, close, Escape, cancel (8 tests ✅)
 
-**37 E2E tests passing (Chromium), 180 unit tests passing — 217 total tests** ✅
+**37 E2E tests passing (Chromium), 192 unit tests passing — 229 total tests** ✅
 
 ---
 

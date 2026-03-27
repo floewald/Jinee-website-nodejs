@@ -8,8 +8,10 @@ export default function FeaturedSection() {
 
   return (
     <section id="portfolio" className="featured-projects section-bg-white">
+      {/* Full-viewport-width charcoal rule above the heading */}
+      <div className="section-divider-line" aria-hidden="true" />
       <div className="container">
-        <h2 className="section-title">My Work</h2>
+        <h2 className="section-title section-title--center">Portfolio</h2>
 
         {/* Video cards */}
         <div className="project-cards">
@@ -32,7 +34,7 @@ export default function FeaturedSection() {
               </div>
               <div className="project-card__body">
                 <h3 className="project-card__title">
-                  {project.portfolioCard!.cardTitle}
+                  {project.heading}
                 </h3>
               </div>
             </Link>
@@ -58,12 +60,13 @@ export default function FeaturedSection() {
                 className="instagram-preview__img"
                 unoptimized
               />
+              <span className="play-overlay" aria-hidden="true">▶</span>
             </a>
           ))}
         </div>
 
         <div className="section-cta">
-          <Link href="/portfolio/" className="btn btn--outline">
+          <Link href="/portfolio/" className="btn btn--primary">
             View More Projects
           </Link>
         </div>

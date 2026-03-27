@@ -36,6 +36,15 @@ describe("ContactForm", () => {
     expect(screen.getByRole("checkbox")).toBeInTheDocument();
   });
 
+  it("has placeholder text on all text inputs", () => {
+    render(<ContactForm />);
+    expect(screen.getByPlaceholderText(/jane/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/doe/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/you@example\.com/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/\+65/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/tell me about your project/i)).toBeInTheDocument();
+  });
+
   it("renders a submit button", () => {
     render(<ContactForm />);
     expect(

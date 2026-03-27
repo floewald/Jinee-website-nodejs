@@ -37,7 +37,6 @@ export default function PhotographyIndexPage() {
               <h2 className="project-card__title">
                 {project.portfolioCard!.cardTitle}
               </h2>
-              <p className="project-card__desc">{project.description}</p>
             </div>
           </Link>
         ))}

@@ -2,6 +2,8 @@ import {
   getProjectBySlug,
   getPhotographyCards,
   getVideoCards,
+  // getSocialMediaCards is imported indirectly via socialMediaProjects
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getSocialMediaCards,
   projectPath,
   getSlugsByType,

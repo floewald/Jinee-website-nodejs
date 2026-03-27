@@ -17,12 +17,21 @@ export default function Navigation() {
       setSubmenuOpen((open) => !open);
       return;
     }
-    // On desktop homepage, scroll to #portfolio section
+    // On desktop homepage, smooth-scroll to #portfolio section
     if (isHome) {
       e.preventDefault();
-      document.querySelector("#portfolio")?.scrollIntoView({ behavior: "smooth" });
+      document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" });
     }
     // On subpages the default Link navigation to /portfolio/ applies
+  }
+
+  function handleAnchorClick(id: string) {
+    return (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (isHome) {
+        e.preventDefault();
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      }
+    };
   }
 
   return (
@@ -80,10 +89,10 @@ export default function Navigation() {
             </ul>
           </li>
           <li>
-            <Link href={isHome ? "/#about" : "/#about"}>About</Link>
+            <Link href={isHome ? "/#about" : "/#about"} onClick={handleAnchorClick("about")}>About</Link>
           </li>
           <li>
-            <Link href={isHome ? "/#contact" : "/#contact"}>Contact</Link>
+            <Link href={isHome ? "/#contact" : "/#contact"} onClick={handleAnchorClick("contact")}>Contact</Link>
           </li>
         </ul>
       </nav>

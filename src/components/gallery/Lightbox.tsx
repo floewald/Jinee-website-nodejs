@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export interface GalleryImage {
@@ -26,6 +26,15 @@ export default function Lightbox({
   onNext,
   onPrev,
 }: LightboxProps) {
+  // Track (index → size) pair so stale sizes are ignored automatically.
+  const [sizeState, setSizeState] = useState<{
+    index: number;
+    size: { w: number; h: number } | null;
+  }>({ index: currentIndex, size: null });
+
+  // Derive natural size: only valid for the current image index.
+  const naturalSize = sizeState.index === currentIndex ? sizeState.size : null;
+
   // Keyboard navigation
   useEffect(() => {
     if (!isOpen) return;
@@ -45,6 +54,12 @@ export default function Lightbox({
   const current = images[currentIndex];
   const imgSrc = current.srcFull ?? current.src;
 
+  const isPortrait = naturalSize ? naturalSize.h > naturalSize.w : false;
+  const lbRatio =
+    naturalSize && naturalSize.w > 0
+      ? `${naturalSize.w} / ${naturalSize.h}`
+      : "3 / 2";
+
   return (
     <div
       className="lightbox"
@@ -62,7 +77,19 @@ export default function Lightbox({
         aria-label={current.alt}
         className="lightbox__content"
       >
-        <div className="lightbox__frame">
+        <div
+          className="lightbox__frame"
+          style={{ "--lb-ratio": lbRatio } as React.CSSProperties}
+        >
+          {/* Blurred background for portrait images */}
+          {isPortrait && (
+            <div
+              className="lightbox__portrait-bg"
+              style={{ backgroundImage: `url(${imgSrc})` }}
+              aria-hidden="true"
+            />
+          )}
+
           <button
             className="lightbox__btn lightbox__prev"
             onClick={onPrev}
@@ -80,6 +107,12 @@ export default function Lightbox({
               style={{ objectFit: "contain" }}
               sizes="100vw"
               unoptimized
+              onLoad={(e) => {
+                const img = e.currentTarget;
+                if (img.naturalWidth > 0) {
+                  setSizeState({ index: currentIndex, size: { w: img.naturalWidth, h: img.naturalHeight } });
+                }
+              }}
             />
           </div>
 
@@ -107,3 +140,4 @@ export default function Lightbox({
     </div>
   );
 }
+

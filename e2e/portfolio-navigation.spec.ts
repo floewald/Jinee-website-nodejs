@@ -1,15 +1,25 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Portfolio Navigation", () => {
-  test("portfolio hub shows three category cards", async ({ page }) => {
+  test("portfolio hub shows three category sections with project cards", async ({ page }) => {
     await page.goto("/portfolio/");
-    await expect(page.locator("h1")).toHaveText("Portfolio");
 
-    const cards = page.locator(".category-card");
-    await expect(cards).toHaveCount(3);
-    await expect(cards.nth(0)).toContainText("Photography");
-    await expect(cards.nth(1)).toContainText("Video");
-    await expect(cards.nth(2)).toContainText("Social Media");
+    // Three section headings for each category
+    await expect(page.locator("h2", { hasText: "Photography" })).toBeAttached();
+    await expect(page.locator("h2", { hasText: "Video" })).toBeAttached();
+    await expect(page.locator("h2", { hasText: "Social Media" })).toBeAttached();
+
+    // At least one project card per section
+    const cards = page.locator(".project-card");
+    const count = await cards.count();
+    expect(count).toBeGreaterThanOrEqual(3);
+  });
+
+  test("portfolio hub has More CTA links for each category", async ({ page }) => {
+    await page.goto("/portfolio/");
+    await expect(page.locator("a", { hasText: /more photography projects/i })).toBeAttached();
+    await expect(page.locator("a", { hasText: /more video projects/i })).toBeAttached();
+    await expect(page.locator("a", { hasText: /more social media projects/i })).toBeAttached();
   });
 
   test("photography index lists project cards", async ({ page }) => {
@@ -30,48 +40,19 @@ test.describe("Portfolio Navigation", () => {
     expect(count).toBeGreaterThanOrEqual(6);
   });
 
-  test("navigate from portfolio hub → photography → project → back", async ({
-    page,
-  }) => {
+  test("navigate from portfolio hub → photography page", async ({ page }) => {
     await page.goto("/portfolio/");
 
-    // Click Photography card
-    await page.locator(".category-card", { hasText: "Photography" }).click();
-    await expect(page.locator("h1")).toHaveText("Photography");
-
-    // Click first project card
-    const firstCard = page.locator(".project-card").first();
-    const cardTitle = await firstCard
-      .locator(".project-card__title")
-      .textContent();
-    await firstCard.click();
-
-    // Should be on a project page with an h1
-    await expect(page.locator("h1.project-heading")).toBeAttached();
-
-    // Go back
-    await page.goBack();
+    // Click the "More Photography Projects" CTA
+    await page.locator("a", { hasText: /more photography projects/i }).click();
     await expect(page.locator("h1")).toHaveText("Photography");
   });
 
-  test("navigate from portfolio hub → video → project → back", async ({
-    page,
-  }) => {
+  test("navigate from portfolio hub → video page", async ({ page }) => {
     await page.goto("/portfolio/");
 
-    // Click Video card
-    await page.locator(".category-card", { hasText: "Video" }).click();
-    await expect(page.locator("h1")).toHaveText("Video");
-
-    // Click first project card
-    const firstCard = page.locator(".project-card").first();
-    await firstCard.click();
-
-    // Should be on a video project page
-    await expect(page.locator("h1.project-heading")).toBeAttached();
-
-    // Go back
-    await page.goBack();
+    // Click the "More Video Projects" CTA
+    await page.locator("a", { hasText: /more video projects/i }).click();
     await expect(page.locator("h1")).toHaveText("Video");
   });
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import type { GalleryImage } from "./Lightbox";
 
@@ -9,14 +10,34 @@ interface GalleryGridProps {
 }
 
 export default function GalleryGrid({ images, onImageClick }: GalleryGridProps) {
+  const [portraitFlags, setPortraitFlags] = useState<boolean[]>(() =>
+    Array(images.length).fill(false)
+  );
+
   if (images.length === 0) return null;
+
+  function handleLoad(e: React.SyntheticEvent<HTMLImageElement>, index: number) {
+    const img = e.currentTarget;
+    if (img.naturalWidth > 0 && img.naturalHeight > img.naturalWidth) {
+      setPortraitFlags((prev) => {
+        const next = [...prev];
+        next[index] = true;
+        return next;
+      });
+    }
+  }
 
   return (
     <div className="project-gallery">
       {images.map((img, i) => (
         <button
           key={`${img.src}-${i}`}
-          className="gallery-item"
+          className={`gallery-item${portraitFlags[i] ? " gallery-item--portrait" : ""}`}
+          style={
+            portraitFlags[i]
+              ? ({ "--portrait-bg-src": `url(${img.src})` } as React.CSSProperties)
+              : undefined
+          }
           onClick={() => onImageClick(i)}
           aria-label={`Open image: ${img.alt}`}
         >
@@ -28,6 +49,7 @@ export default function GalleryGrid({ images, onImageClick }: GalleryGridProps) 
             loading="lazy"
             className="gallery-img"
             unoptimized
+            onLoad={(e) => handleLoad(e, i)}
           />
         </button>
       ))}

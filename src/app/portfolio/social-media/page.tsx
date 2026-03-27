@@ -39,7 +39,6 @@ export default function SocialMediaIndexPage() {
               <h2 className="project-card__title">
                 {project.portfolioCard?.cardTitle ?? project.title}
               </h2>
-              <p className="project-card__desc">{project.description}</p>
             </div>
           </Link>
         ))}

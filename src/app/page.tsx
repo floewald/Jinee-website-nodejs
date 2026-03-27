@@ -12,6 +12,7 @@ export default function Home() {
       <GallerySection />
       <FeaturedSection />
       <AboutSection />
+      <div className="section-spacer-white" />
       <ContactSection />
     </>
   );

@@ -49,7 +49,7 @@ export default async function SocialMediaProjectPage({
       )}
 
       {project.hasGallery && images.length > 0 ? (
-        <GalleryWithLightbox images={images} />
+        <GalleryWithLightbox images={images} showSlideshow />
       ) : project.customContent ? (
         <div
           className="project-custom-content"

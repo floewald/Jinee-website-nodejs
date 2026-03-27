@@ -34,7 +34,8 @@ jest.mock("@/lib/portfolio-config", () => ({
 // Mock next/image
 jest.mock("next/image", () => ({
   __esModule: true,
-  default: (props: Record<string, unknown>) => <img {...props} />,
+  // eslint-disable-next-line @next/next/no-img-element
+  default: (props: Record<string, unknown>) => <img alt="" {...props} />,
 }));
 
 // Mock next/link
@@ -43,10 +44,12 @@ jest.mock("next/link", () => ({
   default: ({
     children,
     href,
+    className,
   }: {
     children: React.ReactNode;
     href: string;
-  }) => <a href={href}>{children}</a>,
+    className?: string;
+  }) => <a href={href} className={className}>{children}</a>,
 }));
 
 describe("FeaturedSection", () => {
@@ -57,16 +60,18 @@ describe("FeaturedSection", () => {
     expect(section).toBeInTheDocument();
   });
 
-  it('renders "My Work" heading', () => {
-    expect(screen.getByText("My Work")).toBeInTheDocument();
+  it('renders "Portfolio" heading (not "My Work")', () => {
+    expect(screen.getByText("Portfolio")).toBeInTheDocument();
+    expect(screen.queryByText("My Work")).not.toBeInTheDocument();
   });
 
-  it("renders video project cards", () => {
-    expect(screen.getByText("Test Card")).toBeInTheDocument();
+  it("renders video project cards using project.heading (role/location)", () => {
+    // project.heading is "Test" in the mock — should appear, not cardTitle "Test Card"
+    expect(screen.getByText("Test")).toBeInTheDocument();
   });
 
   it("renders video card with correct link", () => {
-    const link = screen.getByText("Test Card").closest("a");
+    const link = screen.getByText("Test").closest("a");
     expect(link).toHaveAttribute("href", "/portfolio/video/test-video/");
   });
 
@@ -74,8 +79,16 @@ describe("FeaturedSection", () => {
     expect(screen.getByAltText("IG post 1")).toBeInTheDocument();
   });
 
-  it('renders "View More Projects" link', () => {
+  it("renders play overlay on Instagram previews", () => {
+    const previews = document.querySelectorAll(".instagram-preview");
+    previews.forEach((preview) => {
+      expect(preview.querySelector(".play-overlay")).toBeInTheDocument();
+    });
+  });
+
+  it('renders "View More Projects" link with btn--primary class', () => {
     const link = screen.getByText("View More Projects");
     expect(link).toHaveAttribute("href", "/portfolio/");
+    expect(link).toHaveClass("btn--primary");
   });
 });
