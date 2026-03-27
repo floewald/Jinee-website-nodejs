@@ -81,9 +81,4 @@ describe("Lightbox", () => {
     fireEvent.keyDown(document, { key: "ArrowLeft" });
     expect(baseProps.onPrev).toHaveBeenCalledTimes(1);
   });
-
-  it("shows a counter with current position", () => {
-    render(<Lightbox {...baseProps} currentIndex={1} />);
-    expect(screen.getByText("2 / 3")).toBeInTheDocument();
-  });
 });

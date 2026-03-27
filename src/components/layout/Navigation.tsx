@@ -3,12 +3,20 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { scrollToId, scrollToTop } from "@/lib/scroll-config";
 
 export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === "/";
+
+  function handleHomeClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (isHome) {
+      e.preventDefault();
+      scrollToTop();
+    }
+  }
 
   function handlePortfolioClick(e: React.MouseEvent<HTMLAnchorElement>) {
     // On mobile, toggle the submenu instead of navigating
@@ -20,7 +28,7 @@ export default function Navigation() {
     // On desktop homepage, smooth-scroll to #portfolio section
     if (isHome) {
       e.preventDefault();
-      document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" });
+      scrollToId("portfolio");
     }
     // On subpages the default Link navigation to /portfolio/ applies
   }
@@ -29,7 +37,7 @@ export default function Navigation() {
     return (e: React.MouseEvent<HTMLAnchorElement>) => {
       if (isHome) {
         e.preventDefault();
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+        scrollToId(id);
       }
     };
   }
@@ -59,7 +67,7 @@ export default function Navigation() {
           className={menuOpen ? "open" : undefined}
         >
           <li>
-            <Link href="/">Home</Link>
+            <Link href="/" onClick={handleHomeClick}>Home</Link>
           </li>
           <li
             className={`nav-item-portfolio${submenuOpen ? " open" : ""}`}
@@ -81,10 +89,10 @@ export default function Navigation() {
                 <Link href="/portfolio/photography/">Photography</Link>
               </li>
               <li>
-                <Link href="/portfolio/social-media/">Social Media</Link>
+                <Link href="/portfolio/video/">Video</Link>
               </li>
               <li>
-                <Link href="/portfolio/video/">Video</Link>
+                <Link href="/portfolio/social-media/">Social Media</Link>
               </li>
             </ul>
           </li>

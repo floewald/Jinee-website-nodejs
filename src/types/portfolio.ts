@@ -6,6 +6,8 @@ export interface PortfolioCard {
   cardTitle: string;
   thumbnail: string;
   order: number;
+  /** 3–4 images cycled in the card preview slideshow */
+  previewImages?: string[];
 }
 
 export interface BaseProject {

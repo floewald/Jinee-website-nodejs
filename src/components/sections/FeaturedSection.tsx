@@ -12,6 +12,7 @@ export default function FeaturedSection() {
       <div className="section-divider-line" aria-hidden="true" />
       <div className="container">
         <h2 className="section-title section-title--center">Portfolio</h2>
+        <hr className="section-title-divider" aria-hidden="true" />
 
         {/* Video cards */}
         <div className="project-cards">

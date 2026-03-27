@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
+import { useSwipe } from "@/hooks/useSwipe";
 
 export interface GalleryImage {
   src: string;
@@ -32,8 +34,14 @@ export default function Lightbox({
     size: { w: number; h: number } | null;
   }>({ index: currentIndex, size: null });
 
+  // Zoom is keyed to the current image — deriving it from the index means zoom
+  // resets automatically on navigation without needing an effect.
+  const [zoomedIndex, setZoomedIndex] = useState<number | null>(null);
+  const zoomed = zoomedIndex === currentIndex;
+
   // Derive natural size: only valid for the current image index.
   const naturalSize = sizeState.index === currentIndex ? sizeState.size : null;
+
 
   // Keyboard navigation
   useEffect(() => {
@@ -49,6 +57,12 @@ export default function Lightbox({
     return () => document.removeEventListener("keydown", handleKey);
   }, [isOpen, onClose, onNext, onPrev]);
 
+  // Swipe left/right to navigate (disabled while zoomed)
+  const { handlers: swipeHandlers } = useSwipe({
+    onSwipeLeft: zoomed ? undefined : onNext,
+    onSwipeRight: zoomed ? undefined : onPrev,
+  });
+
   if (!isOpen || images.length === 0) return null;
 
   const current = images[currentIndex];
@@ -60,7 +74,13 @@ export default function Lightbox({
       ? `${naturalSize.w} / ${naturalSize.h}`
       : "3 / 2";
 
-  return (
+  function handleFrameClick(e: React.MouseEvent<HTMLDivElement>) {
+    // Clicks on nav/close buttons must not toggle zoom
+    if ((e.target as HTMLElement).closest(".lightbox__btn")) return;
+    setZoomedIndex(zoomed ? null : currentIndex);
+  }
+
+  return createPortal(
     <div
       className="lightbox"
       aria-hidden={!isOpen}
@@ -79,7 +99,12 @@ export default function Lightbox({
       >
         <div
           className="lightbox__frame"
-          style={{ "--lb-ratio": lbRatio } as React.CSSProperties}
+          style={{
+            "--lb-ratio": lbRatio,
+            cursor: zoomed ? "zoom-out" : "zoom-in",
+          } as React.CSSProperties}
+          {...swipeHandlers}
+          onClick={handleFrameClick}
         >
           {/* Blurred background for portrait images */}
           {isPortrait && (
@@ -98,7 +123,13 @@ export default function Lightbox({
             ◀
           </button>
 
-          <div className="lightbox__img-wrap">
+          <div
+            className="lightbox__img-wrap"
+            style={{
+              transform: zoomed ? "scale(2.2)" : "scale(1)",
+              transition: "transform 0.25s ease",
+            }}
+          >
             <Image
               src={imgSrc}
               alt={current.alt}
@@ -132,12 +163,9 @@ export default function Lightbox({
             ✕
           </button>
         </div>
-
-        <div className="lightbox__counter" aria-live="polite">
-          {currentIndex + 1} / {images.length}
-        </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 

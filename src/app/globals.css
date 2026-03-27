@@ -365,13 +365,16 @@ section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
   }
   .nav-submenu li a {
     display: block;
-    padding: 0.7rem 1rem;
+    padding: 0.2rem 1rem;
     color: var(--text-color);
     text-decoration: none;
     border-bottom: none;
     white-space: nowrap;
   }
-  .nav-submenu li a:hover { text-decoration: underline; }
+  .nav-submenu li a:hover { text-decoration: none; }
+  /* Extra breathing room below the last submenu entry (Video) */
+  .nav-submenu li:first-child a { margin-top: calc(0.7rem + 0.5rem); }
+  .nav-submenu li:last-child a { margin-bottom: calc(0.7rem + 0.5rem); }
 }
 
 /* ── Mobile nav ──────────────────────────────────────────────────────────── */
@@ -597,21 +600,28 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 .section-title {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 1.2em;
+  margin-bottom: 0.5rem;
 }
 
 /* Full-width rule above section heading
    .section-divider-line must be a direct child of a full-bleed section
    (i.e. inside .section-bg-white or .section-bg-charcoal which are width:100vw) */
 .section-divider-line {
-  /* ── To toggle the separator on/off: comment out the border-bottom line below ── */
-  border-bottom: 1px solid #d1d5db; /* light grey — change to 'border-bottom: none' to hide */
+  /* ── To toggle the separator on/off: comment out the border-top line below ── */
+  border-top: none; /* 1px solid #d1d5db;  */
   width: 100%;
   margin-bottom: 1.75rem;
 }
 .section-title--center {
   text-align: center;
   padding-top: 0.5rem;
+}
+/* Content-width separator rendered below section headings */
+.section-title-divider {
+  border: none;
+  border-top: 1px solid #d1d5db;
+  margin: 0 0 1.5rem;
+  width: 100%;
 }
 
 /* Play overlay on Instagram/video preview thumbnails */
@@ -620,8 +630,8 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.7);
-  color: #1f1f1f;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
   border-radius: 999px;
   padding: .55rem .85rem;
   font-size: 1.3rem;
@@ -807,7 +817,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   display: block;
   /* Height-driven sizing: let width follow the image's natural aspect ratio */
   width: auto;
-  height: clamp(260px, 50vh, 480px);
+  height: clamp(480px, 50vh, 480px);
   max-width: 100%;
   object-fit: cover;
   border-radius: 8px;
@@ -1016,6 +1026,8 @@ input::placeholder, textarea::placeholder {
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .lightbox__content {
   position: relative;
@@ -1079,17 +1091,31 @@ input::placeholder, textarea::placeholder {
 .lightbox__close { position: absolute; top: 8px; right: 8px; }
 .lightbox__prev { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); }
 .lightbox__next { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); }
-.lightbox__counter {
-  color: #fff;
-  font-size: 0.9rem;
-  margin-top: .75rem;
-  text-align: center;
-}
+/* .lightbox__counter removed — counter is no longer rendered */
 @media (max-width: 800px) {
   .lightbox__content { max-width: calc(100vw - 40px); max-height: calc(100vh - 60px); }
 }
 @media (max-width: 600px) {
   .lightbox__btn { padding: .7rem .9rem; font-size: 1.25rem; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   CARD SLIDESHOW (auto-cycling preview on project index cards)
+   ══════════════════════════════════════════════════════════════════════════════ */
+.card-slideshow {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+.card-slideshow__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.card-slideshow__slide--active {
+  opacity: 1;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -1158,7 +1184,8 @@ input::placeholder, textarea::placeholder {
   gap: 1.5rem;
 }
 .video-player__item { /* gap handles spacing */ }
-.video-player__title { font-size: 1.05rem; margin-bottom: .6rem; }
+/* min-height ensures video thumbnails align even when titles differ in line count */
+.video-player__title { font-size: 1.05rem; margin-bottom: .6rem; min-height: 5rem; }
 /* Responsive video grid: 3 → 2 → 1 columns */
 @media (max-width: 900px) {
   .video-player { grid-template-columns: repeat(2, 1fr); }
@@ -1364,6 +1391,7 @@ iframe.video-embed {
   font-size: 2rem;
   font-weight: 600;
   margin-bottom: 0.4rem;
+  text-align: center;
 }
 .page-subtitle {
   color: var(--muted-text);
