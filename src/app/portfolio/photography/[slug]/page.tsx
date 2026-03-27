@@ -66,6 +66,7 @@ export default async function PhotographyProjectPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(galleryJsonLd) }}
       />
       <h1 className="project-heading">{project.heading}</h1>
+      <hr className="section-title-divider" aria-hidden="true" />
       {project.description && (
         <p className="project-description">{project.description}</p>
       )}

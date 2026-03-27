@@ -56,6 +56,7 @@ export default async function VideoProjectPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(videoJsonLd) }}
       />
       <h1 className="project-heading">{project.heading}</h1>
+      <hr className="section-title-divider" aria-hidden="true" />
       {project.longDescription && (
         <p className="project-description">{project.longDescription}</p>
       )}

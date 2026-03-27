@@ -44,6 +44,7 @@ export default async function SocialMediaProjectPage({
   return (
     <main className="project-page container">
       <h1 className="project-heading">{project.heading}</h1>
+      <hr className="section-title-divider" aria-hidden="true" />
       {project.description && (
         <p className="project-description">{project.description}</p>
       )}

@@ -39,9 +39,7 @@ export default function VideoPlayer({ videos }: VideoPlayerProps) {
     <div className="video-player">
       {videos.map((v, i) => (
         <div key={i} className="video-player__item">
-          {videos.length > 1 && (
-            <h3 className="video-player__title">{v.title}</h3>
-          )}
+          <h3 className="video-player__title">{v.title}</h3>
           <LazyVideoEmbed video={v} />
         </div>
       ))}
