@@ -15,10 +15,3 @@ export const MAX_CARDS = 6;
 
 /** Auto-advance interval (ms) for card slideshow */
 export const SLIDESHOW_CYCLE_MS = 4000;
-
-/**
- * Prime-number step used to stagger slideshow offsets across multiple cards.
- * gcd(997, 4000) === 1, so 4000 unique offsets are produced before any two
- * cards share the same phase — eliminating the "pairs changing together" effect.
- */
-export const SLIDESHOW_PRIME_STEP = 997;

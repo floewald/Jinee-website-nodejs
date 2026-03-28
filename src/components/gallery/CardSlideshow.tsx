@@ -3,29 +3,29 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useSwipe } from "@/hooks/useSwipe";
-import { SLIDESHOW_CYCLE_MS, SLIDESHOW_PRIME_STEP } from "@/lib/constants";
+import { SLIDESHOW_CYCLE_MS } from "@/lib/constants";
 
 import type { SlideshowImage } from "@/lib/gallery-images";
 
 interface CardSlideshowProps {
   images: SlideshowImage[];
   alt: string;
+  /**
+   * Position of this card in the grid (0-based).
+   * Even cards advance immediately; odd cards are offset by half a cycle,
+   * producing the checkerboard stagger: 0,2,4 → wait → 1,3,5 → repeat.
+   */
+  cardIndex: number;
 }
 
-// Module-level counter for stagger offsets.
-// We multiply by a prime (SLIDESHOW_PRIME_STEP) that is coprime with the
-// SLIDESHOW_CYCLE_MS interval, so every card gets a distinct offset — no two
-// cards share a phase until SLIDESHOW_CYCLE_MS instances have been created.
-// See constants.ts for tuning these values.
-let instanceCounter = 0;
-
-export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
+export default function CardSlideshow({ images, alt, cardIndex }: CardSlideshowProps) {
   const [idx, setIdx] = useState(0);
   const [portraitFlags, setPortraitFlags] = useState<boolean[]>(() =>
     Array(images.length).fill(false)
   );
-  // Capture the stagger offset once on mount via a ref so it never changes.
-  const delay = useRef((instanceCounter++ * SLIDESHOW_PRIME_STEP) % SLIDESHOW_CYCLE_MS);
+  // Odd-positioned cards wait half a cycle before their first advance so that
+  // adjacent cards never change at the same time.
+  const delay = useRef((cardIndex % 2) * (SLIDESHOW_CYCLE_MS / 2));
 
   const next = () => setIdx((prev) => (prev + 1) % images.length);
   const prev = () => setIdx((prev) => (prev - 1 + images.length) % images.length);

@@ -27,7 +27,7 @@ export default function ProjectCardsGrid({
 }: ProjectCardsGridProps) {
   return (
     <div className="project-cards">
-      {projects.map((project) => {
+      {projects.map((project, cardIndex) => {
         const slideshowImages = getProjectSlideshowImages(project.slug, type);
         const previewImages: SlideshowImage[] =
           slideshowImages.length > 1
@@ -45,6 +45,7 @@ export default function ProjectCardsGrid({
                 <CardSlideshow
                   images={previewImages}
                   alt={project.portfolioCard!.cardTitle}
+                  cardIndex={cardIndex}
                 />
               ) : (
                 <Image

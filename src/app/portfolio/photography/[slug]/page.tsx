@@ -73,9 +73,9 @@ export default async function PhotographyProjectPage({
 
       {images.length > 0 ? (
         project.enableDownload ? (
-          <GalleryWithDownload images={images} project={slug} />
+          <GalleryWithDownload images={images} project={slug} showSlideshow={project.showSlideshow} />
         ) : (
-          <GalleryWithLightbox images={images} showSlideshow={project.showSlideshow ?? true} />
+          <GalleryWithLightbox images={images} showSlideshow={project.showSlideshow ?? false} />
         )
       ) : (
         <p className="gallery-empty">No images available yet.</p>

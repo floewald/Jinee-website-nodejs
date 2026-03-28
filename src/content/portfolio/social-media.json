@@ -6,6 +6,7 @@
     "description": "Social Media Content",
     "heading": "📱 Social Media | Motivational Content",
     "ogImage": "https://jineechen.com/assets/social-media/ig-motivational/ig-motivational-1-800.webp",
+    "visible": true,
     "enableDownload": false,
     "hasGallery": false,
     "customContent": "<p class=\"lead\">Check out my motivational content on <a href=\"https://www.instagram.com/\" target=\"_blank\" rel=\"noopener\">Instagram</a>.</p>"
@@ -17,6 +18,7 @@
     "description": "House unboxing social media content.",
     "heading": "📱 Social Media | House Unboxing",
     "ogImage": "https://jineechen.com/assets/social-media/ig-house-unboxing/ig-house-unboxing-1-800.webp",
+    "visible": true,
     "enableDownload": false,
     "hasGallery": true,
     "imageCount": 15
@@ -28,6 +30,7 @@
     "description": "Personal travel log social media content.",
     "heading": "📱 Social Media | Travel Log",
     "ogImage": "https://jineechen.com/assets/social-media/ig-own-travel-log/ig-own-travel-log-1-800.webp",
+    "visible": true,
     "enableDownload": false,
     "hasGallery": true,
     "imageCount": 25

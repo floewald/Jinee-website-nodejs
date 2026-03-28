@@ -5,12 +5,14 @@ import GallerySelection from "./GallerySelection";
 import DownloadToolbar from "./DownloadToolbar";
 import DownloadModal from "./DownloadModal";
 import Lightbox from "@/components/gallery/Lightbox";
+import Slideshow from "@/components/gallery/Slideshow";
 import { useLightbox } from "@/hooks/useLightbox";
 import type { GalleryImage } from "@/components/gallery/Lightbox";
 
 interface GalleryWithDownloadProps {
   images: GalleryImage[];
   project: string;
+  showSlideshow?: boolean;
 }
 
 function toDownloadFilename(src: string): string {
@@ -20,6 +22,7 @@ function toDownloadFilename(src: string): string {
 export default function GalleryWithDownload({
   images,
   project,
+  showSlideshow = false,
 }: GalleryWithDownloadProps) {
   const [selectionMode, setSelectionMode] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
@@ -51,6 +54,7 @@ export default function GalleryWithDownload({
 
   return (
     <>
+      {showSlideshow && images.length > 0 && <Slideshow images={images} />}
       <DownloadToolbar
         selectionMode={selectionMode}
         selectedCount={selected.length}

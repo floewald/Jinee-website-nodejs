@@ -46,9 +46,9 @@ export function getProjectBySlug(
   return allProjects.find((p) => p.slug === slug);
 }
 
-/** All photography projects that have a portfolioCard, in JSON array order */
+/** All photography projects that have a portfolioCard and are visible, in JSON array order */
 export function getPhotographyCards(): PhotographyProject[] {
-  return photographyProjects.filter((p) => p.portfolioCard);
+  return photographyProjects.filter((p) => p.portfolioCard && p.visible !== false);
 }
 
 /** All video projects that have a portfolioCard, in JSON array order */
@@ -71,6 +71,6 @@ export function getSlugsByType(
   type: PortfolioProject["type"]
 ): string[] {
   return allProjects
-    .filter((p) => p.type === type)
+    .filter((p) => p.type === type && p.visible !== false)
     .map((p) => p.slug);
 }

@@ -7,6 +7,7 @@
     "longDescription": "A documentary examining how Taiwan's young university graduates navigate stagnant wages and rising living costs. The film follows everyday workers as they share coping strategies and question the promise of higher education.",
     "heading": "Producer | Director | Videographer | 📍 Taiwan",
     "ogImage": "https://jineechen.com/assets/video/stuck-low-pay/stuck-low-pay-1-800.webp",
+    "visible": true,
     "videos": [
       {
         "title": "Stuck With Low Pay, How Taiwan's Young Graduates Cope With High Costs | Asia's Stuck Generation.",
@@ -27,6 +28,7 @@
     "longDescription": "A short documentary profiling Singaporean electronic-pop artist Jasmine Sokko and her journey chasing music dreams. Part of the 'Dear Singapore' series, the film explores the personal sacrifices and creative vision behind her rise.",
     "heading": "Director | Videographer | 📍 Singapore",
     "ogImage": "https://jineechen.com/assets/video/singer-jasmin-sokko/singer-jasmin-sokko-1-800.webp",
+    "visible": true,
     "videos": [
       {
         "title": "Singer Jasmine Sokko On Chasing Her Music Dreams: Every Dream Is Equally Worthy | Dear Singapore",
@@ -47,6 +49,7 @@
     "longDescription": "A five-part Mandarin-language documentary series revisiting Singapore's heritage districts and the memories they hold. Each episode uncovers the history of an iconic location — from Katong's beauty pageants to Fort Canning's playgrounds and the legendary satay club.",
     "heading": "Producer | Director | Videographer | 📍 Singapore",
     "ogImage": "https://jineechen.com/assets/video/re-old-times/re-old-times-1-800.webp",
+    "visible": true,
     "videos": [
       {
         "title": "Fun转时光 | 彻夜卷发、鱼尾狮穿上身 80年代美姐难当! - Katong",
@@ -92,6 +95,7 @@
     "longDescription": "A documentary profiling healthy dining habits and recommendations for viewers in their 40s and 50s.",
     "heading": "Director | Videographer | 📍 Singapore",
     "ogImage": "https://jineechen.com/assets/video/healthy-dining/healthy-dining-1-800.webp",
+    "visible": true,
     "videos": [
       {
         "title": "8world |《看见主播》40、50岁建康外食",
@@ -111,6 +115,7 @@
     "description": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
     "heading": "Videographer | 📍 Singapore",
     "ogImage": "https://jineechen.com/assets/video/social-media-addiction/social-media-addiction-800.webp",
+    "visible": true,
     "videos": [
       {
         "title": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
@@ -131,6 +136,7 @@
     "longDescription": "A three-part CNA Insider documentary series following visually impaired chefs as they open their own café in Singapore.",
     "heading": "Research | Producer | Director | Videographer | 📍 Singapore",
     "ogImage": "https://jineechen.com/assets/video/blind-kitchen-chefs/blind-kitchen-chefs-1-800.webp",
+    "visible": true,
     "videos": [
       {
         "title": "Episode 1: We're Chefs, We're Partly Blind & We're Opening A Cafe",
@@ -166,6 +172,7 @@
     "longDescription": "A nine-episode Taiwanese web series pairing host Kunda with athletes and celebrities for fitness challenges and gym workouts.",
     "heading": "Executive Producer | 📍 Taiwan",
     "ogImage": "https://jineechen.com/assets/video/into-the-gym/into-the-gym-1-800.webp",
+    "visible": true,
     "videos": [
       {
         "title": "坤達對決世界球后戴資穎，看小戴挑戰100秒20宮格羽球準度挑戰！【 EP1 】",
@@ -231,6 +238,7 @@
     "longDescription": "A four-episode food series exploring affordable local eats in Singapore and Taiwan. From hawker stalls and Michelin-rated meals under S$6 to old-school bento shops and a singing taxi driver's favourite eatery, each episode celebrates everyday food culture.",
     "heading": "Producer | Director | Videographer | 📍 Singapore & Taiwan",
     "ogImage": "https://jineechen.com/assets/video/lunch-with-us/lunch-with-us-1-800.webp",
+    "visible": true,
     "videos": [
       {
         "title": "Budget 'Fast-Food' Hopping In Taiwan: From Vegetarian to Pork Cheap Eats | Taipei",
@@ -271,6 +279,7 @@
     "longDescription": "A television commercial campaign for Marigold, one of Singapore's leading dairy and beverage brands.",
     "heading": "Producer | Director | 📍 Singapore",
     "ogImage": "https://jineechen.com/assets/video/marigold-ad/marigold-ad-1-800.webp",
+    "visible": false,
     "videos": [
       {
         "title": "Marigold TVC Campaign",
@@ -287,6 +296,7 @@
     "longDescription": "A corporate video produced for Singapore's Ministry of Manpower highlighting the annual Dormitory Awards. The piece showcases best practices in foreign-worker dormitory management and celebrates operators who provide safe, well-maintained living conditions.",
     "heading": "Producer | Director | Videographer | 📍 Singapore",
     "ogImage": "https://jineechen.com/assets/video/ministry-of-manpower/ministry-of-manpower-1-800.webp",
+    "visible": false,
     "videos": [
       {
         "title": "Ministry of Manpower Singapore - Dormitory Awards 2017.",
@@ -303,6 +313,7 @@
     "longDescription": "A television commercial campaign for Nestlé, featuring their Nescafé product line.",
     "heading": "Producer | Director | 📍 Singapore",
     "ogImage": "https://jineechen.com/assets/video/nescafe-ad/nescafe-ad-1-800.webp",
+    "visible": false,
     "videos": [
       {
         "title": "Nestlé TVC Campaign",
@@ -319,6 +330,7 @@
     "longDescription": "A two-part documentary embedded with Singapore Civil Defence Force paramedics and emergency responders.",
     "heading": "Producer | Director | Videographer | 📍 Singapore",
     "ogImage": "https://jineechen.com/assets/video/scdf-project/scdf-project-1-800.webp",
+    "visible": true,
     "videos": [
       {
         "title": "SCDF Officers React To Abusive Calls, Emotional Cases And Ambulance-Blocking Drivers",
@@ -348,6 +360,7 @@
     "longDescription": "A two-part documentary giving voice to scam victims in Singapore. Each episode follows a real person recounting how they were drawn into an investment or love scam, what warning signs they missed, and how they rebuilt afterward.",
     "heading": "Producer | Director | Videographer | 📍 Singapore",
     "ogImage": "https://jineechen.com/assets/video/i-fell/i-fell-1-800.webp",
+    "visible": true,
     "videos": [
       {
         "title": "I Fell For An Investment Scam: Here's How They Got Me",
@@ -377,6 +390,7 @@
     "longDescription": "A documentary profiling a robotics professional who chose to build his career in Singapore and the ways he gives back to the community. The film explores work culture, immigration and belonging.",
     "heading": "Producer | Director | Videographer | 📍 Singapore",
     "ogImage": "https://jineechen.com/assets/video/work-in-sgp/work-in-sgp-1-800.webp",
+    "visible": true,
     "videos": [
       {
         "title": "I Build Robots For A Living. Here's Why I Chose To Work In Singapore & How I'm Giving Back",
@@ -397,6 +411,7 @@
     "longDescription": "A documentary following a Singaporean father who spent 14 years as a stay-at-home dad raising his son. The film captures his reflections on sacrifice, identity and the decision to re-enter the workforce.",
     "heading": "Producer | Director | Videographer | 📍 Singapore",
     "ogImage": "https://jineechen.com/assets/video/stay-at-home-dad/stay-at-home-dad-1-800.webp",
+    "visible": true,
     "videos": [
       {
         "title": "I Spent 14 Years As A Stay-At-Home Dad For My Son. Here's Why It's Time To Reclaim My Life",
