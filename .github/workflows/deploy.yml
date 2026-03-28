@@ -32,7 +32,26 @@ jobs:
         env:
           NODE_ENV: production
 
-      # 5. Deploy out/ to the FTP server
+      # 5. Verify the build produced a valid site
+      - name: Verify build output
+        run: |
+          [ -d out/ ] || (echo "::error::Build failed: out/ directory missing" && exit 1)
+          [ -f out/index.html ] || (echo "::error::Build failed: index.html not found" && exit 1)
+          echo "Build OK — $(find out/ -type f | wc -l | tr -d ' ') files"
+
+      # 6. Warn if Git LFS objects are approaching the 1 GB free-tier limit (90 % = 900 MB).
+      #    This is a no-op when LFS is not in use; activates automatically if LFS is adopted.
+      - name: Check Git LFS storage usage
+        run: |
+          if [ -d .git/lfs/objects ]; then
+            USED=$(du -sb .git/lfs/objects | cut -f1)
+            LIMIT=$((900 * 1024 * 1024))
+            if [ "$USED" -gt "$LIMIT" ]; then
+              echo "::warning title=Git LFS quota::LFS objects exceed 90% of the 1 GB free tier (${USED} bytes used). Consider upgrading storage: https://docs.github.com/en/billing/managing-billing-for-git-large-file-storage"
+            fi
+          fi
+
+      # 7. Deploy out/ to the FTP server
       #    Credentials are stored in GitHub repository Secrets (Settings → Secrets and variables → Actions)
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

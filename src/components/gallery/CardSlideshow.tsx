@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { useSwipe } from "@/hooks/useSwipe";
 
 interface CardSlideshowProps {
   images: string[];
@@ -25,15 +26,19 @@ export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
   // Capture the stagger offset once on mount via a ref so it never changes.
   const delay = useRef((instanceCounter++ * PRIME_STEP) % CYCLE_MS);
 
+  const next = () => setIdx((prev) => (prev + 1) % images.length);
+  const prev = () => setIdx((prev) => (prev - 1 + images.length) % images.length);
+  const { handlers: swipeHandlers } = useSwipe({ onSwipeLeft: next, onSwipeRight: prev });
+
   useEffect(() => {
     if (images.length <= 1) return;
 
     let intervalId: ReturnType<typeof setInterval> | null = null;
 
     const timeoutId = setTimeout(() => {
-      setIdx((prev) => (prev + 1) % images.length);
+      next();
       intervalId = setInterval(() => {
-        setIdx((prev) => (prev + 1) % images.length);
+        next();
       }, CYCLE_MS);
     }, delay.current);
 
@@ -55,7 +60,7 @@ export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
   }
 
   return (
-    <div className="card-slideshow">
+    <div className="card-slideshow" {...swipeHandlers}>
       {images.map((src, i) => {
         const isPortrait = portraitFlags[i];
         return (
@@ -77,6 +82,7 @@ export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
               src={src}
               alt={i === 0 ? alt : ""}
               fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="project-card__img"
               style={{
                 objectFit: isPortrait ? "contain" : "cover",

@@ -48,6 +48,7 @@ export default function GalleryGrid({ images, onImageClick }: GalleryGridProps) 
               src={img.src}
               alt={img.alt}
               fill
+              sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 25vw"
               className="gallery-img"
               style={{ objectFit: "contain", zIndex: 1 }}
               unoptimized

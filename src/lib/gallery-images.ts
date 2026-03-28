@@ -33,7 +33,10 @@ export function getProjectSlideshowImages(
     "images.json"
   );
 
-  if (!fs.existsSync(manifestPath)) return [];
+  if (!fs.existsSync(manifestPath)) {
+    console.warn(`[gallery-images] No manifest found for "${slug}" (${type}). Expected: ${manifestPath}`);
+    return [];
+  }
 
   const data: ImageManifestItem[] = JSON.parse(
     fs.readFileSync(manifestPath, "utf-8")
@@ -61,7 +64,10 @@ export function getGalleryImages(
     "images.json"
   );
 
-  if (!fs.existsSync(manifestPath)) return [];
+  if (!fs.existsSync(manifestPath)) {
+    console.warn(`[gallery-images] No manifest found for "${slug}" (${type}). Expected: ${manifestPath}`);
+    return [];
+  }
 
   const data: ImageManifestItem[] = JSON.parse(
     fs.readFileSync(manifestPath, "utf-8")
