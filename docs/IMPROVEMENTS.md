@@ -38,4 +38,3 @@ For the technical design see [DESIGN.md](DESIGN.md).
 | FTP deployment smoke test (NFR-06.7) | Requires live FTP server |
 | Lighthouse / visual regression / OG debugger | Requires deployed site |
 | TinaCMS (Phase 7) | Deferred indefinitely |
-

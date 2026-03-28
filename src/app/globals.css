@@ -22,7 +22,7 @@
 }
 
 /* ─── Tailwind v4 design tokens (matched to original CSS variables) ────────── */
-@theme inline {
+:root {
   /* Brand colours */
   --color-charcoal: #1f1f1f;
   --color-black: #000000;
@@ -752,6 +752,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   line-height: 1.2;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -765,6 +766,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   line-height: 1.2;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   border-bottom: 1px solid #e5e7eb;
@@ -1294,7 +1296,6 @@ input::placeholder, textarea::placeholder {
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
-.video-player__item { /* gap handles spacing */ }
 /* min-height ensures video thumbnails align even when titles differ in line count */
 .video-player__title { font-size: 1.05rem; margin-bottom: .6rem; min-height: 5rem; }
 /* Responsive video grid: 3 → 2 → 1 columns */

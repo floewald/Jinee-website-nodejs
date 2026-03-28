@@ -174,6 +174,7 @@ Portrait images inside a slide are detected via `onLoad` measuring `naturalHeigh
 `src/components/gallery/Lightbox.tsx` renders via `createPortal(…, document.body)` to escape any CSS `transform` stacking context (e.g. from `.section-bg-white { transform: translateX(-50%) }`).
 
 Portrait images (detected from `naturalHeight > naturalWidth` via an `onLoad` callback) always display inside a `3/2` (landscape) frame:
+
 - `object-fit: contain` shows the full portrait image
 - A second `<Image>` element with `className="lightbox__portrait-bg"` fills the remaining space with a blurred version of the same image
 - Zoom (`zoomedIndex === currentIndex` derived state) works the same for both orientations

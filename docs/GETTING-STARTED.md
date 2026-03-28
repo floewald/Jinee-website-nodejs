@@ -15,21 +15,27 @@ Technically it is a **static website** — meaning the final product is a folder
 ## Understanding the Technology (Zero Knowledge Edition)
 
 ### TypeScript / JavaScript
+
 JavaScript is the programming language of the web — it runs directly in browsers. TypeScript is "JavaScript with types," meaning it catches typos and mistakes before you even run the code. Files ending in `.ts` or `.tsx` are TypeScript files.
 
 ### React
+
 React is a JavaScript library for building user interfaces. Instead of writing raw HTML, you write **components** — reusable pieces of UI. For example, `Header.tsx` is one component that is reused on every page. Files ending in `.tsx` contain React components (JSX — HTML-like syntax inside TypeScript).
 
 ### Next.js
+
 Next.js is a framework built on top of React. It adds things like file-based routing (the folder `src/app/about/page.tsx` automatically becomes the `/about` URL), optimised images, and the ability to export everything as static HTML files.
 
 ### Tailwind CSS
+
 Tailwind CSS is a styling system. Instead of writing a separate `.css` file, you apply short utility classes directly in your HTML/JSX: `class="text-center font-bold"`. However, in this project most custom styles are in `src/app/globals.css` using plain CSS — Tailwind is used mainly for the base reset.
 
 ### npm (Node Package Manager)
+
 npm is a tool for installing and running JavaScript packages. You run commands like `npm install` (sets up the project) and `npm run dev` (starts the local preview). All npm commands are run in your terminal / command line.
 
 ### Node.js
+
 Node.js is a runtime that lets JavaScript run on your computer (outside the browser). npm requires Node.js. You do not need to understand Node.js deeply — you just need it installed.
 
 ---
@@ -39,40 +45,46 @@ Node.js is a runtime that lets JavaScript run on your computer (outside the brow
 Work through this list in order. Each step includes how to check if it is already installed.
 
 ### 1. Git
+
 Used to download and track changes to the project code.
 
 **Check:** `git --version`
 
-**Install:** https://git-scm.com/downloads — click your operating system
+**Install:** <https://git-scm.com/downloads> — click your operating system
 
 ### 2. Node.js (version 20 or higher)
+
 The JavaScript runtime. This also installs npm automatically.
 
 **Check:** `node -v` (should say v20.x.x or higher)
 
 **Install:**
-- Go to https://nodejs.org/
+
+- Go to <https://nodejs.org/>
 - Download the **LTS** version (the one labeled "Recommended for most users")
 - Run the installer — accept all defaults
 
 ### 3. A Code Editor
+
 Visual Studio Code (VS Code) is recommended because it shows TypeScript errors inline.
 
-**Install:** https://code.visualstudio.com/
+**Install:** <https://code.visualstudio.com/>
 
 **Useful VS Code extensions (search by name in the Extensions panel):**
+
 - **ESLint** — highlights code style issues
 - **Prettier** — auto-formats code on save
 - **Tailwind CSS IntelliSense** — autocompletes CSS class names
 
 ### 4. (Optional) PHP 7.4+
+
 Only needed if you want to test the contact form or download system locally. The portfolio gallery and all visual parts work fine without PHP.
 
 **Check:** `php -v`
 
-**Install (macOS):** `brew install php` (requires Homebrew from https://brew.sh)
+**Install (macOS):** `brew install php` (requires Homebrew from <https://brew.sh>)
 
-**Install (Windows):** Download from https://windows.php.net/download
+**Install (Windows):** Download from <https://windows.php.net/download>
 
 ---
 
@@ -103,7 +115,7 @@ This downloads all the JavaScript libraries the project needs (React, Next.js, e
 npm run dev
 ```
 
-Open your browser and go to **http://localhost:3000** — you should see the website.
+Open your browser and go to **<http://localhost:3000>** — you should see the website.
 
 The development server **hot-reloads**: when you save a file, the browser updates automatically without needing to refresh.
 
@@ -178,13 +190,14 @@ You do not write code — you edit a JSON file and add images.
 }
 ```
 
-4. **Run** `npm run dev` to preview it at `/portfolio/photography/my-new-project/`
+1. **Run** `npm run dev` to preview it at `/portfolio/photography/my-new-project/`
 
 See [ADDING-PROJECTS.md](ADDING-PROJECTS.md) for the full guide.
 
 ### Editing Page Text or Layout
 
 Most text in components is hardcoded in the TSX files:
+
 - Homepage about text → `src/components/sections/AboutSection.tsx`
 - Contact page (`/contact/`) → `src/app/contact/page.tsx`; contact form component → `src/components/sections/ContactSection.tsx`
 - Footer text → `src/components/layout/Footer.tsx`
@@ -245,11 +258,13 @@ You can run `npm run type-check` at any time to see all TypeScript errors withou
 The project has two types of tests:
 
 **Unit tests** (fast, ~2 seconds) — check individual React components:
+
 ```bash
 npm run test
 ```
 
 **End-to-end tests** (slower, ~30 seconds) — open a real browser and click through pages:
+
 ```bash
 npm run test:e2e
 ```
@@ -261,21 +276,27 @@ Tests run automatically before every `git commit` (via Husky). If they fail, the
 ## Troubleshooting
 
 ### "npm: command not found"
+
 → Node.js is not installed. Go to Prerequisites step 2.
 
 ### "Cannot find module" error after `npm run dev`
+
 → Run `npm install` again to restore missing packages.
 
 ### Port 3000 already in use
+
 → Another process is using port 3000. Either stop that process or run: `npm run dev -- -p 3001` to use port 3001 instead.
 
 ### Images not showing
+
 → WebP images may not have been generated. Run `npm run build:images` first.
 
 ### ESLint blocks the commit
+
 → Run `npm run lint` to see the errors, fix them, then commit again.
 
 ### TypeScript errors in VS Code but `npm run dev` works
+
 → VS Code may be using a different TypeScript version. Press `Cmd+Shift+P` (macOS) → "TypeScript: Select TypeScript Version" → "Use Workspace Version".
 
 ---

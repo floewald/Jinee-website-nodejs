@@ -40,6 +40,7 @@ cp backend/download/download_config.example.php backend/download/download_config
 ```
 
 Edit `backend/contact/config.php`:
+
 ```php
 <?php
 return [
@@ -73,6 +74,7 @@ npm run build:images
 ```
 
 This runs `scripts/build-images.sh` which:
+
 1. Converts JPG/PNG in `assets-raw/` → WebP at 320, 800, 1600px widths in `public/assets/`
 2. Generates `images.json` manifest per project folder
 
@@ -83,12 +85,14 @@ This runs `scripts/build-images.sh` which:
 Two processes run side-by-side during development:
 
 **Terminal 1 — Next.js dev server (Turbopack)**
+
 ```bash
 npm run dev
 # → http://localhost:3000
 ```
 
 **Terminal 2 — PHP backend**
+
 ```bash
 php -S localhost:8080 -t backend/
 # → http://localhost:8080
@@ -99,6 +103,7 @@ The Next.js app makes backend calls to `http://localhost:8080/contact/...` and `
 > **CORS**: `localhost` is already whitelisted in all PHP files. CSRF sessions should work cross-port in local dev.
 
 Create a `.env.local` file:
+
 ```bash
 NEXT_PUBLIC_BACKEND_URL=http://localhost:8080
 ```
@@ -150,6 +155,7 @@ npm run test:coverage     # generate coverage report in coverage/
 ```
 
 Test files live alongside the code:
+
 ```
 src/components/gallery/
 ├── GalleryGrid.tsx
@@ -195,6 +201,7 @@ E2E tests target `http://localhost:3000` (configurable in `playwright.config.ts`
 2. `jest --bail --findRelatedTests` — runs only tests related to changed files (stops on first failure)
 
 To skip the pre-commit hook in an emergency:
+
 ```bash
 git commit --no-verify -m "your message"  # use sparingly
 ```
@@ -214,6 +221,7 @@ git commit --no-verify -m "your message"  # use sparingly
 ## When to Re-run Image Pipeline
 
 Run `npm run build:images` when:
+
 - New raw images are added to `assets-raw/`
 - Existing raw images are replaced
 
@@ -240,6 +248,7 @@ Install the recommended extensions for the best DX:
 ### Next.js errors
 
 The dev server shows a browser overlay for runtime errors. For build errors:
+
 ```bash
 npm run build 2>&1 | less
 ```
@@ -247,11 +256,13 @@ npm run build 2>&1 | less
 ### PHP errors
 
 PHP writes errors to `stderr` when running with `php -S`. You'll see them in the terminal running the PHP server. To increase verbosity:
+
 ```bash
 php -d display_errors=1 -d error_reporting=E_ALL -S localhost:8080 -t backend/
 ```
 
 Log files:
+
 - Contact form sends: `backend/contact/logs/send.log`
 - Download attempts: `backend/download/logs/download_attempts.log`
 

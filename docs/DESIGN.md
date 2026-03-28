@@ -212,6 +212,7 @@ Because `gcd(997, 4000) = 1`, there are exactly **4000 unique offsets** before a
 ### 5.2 Portrait image detection
 
 Used in `GalleryGrid`, `Lightbox`, and `CardSlideshow`. All three follow the same pattern:
+
 1. Attach an `onLoad` callback to `<Image>`
 2. Read `naturalHeight` and `naturalWidth` from the event target
 3. If `naturalHeight > naturalWidth` → set `isPortrait` state → switch CSS class
@@ -221,6 +222,7 @@ In `Lightbox`, a second blurred `<Image>` element fills the background via `clas
 ### 5.3 LQIP blur-up
 
 `scripts/generate-lqip.mjs` (using `sharp`):
+
 1. Reads each `images.json` manifest under `Jinee_website/assets/`
 2. For each image: loads the source WebP, resizes to 8×8 px, outputs as WebP, base64-encodes
 3. Writes result back as a `blur` field in the manifest entry
@@ -245,6 +247,7 @@ At render time: `<Image placeholder="blur" blurDataURL={img.blur} />` — Next.j
 ## 6. Component Cascade (Page-Level)
 
 ### Homepage (`src/app/page.tsx`)
+
 ```
 RootLayout
 └── page.tsx
@@ -255,6 +258,7 @@ RootLayout
 ```
 
 ### Photography project page (`portfolio/photography/[slug]/page.tsx`)
+
 ```
 page.tsx  [Server]
 ├── Slideshow                [Client]  (if showSlideshow !== false)
@@ -270,6 +274,7 @@ page.tsx  [Server]
 ```
 
 ### Video project page (`portfolio/video/[slug]/page.tsx`)
+
 ```
 page.tsx  [Server]
 └── VideoPlayer[]            [Client]  — one per video; lazy via IntersectionObserver

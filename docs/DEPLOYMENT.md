@@ -64,6 +64,7 @@ git push origin main
 ```
 
 GitHub Actions will:
+
 1. Install Node.js and project dependencies
 2. Run `npm run build` to generate the `out/` folder
 3. FTP-sync `out/` to your server, uploading only changed files
@@ -125,6 +126,7 @@ out/
 ### Step 3: Upload via FTP client
 
 **Cyberduck / FileZilla (GUI):**
+
 1. Connect to your FTP server
 2. Navigate to your document root (e.g. `/public_html/`)
 3. Drag the **contents** of `out/` into the document root
@@ -133,6 +135,7 @@ out/
 > **Skip images if unchanged.** `out/assets/` is large. If you did not run `build:images`, skip uploading `assets/` — the files on the server are already current.
 
 **`lftp` (command line):**
+
 ```bash
 lftp -u YOUR_USERNAME,YOUR_PASSWORD ftp.your-server.com
 lftp> mirror -R out/ /public_html/
@@ -183,6 +186,7 @@ RewriteRule ^(.*)$ $1/index.html [L]
 After every deployment, verify the following manually:
 
 **Static pages**
+
 - [ ] Homepage loads (`/`)
 - [ ] Portfolio hub loads (`/portfolio/`)
 - [ ] One photography project loads (e.g., `/portfolio/photography/20260124-west-side-art-tour/`)
@@ -192,6 +196,7 @@ After every deployment, verify the following manually:
 - [ ] Old URLs redirect: `/privacy.html` → `/privacy/`
 
 **Interactive features**
+
 - [ ] Mobile hamburger menu opens/closes
 - [ ] Gallery lightbox opens on image click
 - [ ] Slideshow autoplay on homepage project cards
@@ -199,6 +204,7 @@ After every deployment, verify the following manually:
 - [ ] Cookie consent banner appears, Accept/Reject works
 
 **Download system** (if applicable)
+
 - [ ] Download button appears on enabled projects
 - [ ] Modal opens with password field
 - [ ] Wrong password shows error

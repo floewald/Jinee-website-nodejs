@@ -33,6 +33,7 @@ assets-raw/
 ```
 
 **Image requirements:**
+
 - Format: JPG or PNG
 - Resolution: at least 1600px on the long edge (for full-screen lightbox quality)
 - Filenames: alphanumeric, hyphens, underscores — no spaces
@@ -44,13 +45,14 @@ npm run build:images
 ```
 
 This creates three sizes per image in `public/assets/photography/my-new-project/`:
+
 - `IMG_001-320.webp` — thumbnail (320px wide)
 - `IMG_001-800.webp` — medium / slideshow (800px wide)
 - `IMG_001-1600.webp` — full-size / lightbox (1600px wide)
 
 It also generates a `images.json` manifest in the folder — the gallery reads this file to know which images to show.
 
-### Step 3: Add the project config
+### Step 3: Add the video project config
 
 Open `src/content/portfolio/photography.json` and add a new entry to the JSON array:
 
@@ -94,6 +96,7 @@ Open `src/content/portfolio/photography.json` and add a new entry to the JSON ar
 | `visible` | Optional | Set `false` to hide the project entirely (default: `true`) |
 
 > **Card slideshow vs page slideshow — key distinction:**
+>
 > - `portfolioCard.previewImages` controls the small cycling thumbnail on the *index/overview cards*
 > - `showSlideshow` controls the large auto-advance strip shown *at the top of the project's own page*
 > These are independent. You can have a card slideshow without a page slideshow or vice versa.
@@ -116,10 +119,13 @@ Convention: replace hyphens with underscores and uppercase for the token name.
 
 **b) `.github/workflows/deploy.yml`** — add the secret to the `deploy-backend-config` job.  
 Inside the `env:` block add:
+
 ```yaml
 DL_PASS_MY_NEW_PROJECT: ${{ secrets.DL_PASS_MY_NEW_PROJECT }}
 ```
+
 And inside the Python script add:
+
 ```python
 content = content.replace(
     '%%DL_PASS_MY_NEW_PROJECT%%',
@@ -151,12 +157,14 @@ Upload the video(s) to YouTube and note the video ID from the URL:
 ### Step 2: Add a thumbnail image (optional)
 
 If you want a custom thumbnail for the project (instead of the YouTube auto-thumbnail), add it:
+
 ```
 assets-raw/video/my-video-project/thumbnail.jpg
 ```
+
 Run `npm run build:images` to generate WebP versions.
 
-### Step 3: Add the project config
+### Step 3: Add the social media project config
 
 Open `src/content/portfolio/video.json` and add a new entry to the JSON array:
 
@@ -190,6 +198,7 @@ Open `src/content/portfolio/video.json` and add a new entry to the JSON array:
 ```
 
 **Notes:**
+
 - `embedUrl` format: `https://www.youtube.com/embed/{VIDEO_ID}` — replace `{VIDEO_ID}` with the YouTube ID
 - `uploadDate` format: ISO 8601 date and time with timezone (`+08:00` for Singapore time)
 - Videos are shown in the order listed in the `videos` array
@@ -210,6 +219,7 @@ npm run build
 ### Step 1: Decide content type
 
 Social media projects can be either:
+
 - **Gallery** (`hasGallery: true`) — shows a curated image grid, same as photography
 - **Custom** (`hasGallery: false`) — shows a custom text/HTML message (e.g., link to Instagram)
 
@@ -222,6 +232,7 @@ Place images in `assets-raw/social-media/my-social-project/` and run `npm run bu
 Open `src/content/portfolio/social-media.json` and add a new entry to the JSON array:
 
 **Gallery variant:**
+
 ```json
 {
   "type": "social-media",
@@ -236,6 +247,7 @@ Open `src/content/portfolio/social-media.json` and add a new entry to the JSON a
 ```
 
 **Custom content variant:**
+
 ```json
 {
   "type": "social-media",
@@ -294,6 +306,7 @@ npm run tina
 ```
 
 The visual editor lets you:
+
 - Add/edit/remove projects with a form interface
 - Preview changes before saving
 - All changes save directly to the JSON files (committed with Git)
