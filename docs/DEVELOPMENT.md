@@ -81,6 +81,7 @@ bash scripts/build-images.sh --type video --slug re-old-times
 This runs `scripts/build-images.sh` which:
 1. Converts JPG/PNG in `assets-raw/` → WebP at 320, 800, 1600px widths in `public/assets/`
 2. Generates `images.json` manifest per project folder
+3. Generates app icons (`favicon.ico`, `icon-32.png`, `icon-192.png`, `apple-touch-icon.png`) from `assets-raw/photos/icon.png`
 
 ---
 

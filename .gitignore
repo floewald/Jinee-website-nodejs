@@ -56,10 +56,5 @@ public/assets/fonts/*
 !public/assets/fonts/inter-latin.woff2
 !public/assets/fonts/inter-latin-ext.woff2
 
-# Photos: keep only committed app icons/favicons
-!public/assets/photos/
-public/assets/photos/*
-!public/assets/photos/favicon.ico
-!public/assets/photos/icon-32.png
-!public/assets/photos/icon-192.png
-!public/assets/photos/apple-touch-icon.png
+# Photos (logos, previews, and app icons) are generated from assets-raw/photos
+# by scripts/build-images.sh and should not be committed.
