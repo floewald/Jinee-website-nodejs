@@ -21,12 +21,15 @@ export default function DownloadModal({
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  // Reset on open
+  // Reset form state when modal opens. Using setState in effect is correct
+  // here: we need to reset when isOpen transitions from false→true.
   useEffect(() => {
     if (isOpen) {
+      /* eslint-disable react-hooks/set-state-in-effect */
       setPassword("");
       setStatus("idle");
       setErrorMessage("");
+      /* eslint-enable react-hooks/set-state-in-effect */
     }
   }, [isOpen]);
 

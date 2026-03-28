@@ -66,15 +66,16 @@ export default async function PhotographyProjectPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(galleryJsonLd) }}
       />
       <h1 className="project-heading">{project.heading}</h1>
+      <hr className="section-title-divider" aria-hidden="true" />
       {project.description && (
         <p className="project-description">{project.description}</p>
       )}
 
       {images.length > 0 ? (
         project.enableDownload ? (
-          <GalleryWithDownload images={images} project={slug} />
+          <GalleryWithDownload images={images} project={slug} showSlideshow={project.showSlideshow} />
         ) : (
-          <GalleryWithLightbox images={images} />
+          <GalleryWithLightbox images={images} showSlideshow={project.showSlideshow ?? false} />
         )
       ) : (
         <p className="gallery-empty">No images available yet.</p>

@@ -86,24 +86,50 @@ Open `src/content/portfolio/photography.json` and add a new entry to the JSON ar
 | `downloadPassword` | Only if `enableDownload: true` | Password clients use to download files |
 | `imageCount` | ✅ | Number of images (used for structured data) |
 | `portfolioCard` | Optional | Shows this project as a card on the portfolio category page |
+| `portfolioCard.cardTitle` | Only if `portfolioCard` | Title shown below the card thumbnail |
+| `portfolioCard.thumbnail` | Only if `portfolioCard` | Card thumbnail image path (use `-800.webp`) |
 | `portfolioCard.order` | Only if `portfolioCard` | Lower numbers appear first |
+| `portfolioCard.previewImages` | Optional | Fallback array of 2–3 image paths for the card slideshow (uses `-800.webp`). Not normally needed — the card slideshow automatically uses all images from the project's `images.json` manifest. Only set this if you want to override and limit to specific images. |
+| `showSlideshow` | Optional | `true` (default) adds an auto-advance full-image slideshow above the gallery on the project page. Set `false` to disable — recommended for large galleries where the top slideshow is not needed. |
 | `visible` | Optional | Set `false` to hide the project entirely (default: `true`) |
+
+> **Card slideshow vs page slideshow — key distinction:**
+> - `portfolioCard.previewImages` controls the small cycling thumbnail on the *index/overview cards*
+> - `showSlideshow` controls the large auto-advance strip shown *at the top of the project's own page*
+> These are independent. You can have a card slideshow without a page slideshow or vice versa.
 
 ### Step 4: Enable downloads (optional)
 
-If `enableDownload: true`, you also need to register the project in the PHP download config:
+If `enableDownload: true`, you need to wire up the password in three places:
 
-Open `backend/download/download_config.php` and add an entry:
+**a) `backend/download/download_config.template.php`** — add a project entry with a placeholder token:
 
 ```php
 'my-new-project' => [
-    'folder' => 'photography/my-new-project',
-    'password' => 'your-secure-password',
-    'visible' => true,
+    'folder'   => 'photography/my-new-project',
+    'password' => '%%DL_PASS_MY_NEW_PROJECT%%',
+    'visible'  => true,
 ],
 ```
 
-> **Keep passwords secure.** This file is not committed to git. Set a strong, unique password per project.
+Convention: replace hyphens with underscores and uppercase for the token name.
+
+**b) `.github/workflows/deploy.yml`** — add the secret to the `deploy-backend-config` job.  
+Inside the `env:` block add:
+```yaml
+DL_PASS_MY_NEW_PROJECT: ${{ secrets.DL_PASS_MY_NEW_PROJECT }}
+```
+And inside the Python script add:
+```python
+content = content.replace(
+    '%%DL_PASS_MY_NEW_PROJECT%%',
+    os.environ['DL_PASS_MY_NEW_PROJECT'])
+```
+
+**c) GitHub Secrets** — go to **Settings → Secrets and variables → Actions → New repository secret**  
+and add `DL_PASS_MY_NEW_PROJECT` with a strong, unique password.
+
+On the next push to `main`, GitHub Actions generates and uploads `download_config.php` automatically.
 
 ### Step 5: Build and check
 
@@ -168,6 +194,8 @@ Open `src/content/portfolio/video.json` and add a new entry to the JSON array:
 - `uploadDate` format: ISO 8601 date and time with timezone (`+08:00` for Singapore time)
 - Videos are shown in the order listed in the `videos` array
 - `portfolioCard` is optional — omit if you don't want a card on the portfolio category page
+- `portfolioCard.previewImages`: optional array of 2–3 image paths (use `-800.webp`). When provided, the card auto-cycles through the images. If the project folder has multiple `*-800.webp` thumbnails, add up to 3 here.
+- `showSlideshow` is not used for video projects (video pages show YouTube embeds, not a photo slideshow)
 
 ### Step 4: Build
 

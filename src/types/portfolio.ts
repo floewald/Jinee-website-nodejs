@@ -5,7 +5,10 @@ export type ProjectType = "photography" | "video" | "social-media";
 export interface PortfolioCard {
   cardTitle: string;
   thumbnail: string;
-  order: number;
+  /** Optional explicit order override; if omitted, JSON array position is used */
+  order?: number;
+  /** 3–4 images cycled in the card preview slideshow */
+  previewImages?: string[];
 }
 
 export interface BaseProject {
@@ -28,6 +31,8 @@ export interface PhotographyProject extends BaseProject {
   enableDownload: boolean;
   /** Number of images (used for structured data) */
   imageCount: number;
+  /** Show the Slideshow hero above the gallery grid (default: true) */
+  showSlideshow?: boolean;
 }
 
 export interface VideoItem {

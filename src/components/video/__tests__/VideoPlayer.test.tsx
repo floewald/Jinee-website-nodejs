@@ -34,11 +34,11 @@ describe("VideoPlayer", () => {
     expect(screen.getByText("Episode 2: Another")).toBeInTheDocument();
   });
 
-  it("hides title when only one video", () => {
+  it("shows title even when only one video", () => {
     render(<VideoPlayer videos={[videos[0]]} />);
     expect(
       screen.queryByText("Episode 1: Test Video")
-    ).not.toBeInTheDocument();
+    ).toBeInTheDocument();
   });
 
   it("shows placeholder when not visible", () => {

@@ -9,3 +9,9 @@ export const BACKEND_URL =
 
 /** Number of thumbnail columns at each responsive breakpoint */
 export const GALLERY_COLUMNS = { xs: 2, sm: 3, md: 4 };
+
+/** Maximum number of portfolio cards shown per category on the homepage */
+export const MAX_CARDS = 6;
+
+/** Auto-advance interval (ms) for card slideshow */
+export const SLIDESHOW_CYCLE_MS = 4000;

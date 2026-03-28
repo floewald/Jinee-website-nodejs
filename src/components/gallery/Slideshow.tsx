@@ -60,8 +60,10 @@ export default function Slideshow({
             width={800}
             height={534}
             className="slideshow__img"
+            style={{ width: "100%", height: "auto" }}
             unoptimized
             priority={index === 0}
+            {...(current.blur ? { placeholder: "blur" as const, blurDataURL: current.blur } : {})}
           />
         </div>
       </div>

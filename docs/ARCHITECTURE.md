@@ -106,15 +106,18 @@ RootLayout (src/app/layout.tsx)
 └─ Footer
 
 Homepage (src/app/page.tsx)
-├─ GallerySection         — 3×3 collage + GalleryWithLightbox
-│   ├─ GalleryGrid
-│   └─ Lightbox           — keyboard/swipe nav (Esc/←/→)
-├─ FeaturedSection        — video project cards + IG previews
+├─ GallerySection         — 3×3 travel collage + GalleryWithLightbox
+│   ├─ GalleryGrid        — portrait images span 2 grid rows with blurred bg fill
+│   └─ Lightbox           — keyboard/swipe nav (Esc/←/→); createPortal to document.body
+├─ FeaturedSection        — video project cards (with CardSlideshow) + IG previews
+│   └─ CardSlideshow      — auto-cycles previewImages; staggered by prime offset (see below)
 ├─ AboutSection           — avatar, bilingual bio
 └─ ContactSection
     └─ ContactForm        — AJAX, CSRF, sessionStorage drafts
 
 Photography project page (src/app/portfolio/photography/[slug]/page.tsx)
+├─ [optional Slideshow]   — full-image auto-advance strip; controlled by `showSlideshow` in JSON
+│                            (default: true; set `showSlideshow: false` in photography.json to disable)
 ├─ GalleryWithLightbox    — standard gallery (if enableDownload: false)
 │   ├─ GalleryGrid
 │   └─ Lightbox
@@ -123,6 +126,9 @@ Photography project page (src/app/portfolio/photography/[slug]/page.tsx)
     ├─ GallerySelection   — GalleryGrid with checkbox overlay
     ├─ Lightbox
     └─ DownloadModal      — password input, CSRF, ZIP download
+
+Photography / Video category index pages (src/app/portfolio/{photography,video}/page.tsx)
+└─ CardSlideshow          — cycling thumbnail when portfolioCard.previewImages is set
 
 Video project page (src/app/portfolio/video/[slug]/page.tsx)
 └─ VideoPlayer[]          — lazy-loaded YouTube embeds via IntersectionObserver
@@ -142,6 +148,35 @@ Social media project page (src/app/portfolio/social-media/[slug]/page.tsx)
 | `useLightbox` | `src/hooks/useLightbox.ts` | Manages lightbox open/close/index state. Handles keyboard events (arrows, Escape). |
 | `useIntersection` | `src/hooks/useIntersection.ts` | Wraps `IntersectionObserver`. Used for lazy-loading YouTube embeds and image preloading. |
 | `useMediaQuery` | `src/hooks/useMediaQuery.ts` | Returns `boolean` for a media query string. Used for mobile-vs-desktop nav behaviour. |
+
+---
+
+## CardSlideshow — stagger algorithm
+
+`src/components/gallery/CardSlideshow.tsx` uses a **prime-step module-level counter** to ensure all visible cards cycle independently:
+
+```
+offset = (instanceCounter++ × 997) mod 4000  ms
+```
+
+- Cycle length: **4000 ms** per image
+- Step: **997 ms** — prime, so `gcd(997, 4000) = 1`
+- Result: 4000 unique phase offsets before any wrap-around; no two cards share a phase
+
+Why this matters: a naive 3-bucket scheme (0 / 1333 / 2667 ms) caused every 4th card to be in-phase with card 0, so groups of cards visibly flipped together. The prime step eliminates this entirely.
+
+Portrait images inside a slide are detected via `onLoad` measuring `naturalHeight > naturalWidth`. When detected, the slide switches to `object-fit: contain` and a CSS `::before` pseudo-element blurs the same image as a background fill — matching the lightbox portrait treatment.
+
+---
+
+## Lightbox — portal & portrait handling
+
+`src/components/gallery/Lightbox.tsx` renders via `createPortal(…, document.body)` to escape any CSS `transform` stacking context (e.g. from `.section-bg-white { transform: translateX(-50%) }`).
+
+Portrait images (detected from `naturalHeight > naturalWidth` via an `onLoad` callback) always display inside a `3/2` (landscape) frame:
+- `object-fit: contain` shows the full portrait image
+- A second `<Image>` element with `className="lightbox__portrait-bg"` fills the remaining space with a blurred version of the same image
+- Zoom (`zoomedIndex === currentIndex` derived state) works the same for both orientations
 
 ---
 

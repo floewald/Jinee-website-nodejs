@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
 
   // Static export cannot use Next.js Image Optimization API
   images: {
+    // Static FTP deployment — no Node.js runtime on the server.
+    // Images are pre-processed to WebP by `npm run build:images`.
     unoptimized: true,
   },
 };

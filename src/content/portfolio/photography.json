@@ -6,12 +6,18 @@
     "description": "Event photography coverage of Mediacorp's 2026 Chinese New Year Road Show.",
     "heading": "Mediacorp | 2026 CNY Road Show",
     "ogImage": "https://jineechen.com/assets/photography/20260201-mediacorp-2026-cny-road-show/20260201_IMG_2606-800.webp",
+    "visible": true,
     "enableDownload": true,
+    "showSlideshow": false,
     "imageCount": 50,
     "portfolioCard": {
       "cardTitle": "Mediacorp 2026 CNY Road Show",
       "thumbnail": "/assets/photography/20260201-mediacorp-2026-cny-road-show/20260201-kharissa-01-800.webp",
-      "order": 1
+      "previewImages": [
+        "/assets/photography/20260201-mediacorp-2026-cny-road-show/20260201-kharissa-01-800.webp",
+        "/assets/photography/20260201-mediacorp-2026-cny-road-show/20260201-kharissa-02-800.webp",
+        "/assets/photography/20260201-mediacorp-2026-cny-road-show/20260201-kharissa-03-800.webp"
+      ]
     }
   },
   {
@@ -21,12 +27,18 @@
     "description": "NTU Museum Walking Tour West Side Art.",
     "heading": "NTU Museum | Walking Tour West Side Art",
     "ogImage": "https://jineechen.com/assets/photography/20260124-west-side-art-tour/20260124_IMG_1772-800.webp",
+    "visible": true,
     "enableDownload": true,
+    "showSlideshow": false,
     "imageCount": 100,
     "portfolioCard": {
       "cardTitle": "West Side Art Tour",
       "thumbnail": "/assets/photography/20260124-west-side-art-tour/20260124-west-side-art-tour_web-001-800.webp",
-      "order": 2
+      "previewImages": [
+        "/assets/photography/20260124-west-side-art-tour/20260124-west-side-art-tour_web-001-800.webp",
+        "/assets/photography/20260124-west-side-art-tour/20260124-west-side-art-tour_web-002-800.webp",
+        "/assets/photography/20260124-west-side-art-tour/20260124-west-side-art-tour_web-003-800.webp"
+      ]
     }
   },
   {
@@ -36,12 +48,18 @@
     "description": "Professional event photography portfolio showcasing corporate events, conferences, and celebrations.",
     "heading": "📍 Singapore | Event Photography",
     "ogImage": "https://jineechen.com/assets/photography/event-photography/event-001-800.webp",
+    "visible": true,
     "enableDownload": false,
+    "showSlideshow": false,
     "imageCount": 30,
     "portfolioCard": {
       "cardTitle": "Event Photography",
       "thumbnail": "/assets/photography/event-photography/5d8df6dd-cca3-47a3-af9f-6dbb0aa79ca1-800.webp",
-      "order": 3
+      "previewImages": [
+        "/assets/photography/event-photography/5d8df6dd-cca3-47a3-af9f-6dbb0aa79ca1-800.webp",
+        "/assets/photography/event-photography/689d4d01-d932-4851-90fe-a273274faacc-800.webp",
+        "/assets/photography/event-photography/8c6c3060-07e5-4260-8b6e-308808687a59-800.webp"
+      ]
     }
   },
   {
@@ -51,12 +69,18 @@
     "description": "Travel photography from around the world — landscapes, cultures, and adventures.",
     "heading": "Travel Photography",
     "ogImage": "https://jineechen.com/assets/photography/travel-photography/travel-001-800.webp",
+    "visible": true,
     "enableDownload": false,
+    "showSlideshow": false,
     "imageCount": 40,
     "portfolioCard": {
       "cardTitle": "Travel Photography",
       "thumbnail": "/assets/photography/travel-photography/00002-800.webp",
-      "order": 4
+      "previewImages": [
+        "/assets/photography/travel-photography/00002-800.webp",
+        "/assets/photography/travel-photography/00006-800.webp",
+        "/assets/photography/travel-photography/00013-800.webp"
+      ]
     }
   },
   {
@@ -66,12 +90,18 @@
     "description": "Indie Singapore Walking Tour Singapore River.",
     "heading": "Indie Singapore | Walking Tour Singapore River",
     "ogImage": "https://jineechen.com/assets/photography/walking-tour-sgp-river/20251006-IMG_0014-800.webp",
+    "visible": true,
     "enableDownload": false,
+    "showSlideshow": false,
     "imageCount": 26,
     "portfolioCard": {
       "cardTitle": "Indie Singapore River Walking Tour",
       "thumbnail": "/assets/photography/walking-tour-sgp-river/IMG_0146-800.webp",
-      "order": 5
+      "previewImages": [
+        "/assets/photography/walking-tour-sgp-river/20251006-IMG_0014-800.webp",
+        "/assets/photography/walking-tour-sgp-river/20251006-IMG_0057-800.webp",
+        "/assets/photography/walking-tour-sgp-river/20251006-IMG_0080-800.webp"
+      ]
     }
   },
   {
@@ -81,12 +111,18 @@
     "description": "Indie Singapore Walking Tour Little India.",
     "heading": "Indie Singapore | Walking Tour Little India",
     "ogImage": "https://jineechen.com/assets/photography/walking-tour-little-india/20251106-IMG_0531-800.webp",
+    "visible": true,
     "enableDownload": true,
+    "showSlideshow": false,
     "imageCount": 60,
     "portfolioCard": {
       "cardTitle": "Indie Singapore Little India Walking Tour",
       "thumbnail": "/assets/photography/walking-tour-little-india/20251106-IMG_0563-800.webp",
-      "order": 6
+      "previewImages": [
+        "/assets/photography/walking-tour-little-india/20251106-IMG_0531-800.webp",
+        "/assets/photography/walking-tour-little-india/20251106-IMG_0533-800.webp",
+        "/assets/photography/walking-tour-little-india/20251106-IMG_0552-800.webp"
+      ]
     }
   },
   {
@@ -95,13 +131,19 @@
     "title": "Singapore | Birthday Party",
     "description": "Private birthday party photography in Singapore.",
     "heading": "Singapore | Birthday Party",
-    "ogImage": "https://jineechen.com/assets/photography/private-party/Jinee Chen_Party photos-1-800.webp",
+    "ogImage": "https://jineechen.com/assets/photography/private-party/Jinee_Chen_Party photos-1-800.webp",
+    "visible": false,
     "enableDownload": false,
+    "showSlideshow": false,
     "imageCount": 60,
     "portfolioCard": {
       "cardTitle": "Singapore Birthday Party",
-      "thumbnail": "/assets/photography/private-party/Jinee Chen_Party photos-1-800.webp",
-      "order": 6
+      "thumbnail": "/assets/photography/private-party/Jinee_Chen_Party photos-1-800.webp",
+      "previewImages": [
+        "/assets/photography/private-party/Jinee_Chen_Party photos-1-800.webp",
+        "/assets/photography/private-party/Jinee_Chen_Party photos-10-800.webp",
+        "/assets/photography/private-party/Jinee_Chen_Party photos-2-800.webp"
+      ]
     }
   },
   {
@@ -111,8 +153,19 @@
     "description": "Kali Majapahit Training Camp.",
     "heading": "Kali Majapahit | Training Camp",
     "ogImage": "https://jineechen.com/assets/photography/sports-photography/sports-001-800.webp",
+    "visible": true,
     "enableDownload": false,
-    "imageCount": 25
+    "showSlideshow": false,
+    "imageCount": 25,
+    "portfolioCard": {
+      "cardTitle": "Kali Majapahit Training Camp",
+      "thumbnail": "/assets/photography/sports-photography/sports-001-800.webp",
+      "previewImages": [
+        "/assets/photography/sports-photography/sports-001-800.webp",
+        "/assets/photography/sports-photography/sports-002-800.webp",
+        "/assets/photography/sports-photography/sports-003-800.webp"
+      ]
+    }
   },
   {
     "type": "photography",
@@ -121,7 +174,9 @@
     "description": "Behind-the-scenes photography from video productions.",
     "heading": "🎬 Behind The Scenes",
     "ogImage": "https://jineechen.com/assets/photography/behind-the-scenes/bts-001-800.webp",
+    "visible": false,
     "enableDownload": false,
+    "showSlideshow": false,
     "imageCount": 20
   }
 ]

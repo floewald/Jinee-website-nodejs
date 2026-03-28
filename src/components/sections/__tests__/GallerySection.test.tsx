@@ -8,7 +8,7 @@
  *  - Section has gallery id for anchor navigation
  */
 
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import GallerySection from "@/components/sections/GallerySection";
 
 // Mock GalleryWithLightbox to isolate GallerySection logic
@@ -21,6 +21,7 @@ jest.mock("@/components/gallery/GalleryWithLightbox", () => {
     return (
       <div data-testid="gallery-with-lightbox">
         {images.map((img, i) => (
+          // eslint-disable-next-line @next/next/no-img-element
           <img key={i} src={img.src} alt={img.alt} />
         ))}
       </div>

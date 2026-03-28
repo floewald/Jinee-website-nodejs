@@ -67,6 +67,7 @@ npm run dev
 | `npm run test:watch` | Jest in watch mode |
 | `npm run test:coverage` | Jest with coverage report |
 | `npm run test:e2e` | Playwright end-to-end tests |
+| `npm run create-project` | Interactive CLI to scaffold a new portfolio project |
 
 ---
 
@@ -99,7 +100,9 @@ npm run dev
 │   │   ├── useIntersection.ts # IntersectionObserver wrapper
 │   │   └── useMediaQuery.ts   # Responsive breakpoint boolean
 │   ├── lib/
-│   │   ├── portfolio-config.ts  # Typed project config loader
+│   │   ├── portfolio-config.ts  # Typed project config loader (Zod-validated at build time)
+│   │   ├── portfolio-schemas.ts # Zod schemas for photography / video / social-media
+│   │   ├── scaffold-project.ts  # Pure logic for create-project CLI
 │   │   ├── image-utils.ts       # WebP URL helpers (thumb/md/lg)
 │   │   └── constants.ts         # Site-wide constants
 │   ├── types/
@@ -118,16 +121,21 @@ npm run dev
 │   ├── contact/               # Contact form, CSRF tokens
 │   ├── download/              # Download system, rate limiting
 │   └── manifest.php           # Image manifest endpoint
-├── scripts/                   # Image build pipeline (reused from original)
+├── scripts/                   # Image build pipeline + DX tools
 │   ├── build-images.sh
 │   ├── generate-webp.sh
-│   └── generate-manifests.js
+│   ├── generate-manifests.js
+│   ├── create-project.mjs     # Interactive project scaffold CLI
+│   └── validate-manifests.mjs # Build-time manifest checker
 ├── e2e/                       # Playwright end-to-end tests
 ├── docs/                      # Developer & contributor documentation
 │   ├── ARCHITECTURE.md
 │   ├── DEVELOPMENT.md
 │   ├── DEPLOYMENT.md
 │   ├── ADDING-PROJECTS.md
+│   ├── REQUIREMENTS.md
+│   ├── DESIGN.md
+│   ├── IMPROVEMENTS.md
 │   └── MIGRATION-PROGRESS.md
 ├── Jinee_website/             # Original site (kept as reference)
 ├── next.config.ts
@@ -141,11 +149,15 @@ npm run dev
 
 | Document | Audience | Purpose |
 |----------|----------|---------|
+| [docs/GETTING-STARTED.md](docs/GETTING-STARTED.md) | **New developers** | Complete beginner's guide — zero-knowledge intro to the tech stack, first-time setup, and day-to-day workflow |
+| [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) | Developers / PMs | Functional and non-functional requirements; deferred items |
+| [docs/DESIGN.md](docs/DESIGN.md) | Developers | Detailed software design: modules, data model, algorithms, security, testing |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Developers | Component hierarchy, data flow, image pipeline, PHP endpoints |
 | [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | Developers | Full local setup, running PHP side-by-side, debugging |
 | [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | Developers | FTP build & deploy, `.htaccess` redirects, smoke test |
 | [docs/ADDING-PROJECTS.md](docs/ADDING-PROJECTS.md) | Content editors | Step-by-step guide for adding new portfolio projects |
-| [docs/MIGRATION-PROGRESS.md](docs/MIGRATION-PROGRESS.md) | Developers | Live progress tracker for the migration from the original site |
+| [docs/IMPROVEMENTS.md](docs/IMPROVEMENTS.md) | Developers | Completed backlog items and deferred items summary |
+| [docs/MIGRATION-PROGRESS.md](docs/MIGRATION-PROGRESS.md) | Developers | Migration phases summary and deferred items |
 
 ---
 

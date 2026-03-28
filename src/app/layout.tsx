@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/ui/CookieBanner";
+import SmoothScroll from "@/components/SmoothScroll";
 import { SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/constants";
 
 // Self-hosted Inter — avoids Google Fonts CDN (GDPR compliance)
@@ -82,6 +83,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col">
         <Header />
+        <SmoothScroll />
         <main id="main-content" className="flex-1">
           {children}
         </main>

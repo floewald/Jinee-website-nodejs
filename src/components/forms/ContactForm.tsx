@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { BACKEND_URL } from "@/lib/constants";
 
 const DRAFT_KEY = "contactFormDraft";
@@ -24,24 +24,18 @@ const empty: FormState = {
 };
 
 export default function ContactForm() {
-  const [form, setForm] = useState<FormState>(empty);
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error" | "network-error">("idle");
-  const [errorMessage, setErrorMessage] = useState("");
-  const mounted = useRef(false);
-
-  // Restore draft on mount
-  useEffect(() => {
-    if (mounted.current) return;
-    mounted.current = true;
-    const saved = sessionStorage.getItem(DRAFT_KEY);
-    if (saved) {
-      try {
-        setForm(JSON.parse(saved));
-      } catch {
-        // ignore
+  const [form, setForm] = useState<FormState>(() => {
+    // Restore draft saved during the same browser session (runs only on client)
+    if (typeof window !== "undefined") {
+      const saved = sessionStorage.getItem(DRAFT_KEY);
+      if (saved) {
+        try { return JSON.parse(saved) as FormState; } catch { /* ignore */ }
       }
     }
-  }, []);
+    return empty;
+  });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error" | "network-error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value, type } = e.target;
@@ -111,6 +105,7 @@ export default function ContactForm() {
             onChange={handleChange}
             required
             autoComplete="given-name"
+            placeholder="Jane"
           />
         </div>
 
@@ -124,6 +119,7 @@ export default function ContactForm() {
             onChange={handleChange}
             required
             autoComplete="family-name"
+            placeholder="Doe"
           />
         </div>
       </div>
@@ -138,6 +134,7 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           autoComplete="email"
+          placeholder="you@example.com"
         />
       </div>
 
@@ -150,6 +147,7 @@ export default function ContactForm() {
           value={form.phone}
           onChange={handleChange}
           autoComplete="tel"
+          placeholder="+65 9123 4567"
         />
       </div>
 
@@ -162,6 +160,7 @@ export default function ContactForm() {
           value={form.message}
           onChange={handleChange}
           required
+          placeholder="Tell me about your project…"
         />
       </div>
 

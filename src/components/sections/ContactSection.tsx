@@ -44,9 +44,8 @@ export default function ContactSection() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
-                </svg>{" "}
-                Email:{" "}
-                <a href="mailto:hello@jineechen.com">hello@jineechen.com</a>
+                </svg>
+                <span><b>Email:</b>&#32;<a href="mailto:hello@jineechen.com">hello@jineechen.com</a></span>
               </p>
 
               <p>
@@ -63,15 +62,12 @@ export default function ContactSection() {
                   <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="1.2" />
                   <path d="M16 2v4M8 2v4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                   <path d="M7 11h10M7 15h10" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-                </svg>{" "}
-                Meet me:{" "}
-                <a
+                </svg>
+                <span><b>Meet me:</b>&#32;<a
                   href="https://calendly.com/jineechen/15min"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
-                  Calendly — 15 min
-                </a>
+                >Calendly — 15 min</a></span>
               </p>
 
               <p>
@@ -93,8 +89,8 @@ export default function ContactSection() {
                     strokeLinejoin="round"
                   />
                   <circle cx="12" cy="10" r="2.2" fill="currentColor" />
-                </svg>{" "}
-                Location: Singapore &amp; Taipei
+                </svg>
+                <span><b>Location:</b>&#32;Singapore &amp; Taipei</span>
               </p>
 
               <p>
@@ -111,15 +107,12 @@ export default function ContactSection() {
                   <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="1.2" />
                   <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.2" />
                   <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" />
-                </svg>{" "}
-                Instagram:{" "}
-                <a
+                </svg>
+                <span><b>Instagram:</b>&#32;<a
                   href="https://instagram.com/jineechen"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
-                  @jineechen
-                </a>
+                >@jineechen</a></span>
               </p>
             </div>
           </div>
