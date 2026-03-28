@@ -139,3 +139,55 @@ jobs:
           local-dir: ./out/assets/
           server-dir: ${{ secrets.FTP_SERVER_DIR }}assets/
           state-name: .ftp-deploy-assets-sync-state.json
+
+  # Generates download_config.php from the committed template by injecting
+  # passwords stored as GitHub Secrets, then uploads the file via FTP.
+  # This way the repo can be public — no credentials ever touch git.
+  deploy-backend-config:
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Passwords are passed as env-vars and substituted using Python str.replace()
+      # so any special characters in the password values are handled safely.
+      - name: Generate download_config.php from template
+        env:
+          DL_PASS_WALKING_TOUR_LITTLE_INDIA: ${{ secrets.DL_PASS_WALKING_TOUR_LITTLE_INDIA }}
+          DL_PASS_20260124_WEST_SIDE_ART_TOUR: ${{ secrets.DL_PASS_20260124_WEST_SIDE_ART_TOUR }}
+          DL_PASS_20260201_MEDIACORP_2026_CNY_ROAD_SHOW: ${{ secrets.DL_PASS_20260201_MEDIACORP_2026_CNY_ROAD_SHOW }}
+        run: |
+          mkdir -p /tmp/backend-config
+          python3 - <<'PYEOF'
+          import os
+          with open('backend/download/download_config.template.php') as f:
+              content = f.read()
+          content = content.replace(
+              '%%DL_PASS_WALKING_TOUR_LITTLE_INDIA%%',
+              os.environ['DL_PASS_WALKING_TOUR_LITTLE_INDIA'])
+          content = content.replace(
+              '%%DL_PASS_20260124_WEST_SIDE_ART_TOUR%%',
+              os.environ['DL_PASS_20260124_WEST_SIDE_ART_TOUR'])
+          content = content.replace(
+              '%%DL_PASS_20260201_MEDIACORP_2026_CNY_ROAD_SHOW%%',
+              os.environ['DL_PASS_20260201_MEDIACORP_2026_CNY_ROAD_SHOW'])
+          with open('/tmp/backend-config/download_config.php', 'w') as f:
+              f.write(content)
+          PYEOF
+
+      # Uploads the generated config to /private/download/ on the server.
+      # download.php (in www/download/) resolves ../../private/download/download_config.php
+      # which is why this goes to the private folder, NOT www/download/.
+      # Set FTP_BACKEND_DIR = private/download/  (must end with /)
+      - name: Upload download_config.php via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: /tmp/backend-config/
+          server-dir: ${{ secrets.FTP_BACKEND_DIR }}
+          state-name: .ftp-deploy-backend-config-state.json
+          dangerous-clean-slate: false

@@ -29,14 +29,27 @@ Every time you push a commit to the `main` branch, GitHub builds the site and FT
 
 Go to your repository on GitHub → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**.
 
-Add these four secrets:
+Add these secrets:
+
+**FTP credentials (core)**
 
 | Secret name | Value |
 |-------------|-------|
 | `FTP_SERVER` | Your FTP hostname, e.g. `ftp.jineechen.com` |
 | `FTP_USERNAME` | Your FTP username |
 | `FTP_PASSWORD` | Your FTP password |
-| `FTP_SERVER_DIR` | The remote path to deploy to, e.g. `/public_html/` (must end with `/`) |
+| `FTP_SERVER_DIR` | Remote path for the static site, e.g. `/public_html/` (must end with `/`) |
+| `FTP_BACKEND_DIR` | Remote path for the generated `download_config.php`, **must be** `private/download/` (outside webroot, must end with `/`) |
+
+**Download passwords** — one per downloadable project
+
+| Secret name | Project |
+|-------------|--------|
+| `DL_PASS_WALKING_TOUR_LITTLE_INDIA` | Walking Tour Little India |
+| `DL_PASS_20260124_WEST_SIDE_ART_TOUR` | West Side Art Tour |
+| `DL_PASS_20260201_MEDIACORP_2026_CNY_ROAD_SHOW` | Mediacorp CNY Road Show |
+
+> When you add a new downloadable project, add its matching `DL_PASS_<SLUG>` secret here and a corresponding line in `backend/download/download_config.template.php` and `.github/workflows/deploy.yml`.
 
 > Secrets are **never** visible in logs or to other users — GitHub encrypts them at rest.
 
@@ -61,8 +74,8 @@ GitHub Actions will:
 |---------|--------------------------------|-------|
 | HTML, CSS, JS | ✅ Yes | Every push to `main` |
 | New/changed images | ✅ Yes (if `assets-raw/` changed) | The `deploy-assets` job only runs when image source files change |
+| `backend/download/download_config.php` | ✅ Yes (generated from template) | Passwords injected from GitHub Secrets at deploy time |
 | `backend/` PHP files | ❌ No | Upload manually via FTP — see below |
-| `backend/download_config.php` | ❌ Never (not in git) | Upload manually — contains passwords |
 | `backend/contact/config.php` | ❌ Never (not in git) | Upload manually — contains SMTP credentials |
 
 ### Viewing deploy status
@@ -204,14 +217,14 @@ If a deployment breaks the site:
 
 ## PHP Backend Configuration on Server
 
-The following server-side config files are **not committed to git** (they contain credentials):
+The following server-side config files contain credentials and are **not committed to git**:
 
-| File | Purpose | Example |
-|------|---------|---------|
-| `backend/contact/config.php` | SMTP credentials, recipient email | See `config.example.php` |
-| `backend/download/download_config.php` | Project passwords, file paths | See `download_config.example.php` |
+| File | How it gets on the server |
+|------|---------------------------|
+| `backend/contact/config.php` | Upload manually via FTP — see `config.example.php` |
+| `backend/download/download_config.php` | **Auto-generated** by the `deploy-backend-config` Actions job from `download_config.template.php` + GitHub Secrets |
 
-These files must be uploaded manually to the server or maintained via a separate secure channel.
+`backend/contact/config.php` must still be uploaded manually. `backend/download/download_config.php` is now handled automatically — you only need to keep the GitHub Secrets up to date.
 
 The `backend/download/rate-limit/` and `backend/contact/logs/` directories must be **writable** by the PHP process on the server:
 

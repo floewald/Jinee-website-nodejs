@@ -100,19 +100,36 @@ Open `src/content/portfolio/photography.json` and add a new entry to the JSON ar
 
 ### Step 4: Enable downloads (optional)
 
-If `enableDownload: true`, you also need to register the project in the PHP download config:
+If `enableDownload: true`, you need to wire up the password in three places:
 
-Open `backend/download/download_config.php` and add an entry:
+**a) `backend/download/download_config.template.php`** — add a project entry with a placeholder token:
 
 ```php
 'my-new-project' => [
-    'folder' => 'photography/my-new-project',
-    'password' => 'your-secure-password',
-    'visible' => true,
+    'folder'   => 'photography/my-new-project',
+    'password' => '%%DL_PASS_MY_NEW_PROJECT%%',
+    'visible'  => true,
 ],
 ```
 
-> **Keep passwords secure.** This file is not committed to git. Set a strong, unique password per project.
+Convention: replace hyphens with underscores and uppercase for the token name.
+
+**b) `.github/workflows/deploy.yml`** — add the secret to the `deploy-backend-config` job.  
+Inside the `env:` block add:
+```yaml
+DL_PASS_MY_NEW_PROJECT: ${{ secrets.DL_PASS_MY_NEW_PROJECT }}
+```
+And inside the Python script add:
+```python
+content = content.replace(
+    '%%DL_PASS_MY_NEW_PROJECT%%',
+    os.environ['DL_PASS_MY_NEW_PROJECT'])
+```
+
+**c) GitHub Secrets** — go to **Settings → Secrets and variables → Actions → New repository secret**  
+and add `DL_PASS_MY_NEW_PROJECT` with a strong, unique password.
+
+On the next push to `main`, GitHub Actions generates and uploads `download_config.php` automatically.
 
 ### Step 5: Build and check
 
