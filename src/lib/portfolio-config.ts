@@ -6,19 +6,28 @@ import type {
   PortfolioIndexConfig,
 } from "@/types/portfolio";
 
+import { validatePortfolioData } from "@/lib/portfolio-schemas";
+
 import photographyData from "@/content/portfolio/photography.json";
 import videoData from "@/content/portfolio/video.json";
 import socialMediaData from "@/content/portfolio/social-media.json";
 import indexConfigData from "@/content/portfolio/index-config.json";
 
 // Cast the raw JSON to typed arrays
-export const photographyProjects =
-  photographyData as PhotographyProject[];
+export const photographyProjects = validatePortfolioData(
+  "photography",
+  photographyData
+) as PhotographyProject[];
 
-export const videoProjects = videoData as VideoProject[];
+export const videoProjects = validatePortfolioData(
+  "video",
+  videoData
+) as VideoProject[];
 
-export const socialMediaProjects =
-  socialMediaData as SocialMediaProject[];
+export const socialMediaProjects = validatePortfolioData(
+  "social-media",
+  socialMediaData
+) as SocialMediaProject[];
 
 export const portfolioIndexConfig =
   indexConfigData as PortfolioIndexConfig;

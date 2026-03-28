@@ -179,33 +179,30 @@ if images were not processed.
 
 ---
 
-### 5.3 No CLI project scaffolding tool — **LOW**
+### 5.3 ~~No CLI project scaffolding tool~~ — ✅ **DONE**
 
-Adding a new project requires manually editing a JSON file for the slug, title, description,
-ordering, thumbnail path, etc. Every key must be correct and no schema validation is run.
-
-**Recommendation:** A small Node.js script `npm run create-project` that:
-1. Prompts for slug, title, type (photography / video / social-media)
-2. Creates the `assets-raw/{type}/{slug}/` directory
-3. Appends a skeleton entry to the appropriate JSON config
+`scripts/create-project.mjs` interactive CLI added (`npm run create-project`). It:
+1. Prompts for type, slug (validated as `/^[a-z0-9-]+$/`), and title
+2. Creates `Jinee_website/assets-raw/{type}/{slug}/`
+3. Checks for duplicate slugs and appends a typed skeleton entry to the JSON config
 4. Prints the next steps
 
-This dramatically reduces onboarding friction for new content.
+Pure business logic (slug validation, skeleton builders, path helpers) lives in
+`src/lib/scaffold-project.ts` and is covered by 14 unit tests in
+`src/lib/__tests__/scaffold-project.test.ts`.
 
 ---
 
-### 5.4 No JSON schema validation for content config — **LOW**
+### 5.4 ~~No JSON schema validation for content config~~ — ✅ **DONE**
 
-Typos in `photography.json`, `video.json`, or `social-media.json` (missing required fields,
-wrong types) cause cryptic TypeScript errors at build time rather than helpful messages.
+`src/lib/portfolio-schemas.ts` defines [Zod](https://zod.dev) schemas (`PhotographyProjectSchema`,
+`VideoProjectSchema`, `SocialMediaProjectSchema`) that mirror the TypeScript types in
+`src/types/portfolio.ts`. `portfolio-config.ts` calls `validatePortfolioData()` at module load
+time — a malformed JSON entry now causes `next build` to fail immediately with a
+field-level Zod error instead of a cryptic TypeScript complaint.
 
-**Recommendation:** Add [Zod](https://zod.dev) schemas that mirror the TypeScript types in
-`src/types/portfolio.ts` and validate each JSON file at build time:
-
-```ts
-const PhotographyProjectSchema = z.object({ slug: z.string(), ... });
-PhotographyProjectSchema.parse(rawJson); // throws with clear message on error
-```
+Covered by 14 unit tests in `src/lib/__tests__/portfolio-schemas.test.ts` (including
+real-JSON smoke tests for all three content files).
 
 ---
 
