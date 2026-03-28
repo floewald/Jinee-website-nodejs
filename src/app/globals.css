@@ -734,7 +734,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 }
 .project-card:hover .project-card__thumb img,
 .project-card:hover .project-card__thumb .project-card__img {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 /* Scale images inside CardSlideshow on parent hover */
 .project-card:hover .card-slideshow__slide .project-card__img {
