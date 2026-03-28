@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useSwipe } from "@/hooks/useSwipe";
+import { SLIDESHOW_CYCLE_MS, SLIDESHOW_PRIME_STEP } from "@/lib/constants";
+
 import type { SlideshowImage } from "@/lib/gallery-images";
 
 interface CardSlideshowProps {
@@ -11,13 +13,11 @@ interface CardSlideshowProps {
 }
 
 // Module-level counter for stagger offsets.
-// We multiply by a prime (997) that is coprime with the 4000 ms cycle, so
-// every card gets a distinct offset — no two cards share a phase until 4000
-// instances have been created.  This eliminates the "pairs changing together"
-// problem that a 3-bucket strategy would cause for ≥4 visible cards.
+// We multiply by a prime (SLIDESHOW_PRIME_STEP) that is coprime with the
+// SLIDESHOW_CYCLE_MS interval, so every card gets a distinct offset — no two
+// cards share a phase until SLIDESHOW_CYCLE_MS instances have been created.
+// See constants.ts for tuning these values.
 let instanceCounter = 0;
-const CYCLE_MS = 4000;
-const PRIME_STEP = 997; // gcd(997, 4000) === 1  →  4000 unique offsets
 
 export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
   const [idx, setIdx] = useState(0);
@@ -25,7 +25,7 @@ export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
     Array(images.length).fill(false)
   );
   // Capture the stagger offset once on mount via a ref so it never changes.
-  const delay = useRef((instanceCounter++ * PRIME_STEP) % CYCLE_MS);
+  const delay = useRef((instanceCounter++ * SLIDESHOW_PRIME_STEP) % SLIDESHOW_CYCLE_MS);
 
   const next = () => setIdx((prev) => (prev + 1) % images.length);
   const prev = () => setIdx((prev) => (prev - 1 + images.length) % images.length);
@@ -40,7 +40,7 @@ export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
       next();
       intervalId = setInterval(() => {
         next();
-      }, CYCLE_MS);
+      }, SLIDESHOW_CYCLE_MS);
     }, delay.current);
 
     return () => {
@@ -48,6 +48,15 @@ export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
       if (intervalId !== null) clearInterval(intervalId);
     };
   }, [images.length]);
+
+  // Preload the next image whenever the active index changes so it is already
+  // in the browser cache before the slide transition fires.
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const nextSrc = images[(idx + 1) % images.length].src;
+    const img = new window.Image();
+    img.src = nextSrc;
+  }, [idx, images]);
 
   function handleLoad(e: React.SyntheticEvent<HTMLImageElement>, i: number) {
     const img = e.currentTarget;

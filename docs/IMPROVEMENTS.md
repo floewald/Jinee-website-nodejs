@@ -57,14 +57,19 @@ node scripts/generate-lqip.mjs  # re-run whenever images change
 
 ---
 
-### 2.2 No preload for next carousel image — **LOW**
+### 2.2 ~~No preload for next carousel image~~ — ✅ **DONE**
 
-`CardSlideshow` rotates images every 4 000 ms but only loads the current image.
-The next image fetches from the network when the interval fires, causing a brief blank frame on
-slower connections.
-
-**Recommendation:** When `currentIndex` is updated, call
-`new Image().src = images[nextIndex]` in a `useEffect` to prime the browser cache.
+A `useEffect` in `CardSlideshow` now preloads the next image whenever `idx` changes:
+```ts
+useEffect(() => {
+  if (images.length <= 1) return;
+  const nextSrc = images[(idx + 1) % images.length].src;
+  const img = new window.Image();
+  img.src = nextSrc;
+}, [idx, images]);
+```
+Covered by the "preloads the next image when the active slide changes" test in
+`src/components/gallery/__tests__/CardSlideshow.test.tsx`.
 
 ---
 
@@ -79,17 +84,11 @@ slower connections.
 
 ---
 
-### 3.2 Document hardcoded numeric constants — **LOW**
+### 3.2 ~~Document hardcoded numeric constants~~ — ✅ **DONE**
 
-Several magic numbers live close to where they are used:
-
-| File | Constant | Suggestion |
-|------|----------|-----------|
-| `src/app/portfolio/page.tsx` line 23 | `MAX_CARDS = 6` | Move to `src/lib/constants.ts` |
-| `src/components/gallery/CardSlideshow.tsx` line 16 | `CYCLE_MS = 4000` | Move to `src/lib/constants.ts` |
-| `src/lib/gallery-images.ts` line 24–28 | Hardcoded path `Jinee_website/assets/{type}/{slug}` | Already functionally correct; add a comment explaining the path convention |
-
-Moving them to `constants.ts` makes site-wide tuning a one-line change.
+`MAX_CARDS`, `SLIDESHOW_CYCLE_MS`, and `SLIDESHOW_PRIME_STEP` are now exported from
+`src/lib/constants.ts` with explanatory JSDoc comments. `CardSlideshow` imports them
+instead of using inline literals. `portfolio/page.tsx` imports `MAX_CARDS` from constants.
 
 ---
 
@@ -126,12 +125,10 @@ manifest is missing. Covered by tests in `src/lib/__tests__/gallery-images.test.
 
 ## 4. Error Handling & Robustness
 
-### 4.1 No custom 404 page — **LOW**
+### 4.1 ~~No custom 404 page~~ — ✅ **DONE**
 
-When a visitor lands on an unknown URL, Next.js serves its generic 404 page.
-
-**Recommendation:** Create `src/app/not-found.tsx` with the site header, footer, and a branded
-message. This is a 20-line file and improves the visitor experience noticeably.
+`src/app/not-found.tsx` created with a branded 404 heading and a "Back to Home" link.
+Covered by 2 tests in `src/app/__tests__/not-found.test.tsx`.
 
 ---
 
@@ -284,9 +281,9 @@ A Git LFS quota warning step (fires at 90 % of the 1 GB free tier) was also adde
 | 5.1 | Build-time validation that all project slugs have manifests | MEDIUM | Small script | ✅ Done |
 | 5.2 | `npm run build:images` easy to skip — hook into prebuild | MEDIUM | 2-line change | ✅ Done |
 | 6.1 | Fix fragile asset deploy condition in GitHub Actions | MEDIUM | Medium (YAML rewrite) | ✅ Done |
-| 3.2 | Move magic constants to `constants.ts` | LOW | Small | Open |
+| 3.2 | Move magic constants to `constants.ts` | LOW | Small | ✅ Done |
 | 3.3 | Extract `<ProjectCardsGrid>` component | LOW | Medium | Open |
-| 4.1 | Create custom 404 page | LOW | Small | Open |
-| 2.2 | Preload next carousel image | LOW | Small | Open |
+| 4.1 | Create custom 404 page | LOW | Small | ✅ Done |
+| 2.2 | Preload next carousel image | LOW | Small | ✅ Done |
 | 5.3 | CLI project scaffolding tool | LOW | Medium | Open |
 | 5.4 | Zod validation for content JSON | LOW | Medium | Open |

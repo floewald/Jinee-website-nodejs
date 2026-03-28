@@ -7,6 +7,7 @@ import {
   portfolioIndexConfig,
   projectPath,
 } from "@/lib/portfolio-config";
+import { MAX_CARDS } from "@/lib/constants";
 import { getProjectSlideshowImages, type SlideshowImage } from "@/lib/gallery-images";
 import CardSlideshow from "@/components/gallery/CardSlideshow";
 
@@ -19,8 +20,6 @@ export const metadata: Metadata = {
 function slugFromImage(imagePath: string): string {
   return imagePath.split("/")[3];
 }
-
-const MAX_CARDS = 6;
 
 export default function PortfolioPage() {
   const photographyCards = getPhotographyCards().slice(0, MAX_CARDS);

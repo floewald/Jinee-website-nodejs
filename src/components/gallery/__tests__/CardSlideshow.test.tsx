@@ -117,4 +117,23 @@ describe("CardSlideshow", () => {
     expect(slides[0]).toHaveClass("card-slideshow__slide--active");
     expect(slides).toHaveLength(1);
   });
+
+  it("preloads the next image when the active slide changes", () => {
+    // Mock window.Image constructor to capture .src assignments
+    const mockImageInstance = { src: "" };
+    const MockImage = jest.fn(() => mockImageInstance);
+    const origImage = window.Image;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).Image = MockImage;
+
+    const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" />);
+    swipeLeft(container.querySelector(".card-slideshow")!);
+
+    // After advancing to index 1, the next image (index 2) should be preloaded
+    expect(MockImage).toHaveBeenCalled();
+    expect(mockImageInstance.src).toBe(IMAGES[2].src);
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).Image = origImage;
+  });
 });
