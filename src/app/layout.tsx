@@ -73,8 +73,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // ─── Global settings ────────────────────────────────────────────────────────
+  // Set to true to remove ALL border-radii site-wide (flat/sharp design)
+  const NO_RADIUS = true;
+
   return (
-    <html lang="en" className={`${inter.variable} h-full`}>
+    <html
+      lang="en"
+      className={`${inter.variable} h-full${NO_RADIUS ? " no-radius" : ""}`}
+    >
       <head>
         <script
           type="application/ld+json"

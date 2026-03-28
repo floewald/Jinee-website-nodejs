@@ -11,7 +11,7 @@ export default function GallerySection() {
   return (
     <section id="gallery" className="section-bg-white gallery-section">
       <div className="collage-hv collage-3x3">
-        <GalleryWithLightbox images={collageImages} />
+        <GalleryWithLightbox images={collageImages} useColumnsLayout />
       </div>
     </section>
   );

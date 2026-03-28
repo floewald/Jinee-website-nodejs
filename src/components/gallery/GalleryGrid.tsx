@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import Image from "next/image";
 import Masonry from "react-masonry-css";
 import type { GalleryImage } from "./Lightbox";
@@ -7,6 +8,11 @@ import type { GalleryImage } from "./Lightbox";
 interface GalleryGridProps {
   images: GalleryImage[];
   onImageClick: (index: number) => void;
+  /**
+   * When true, uses CSS columns layout instead of react-masonry-css.
+   * Better for mixed portrait/landscape images: browser balances column heights.
+   */
+  useColumnsLayout?: boolean;
 }
 
 const BREAKPOINT_COLS = {
@@ -15,36 +21,78 @@ const BREAKPOINT_COLS = {
   480: 1,
 };
 
-export default function GalleryGrid({ images, onImageClick }: GalleryGridProps) {
+export default function GalleryGrid({
+  images,
+  onImageClick,
+  useColumnsLayout = false,
+}: GalleryGridProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    container.setAttribute("data-reveal-ready", "");
+    const items = Array.from(
+      container.querySelectorAll<HTMLElement>(".gallery-item")
+    );
+    if (items.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).classList.add("reveal--visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
+    );
+    items.forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
+  }, [images]);
+
   if (images.length === 0) return null;
 
-  return (
-    <Masonry
-      breakpointCols={BREAKPOINT_COLS}
-      className="project-gallery"
-      columnClassName="project-gallery__col"
+  const galleryItems = images.map((img, i) => (
+    <button
+      key={`${img.src}-${i}`}
+      className="gallery-item"
+      onClick={() => onImageClick(i)}
+      aria-label={`Open image: ${img.alt}`}
     >
-      {images.map((img, i) => (
-        <button
-          key={`${img.src}-${i}`}
-          className="gallery-item"
-          onClick={() => onImageClick(i)}
-          aria-label={`Open image: ${img.alt}`}
-        >
-          <Image
-            src={img.src}
-            alt={img.alt}
-            width={800}
-            height={0}
-            loading="lazy"
-            className="gallery-img"
-            sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw"
-            unoptimized
-            style={{ height: "auto" }}
-            {...(img.blur ? { placeholder: "blur" as const, blurDataURL: img.blur } : {})}
-          />
-        </button>
-      ))}
-    </Masonry>
+      <Image
+        src={img.src}
+        alt={img.alt}
+        width={800}
+        height={0}
+        loading="lazy"
+        className="gallery-img"
+        sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw"
+        unoptimized
+        style={{ height: "auto" }}
+        {...(img.blur ? { placeholder: "blur" as const, blurDataURL: img.blur } : {})}
+      />
+    </button>
+  ));
+
+  if (useColumnsLayout) {
+    return (
+      <div ref={containerRef} className="gallery-cols">
+        {galleryItems}
+      </div>
+    );
+  }
+
+  return (
+    <div ref={containerRef}>
+      <Masonry
+        breakpointCols={BREAKPOINT_COLS}
+        className="project-gallery"
+        columnClassName="project-gallery__col"
+      >
+        {galleryItems}
+      </Masonry>
+    </div>
   );
 }

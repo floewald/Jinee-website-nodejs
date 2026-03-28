@@ -509,6 +509,25 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   display: block;
 }
 
+/* Hero blur-background mode (for portrait/mixed images) */
+.hero-slide__bg-blur {
+  position: absolute;
+  inset: -5%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(24px);
+  opacity: 0.55;
+  z-index: 0;
+}
+.hero-slide--white-bg {
+  background-color: #ffffff;
+}
+.hero-img--contain {
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+
 /* ══════════════════════════════════════════════════════════════════════════════
    GALLERY COLLAGE (homepage)
    ══════════════════════════════════════════════════════════════════════════════ */
@@ -537,6 +556,22 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   flex: 1;
   min-width: 0;
 }
+
+/* CSS columns masonry (homepage collage — items pack tightly regardless of height)
+   Column order: items 1, 2, 3 go to col-1, col-2, col-3 top slot;
+   then 4, 5, 6 to the next slot in each column, etc. */
+.gallery-cols {
+  columns: 3;
+  column-gap: 0.9rem;
+  margin-top: var(--gallery-content-gap);
+}
+.gallery-cols .gallery-item {
+  break-inside: avoid;
+  margin-bottom: 0.9rem;
+  display: block;
+}
+@media (max-width: 900px) { .gallery-cols { columns: 2; } }
+@media (max-width: 480px) { .gallery-cols { columns: 1; } }
 .gallery-item {
   display: block;
   border: none;
@@ -568,6 +603,31 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
    FEATURED SECTION (homepage "Videography")
    ══════════════════════════════════════════════════════════════════════════════ */
 .gallery-section { padding-bottom: 0; }
+
+/* ─── Scroll-reveal animation ───────────────────────────────────────────────
+   Items start hidden only once JS has set data-reveal-ready on the container.
+   IntersectionObserver then adds .reveal--visible when items scroll into view.
+   ──────────────────────────────────────────────────────────────────────────── */
+[data-reveal-ready] .gallery-item {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+[data-reveal-ready] .gallery-item.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Same animation for project cards */
+[data-reveal-ready] .project-card {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+[data-reveal-ready] .project-card.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 .featured-projects { padding-top: 0; padding-bottom: 1rem; }
 .section-title {
   font-size: 2rem;
@@ -1385,7 +1445,7 @@ iframe.video-embed {
   margin-top: 30px;
   margin-left: 0;
 }
-.portfolio-section { padding-top: var(--gallery-content-gap); }
+.portfolio-section { padding-top: 0; }
 .project-description {
   max-width: 65ch;
   margin-bottom: 1.5rem;
@@ -1522,4 +1582,15 @@ img {
   body { padding-top: var(--site-hero-current-height) !important; }
   section, h1, h2, h3 { scroll-margin-top: var(--site-hero-current-height) !important; }
   h1 { font-size: clamp(1.9rem, 7.5vw, 2.8rem); line-height: 1.08; margin-bottom: 0.6rem; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   GLOBAL BORDER-RADIUS TOGGLE
+   To remove all border-radii site-wide, set NO_RADIUS = true in
+   src/app/layout.tsx — it adds class "no-radius" to <html>.
+   ══════════════════════════════════════════════════════════════════════════════ */
+html.no-radius *,
+html.no-radius *::before,
+html.no-radius *::after {
+  border-radius: 0 !important;
 }

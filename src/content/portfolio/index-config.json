@@ -16,6 +16,11 @@
       "srcFull": "/assets/photography/travel-photography/0031_28-1600.webp"
     },
     {
+      "src": "/assets/photography/private-party/Jinee_Chen_Party photos-2-1600.webp",
+      "alt": "Travel scene — sunlit street with local architecture",
+      "srcFull": "/assets/photography/private-party/Jinee_Chen_Party photos-2-1600.webp"
+    },
+    {
       "src": "/assets/photography/travel-photography/0006_3-1600.webp",
       "alt": "Travel scene — narrow alleyway decorated with lanterns",
       "srcFull": "/assets/photography/travel-photography/0006_3-1600.webp"
@@ -73,5 +78,6 @@
       "alt": "Instagram House unboxing 4"
     }
   ],
-  "videoSectionTitle": "Video - Youtube Content"
+  "videoSectionTitle": "Video - Youtube Content",
+  "heroFit": "blur"
 }

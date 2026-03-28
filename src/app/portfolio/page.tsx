@@ -10,6 +10,7 @@ import {
 import { MAX_CARDS } from "@/lib/constants";
 import { getProjectSlideshowImages, type SlideshowImage } from "@/lib/gallery-images";
 import CardSlideshow from "@/components/gallery/CardSlideshow";
+import RevealGrid from "@/components/portfolio/RevealGrid";
 
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -27,13 +28,13 @@ export default function PortfolioPage() {
   const socialMediaLinks = portfolioIndexConfig.socialMediaLinks;
 
   return (
-    <main>
+    <main className="portfolio-hub">
       {/* Photography section */}
       <section className="portfolio-section section-bg-white">
         <div className="container">
           <h2 className="section-title section-title--center">Photography</h2>
           <hr className="section-title-divider" aria-hidden="true" />
-          <div className="project-grid">
+          <RevealGrid className="project-grid">
             {photographyCards.map((project, cardIndex) => {
               const slideshowImages = getProjectSlideshowImages(project.slug, "photography");
               const previewImages: SlideshowImage[] = slideshowImages.length > 1
@@ -72,7 +73,7 @@ export default function PortfolioPage() {
               </Link>
               );
             })}
-          </div>
+          </RevealGrid>
           <div className="section-cta">
             <Link href="/portfolio/photography/" className="btn btn--primary">
               More Photography Projects
@@ -88,7 +89,7 @@ export default function PortfolioPage() {
             Videography
           </h2>
           <hr className="section-title-divider" style={{ borderTopColor: "rgba(255,255,255,0.2)" }} aria-hidden="true" />
-          <div className="project-grid">
+          <RevealGrid className="project-grid">
             {videoCards.map((project) => (
               <Link
                 key={project.slug}
@@ -113,7 +114,7 @@ export default function PortfolioPage() {
                 </div>
               </Link>
             ))}
-          </div>
+          </RevealGrid>
           <div className="section-cta">
             <Link href="/portfolio/video/" className="btn btn--inverted">
               More Video Projects

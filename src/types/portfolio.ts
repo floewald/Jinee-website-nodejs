@@ -99,6 +99,12 @@ export interface PortfolioIndexConfig {
   collageImages: CollageImageConfig[];
   socialMediaLinks: InstagramLink[];
   videoSectionTitle: string;
+  /**
+   * How hero slideshow handles portrait / mixed images:
+   * "cover" (default) | "blur" (blurred backdrop) | "white" (white backdrop)
+   * Change in src/content/portfolio/index-config.json
+   */
+  heroFit?: "cover" | "blur" | "white";
 }
 
 // ─── Site-wide config (src/content/site.json) ────────────────────────────────

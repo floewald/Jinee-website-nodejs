@@ -8,15 +8,25 @@ export interface HeroSlide {
   alt: string;
 }
 
+export type HeroFit = "cover" | "blur" | "white";
+
 interface HeroSlideshowProps {
   slides: HeroSlide[];
   /** Milliseconds each slide is shown. Default: 4000 */
   intervalMs?: number;
+  /**
+   * How to handle images that don't fill the hero area:
+   * - "cover" (default): crops to fill — works best for landscape images
+   * - "blur": blurred background behind contained image — best for portrait/mixed
+   * - "white": white background behind contained image
+   */
+  fit?: HeroFit;
 }
 
 export default function HeroSlideshow({
   slides,
   intervalMs = 4000,
+  fit = "cover",
 }: HeroSlideshowProps) {
   const [current, setCurrent] = useState(0);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -38,16 +48,29 @@ export default function HeroSlideshow({
       {slides.map((slide, i) => (
         <div
           key={slide.src}
-          className={`hero-slide${i === current ? " hero-slide--active" : ""}`}
+          className={[
+            "hero-slide",
+            i === current ? "hero-slide--active" : "",
+            fit === "white" ? "hero-slide--white-bg" : "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
           aria-hidden={i !== current}
         >
+          {fit === "blur" && (
+            <div
+              className="hero-slide__bg-blur"
+              style={{ backgroundImage: `url(${slide.src})` }}
+              aria-hidden="true"
+            />
+          )}
           <Image
             src={slide.src}
             alt={slide.alt}
             width={1600}
             height={900}
             priority={i === 0}
-            className="hero-img"
+            className={`hero-img${fit !== "cover" ? " hero-img--contain" : ""}`}
             unoptimized
           />
         </div>

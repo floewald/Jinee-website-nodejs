@@ -80,4 +80,10 @@ describe("GalleryGrid", () => {
       expect(btn).toHaveAttribute("aria-label");
     });
   });
+
+  it("renders columns layout when useColumnsLayout is true", () => {
+    render(<GalleryGrid images={IMAGES} onImageClick={jest.fn()} useColumnsLayout />);
+    expect(document.querySelector(".gallery-cols")).toBeInTheDocument();
+    expect(screen.queryByTestId("masonry-grid")).toBeNull();
+  });
 });
