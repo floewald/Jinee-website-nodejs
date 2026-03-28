@@ -92,15 +92,15 @@ instead of using inline literals. `portfolio/page.tsx` imports `MAX_CARDS` from 
 
 ---
 
-### 3.3 Code duplication between category pages — **LOW**
+### 3.3 ~~Code duplication between category pages~~ — ✅ **DONE**
 
-`src/app/portfolio/photography/page.tsx` and `src/app/portfolio/video/page.tsx` contain
-nearly identical JSX: load cards, load slideshow images, render a `<section>` with
-`<CardSlideshow>` per card.
+`src/components/portfolio/ProjectCardsGrid.tsx` — a Server Component that accepts
+`projects`, `type`, and `fallbackImageHeight`. Both `photography/page.tsx` and
+`video/page.tsx` are now thin wrappers (~10 lines each) that load their projects and
+pass them to `<ProjectCardsGrid>`.
 
-**Recommendation:** Extract a shared `<ProjectCardsGrid>` Server Component that accepts a
-`cards` array and a `getImages(slug)` function. Both pages become a thin wrapper that calls
-the appropriate data-fetching function.
+Covered by 5 unit tests in
+`src/components/portfolio/__tests__/ProjectCardsGrid.test.tsx`.
 
 ---
 
@@ -282,7 +282,7 @@ A Git LFS quota warning step (fires at 90 % of the 1 GB free tier) was also adde
 | 5.2 | `npm run build:images` easy to skip — hook into prebuild | MEDIUM | 2-line change | ✅ Done |
 | 6.1 | Fix fragile asset deploy condition in GitHub Actions | MEDIUM | Medium (YAML rewrite) | ✅ Done |
 | 3.2 | Move magic constants to `constants.ts` | LOW | Small | ✅ Done |
-| 3.3 | Extract `<ProjectCardsGrid>` component | LOW | Medium | Open |
+| 3.3 | Extract `<ProjectCardsGrid>` component | LOW | Medium | ✅ Done |
 | 4.1 | Create custom 404 page | LOW | Small | ✅ Done |
 | 2.2 | Preload next carousel image | LOW | Small | ✅ Done |
 | 5.3 | CLI project scaffolding tool | LOW | Medium | Open |
