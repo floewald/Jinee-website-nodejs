@@ -48,11 +48,18 @@ export default function FeaturedSection() {
                 )}
               </div>
               <div className="project-card__body">
-                <h3 className="project-card__title">
-                  {project.heading.includes(" | 📍") ? (
-                    <>{project.heading.split(" | 📍")[0]}<br />📍{project.heading.split(" | 📍")[1]}</>
-                  ) : project.heading}
-                </h3>
+                {project.heading.includes(" | 📍") ? (
+                  <>
+                    <h3 className="project-card__role">
+                      {project.heading.split(" | 📍")[0]}
+                    </h3>
+                    <p className="project-card__location">
+                      📍{project.heading.split(" | 📍")[1]}
+                    </p>
+                  </>
+                ) : (
+                  <h3 className="project-card__role">{project.heading}</h3>
+                )}
               </div>
             </Link>
             );

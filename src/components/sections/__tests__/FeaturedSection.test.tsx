@@ -9,7 +9,7 @@ jest.mock("@/lib/portfolio-config", () => ({
       type: "video",
       title: "Test Video",
       description: "A test video",
-      heading: "Test",
+      heading: "Producer | Director | Videographer | 📍 Singapore",
       ogImage: "/test.webp",
       videos: [],
       portfolioCard: {
@@ -72,12 +72,22 @@ describe("FeaturedSection", () => {
   });
 
   it("renders video project cards using project.heading (role/location)", () => {
-    // project.heading is "Test" in the mock — should appear, not cardTitle "Test Card"
-    expect(screen.getByText("Test")).toBeInTheDocument();
+    // role part (before 📍) rendered in .project-card__role
+    expect(screen.getByText("Producer | Director | Videographer")).toBeInTheDocument();
+  });
+
+  it("renders location in a separate element outside the role clamp", () => {
+    const role = document.querySelector(".project-card__role");
+    const location = document.querySelector(".project-card__location");
+    expect(role).toBeInTheDocument();
+    expect(location).toBeInTheDocument();
+    // location must NOT be a descendant of role
+    expect(role).not.toContainElement(location as HTMLElement);
+    expect(location).toHaveTextContent("📍 Singapore");
   });
 
   it("renders video card with correct link", () => {
-    const link = screen.getByText("Test").closest("a");
+    const link = screen.getByText("Producer | Director | Videographer").closest("a");
     expect(link).toHaveAttribute("href", "/portfolio/video/test-video/");
   });
 

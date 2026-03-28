@@ -709,6 +709,26 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   border-bottom: 1px solid #e5e7eb;
   padding-bottom: 0.3rem;
 }
+/* Role + location split used in FeaturedSection card bodies */
+.project-card__role {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.3rem;
+}
+.project-card__location {
+  margin: 0.3rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 /* Also style legacy .project-grid (used on portfolio category pages) */
 .project-grid {
   display: grid;
