@@ -19,16 +19,22 @@ jest.mock("next/image", () => ({
       unoptimized?: boolean;
       fill?: boolean;
       sizes?: string;
+      blurDataURL?: string;
+      placeholder?: string;
     }
   ) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { unoptimized: _u, fill: _f, sizes: _s, ...rest } = props;
+    const { unoptimized: _u, fill: _f, sizes: _s, placeholder: _p, ...rest } = props;
     // eslint-disable-next-line @next/next/no-img-element
     return <img alt="" {...rest} />;
   },
 }));
 
-const IMAGES = ["/img/a-800.webp", "/img/b-800.webp", "/img/c-800.webp"];
+const IMAGES = [
+  { src: "/img/a-800.webp" },
+  { src: "/img/b-800.webp" },
+  { src: "/img/c-800.webp" },
+];
 
 beforeEach(() => jest.useFakeTimers());
 afterEach(() => {
@@ -87,6 +93,17 @@ describe("CardSlideshow", () => {
     swipeLeft(track);
     const slides = container.querySelectorAll(".card-slideshow__slide");
     expect(slides[0]).toHaveClass("card-slideshow__slide--active");
+  });
+
+  it("passes blurDataURL to the image when blur field is present", () => {
+    const imagesWithBlur = [
+      { src: "/img/a-800.webp", blur: "data:image/webp;base64,TESTBLUR" },
+    ];
+    const { container } = render(
+      <CardSlideshow images={imagesWithBlur} alt="Blur test" />
+    );
+    const img = container.querySelector("img")!;
+    expect(img).toHaveAttribute("blurDataURL", "data:image/webp;base64,TESTBLUR");
   });
 
   it("does not start autoplay when only one image is provided", () => {

@@ -37,25 +37,19 @@ export function getProjectBySlug(
   return allProjects.find((p) => p.slug === slug);
 }
 
-/** All photography projects that have a portfolioCard, sorted by order */
+/** All photography projects that have a portfolioCard, in JSON array order */
 export function getPhotographyCards(): PhotographyProject[] {
-  return photographyProjects
-    .filter((p) => p.portfolioCard)
-    .sort((a, b) => (a.portfolioCard!.order - b.portfolioCard!.order));
+  return photographyProjects.filter((p) => p.portfolioCard);
 }
 
-/** All video projects that have a portfolioCard, sorted by order */
+/** All video projects that have a portfolioCard, in JSON array order */
 export function getVideoCards(): VideoProject[] {
-  return videoProjects
-    .filter((p) => p.portfolioCard)
-    .sort((a, b) => (a.portfolioCard!.order - b.portfolioCard!.order));
+  return videoProjects.filter((p) => p.portfolioCard);
 }
 
-/** All social-media projects that have a portfolioCard, sorted by order */
+/** All social-media projects that have a portfolioCard, in JSON array order */
 export function getSocialMediaCards(): SocialMediaProject[] {
-  return socialMediaProjects
-    .filter((p) => p.portfolioCard)
-    .sort((a, b) => (a.portfolioCard!.order - b.portfolioCard!.order));
+  return socialMediaProjects.filter((p) => p.portfolioCard);
 }
 
 /** Canonical URL path for a project */

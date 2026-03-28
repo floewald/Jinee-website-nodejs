@@ -83,3 +83,83 @@ describe("getProjectSlideshowImages()", () => {
     );
   });
 });
+
+// ---------------------------------------------------------------------------
+// LQIP blur passthrough — getGalleryImages
+// ---------------------------------------------------------------------------
+describe("getGalleryImages() blur passthrough", () => {
+  beforeEach(() => {
+    (fs.existsSync as jest.Mock).mockReturnValue(true);
+  });
+
+  it("includes blur field from manifest when present", () => {
+    (fs.readFileSync as jest.Mock).mockReturnValue(
+      JSON.stringify([{
+        basename: "photo-1",
+        thumb: "photo-1-400.webp",
+        md: "photo-1-800.webp",
+        lg: "photo-1-1600.webp",
+        original: "photo-1.jpg",
+        blur: "data:image/webp;base64,ABC123",
+      }])
+    );
+    const result = getGalleryImages("test-project", "photography");
+    expect(result[0].blur).toBe("data:image/webp;base64,ABC123");
+  });
+
+  it("has undefined blur when manifest item has no blur field", () => {
+    (fs.readFileSync as jest.Mock).mockReturnValue(
+      JSON.stringify([{
+        basename: "photo-1",
+        thumb: "photo-1-400.webp",
+        md: "photo-1-800.webp",
+        lg: "photo-1-1600.webp",
+        original: "photo-1.jpg",
+      }])
+    );
+    const result = getGalleryImages("test-project", "photography");
+    expect(result[0].blur).toBeUndefined();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// LQIP blur passthrough — getProjectSlideshowImages
+// ---------------------------------------------------------------------------
+describe("getProjectSlideshowImages() returns SlideshowImage objects", () => {
+  beforeEach(() => {
+    (fs.existsSync as jest.Mock).mockReturnValue(true);
+  });
+
+  it("returns objects with src and blur when manifest has blur field", () => {
+    (fs.readFileSync as jest.Mock).mockReturnValue(
+      JSON.stringify([{
+        basename: "photo-1",
+        thumb: null,
+        md: "photo-1-800.webp",
+        lg: null,
+        original: null,
+        blur: "data:image/webp;base64,XYZ",
+      }])
+    );
+    const result = getProjectSlideshowImages("test-project", "photography");
+    expect(result[0]).toEqual({
+      src: "/assets/photography/test-project/photo-1-800.webp",
+      blur: "data:image/webp;base64,XYZ",
+    });
+  });
+
+  it("returns objects with only src when manifest item has no blur field", () => {
+    (fs.readFileSync as jest.Mock).mockReturnValue(
+      JSON.stringify([{
+        basename: "photo-1",
+        thumb: null,
+        md: "photo-1-800.webp",
+        lg: null,
+        original: null,
+      }])
+    );
+    const result = getProjectSlideshowImages("test-project", "photography");
+    expect(result[0]).toMatchObject({ src: "/assets/photography/test-project/photo-1-800.webp" });
+    expect(result[0].blur).toBeUndefined();
+  });
+});

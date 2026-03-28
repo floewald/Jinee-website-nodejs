@@ -3,9 +3,10 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useSwipe } from "@/hooks/useSwipe";
+import type { SlideshowImage } from "@/lib/gallery-images";
 
 interface CardSlideshowProps {
-  images: string[];
+  images: SlideshowImage[];
   alt: string;
 }
 
@@ -61,25 +62,25 @@ export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
 
   return (
     <div className="card-slideshow" {...swipeHandlers}>
-      {images.map((src, i) => {
+      {images.map((image, i) => {
         const isPortrait = portraitFlags[i];
         return (
           <div
-            key={src}
+            key={image.src}
             className={`card-slideshow__slide${i === idx ? " card-slideshow__slide--active" : ""}${isPortrait ? " card-slideshow__slide--portrait" : ""}`}
           >
             {isPortrait && (
               <>
                 <div
                   className="card-slideshow__bg"
-                  style={{ backgroundImage: `url("${src}")` }}
+                  style={{ backgroundImage: `url("${image.src}")` }}
                   aria-hidden="true"
                 />
                 <div className="card-slideshow__bg-overlay" aria-hidden="true" />
               </>
             )}
             <Image
-              src={src}
+              src={image.src}
               alt={i === 0 ? alt : ""}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -89,6 +90,7 @@ export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
                 zIndex: isPortrait ? 2 : undefined,
               }}
               unoptimized
+              {...(image.blur ? { placeholder: "blur" as const, blurDataURL: image.blur } : {})}
               onLoad={(e) => handleLoad(e, i)}
             />
           </div>

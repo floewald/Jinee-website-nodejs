@@ -5,6 +5,12 @@ export interface GalleryImage {
   src: string;
   alt: string;
   srcFull: string;
+  blur?: string;
+}
+
+export interface SlideshowImage {
+  src: string;
+  blur?: string;
 }
 
 interface ImageManifestItem {
@@ -13,6 +19,7 @@ interface ImageManifestItem {
   md: string | null;
   lg: string | null;
   original: string | null;
+  blur?: string;
 }
 
 /**
@@ -23,7 +30,7 @@ interface ImageManifestItem {
 export function getProjectSlideshowImages(
   slug: string,
   type: "photography" | "social-media" | "video"
-): string[] {
+): SlideshowImage[] {
   const manifestPath = path.join(
     process.cwd(),
     "Jinee_website",
@@ -44,7 +51,10 @@ export function getProjectSlideshowImages(
 
   const baseUrl = `/assets/${type}/${slug}`;
 
-  return data.filter((item) => item.md).map((item) => `${baseUrl}/${item.md}`);
+  return data.filter((item) => item.md).map((item) => ({
+    src: `${baseUrl}/${item.md}`,
+    ...(item.blur ? { blur: item.blur } : {}),
+  }));
 }
 
 /**
@@ -81,5 +91,6 @@ export function getGalleryImages(
       src: `${baseUrl}/${item.md}`,
       alt: item.basename,
       srcFull: item.lg ? `${baseUrl}/${item.lg}` : `${baseUrl}/${item.md}`,
+      ...(item.blur ? { blur: item.blur } : {}),
     }));
 }

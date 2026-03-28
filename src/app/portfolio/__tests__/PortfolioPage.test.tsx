@@ -10,7 +10,7 @@ jest.mock("@/lib/portfolio-config", () => ({
       description: "Travel shots",
       heading: "📍 Singapore | Photographer",
       ogImage: "/travel.webp",
-      portfolioCard: { cardTitle: "Travel Photography", thumbnail: "/travel-t.webp", order: 1 },
+      portfolioCard: { cardTitle: "Travel Photography", thumbnail: "/travel-t.webp" },
     },
   ],
   getVideoCards: () => [
@@ -22,7 +22,7 @@ jest.mock("@/lib/portfolio-config", () => ({
       heading: "📍 Singapore | Producer | Director",
       ogImage: "/stuck.webp",
       videos: [],
-      portfolioCard: { cardTitle: "Stuck with Low Pay", thumbnail: "/stuck-t.webp", order: 1 },
+      portfolioCard: { cardTitle: "Stuck with Low Pay", thumbnail: "/stuck-t.webp" },
     },
   ],
   portfolioIndexConfig: {

@@ -63,6 +63,7 @@ export default function Slideshow({
             style={{ width: "100%", height: "auto" }}
             unoptimized
             priority={index === 0}
+            {...(current.blur ? { placeholder: "blur" as const, blurDataURL: current.blur } : {})}
           />
         </div>
       </div>

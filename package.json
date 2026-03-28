@@ -7,6 +7,7 @@
     "build": "npm run build:images && next build",
     "build:next": "next build",
     "build:images": "./scripts/build-images.sh",
+    "generate:lqip": "node scripts/generate-lqip.mjs",
     "start": "next start",
     "lint": "eslint",
     "type-check": "tsc --noEmit",

@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { getVideoCards, projectPath } from "@/lib/portfolio-config";
-import { getProjectSlideshowImages } from "@/lib/gallery-images";
+import { getProjectSlideshowImages, type SlideshowImage } from "@/lib/gallery-images";
 import CardSlideshow from "@/components/gallery/CardSlideshow";
 
 export const metadata: Metadata = {
@@ -21,9 +21,9 @@ export default function VideoIndexPage() {
       <div className="project-cards">
         {projects.map((project) => {
           const slideshowImages = getProjectSlideshowImages(project.slug, "video");
-          const previewImages = slideshowImages.length > 1
+          const previewImages: SlideshowImage[] = slideshowImages.length > 1
             ? slideshowImages
-            : project.portfolioCard!.previewImages;
+            : (project.portfolioCard!.previewImages ?? []).map((src) => ({ src }));
           return (
           <Link
             key={project.slug}

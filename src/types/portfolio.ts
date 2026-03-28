@@ -5,7 +5,8 @@ export type ProjectType = "photography" | "video" | "social-media";
 export interface PortfolioCard {
   cardTitle: string;
   thumbnail: string;
-  order: number;
+  /** Optional explicit order override; if omitted, JSON array position is used */
+  order?: number;
   /** 3–4 images cycled in the card preview slideshow */
   previewImages?: string[];
 }

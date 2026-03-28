@@ -52,6 +52,7 @@ export default function GalleryGrid({ images, onImageClick }: GalleryGridProps) 
               className="gallery-img"
               style={{ objectFit: "contain", zIndex: 1 }}
               unoptimized
+              {...(img.blur ? { placeholder: "blur" as const, blurDataURL: img.blur } : {})}
               onLoad={(e) => handleLoad(e, i)}
             />
           ) : (
@@ -63,6 +64,7 @@ export default function GalleryGrid({ images, onImageClick }: GalleryGridProps) 
               loading="lazy"
               className="gallery-img"
               unoptimized
+              {...(img.blur ? { placeholder: "blur" as const, blurDataURL: img.blur } : {})}
               onLoad={(e) => handleLoad(e, i)}
             />
           )}

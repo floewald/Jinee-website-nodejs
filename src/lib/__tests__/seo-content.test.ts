@@ -36,11 +36,7 @@ describe("social-media-addiction project", () => {
     expect(project?.ogImage).toMatch(/^https:\/\//);
   });
 
-  it("has a portfolioCard with order 3", () => {
-    expect(project?.portfolioCard?.order).toBe(3);
-  });
-
-  it("has a portfolioCard thumbnail", () => {
+  it("has a portfolioCard with a thumbnail", () => {
     expect(project?.portfolioCard?.thumbnail).toMatch(/\/assets\/video\//);
   });
 
@@ -52,29 +48,21 @@ describe("social-media-addiction project", () => {
 });
 
 describe("video portfolio card ordering", () => {
-  const cardProjects = videoProjects
-    .filter((p) => p.portfolioCard)
-    .sort((a, b) => a.portfolioCard!.order - b.portfolioCard!.order);
+  const cardProjects = videoProjects.filter((p) => p.portfolioCard);
 
   it("has 12 projects with portfolio cards", () => {
     expect(cardProjects.length).toBe(12);
   });
 
-  it("card orders are consecutive starting at 1", () => {
-    cardProjects.forEach((p, i) => {
-      expect(p.portfolioCard!.order).toBe(i + 1);
-    });
-  });
-
-  it("order matches legacy site lineup", () => {
+  it("order matches lineup defined in video.json", () => {
     const expectedOrder = [
       "stuck-low-pay",
-      "healthy-dining",
-      "social-media-addiction",
       "singer-jasmin-sokko",
       "re-old-times",
-      "into-the-gym",
+      "healthy-dining",
+      "social-media-addiction",
       "blind-kitchen-chefs",
+      "into-the-gym",
       "lunch-with-us",
       "scdf-project",
       "i-fell",

@@ -23,7 +23,7 @@ Explanatory comment added to `next.config.ts` confirming this is intentional for
 
 ## 2. Loading / UX
 
-### 2.1 LQIP (Low Quality Image Placeholder / blur-up) — **MEDIUM**
+### 2.1 ~~LQIP (Low Quality Image Placeholder / blur-up)~~ — ✅ **DONE**
 
 Images appear as white/blank space until they finish loading. The **blur-up pattern** (used by
 Unsplash, Instagram, Medium) shows a tiny blurred placeholder immediately, then sharpens once the
@@ -34,26 +34,26 @@ full image arrives. This is the single most visible UX improvement for visitors 
 `background-image` while the real image loads. It does **not** use the Next.js image CDN, so it is
 fully compatible with `unoptimized: true` (our static FTP deployment).
 
-**Implementation plan:**
+**What was implemented:**
 
-1. **Extend `build-images.sh`** — for every image, alongside the existing `-400`/`-800`/`-1600` variants,
-   generate an 8×8 px blurred WebP with `sharp` and base64-encode it:
-   ```bash
-   # via a small Node.js helper called from the bash script
-   const lqip = await sharp(inputFile)
-     .resize(8, 8)
-     .blur(1)
-     .webp({ quality: 20 })
-     .toBuffer();
-   manifest[i].blur = `data:image/webp;base64,${lqip.toString('base64')}`;
-   ```
-2. **Add `blur` field to `images.json`** manifest schema and `ImageManifestItem` interface.
-3. **Pass to `<Image>`** in `GalleryGrid`, `Lightbox`, `CardSlideshow`, and `Slideshow`:
-   ```tsx
-   <Image placeholder="blur" blurDataURL={img.blur} ... />
-   ```
+1. **`scripts/generate-lqip.mjs`** — standalone Node.js script (using `sharp`) that reads every
+   `images.json` manifest under `Jinee_website/assets/`, generates an 8×8 px blurred WebP per image,
+   base64-encodes it, and writes the result back as a `blur` field on each manifest entry.
+   Run once: `node scripts/generate-lqip.mjs`. Re-run whenever new images are added.
+2. **`blur` field added** to `ImageManifestItem` and `GalleryImage` interfaces in `gallery-images.ts`.
+3. **`SlideshowImage` type** exported from `gallery-images.ts` — replaces the previous `string[]`
+   return type of `getProjectSlideshowImages()` so blur data flows into `CardSlideshow`.
+4. **`<Image>` components updated** in `GalleryGrid`, `Lightbox`, `CardSlideshow`, and `Slideshow`
+   to pass `placeholder="blur" blurDataURL={img.blur}` when `blur` is present.
+5. **All 4 callers of `CardSlideshow`** updated to normalise `previewImages` fallback to
+   `SlideshowImage[]` (mapping bare `string` paths from `portfolioCard.previewImages` to `{src}`
+   objects).
 
-**Effort:** Medium — build script change + 4 component updates + regenerate all manifests.
+**To activate blur placeholders:**
+```bash
+npm install --save-dev sharp   # one-time
+node scripts/generate-lqip.mjs  # re-run whenever images change
+```
 
 ---
 

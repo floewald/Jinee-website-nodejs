@@ -7,7 +7,7 @@ import {
   portfolioIndexConfig,
   projectPath,
 } from "@/lib/portfolio-config";
-import { getProjectSlideshowImages } from "@/lib/gallery-images";
+import { getProjectSlideshowImages, type SlideshowImage } from "@/lib/gallery-images";
 import CardSlideshow from "@/components/gallery/CardSlideshow";
 
 export const metadata: Metadata = {
@@ -37,9 +37,9 @@ export default function PortfolioPage() {
           <div className="project-grid">
             {photographyCards.map((project) => {
               const slideshowImages = getProjectSlideshowImages(project.slug, "photography");
-              const previewImages = slideshowImages.length > 1
+              const previewImages: SlideshowImage[] = slideshowImages.length > 1
                 ? slideshowImages
-                : project.portfolioCard!.previewImages;
+                : (project.portfolioCard!.previewImages ?? []).map((src) => ({ src }));
               return (
               <Link
                 key={project.slug}

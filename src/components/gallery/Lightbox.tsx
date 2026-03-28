@@ -9,6 +9,7 @@ export interface GalleryImage {
   src: string;
   alt: string;
   srcFull?: string;
+  blur?: string;
 }
 
 interface LightboxProps {
@@ -140,6 +141,7 @@ export default function Lightbox({
               style={{ objectFit: "contain" }}
               sizes="100vw"
               unoptimized
+              {...(current.blur ? { placeholder: "blur" as const, blurDataURL: current.blur } : {})}
               onLoad={(e) => {
                 const img = e.currentTarget;
                 if (img.naturalWidth > 0) {
