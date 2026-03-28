@@ -17,15 +17,20 @@ test.describe("Homepage", () => {
   test("renders gallery section", async ({ page }) => {
     const gallery = page.locator("#gallery");
     await expect(gallery).toBeAttached();
-    // 9 images in the 3×3 collage
+    // images count depends on config — at least one image expected
     const images = gallery.locator("img");
-    await expect(images).toHaveCount(9);
+    await expect(images.first()).toBeAttached();
   });
 
-  test("renders portfolio / featured section", async ({ page }) => {
+  test("renders hero image at top of page", async ({ page }) => {
+    const hero = page.locator(".hero-section img");
+    await expect(hero).toBeAttached();
+  });
+
+  test("renders videography / featured section", async ({ page }) => {
     const section = page.locator("#portfolio");
     await expect(section).toBeAttached();
-    await expect(section.locator("h2")).toHaveText("My Work");
+    await expect(section.locator("h2")).toHaveText("Videography");
   });
 
   test("renders about section", async ({ page }) => {
@@ -34,10 +39,8 @@ test.describe("Homepage", () => {
     await expect(section.locator("h2")).toContainText("Video Producer");
   });
 
-  test("renders contact section", async ({ page }) => {
-    const section = page.locator("#contact");
-    await expect(section).toBeAttached();
-    await expect(section.locator("form.contact-form")).toBeAttached();
+  test("homepage does not include a contact form (contact moved to /contact/)", async ({ page }) => {
+    await expect(page.locator("#contact")).not.toBeAttached();
   });
 
   test("nav links are present", async ({ page }) => {

@@ -34,7 +34,7 @@ export default function PortfolioPage() {
           <h2 className="section-title section-title--center">Photography</h2>
           <hr className="section-title-divider" aria-hidden="true" />
           <div className="project-grid">
-            {photographyCards.map((project) => {
+            {photographyCards.map((project, cardIndex) => {
               const slideshowImages = getProjectSlideshowImages(project.slug, "photography");
               const previewImages: SlideshowImage[] = slideshowImages.length > 1
                 ? slideshowImages
@@ -50,6 +50,7 @@ export default function PortfolioPage() {
                     <CardSlideshow
                       images={previewImages}
                       alt={project.portfolioCard!.cardTitle}
+                      cardIndex={cardIndex}
                     />
                   ) : (
                     <Image

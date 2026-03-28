@@ -86,7 +86,17 @@ export interface InstagramLink {
   alt: string;
 }
 
+/** A single image entry for the homepage collage */
+export interface CollageImageConfig {
+  src: string;
+  alt: string;
+  srcFull: string;
+  blur?: string;
+}
+
 export interface PortfolioIndexConfig {
+  /** Images shown in the homepage gallery collage */
+  collageImages: CollageImageConfig[];
   socialMediaLinks: InstagramLink[];
   videoSectionTitle: string;
 }

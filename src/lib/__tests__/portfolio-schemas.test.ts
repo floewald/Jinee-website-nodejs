@@ -133,7 +133,7 @@ describe("validatePortfolioData()", () => {
   it("returns parsed data when input is valid", () => {
     const result = validatePortfolioData("photography", [VALID_PHOTO]);
     expect(result).toHaveLength(1);
-    expect(result[0].slug).toBe("event-photography");
+    expect((result[0] as { slug: string }).slug).toBe("event-photography");
   });
 
   it("throws a descriptive ZodError when data is invalid", () => {

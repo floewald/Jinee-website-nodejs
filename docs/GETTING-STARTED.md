@@ -117,6 +117,8 @@ Press `Ctrl + C` in the terminal to stop the server.
 src/
 ├── app/                   ← Pages (URL structure mirrors folder structure)
 │   ├── page.tsx           ← Homepage: /
+│   ├── contact/
+│   │   └── page.tsx       ← Contact page: /contact/
 │   ├── portfolio/
 │   │   ├── page.tsx       ← Portfolio overview: /portfolio/
 │   │   ├── photography/[slug]/page.tsx   ← Individual photo project page
@@ -126,13 +128,14 @@ src/
 │
 ├── components/            ← Reusable React building blocks
 │   ├── layout/            ← Header, Footer, Navigation
-│   ├── sections/          ← Homepage sections (About, Gallery, etc.)
-│   ├── gallery/           ← Photo gallery, lightbox, slideshow
+│   ├── sections/          ← Homepage sections (About, Gallery, Hero, etc.)
+│   ├── gallery/           ← Photo gallery (masonry), lightbox, slideshow
 │   ├── forms/             ← Contact form
 │   └── video/             ← YouTube embed player
 │
 ├── content/               ← DATA: JSON files describing each portfolio project
 │   └── portfolio/
+│       ├── index-config.json  ← Homepage collage images + Instagram links
 │       ├── photography.json   ← All photography projects
 │       ├── video.json         ← All video projects
 │       └── social-media.json  ← All social media projects
@@ -153,7 +156,7 @@ public/
 
 You do not write code — you edit a JSON file and add images.
 
-1. **Add images** to `Jinee_website/assets-raw/photography/my-new-project/`
+1. **Add images** to `assets-raw/photography/my-new-project/`
 2. **Generate WebP** versions: `npm run build:images`
 3. **Edit** `src/content/portfolio/photography.json` — add a new entry:
 
@@ -183,8 +186,11 @@ See [ADDING-PROJECTS.md](ADDING-PROJECTS.md) for the full guide.
 
 Most text in components is hardcoded in the TSX files:
 - Homepage about text → `src/components/sections/AboutSection.tsx`
-- Contact details → `src/components/sections/ContactSection.tsx`
+- Contact page (`/contact/`) → `src/app/contact/page.tsx`; contact form component → `src/components/sections/ContactSection.tsx`
 - Footer text → `src/components/layout/Footer.tsx`
+- **Homepage hero image** → `src/app/page.tsx` (change the `src` prop on `<HeroSection />`)
+- **Homepage collage images** → `src/content/portfolio/index-config.json` → `collageImages` array (edit `src`, `alt`, `srcFull` fields)
+- **Homepage videography section** — add/remove video cards via `src/content/portfolio/video.json`
 
 Open the file, find the text, change it, save — the browser reloads automatically.
 

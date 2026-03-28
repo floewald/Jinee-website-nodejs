@@ -66,9 +66,9 @@ describe("FeaturedSection", () => {
     expect(section).toBeInTheDocument();
   });
 
-  it('renders "Portfolio" heading (not "My Work")', () => {
-    expect(screen.getByText("Portfolio")).toBeInTheDocument();
-    expect(screen.queryByText("My Work")).not.toBeInTheDocument();
+  it('renders "Videography" heading', () => {
+    expect(screen.getByText("Videography")).toBeInTheDocument();
+    expect(screen.queryByText("Portfolio")).not.toBeInTheDocument();
   });
 
   it("renders video project cards using project.heading (role/location)", () => {
@@ -91,15 +91,9 @@ describe("FeaturedSection", () => {
     expect(link).toHaveAttribute("href", "/portfolio/video/test-video/");
   });
 
-  it("renders Instagram previews", () => {
-    expect(screen.getByAltText("IG post 1")).toBeInTheDocument();
-  });
-
-  it("renders play overlay on Instagram previews", () => {
-    const previews = document.querySelectorAll(".instagram-preview");
-    previews.forEach((preview) => {
-      expect(preview.querySelector(".play-overlay")).toBeInTheDocument();
-    });
+  it("does not render Instagram previews on the homepage", () => {
+    expect(document.querySelector(".instagram-previews")).toBeNull();
+    expect(document.querySelector(".instagram-preview")).toBeNull();
   });
 
   it('renders "View More Projects" link with btn--primary class', () => {

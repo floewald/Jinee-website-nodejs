@@ -113,6 +113,8 @@ Create `src/app/your-page/page.tsx`. It will be exported as `out/your-page/index
 
 Export a `metadata` object (or `generateMetadata` function) at the top of the file for SEO.
 
+Existing static pages: `/`, `/contact/`, `/portfolio/photography/[slug]/`, `/portfolio/video/[slug]/`, `/portfolio/social-media/[slug]/`.
+
 ### Adding a new component
 
 1. Create the component in `src/components/<category>/ComponentName.tsx`
@@ -120,6 +122,12 @@ Export a `metadata` object (or `generateMetadata` function) at the top of the fi
 3. Implement the component to make the test pass
 
 For client-side interactivity (state, effects, browser APIs), add `'use client'` at the top. Server components (default, no `'use client'`) cannot use hooks or event handlers.
+
+### Gallery layout
+
+Photo galleries use `react-masonry-css` (shortest-column-first masonry). The `GalleryGrid` component renders images at their natural aspect ratio — no portrait detection or blur backgrounds. Breakpoints: 3 columns ≥900 px, 2 columns ≥480 px, 1 column below that.
+
+The homepage collage images are configured in `src/content/portfolio/index-config.json` (`collageImages` array). Each entry requires `src`, `alt`, and `srcFull`.
 
 ### Environment variables
 

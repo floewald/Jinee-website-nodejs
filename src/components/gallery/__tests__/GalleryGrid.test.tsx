@@ -11,6 +11,15 @@ jest.mock("next/image", () => ({
   },
 }));
 
+// react-masonry-css renders flex columns; mock it to render children directly
+// so tests aren't coupled to the library's DOM structure.
+jest.mock("react-masonry-css", () => ({
+  __esModule: true,
+  default: ({ children }: { children: React.ReactNode }) => (
+    <div data-testid="masonry-grid">{children}</div>
+  ),
+}));
+
 const IMAGES = [
   { src: "/img/a-800.webp", alt: "Photo A", srcFull: "/img/a-1600.webp" },
   { src: "/img/b-800.webp", alt: "Photo B", srcFull: "/img/b-1600.webp" },
@@ -45,29 +54,30 @@ describe("GalleryGrid", () => {
     expect(onImageClick).toHaveBeenCalledWith(2);
   });
 
-  it("renders empty grid when images array is empty", () => {
-    render(<GalleryGrid images={[]} onImageClick={jest.fn()} />);
-    expect(screen.queryAllByRole("img")).toHaveLength(0);
+  it("renders nothing when images array is empty", () => {
+    const { container } = render(<GalleryGrid images={[]} onImageClick={jest.fn()} />);
+    expect(container.firstChild).toBeNull();
   });
 
-  it("adds gallery-item--portrait class after onLoad for portrait image", () => {
+  it("renders images inside the masonry grid container", () => {
     render(<GalleryGrid images={IMAGES} onImageClick={jest.fn()} />);
-    const img = screen.getByRole("img", { name: "Photo A" });
-    // Simulate a portrait image (height > width)
-    Object.defineProperty(img, "naturalWidth", { value: 400, configurable: true });
-    Object.defineProperty(img, "naturalHeight", { value: 600, configurable: true });
-    fireEvent.load(img);
-    const button = img.closest("button");
-    expect(button).toHaveClass("gallery-item--portrait");
+    expect(screen.getByTestId("masonry-grid")).toBeInTheDocument();
   });
 
-  it("does not add gallery-item--portrait for landscape image", () => {
+  it("does not render portrait background blur divs", () => {
     render(<GalleryGrid images={IMAGES} onImageClick={jest.fn()} />);
-    const img = screen.getByRole("img", { name: "Photo B" });
-    Object.defineProperty(img, "naturalWidth", { value: 800, configurable: true });
-    Object.defineProperty(img, "naturalHeight", { value: 534, configurable: true });
-    fireEvent.load(img);
-    const button = img.closest("button");
-    expect(button).not.toHaveClass("gallery-item--portrait");
+    expect(document.querySelector(".gallery-portrait-bg")).toBeNull();
+  });
+
+  it("does not add gallery-item--portrait class to any item", () => {
+    render(<GalleryGrid images={IMAGES} onImageClick={jest.fn()} />);
+    expect(document.querySelector(".gallery-item--portrait")).toBeNull();
+  });
+
+  it("every button has an accessible aria-label", () => {
+    render(<GalleryGrid images={IMAGES} onImageClick={jest.fn()} />);
+    screen.getAllByRole("button").forEach((btn) => {
+      expect(btn).toHaveAttribute("aria-label");
+    });
   });
 });

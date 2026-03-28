@@ -24,6 +24,7 @@ For content workflow see [ADDING-PROJECTS.md](ADDING-PROJECTS.md).
 | 6 | Build, export & deploy (CI/CD, GitHub Actions, `.htaccess` redirects) | ✅ Complete |
 | 7 | TinaCMS | ⏳ Deferred indefinitely |
 | 8 | Detail refinements (design parity with legacy site) | ✅ Complete |
+| 9 | Homepage redesign & gallery masonry (hero image, masonry layout, /contact route, config-driven collage, Videography rename) | ✅ Complete |
 
 ---
 

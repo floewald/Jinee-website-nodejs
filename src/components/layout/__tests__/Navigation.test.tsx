@@ -31,6 +31,12 @@ describe("Navigation", () => {
     expect(screen.getByRole("link", { name: /contact/i })).toBeInTheDocument();
   });
 
+  it("contact link points to the /contact/ page (not an anchor)", () => {
+    render(<Navigation />);
+    const contactLink = screen.getByRole("link", { name: /contact/i });
+    expect(contactLink).toHaveAttribute("href", "/contact/");
+  });
+
   it("renders the nav toggle button for mobile", () => {
     render(<Navigation />);
     expect(

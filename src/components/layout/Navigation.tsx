@@ -100,7 +100,7 @@ export default function Navigation() {
             <Link href={isHome ? "/#about" : "/#about"} onClick={handleAnchorClick("about")}>About</Link>
           </li>
           <li>
-            <Link href={isHome ? "/#contact" : "/#contact"} onClick={handleAnchorClick("contact")}>Contact</Link>
+            <Link href="/contact/">Contact</Link>
           </li>
         </ul>
       </nav>

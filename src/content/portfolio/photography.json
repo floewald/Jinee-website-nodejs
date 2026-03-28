@@ -132,7 +132,7 @@
     "description": "Private birthday party photography in Singapore.",
     "heading": "Singapore | Birthday Party",
     "ogImage": "https://jineechen.com/assets/photography/private-party/Jinee_Chen_Party photos-1-800.webp",
-    "visible": false,
+    "visible": true,
     "enableDownload": false,
     "showSlideshow": false,
     "imageCount": 60,

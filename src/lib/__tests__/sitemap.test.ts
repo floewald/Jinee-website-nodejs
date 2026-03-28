@@ -39,7 +39,7 @@ describe("sitemap()", () => {
   });
 
   describe("static routes", () => {
-    const staticPaths = ["/", "/portfolio/", "/portfolio/photography/", "/portfolio/video/", "/portfolio/social-media/", "/imprint/", "/privacy/"];
+    const staticPaths = ["/", "/contact/", "/portfolio/", "/portfolio/photography/", "/portfolio/video/", "/portfolio/social-media/", "/imprint/", "/privacy/"];
 
     it.each(staticPaths)("includes %s", (path) => {
       expect(urls).toContain(`${SITE_URL}${path}`);
@@ -119,7 +119,7 @@ describe("sitemap()", () => {
   });
 
   it("total count matches static + all projects", () => {
-    const staticCount = 7; // home, portfolio, 3 categories, imprint, privacy
+    const staticCount = 8; // home, contact, portfolio, 3 categories, imprint, privacy
     const expected =
       staticCount +
       photographyProjects.length +

@@ -492,45 +492,50 @@ section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
 section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   GALLERY COLLAGE (homepage 3×3)
+   HERO SECTION (homepage full-width banner image)
+   ══════════════════════════════════════════════════════════════════════════════ */
+.hero-section {
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  line-height: 0; /* remove gap below inline image */
+}
+.hero-img {
+  width: 100%;
+  height: auto;
+  max-height: clamp(280px, 50vw, 720px);
+  object-fit: cover;
+  display: block;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   GALLERY COLLAGE (homepage)
    ══════════════════════════════════════════════════════════════════════════════ */
 .collage-hv.collage-3x3 {
   width: 100%;
   overflow: hidden;
-}
-/* Make the project-gallery inside the collage the actual CSS grid */
-.collage-hv.collage-3x3 .project-gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(12px, 1.5vw, 24px);
-  grid-auto-rows: clamp(180px, 22vw, 460px);
-  width: 100%;
-}
-.collage-hv.collage-3x3 .gallery-item {
-  overflow: hidden;
-  border-radius: var(--radius);
-  display: block;
-  width: 100%;
-  /* height fills grid row via align-self:stretch (grid default) */
-}
-.collage-hv.collage-3x3 .gallery-img {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: unset; /* override the 16/9 default for collage */
-  object-fit: cover;
-  border-radius: 0; /* border-radius lives on the gallery-item */
+  padding: 0 clamp(12px, 1.5vw, 24px);
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   PROJECT GALLERY (3-column grid on project pages)
+   PROJECT GALLERY — masonry layout (react-masonry-css)
+   react-masonry-css renders:
+     .project-gallery           → flex container (replaces the old CSS grid)
+     .project-gallery__col      → each column div
    ══════════════════════════════════════════════════════════════════════════════ */
 .project-gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: clamp(110px, 13vw, 210px);
+  display: flex;
   gap: 0.9rem;
   margin-top: var(--gallery-content-gap);
-  align-items: stretch;
+  width: 100%;
+}
+.project-gallery__col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  flex: 1;
+  min-width: 0;
 }
 .gallery-item {
   display: block;
@@ -540,7 +545,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   cursor: pointer;
   overflow: hidden;
   border-radius: 8px;
-  height: 100%;
+  width: 100%;
 }
 .gallery-item__trigger {
   display: block;
@@ -551,69 +556,16 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   overflow: hidden;
   border-radius: 8px;
   width: 100%;
-  height: 100%;
 }
 .gallery-img {
   width: 100%;
-  height: 100%;
-  aspect-ratio: unset;
-  object-fit: cover;
-  border-radius: 0;
+  height: auto;      /* natural aspect ratio — no fixed height */
   display: block;
-}
-/* Tablet: 2 columns */
-@media (max-width: 900px) {
-  .project-gallery { grid-template-columns: repeat(2, 1fr); }
-}
-/* Mobile: 1 column */
-@media (max-width: 480px) {
-  .project-gallery { grid-template-columns: 1fr; }
-}
-
-/* Portrait gallery items — span 2 rows and use blurred background */
-.gallery-item--portrait {
-  overflow: hidden;
-  position: relative;
-  grid-row: span 2;
-  border-radius: 8px;
-  clip-path: inset(0 round 8px);
-  /* translateZ(0) forces GPU compositing — makes border-radius+overflow:hidden
-     reliably clip absolutely-positioned children in all browsers (incl. Safari) */
-  transform: translateZ(0);
-}
-.gallery-item--portrait .gallery-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  z-index: 1;
   border-radius: 0;
-}
-/* Next.js 15 Image fill renders a plain <img data-nimg="fill"> (no span wrapper) */
-.gallery-item--portrait img[data-nimg="fill"] {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain !important;
-  z-index: 1;
-}
-/* Blurred fill background rendered as an explicit child div (z-index:0, below img) */
-.gallery-portrait-bg {
-  position: absolute;
-  inset: -12%;   /* extend so blur doesn't show hard edges */
-  background-size: cover;
-  background-position: center;
-  filter: blur(14px);
-  z-index: 0;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   FEATURED SECTION (homepage "Portfolio")
+   FEATURED SECTION (homepage "Videography")
    ══════════════════════════════════════════════════════════════════════════════ */
 .gallery-section { padding-bottom: 0; }
 .featured-projects { padding-top: 0; padding-bottom: 1rem; }
