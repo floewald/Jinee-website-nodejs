@@ -9,11 +9,6 @@ export const metadata: Metadata = {
   description: "Instagram reels, posts and lifestyle content by Jinee Chen.",
 };
 
-/** Extract the project slug from an image path like /assets/social-media/SLUG/... */
-function slugFromImage(imagePath: string): string {
-  return imagePath.split("/")[3];
-}
-
 export default function SocialMediaIndexPage() {
   const links = portfolioIndexConfig.socialMediaLinks;
 
@@ -26,8 +21,10 @@ export default function SocialMediaIndexPage() {
         {links.map((link) => (
           <Link
             key={link.url}
-            href={`/portfolio/social-media/${slugFromImage(link.image)}/`}
+            href={link.url}
             className="instagram-preview"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Image
               src={link.image}

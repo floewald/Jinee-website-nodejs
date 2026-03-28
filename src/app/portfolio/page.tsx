@@ -17,11 +17,6 @@ export const metadata: Metadata = {
   description: "Photography, video production, and social media content by Jinee Chen.",
 };
 
-/** Extract the project slug from an image path like /assets/social-media/SLUG/... */
-function slugFromImage(imagePath: string): string {
-  return imagePath.split("/")[3];
-}
-
 export default function PortfolioPage() {
   const photographyCards = getPhotographyCards().slice(0, MAX_CARDS);
   const videoCards = getVideoCards().slice(0, MAX_CARDS);
@@ -132,8 +127,10 @@ export default function PortfolioPage() {
             {socialMediaLinks.map((link) => (
               <Link
                 key={link.url}
-                href={`/portfolio/social-media/${slugFromImage(link.image)}/`}
+                href={link.url}
                 className="instagram-preview"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Image
                   src={link.image}
@@ -144,6 +141,7 @@ export default function PortfolioPage() {
                   className="instagram-preview__img"
                   unoptimized
                 />
+                <span className="play-overlay" aria-hidden="true">▶</span>
               </Link>
             ))}
           </RevealGrid>

@@ -50,8 +50,20 @@ jest.mock("next/image", () => ({
 
 jest.mock("next/link", () => ({
   __esModule: true,
-  default: ({ children, href }: { children: React.ReactNode; href: string }) => (
-    <a href={href}>{children}</a>
+  default: ({
+    children,
+    href,
+    className,
+    target,
+    rel,
+  }: {
+    children: React.ReactNode;
+    href: string;
+    className?: string;
+    target?: string;
+    rel?: string;
+  }) => (
+    <a href={href} className={className} target={target} rel={rel}>{children}</a>
   ),
 }));
 
@@ -75,9 +87,16 @@ describe("PortfolioPage (hub)", () => {
     expect(screen.getByText("Stuck with Low Pay")).toBeInTheDocument();
   });
 
-  it("renders social media instagram previews without play overlay", () => {
-    // play overlay triangle was removed
-    expect(document.querySelectorAll(".play-overlay")).toHaveLength(0);
+  it("renders social media instagram previews with play overlay", () => {
+    expect(document.querySelectorAll(".play-overlay")).toHaveLength(1);
+  });
+
+  it("renders social media preview links to external instagram urls", () => {
+    const socialLink = document.querySelector(".instagram-preview") as HTMLAnchorElement | null;
+    expect(socialLink).not.toBeNull();
+    expect(socialLink).toHaveAttribute("href", "https://www.instagram.com/reel/test/");
+    expect(socialLink).toHaveAttribute("target", "_blank");
+    expect(socialLink).toHaveAttribute("rel", "noopener noreferrer");
   });
 
   it("renders no description paragraph in project cards", () => {
