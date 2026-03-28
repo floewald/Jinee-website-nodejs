@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run build:images && next build",
+    "build": "npm run build:images && npm run validate:manifests && next build",
     "build:next": "next build",
     "build:images": "./scripts/build-images.sh",
+    "validate:manifests": "node scripts/validate-manifests.mjs",
     "generate:lqip": "node scripts/generate-lqip.mjs",
     "start": "next start",
     "lint": "eslint",

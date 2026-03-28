@@ -144,28 +144,31 @@ Covered by tests in `src/app/__tests__/error.test.tsx`.
 
 ## 5. Adding New Projects (DX)
 
-### 5.1 No build-time validation of project manifests — **MEDIUM**
+### 5.1 ~~No build-time validation of project manifests~~ — ✅ **DONE**
 
 When a new project is added to a JSON config file but `npm run build:images` has not been run,
 the gallery silently renders empty. There is no build step that checks every project slug has
 a corresponding `images.json`.
 
-**Recommendation:** Add a validation step to the build script or as a separate
-`scripts/validate-manifests.js`:
+**`scripts/validate-manifests.mjs`** reads all three JSON configs, checks each project with a
+`portfolioCard` has a corresponding `Jinee_website/assets/{type}/{slug}/images.json`, and exits 1
+with a clear actionable message listing every offender. If the `Jinee_website/assets/` directory
+is absent (fresh checkout / CI-only builds) the check is skipped gracefully.
 
-```js
-// Check that every project slug in photography.json / video.json / social-media.json
-// has a matching Jinee_website/assets/{type}/{slug}/images.json
-```
+The core logic lives in the testable TypeScript module **`src/lib/validate-manifests.ts`**
+(`findMissingManifests()`), covered by 5 unit tests in
+`src/lib/__tests__/validate-manifests.test.ts`.
 
-Run it as part of `npm run build` (prepend it in `package.json`):
+Integrated into `npm run build`:
 ```json
-"build": "node scripts/validate-manifests.js && next build"
+"build": "npm run build:images && npm run validate:manifests && next build"
 ```
+
+Run standalone: `npm run validate:manifests`
 
 ---
 
-### 5.2 Manual `npm run build:images` step easy to forget — **MEDIUM**
+### 5.2 ~~Manual `npm run build:images` step easy to forget~~ — ✅ **DONE**
 
 The workflow for adding images is:
 
@@ -173,15 +176,9 @@ The workflow for adding images is:
 2. `npm run build:images` → generates WebP + `images.json`
 3. `npm run build` → Next.js static export
 
-Step 2 is easy to skip. The build will succeed but the new images will be absent.
-
-**Recommendation:** Make `build:images` a dependency in `package.json`:
-```json
-"prebuild": "node scripts/build-images.sh || true"
-```
-
-Or document step 2 prominently in `docs/ADDING-PROJECTS.md` (already done, can add a warning
-block to reinforce it).
+`build:images` now runs automatically as the first step of `npm run build` (see 5.1 above).
+The manifest validation step that follows ensures the build fails early with a clear message
+if images were not processed.
 
 ---
 
@@ -294,8 +291,8 @@ A Git LFS quota warning step (fires at 90 % of the 1 GB free tier) was also adde
 | 3.6 | Use `new Date()` in sitemap | LOW | Trivial | ✅ Done |
 | Mobile | Swipe on CardSlideshow | HIGH UX | Small | ✅ Done |
 | 2.1 | LQIP blur-up placeholder | MEDIUM | Medium | 🔄 Next batch |
-| 5.1 | Build-time validation that all project slugs have manifests | MEDIUM | Small script | Open |
-| 5.2 | `npm run build:images` easy to skip — hook into prebuild | MEDIUM | 2-line change | Open |
+| 5.1 | Build-time validation that all project slugs have manifests | MEDIUM | Small script | ✅ Done |
+| 5.2 | `npm run build:images` easy to skip — hook into prebuild | MEDIUM | 2-line change | ✅ Done |
 | 6.1 | Fix fragile asset deploy condition in GitHub Actions | MEDIUM | Medium (YAML rewrite) | Open |
 | 3.2 | Move magic constants to `constants.ts` | LOW | Small | Open |
 | 3.3 | Extract `<ProjectCardsGrid>` component | LOW | Medium | Open |
