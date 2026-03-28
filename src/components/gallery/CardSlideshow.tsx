@@ -15,10 +15,10 @@ interface CardSlideshowProps {
    * Even cards advance immediately; odd cards are offset by half a cycle,
    * producing the checkerboard stagger: 0,2,4 → wait → 1,3,5 → repeat.
    */
-  cardIndex: number;
+  cardIndex?: number;
 }
 
-export default function CardSlideshow({ images, alt, cardIndex }: CardSlideshowProps) {
+export default function CardSlideshow({ images, alt, cardIndex = 0 }: CardSlideshowProps) {
   const [idx, setIdx] = useState(0);
   const [portraitFlags, setPortraitFlags] = useState<boolean[]>(() =>
     Array(images.length).fill(false)

@@ -23,7 +23,7 @@ export function getContentJsonPath(type: ProjectType): string {
  * Returns the directory path where raw images for a new project should be placed.
  */
 export function getAssetsRawPath(type: ProjectType, slug: string): string {
-  return path.join(ROOT, "Jinee_website", "assets-raw", type, slug);
+  return path.join(ROOT, "assets-raw", type, slug);
 }
 
 type SkeletonEntry =

@@ -88,7 +88,7 @@ jobs:
         with:
           fetch-depth: 0   # full history so git diff works across any push depth
 
-      # Detect whether any file under Jinee_website/assets-raw/ changed.
+      # Detect whether any file under assets-raw/ changed.
       # Writes `changed=true` or `changed=false` to $GITHUB_OUTPUT.
       # Handles force-pushes and first-ever pushes (before SHA is all zeroes).
       - name: Check for asset changes
@@ -101,7 +101,7 @@ jobs:
           else
             CHANGED=$(git diff --name-only "$BEFORE" "$AFTER" 2>/dev/null || echo "")
           fi
-          if echo "$CHANGED" | grep -q 'Jinee_website/assets-raw/'; then
+          if echo "$CHANGED" | grep -q 'assets-raw/'; then
             echo "changed=true" >> $GITHUB_OUTPUT
           else
             echo "changed=false" >> $GITHUB_OUTPUT

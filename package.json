@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "npm run build:images && npm run validate:manifests && next build",
     "build:next": "next build",
-    "build:images": "./scripts/build-images.sh",
+    "build:images": "bash scripts/build-images.sh",
     "validate:manifests": "node scripts/validate-manifests.mjs",
     "create-project": "node scripts/create-project.mjs",
     "generate:lqip": "node scripts/generate-lqip.mjs",
@@ -27,6 +27,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@fontsource-variable/inter": "^5.2.8",
     "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
@@ -41,6 +42,7 @@
     "jest": "^30.3.0",
     "jest-environment-jsdom": "^30.3.0",
     "lint-staged": "^16.4.0",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4",
     "ts-jest": "^29.4.6",
     "typescript": "^5"

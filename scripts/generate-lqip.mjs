@@ -2,7 +2,7 @@
 /**
  * generate-lqip.mjs — LQIP (Low Quality Image Placeholder) generator
  *
- * Reads every images.json manifest under Jinee_website/assets/, generates an
+ * Reads every images.json manifest under public/assets/, generates an
  * 8×8 px blurred WebP for each image entry, base64-encodes it, and writes the
  * result back as a `blur` field on each manifest entry.
  *
@@ -18,7 +18,7 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
-const ASSETS_BASE = path.join(ROOT, "Jinee_website", "assets");
+const ASSETS_BASE = path.join(ROOT, "public", "assets");
 
 // Dynamically import sharp so the script gives a clear error if not installed.
 let sharp;

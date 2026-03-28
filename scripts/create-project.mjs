@@ -48,7 +48,7 @@ function getContentJsonPath(type) {
 }
 
 function getAssetsRawPath(type, slug) {
-  return path.join(ROOT, "Jinee_website", "assets-raw", type, slug);
+  return path.join(ROOT, "assets-raw", type, slug);
 }
 
 function buildSkeleton(type, slug, title) {
@@ -149,7 +149,7 @@ console.log(`\x1b[32m✔\x1b[0m Appended skeleton to ${path.relative(ROOT, jsonP
 // 8 — Next steps
 console.log(`
 \x1b[1mNext steps:\x1b[0m
-  1. Add images to:  Jinee_website/assets-raw/${type}/${slug}/
+  1. Add images to:  assets-raw/${type}/${slug}/
   2. Run:            npm run build:images
   3. Edit:           src/content/portfolio/${type}.json  (fill in placeholders)
   4. Run:            npm run build

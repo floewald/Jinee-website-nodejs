@@ -47,5 +47,14 @@ backend/contact/logs/
 backend/download/rate-limit/
 backend/download/tmp/
 
-# Legacy site (separate git repo — do not commit as submodule)
-Jinee_website/
+# Generated assets from scripts/build-images.mjs
+public/assets/*
+
+# Fonts: keep only committed self-hosted Inter files
+!public/assets/fonts/
+public/assets/fonts/*
+!public/assets/fonts/inter-latin.woff2
+!public/assets/fonts/inter-latin-ext.woff2
+
+# Photos (logos, previews, and app icons) are generated from assets-raw/photos
+# by scripts/build-images.sh and should not be committed.

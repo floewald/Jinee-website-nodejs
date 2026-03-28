@@ -4,14 +4,14 @@
  *
  * Reads all three portfolio JSON files (photography, video, social-media),
  * and for every project that has a `portfolioCard` verifies that the
- * corresponding `Jinee_website/assets/{type}/{slug}/images.json` exists.
+ * corresponding `public/assets/{type}/{slug}/images.json` exists.
  *
  * If any manifests are missing the script logs a clear warning and exits 1,
  * so the Next.js build fails early with an actionable message instead of
  * silently rendering empty galleries.
  *
- * If the `Jinee_website/assets/` directory is not present (e.g. a fresh
- * checkout without the legacy asset tree) the check is skipped entirely.
+ * If the `public/assets/` directory is not present (e.g. a fresh
+ * checkout without the asset tree) the check is skipped entirely.
  *
  * Usage:
  *   node scripts/validate-manifests.mjs
@@ -26,12 +26,12 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
-const ASSETS_BASE = path.join(ROOT, "Jinee_website", "assets");
+const ASSETS_BASE = path.join(ROOT, "public", "assets");
 const CONTENT_BASE = path.join(ROOT, "src", "content", "portfolio");
 
 // Skip the entire check when the assets tree is absent (fresh checkout / CI-only builds)
 if (!fs.existsSync(ASSETS_BASE)) {
-  console.log("[validate-manifests] Jinee_website/assets/ not found — skipping manifest validation.");
+  console.log("[validate-manifests] public/assets/ not found — skipping manifest validation.");
   process.exit(0);
 }
 
@@ -66,10 +66,10 @@ if (missing.length > 0) {
   console.error("\n[validate-manifests] ERROR: Missing image manifests detected!\n");
   console.error("The following projects have a portfolioCard but no images.json:");
   for (const { type, slug } of missing) {
-    console.error(`  • ${type}/${slug}  →  Jinee_website/assets/${type}/${slug}/images.json`);
+    console.error(`  • ${type}/${slug}  →  public/assets/${type}/${slug}/images.json`);
   }
   console.error(
-    "\nTo fix: add images to Jinee_website/assets-raw/{type}/{slug}/ then run:\n" +
+    "\nTo fix: add images to assets-raw/{type}/{slug}/ then run:\n" +
     "  npm run build:images\n"
   );
   process.exit(1);
