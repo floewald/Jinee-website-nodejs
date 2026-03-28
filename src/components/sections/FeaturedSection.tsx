@@ -18,7 +18,7 @@ export default function FeaturedSection() {
 
         {/* Video cards */}
         <div className="project-cards">
-          {videoCards.map((project) => {
+          {videoCards.map((project, cardIndex) => {
             const slideshowImages = getProjectSlideshowImages(project.slug, "video");
             const previewImages: SlideshowImage[] = slideshowImages.length > 1
               ? slideshowImages
@@ -34,6 +34,7 @@ export default function FeaturedSection() {
                   <CardSlideshow
                     images={previewImages}
                     alt={project.portfolioCard!.cardTitle}
+                    cardIndex={cardIndex}
                   />
                 ) : (
                   <Image

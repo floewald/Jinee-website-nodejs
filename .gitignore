@@ -47,5 +47,19 @@ backend/contact/logs/
 backend/download/rate-limit/
 backend/download/tmp/
 
-# Generated WebP assets — produced at build time from assets-raw/ via npm run build:images
-public/assets/
+# Generated assets from scripts/build-images.mjs
+public/assets/*
+
+# Fonts: keep only committed self-hosted Inter files
+!public/assets/fonts/
+public/assets/fonts/*
+!public/assets/fonts/inter-latin.woff2
+!public/assets/fonts/inter-latin-ext.woff2
+
+# Photos: keep only committed app icons/favicons
+!public/assets/photos/
+public/assets/photos/*
+!public/assets/photos/favicon.ico
+!public/assets/photos/icon-32.png
+!public/assets/photos/icon-192.png
+!public/assets/photos/apple-touch-icon.png
