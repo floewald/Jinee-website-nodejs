@@ -38,8 +38,8 @@ describe("ContactForm", () => {
 
   it("has placeholder text on all text inputs", () => {
     render(<ContactForm />);
-    expect(screen.getByPlaceholderText(/jane/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/doe/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/first name/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/last name/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/you@example\.com/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/\+65/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/tell me about your project/i)).toBeInTheDocument();

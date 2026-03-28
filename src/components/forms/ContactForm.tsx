@@ -105,7 +105,7 @@ export default function ContactForm() {
             onChange={handleChange}
             required
             autoComplete="given-name"
-            placeholder="Jane"
+            placeholder="First Name"
           />
         </div>
 
@@ -119,7 +119,7 @@ export default function ContactForm() {
             onChange={handleChange}
             required
             autoComplete="family-name"
-            placeholder="Doe"
+            placeholder="Last Name"
           />
         </div>
       </div>
