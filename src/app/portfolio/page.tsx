@@ -143,7 +143,6 @@ export default function PortfolioPage() {
                   className="instagram-preview__img"
                   unoptimized
                 />
-                <span className="play-overlay" aria-hidden="true">▶</span>
               </Link>
             ))}
           </div>

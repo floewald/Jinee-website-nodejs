@@ -318,16 +318,11 @@ section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
 /* Portfolio submenu (desktop) */
 .nav-item-portfolio { position: static; }
 .nav-portfolio-toggle::after {
-  content: ' ▶';
-  font-size: 0.65em;
-  opacity: 0.7;
-  transition: transform 220ms ease, opacity 220ms ease;
-  display: inline-block;
+  content: '';
+  display: none;
 }
-.nav-portfolio-toggle:hover::after { opacity: 1; }
 
 @media (min-width: 801px) {
-  .nav-item-portfolio:hover .nav-portfolio-toggle::after { transform: rotate(90deg); }
   .nav-portfolio-toggle { position: relative; }
   .nav-portfolio-toggle::before {
     content: "";
@@ -455,10 +450,6 @@ section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
     width: 100%;
   }
   .nav-item-portfolio.open .nav-submenu { display: flex !important; }
-  .nav-item-portfolio.open .nav-portfolio-toggle::after {
-    transform: rotate(90deg);
-    opacity: 1;
-  }
   .nav-submenu li { width: 100%; }
   .nav-submenu li a { padding: 0.6rem 1rem 0.6rem 2.2rem !important; display: block !important; font-size: 0.95rem; }
 
@@ -492,19 +483,28 @@ section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
 section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   HERO SECTION (homepage full-width banner image)
+   HERO SLIDESHOW (homepage full-width cycling slideshow)
    ══════════════════════════════════════════════════════════════════════════════ */
 .hero-section {
+  position: relative;
   width: 100%;
   overflow: hidden;
   padding: 0;
   margin: 0;
-  line-height: 0; /* remove gap below inline image */
+  height: clamp(280px, 50vw, 720px);
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out;
+}
+.hero-slide--active {
+  opacity: 1;
 }
 .hero-img {
   width: 100%;
-  height: auto;
-  max-height: clamp(280px, 50vw, 720px);
+  height: 100%;
   object-fit: cover;
   display: block;
 }
@@ -570,7 +570,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 .gallery-section { padding-bottom: 0; }
 .featured-projects { padding-top: 0; padding-bottom: 1rem; }
 .section-title {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
@@ -824,7 +824,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 
 .about-text { flex: 1 1 350px; }
 .about-text p {
-  color: #fff;
+  color: var(--text-color);
   font-size: 1rem;
   line-height: 1.6;
   padding-bottom: 12px;
@@ -835,14 +835,14 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   border-bottom: none;
   padding-bottom: 0;
   margin-bottom: 1.2em;
-  color: #fff;
+  color: var(--charcoal);
 }
 .about-chinese-text {
   margin-top: 2rem;
   font-size: 1rem;
-  color: #fff;
+  color: var(--text-color);
 }
-.about-chinese-text p { color: #fff; }
+.about-chinese-text p { color: var(--text-color); }
 
 /* ══════════════════════════════════════════════════════════════════════════════
    CONTACT SECTION

@@ -134,7 +134,7 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           autoComplete="email"
-          placeholder="you@example.com"
+          placeholder="your@domain.com"
         />
       </div>
 

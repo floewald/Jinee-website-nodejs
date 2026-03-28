@@ -75,10 +75,9 @@ describe("PortfolioPage (hub)", () => {
     expect(screen.getByText("Stuck with Low Pay")).toBeInTheDocument();
   });
 
-  it("renders social media instagram previews", () => {
-    // The play overlay ▶ is rendered inside each instagram preview link
-    const overlays = screen.getAllByText("▶");
-    expect(overlays.length).toBeGreaterThan(0);
+  it("renders social media instagram previews without play overlay", () => {
+    // play overlay triangle was removed
+    expect(document.querySelectorAll(".play-overlay")).toHaveLength(0);
   });
 
   it("renders no description paragraph in project cards", () => {

@@ -1,21 +1,22 @@
-import HeroSection from "@/components/sections/HeroSection";
+import HeroSlideshow from "@/components/sections/HeroSlideshow";
 import GallerySection from "@/components/sections/GallerySection";
 import FeaturedSection from "@/components/sections/FeaturedSection";
-import AboutSection from "@/components/sections/AboutSection";
+import { portfolioIndexConfig } from "@/lib/portfolio-config";
 
 export default function Home() {
+  const heroSlides = portfolioIndexConfig.collageImages.map((img) => ({
+    src: img.src,
+    alt: img.alt,
+  }));
+
   return (
     <>
       <h1 className="sr-only">
         Jinee Chen — Photographer &amp; Videographer in Singapore
       </h1>
-      <HeroSection
-        src="/assets/photography/travel-photography/0019_16-1600.webp"
-        alt="Jinee Chen — travel photography hero"
-      />
+      <HeroSlideshow slides={heroSlides} />
       <GallerySection />
       <FeaturedSection />
-      <AboutSection />
     </>
   );
 }

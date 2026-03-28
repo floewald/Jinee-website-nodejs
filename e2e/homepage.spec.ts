@@ -22,9 +22,9 @@ test.describe("Homepage", () => {
     await expect(images.first()).toBeAttached();
   });
 
-  test("renders hero image at top of page", async ({ page }) => {
-    const hero = page.locator(".hero-section img");
-    await expect(hero).toBeAttached();
+  test("renders hero slideshow at top of page", async ({ page }) => {
+    const hero = page.locator(".hero-section .hero-slide");
+    await expect(hero.first()).toBeAttached();
   });
 
   test("renders videography / featured section", async ({ page }) => {
@@ -33,10 +33,8 @@ test.describe("Homepage", () => {
     await expect(section.locator("h2")).toHaveText("Videography");
   });
 
-  test("renders about section", async ({ page }) => {
-    const section = page.locator("#about");
-    await expect(section).toBeAttached();
-    await expect(section.locator("h2")).toContainText("Video Producer");
+  test("about section is on /about/ page (not homepage)", async ({ page }) => {
+    await expect(page.locator("#about")).not.toBeAttached();
   });
 
   test("homepage does not include a contact form (contact moved to /contact/)", async ({ page }) => {
