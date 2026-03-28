@@ -111,7 +111,7 @@ describe("getContentJsonPath()", () => {
 describe("getAssetsRawPath()", () => {
   it("returns the correct assets-raw directory path", () => {
     expect(getAssetsRawPath("photography", "my-project")).toBe(
-      path.join(ROOT, "Jinee_website", "assets-raw", "photography", "my-project")
+      path.join(ROOT, "assets-raw", "photography", "my-project")
     );
   });
 });

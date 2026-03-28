@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "npm run build:images && npm run validate:manifests && next build",
     "build:next": "next build",
-    "build:images": "./scripts/build-images.sh",
+    "build:images": "node scripts/build-images.mjs",
     "validate:manifests": "node scripts/validate-manifests.mjs",
     "create-project": "node scripts/create-project.mjs",
     "generate:lqip": "node scripts/generate-lqip.mjs",
@@ -42,7 +42,8 @@
     "lint-staged": "^16.4.0",
     "tailwindcss": "^4",
     "ts-jest": "^29.4.6",
-    "typescript": "^5"
+    "typescript": "^5",
+    "sharp": "^0.34.5"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

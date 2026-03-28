@@ -47,5 +47,5 @@ backend/contact/logs/
 backend/download/rate-limit/
 backend/download/tmp/
 
-# Legacy site (separate git repo — do not commit as submodule)
-Jinee_website/
+# Generated WebP assets — produced at build time from assets-raw/ via npm run build:images
+public/assets/

@@ -33,7 +33,7 @@ export function getProjectSlideshowImages(
 ): SlideshowImage[] {
   const manifestPath = path.join(
     process.cwd(),
-    "Jinee_website",
+    "public",
     "assets",
     type,
     slug,
@@ -67,7 +67,7 @@ export function getGalleryImages(
 ): GalleryImage[] {
   const manifestPath = path.join(
     process.cwd(),
-    "Jinee_website",
+    "public",
     "assets",
     type,
     slug,
