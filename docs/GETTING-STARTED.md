@@ -169,8 +169,7 @@ public/
 You do not write code — you edit a JSON file and add images.
 
 1. **Add images** to `assets-raw/photography/my-new-project/`
-2. **Generate WebP** versions: `npm run build:images`
-3. **Edit** `src/content/portfolio/photography.json` — add a new entry:
+2. **Edit** `src/content/portfolio/photography.json` — add a new entry:
 
 ```json
 {
@@ -190,7 +189,12 @@ You do not write code — you edit a JSON file and add images.
 }
 ```
 
-1. **Run** `npm run dev` to preview it at `/portfolio/photography/my-new-project/`
+3. **Run** `npm run build` to generate WebP images + static pages.
+4. **Run** `npm run dev` to preview it at `/portfolio/photography/my-new-project/`
+
+Note: `npm run build` already runs image generation (`npm run build:images`) before
+the Next.js export. Use `npm run build:images` separately only when you want a
+faster image-only regeneration during editing.
 
 See [ADDING-PROJECTS.md](ADDING-PROJECTS.md) for the full guide.
 
@@ -233,7 +237,7 @@ npm run type-check    # TypeScript type errors
 npm run test
 
 # When done and ready to deploy — build the static files
-npm run build         # creates the out/ folder
+npm run build         # regenerates images + creates the out/ folder
 # Then upload out/ to the server via FTP
 ```
 
@@ -289,7 +293,8 @@ Tests run automatically before every `git commit` (via Husky). If they fail, the
 
 ### Images not showing
 
-→ WebP images may not have been generated. Run `npm run build:images` first.
+→ WebP images may not have been generated. Run `npm run build`.
+  (For image-only regeneration during editing, `npm run build:images` also works.)
 
 ### ESLint blocks the commit
 
@@ -305,7 +310,7 @@ Tests run automatically before every `git commit` (via Husky). If they fail, the
 
 ### How it works — no Node.js needed on the server
 
-When you run `npm run build`, Next.js compiles the whole site into a folder called `out/`. That folder contains only plain HTML/CSS/JS files — ordinary web files a browser can read directly. You upload `out/` to the web server via FTP. The server just stores and delivers the files; **it does not need Node.js installed.**
+When you run `npm run build`, the project first regenerates images/manifests and then Next.js compiles the site into a folder called `out/`. That folder contains only plain HTML/CSS/JS files — ordinary web files a browser can read directly. You upload `out/` to the web server via FTP. The server just stores and delivers the files; **it does not need Node.js installed.**
 
 Node.js and npm are only needed **on your local machine** (or in GitHub Actions) to run the build. Once `out/` is produced, Node.js is no longer part of the picture.
 

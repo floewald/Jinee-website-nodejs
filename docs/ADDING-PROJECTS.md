@@ -11,9 +11,11 @@ Make sure your development environment is running. If you haven't set it up yet,
 The basic workflow for any content change is:
 
 1. Add/edit the content (images + JSON config)
-2. Run `npm run build:images` (only if you added new images)
-3. Run `npm run build`
+2. Run `npm run build` (this already runs `npm run build:images` first)
 4. Deploy the new `out/` folder to the server
+
+For faster iteration while editing images only, you can still run
+`npm run build:images` directly before `npm run build`.
 
 ---
 
@@ -178,7 +180,8 @@ If you want a custom thumbnail for the project (instead of the YouTube auto-thum
 assets-raw/video/my-video-project/thumbnail.jpg
 ```
 
-Run `npm run build:images` to generate WebP versions.
+Run `npm run build` to generate WebP versions and update the static export.
+For image-only iteration, `npm run build:images` is also available.
 
 ### Step 3: Add the video project config
 
@@ -241,7 +244,8 @@ Social media projects can be either:
 
 ### Step 2: Add images (if gallery)
 
-Place images in `assets-raw/social-media/my-social-project/` and run `npm run build:images`.
+Place images in `assets-raw/social-media/my-social-project/`, then run
+`npm run build` (or `npm run build:images` for image-only iteration).
 
 ### Step 3: Add the project config
 

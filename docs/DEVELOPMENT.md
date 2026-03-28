@@ -15,6 +15,9 @@ Full local setup and day-to-day development workflow. See [README.md](../README.
 | cwebp | any | `brew install webp` (preferred for image pipeline) |
 | ImageMagick | 7+ | `brew install imagemagick` (fallback for image pipeline) |
 
+Note: `npm run build` already calls `npm run build:images` before `next build`.
+Use `npm run build:images` directly only for faster image-only iteration.
+
 ---
 
 ## First-Time Setup
