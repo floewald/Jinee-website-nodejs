@@ -214,7 +214,7 @@ PhotographyProjectSchema.parse(rawJson); // throws with clear message on error
 
 ## 6. CI/CD Workflow
 
-### 6.1 Asset deploy condition fragile — **MEDIUM**
+### 6.1 ~~Asset deploy condition fragile~~ — ✅ **DONE**
 
 `.github/workflows/deploy.yml` uses `github.event.head_commit.modified` to decide whether to
 re-upload the `assets/` directory:
@@ -225,26 +225,16 @@ if: |
   contains(github.event.head_commit.added, 'Jinee_website/assets-raw/')
 ```
 
-`github.event.head_commit` is `null` on pull requests, manual triggers (`workflow_dispatch`),
-and force-pushes, causing the asset deploy job to be silently skipped in those cases.
+The job-level `if:` was removed and replaced with a **"Check for asset changes" step** that
+runs `git diff --name-only "$BEFORE" "$AFTER"` to detect files changed under
+`Jinee_website/assets-raw/`. All subsequent steps in the job carry
+`if: steps.asset_changes.outputs.changed == 'true'` so they are skipped when no assets changed.
 
-**Recommendation:** Detect changed files with `git diff` instead:
+Edge cases handled:
+- **Force-push / first push** (before SHA = `0000…000`): uses `git show --name-only HEAD` instead.
+- **workflow_dispatch**: git diff returns no output, so asset steps are skipped (safe default).
 
-```yaml
-- name: Check for asset changes
-  id: asset_changes
-  run: |
-    CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} 2>/dev/null || echo "")
-    if echo "$CHANGED" | grep -q 'Jinee_website/assets-raw/'; then
-      echo "changed=true" >> $GITHUB_OUTPUT
-    else
-      echo "changed=false" >> $GITHUB_OUTPUT
-    fi
-
-- name: Deploy assets
-  if: steps.asset_changes.outputs.changed == 'true'
-  ...
-```
+The checkout step uses `fetch-depth: 0` so `git diff` works across any push depth.
 
 ---
 
@@ -293,7 +283,7 @@ A Git LFS quota warning step (fires at 90 % of the 1 GB free tier) was also adde
 | 2.1 | LQIP blur-up placeholder | MEDIUM | Medium | 🔄 Next batch |
 | 5.1 | Build-time validation that all project slugs have manifests | MEDIUM | Small script | ✅ Done |
 | 5.2 | `npm run build:images` easy to skip — hook into prebuild | MEDIUM | 2-line change | ✅ Done |
-| 6.1 | Fix fragile asset deploy condition in GitHub Actions | MEDIUM | Medium (YAML rewrite) | Open |
+| 6.1 | Fix fragile asset deploy condition in GitHub Actions | MEDIUM | Medium (YAML rewrite) | ✅ Done |
 | 3.2 | Move magic constants to `constants.ts` | LOW | Small | Open |
 | 3.3 | Extract `<ProjectCardsGrid>` component | LOW | Medium | Open |
 | 4.1 | Create custom 404 page | LOW | Small | Open |
