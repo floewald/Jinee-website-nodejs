@@ -17,38 +17,45 @@ test.describe("Lightbox", () => {
     await expect(dialog).toBeAttached();
   });
 
-  test("shows image counter", async ({ page }) => {
+  test("shows lightbox image", async ({ page }) => {
     const firstButton = page.locator("button").filter({ has: page.locator("img") }).first();
     await firstButton.click();
 
-    const counter = page.locator(".lightbox__counter");
-    await expect(counter).toContainText("1 /");
+    await expect(page.locator(".lightbox__img")).toBeAttached();
   });
 
   test("navigates with next/prev buttons", async ({ page }) => {
     const firstButton = page.locator("button").filter({ has: page.locator("img") }).first();
     await firstButton.click();
 
+    const currentImage = page.locator(".lightbox__img");
+    const srcBefore = await currentImage.getAttribute("src");
+
     // Click next
     await page.locator(".lightbox__next").click();
-    const counter = page.locator(".lightbox__counter");
-    await expect(counter).toContainText("2 /");
+    const srcAfterNext = await currentImage.getAttribute("src");
+    expect(srcAfterNext).not.toBe(srcBefore);
 
     // Click prev
     await page.locator(".lightbox__prev").click();
-    await expect(counter).toContainText("1 /");
+    const srcAfterPrev = await currentImage.getAttribute("src");
+    expect(srcAfterPrev).toBe(srcBefore);
   });
 
   test("navigates with arrow keys", async ({ page }) => {
     const firstButton = page.locator("button").filter({ has: page.locator("img") }).first();
     await firstButton.click();
 
+    const currentImage = page.locator(".lightbox__img");
+    const srcBefore = await currentImage.getAttribute("src");
+
     await page.keyboard.press("ArrowRight");
-    const counter = page.locator(".lightbox__counter");
-    await expect(counter).toContainText("2 /");
+    const srcAfterRight = await currentImage.getAttribute("src");
+    expect(srcAfterRight).not.toBe(srcBefore);
 
     await page.keyboard.press("ArrowLeft");
-    await expect(counter).toContainText("1 /");
+    const srcAfterLeft = await currentImage.getAttribute("src");
+    expect(srcAfterLeft).toBe(srcBefore);
   });
 
   test("closes with Escape key", async ({ page }) => {

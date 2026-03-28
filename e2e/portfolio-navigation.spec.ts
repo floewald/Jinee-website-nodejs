@@ -33,7 +33,7 @@ test.describe("Portfolio Navigation", () => {
 
   test("video index lists project cards", async ({ page }) => {
     await page.goto("/portfolio/video/");
-    await expect(page.locator("h1")).toHaveText("Video");
+    await expect(page.locator("h1")).toHaveText("Videography");
 
     const cards = page.locator(".project-card");
     const count = await cards.count();
@@ -53,7 +53,7 @@ test.describe("Portfolio Navigation", () => {
 
     // Click the "More Video Projects" CTA
     await page.locator("a", { hasText: /more video projects/i }).click();
-    await expect(page.locator("h1")).toHaveText("Video");
+    await expect(page.locator("h1")).toHaveText("Videography");
   });
 
   test("video project page shows video player", async ({ page }) => {

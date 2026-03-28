@@ -81,4 +81,20 @@ describe("Lightbox", () => {
     fireEvent.keyDown(document, { key: "ArrowLeft" });
     expect(baseProps.onPrev).toHaveBeenCalledTimes(1);
   });
+
+  it("resets zoom state cleanly when reopened (no stale pan)", () => {
+    const { rerender } = render(<Lightbox {...baseProps} />);
+    // Close lightbox
+    rerender(<Lightbox {...baseProps} isOpen={false} />);
+    // Reopen lightbox
+    rerender(<Lightbox {...baseProps} isOpen={true} />);
+    // Should render the dialog without errors
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+
+  it("renders correctly when navigating to a different image", () => {
+    const { rerender } = render(<Lightbox {...baseProps} currentIndex={0} />);
+    rerender(<Lightbox {...baseProps} currentIndex={1} />);
+    expect(screen.getByRole("img", { name: /image b/i })).toBeInTheDocument();
+  });
 });

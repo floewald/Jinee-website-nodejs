@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { useSwipe } from "@/hooks/useSwipe";
@@ -39,9 +39,23 @@ export default function Lightbox({
   // resets automatically on navigation without needing an effect.
   const [zoomedIndex, setZoomedIndex] = useState<number | null>(null);
   const zoomed = zoomedIndex === currentIndex;
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+
+  const dragStartRef = useRef<{ x: number; y: number; panX: number; panY: number } | null>(null);
+  const movedDuringDragRef = useRef(false);
 
   // Derive natural size: only valid for the current image index.
   const naturalSize = sizeState.index === currentIndex ? sizeState.size : null;
+
+  // Reset refs when the lightbox closes. Ref mutations in effects are fine;
+  // only synchronous setState in effects triggers the set-state-in-effect rule.
+  useEffect(() => {
+    if (!isOpen) {
+      dragStartRef.current = null;
+      movedDuringDragRef.current = false;
+    }
+  }, [isOpen]);
 
 
   // Keyboard navigation
@@ -80,7 +94,62 @@ export default function Lightbox({
   function handleFrameClick(e: React.MouseEvent<HTMLDivElement>) {
     // Clicks on nav/close buttons must not toggle zoom
     if ((e.target as HTMLElement).closest(".lightbox__btn")) return;
-    setZoomedIndex(zoomed ? null : currentIndex);
+
+    // Ignore click that follows a drag gesture.
+    if (movedDuringDragRef.current) {
+      movedDuringDragRef.current = false;
+      return;
+    }
+
+    if (zoomed) {
+      setZoomedIndex(null);
+    } else {
+      // Reset pan & drag state before zooming in so no stale values persist.
+      setPan({ x: 0, y: 0 });
+      setIsDragging(false);
+      setZoomedIndex(currentIndex);
+    }
+  }
+
+  function handlePointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    if (!zoomed) return;
+
+    // Only primary mouse button should start panning.
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+
+    dragStartRef.current = {
+      x: e.clientX,
+      y: e.clientY,
+      panX: pan.x,
+      panY: pan.y,
+    };
+    movedDuringDragRef.current = false;
+    setIsDragging(true);
+    e.currentTarget.setPointerCapture(e.pointerId);
+  }
+
+  function handlePointerMove(e: React.PointerEvent<HTMLDivElement>) {
+    if (!zoomed || !dragStartRef.current) return;
+
+    const dx = e.clientX - dragStartRef.current.x;
+    const dy = e.clientY - dragStartRef.current.y;
+    if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+      movedDuringDragRef.current = true;
+    }
+
+    setPan({
+      x: dragStartRef.current.panX + dx,
+      y: dragStartRef.current.panY + dy,
+    });
+  }
+
+  function handlePointerUp(e: React.PointerEvent<HTMLDivElement>) {
+    if (!zoomed) return;
+    dragStartRef.current = null;
+    setIsDragging(false);
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
   }
 
   return createPortal(
@@ -104,7 +173,8 @@ export default function Lightbox({
           className="lightbox__frame"
           style={{
             "--lb-ratio": lbRatio,
-            cursor: zoomed ? "zoom-out" : "zoom-in",
+            cursor: zoomed ? (isDragging ? "grabbing" : "grab") : "zoom-in",
+            touchAction: zoomed ? "none" : "auto",
           } as React.CSSProperties}
           {...swipeHandlers}
           onClick={handleFrameClick}
@@ -129,8 +199,20 @@ export default function Lightbox({
           <div
             className="lightbox__img-wrap"
             style={{
-              transform: zoomed ? "scale(2.2)" : "scale(1)",
-              transition: "transform 0.25s ease",
+              transform: zoomed
+                ? `translate3d(${pan.x}px, ${pan.y}px, 0) scale(2.2)`
+                : "translate3d(0, 0, 0) scale(1)",
+              transformOrigin: "center center",
+              willChange: zoomed ? "transform" : undefined,
+              transition: zoomed && isDragging ? "none" : "transform 0.25s ease",
+              cursor: zoomed ? (isDragging ? "grabbing" : "grab") : "auto",
+            }}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerUp}
+            onContextMenu={(e) => {
+              if (zoomed) e.preventDefault();
             }}
           >
             <Image
@@ -139,6 +221,8 @@ export default function Lightbox({
               fill
               className="lightbox__img"
               style={{ objectFit: "contain" }}
+              draggable={false}
+              onDragStart={(e) => e.preventDefault()}
               sizes="100vw"
               unoptimized
               {...(current.blur ? { placeholder: "blur" as const, blurDataURL: current.blur } : {})}
