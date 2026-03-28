@@ -31,11 +31,25 @@ export default function GalleryGrid({
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
-    container.setAttribute("data-reveal-ready", "");
     const items = Array.from(
       container.querySelectorAll<HTMLElement>(".gallery-item")
     );
     if (items.length === 0) return;
+
+    // Pre-mark items already in viewport so they never jump when data-reveal-ready is added
+    items.forEach((item) => {
+      const rect = item.getBoundingClientRect();
+      if (
+        rect.top < window.innerHeight &&
+        rect.bottom > 0 &&
+        rect.left < window.innerWidth &&
+        rect.right > 0
+      ) {
+        item.classList.add("reveal--visible");
+      }
+    });
+    // Set attribute AFTER pre-marking so visible items stay put (no translateY flash)
+    container.setAttribute("data-reveal-ready", "");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -46,7 +60,7 @@ export default function GalleryGrid({
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
+      { threshold: 0.01, rootMargin: "0px 50px 0px 0px" }
     );
     items.forEach((item) => observer.observe(item));
     return () => observer.disconnect();

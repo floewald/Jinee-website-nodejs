@@ -8,6 +8,7 @@ export default function Home() {
   const heroSlides = portfolioIndexConfig.collageImages.map((img) => ({
     src: img.src,
     alt: img.alt,
+    objectPosition: img.objectPosition,
   }));
   const heroFit: HeroFit = (portfolioIndexConfig.heroFit as HeroFit) ?? "cover";
 

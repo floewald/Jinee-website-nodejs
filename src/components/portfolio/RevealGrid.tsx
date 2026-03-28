@@ -19,12 +19,25 @@ export default function RevealGrid({ children, className }: RevealGridProps) {
   useEffect(() => {
     const container = ref.current;
     if (!container) return;
-    container.setAttribute("data-reveal-ready", "");
 
     const items = Array.from(
-      container.querySelectorAll<HTMLElement>(".project-card, .gallery-item")
+      container.querySelectorAll<HTMLElement>(".project-card, .gallery-item, .instagram-preview")
     );
     if (!items.length) return;
+
+    // Pre-mark items already in viewport so they never jump on mount
+    items.forEach((item) => {
+      const rect = item.getBoundingClientRect();
+      if (
+        rect.top < window.innerHeight &&
+        rect.bottom > 0 &&
+        rect.left < window.innerWidth &&
+        rect.right > 0
+      ) {
+        item.classList.add("reveal--visible");
+      }
+    });
+    container.setAttribute("data-reveal-ready", "");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -35,7 +48,7 @@ export default function RevealGrid({ children, className }: RevealGridProps) {
           }
         });
       },
-      { threshold: 0.08, rootMargin: "0px 0px -20px 0px" }
+      { threshold: 0.01, rootMargin: "0px 50px 0px 0px" }
     );
     items.forEach((item) => observer.observe(item));
     return () => observer.disconnect();

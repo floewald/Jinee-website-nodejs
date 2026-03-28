@@ -128,7 +128,7 @@ export default function PortfolioPage() {
         <div className="container">
           <h2 className="section-title section-title--center">Social Media</h2>
           <hr className="section-title-divider" aria-hidden="true" />
-          <div className="instagram-previews">
+          <RevealGrid className="instagram-previews">
             {socialMediaLinks.map((link) => (
               <Link
                 key={link.url}
@@ -146,7 +146,7 @@ export default function PortfolioPage() {
                 />
               </Link>
             ))}
-          </div>
+          </RevealGrid>
           <div className="section-cta">
             <Link href="/portfolio/social-media/" className="btn btn--primary">
               More Social Media Projects

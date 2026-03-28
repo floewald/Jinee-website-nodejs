@@ -6,6 +6,12 @@ import Image from "next/image";
 export interface HeroSlide {
   src: string;
   alt: string;
+  /**
+   * CSS object-position for cover mode, e.g. "center 30%" (default: "center").
+   * 0% = top, 50% = center, 100% = bottom.
+   * Has no effect in blur/white modes.
+   */
+  objectPosition?: string;
 }
 
 export type HeroFit = "cover" | "blur" | "white";
@@ -60,7 +66,7 @@ export default function HeroSlideshow({
           {fit === "blur" && (
             <div
               className="hero-slide__bg-blur"
-              style={{ backgroundImage: `url(${slide.src})` }}
+              style={{ backgroundImage: `url("${slide.src}")` }}
               aria-hidden="true"
             />
           )}
@@ -71,6 +77,9 @@ export default function HeroSlideshow({
             height={900}
             priority={i === 0}
             className={`hero-img${fit !== "cover" ? " hero-img--contain" : ""}`}
+            style={fit === "cover" && slide.objectPosition
+              ? { objectPosition: slide.objectPosition }
+              : undefined}
             unoptimized
           />
         </div>

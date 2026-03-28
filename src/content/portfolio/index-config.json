@@ -3,52 +3,62 @@
     {
       "src": "/assets/photography/travel-photography/0019_16-1600.webp",
       "alt": "Travel scene — sunlit street with local architecture",
-      "srcFull": "/assets/photography/travel-photography/0019_16-1600.webp"
+      "srcFull": "/assets/photography/travel-photography/0019_16-1600.webp",
+      "objectPosition": "center 50%"
     },
     {
       "src": "/assets/photography/travel-photography/0015_12-1600.webp",
       "alt": "Travel scene — vibrant market in a Southeast Asian city",
-      "srcFull": "/assets/photography/travel-photography/0015_12-1600.webp"
+      "srcFull": "/assets/photography/travel-photography/0015_12-1600.webp",
+      "objectPosition": "center 50%"
     },
     {
       "src": "/assets/photography/travel-photography/0031_28-1600.webp",
       "alt": "Travel scene — golden hour over waterfront skyline",
-      "srcFull": "/assets/photography/travel-photography/0031_28-1600.webp"
+      "srcFull": "/assets/photography/travel-photography/0031_28-1600.webp",
+      "objectPosition": "center 50%"
     },
     {
       "src": "/assets/photography/private-party/Jinee_Chen_Party photos-2-1600.webp",
       "alt": "Travel scene — sunlit street with local architecture",
-      "srcFull": "/assets/photography/private-party/Jinee_Chen_Party photos-2-1600.webp"
+      "srcFull": "/assets/photography/private-party/Jinee_Chen_Party photos-2-1600.webp",
+      "objectPosition": "center 20%"
     },
     {
       "src": "/assets/photography/travel-photography/0006_3-1600.webp",
       "alt": "Travel scene — narrow alleyway decorated with lanterns",
-      "srcFull": "/assets/photography/travel-photography/0006_3-1600.webp"
+      "srcFull": "/assets/photography/travel-photography/0006_3-1600.webp",
+      "objectPosition": "center 50%"
     },
     {
       "src": "/assets/photography/travel-photography/0005_33-1600.webp",
       "alt": "Travel scene — street vendor preparing local cuisine",
-      "srcFull": "/assets/photography/travel-photography/0005_33-1600.webp"
+      "srcFull": "/assets/photography/travel-photography/0005_33-1600.webp",
+      "objectPosition": "center 50%"
     },
     {
       "src": "/assets/photography/travel-photography/00002-1600.webp",
       "alt": "Travel scene — panoramic view of lush tropical landscape",
-      "srcFull": "/assets/photography/travel-photography/00002-1600.webp"
+      "srcFull": "/assets/photography/travel-photography/00002-1600.webp",
+      "objectPosition": "center 50%"
     },
     {
       "src": "/assets/photography/travel-photography/0008_8-1600.webp",
       "alt": "Travel scene — candid moment at an outdoor café",
-      "srcFull": "/assets/photography/travel-photography/0008_8-1600.webp"
+      "srcFull": "/assets/photography/travel-photography/0008_8-1600.webp",
+      "objectPosition": "center 50%"
     },
     {
       "src": "/assets/photography/travel-photography/0035_35-1600.webp",
       "alt": "Travel scene — colourful shophouses along a quiet street",
-      "srcFull": "/assets/photography/travel-photography/0035_35-1600.webp"
+      "srcFull": "/assets/photography/travel-photography/0035_35-1600.webp",
+      "objectPosition": "center 50%"
     },
     {
       "src": "/assets/photography/travel-photography/0002_2-1600.webp",
       "alt": "Travel scene — twilight cityscape reflected in calm water",
-      "srcFull": "/assets/photography/travel-photography/0002_2-1600.webp"
+      "srcFull": "/assets/photography/travel-photography/0002_2-1600.webp",
+      "objectPosition": "center 50%"
     }
   ],
   "socialMediaLinks": [
@@ -79,5 +89,5 @@
     }
   ],
   "videoSectionTitle": "Video - Youtube Content",
-  "heroFit": "blur"
+  "heroFit": "cover"
 }

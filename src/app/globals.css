@@ -118,6 +118,9 @@ body {
   --border-color: var(--color-site-border);
   --max-width: var(--max-width-site);
   --radius: var(--radius-site);
+  --radius-sm: var(--radius-site);
+  --radius-md: calc(var(--radius-site) + 2px);
+  --radius-lg: calc(var(--radius-site) + 6px);
   --spacing: var(--spacing-site);
   --collage-gutter: var(--spacing-collage-gutter);
 
@@ -143,6 +146,8 @@ body {
 
   /* Section spacing */
   --gallery-content-gap: 20px;
+  /* Hero slideshow height — change this one value to resize the homepage hero */
+  --hero-height: clamp(280px, 50vw, 720px);
   --section-padding-top: 2rem;
   --section-padding-bottom: 2rem;
 }
@@ -491,7 +496,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   overflow: hidden;
   padding: 0;
   margin: 0;
-  height: clamp(280px, 50vw, 720px);
+  height: var(--hero-height);
 }
 .hero-slide {
   position: absolute;
@@ -512,11 +517,11 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 /* Hero blur-background mode (for portrait/mixed images) */
 .hero-slide__bg-blur {
   position: absolute;
-  inset: -5%;
+  inset: -8%;
   background-size: cover;
   background-position: center;
-  filter: blur(24px);
-  opacity: 0.55;
+  filter: blur(28px);
+  opacity: 0.85;
   z-index: 0;
 }
 .hero-slide--white-bg {
@@ -557,12 +562,12 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   min-width: 0;
 }
 
-/* CSS columns masonry (homepage collage — items pack tightly regardless of height)
-   Column order: items 1, 2, 3 go to col-1, col-2, col-3 top slot;
-   then 4, 5, 6 to the next slot in each column, etc. */
+/* CSS columns masonry (homepage collage)
+   Keep balanced fill while preserving aligned top edge across columns. */
 .gallery-cols {
   columns: 3;
   column-gap: 0.9rem;
+  column-fill: balance;
   margin-top: var(--gallery-content-gap);
 }
 .gallery-cols .gallery-item {
@@ -579,7 +584,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   padding: 0;
   cursor: pointer;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   width: 100%;
 }
 .gallery-item__trigger {
@@ -589,7 +594,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   padding: 0;
   cursor: pointer;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   width: 100%;
 }
 .gallery-img {
@@ -617,14 +622,31 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   opacity: 1;
   transform: translateY(0);
 }
+/* In CSS-columns collage, avoid per-item Y offset so all columns start flush. */
+[data-reveal-ready].gallery-cols .gallery-item {
+  transform: none;
+  transition: opacity 0.45s ease;
+}
+[data-reveal-ready].gallery-cols .gallery-item.reveal--visible {
+  transform: none;
+}
 
-/* Same animation for project cards */
+/* Same animation for project cards and instagram previews */
 [data-reveal-ready] .project-card {
   opacity: 0;
   transform: translateY(22px);
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
 [data-reveal-ready] .project-card.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-reveal-ready] .instagram-preview {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+[data-reveal-ready] .instagram-preview.reveal--visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -690,13 +712,26 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   background: #fff;
   border: 1px solid var(--border-color);
   height: 100%;
-  transition: transform .18s ease, box-shadow .18s ease;
+  transition: box-shadow .18s ease;
 }
 .project-card:hover {
-  transform: translateY(-4px);
   box-shadow: 0 8px 30px rgba(0,0,0,0.08);
 }
-.project-card__thumb { overflow: hidden; }
+.project-card__thumb {
+  overflow: hidden;
+}
+.project-card__thumb img,
+.project-card__thumb .project-card__img {
+  transition: transform 0.35s ease;
+}
+.project-card:hover .project-card__thumb img,
+.project-card:hover .project-card__thumb .project-card__img {
+  transform: scale(1.1);
+}
+/* Scale images inside CardSlideshow on parent hover */
+.project-card:hover .card-slideshow__slide .project-card__img {
+  transform: scale(1.1);
+}
 .project-card__img {
   width: 100%;
   height: auto;
@@ -746,7 +781,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  margin-top: 1.25rem;
+  border-radius: var(--radius-md);
   align-items: stretch;
 }
 .project-grid .project-card img {
@@ -786,7 +821,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   display: block;
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   background: transparent;
   border: none;
   text-decoration: none;
@@ -800,7 +835,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   object-fit: cover;
   border-radius: inherit;
 }
-.instagram-preview:hover img { transform: scale(1.02); transition: transform .18s ease; }
+.instagram-preview:hover img { transform: scale(1.05); transition: transform .35s ease; }
 
 /* Section CTA */
 .section-cta {

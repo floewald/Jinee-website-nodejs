@@ -3,6 +3,7 @@ import Image from "next/image";
 import { getVideoCards } from "@/lib/portfolio-config";
 import { getProjectSlideshowImages, type SlideshowImage } from "@/lib/gallery-images";
 import CardSlideshow from "@/components/gallery/CardSlideshow";
+import RevealGrid from "@/components/portfolio/RevealGrid";
 
 export default function FeaturedSection() {
   const videoCards = getVideoCards().slice(0, 6);
@@ -16,7 +17,7 @@ export default function FeaturedSection() {
         <hr className="section-title-divider" aria-hidden="true" />
 
         {/* Video cards */}
-        <div className="project-cards">
+        <RevealGrid className="project-cards">
           {videoCards.map((project, cardIndex) => {
             const slideshowImages = getProjectSlideshowImages(project.slug, "video");
             const previewImages: SlideshowImage[] = slideshowImages.length > 1
@@ -64,7 +65,7 @@ export default function FeaturedSection() {
             </Link>
             );
           })}
-        </div>
+        </RevealGrid>
 
         <div className="section-cta">
           <Link href="/portfolio/" className="btn btn--primary">

@@ -92,6 +92,8 @@ export interface CollageImageConfig {
   alt: string;
   srcFull: string;
   blur?: string;
+  /** object-position for hero slideshow in cover mode, e.g. "center 30%" or "top" */
+  objectPosition?: string;
 }
 
 export interface PortfolioIndexConfig {
