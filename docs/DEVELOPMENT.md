@@ -134,6 +134,27 @@ Photo galleries use `react-masonry-css` (shortest-column-first masonry). The `Ga
 
 The homepage collage images are configured in `src/content/portfolio/index-config.json` (`collageImages` array). Each entry requires `src`, `alt`, and `srcFull`.
 
+Optional per-image setting: `objectPosition` controls crop focus in the
+homepage hero slideshow (`heroFit: "cover"`). Supported values include:
+
+- Keywords: `center`, `top`, `bottom`, `left`, `right`, `center top`,
+  `center bottom`, `left top`, `left bottom`, `right top`, `right bottom`
+- Percentages: `50%`, `50% 30%`, `center 30%`, `30% center`
+
+If omitted, object position defaults to `center`.
+
+Example: `center 30%` means horizontal center with vertical focus 30% from
+the top. Use lower values (e.g. `20%`) to bias upward, higher values
+(e.g. `70%`) to bias downward.
+
+### UI settings (radius + collage hover zoom)
+
+- **Global radius on/off:** set `NO_RADIUS` in `src/app/layout.tsx`.
+- **Global radius value:** set `--radius-site` in `src/app/globals.css` (derived: `--radius-sm`, `--radius-md`, `--radius-lg`).
+- **Homepage collage hover zoom:** adjust `transform: scale(1.1)` in `.gallery-cols .gallery-item:hover .gallery-img` in `src/app/globals.css`.
+
+The Instagram/video play overlay is intentionally kept circular even when `NO_RADIUS` is enabled.
+
 ### Environment variables
 
 All env vars must be prefixed with `NEXT_PUBLIC_` to be available in the browser (static export). Since there is no Node.js runtime on the production server, there are **no server-side env vars** — secrets live only in PHP config files.

@@ -140,8 +140,8 @@ jobs:
           server-dir: ${{ secrets.FTP_SERVER_DIR }}assets/
           state-name: .ftp-deploy-assets-sync-state.json
 
-  # Generates download_config.php from the committed template by injecting
-  # passwords stored as GitHub Secrets, then uploads the file via FTP.
+  # Generates backend config files from committed templates by injecting
+  # credentials stored as GitHub Secrets, then uploads via FTP.
   # This way the repo can be public — no credentials ever touch git.
   deploy-backend-config:
     runs-on: ubuntu-latest
@@ -151,17 +151,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Passwords are passed as env-vars and substituted using Python str.replace()
-      # so any special characters in the password values are handled safely.
-      - name: Generate download_config.php from template
+      # Secrets are passed as env-vars and substituted using Python str.replace()
+      # so special characters are handled safely.
+      - name: Generate backend config files from templates
         env:
           DL_PASS_WALKING_TOUR_LITTLE_INDIA: ${{ secrets.DL_PASS_WALKING_TOUR_LITTLE_INDIA }}
           DL_PASS_20260124_WEST_SIDE_ART_TOUR: ${{ secrets.DL_PASS_20260124_WEST_SIDE_ART_TOUR }}
           DL_PASS_20260201_MEDIACORP_2026_CNY_ROAD_SHOW: ${{ secrets.DL_PASS_20260201_MEDIACORP_2026_CNY_ROAD_SHOW }}
+          CONTACT_RECIPIENT: ${{ secrets.CONTACT_RECIPIENT }}
+          CONTACT_FROM_EMAIL: ${{ secrets.CONTACT_FROM_EMAIL }}
+          CONTACT_FROM_NAME: ${{ secrets.CONTACT_FROM_NAME }}
+          CONTACT_SMTP_HOST: ${{ secrets.CONTACT_SMTP_HOST }}
+          CONTACT_SMTP_PORT: ${{ secrets.CONTACT_SMTP_PORT }}
+          CONTACT_SMTP_USER: ${{ secrets.CONTACT_SMTP_USER }}
+          CONTACT_SMTP_PASS: ${{ secrets.CONTACT_SMTP_PASS }}
+          CONTACT_SMTP_SECURE: ${{ secrets.CONTACT_SMTP_SECURE }}
         run: |
           mkdir -p /tmp/backend-config
+          mkdir -p /tmp/backend-contact
           python3 - <<'PYEOF'
           import os
+
+          # download_config.php (private/download)
           with open('backend/download/download_config.template.php') as f:
               content = f.read()
           content = content.replace(
@@ -175,6 +186,20 @@ jobs:
               os.environ['DL_PASS_20260201_MEDIACORP_2026_CNY_ROAD_SHOW'])
           with open('/tmp/backend-config/download_config.php', 'w') as f:
               f.write(content)
+
+            # contact/config.php (public backend/contact)
+            with open('backend/contact/config.template.php') as f:
+              contact = f.read()
+            contact = contact.replace('%%CONTACT_RECIPIENT%%', os.environ['CONTACT_RECIPIENT'])
+            contact = contact.replace('%%CONTACT_FROM_EMAIL%%', os.environ['CONTACT_FROM_EMAIL'])
+            contact = contact.replace('%%CONTACT_FROM_NAME%%', os.environ['CONTACT_FROM_NAME'])
+            contact = contact.replace('%%CONTACT_SMTP_HOST%%', os.environ['CONTACT_SMTP_HOST'])
+            contact = contact.replace('%%CONTACT_SMTP_PORT%%', os.environ['CONTACT_SMTP_PORT'])
+            contact = contact.replace('%%CONTACT_SMTP_USER%%', os.environ['CONTACT_SMTP_USER'])
+            contact = contact.replace('%%CONTACT_SMTP_PASS%%', os.environ['CONTACT_SMTP_PASS'])
+            contact = contact.replace('%%CONTACT_SMTP_SECURE%%', os.environ['CONTACT_SMTP_SECURE'])
+            with open('/tmp/backend-contact/config.php', 'w') as f:
+              f.write(contact)
           PYEOF
 
       # Uploads the generated config to /private/download/ on the server.
@@ -190,4 +215,17 @@ jobs:
           local-dir: /tmp/backend-config/
           server-dir: ${{ secrets.FTP_BACKEND_DIR }}
           state-name: .ftp-deploy-backend-config-state.json
+          dangerous-clean-slate: false
+
+      # Uploads generated contact config to /backend/contact/ in webroot.
+      # Set FTP_BACKEND_CONTACT_DIR to e.g. /public_html/backend/contact/ (must end with /)
+      - name: Upload contact config.php via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: /tmp/backend-contact/
+          server-dir: ${{ secrets.FTP_BACKEND_CONTACT_DIR }}
+          state-name: .ftp-deploy-contact-config-state.json
           dangerous-clean-slate: false

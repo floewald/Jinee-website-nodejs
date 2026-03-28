@@ -52,7 +52,7 @@ This creates three sizes per image in `public/assets/photography/my-new-project/
 
 It also generates a `images.json` manifest in the folder — the gallery reads this file to know which images to show.
 
-### Step 3: Add the video project config
+### Step 3: Add the photography project config
 
 Open `src/content/portfolio/photography.json` and add a new entry to the JSON array:
 
@@ -94,6 +94,22 @@ Open `src/content/portfolio/photography.json` and add a new entry to the JSON ar
 | `portfolioCard.previewImages` | Optional | Fallback array of 2–3 image paths for the card slideshow (uses `-800.webp`). Not normally needed — the card slideshow automatically uses all images from the project's `images.json` manifest. Only set this if you want to override and limit to specific images. |
 | `showSlideshow` | Optional | `true` (default) adds an auto-advance full-image slideshow above the gallery on the project page. Set `false` to disable — recommended for large galleries where the top slideshow is not needed. |
 | `visible` | Optional | Set `false` to hide the project entirely (default: `true`) |
+
+For homepage hero/collage framing, each entry in
+`src/content/portfolio/index-config.json` (`collageImages`) also supports
+optional `objectPosition`.
+
+- Keyword options: `center`, `top`, `bottom`, `left`, `right`,
+  `center top`, `center bottom`, `left top`, `left bottom`,
+  `right top`, `right bottom`
+- Percentage options: `50%`, `50% 30%`, `center 30%`, `30% center`
+- Default when omitted: `center`
+
+Meaning of `center 30%`:
+
+- First value (`center`) = horizontal anchor (X-axis)
+- Second value (`30%`) = vertical anchor (Y-axis), measured from top to bottom
+- So `center 30%` keeps the image centered horizontally and places the crop focus at 30% down from the top (slightly above vertical center)
 
 > **Card slideshow vs page slideshow — key distinction:**
 >
@@ -164,7 +180,7 @@ assets-raw/video/my-video-project/thumbnail.jpg
 
 Run `npm run build:images` to generate WebP versions.
 
-### Step 3: Add the social media project config
+### Step 3: Add the video project config
 
 Open `src/content/portfolio/video.json` and add a new entry to the JSON array:
 
@@ -318,5 +334,26 @@ The underlying JSON structure stays the same — you can always switch back to e
 ## Site-wide Configuration
 
 Global settings like the site name, email, Calendly link, and social media URLs are currently hardcoded in the relevant components (`Footer.tsx`, `ContactSection.tsx`, `AboutSection.tsx`). To change them, edit the component directly and rebuild.
+
+### UI settings (now configurable)
+
+You can now control border radius and homepage collage hover zoom from central settings:
+
+- **Global border radius toggle (on/off):**
+  - File: `src/app/layout.tsx`
+  - Setting: `const NO_RADIUS = true;`
+  - `true` removes rounded corners globally, `false` enables them.
+- **Global radius value scale:**
+  - File: `src/app/globals.css`
+  - Base token: `--radius-site`
+  - Derived tokens: `--radius-sm`, `--radius-md`, `--radius-lg`
+  - Change `--radius-site` to tune most corner radii site-wide.
+- **Homepage masonry collage hover zoom:**
+  - File: `src/app/globals.css`
+  - Selector: `.gallery-cols .gallery-item:hover .gallery-img`
+  - Property: `transform: scale(1.1)`
+  - Adjust this scale value for stronger/weaker zoom effect.
+
+Note: the play overlay remains circular even when `NO_RADIUS` is enabled.
 
 Once [Phase 7 (TinaCMS)](MIGRATION-PROGRESS.md) is complete, these will be editable via the visual editor.

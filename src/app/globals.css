@@ -604,6 +604,12 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   height: auto;      /* natural aspect ratio — no fixed height */
   display: block;
   border-radius: 0;
+  transition: transform 0.35s ease;
+}
+
+.gallery-cols .gallery-item:hover .gallery-img,
+.gallery-cols .gallery-item:focus-visible .gallery-img {
+  transform: scale(1.1);
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════

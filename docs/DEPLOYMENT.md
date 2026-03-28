@@ -40,6 +40,7 @@ Add these secrets:
 | `FTP_PASSWORD` | Your FTP password |
 | `FTP_SERVER_DIR` | Remote path for the static site, e.g. `/public_html/` (must end with `/`) |
 | `FTP_BACKEND_DIR` | Remote path for the generated `download_config.php`, **must be** `private/download/` (outside webroot, must end with `/`) |
+| `FTP_BACKEND_CONTACT_DIR` | Remote path for generated `backend/contact/config.php`, e.g. `/public_html/backend/contact/` (must end with `/`) |
 
 **Download passwords** — one per downloadable project
 
@@ -52,6 +53,19 @@ Add these secrets:
 > When you add a new downloadable project, add its matching `DL_PASS_<SLUG>` secret here and a corresponding line in `backend/download/download_config.template.php` and `.github/workflows/deploy.yml`.
 
 > Secrets are **never** visible in logs or to other users — GitHub encrypts them at rest.
+
+**Contact SMTP config** — used to generate `backend/contact/config.php`
+
+| Secret name | Example value |
+|-------------|---------------|
+| `CONTACT_RECIPIENT` | `hello@example.com` |
+| `CONTACT_FROM_EMAIL` | `hello@example.com` |
+| `CONTACT_FROM_NAME` | `Jinee Chen Website` |
+| `CONTACT_SMTP_HOST` | `ssl0.example.net` |
+| `CONTACT_SMTP_PORT` | `465` |
+| `CONTACT_SMTP_USER` | `hello@example.com` |
+| `CONTACT_SMTP_PASS` | your SMTP password |
+| `CONTACT_SMTP_SECURE` | `ssl` or `tls` |
 
 ### Step 2 — Push to main
 
@@ -76,8 +90,9 @@ GitHub Actions will:
 | HTML, CSS, JS | ✅ Yes | Every push to `main` |
 | New/changed images | ✅ Yes (if `assets-raw/` changed) | The `deploy-assets` job only runs when image source files change |
 | `backend/download/download_config.php` | ✅ Yes (generated from template) | Passwords injected from GitHub Secrets at deploy time |
+| `backend/contact/config.php` | ✅ Yes (generated from template) | SMTP/recipient settings injected from GitHub Secrets at deploy time |
 | `backend/` PHP files | ❌ No | Upload manually via FTP — see below |
-| `backend/contact/config.php` | ❌ Never (not in git) | Upload manually — contains SMTP credentials |
+| `backend/contact/config.example.php` | ❌ No | Example only; never used in production directly |
 
 ### Viewing deploy status
 
@@ -227,10 +242,10 @@ The following server-side config files contain credentials and are **not committ
 
 | File | How it gets on the server |
 |------|---------------------------|
-| `backend/contact/config.php` | Upload manually via FTP — see `config.example.php` |
+| `backend/contact/config.php` | **Auto-generated** by the `deploy-backend-config` Actions job from `contact/config.template.php` + GitHub Secrets |
 | `backend/download/download_config.php` | **Auto-generated** by the `deploy-backend-config` Actions job from `download_config.template.php` + GitHub Secrets |
 
-`backend/contact/config.php` must still be uploaded manually. `backend/download/download_config.php` is now handled automatically — you only need to keep the GitHub Secrets up to date.
+Both backend config files are now handled automatically — you only need to keep the GitHub Secrets up to date.
 
 The `backend/download/rate-limit/` and `backend/contact/logs/` directories must be **writable** by the PHP process on the server:
 
