@@ -572,8 +572,10 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 }
 .gallery-cols .gallery-item {
   break-inside: avoid;
+  vertical-align: top;
   margin-bottom: 0.9rem;
-  display: block;
+  display: inline-block;
+  width: 100%;
 }
 @media (max-width: 900px) { .gallery-cols { columns: 2; } }
 @media (max-width: 480px) { .gallery-cols { columns: 1; } }
@@ -1628,4 +1630,9 @@ html.no-radius *,
 html.no-radius *::before,
 html.no-radius *::after {
   border-radius: 0 !important;
+}
+
+/* Keep media play overlays circular even when global no-radius mode is enabled. */
+html.no-radius .play-overlay {
+  border-radius: 999px !important;
 }
