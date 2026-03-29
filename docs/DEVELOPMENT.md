@@ -162,6 +162,7 @@ the top. Use lower values (e.g. `20%`) to bias upward, higher values
 - **Global radius value:** set `--radius-site` in `src/app/globals.css` (derived: `--radius-sm`, `--radius-md`, `--radius-lg`).
 - **Homepage collage hover zoom:** adjust `transform: scale(1.1)` in `.gallery-cols .gallery-item:hover .gallery-img` in `src/app/globals.css`.
 - **Slideshow speed:** change `SLIDESHOW_CYCLE_MS` (minimum interval, default: 4000 ms) and `SLIDESHOW_JITTER_MS` (random extra range, default: 4000 ms) in `src/lib/constants.ts`. Each card picks a random interval between those two values on mount.
+- **About / Contact page theme:** change `ABOUT_PAGE_THEME` and `CONTACT_PAGE_THEME` in `src/lib/constants.ts`. Set either `"section-bg-charcoal"` (dark) or `"section-bg-white"` (light). Each constant controls its respective page independently.
 
 The `.gallery-item` container uses `will-change: transform` to force a GPU compositing layer, ensuring `overflow: hidden` + `border-radius` correctly clips scaled images on hover.
 

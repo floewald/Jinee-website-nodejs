@@ -1,8 +1,9 @@
 import Image from "next/image";
+import { ABOUT_PAGE_THEME } from "@/lib/constants";
 
 export default function AboutSection() {
   return (
-    <section id="about" className="section-bg-charcoal">
+    <section id="about" className={ABOUT_PAGE_THEME}>
       <div className="about-container container">
         <div className="about-image">
           <Image

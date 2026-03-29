@@ -1,9 +1,10 @@
 import Image from "next/image";
 import ContactForm from "@/components/forms/ContactForm";
+import { CONTACT_PAGE_THEME } from "@/lib/constants";
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="section-bg-charcoal">
+    <section id="contact" className={CONTACT_PAGE_THEME}>
       <div className="container">
         <div className="contact-grid">
           {/* Contact card */}
