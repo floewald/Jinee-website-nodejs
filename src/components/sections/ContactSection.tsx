@@ -3,7 +3,7 @@ import ContactForm from "@/components/forms/ContactForm";
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="section-bg-white">
+    <section id="contact" className="section-bg-charcoal">
       <div className="container">
         <div className="contact-grid">
           {/* Contact card */}

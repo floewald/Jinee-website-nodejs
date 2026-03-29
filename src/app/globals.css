@@ -485,6 +485,19 @@ section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
   color: #fff;
   padding: var(--section-padding-top) 0 var(--section-padding-bottom) 0;
 }
+/* ── Text overrides for dark sections ─────────────────────────────────────
+   Component-level CSS rules (e.g. .about-text h2, .section-title) set explicit
+   dark colours that override the inherited #fff from .section-bg-charcoal.
+   These context selectors restore legibility without touching component styles. */
+.section-bg-charcoal .section-title,
+.section-bg-charcoal .about-text h2 { color: #fff; }
+.section-bg-charcoal .section-title-divider { border-top-color: rgba(255,255,255,0.2); }
+.section-bg-charcoal .about-text p,
+.section-bg-charcoal .about-chinese-text,
+.section-bg-charcoal .about-chinese-text p { color: rgba(255,255,255,0.88); }
+.section-bg-charcoal a { color: #fff; }
+.section-bg-charcoal a:hover,
+.section-bg-charcoal a:focus { color: #fff; opacity: 0.8; }
 section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 
 /* ══════════════════════════════════════════════════════════════════════════════

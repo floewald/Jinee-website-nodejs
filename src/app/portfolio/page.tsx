@@ -80,10 +80,10 @@ export default function PortfolioPage() {
       {/* Video section */}
       <section className="portfolio-section section-bg-charcoal">
         <div className="container">
-          <h2 className="section-title section-title--center" style={{ color: "#fff" }}>
+          <h2 className="section-title section-title--center">
             Videography
           </h2>
-          <hr className="section-title-divider" style={{ borderTopColor: "rgba(255,255,255,0.2)" }} aria-hidden="true" />
+          <hr className="section-title-divider" aria-hidden="true" />
           <RevealGrid className="project-grid">
             {videoCards.map((project) => (
               <Link
