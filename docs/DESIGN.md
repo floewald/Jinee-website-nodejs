@@ -201,14 +201,20 @@ interface ImageManifestItem {
 
 ### 5.1 CardSlideshow per-card stagger
 
-Multiple `CardSlideshow` instances run in the same React tree. Each card receives a `cardIndex` prop (0-based). The initial delay before the first advance is:
+Multiple `CardSlideshow` instances run in the same React tree. On mount, each card independently samples two random values inside a `useState` lazy initializer (runs exactly once per mount, safe from React's purity linter):
 
-```
-delay = (cardIndex × 777) mod SLIDESHOW_CYCLE_MS
-      = (cardIndex × 777) mod 4000  ms
+```ts
+const [timing] = useState(() => {
+  const intervalMs = SLIDESHOW_CYCLE_MS + Math.random() * SLIDESHOW_JITTER_MS;
+  return { intervalMs, delayMs: Math.random() * intervalMs };
+});
+// intervalMs: 7 000 – 11 000 ms
+// delayMs:    0 – intervalMs
 ```
 
-Because `gcd(777, 4000) = 1`, every card index produces a unique offset modulo 4000. No two cards ever flip at the same time.
+Because both values are independently random, no two cards will stay in sync — they drift continuously and never re-align. The longer base cycle (`SLIDESHOW_CYCLE_MS = 7000 ms`) keeps the animation infrequent and smooth.
+
+`cardIndex` is kept in the `CardSlideshowProps` interface for backward compatibility with existing callers but is no longer used.
 
 ### 5.2 Portrait image detection
 
