@@ -227,6 +227,33 @@ After every deployment, verify the following manually:
 
 ---
 
+## Option C — Customer preview ZIP
+
+Use this to share the frontend with a customer so they can review pages and texts before going live. The ZIP contains only static HTML/CSS/JS — **no backend, no secrets**.
+
+```bash
+npm run preview
+```
+
+This runs `npm run build:next` (skips the heavy image processing step — existing images in `public/assets/` are used as-is) and then packages `out/` into a dated ZIP file in the project root:
+
+```
+jinee-preview-2026-03-29.zip
+```
+
+Send the ZIP to the customer. Inside they will find two launcher scripts:
+
+| File | Platform | Requirement |
+|------|----------|-------------|
+| `START HERE (Mac).command` | macOS | Python 3 (pre-installed on all modern Macs) |
+| `START HERE (Windows).bat` | Windows | PowerShell (built into every Windows 10/11 PC) |
+
+Double-clicking the appropriate launcher starts a local HTTP server on port 3737 and opens `http://localhost:3737` in the default browser automatically — **one click, no technical knowledge needed**.
+
+> **Note:** Links that call the PHP backend (contact form submissions, file downloads) will not work in the preview ZIP. This is intentional — the preview is for visual and text review only.
+
+---
+
 ## Rollback
 
 If a deployment breaks the site:

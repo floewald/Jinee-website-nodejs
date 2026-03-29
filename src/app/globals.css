@@ -588,6 +588,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   overflow: hidden;
   border-radius: var(--radius-md);
   width: 100%;
+  will-change: transform; /* Force compositing layer so border-radius clips scaled children */
 }
 .gallery-item__trigger {
   display: block;
@@ -1209,7 +1210,7 @@ input::placeholder, textarea::placeholder {
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: #111;  /* dark fallback visible only before first image loads */
+  background: #f5f5f5;  /* light fallback visible before first image loads */
 }
 .card-slideshow__slide {
   position: absolute;
@@ -1643,18 +1644,4 @@ img {
   h1 { font-size: clamp(1.9rem, 7.5vw, 2.8rem); line-height: 1.08; margin-bottom: 0.6rem; }
 }
 
-/* ══════════════════════════════════════════════════════════════════════════════
-   GLOBAL BORDER-RADIUS TOGGLE
-   To remove all border-radii site-wide, set NO_RADIUS = true in
-   src/app/layout.tsx — it adds class "no-radius" to <html>.
-   ══════════════════════════════════════════════════════════════════════════════ */
-html.no-radius *,
-html.no-radius *::before,
-html.no-radius *::after {
-  border-radius: 0 !important;
-}
 
-/* Keep media play overlays circular even when global no-radius mode is enabled. */
-html.no-radius .play-overlay {
-  border-radius: 999px !important;
-}

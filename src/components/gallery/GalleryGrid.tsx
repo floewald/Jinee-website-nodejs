@@ -36,13 +36,6 @@ export default function GalleryGrid({
     );
     if (items.length === 0) return;
 
-    // Homepage collage uses CSS columns; keep all items at a shared top origin
-    // and avoid reveal transforms that can create perceived column offsets.
-    if (useColumnsLayout) {
-      items.forEach((item) => item.classList.add("reveal--visible"));
-      return;
-    }
-
     // Pre-mark items already in viewport so they never jump when data-reveal-ready is added
     items.forEach((item) => {
       const rect = item.getBoundingClientRect();

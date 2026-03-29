@@ -159,11 +159,11 @@ the top. Use lower values (e.g. `20%`) to bias upward, higher values
 
 ### UI settings (radius + collage hover zoom)
 
-- **Global radius on/off:** set `NO_RADIUS` in `src/app/layout.tsx`.
 - **Global radius value:** set `--radius-site` in `src/app/globals.css` (derived: `--radius-sm`, `--radius-md`, `--radius-lg`).
 - **Homepage collage hover zoom:** adjust `transform: scale(1.1)` in `.gallery-cols .gallery-item:hover .gallery-img` in `src/app/globals.css`.
+- **Slideshow speed:** change `SLIDESHOW_CYCLE_MS` in `src/lib/constants.ts` (default: 4000 ms).
 
-The Instagram/video play overlay is intentionally kept circular even when `NO_RADIUS` is enabled.
+The `.gallery-item` container uses `will-change: transform` to force a GPU compositing layer, ensuring `overflow: hidden` + `border-radius` correctly clips scaled images on hover.
 
 ### Environment variables
 

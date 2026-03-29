@@ -7,6 +7,7 @@
     "build": "npm run build:images && npm run validate:manifests && next build",
     "build:next": "next build",
     "build:images": "bash scripts/build-images.sh",
+    "preview": "npm run build:next && bash scripts/build-preview-zip.sh",
     "validate:manifests": "node scripts/validate-manifests.mjs",
     "create-project": "node scripts/create-project.mjs",
     "generate:lqip": "node scripts/generate-lqip.mjs",

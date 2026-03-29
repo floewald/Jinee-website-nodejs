@@ -343,10 +343,6 @@ Global settings like the site name, email, Calendly link, and social media URLs 
 
 You can now control border radius and homepage collage hover zoom from central settings:
 
-- **Global border radius toggle (on/off):**
-  - File: `src/app/layout.tsx`
-  - Setting: `const NO_RADIUS = true;`
-  - `true` removes rounded corners globally, `false` enables them.
 - **Global radius value scale:**
   - File: `src/app/globals.css`
   - Base token: `--radius-site`
@@ -357,7 +353,9 @@ You can now control border radius and homepage collage hover zoom from central s
   - Selector: `.gallery-cols .gallery-item:hover .gallery-img`
   - Property: `transform: scale(1.1)`
   - Adjust this scale value for stronger/weaker zoom effect.
-
-Note: the play overlay remains circular even when `NO_RADIUS` is enabled.
+- **Slideshow speed:**
+  - File: `src/lib/constants.ts`
+  - Constant: `SLIDESHOW_CYCLE_MS` (default: 4000 ms)
+  - Controls both the hero slideshow and project card slideshows.
 
 Once [Phase 7 (TinaCMS)](MIGRATION-PROGRESS.md) is complete, these will be editable via the visual editor.

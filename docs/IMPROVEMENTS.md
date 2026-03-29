@@ -43,6 +43,19 @@ For the technical design see [DESIGN.md](DESIGN.md).
 
 ---
 
+## Visual polish & animation improvements
+
+| # | Item | Area | Status |
+|---|------|------|--------|
+| V-1 | Scroll-triggered slide-in for homepage collage images (`GalleryGrid` IntersectionObserver) | Animation | ✅ |
+| V-2 | Scroll-triggered slide-in for project cards (`RevealGrid`, already wired on photography/video index pages) | Animation | ✅ |
+| V-3 | Border-radius preserved on gallery image hover (`will-change: transform` on `.gallery-item`) | Visual | ✅ |
+| V-4 | Removed `NO_RADIUS` global toggle from `layout.tsx` and `globals.css` | Cleanup | ✅ |
+| V-5 | Per-card unique slideshow stagger — `(cardIndex × 777) % 4000` — no two cards flip simultaneously | Animation | ✅ |
+| V-6 | Card slideshow fallback background changed from `#111` to `#f5f5f5` (no black flash before image loads) | Visual | ✅ |
+
+---
+
 ## In-progress — Mobile UX improvements
 
 | # | Item | Area | Status |

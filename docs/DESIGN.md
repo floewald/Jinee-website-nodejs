@@ -91,7 +91,7 @@ git push origin main           → GitHub Actions deploys out/ via FTP
 | Portfolio config | `src/lib/portfolio-config.ts` | Loads + validates JSON at build time; exports typed arrays |
 | Gallery images | `src/lib/gallery-images.ts` | Reads `images.json` manifests; returns `GalleryImage[]` |
 | Image utils | `src/lib/image-utils.ts` | WebP URL helpers (slug + filename → sized URL) |
-| Constants | `src/lib/constants.ts` | `MAX_CARDS`, `SLIDESHOW_CYCLE_MS`, `SLIDESHOW_PRIME_STEP`, `SITE_URL` |
+| Constants | `src/lib/constants.ts` | `MAX_CARDS`, `SLIDESHOW_CYCLE_MS`, `SITE_URL` |
 | SEO content | `src/lib/seo-content.ts` | Shared metadata templates for each project type |
 
 ### 3.2 Validation / DX scripts
@@ -111,7 +111,7 @@ git push origin main           → GitHub Actions deploys out/ via FTP
 | `Navigation` | Client | `src/components/layout/` | Desktop submenu, mobile hamburger |
 | `Footer` | Server | `src/components/layout/` | Email, Calendly, legal links |
 | `CookieBanner` | Client | `src/components/layout/` | GDPR consent banner |
-| `GalleryGrid` | Server | `src/components/gallery/` | Responsive image grid; portrait detection |
+| `GalleryGrid` | Client | `src/components/gallery/` | Responsive image grid; scroll-reveal via IntersectionObserver; portrait detection |
 | `GalleryWithLightbox` | Client | `src/components/gallery/` | Composes GalleryGrid + useLightbox + Lightbox |
 | `GalleryWithDownload` | Client | `src/components/gallery/` | Adds DownloadToolbar + GallerySelection + DownloadModal |
 | `GallerySection` | Client | `src/components/sections/` | Slideshow + GalleryWithLightbox (homepage collage) |
@@ -123,6 +123,7 @@ git push origin main           → GitHub Actions deploys out/ via FTP
 | `ContactForm` | Client | `src/components/sections/` | AJAX form with CSRF, honeypot, sessionStorage draft |
 | `DownloadModal` | Client | `src/components/gallery/` | Password + CSRF → ZIP download |
 | `DownloadToolbar` | Client | `src/components/gallery/` | Select all, count, download button |
+| `RevealGrid` | Client | `src/components/portfolio/` | Scroll-triggered slide-in wrapper for project cards via IntersectionObserver |
 | `GallerySelection` | Client | `src/components/gallery/` | Checkbox overlay on GalleryGrid |
 
 ### 3.4 Custom hooks
@@ -198,16 +199,16 @@ interface ImageManifestItem {
 
 ## 5. Key Algorithms
 
-### 5.1 CardSlideshow prime-stagger
+### 5.1 CardSlideshow per-card stagger
 
-Multiple `CardSlideshow` instances run in the same React tree. A naive 3-bucket approach causes cards to flip in visible groups. The solution uses a module-level counter:
+Multiple `CardSlideshow` instances run in the same React tree. Each card receives a `cardIndex` prop (0-based). The initial delay before the first advance is:
 
 ```
-offset = (instanceCounter++ × SLIDESHOW_PRIME_STEP) mod SLIDESHOW_CYCLE_MS
-       = (instanceCounter++ × 997) mod 4000  ms
+delay = (cardIndex × 777) mod SLIDESHOW_CYCLE_MS
+      = (cardIndex × 777) mod 4000  ms
 ```
 
-Because `gcd(997, 4000) = 1`, there are exactly **4000 unique offsets** before any wrap-around. No two adjacent cards share a phase.
+Because `gcd(777, 4000) = 1`, every card index produces a unique offset modulo 4000. No two cards ever flip at the same time.
 
 ### 5.2 Portrait image detection
 

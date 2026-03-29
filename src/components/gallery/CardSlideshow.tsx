@@ -23,9 +23,10 @@ export default function CardSlideshow({ images, alt, cardIndex = 0 }: CardSlides
   const [portraitFlags, setPortraitFlags] = useState<boolean[]>(() =>
     Array(images.length).fill(false)
   );
-  // Odd-positioned cards wait half a cycle before their first advance so that
-  // adjacent cards never change at the same time.
-  const delay = useRef((cardIndex % 2) * (SLIDESHOW_CYCLE_MS / 2));
+  // Each card gets a unique phase offset so no two cards ever flip at the same
+  // time. 777 is coprime to SLIDESHOW_CYCLE_MS (4000), guaranteeing all offsets
+  // are distinct before the sequence repeats after 4000 cards.
+  const delay = useRef((cardIndex * 777) % SLIDESHOW_CYCLE_MS);
 
   const next = () => setIdx((prev) => (prev + 1) % images.length);
   const prev = () => setIdx((prev) => (prev - 1 + images.length) % images.length);
