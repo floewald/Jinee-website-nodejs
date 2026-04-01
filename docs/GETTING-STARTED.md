@@ -285,7 +285,12 @@ Tests run automatically before every `git commit` (via Husky). If they fail, the
 
 ### "Cannot find module" error after `npm run dev`
 
-→ Run `npm install` again to restore missing packages.
+→ Run `npm install` again to restore missing packages. If the error persists after installing, the `.next` cache is stale — clear it and restart:
+
+```bash
+rm -rf .next
+npm run dev
+```
 
 ### Port 3000 already in use
 

@@ -166,6 +166,27 @@
   },
   {
     "type": "video",
+    "slug": "lion-dancers",
+    "title": "Lion Dancers | Documentary",
+    "description": "Documentary featuring lion dancers and their cultural significance.",
+    "longDescription": "A short documentary exploring the art and tradition of lion dancing in Singapore. The film delves into the history, techniques, and cultural importance of this vibrant performance art.",
+    "heading": "Producer | Director | Videographer | 📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/video/lion-dancers/lion-dancers-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "Lion Dancers | Documentary",
+        "embedUrl": "https://www.youtube.com/embed/k_FZwxEskO4&t=3s",
+        "uploadDate": "2023-01-01T00:00:00+08:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA | Lion Dancers",
+      "thumbnail": "/assets/video/lion-dancers/lion-dancers-800.webp"
+    }
+  },
+  {
+    "type": "video",
     "slug": "into-the-gym",
     "title": "Into The Gym | Johnson Health Tech Web Series",
     "description": "Web series 'Into The Gym' following fitness journeys and celebrity workouts.",
