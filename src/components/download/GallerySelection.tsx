@@ -77,6 +77,20 @@ export default function GallerySelection({
                   }
                   tabIndex={-1}
                 />
+                <svg
+                  className="gallery-checkbox-icon"
+                  viewBox="0 0 22 22"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M 3 13 Q 7.5 18.5 19 5"
+                    stroke="#1f1f1f"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </label>
             )}
           </div>

@@ -1368,6 +1368,12 @@ iframe.video-embed {
   padding: .5rem 0;
   overflow-x: auto;
 }
+@media (max-width: 600px) {
+  .download-toolbar {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+}
 .download-toolbar .btn {
   align-self: center;
   white-space: nowrap;
@@ -1430,18 +1436,17 @@ iframe.video-embed {
   background: rgba(255, 255, 255, 0.92);
   border-color: #1f1f1f;
 }
-.gallery-checkbox:has(.inline-select:checked)::after {
-  content: '';
+.gallery-checkbox-icon {
   position: absolute;
-  left: 6px;
-  top: 4px;
-  width: 7px;
-  height: 10px;
-  border: 2.5px solid #1f1f1f;
-  border-top: none;
-  border-left: none;
-  border-radius: 0 2px 2px 0;
-  transform: rotate(45deg);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.gallery-checkbox:has(.inline-select:checked) .gallery-checkbox-icon {
+  opacity: 1;
 }
 .gallery-checkbox:has(.inline-select:focus-visible)::before {
   outline: 2px solid #1f1f1f;
@@ -1757,9 +1762,16 @@ img {
 /* ══════════════════════════════════════════════════════════════════════════════
    MOBILE SYNC
    ══════════════════════════════════════════════════════════════════════════════ */
+.gallery-desktop-only { display: block; }
+.gallery-mobile-only  { display: none; }
 @media (max-width: 800px) {
-  body { padding-top: var(--site-hero-current-height) !important; }
-  section, h1, h2, h3 { scroll-margin-top: var(--site-hero-current-height) !important; }
+  .gallery-desktop-only { display: none; }
+  .gallery-mobile-only  { display: block; }
+}
+
+@media (max-width: 800px) {
+  body { padding-top: 84px !important; }
+  section, h1, h2, h3 { scroll-margin-top: 84px !important; }
   h1 { font-size: clamp(1.9rem, 7.5vw, 2.8rem); line-height: 1.08; margin-bottom: 0.6rem; }
 }
 
