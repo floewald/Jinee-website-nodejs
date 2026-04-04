@@ -93,9 +93,9 @@ describe("getContentJsonPath()", () => {
     );
   });
 
-  it("returns the video.json path", () => {
+  it("returns the videography.json path", () => {
     expect(getContentJsonPath("video")).toBe(
-      path.join(ROOT, "src", "content", "portfolio", "video.json")
+      path.join(ROOT, "src", "content", "portfolio", "videography.json")
     );
   });
 

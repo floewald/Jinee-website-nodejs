@@ -185,7 +185,7 @@ For image-only iteration, `npm run build:images` is also available.
 
 ### Step 3: Add the video project config
 
-Open `src/content/portfolio/video.json` and add a new entry to the JSON array:
+Open `src/content/portfolio/videography.json` and add a new entry to the JSON array:
 
 ```json
 {

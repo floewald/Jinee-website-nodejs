@@ -4,7 +4,7 @@
  * Verifies:
  *  - new social-media-addiction project is correctly added
  *  - all video portfolio cards have consecutive orders (no gaps)
- *  - card ordering in video.json matches legacy site order
+ *  - card ordering in videography.json matches legacy site order
  *  - JSON-LD required fields are present on all video projects
  */
 
@@ -54,7 +54,7 @@ describe("video portfolio card ordering", () => {
     expect(cardProjects.length).toBe(13);
   });
 
-  it("order matches lineup defined in video.json", () => {
+  it("order matches lineup defined in videography.json", () => {
     const expectedOrder = [
       "stuck-low-pay",
       "singer-jasmin-sokko",

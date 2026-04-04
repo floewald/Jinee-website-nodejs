@@ -22,7 +22,7 @@ import {
   validatePortfolioData,
 } from "@/lib/portfolio-schemas";
 import photographyData from "@/content/portfolio/photography.json";
-import videoData from "@/content/portfolio/video.json";
+import videoData from "@/content/portfolio/videography.json";
 import socialMediaData from "@/content/portfolio/social-media.json";
 
 const VALID_PHOTO = {
@@ -152,7 +152,7 @@ describe("Real JSON content files", () => {
     ).not.toThrow();
   });
 
-  it("video.json passes VideoProjectSchema", () => {
+  it("videography.json passes VideoProjectSchema", () => {
     expect(() => validatePortfolioData("video", videoData)).not.toThrow();
   });
 

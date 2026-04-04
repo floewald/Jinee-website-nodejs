@@ -912,6 +912,14 @@ a.btn.btn--ghost:focus { background: transparent; color: var(--charcoal); border
 /* Non-link buttons (button elements) */
 button.btn.btn--primary { background: #1f1f1f; color: #fff; }
 button.btn.btn--primary:hover { opacity: .95; }
+button.btn.btn--inverted,
+button.btn.btn--inverted:hover,
+button.btn.btn--inverted:focus { background: #fff; color: var(--charcoal); border: 1px solid var(--border-color); opacity: 1; }
+button.btn.btn--inverted:hover { opacity: .95; }
+button.btn.btn--outline,
+button.btn.btn--outline:hover,
+button.btn.btn--outline:focus { background: transparent; color: var(--charcoal); border: 1px solid var(--charcoal); opacity: 1; }
+button.btn.btn--outline:hover { opacity: .95; }
 .btn--large { padding: .75rem 1.2rem; font-size: 1rem; }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -1777,6 +1785,9 @@ img {
   body { padding-top: 84px !important; }
   section, h1, h2, h3 { scroll-margin-top: 84px !important; }
   h1 { font-size: clamp(1.9rem, 7.5vw, 2.8rem); line-height: 1.08; margin-bottom: 0.6rem; }
+  .portfolio-hub,
+  .portfolio-category,
+  .project-page { padding-top: 1.5rem; }
 }
 
 

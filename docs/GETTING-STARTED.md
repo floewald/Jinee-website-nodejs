@@ -149,7 +149,7 @@ src/
 │   └── portfolio/
 │       ├── index-config.json  ← Homepage collage images + Instagram links
 │       ├── photography.json   ← All photography projects
-│       ├── video.json         ← All video projects
+│       ├── videography.json    ← All video projects
 │       └── social-media.json  ← All social media projects
 │
 ├── hooks/                 ← Small reusable logic pieces (e.g. detecting swipe)
@@ -207,7 +207,7 @@ Most text in components is hardcoded in the TSX files:
 - Footer text → `src/components/layout/Footer.tsx`
 - **Homepage hero image** → `src/app/page.tsx` (change the `src` prop on `<HeroSection />`)
 - **Homepage collage images** → `src/content/portfolio/index-config.json` → `collageImages` array (edit `src`, `alt`, `srcFull` fields)
-- **Homepage videography section** — add/remove video cards via `src/content/portfolio/video.json`
+- **Homepage videography section** — add/remove video cards via `src/content/portfolio/videography.json`
 
 Open the file, find the text, change it, save — the browser reloads automatically.
 

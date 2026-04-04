@@ -49,7 +49,7 @@ export default function FeaturedSection() {
                 )}
               </div>
               <div className="project-card__body">
-                <h3 className="project-card__title">{project.title}</h3>
+                <h3 className="project-card__title">{project.heading}</h3>
                 {project.type === "video" && project.location && (
                   <p className="project-card__location">{project.location}</p>
                 )}

@@ -122,7 +122,7 @@ Next.js 16 (output: 'export')
 
 | ID | Requirement | Status |
 |----|-------------|--------|
-| FR-10.1 | Projects defined in human-readable JSON (`photography.json`, `video.json`, `social-media.json`) | ✅ |
+| FR-10.1 | Projects defined in human-readable JSON (`photography.json`, `videography.json`, `social-media.json`) | ✅ |
 | FR-10.2 | `npm run create-project` scaffolds a new project interactively | ✅ |
 | FR-10.3 | `npm run build:images` converts raw images to WebP, generates `images.json` manifests | ✅ |
 | FR-10.4 | `npm run validate:manifests` checks every project's manifest exists (fails `npm run build` early if not) | ✅ |
