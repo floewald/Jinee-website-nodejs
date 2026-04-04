@@ -85,7 +85,7 @@ export default function GallerySelection({
                 >
                   <path
                     d="M 3.5 11.5 L 8.5 16.5 L 19 5"
-                    stroke="#1f1f1f"
+                    stroke="#595959"
                     strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"

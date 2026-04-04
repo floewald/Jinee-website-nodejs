@@ -1467,8 +1467,8 @@ button.download-toggle.is-active:hover { background: #333; }
   transition: background 0.15s, border-color 0.15s;
 }
 .gallery-checkbox:has(.inline-select:checked)::before {
-  background: rgba(255, 255, 255, 0.92);
-  border-color: #1f1f1f;
+  background: rgba(255, 255, 255, 0.7);
+  border-color: #999;
 }
 .gallery-checkbox-icon {
   position: absolute;
@@ -1484,7 +1484,7 @@ button.download-toggle.is-active:hover { background: #333; }
   color: #999;
 }
 .gallery-checkbox:has(.inline-select:checked) {
-  opacity: 1;
+  opacity: 0.8;
 }
 .gallery-checkbox:has(.inline-select:focus-visible)::before {
   outline: 2px solid #1f1f1f;
