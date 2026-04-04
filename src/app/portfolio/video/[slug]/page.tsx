@@ -49,14 +49,23 @@ export default async function VideoProjectPage({
     uploadDate: project.videos[0]?.uploadDate ?? "2023-01-01T00:00:00+08:00",
   };
 
+  const pinIndex = project.heading.indexOf("📍");
+  const roles = pinIndex > -1
+    ? project.heading.slice(0, pinIndex).replace(/\s*\|\s*$/, "").trim()
+    : project.heading;
+  const location = pinIndex > -1 ? project.heading.slice(pinIndex).trim() : null;
+
   return (
     <main className="project-page container">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(videoJsonLd) }}
       />
-      <h1 className="project-heading">{project.heading}</h1>
+      <h1 className="project-heading">{project.title}</h1>
       <hr className="section-title-divider" aria-hidden="true" />
+      <p className="project-roles">{roles}</p>
+      <hr className="section-title-divider" aria-hidden="true" />
+      {location && <p className="project-location">{location}</p>}
       {project.longDescription && (
         <p className="project-description">{project.longDescription}</p>
       )}

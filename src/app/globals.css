@@ -1320,7 +1320,7 @@ input::placeholder, textarea::placeholder {
   gap: 1.5rem;
 }
 /* min-height ensures video thumbnails align even when titles differ in line count */
-.video-player__title { font-size: 1.05rem; margin-bottom: .6rem; min-height: 5rem; }
+.video-player__title { font-size: 1.05rem; font-weight: 700; margin-bottom: .6rem; min-height: 5rem; }
 /* Responsive video grid: 3 → 2 → 1 columns */
 @media (max-width: 900px) {
   .video-player { grid-template-columns: repeat(2, 1fr); }
@@ -1624,6 +1624,16 @@ iframe.video-embed {
   font-size: 1.8rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
+}
+.project-roles {
+  font-size: 1rem;
+  color: var(--muted-text);
+  margin: 0.4rem 0 0.5rem;
+}
+.project-location {
+  font-size: 0.95rem;
+  color: var(--muted-text);
+  margin: 0.5rem 0 1.25rem;
 }
 .gallery-empty {
   color: var(--muted-text);
