@@ -5,6 +5,7 @@ import { useState } from "react";
 interface DownloadToolbarProps {
   selectionMode: boolean;
   selectedCount: number;
+  totalCount: number;
   onToggleSelection: () => void;
   onSelectAll: () => void;
   onClearSelection: () => void;
@@ -14,32 +15,29 @@ interface DownloadToolbarProps {
 export default function DownloadToolbar({
   selectionMode,
   selectedCount,
+  totalCount,
   onToggleSelection,
   onSelectAll,
   onClearSelection,
   onDownload,
 }: DownloadToolbarProps) {
-  const [allActive, setAllActive] = useState(false);
   const [clearFlash, setClearFlash] = useState(false);
+  const allSelected = selectedCount === totalCount && totalCount > 0;
 
   function handleToggleSelection() {
     if (selectionMode) {
-      // Turning selection mode off — reset button states
-      setAllActive(false);
       setClearFlash(false);
     }
     onToggleSelection();
   }
 
   function handleSelectAll() {
-    setAllActive(true);
     setClearFlash(false);
     onSelectAll();
   }
 
   function handleClearSelection() {
     setClearFlash(true);
-    setAllActive(false);
     onClearSelection();
     setTimeout(() => setClearFlash(false), 100);
   }
@@ -75,7 +73,7 @@ export default function DownloadToolbar({
           </span>
 
           <button
-            className={`btn btn--outline${allActive ? " is-active" : ""}`}
+            className={`btn btn--outline${allSelected ? " is-active" : ""}`}
             onClick={handleSelectAll}
           >
             All

@@ -58,7 +58,7 @@ export default function GalleryWithDownload({
       <DownloadToolbar
         selectionMode={selectionMode}
         selectedCount={selected.length}
-
+        totalCount={images.length}
         onToggleSelection={handleToggleSelection}
         onSelectAll={handleSelectAll}
         onClearSelection={handleClearSelection}

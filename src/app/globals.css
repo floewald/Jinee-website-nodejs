@@ -920,6 +920,7 @@ button.btn.btn--outline { background: transparent; color: var(--charcoal); borde
 button.btn.btn--outline:focus { background: transparent; color: var(--charcoal); border: 1px solid var(--border-color); opacity: 1; }
 button.btn.btn--outline:hover,
 button.btn.btn--outline.is-active { background: var(--charcoal); color: #fff; border-color: var(--charcoal); opacity: 1; }
+button.btn.btn--outline.is-active:hover { background: #333; }
 .btn--large { padding: .75rem 1.2rem; font-size: 1rem; }
 
 /* ══════════════════════════════════════════════════════════════════════════════

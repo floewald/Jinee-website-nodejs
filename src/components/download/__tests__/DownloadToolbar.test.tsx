@@ -5,6 +5,7 @@ describe("DownloadToolbar", () => {
   const baseProps = {
     selectionMode: false,
     selectedCount: 0,
+    totalCount: 5,
     onToggleSelection: jest.fn(),
     onSelectAll: jest.fn(),
     onClearSelection: jest.fn(),
@@ -62,17 +63,26 @@ describe("DownloadToolbar", () => {
     expect(baseProps.onDownload).toHaveBeenCalledTimes(1);
   });
 
-  it("adds is-active to All button after clicking and clears it on Clear", () => {
+  it("shows All button as active when all images are selected", () => {
+    render(
+      <DownloadToolbar {...baseProps} selectionMode={true} selectedCount={5} totalCount={5} />
+    );
+    expect(screen.getByRole("button", { name: /^all$/i })).toHaveClass("is-active");
+  });
+
+  it("shows All button as inactive when not all images are selected", () => {
+    render(
+      <DownloadToolbar {...baseProps} selectionMode={true} selectedCount={3} totalCount={5} />
+    );
+    expect(screen.getByRole("button", { name: /^all$/i })).not.toHaveClass("is-active");
+  });
+
+  it("flashes Clear button as active for 100ms then resets", () => {
     jest.useFakeTimers();
     render(<DownloadToolbar {...baseProps} selectionMode={true} />);
-    const allBtn = screen.getByRole("button", { name: /^all$/i });
     const clearBtn = screen.getByRole("button", { name: /clear/i });
 
-    fireEvent.click(allBtn);
-    expect(allBtn).toHaveClass("is-active");
-
     fireEvent.click(clearBtn);
-    expect(allBtn).not.toHaveClass("is-active");
     expect(clearBtn).toHaveClass("is-active");
 
     act(() => jest.advanceTimersByTime(100));
@@ -80,17 +90,13 @@ describe("DownloadToolbar", () => {
     jest.useRealTimers();
   });
 
-  it("resets All/Clear active state when selection mode is toggled off", () => {
+  it("hides All button when selection mode is toggled off", () => {
     const { rerender } = render(
-      <DownloadToolbar {...baseProps} selectionMode={true} />
+      <DownloadToolbar {...baseProps} selectionMode={true} selectedCount={5} totalCount={5} />
     );
-    const allBtn = screen.getByRole("button", { name: /^all$/i });
-    fireEvent.click(allBtn);
-    expect(allBtn).toHaveClass("is-active");
+    expect(screen.getByRole("button", { name: /^all$/i })).toHaveClass("is-active");
 
-    // Toggle off by re-rendering with selectionMode=false
     rerender(<DownloadToolbar {...baseProps} selectionMode={false} />);
-    // Selection mode closed — All button is gone, state reset
     expect(screen.queryByRole("button", { name: /^all$/i })).not.toBeInTheDocument();
   });
 });
