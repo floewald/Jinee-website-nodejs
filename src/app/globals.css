@@ -916,8 +916,8 @@ button.btn.btn--primary:focus { background: #333; color: #fff; opacity: 1; }
 button.btn.btn--inverted { background: #fff; color: var(--charcoal); border: 1px solid var(--border-color); transition: background 0.15s; }
 button.btn.btn--inverted:hover,
 button.btn.btn--inverted:focus { background: #f5f5f5; color: var(--charcoal); border: 1px solid var(--border-color); opacity: 1; }
-button.btn.btn--outline { background: transparent; color: var(--charcoal); border: 1px solid var(--charcoal); transition: background 0.15s, color 0.15s, border-color 0.15s; }
-button.btn.btn--outline:focus { background: transparent; color: var(--charcoal); border: 1px solid var(--charcoal); opacity: 1; }
+button.btn.btn--outline { background: transparent; color: var(--charcoal); border: 1px solid var(--border-color); transition: background 0.15s, color 0.15s, border-color 0.15s; }
+button.btn.btn--outline:focus { background: transparent; color: var(--charcoal); border: 1px solid var(--border-color); opacity: 1; }
 button.btn.btn--outline:hover,
 button.btn.btn--outline.is-active { background: var(--charcoal); color: #fff; border-color: var(--charcoal); opacity: 1; }
 .btn--large { padding: .75rem 1.2rem; font-size: 1rem; }
@@ -1410,12 +1410,25 @@ iframe.video-embed {
   color: var(--charcoal);
   white-space: nowrap;
 }
-button.download-toggle.is-active { background: var(--charcoal); color: #fff; border-color: var(--charcoal); }
+button.download-toggle.is-active,
+button.download-toggle.is-active:hover,
+button.download-toggle.is-active:focus { background: var(--charcoal); color: #fff; border-color: var(--charcoal); }
+button.download-toggle.is-active:hover { background: #333; }
 .toolbar-divider {
   width: 1px;
   align-self: stretch;
   background: #d0d0d0;
   flex-shrink: 0;
+}
+.toolbar-pipe {
+  align-self: center;
+  color: #d0d0d0;
+  font-size: 1.1rem;
+  line-height: 1;
+  user-select: none;
+}
+@media (max-width: 600px) {
+  .toolbar-pipe { display: none; }
 }
 
 /* Selection mode checkbox overlay */
@@ -1429,6 +1442,7 @@ button.download-toggle.is-active { background: var(--charcoal); color: #fff; bor
   width: 22px;
   height: 22px;
   display: block;
+  opacity: 0.6;
 }
 /* Hide native input; use label ::before/::after for custom styling */
 .inline-select {
@@ -1465,6 +1479,10 @@ button.download-toggle.is-active { background: var(--charcoal); color: #fff; bor
   transition: opacity 0.15s;
 }
 .gallery-checkbox:has(.inline-select:checked) .gallery-checkbox-icon {
+  opacity: 1;
+  color: #999;
+}
+.gallery-checkbox:has(.inline-select:checked) {
   opacity: 1;
 }
 .gallery-checkbox:has(.inline-select:focus-visible)::before {

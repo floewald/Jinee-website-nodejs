@@ -68,6 +68,8 @@ export default function DownloadToolbar({
             </svg>
           </button>
 
+          <span className="toolbar-pipe" aria-hidden="true">|</span>
+
           <span className="selected-count selected-count--badge" aria-live="polite">
             {selectedCount} selected
           </span>
