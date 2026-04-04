@@ -422,13 +422,20 @@ trigger: push to main  (or workflow_dispatch)
 
 ### 9.2 Environment variables
 
-| Variable | Where | Purpose |
-|----------|-------|---------|
-| `NEXT_PUBLIC_BACKEND_URL` | `.env.local` (local dev only) | Base URL for PHP backend API calls (defaults to `"/backend"` in production builds) |
-| `FTP_SERVER` | GitHub Secret | FTP hostname |
-| `FTP_USERNAME` | GitHub Secret | FTP user |
-| `FTP_PASSWORD` | GitHub Secret | FTP password |
-| `FTP_SERVER_DIR` | GitHub Secret | Remote deploy path |
+**Local development only** (`.env.local`, never committed, never needed in CI):
+
+| Variable | Purpose |
+|----------|---------|
+| `NEXT_PUBLIC_BACKEND_URL` | Override PHP backend base URL for local dev (e.g. `http://localhost:8787/backend`). Defaults to `"/backend"` (same-origin) in all production builds. |
+
+**GitHub Secrets** (Settings → Secrets and variables → Actions):
+
+| Secret | Purpose |
+|--------|---------|
+| `FTP_SERVER` | FTP hostname |
+| `FTP_USERNAME` | FTP user |
+| `FTP_PASSWORD` | FTP password |
+| `FTP_SERVER_DIR` | Remote deploy path |
 
 ### 9.3 Directory layout on server
 

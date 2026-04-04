@@ -112,11 +112,13 @@ The Next.js app makes backend calls to `http://localhost:8080/contact/...` and `
 
 > **CORS**: `localhost` is already whitelisted in all PHP files. CSRF sessions should work cross-port in local dev.
 
-Create a `.env.local` file:
+Create a `.env.local` file (git-ignored, never commit it):
 
 ```bash
-NEXT_PUBLIC_BACKEND_URL=http://localhost:8080
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8787/backend
 ```
+
+> This variable is **only needed locally**. Production builds fall back to `"/backend"` (same-origin). It is not a GitHub Secret and is not used in CI.
 
 ---
 
