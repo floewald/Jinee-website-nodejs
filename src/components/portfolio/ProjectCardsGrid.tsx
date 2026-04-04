@@ -63,6 +63,10 @@ export default function ProjectCardsGrid({
               <h2 className="project-card__title">
                 {project.portfolioCard!.cardTitle}
               </h2>
+              <h3 className="project-card__role">{project.heading}</h3>
+              {project.type === "video" && project.location && (
+                <p className="project-card__location">{project.location}</p>
+              )}
             </div>
           </Link>
         );

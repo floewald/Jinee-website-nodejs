@@ -37,6 +37,7 @@ export const PhotographyProjectSchema = BaseProjectSchema.extend({
 
 export const VideoProjectSchema = BaseProjectSchema.extend({
   type: z.literal("video"),
+  location: z.string().optional(),
   longDescription: z.string().optional(),
   videos: z.array(VideoItemSchema),
 });

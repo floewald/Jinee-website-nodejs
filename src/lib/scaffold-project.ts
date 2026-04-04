@@ -71,7 +71,8 @@ function videoSkeleton(slug: string, title: string) {
     title,
     description: `<!-- Add 120-160 character SEO description for ${title} -->`,
     longDescription: `<!-- Add longer paragraph for the project page -->`,
-    heading: "Producer | Director | 📍 Singapore",
+    heading: "Producer | Director",
+    location: "📍 Singapore",
     ogImage: `https://jineechen.com/assets/video/${slug}/${slug}-1-800.webp`,
     videos: [
       {

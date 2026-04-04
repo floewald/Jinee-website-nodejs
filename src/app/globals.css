@@ -699,6 +699,10 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   margin: 0 0 1.5rem;
   width: 100%;
 }
+/* Tighter symmetric spacing when dividers separate inline metadata in project pages */
+.project-page .section-title-divider {
+  margin: 0.2rem 0;
+}
 
 /* Play overlay on Instagram/video preview thumbnails */
 .play-overlay {
@@ -983,7 +987,7 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   gap: 0.6rem;
   height: 100%;
 }
-.contact-card p { color: var(--charcoal); max-width: none; display: flex; align-items: baseline; gap: 0.5rem; }
+.contact-card p { color: var(--charcoal); max-width: none; display: flex; align-items: center; gap: 0.5rem; }
 .contact-card a { color: var(--charcoal); }
 .contact-photo {
   width: 100%;
