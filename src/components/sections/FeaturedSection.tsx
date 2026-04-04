@@ -49,7 +49,7 @@ export default function FeaturedSection() {
                 )}
               </div>
               <div className="project-card__body">
-                <h3 className="project-card__role">{project.heading}</h3>
+                <h3 className="project-card__title">{project.title}</h3>
                 {project.type === "video" && project.location && (
                   <p className="project-card__location">{project.location}</p>
                 )}
@@ -60,8 +60,8 @@ export default function FeaturedSection() {
         </RevealGrid>
 
         <div className="section-cta">
-          <Link href="/portfolio/" className="btn btn--primary">
-            View More Projects
+          <Link href="/portfolio/video/" className="btn btn--primary">
+            More Video Projects
           </Link>
         </div>
       </div>
