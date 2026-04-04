@@ -5,7 +5,7 @@ import { portfolioIndexConfig } from "@/lib/portfolio-config";
 import type { HeroFit } from "@/components/sections/HeroSlideshow";
 
 export default function Home() {
-  const heroSlides = portfolioIndexConfig.collageImages.map((img) => ({
+  const heroSlides = (portfolioIndexConfig.slideshowImages ?? portfolioIndexConfig.collageImages).map((img) => ({
     src: img.src,
     alt: img.alt,
     objectPosition: img.objectPosition,

@@ -99,6 +99,8 @@ export interface CollageImageConfig {
 export interface PortfolioIndexConfig {
   /** Images shown in the homepage gallery collage */
   collageImages: CollageImageConfig[];
+  /** Images shown in the hero slideshow (can differ from collageImages) */
+  slideshowImages?: CollageImageConfig[];
   socialMediaLinks: InstagramLink[];
   videoSectionTitle: string;
   /**

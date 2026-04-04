@@ -41,10 +41,17 @@ export default function GallerySelection({
             <button
               className="gallery-item__trigger"
               onClick={() => {
-                if (!selectionMode) onImageClick(i);
+                if (selectionMode) {
+                  onSelectionChange(filename, !isChecked);
+                } else {
+                  onImageClick(i);
+                }
               }}
-              aria-label={`Open image: ${img.alt}`}
-              tabIndex={selectionMode ? -1 : 0}
+              aria-label={
+                selectionMode
+                  ? `${isChecked ? "Deselect" : "Select"} ${img.alt}`
+                  : `Open image: ${img.alt}`
+              }
             >
               <Image
                 src={img.src}
@@ -68,6 +75,7 @@ export default function GallerySelection({
                   onChange={(e) =>
                     onSelectionChange(filename, e.target.checked)
                   }
+                  tabIndex={-1}
                 />
               </label>
             )}

@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import DownloadModal from "@/components/download/DownloadModal";
 
 jest.mock("@/lib/constants", () => ({
@@ -42,7 +42,8 @@ describe("DownloadModal", () => {
 
   it("renders a password input", () => {
     render(<DownloadModal {...baseProps} />);
-    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
+    // Exact string avoids matching aria-label="Show password" on the eye toggle
+    expect(screen.getByLabelText("Password")).toBeInTheDocument();
   });
 
   it("renders a download submit button", () => {
@@ -81,7 +82,7 @@ describe("DownloadModal", () => {
     expect(error).toBeInTheDocument();
   });
 
-  it("disables the submit button while downloading", () => {
+  it("disables the submit button while downloading", async () => {
     let resolve: (v: unknown) => void;
     (global.fetch as jest.Mock).mockReturnValueOnce(
       new Promise((res) => {
@@ -95,6 +96,8 @@ describe("DownloadModal", () => {
       screen.getByRole("button", { name: /download|processing/i })
     ).toBeDisabled();
 
-    resolve!({ ok: true, json: async () => ({ token: "t" }) });
+    await act(async () => {
+      resolve!({ ok: true, json: async () => ({ token: "t" }) });
+    });
   });
 });

@@ -26,31 +26,36 @@ export default function DownloadToolbar({
         aria-pressed={selectionMode}
         onClick={onToggleSelection}
       >
-        {selectionMode ? "Cancel Select" : "Select"}
+        Select
       </button>
 
       {selectionMode && (
         <>
-          <button className="btn btn--ghost" onClick={onSelectAll}>
-            Select All ({totalCount})
+          <button
+            className="btn btn--primary download-button"
+            disabled={selectedCount === 0}
+            onClick={onDownload}
+          >
+            Download
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" style={{ marginLeft: "6px" }}>
+              <path d="M7 1v8M3.5 6l3.5 3.5L10.5 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M1 11h12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+            </svg>
           </button>
 
-          <button className="btn btn--ghost" onClick={onClearSelection}>
-            Clear
-          </button>
+          <span className="toolbar-divider" aria-hidden="true" />
 
-          <span className="selected-count" aria-live="polite">
+          <span className="selected-count selected-count--badge" aria-live="polite">
             {selectedCount} selected
           </span>
 
-          {selectedCount > 0 && (
-            <button
-              className="btn btn--primary download-button"
-              onClick={onDownload}
-            >
-              Download ZIP ({selectedCount})
-            </button>
-          )}
+          <button className="btn btn--outline" onClick={onSelectAll}>
+            All
+          </button>
+
+          <button className="btn btn--outline" onClick={onClearSelection}>
+            Clear
+          </button>
         </>
       )}
     </div>

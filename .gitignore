@@ -58,3 +58,6 @@ public/assets/fonts/*
 
 # Photos (logos, previews, and app icons) are generated from assets-raw/photos
 # by scripts/build-images.sh and should not be committed.
+
+# PandaCSS generated output — not used by this project, regenerated automatically
+src/styled-system/
