@@ -1410,7 +1410,7 @@ iframe.video-embed {
   color: var(--charcoal);
   white-space: nowrap;
 }
-.download-toggle.is-active { background: var(--charcoal); color: #fff; border-color: var(--charcoal); }
+button.download-toggle.is-active { background: var(--charcoal); color: #fff; border-color: var(--charcoal); }
 .toolbar-divider {
   width: 1px;
   align-self: stretch;
