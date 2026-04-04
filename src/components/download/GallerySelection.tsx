@@ -1,7 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import Masonry from "react-masonry-css";
 import type { GalleryImage } from "@/components/gallery/Lightbox";
+
+const BREAKPOINT_COLS = { default: 3, 900: 2, 480: 1 };
 
 interface GallerySelectionProps {
   images: GalleryImage[];
@@ -24,8 +27,10 @@ export default function GallerySelection({
   onSelectionChange,
 }: GallerySelectionProps) {
   return (
-    <div
+    <Masonry
+      breakpointCols={BREAKPOINT_COLS}
       className={`project-gallery${selectionMode ? " selection-mode" : ""}`}
+      columnClassName="project-gallery__col"
     >
       {images.map((img, i) => {
         const filename = toDownloadFilename(img.src);
@@ -36,16 +41,23 @@ export default function GallerySelection({
             <button
               className="gallery-item__trigger"
               onClick={() => {
-                if (!selectionMode) onImageClick(i);
+                if (selectionMode) {
+                  onSelectionChange(filename, !isChecked);
+                } else {
+                  onImageClick(i);
+                }
               }}
-              aria-label={`Open image: ${img.alt}`}
-              tabIndex={selectionMode ? -1 : 0}
+              aria-label={
+                selectionMode
+                  ? `${isChecked ? "Deselect" : "Select"} ${img.alt}`
+                  : `Open image: ${img.alt}`
+              }
             >
               <Image
                 src={img.src}
                 alt={img.alt}
                 width={800}
-                height={534}
+                height={0}
                 loading="lazy"
                 className="gallery-img"
                 unoptimized
@@ -63,12 +75,13 @@ export default function GallerySelection({
                   onChange={(e) =>
                     onSelectionChange(filename, e.target.checked)
                   }
+                  tabIndex={-1}
                 />
               </label>
             )}
           </div>
         );
       })}
-    </div>
+    </Masonry>
   );
 }

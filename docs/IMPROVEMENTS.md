@@ -38,4 +38,34 @@ For the technical design see [DESIGN.md](DESIGN.md).
 | FTP deployment smoke test (NFR-06.7) | Requires live FTP server |
 | Lighthouse / visual regression / OG debugger | Requires deployed site |
 | TinaCMS (Phase 7) | Deferred indefinitely |
+| Pinch-to-zoom in lightbox | Deferred — tap-to-zoom (2.2×) covers use case; would need gesture library |
+| Safe area insets (`env(safe-area-inset-*)`) | Deferred — only needed if PWA mode is planned |
 
+---
+
+## Visual polish & animation improvements
+
+| # | Item | Area | Status |
+|---|------|------|--------|
+| V-1 | Scroll-triggered slide-in for homepage collage images (`GalleryGrid` IntersectionObserver) | Animation | ✅ |
+| V-2 | Scroll-triggered slide-in for project cards (`RevealGrid`, already wired on photography/video index pages) | Animation | ✅ |
+| V-3 | Border-radius preserved on gallery image hover (`will-change: transform` on `.gallery-item`) | Visual | ✅ |
+| V-4 | Removed `NO_RADIUS` global toggle from `layout.tsx` and `globals.css` | Cleanup | ✅ |
+| V-5 | Per-card unique slideshow stagger — `(cardIndex × 777) % 4000` — no two cards flip simultaneously | Animation | ✅ |
+| V-6 | Card slideshow fallback background changed from `#111` to `#f5f5f5` (no black flash before image loads) | Visual | ✅ |
+
+---
+
+## In-progress — Mobile UX improvements
+
+| # | Item | Area | Status |
+|---|------|------|--------|
+| M-0 | Lightbox ESLint error: `setPan` inside `useEffect` → event-handler reset | Correctness | ✅ |
+| M-1 | Form input `font-size` → 1rem (prevent iOS Safari auto-zoom) | Mobile UX | ✅ |
+| M-2 | `.form-row` mobile breakpoint (stack first/last name at ≤600px) | Mobile UX | ✅ |
+| M-3 | Lightbox touch targets ≥ 44×44px (`min-width`/`min-height`) | Accessibility | ✅ |
+| M-4 | `clamp()` for h1/h2 typography (scale on screens < 360px) | Mobile UX | ✅ |
+| M-5 | Header padding audit for ultra-small screens (< 360px) | Mobile UX | ✅ (already adequate) |
+| M-6 | `prefers-reduced-motion` media query | Accessibility | ✅ |
+| M-7 | Focus ring visibility audit | Accessibility | ✅ (already adequate) |
+| M-8 | Mobile E2E test assertions (Playwright `mobile-ux.spec.ts`) | Testing | ✅ |

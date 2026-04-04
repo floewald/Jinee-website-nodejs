@@ -7,6 +7,7 @@
     "build": "npm run build:images && npm run validate:manifests && next build",
     "build:next": "next build",
     "build:images": "bash scripts/build-images.sh",
+    "preview": "npm run build:next && bash scripts/build-preview-zip.sh",
     "validate:manifests": "node scripts/validate-manifests.mjs",
     "create-project": "node scripts/create-project.mjs",
     "generate:lqip": "node scripts/generate-lqip.mjs",
@@ -23,6 +24,7 @@
     "next": "16.2.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "react-masonry-css": "^1.0.16",
     "zod": "^4.3.6"
   },
   "devDependencies": {

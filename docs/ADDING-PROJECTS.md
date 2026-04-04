@@ -11,9 +11,11 @@ Make sure your development environment is running. If you haven't set it up yet,
 The basic workflow for any content change is:
 
 1. Add/edit the content (images + JSON config)
-2. Run `npm run build:images` (only if you added new images)
-3. Run `npm run build`
+2. Run `npm run build` (this already runs `npm run build:images` first)
 4. Deploy the new `out/` folder to the server
+
+For faster iteration while editing images only, you can still run
+`npm run build:images` directly before `npm run build`.
 
 ---
 
@@ -33,6 +35,7 @@ assets-raw/
 ```
 
 **Image requirements:**
+
 - Format: JPG or PNG
 - Resolution: at least 1600px on the long edge (for full-screen lightbox quality)
 - Filenames: alphanumeric, hyphens, underscores — no spaces
@@ -44,13 +47,14 @@ npm run build:images
 ```
 
 This creates three sizes per image in `public/assets/photography/my-new-project/`:
+
 - `IMG_001-320.webp` — thumbnail (320px wide)
 - `IMG_001-800.webp` — medium / slideshow (800px wide)
 - `IMG_001-1600.webp` — full-size / lightbox (1600px wide)
 
 It also generates a `images.json` manifest in the folder — the gallery reads this file to know which images to show.
 
-### Step 3: Add the project config
+### Step 3: Add the photography project config
 
 Open `src/content/portfolio/photography.json` and add a new entry to the JSON array:
 
@@ -93,7 +97,24 @@ Open `src/content/portfolio/photography.json` and add a new entry to the JSON ar
 | `showSlideshow` | Optional | `true` (default) adds an auto-advance full-image slideshow above the gallery on the project page. Set `false` to disable — recommended for large galleries where the top slideshow is not needed. |
 | `visible` | Optional | Set `false` to hide the project entirely (default: `true`) |
 
+For homepage hero/collage framing, each entry in
+`src/content/portfolio/index-config.json` (`collageImages`) also supports
+optional `objectPosition`.
+
+- Keyword options: `center`, `top`, `bottom`, `left`, `right`,
+  `center top`, `center bottom`, `left top`, `left bottom`,
+  `right top`, `right bottom`
+- Percentage options: `50%`, `50% 30%`, `center 30%`, `30% center`
+- Default when omitted: `center`
+
+Meaning of `center 30%`:
+
+- First value (`center`) = horizontal anchor (X-axis)
+- Second value (`30%`) = vertical anchor (Y-axis), measured from top to bottom
+- So `center 30%` keeps the image centered horizontally and places the crop focus at 30% down from the top (slightly above vertical center)
+
 > **Card slideshow vs page slideshow — key distinction:**
+>
 > - `portfolioCard.previewImages` controls the small cycling thumbnail on the *index/overview cards*
 > - `showSlideshow` controls the large auto-advance strip shown *at the top of the project's own page*
 > These are independent. You can have a card slideshow without a page slideshow or vice versa.
@@ -116,10 +137,13 @@ Convention: replace hyphens with underscores and uppercase for the token name.
 
 **b) `.github/workflows/deploy.yml`** — add the secret to the `deploy-backend-config` job.  
 Inside the `env:` block add:
+
 ```yaml
 DL_PASS_MY_NEW_PROJECT: ${{ secrets.DL_PASS_MY_NEW_PROJECT }}
 ```
+
 And inside the Python script add:
+
 ```python
 content = content.replace(
     '%%DL_PASS_MY_NEW_PROJECT%%',
@@ -151,12 +175,15 @@ Upload the video(s) to YouTube and note the video ID from the URL:
 ### Step 2: Add a thumbnail image (optional)
 
 If you want a custom thumbnail for the project (instead of the YouTube auto-thumbnail), add it:
+
 ```
 assets-raw/video/my-video-project/thumbnail.jpg
 ```
-Run `npm run build:images` to generate WebP versions.
 
-### Step 3: Add the project config
+Run `npm run build` to generate WebP versions and update the static export.
+For image-only iteration, `npm run build:images` is also available.
+
+### Step 3: Add the video project config
 
 Open `src/content/portfolio/video.json` and add a new entry to the JSON array:
 
@@ -190,6 +217,7 @@ Open `src/content/portfolio/video.json` and add a new entry to the JSON array:
 ```
 
 **Notes:**
+
 - `embedUrl` format: `https://www.youtube.com/embed/{VIDEO_ID}` — replace `{VIDEO_ID}` with the YouTube ID
 - `uploadDate` format: ISO 8601 date and time with timezone (`+08:00` for Singapore time)
 - Videos are shown in the order listed in the `videos` array
@@ -210,18 +238,21 @@ npm run build
 ### Step 1: Decide content type
 
 Social media projects can be either:
+
 - **Gallery** (`hasGallery: true`) — shows a curated image grid, same as photography
 - **Custom** (`hasGallery: false`) — shows a custom text/HTML message (e.g., link to Instagram)
 
 ### Step 2: Add images (if gallery)
 
-Place images in `assets-raw/social-media/my-social-project/` and run `npm run build:images`.
+Place images in `assets-raw/social-media/my-social-project/`, then run
+`npm run build` (or `npm run build:images` for image-only iteration).
 
 ### Step 3: Add the project config
 
 Open `src/content/portfolio/social-media.json` and add a new entry to the JSON array:
 
 **Gallery variant:**
+
 ```json
 {
   "type": "social-media",
@@ -236,6 +267,7 @@ Open `src/content/portfolio/social-media.json` and add a new entry to the JSON a
 ```
 
 **Custom content variant:**
+
 ```json
 {
   "type": "social-media",
@@ -294,6 +326,7 @@ npm run tina
 ```
 
 The visual editor lets you:
+
 - Add/edit/remove projects with a form interface
 - Preview changes before saving
 - All changes save directly to the JSON files (committed with Git)
@@ -305,5 +338,24 @@ The underlying JSON structure stays the same — you can always switch back to e
 ## Site-wide Configuration
 
 Global settings like the site name, email, Calendly link, and social media URLs are currently hardcoded in the relevant components (`Footer.tsx`, `ContactSection.tsx`, `AboutSection.tsx`). To change them, edit the component directly and rebuild.
+
+### UI settings (now configurable)
+
+You can now control border radius and homepage collage hover zoom from central settings:
+
+- **Global radius value scale:**
+  - File: `src/app/globals.css`
+  - Base token: `--radius-site`
+  - Derived tokens: `--radius-sm`, `--radius-md`, `--radius-lg`
+  - Change `--radius-site` to tune most corner radii site-wide.
+- **Homepage masonry collage hover zoom:**
+  - File: `src/app/globals.css`
+  - Selector: `.gallery-cols .gallery-item:hover .gallery-img`
+  - Property: `transform: scale(1.1)`
+  - Adjust this scale value for stronger/weaker zoom effect.
+- **Slideshow speed:**
+  - File: `src/lib/constants.ts`
+  - Constant: `SLIDESHOW_CYCLE_MS` (default: 4000 ms)
+  - Controls both the hero slideshow and project card slideshows.
 
 Once [Phase 7 (TinaCMS)](MIGRATION-PROGRESS.md) is complete, these will be editable via the visual editor.

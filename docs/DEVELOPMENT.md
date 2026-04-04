@@ -15,6 +15,9 @@ Full local setup and day-to-day development workflow. See [README.md](../README.
 | cwebp | any | `brew install webp` (preferred for image pipeline) |
 | ImageMagick | 7+ | `brew install imagemagick` (fallback for image pipeline) |
 
+Note: `npm run build` already calls `npm run build:images` before `next build`.
+Use `npm run build:images` directly only for faster image-only iteration.
+
 ---
 
 ## First-Time Setup
@@ -40,6 +43,7 @@ cp backend/download/download_config.example.php backend/download/download_config
 ```
 
 Edit `backend/contact/config.php`:
+
 ```php
 <?php
 return [
@@ -79,6 +83,7 @@ bash scripts/build-images.sh --type video --slug re-old-times
 ```
 
 This runs `scripts/build-images.sh` which:
+
 1. Converts JPG/PNG in `assets-raw/` → WebP at 320, 800, 1600px widths in `public/assets/`
 2. Generates `images.json` manifest per project folder
 3. Generates app icons (`favicon.ico`, `icon-32.png`, `icon-192.png`, `apple-touch-icon.png`) from `assets-raw/photos/icon.png`
@@ -90,12 +95,14 @@ This runs `scripts/build-images.sh` which:
 Two processes run side-by-side during development:
 
 **Terminal 1 — Next.js dev server (Turbopack)**
+
 ```bash
 npm run dev
 # → http://localhost:3000
 ```
 
 **Terminal 2 — PHP backend**
+
 ```bash
 php -S localhost:8080 -t backend/
 # → http://localhost:8080
@@ -106,6 +113,7 @@ The Next.js app makes backend calls to `http://localhost:8080/contact/...` and `
 > **CORS**: `localhost` is already whitelisted in all PHP files. CSRF sessions should work cross-port in local dev.
 
 Create a `.env.local` file:
+
 ```bash
 NEXT_PUBLIC_BACKEND_URL=http://localhost:8080
 ```
@@ -120,6 +128,8 @@ Create `src/app/your-page/page.tsx`. It will be exported as `out/your-page/index
 
 Export a `metadata` object (or `generateMetadata` function) at the top of the file for SEO.
 
+Existing static pages: `/`, `/contact/`, `/portfolio/photography/[slug]/`, `/portfolio/video/[slug]/`, `/portfolio/social-media/[slug]/`.
+
 ### Adding a new component
 
 1. Create the component in `src/components/<category>/ComponentName.tsx`
@@ -127,6 +137,34 @@ Export a `metadata` object (or `generateMetadata` function) at the top of the fi
 3. Implement the component to make the test pass
 
 For client-side interactivity (state, effects, browser APIs), add `'use client'` at the top. Server components (default, no `'use client'`) cannot use hooks or event handlers.
+
+### Gallery layout
+
+Photo galleries use `react-masonry-css` (shortest-column-first masonry). The `GalleryGrid` component renders images at their natural aspect ratio — no portrait detection or blur backgrounds. Breakpoints: 3 columns ≥900 px, 2 columns ≥480 px, 1 column below that.
+
+The homepage collage images are configured in `src/content/portfolio/index-config.json` (`collageImages` array). Each entry requires `src`, `alt`, and `srcFull`.
+
+Optional per-image setting: `objectPosition` controls crop focus in the
+homepage hero slideshow (`heroFit: "cover"`). Supported values include:
+
+- Keywords: `center`, `top`, `bottom`, `left`, `right`, `center top`,
+  `center bottom`, `left top`, `left bottom`, `right top`, `right bottom`
+- Percentages: `50%`, `50% 30%`, `center 30%`, `30% center`
+
+If omitted, object position defaults to `center`.
+
+Example: `center 30%` means horizontal center with vertical focus 30% from
+the top. Use lower values (e.g. `20%`) to bias upward, higher values
+(e.g. `70%`) to bias downward.
+
+### UI settings (radius + collage hover zoom)
+
+- **Global radius value:** set `--radius-site` in `src/app/globals.css` (derived: `--radius-sm`, `--radius-md`, `--radius-lg`).
+- **Homepage collage hover zoom:** adjust `transform: scale(1.1)` in `.gallery-cols .gallery-item:hover .gallery-img` in `src/app/globals.css`.
+- **Slideshow speed:** change `SLIDESHOW_CYCLE_MS` (minimum interval, default: 4000 ms) and `SLIDESHOW_JITTER_MS` (random extra range, default: 4000 ms) in `src/lib/constants.ts`. Each card picks a random interval between those two values on mount.
+- **About / Contact page theme:** change `ABOUT_PAGE_THEME` and `CONTACT_PAGE_THEME` in `src/lib/constants.ts`. Set either `"section-bg-charcoal"` (dark) or `"section-bg-white"` (light). Each constant controls its respective page independently.
+
+The `.gallery-item` container uses `will-change: transform` to force a GPU compositing layer, ensuring `overflow: hidden` + `border-radius` correctly clips scaled images on hover.
 
 ### Environment variables
 
@@ -149,6 +187,7 @@ npm run test:coverage     # generate coverage report in coverage/
 ```
 
 Test files live alongside the code:
+
 ```
 src/components/gallery/
 ├── GalleryGrid.tsx
@@ -194,6 +233,7 @@ E2E tests target `http://localhost:3000` (configurable in `playwright.config.ts`
 2. `jest --bail --findRelatedTests` — runs only tests related to changed files (stops on first failure)
 
 To skip the pre-commit hook in an emergency:
+
 ```bash
 git commit --no-verify -m "your message"  # use sparingly
 ```
@@ -213,6 +253,7 @@ git commit --no-verify -m "your message"  # use sparingly
 ## When to Re-run Image Pipeline
 
 Run `npm run build:images` when:
+
 - New raw images are added to `assets-raw/`
 - Existing raw images are replaced
 
@@ -239,6 +280,7 @@ Install the recommended extensions for the best DX:
 ### Next.js errors
 
 The dev server shows a browser overlay for runtime errors. For build errors:
+
 ```bash
 npm run build 2>&1 | less
 ```
@@ -246,11 +288,13 @@ npm run build 2>&1 | less
 ### PHP errors
 
 PHP writes errors to `stderr` when running with `php -S`. You'll see them in the terminal running the PHP server. To increase verbosity:
+
 ```bash
 php -d display_errors=1 -d error_reporting=E_ALL -S localhost:8080 -t backend/
 ```
 
 Log files:
+
 - Contact form sends: `backend/contact/logs/send.log`
 - Download attempts: `backend/download/logs/download_attempts.log`
 

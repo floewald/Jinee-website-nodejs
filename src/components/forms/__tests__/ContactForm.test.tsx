@@ -40,7 +40,7 @@ describe("ContactForm", () => {
     render(<ContactForm />);
     expect(screen.getByPlaceholderText(/first name/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/last name/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/you@example\.com/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/your@domain\.com/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/\+65/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/tell me about your project/i)).toBeInTheDocument();
   });

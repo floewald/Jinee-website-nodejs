@@ -40,6 +40,7 @@ Add these secrets:
 | `FTP_PASSWORD` | Your FTP password |
 | `FTP_SERVER_DIR` | Remote path for the static site, e.g. `/public_html/` (must end with `/`) |
 | `FTP_BACKEND_DIR` | Remote path for the generated `download_config.php`, **must be** `private/download/` (outside webroot, must end with `/`) |
+| `FTP_BACKEND_CONTACT_DIR` | Remote path for generated `backend/contact/config.php`, e.g. `/public_html/backend/contact/` (must end with `/`) |
 
 **Download passwords** — one per downloadable project
 
@@ -53,6 +54,19 @@ Add these secrets:
 
 > Secrets are **never** visible in logs or to other users — GitHub encrypts them at rest.
 
+**Contact SMTP config** — used to generate `backend/contact/config.php`
+
+| Secret name | Example value |
+|-------------|---------------|
+| `CONTACT_RECIPIENT` | `hello@example.com` |
+| `CONTACT_FROM_EMAIL` | `hello@example.com` |
+| `CONTACT_FROM_NAME` | `Jinee Chen Website` |
+| `CONTACT_SMTP_HOST` | `ssl0.example.net` |
+| `CONTACT_SMTP_PORT` | `465` |
+| `CONTACT_SMTP_USER` | `hello@example.com` |
+| `CONTACT_SMTP_PASS` | your SMTP password |
+| `CONTACT_SMTP_SECURE` | `ssl` or `tls` |
+
 ### Step 2 — Push to main
 
 That's it. The workflow file is already at `.github/workflows/deploy.yml`.
@@ -64,6 +78,7 @@ git push origin main
 ```
 
 GitHub Actions will:
+
 1. Install Node.js and project dependencies
 2. Run `npm run build` to generate the `out/` folder
 3. FTP-sync `out/` to your server, uploading only changed files
@@ -75,8 +90,9 @@ GitHub Actions will:
 | HTML, CSS, JS | ✅ Yes | Every push to `main` |
 | New/changed images | ✅ Yes (if `assets-raw/` changed) | The `deploy-assets` job only runs when image source files change |
 | `backend/download/download_config.php` | ✅ Yes (generated from template) | Passwords injected from GitHub Secrets at deploy time |
+| `backend/contact/config.php` | ✅ Yes (generated from template) | SMTP/recipient settings injected from GitHub Secrets at deploy time |
 | `backend/` PHP files | ❌ No | Upload manually via FTP — see below |
-| `backend/contact/config.php` | ❌ Never (not in git) | Upload manually — contains SMTP credentials |
+| `backend/contact/config.example.php` | ❌ No | Example only; never used in production directly |
 
 ### Viewing deploy status
 
@@ -125,6 +141,7 @@ out/
 ### Step 3: Upload via FTP client
 
 **Cyberduck / FileZilla (GUI):**
+
 1. Connect to your FTP server
 2. Navigate to your document root (e.g. `/public_html/`)
 3. Drag the **contents** of `out/` into the document root
@@ -133,6 +150,7 @@ out/
 > **Skip images if unchanged.** `out/assets/` is large. If you did not run `build:images`, skip uploading `assets/` — the files on the server are already current.
 
 **`lftp` (command line):**
+
 ```bash
 lftp -u YOUR_USERNAME,YOUR_PASSWORD ftp.your-server.com
 lftp> mirror -R out/ /public_html/
@@ -183,6 +201,7 @@ RewriteRule ^(.*)$ $1/index.html [L]
 After every deployment, verify the following manually:
 
 **Static pages**
+
 - [ ] Homepage loads (`/`)
 - [ ] Portfolio hub loads (`/portfolio/`)
 - [ ] One photography project loads (e.g., `/portfolio/photography/20260124-west-side-art-tour/`)
@@ -192,6 +211,7 @@ After every deployment, verify the following manually:
 - [ ] Old URLs redirect: `/privacy.html` → `/privacy/`
 
 **Interactive features**
+
 - [ ] Mobile hamburger menu opens/closes
 - [ ] Gallery lightbox opens on image click
 - [ ] Slideshow autoplay on homepage project cards
@@ -199,10 +219,38 @@ After every deployment, verify the following manually:
 - [ ] Cookie consent banner appears, Accept/Reject works
 
 **Download system** (if applicable)
+
 - [ ] Download button appears on enabled projects
 - [ ] Modal opens with password field
 - [ ] Wrong password shows error
 - [ ] Correct password triggers ZIP download
+
+---
+
+## Option C — Customer preview ZIP
+
+Use this to share the frontend with a customer so they can review pages and texts before going live. The ZIP contains only static HTML/CSS/JS — **no backend, no secrets**.
+
+```bash
+npm run preview
+```
+
+This runs `npm run build:next` (skips the heavy image processing step — existing images in `public/assets/` are used as-is) and then packages `out/` into a dated ZIP file in the project root:
+
+```
+jinee-preview-2026-03-29.zip
+```
+
+Send the ZIP to the customer. Inside they will find two launcher scripts:
+
+| File | Platform | Requirement |
+|------|----------|-------------|
+| `START HERE (Mac).command` | macOS | Python 3 (pre-installed on all modern Macs) |
+| `START HERE (Windows).bat` | Windows | PowerShell (built into every Windows 10/11 PC) |
+
+Double-clicking the appropriate launcher starts a local HTTP server on port 3737 and opens `http://localhost:3737` in the default browser automatically — **one click, no technical knowledge needed**.
+
+> **Note:** Links that call the PHP backend (contact form submissions, file downloads) will not work in the preview ZIP. This is intentional — the preview is for visual and text review only.
 
 ---
 
@@ -221,10 +269,10 @@ The following server-side config files contain credentials and are **not committ
 
 | File | How it gets on the server |
 |------|---------------------------|
-| `backend/contact/config.php` | Upload manually via FTP — see `config.example.php` |
+| `backend/contact/config.php` | **Auto-generated** by the `deploy-backend-config` Actions job from `contact/config.template.php` + GitHub Secrets |
 | `backend/download/download_config.php` | **Auto-generated** by the `deploy-backend-config` Actions job from `download_config.template.php` + GitHub Secrets |
 
-`backend/contact/config.php` must still be uploaded manually. `backend/download/download_config.php` is now handled automatically — you only need to keep the GitHub Secrets up to date.
+Both backend config files are now handled automatically — you only need to keep the GitHub Secrets up to date.
 
 The `backend/download/rate-limit/` and `backend/contact/logs/` directories must be **writable** by the PHP process on the server:
 

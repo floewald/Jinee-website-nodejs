@@ -86,9 +86,29 @@ export interface InstagramLink {
   alt: string;
 }
 
+/** A single image entry for the homepage collage */
+export interface CollageImageConfig {
+  src: string;
+  alt: string;
+  srcFull: string;
+  blur?: string;
+  /** object-position for hero slideshow in cover mode, e.g. "center 30%" or "top" */
+  objectPosition?: string;
+}
+
 export interface PortfolioIndexConfig {
+  /** Images shown in the homepage gallery collage */
+  collageImages: CollageImageConfig[];
+  /** Images shown in the hero slideshow (can differ from collageImages) */
+  slideshowImages?: CollageImageConfig[];
   socialMediaLinks: InstagramLink[];
   videoSectionTitle: string;
+  /**
+   * How hero slideshow handles portrait / mixed images:
+   * "cover" (default) | "blur" (blurred backdrop) | "white" (white backdrop)
+   * Change in src/content/portfolio/index-config.json
+   */
+  heroFit?: "cover" | "blur" | "white";
 }
 
 // ─── Site-wide config (src/content/site.json) ────────────────────────────────

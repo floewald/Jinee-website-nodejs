@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useSwipe } from "@/hooks/useSwipe";
-import { SLIDESHOW_CYCLE_MS } from "@/lib/constants";
+import { SLIDESHOW_CYCLE_MS, SLIDESHOW_JITTER_MS } from "@/lib/constants";
 
 import type { SlideshowImage } from "@/lib/gallery-images";
 
@@ -11,21 +11,24 @@ interface CardSlideshowProps {
   images: SlideshowImage[];
   alt: string;
   /**
-   * Position of this card in the grid (0-based).
-   * Even cards advance immediately; odd cards are offset by half a cycle,
-   * producing the checkerboard stagger: 0,2,4 → wait → 1,3,5 → repeat.
+   * Accepted for backward compatibility; no longer used.
+   * Timing is now randomised per card via a useState lazy initializer.
    */
   cardIndex?: number;
 }
 
-export default function CardSlideshow({ images, alt, cardIndex = 0 }: CardSlideshowProps) {
+export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
   const [idx, setIdx] = useState(0);
   const [portraitFlags, setPortraitFlags] = useState<boolean[]>(() =>
     Array(images.length).fill(false)
   );
-  // Odd-positioned cards wait half a cycle before their first advance so that
-  // adjacent cards never change at the same time.
-  const delay = useRef((cardIndex % 2) * (SLIDESHOW_CYCLE_MS / 2));
+  // Lazy initializer runs exactly once (not on re-renders) — safe to use
+  // Math.random() here. Each card gets its own random interval and start
+  // delay so no two cards ever stay in sync.
+  const [timing] = useState(() => {
+    const intervalMs = SLIDESHOW_CYCLE_MS + Math.random() * SLIDESHOW_JITTER_MS;
+    return { intervalMs, delayMs: Math.random() * intervalMs };
+  });
 
   const next = () => setIdx((prev) => (prev + 1) % images.length);
   const prev = () => setIdx((prev) => (prev - 1 + images.length) % images.length);
@@ -35,19 +38,20 @@ export default function CardSlideshow({ images, alt, cardIndex = 0 }: CardSlides
     if (images.length <= 1) return;
 
     let intervalId: ReturnType<typeof setInterval> | null = null;
+    // Inline advance to avoid adding `next` to the dependency array
+    // (which would re-subscribe the timer every render).
+    const advance = () => setIdx((prev) => (prev + 1) % images.length);
 
     const timeoutId = setTimeout(() => {
-      next();
-      intervalId = setInterval(() => {
-        next();
-      }, SLIDESHOW_CYCLE_MS);
-    }, delay.current);
+      advance();
+      intervalId = setInterval(advance, timing.intervalMs);
+    }, timing.delayMs);
 
     return () => {
       clearTimeout(timeoutId);
       if (intervalId !== null) clearInterval(intervalId);
     };
-  }, [images.length]);
+  }, [images.length, timing.intervalMs, timing.delayMs]);
 
   // Preload the next image whenever the active index changes so it is already
   // in the browser cache before the slide transition fires.

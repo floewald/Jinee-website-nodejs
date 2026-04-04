@@ -3,19 +3,21 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { scrollToId, scrollToTop } from "@/lib/scroll-config";
+import { scrollToTop } from "@/lib/scroll-config";
 
 export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const pathname = usePathname();
-  const isHome = pathname === "/";
 
-  function handleHomeClick(e: React.MouseEvent<HTMLAnchorElement>) {
-    if (isHome) {
-      e.preventDefault();
-      scrollToTop();
-    }
+  /** When already on the target page, scroll to top instead of re-navigating. */
+  function handleNavClick(href: string) {
+    return (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (pathname === href) {
+        e.preventDefault();
+        scrollToTop();
+      }
+    };
   }
 
   function handlePortfolioClick(e: React.MouseEvent<HTMLAnchorElement>) {
@@ -25,21 +27,11 @@ export default function Navigation() {
       setSubmenuOpen((open) => !open);
       return;
     }
-    // On desktop homepage, smooth-scroll to #portfolio section
-    if (isHome) {
+    // On desktop, scroll to top if already on /portfolio/, otherwise navigate
+    if (pathname === "/portfolio/") {
       e.preventDefault();
-      scrollToId("portfolio");
+      scrollToTop();
     }
-    // On subpages the default Link navigation to /portfolio/ applies
-  }
-
-  function handleAnchorClick(id: string) {
-    return (e: React.MouseEvent<HTMLAnchorElement>) => {
-      if (isHome) {
-        e.preventDefault();
-        scrollToId(id);
-      }
-    };
   }
 
   return (
@@ -67,7 +59,7 @@ export default function Navigation() {
           className={menuOpen ? "open" : undefined}
         >
           <li>
-            <Link href="/" onClick={handleHomeClick}>Home</Link>
+            <Link href="/" onClick={handleNavClick("/")}>Home</Link>
           </li>
           <li
             className={`nav-item-portfolio${submenuOpen ? " open" : ""}`}
@@ -75,7 +67,7 @@ export default function Navigation() {
             onMouseLeave={() => setSubmenuOpen(false)}
           >
             <Link
-              href={isHome ? "/#portfolio" : "/portfolio/"}
+              href="/portfolio/"
               className="nav-portfolio-toggle"
               onClick={handlePortfolioClick}
             >
@@ -97,10 +89,10 @@ export default function Navigation() {
             </ul>
           </li>
           <li>
-            <Link href={isHome ? "/#about" : "/#about"} onClick={handleAnchorClick("about")}>About</Link>
+            <Link href="/about/" onClick={handleNavClick("/about/")}>About</Link>
           </li>
           <li>
-            <Link href={isHome ? "/#contact" : "/#contact"} onClick={handleAnchorClick("contact")}>Contact</Link>
+            <Link href="/contact/" onClick={handleNavClick("/contact/")}>Contact</Link>
           </li>
         </ul>
       </nav>

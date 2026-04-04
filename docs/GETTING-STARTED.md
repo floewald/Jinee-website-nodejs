@@ -15,21 +15,27 @@ Technically it is a **static website** — meaning the final product is a folder
 ## Understanding the Technology (Zero Knowledge Edition)
 
 ### TypeScript / JavaScript
+
 JavaScript is the programming language of the web — it runs directly in browsers. TypeScript is "JavaScript with types," meaning it catches typos and mistakes before you even run the code. Files ending in `.ts` or `.tsx` are TypeScript files.
 
 ### React
+
 React is a JavaScript library for building user interfaces. Instead of writing raw HTML, you write **components** — reusable pieces of UI. For example, `Header.tsx` is one component that is reused on every page. Files ending in `.tsx` contain React components (JSX — HTML-like syntax inside TypeScript).
 
 ### Next.js
+
 Next.js is a framework built on top of React. It adds things like file-based routing (the folder `src/app/about/page.tsx` automatically becomes the `/about` URL), optimised images, and the ability to export everything as static HTML files.
 
 ### Tailwind CSS
+
 Tailwind CSS is a styling system. Instead of writing a separate `.css` file, you apply short utility classes directly in your HTML/JSX: `class="text-center font-bold"`. However, in this project most custom styles are in `src/app/globals.css` using plain CSS — Tailwind is used mainly for the base reset.
 
 ### npm (Node Package Manager)
+
 npm is a tool for installing and running JavaScript packages. You run commands like `npm install` (sets up the project) and `npm run dev` (starts the local preview). All npm commands are run in your terminal / command line.
 
 ### Node.js
+
 Node.js is a runtime that lets JavaScript run on your computer (outside the browser). npm requires Node.js. You do not need to understand Node.js deeply — you just need it installed.
 
 ---
@@ -39,40 +45,46 @@ Node.js is a runtime that lets JavaScript run on your computer (outside the brow
 Work through this list in order. Each step includes how to check if it is already installed.
 
 ### 1. Git
+
 Used to download and track changes to the project code.
 
 **Check:** `git --version`
 
-**Install:** https://git-scm.com/downloads — click your operating system
+**Install:** <https://git-scm.com/downloads> — click your operating system
 
 ### 2. Node.js (version 20 or higher)
+
 The JavaScript runtime. This also installs npm automatically.
 
 **Check:** `node -v` (should say v20.x.x or higher)
 
 **Install:**
-- Go to https://nodejs.org/
+
+- Go to <https://nodejs.org/>
 - Download the **LTS** version (the one labeled "Recommended for most users")
 - Run the installer — accept all defaults
 
 ### 3. A Code Editor
+
 Visual Studio Code (VS Code) is recommended because it shows TypeScript errors inline.
 
-**Install:** https://code.visualstudio.com/
+**Install:** <https://code.visualstudio.com/>
 
 **Useful VS Code extensions (search by name in the Extensions panel):**
+
 - **ESLint** — highlights code style issues
 - **Prettier** — auto-formats code on save
 - **Tailwind CSS IntelliSense** — autocompletes CSS class names
 
 ### 4. (Optional) PHP 7.4+
+
 Only needed if you want to test the contact form or download system locally. The portfolio gallery and all visual parts work fine without PHP.
 
 **Check:** `php -v`
 
-**Install (macOS):** `brew install php` (requires Homebrew from https://brew.sh)
+**Install (macOS):** `brew install php` (requires Homebrew from <https://brew.sh>)
 
-**Install (Windows):** Download from https://windows.php.net/download
+**Install (Windows):** Download from <https://windows.php.net/download>
 
 ---
 
@@ -103,7 +115,7 @@ This downloads all the JavaScript libraries the project needs (React, Next.js, e
 npm run dev
 ```
 
-Open your browser and go to **http://localhost:3000** — you should see the website.
+Open your browser and go to **<http://localhost:3000>** — you should see the website.
 
 The development server **hot-reloads**: when you save a file, the browser updates automatically without needing to refresh.
 
@@ -117,6 +129,8 @@ Press `Ctrl + C` in the terminal to stop the server.
 src/
 ├── app/                   ← Pages (URL structure mirrors folder structure)
 │   ├── page.tsx           ← Homepage: /
+│   ├── contact/
+│   │   └── page.tsx       ← Contact page: /contact/
 │   ├── portfolio/
 │   │   ├── page.tsx       ← Portfolio overview: /portfolio/
 │   │   ├── photography/[slug]/page.tsx   ← Individual photo project page
@@ -126,13 +140,14 @@ src/
 │
 ├── components/            ← Reusable React building blocks
 │   ├── layout/            ← Header, Footer, Navigation
-│   ├── sections/          ← Homepage sections (About, Gallery, etc.)
-│   ├── gallery/           ← Photo gallery, lightbox, slideshow
+│   ├── sections/          ← Homepage sections (About, Gallery, Hero, etc.)
+│   ├── gallery/           ← Photo gallery (masonry), lightbox, slideshow
 │   ├── forms/             ← Contact form
 │   └── video/             ← YouTube embed player
 │
 ├── content/               ← DATA: JSON files describing each portfolio project
 │   └── portfolio/
+│       ├── index-config.json  ← Homepage collage images + Instagram links
 │       ├── photography.json   ← All photography projects
 │       ├── video.json         ← All video projects
 │       └── social-media.json  ← All social media projects
@@ -153,9 +168,8 @@ public/
 
 You do not write code — you edit a JSON file and add images.
 
-1. **Add images** to `Jinee_website/assets-raw/photography/my-new-project/`
-2. **Generate WebP** versions: `npm run build:images`
-3. **Edit** `src/content/portfolio/photography.json` — add a new entry:
+1. **Add images** to `assets-raw/photography/my-new-project/`
+2. **Edit** `src/content/portfolio/photography.json` — add a new entry:
 
 ```json
 {
@@ -175,16 +189,25 @@ You do not write code — you edit a JSON file and add images.
 }
 ```
 
+3. **Run** `npm run build` to generate WebP images + static pages.
 4. **Run** `npm run dev` to preview it at `/portfolio/photography/my-new-project/`
+
+Note: `npm run build` already runs image generation (`npm run build:images`) before
+the Next.js export. Use `npm run build:images` separately only when you want a
+faster image-only regeneration during editing.
 
 See [ADDING-PROJECTS.md](ADDING-PROJECTS.md) for the full guide.
 
 ### Editing Page Text or Layout
 
 Most text in components is hardcoded in the TSX files:
+
 - Homepage about text → `src/components/sections/AboutSection.tsx`
-- Contact details → `src/components/sections/ContactSection.tsx`
+- Contact page (`/contact/`) → `src/app/contact/page.tsx`; contact form component → `src/components/sections/ContactSection.tsx`
 - Footer text → `src/components/layout/Footer.tsx`
+- **Homepage hero image** → `src/app/page.tsx` (change the `src` prop on `<HeroSection />`)
+- **Homepage collage images** → `src/content/portfolio/index-config.json` → `collageImages` array (edit `src`, `alt`, `srcFull` fields)
+- **Homepage videography section** — add/remove video cards via `src/content/portfolio/video.json`
 
 Open the file, find the text, change it, save — the browser reloads automatically.
 
@@ -214,7 +237,7 @@ npm run type-check    # TypeScript type errors
 npm run test
 
 # When done and ready to deploy — build the static files
-npm run build         # creates the out/ folder
+npm run build         # regenerates images + creates the out/ folder
 # Then upload out/ to the server via FTP
 ```
 
@@ -239,11 +262,13 @@ You can run `npm run type-check` at any time to see all TypeScript errors withou
 The project has two types of tests:
 
 **Unit tests** (fast, ~2 seconds) — check individual React components:
+
 ```bash
 npm run test
 ```
 
 **End-to-end tests** (slower, ~30 seconds) — open a real browser and click through pages:
+
 ```bash
 npm run test:e2e
 ```
@@ -255,21 +280,33 @@ Tests run automatically before every `git commit` (via Husky). If they fail, the
 ## Troubleshooting
 
 ### "npm: command not found"
+
 → Node.js is not installed. Go to Prerequisites step 2.
 
 ### "Cannot find module" error after `npm run dev`
-→ Run `npm install` again to restore missing packages.
+
+→ Run `npm install` again to restore missing packages. If the error persists after installing, the `.next` cache is stale — clear it and restart:
+
+```bash
+rm -rf .next
+npm run dev
+```
 
 ### Port 3000 already in use
+
 → Another process is using port 3000. Either stop that process or run: `npm run dev -- -p 3001` to use port 3001 instead.
 
 ### Images not showing
-→ WebP images may not have been generated. Run `npm run build:images` first.
+
+→ WebP images may not have been generated. Run `npm run build`.
+  (For image-only regeneration during editing, `npm run build:images` also works.)
 
 ### ESLint blocks the commit
+
 → Run `npm run lint` to see the errors, fix them, then commit again.
 
 ### TypeScript errors in VS Code but `npm run dev` works
+
 → VS Code may be using a different TypeScript version. Press `Cmd+Shift+P` (macOS) → "TypeScript: Select TypeScript Version" → "Use Workspace Version".
 
 ---
@@ -278,7 +315,7 @@ Tests run automatically before every `git commit` (via Husky). If they fail, the
 
 ### How it works — no Node.js needed on the server
 
-When you run `npm run build`, Next.js compiles the whole site into a folder called `out/`. That folder contains only plain HTML/CSS/JS files — ordinary web files a browser can read directly. You upload `out/` to the web server via FTP. The server just stores and delivers the files; **it does not need Node.js installed.**
+When you run `npm run build`, the project first regenerates images/manifests and then Next.js compiles the site into a folder called `out/`. That folder contains only plain HTML/CSS/JS files — ordinary web files a browser can read directly. You upload `out/` to the web server via FTP. The server just stores and delivers the files; **it does not need Node.js installed.**
 
 Node.js and npm are only needed **on your local machine** (or in GitHub Actions) to run the build. Once `out/` is produced, Node.js is no longer part of the picture.
 

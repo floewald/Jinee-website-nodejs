@@ -2,16 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { portfolioIndexConfig } from "@/lib/portfolio-config";
+import RevealGrid from "@/components/portfolio/RevealGrid";
 
 export const metadata: Metadata = {
   title: "Social Media",
   description: "Instagram reels, posts and lifestyle content by Jinee Chen.",
 };
-
-/** Extract the project slug from an image path like /assets/social-media/SLUG/... */
-function slugFromImage(imagePath: string): string {
-  return imagePath.split("/")[3];
-}
 
 export default function SocialMediaIndexPage() {
   const links = portfolioIndexConfig.socialMediaLinks;
@@ -21,12 +17,14 @@ export default function SocialMediaIndexPage() {
       <h1 className="page-title">Social Media</h1>
       <hr className="section-title-divider" aria-hidden="true" />
 
-      <div className="instagram-previews">
+      <RevealGrid className="instagram-previews">
         {links.map((link) => (
           <Link
             key={link.url}
-            href={`/portfolio/social-media/${slugFromImage(link.image)}/`}
+            href={link.url}
             className="instagram-preview"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Image
               src={link.image}
@@ -40,7 +38,7 @@ export default function SocialMediaIndexPage() {
             <span className="play-overlay" aria-hidden="true">▶</span>
           </Link>
         ))}
-      </div>
+      </RevealGrid>
     </main>
   );
 }

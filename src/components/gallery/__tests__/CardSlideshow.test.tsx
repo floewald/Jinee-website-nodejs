@@ -56,13 +56,13 @@ function swipeRight(el: Element) {
 
 describe("CardSlideshow", () => {
   it("renders one img element per image", () => {
-    const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" />);
+    const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" cardIndex={0} />);
     // querySelector finds all <img> regardless of alt/role
     expect(container.querySelectorAll("img")).toHaveLength(3);
   });
 
   it("the first slide is active on initial render", () => {
-    const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" />);
+    const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" cardIndex={0} />);
     const slides = container.querySelectorAll(".card-slideshow__slide");
     expect(slides[0]).toHaveClass("card-slideshow__slide--active");
     expect(slides[1]).not.toHaveClass("card-slideshow__slide--active");
@@ -70,21 +70,21 @@ describe("CardSlideshow", () => {
   });
 
   it("swipe left advances to the second slide", () => {
-    const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" />);
+    const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" cardIndex={0} />);
     swipeLeft(container.querySelector(".card-slideshow")!);
     const slides = container.querySelectorAll(".card-slideshow__slide");
     expect(slides[1]).toHaveClass("card-slideshow__slide--active");
   });
 
   it("swipe right from the first slide wraps to the last slide", () => {
-    const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" />);
+    const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" cardIndex={0} />);
     swipeRight(container.querySelector(".card-slideshow")!);
     const slides = container.querySelectorAll(".card-slideshow__slide");
     expect(slides[2]).toHaveClass("card-slideshow__slide--active");
   });
 
   it("swipe left wraps from the last slide back to the first", () => {
-    const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" />);
+    const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" cardIndex={0} />);
     const track = container.querySelector(".card-slideshow")!;
     // Advance to last slide via two left swipes
     swipeLeft(track);
@@ -100,7 +100,7 @@ describe("CardSlideshow", () => {
       { src: "/img/a-800.webp", blur: "data:image/webp;base64,TESTBLUR" },
     ];
     const { container } = render(
-      <CardSlideshow images={imagesWithBlur} alt="Blur test" />
+      <CardSlideshow images={imagesWithBlur} alt="Blur test" cardIndex={0} />
     );
     const img = container.querySelector("img")!;
     expect(img).toHaveAttribute("blurDataURL", "data:image/webp;base64,TESTBLUR");
@@ -108,7 +108,7 @@ describe("CardSlideshow", () => {
 
   it("does not start autoplay when only one image is provided", () => {
     const { container } = render(
-      <CardSlideshow images={[IMAGES[0]]} alt="Single" />
+      <CardSlideshow images={[IMAGES[0]]} alt="Single" cardIndex={0} />
     );
     act(() => {
       jest.advanceTimersByTime(20_000);
@@ -126,7 +126,7 @@ describe("CardSlideshow", () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).Image = MockImage;
 
-    const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" />);
+    const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" cardIndex={0} />);
     swipeLeft(container.querySelector(".card-slideshow")!);
 
     // After advancing to index 1, the next image (index 2) should be preloaded

@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test.describe("Contact Form", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/#contact");
+    await page.goto("/contact/");
   });
 
   test("shows required fields", async ({ page }) => {
@@ -50,15 +50,33 @@ test.describe("Contact Form", () => {
   });
 
   test("persists draft in sessionStorage", async ({ page }) => {
-    await page.fill("#cf-first-name", "Draft");
+    const firstName = page.locator("#cf-first-name");
+    await firstName.fill("Draft");
+    await firstName.blur();
     await page.fill("#cf-email", "draft@example.com");
 
-    const draft = await page.evaluate(() =>
-      sessionStorage.getItem("contactFormDraft")
-    );
-    expect(draft).toBeTruthy();
-    const parsed = JSON.parse(draft!);
-    expect(parsed.firstName).toBe("Draft");
-    expect(parsed.email).toBe("draft@example.com");
+    await expect
+      .poll(async () =>
+        page.evaluate(() => {
+          const raw = sessionStorage.getItem("contactFormDraft");
+          if (!raw) return null;
+          try {
+            const parsed = JSON.parse(raw) as {
+              firstName?: string;
+              email?: string;
+            };
+            return {
+              firstName: parsed.firstName ?? "",
+              email: parsed.email ?? "",
+            };
+          } catch {
+            return null;
+          }
+        })
+      )
+      .toEqual({
+        firstName: "Draft",
+        email: "draft@example.com",
+      });
   });
 });

@@ -10,16 +10,12 @@ import {
 import { MAX_CARDS } from "@/lib/constants";
 import { getProjectSlideshowImages, type SlideshowImage } from "@/lib/gallery-images";
 import CardSlideshow from "@/components/gallery/CardSlideshow";
+import RevealGrid from "@/components/portfolio/RevealGrid";
 
 export const metadata: Metadata = {
   title: "Portfolio",
   description: "Photography, video production, and social media content by Jinee Chen.",
 };
-
-/** Extract the project slug from an image path like /assets/social-media/SLUG/... */
-function slugFromImage(imagePath: string): string {
-  return imagePath.split("/")[3];
-}
 
 export default function PortfolioPage() {
   const photographyCards = getPhotographyCards().slice(0, MAX_CARDS);
@@ -27,13 +23,13 @@ export default function PortfolioPage() {
   const socialMediaLinks = portfolioIndexConfig.socialMediaLinks;
 
   return (
-    <main>
+    <main className="portfolio-hub">
       {/* Photography section */}
       <section className="portfolio-section section-bg-white">
         <div className="container">
           <h2 className="section-title section-title--center">Photography</h2>
           <hr className="section-title-divider" aria-hidden="true" />
-          <div className="project-grid">
+          <RevealGrid className="project-grid">
             {photographyCards.map((project, cardIndex) => {
               const slideshowImages = getProjectSlideshowImages(project.slug, "photography");
               const previewImages: SlideshowImage[] = slideshowImages.length > 1
@@ -72,7 +68,7 @@ export default function PortfolioPage() {
               </Link>
               );
             })}
-          </div>
+          </RevealGrid>
           <div className="section-cta">
             <Link href="/portfolio/photography/" className="btn btn--primary">
               More Photography Projects
@@ -84,11 +80,11 @@ export default function PortfolioPage() {
       {/* Video section */}
       <section className="portfolio-section section-bg-charcoal">
         <div className="container">
-          <h2 className="section-title section-title--center" style={{ color: "#fff" }}>
+          <h2 className="section-title section-title--center">
             Videography
           </h2>
-          <hr className="section-title-divider" style={{ borderTopColor: "rgba(255,255,255,0.2)" }} aria-hidden="true" />
-          <div className="project-grid">
+          <hr className="section-title-divider" aria-hidden="true" />
+          <RevealGrid className="project-grid">
             {videoCards.map((project) => (
               <Link
                 key={project.slug}
@@ -113,7 +109,7 @@ export default function PortfolioPage() {
                 </div>
               </Link>
             ))}
-          </div>
+          </RevealGrid>
           <div className="section-cta">
             <Link href="/portfolio/video/" className="btn btn--inverted">
               More Video Projects
@@ -127,12 +123,14 @@ export default function PortfolioPage() {
         <div className="container">
           <h2 className="section-title section-title--center">Social Media</h2>
           <hr className="section-title-divider" aria-hidden="true" />
-          <div className="instagram-previews">
+          <RevealGrid className="instagram-previews">
             {socialMediaLinks.map((link) => (
               <Link
                 key={link.url}
-                href={`/portfolio/social-media/${slugFromImage(link.image)}/`}
+                href={link.url}
                 className="instagram-preview"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Image
                   src={link.image}
@@ -146,7 +144,7 @@ export default function PortfolioPage() {
                 <span className="play-overlay" aria-hidden="true">▶</span>
               </Link>
             ))}
-          </div>
+          </RevealGrid>
           <div className="section-cta">
             <Link href="/portfolio/social-media/" className="btn btn--primary">
               More Social Media Projects

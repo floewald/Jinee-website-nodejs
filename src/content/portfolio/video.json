@@ -93,7 +93,7 @@
     "title": "8world |《看见主播》40、50岁建康外食",
     "description": "8world |《看见主播》40、50岁建康外食",
     "longDescription": "A documentary profiling healthy dining habits and recommendations for viewers in their 40s and 50s.",
-    "heading": "Director | Videographer | 📍 Singapore",
+    "heading": "Co-Director | Videographer | 📍 Singapore",
     "ogImage": "https://jineechen.com/assets/video/healthy-dining/healthy-dining-800.webp",
     "visible": true,
     "videos": [
@@ -162,6 +162,27 @@
         "/assets/video/blind-kitchen-chefs/blind-kitchen-chefs-2-800.webp",
         "/assets/video/blind-kitchen-chefs/blind-kitchen-chefs-3-800.webp"
       ]
+    }
+  },
+  {
+    "type": "video",
+    "slug": "lion-dancers",
+    "title": "Lion Dancers | Documentary",
+    "description": "Documentary featuring lion dancers and their cultural significance.",
+    "longDescription": "A short documentary exploring the art and tradition of lion dancing in Singapore. The film delves into the history, techniques, and cultural importance of this vibrant performance art.",
+    "heading": "Producer | Director | Videographer | 📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/video/lion-dancers/lion-dancers-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "Lion Dancers | Documentary",
+        "embedUrl": "https://www.youtube.com/embed/k_FZwxEskO4&t=3s",
+        "uploadDate": "2023-01-01T00:00:00+08:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA | Lion Dancers",
+      "thumbnail": "/assets/video/lion-dancers/lion-dancers-800.webp"
     }
   },
   {

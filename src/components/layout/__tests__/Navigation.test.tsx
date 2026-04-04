@@ -1,9 +1,8 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Navigation from "@/components/layout/Navigation";
 
-// Mock Next.js hooks
 jest.mock("next/navigation", () => ({
-  usePathname: jest.fn(() => "/"),
+  usePathname: () => "/",
 }));
 
 jest.mock("next/link", () => ({
@@ -29,6 +28,24 @@ describe("Navigation", () => {
     expect(screen.getByRole("link", { name: /home/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /about/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /contact/i })).toBeInTheDocument();
+  });
+
+  it("about link points to /about/", () => {
+    render(<Navigation />);
+    const aboutLink = screen.getByRole("link", { name: /about/i });
+    expect(aboutLink).toHaveAttribute("href", "/about/");
+  });
+
+  it("portfolio link points to /portfolio/ (not an anchor)", () => {
+    render(<Navigation />);
+    const portfolioLink = screen.getByRole("link", { name: /^portfolio$/i });
+    expect(portfolioLink).toHaveAttribute("href", "/portfolio/");
+  });
+
+  it("contact link points to the /contact/ page (not an anchor)", () => {
+    render(<Navigation />);
+    const contactLink = screen.getByRole("link", { name: /contact/i });
+    expect(contactLink).toHaveAttribute("href", "/contact/");
   });
 
   it("renders the nav toggle button for mobile", () => {

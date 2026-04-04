@@ -29,13 +29,13 @@ describe("DownloadToolbar", () => {
 
   it("shows select all and clear buttons when selectionMode is active", () => {
     render(<DownloadToolbar {...baseProps} selectionMode={true} />);
-    expect(screen.getByRole("button", { name: /select all/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /^all$/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /clear/i })).toBeInTheDocument();
   });
 
   it("hides select all and clear buttons when selectionMode is off", () => {
     render(<DownloadToolbar {...baseProps} selectionMode={false} />);
-    expect(screen.queryByRole("button", { name: /select all/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /^all$/i })).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /clear/i })).not.toBeInTheDocument();
   });
 
