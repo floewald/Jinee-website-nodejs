@@ -1419,25 +1419,28 @@ iframe.video-embed {
   content: '';
   position: absolute;
   inset: 0;
-  background: #fff;
-  border: 2px solid #bbb;
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 7px;
   box-sizing: border-box;
+  backdrop-filter: blur(2px);
+  transition: background 0.15s, border-color 0.15s;
 }
 .gallery-checkbox:has(.inline-select:checked)::before {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.92);
   border-color: #1f1f1f;
 }
 .gallery-checkbox:has(.inline-select:checked)::after {
   content: '';
   position: absolute;
-  left: 7px;
-  top: 3px;
-  width: 6px;
-  height: 11px;
-  border: 2px solid #1f1f1f;
+  left: 6px;
+  top: 4px;
+  width: 7px;
+  height: 10px;
+  border: 2.5px solid #1f1f1f;
   border-top: none;
   border-left: none;
+  border-radius: 0 2px 2px 0;
   transform: rotate(45deg);
 }
 .gallery-checkbox:has(.inline-select:focus-visible)::before {
@@ -1600,7 +1603,8 @@ iframe.video-embed {
 }
 .portfolio-section { padding-top: 0; }
 .project-description {
-  max-width: 65ch;
+  max-width: 100%;
+  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   line-height: 1.6;
   color: var(--charcoal);
