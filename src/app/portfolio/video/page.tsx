@@ -4,7 +4,7 @@ import ProjectCardsGrid from "@/components/portfolio/ProjectCardsGrid";
 import RevealGrid from "@/components/portfolio/RevealGrid";
 
 export const metadata: Metadata = {
-  title: "Video",
+  title: "Videography",
   description: "Documentary and commercial video productions by Jinee Chen.",
 };
 
