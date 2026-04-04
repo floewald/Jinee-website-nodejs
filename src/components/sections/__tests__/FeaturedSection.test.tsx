@@ -9,7 +9,8 @@ jest.mock("@/lib/portfolio-config", () => ({
       type: "video",
       title: "Test Video",
       description: "A test video",
-      heading: "Producer | Director | Videographer | 📍 Singapore",
+      heading: "Producer | Director | Videographer",
+      location: "📍 Singapore",
       ogImage: "/test.webp",
       videos: [],
       portfolioCard: {

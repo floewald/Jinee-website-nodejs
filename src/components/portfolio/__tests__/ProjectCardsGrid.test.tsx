@@ -30,7 +30,7 @@ jest.mock("@/components/gallery/CardSlideshow", () => ({
 
 jest.mock("next/image", () => ({
   __esModule: true,
-  default: (props: Record<string, unknown>) => (
+  default: ({ unoptimized: _unoptimized, ...props }: Record<string, unknown>) => (
     // eslint-disable-next-line @next/next/no-img-element
     <img alt="" {...props} />
   ),
@@ -55,7 +55,8 @@ const VIDEO_PROJECT: VideoProject = {
   type: "video",
   title: "Stuck with Low Pay",
   description: "Documentary",
-  heading: "Producer | Director | 📍 Taiwan",
+  heading: "Producer | Director",
+  location: "📍 Taiwan",
   ogImage: "/stuck.webp",
   videos: [],
   portfolioCard: { cardTitle: "CNA | Stuck With Low Pay", thumbnail: "/thumb.webp" },
@@ -140,6 +141,6 @@ describe("ProjectCardsGrid", () => {
         fallbackImageHeight={450}
       />
     );
-    expect(screen.getByText("CNA | Stuck With Low Pay")).toBeInTheDocument();
+    expect(screen.getByText("Stuck with Low Pay")).toBeInTheDocument();
   });
 });

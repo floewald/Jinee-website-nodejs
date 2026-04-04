@@ -45,6 +45,8 @@ export interface VideoItem {
 
 export interface VideoProject extends BaseProject {
   type: "video";
+  /** Filming location(s), e.g. "Singapore" or "Singapore & Taiwan" */
+  location?: string;
   /** Longer intro paragraph shown above the video player */
   longDescription?: string;
   videos: VideoItem[];

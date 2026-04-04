@@ -187,18 +187,18 @@ jobs:
           with open('/tmp/backend-config/download_config.php', 'w') as f:
               f.write(content)
 
-            # contact/config.php (public backend/contact)
-            with open('backend/contact/config.template.php') as f:
+          # contact/config.php (public backend/contact)
+          with open('backend/contact/config.template.php') as f:
               contact = f.read()
-            contact = contact.replace('%%CONTACT_RECIPIENT%%', os.environ['CONTACT_RECIPIENT'])
-            contact = contact.replace('%%CONTACT_FROM_EMAIL%%', os.environ['CONTACT_FROM_EMAIL'])
-            contact = contact.replace('%%CONTACT_FROM_NAME%%', os.environ['CONTACT_FROM_NAME'])
-            contact = contact.replace('%%CONTACT_SMTP_HOST%%', os.environ['CONTACT_SMTP_HOST'])
-            contact = contact.replace('%%CONTACT_SMTP_PORT%%', os.environ['CONTACT_SMTP_PORT'])
-            contact = contact.replace('%%CONTACT_SMTP_USER%%', os.environ['CONTACT_SMTP_USER'])
-            contact = contact.replace('%%CONTACT_SMTP_PASS%%', os.environ['CONTACT_SMTP_PASS'])
-            contact = contact.replace('%%CONTACT_SMTP_SECURE%%', os.environ['CONTACT_SMTP_SECURE'])
-            with open('/tmp/backend-contact/config.php', 'w') as f:
+          contact = contact.replace('%%CONTACT_RECIPIENT%%', os.environ['CONTACT_RECIPIENT'])
+          contact = contact.replace('%%CONTACT_FROM_EMAIL%%', os.environ['CONTACT_FROM_EMAIL'])
+          contact = contact.replace('%%CONTACT_FROM_NAME%%', os.environ['CONTACT_FROM_NAME'])
+          contact = contact.replace('%%CONTACT_SMTP_HOST%%', os.environ['CONTACT_SMTP_HOST'])
+          contact = contact.replace('%%CONTACT_SMTP_PORT%%', os.environ['CONTACT_SMTP_PORT'])
+          contact = contact.replace('%%CONTACT_SMTP_USER%%', os.environ['CONTACT_SMTP_USER'])
+          contact = contact.replace('%%CONTACT_SMTP_PASS%%', os.environ['CONTACT_SMTP_PASS'])
+          contact = contact.replace('%%CONTACT_SMTP_SECURE%%', os.environ['CONTACT_SMTP_SECURE'])
+          with open('/tmp/backend-contact/config.php', 'w') as f:
               f.write(contact)
           PYEOF
 

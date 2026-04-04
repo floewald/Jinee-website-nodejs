@@ -45,13 +45,13 @@ export default function PortfolioPage() {
                   {previewImages && previewImages.length > 1 ? (
                     <CardSlideshow
                       images={previewImages}
-                      alt={project.portfolioCard!.cardTitle}
+                      alt={project.title}
                       cardIndex={cardIndex}
                     />
                   ) : (
                     <Image
                       src={project.portfolioCard!.thumbnail}
-                      alt={project.portfolioCard!.cardTitle}
+                      alt={project.title}
                       width={800}
                       height={534}
                       loading="lazy"
@@ -62,7 +62,7 @@ export default function PortfolioPage() {
                 </div>
                 <div className="project-card__body">
                   <h3 className="project-card__title">
-                    {project.portfolioCard!.cardTitle}
+                    {project.title}
                   </h3>
                 </div>
               </Link>
@@ -85,30 +85,45 @@ export default function PortfolioPage() {
           </h2>
           <hr className="section-title-divider" aria-hidden="true" />
           <RevealGrid className="project-grid">
-            {videoCards.map((project) => (
+            {videoCards.map((project, cardIndex) => {
+              const slideshowImages = getProjectSlideshowImages(project.slug, "video");
+              const previewImages: SlideshowImage[] = slideshowImages.length > 1
+                ? slideshowImages
+                : (project.portfolioCard!.previewImages ?? []).map((src) => ({ src }));
+              return (
               <Link
                 key={project.slug}
                 href={projectPath(project)}
                 className="project-card"
               >
                 <div className="project-card__thumb">
-                  <Image
-                    src={project.portfolioCard!.thumbnail}
-                    alt={project.portfolioCard!.cardTitle}
-                    width={800}
-                    height={450}
-                    loading="lazy"
-                    className="project-card__img"
-                    unoptimized
-                  />
+                  {previewImages.length > 1 ? (
+                    <CardSlideshow
+                      images={previewImages}
+                      alt={project.title}
+                      cardIndex={cardIndex}
+                    />
+                  ) : (
+                    <Image
+                      src={project.portfolioCard!.thumbnail}
+                      alt={project.title}
+                      width={800}
+                      height={450}
+                      loading="lazy"
+                      className="project-card__img"
+                      unoptimized
+                    />
+                  )}
                 </div>
                 <div className="project-card__body">
-                  <h3 className="project-card__title">
-                    {project.portfolioCard!.cardTitle}
-                  </h3>
+                  <h3 className="project-card__title">{project.title}</h3>
+                  {project.location && (
+                    <p className="project-card__location">{project.location}</p>
+                  )}
                 </div>
               </Link>
-            ))}
+              );
+            })}
           </RevealGrid>
           <div className="section-cta">
             <Link href="/portfolio/video/" className="btn btn--inverted">
