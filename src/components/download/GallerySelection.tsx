@@ -84,9 +84,9 @@ export default function GallerySelection({
                   aria-hidden="true"
                 >
                   <path
-                    d="M 3 13 Q 7.5 18.5 19 5"
-                    stroke="#1f1f1f"
-                    strokeWidth="2.2"
+                    d="M 3.5 11.5 L 8.5 16.5 L 19 5"
+                    stroke="#595959"
+                    strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />

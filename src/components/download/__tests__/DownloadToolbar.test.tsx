@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import DownloadToolbar from "@/components/download/DownloadToolbar";
 
 describe("DownloadToolbar", () => {
@@ -61,5 +61,42 @@ describe("DownloadToolbar", () => {
     );
     fireEvent.click(screen.getByRole("button", { name: /download/i }));
     expect(baseProps.onDownload).toHaveBeenCalledTimes(1);
+  });
+
+  it("shows All button as active when all images are selected", () => {
+    render(
+      <DownloadToolbar {...baseProps} selectionMode={true} selectedCount={5} totalCount={5} />
+    );
+    expect(screen.getByRole("button", { name: /^all$/i })).toHaveClass("is-active");
+  });
+
+  it("shows All button as inactive when not all images are selected", () => {
+    render(
+      <DownloadToolbar {...baseProps} selectionMode={true} selectedCount={3} totalCount={5} />
+    );
+    expect(screen.getByRole("button", { name: /^all$/i })).not.toHaveClass("is-active");
+  });
+
+  it("flashes Clear button as active for 100ms then resets", () => {
+    jest.useFakeTimers();
+    render(<DownloadToolbar {...baseProps} selectionMode={true} />);
+    const clearBtn = screen.getByRole("button", { name: /clear/i });
+
+    fireEvent.click(clearBtn);
+    expect(clearBtn).toHaveClass("is-active");
+
+    act(() => jest.advanceTimersByTime(100));
+    expect(clearBtn).not.toHaveClass("is-active");
+    jest.useRealTimers();
+  });
+
+  it("hides All button when selection mode is toggled off", () => {
+    const { rerender } = render(
+      <DownloadToolbar {...baseProps} selectionMode={true} selectedCount={5} totalCount={5} />
+    );
+    expect(screen.getByRole("button", { name: /^all$/i })).toHaveClass("is-active");
+
+    rerender(<DownloadToolbar {...baseProps} selectionMode={false} />);
+    expect(screen.queryByRole("button", { name: /^all$/i })).not.toBeInTheDocument();
   });
 });

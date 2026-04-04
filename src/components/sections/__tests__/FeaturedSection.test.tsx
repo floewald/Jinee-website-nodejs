@@ -72,8 +72,8 @@ describe("FeaturedSection", () => {
     expect(screen.queryByText("Portfolio")).not.toBeInTheDocument();
   });
 
-  it("renders video project cards using project.title", () => {
-    expect(screen.getByText("Test Video")).toBeInTheDocument();
+  it("renders video project cards using project.heading", () => {
+    expect(screen.getByText("Producer | Director | Videographer")).toBeInTheDocument();
   });
 
   it("renders location in a separate element outside the title", () => {
@@ -87,7 +87,7 @@ describe("FeaturedSection", () => {
   });
 
   it("renders video card with correct link", () => {
-    const link = screen.getByText("Test Video").closest("a");
+    const link = screen.getByText("Producer | Director | Videographer").closest("a");
     expect(link).toHaveAttribute("href", "/portfolio/video/test-video/");
   });
 

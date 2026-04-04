@@ -11,7 +11,7 @@ import type {
 import { validatePortfolioData } from "@/lib/portfolio-schemas";
 
 import photographyData from "@/content/portfolio/photography.json";
-import videoData from "@/content/portfolio/video.json";
+import videoData from "@/content/portfolio/videography.json";
 import socialMediaData from "@/content/portfolio/social-media.json";
 import indexConfigData from "@/content/portfolio/index-config.json";
 

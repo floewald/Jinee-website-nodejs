@@ -15,8 +15,14 @@ export function validateSlug(slug: string): boolean {
 /**
  * Returns the absolute path of the content JSON file for the given type.
  */
+const CONTENT_JSON_FILENAMES: Record<ProjectType, string> = {
+  photography: "photography",
+  video: "videography",
+  "social-media": "social-media",
+};
+
 export function getContentJsonPath(type: ProjectType): string {
-  return path.join(ROOT, "src", "content", "portfolio", `${type}.json`);
+  return path.join(ROOT, "src", "content", "portfolio", `${CONTENT_JSON_FILENAMES[type]}.json`);
 }
 
 /**

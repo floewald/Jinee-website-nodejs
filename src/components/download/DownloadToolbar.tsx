@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 interface DownloadToolbarProps {
   selectionMode: boolean;
   selectedCount: number;
@@ -19,12 +21,33 @@ export default function DownloadToolbar({
   onClearSelection,
   onDownload,
 }: DownloadToolbarProps) {
+  const [clearFlash, setClearFlash] = useState(false);
+  const allSelected = selectedCount === totalCount && totalCount > 0;
+
+  function handleToggleSelection() {
+    if (selectionMode) {
+      setClearFlash(false);
+    }
+    onToggleSelection();
+  }
+
+  function handleSelectAll() {
+    setClearFlash(false);
+    onSelectAll();
+  }
+
+  function handleClearSelection() {
+    setClearFlash(true);
+    onClearSelection();
+    setTimeout(() => setClearFlash(false), 100);
+  }
+
   return (
     <div className="download-toolbar">
       <button
         className={`download-toggle btn btn--outline${selectionMode ? " is-active" : ""}`}
         aria-pressed={selectionMode}
-        onClick={onToggleSelection}
+        onClick={handleToggleSelection}
       >
         Select
       </button>
@@ -43,15 +66,23 @@ export default function DownloadToolbar({
             </svg>
           </button>
 
+          <span className="toolbar-pipe" aria-hidden="true">|</span>
+
           <span className="selected-count selected-count--badge" aria-live="polite">
             {selectedCount} selected
           </span>
 
-          <button className="btn btn--outline" onClick={onSelectAll}>
+          <button
+            className={`btn btn--outline${allSelected ? " is-active" : ""}`}
+            onClick={handleSelectAll}
+          >
             All
           </button>
 
-          <button className="btn btn--outline" onClick={onClearSelection}>
+          <button
+            className={`btn btn--outline${clearFlash ? " is-active" : ""}`}
+            onClick={handleClearSelection}
+          >
             Clear
           </button>
         </>

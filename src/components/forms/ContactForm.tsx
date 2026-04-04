@@ -54,7 +54,9 @@ export default function ContactForm() {
 
     try {
       // Step 1: get CSRF token
-      const csrfRes = await fetch(`${BACKEND_URL}/contact/csrf-token.php`);
+      const csrfRes = await fetch(`${BACKEND_URL}/contact/csrf-token.php`, {
+        credentials: "include",
+      });
       const { token } = await csrfRes.json();
 
       // Step 2: submit form
@@ -71,6 +73,7 @@ export default function ContactForm() {
 
       const res = await fetch(`${BACKEND_URL}/contact/contact.php`, {
         method: "POST",
+        credentials: "include",
         body: data,
       });
       const json = await res.json();

@@ -110,7 +110,7 @@ npm run dev
 │   └── content/
 │       └─ portfolio/
 │           ├─ photography.json  # Photography project definitions (9 projects)
-│           ├─ video.json        # Video project definitions (15 projects)
+│           ├─ videography.json # Video project definitions (15 projects)
 │           ├─ social-media.json # Social media project definitions (3 projects)
 │           └─ index-config.json # Homepage featured section config
 ├── public/
