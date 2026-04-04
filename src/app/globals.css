@@ -884,7 +884,7 @@ a.project-card:focus { color: var(--charcoal); text-decoration: none; }
   border-radius: 6px;
   cursor: pointer;
   align-self: flex-start;
-  border: none;
+  border: 1px solid transparent;
   background: transparent;
   color: inherit;
   font: inherit;
@@ -1333,10 +1333,17 @@ input::placeholder, textarea::placeholder {
   margin-top: 1rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  grid-auto-rows: auto;
+  column-gap: 1.5rem;
+  row-gap: 0.75rem;
 }
-/* min-height ensures video thumbnails align even when titles differ in line count */
-.video-player__title { font-size: 1.05rem; font-weight: 700; margin-bottom: .6rem; min-height: 5rem; }
+/* Each item spans 2 row tracks (title + embed); subgrid aligns titles per visual row */
+.video-player__item {
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+}
+.video-player__title { font-size: 1.05rem; font-weight: 700; align-self: start; }
 /* Responsive video grid: 3 → 2 → 1 columns */
 @media (max-width: 900px) {
   .video-player { grid-template-columns: repeat(2, 1fr); }
@@ -1344,7 +1351,7 @@ input::placeholder, textarea::placeholder {
 @media (max-width: 540px) {
   .video-player { grid-template-columns: 1fr; }
 }
-.video-embed-wrap { margin-bottom: 0; }
+.video-embed-wrap { margin-bottom: 0.75rem; }
 .video-embed {
   position: relative;
   width: 100%;
