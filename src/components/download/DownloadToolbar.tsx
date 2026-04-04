@@ -1,9 +1,10 @@
 "use client";
 
+import { useState } from "react";
+
 interface DownloadToolbarProps {
   selectionMode: boolean;
   selectedCount: number;
-  totalCount: number;
   onToggleSelection: () => void;
   onSelectAll: () => void;
   onClearSelection: () => void;
@@ -13,18 +14,42 @@ interface DownloadToolbarProps {
 export default function DownloadToolbar({
   selectionMode,
   selectedCount,
-  totalCount,
   onToggleSelection,
   onSelectAll,
   onClearSelection,
   onDownload,
 }: DownloadToolbarProps) {
+  const [allActive, setAllActive] = useState(false);
+  const [clearFlash, setClearFlash] = useState(false);
+
+  function handleToggleSelection() {
+    if (selectionMode) {
+      // Turning selection mode off — reset button states
+      setAllActive(false);
+      setClearFlash(false);
+    }
+    onToggleSelection();
+  }
+
+  function handleSelectAll() {
+    setAllActive(true);
+    setClearFlash(false);
+    onSelectAll();
+  }
+
+  function handleClearSelection() {
+    setClearFlash(true);
+    setAllActive(false);
+    onClearSelection();
+    setTimeout(() => setClearFlash(false), 100);
+  }
+
   return (
     <div className="download-toolbar">
       <button
         className={`download-toggle btn btn--outline${selectionMode ? " is-active" : ""}`}
         aria-pressed={selectionMode}
-        onClick={onToggleSelection}
+        onClick={handleToggleSelection}
       >
         Select
       </button>
@@ -47,11 +72,17 @@ export default function DownloadToolbar({
             {selectedCount} selected
           </span>
 
-          <button className="btn btn--outline" onClick={onSelectAll}>
+          <button
+            className={`btn btn--outline${allActive ? " is-active" : ""}`}
+            onClick={handleSelectAll}
+          >
             All
           </button>
 
-          <button className="btn btn--outline" onClick={onClearSelection}>
+          <button
+            className={`btn btn--outline${clearFlash ? " is-active" : ""}`}
+            onClick={handleClearSelection}
+          >
             Clear
           </button>
         </>
