@@ -72,23 +72,22 @@ describe("FeaturedSection", () => {
     expect(screen.queryByText("Portfolio")).not.toBeInTheDocument();
   });
 
-  it("renders video project cards using project.heading (role/location)", () => {
-    // role part (before 📍) rendered in .project-card__role
-    expect(screen.getByText("Producer | Director | Videographer")).toBeInTheDocument();
+  it("renders video project cards using project.title", () => {
+    expect(screen.getByText("Test Video")).toBeInTheDocument();
   });
 
-  it("renders location in a separate element outside the role clamp", () => {
-    const role = document.querySelector(".project-card__role");
+  it("renders location in a separate element outside the title", () => {
+    const title = document.querySelector(".project-card__title");
     const location = document.querySelector(".project-card__location");
-    expect(role).toBeInTheDocument();
+    expect(title).toBeInTheDocument();
     expect(location).toBeInTheDocument();
-    // location must NOT be a descendant of role
-    expect(role).not.toContainElement(location as HTMLElement);
+    // location must NOT be a descendant of title
+    expect(title).not.toContainElement(location as HTMLElement);
     expect(location).toHaveTextContent("📍 Singapore");
   });
 
   it("renders video card with correct link", () => {
-    const link = screen.getByText("Producer | Director | Videographer").closest("a");
+    const link = screen.getByText("Test Video").closest("a");
     expect(link).toHaveAttribute("href", "/portfolio/video/test-video/");
   });
 
@@ -97,9 +96,9 @@ describe("FeaturedSection", () => {
     expect(document.querySelector(".instagram-preview")).toBeNull();
   });
 
-  it('renders "View More Projects" link with btn--primary class', () => {
-    const link = screen.getByText("View More Projects");
-    expect(link).toHaveAttribute("href", "/portfolio/");
+  it('renders "More Video Projects" link with btn--primary class', () => {
+    const link = screen.getByText("More Video Projects");
+    expect(link).toHaveAttribute("href", "/portfolio/video/");
     expect(link).toHaveClass("btn--primary");
   });
 });

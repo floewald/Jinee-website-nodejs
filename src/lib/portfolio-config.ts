@@ -4,6 +4,8 @@ import type {
   SocialMediaProject,
   PortfolioProject,
   PortfolioIndexConfig,
+  CollageImageConfig,
+  InstagramLink,
 } from "@/types/portfolio";
 
 import { validatePortfolioData } from "@/lib/portfolio-schemas";
@@ -13,7 +15,40 @@ import videoData from "@/content/portfolio/video.json";
 import socialMediaData from "@/content/portfolio/social-media.json";
 import indexConfigData from "@/content/portfolio/index-config.json";
 
-// Cast the raw JSON to typed arrays
+// ─── index-config.json raw shape ─────────────────────────────────────────────
+
+interface SlugEntry {
+  src: string;
+  alt: string;
+  objectPosition?: string;
+}
+
+interface PortfolioIndexRawConfig {
+  slugs: Record<string, SlugEntry>;
+  collageImages: string[];
+  collageImagesMobile?: string[];
+  slideshowImages?: string[];
+  socialMediaLinks: InstagramLink[];
+  videoSectionTitle: string;
+  heroFit?: string;
+}
+
+function resolveImages(
+  keys: string[],
+  slugs: Record<string, SlugEntry>
+): CollageImageConfig[] {
+  return keys.map((key) => {
+    const entry = slugs[key];
+    return {
+      src: entry.src,
+      alt: entry.alt,
+      srcFull: entry.src,
+      ...(entry.objectPosition ? { objectPosition: entry.objectPosition } : {}),
+    };
+  });
+}
+
+// ─── Cast the raw JSON to typed arrays ───────────────────────────────────────
 export const photographyProjects = validatePortfolioData(
   "photography",
   photographyData
@@ -29,8 +64,20 @@ export const socialMediaProjects = validatePortfolioData(
   socialMediaData
 ) as SocialMediaProject[];
 
-export const portfolioIndexConfig =
-  indexConfigData as PortfolioIndexConfig;
+const _raw = indexConfigData as unknown as PortfolioIndexRawConfig;
+
+export const portfolioIndexConfig: PortfolioIndexConfig = {
+  collageImages: resolveImages(_raw.collageImages, _raw.slugs),
+  collageImagesMobile: _raw.collageImagesMobile
+    ? resolveImages(_raw.collageImagesMobile, _raw.slugs)
+    : undefined,
+  slideshowImages: _raw.slideshowImages
+    ? resolveImages(_raw.slideshowImages, _raw.slugs)
+    : undefined,
+  socialMediaLinks: _raw.socialMediaLinks,
+  videoSectionTitle: _raw.videoSectionTitle,
+  heroFit: _raw.heroFit as PortfolioIndexConfig["heroFit"],
+};
 
 /** All projects across every category, in original order */
 export const allProjects: PortfolioProject[] = [

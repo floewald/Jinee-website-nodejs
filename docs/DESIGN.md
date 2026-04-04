@@ -287,6 +287,37 @@ page.tsx  [Server]
 └── VideoPlayer[]            [Client]  — one per video; lazy via IntersectionObserver
 ```
 
+### CSS Specificity Conventions (`globals.css`)
+
+All component styles live in a single `globals.css` file processed by Tailwind v4 via
+`@import "tailwindcss"`.  Tailwind wraps its output in `@layer` blocks (`base`,
+`components`, `utilities`); all hand-written rules sit **outside** any layer so they
+always beat Tailwind's generated styles.
+
+**Section backgrounds** — `.section-bg-white` and `.section-bg-charcoal` apply full-bleed
+background colour plus `color` inheritance.  The charcoal section sets `color: #fff` and
+overrides anchor colour with `:not()` exclusions to avoid bleeding into project cards
+and buttons:
+
+```css
+.section-bg-charcoal a:not(.project-card):not(.btn) { color: #fff; }
+```
+
+Cards inside `.section-bg-charcoal` get a dark border via
+`.section-bg-charcoal .project-card { border-color: #333; }`.
+
+**Buttons** — all link-based button variants use `a.btn.btn--*` selectors (element +
+two classes = specificity `0,2,1`) with explicit `:hover` and `:focus` states.  This
+beats any section-level `a` colour override.  `<button>` elements use
+`button.btn.btn--primary` for the same reason.
+
+**Project cards** — `a.project-card` explicitly sets `color: var(--charcoal)` (and
+repeats for `:hover`/`:focus`) so the card body text always renders dark regardless of
+the section background.
+
+**Project card titles** — `.project-card__title` also sets `color: var(--charcoal)`
+directly as a safety net.
+
 ---
 
 ## 7. Security Design

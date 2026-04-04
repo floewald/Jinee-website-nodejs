@@ -50,13 +50,13 @@ describe("GallerySection", () => {
   it("renders images from config (not hardcoded)", () => {
     render(<GallerySection />);
     const images = screen.getAllByRole("img");
-    expect(images).toHaveLength(3); // matches the 3 mock collage images
+    expect(images).toHaveLength(6); // 3 mock images × 2 galleries (desktop + mobile)
   });
 
   it("passes config images to GalleryWithLightbox", () => {
     render(<GallerySection />);
-    expect(screen.getByTestId("gallery-with-lightbox")).toBeInTheDocument();
-    expect(screen.getByAltText("Image 1")).toBeInTheDocument();
+    expect(screen.getAllByTestId("gallery-with-lightbox")[0]).toBeInTheDocument();
+    expect(screen.getAllByAltText("Image 1")[0]).toBeInTheDocument();
   });
 
   it("every image has an alt attribute", () => {

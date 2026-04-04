@@ -43,8 +43,6 @@ export default function DownloadToolbar({
             </svg>
           </button>
 
-          <span className="toolbar-divider" aria-hidden="true" />
-
           <span className="selected-count selected-count--badge" aria-live="polite">
             {selectedCount} selected
           </span>
