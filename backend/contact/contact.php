@@ -2,6 +2,19 @@
 // contact/contact.php
 // Basic contact form handler with honeypot and optional PHPMailer (composer) support.
 
+// CORS: allow localhost (dev) and production origin
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+if ($origin && (strpos($origin, '127.0.0.1') !== false || strpos($origin, 'localhost') !== false)) {
+    header('Access-Control-Allow-Origin: ' . $origin);
+    header('Access-Control-Allow-Credentials: true');
+} elseif ($origin === 'https://jineechen.com' || $origin === 'https://www.jineechen.com') {
+    header('Access-Control-Allow-Origin: ' . $origin);
+    header('Access-Control-Allow-Credentials: true');
+}
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, X-CSRF-Token');
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(204); exit; }
+
 // Load config if present (create contact/config.php from .example-config.php)
 $config = [];
 if (file_exists(__DIR__ . '/config.php')) {

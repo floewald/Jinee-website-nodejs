@@ -424,7 +424,7 @@ trigger: push to main  (or workflow_dispatch)
 
 | Variable | Where | Purpose |
 |----------|-------|---------|
-| `NEXT_PUBLIC_BACKEND_URL` | `.env.local` / GitHub Secret | Base URL for PHP backend API calls |
+| `NEXT_PUBLIC_BACKEND_URL` | `.env.local` (local dev only) | Base URL for PHP backend API calls (defaults to `"/backend"` in production builds) |
 | `FTP_SERVER` | GitHub Secret | FTP hostname |
 | `FTP_USERNAME` | GitHub Secret | FTP user |
 | `FTP_PASSWORD` | GitHub Secret | FTP password |

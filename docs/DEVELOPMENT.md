@@ -108,7 +108,7 @@ php -S localhost:8080 -t backend/
 # → http://localhost:8080
 ```
 
-The Next.js app makes backend calls to `http://localhost:8080/contact/...` and `http://localhost:8080/download/...` during development. This is configured via the `NEXT_PUBLIC_BACKEND_URL` environment variable (defaults to empty string in production, where backend lives at the same origin).
+The Next.js app makes backend calls to `http://localhost:8080/contact/...` and `http://localhost:8080/download/...` during development. This is configured via the `NEXT_PUBLIC_BACKEND_URL` environment variable (defaults to `"/backend"` in production, where the backend folder lives at the same origin).
 
 > **CORS**: `localhost` is already whitelisted in all PHP files. CSRF sessions should work cross-port in local dev.
 
@@ -172,7 +172,7 @@ All env vars must be prefixed with `NEXT_PUBLIC_` to be available in the browser
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
-| `NEXT_PUBLIC_BACKEND_URL` | `""` (same origin) | PHP backend base URL (override for local dev) |
+| `NEXT_PUBLIC_BACKEND_URL` | `"/backend"` (same origin) | PHP backend base URL (set in `.env.local` for local dev only) |
 
 ---
 
