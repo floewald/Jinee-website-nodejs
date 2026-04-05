@@ -303,6 +303,6 @@ jobs:
             **/download_config.php
             **/download_config.template.php
             **/download_config.example.php
-            **/logs/**
+            **/logs/*.log
             **/rate-limit/**
             **/tmp/**

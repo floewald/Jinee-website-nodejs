@@ -206,7 +206,17 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             echo "  assets exists: " . (is_dir($assetsBase) ? 'YES' : 'NO') . "\n";
             echo "  private_base:  $privateBase\n";
             echo "  private exists: " . (is_dir($privateBase) ? 'YES' : 'NO') . "\n";
-            echo "  projects: " . implode(', ', array_keys($cfg['projects'] ?? [])) . "\n";
+            echo "  projects: " . implode(', ', array_keys($cfg['projects'] ?? [])) . "\n\n";
+            echo "=== Project folder resolution ===\n";
+            foreach (($cfg['projects'] ?? []) as $slug => $proj) {
+                $folder = trim($proj['folder'] ?? '', '/\\');
+                $privPath = rtrim($privateBase, '/\\') . DIRECTORY_SEPARATOR . $folder;
+                $pubPath  = rtrim($assetsBase,  '/\\') . DIRECTORY_SEPARATOR . $folder;
+                $via = is_dir($privPath) ? 'private' : (is_dir($pubPath) ? 'assets' : 'MISSING');
+                echo "  $slug\n    private: $privPath → " . (is_dir($privPath) ? 'YES' : 'no') . "\n";
+                echo "    assets:  $pubPath → " . (is_dir($pubPath) ? 'YES' : 'no') . "\n";
+                echo "    result:  $via\n";
+            }
         } else {
             echo "  Config NOT loaded\n";
         }

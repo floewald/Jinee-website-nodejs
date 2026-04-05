@@ -37,6 +37,10 @@ $from_name = $config['from_name'] ?? 'Website Contact';
 $logFile = __DIR__ . '/logs/send.log';
 if (!function_exists('append_log')) {
     function append_log($file, $msg) {
+        $dir = dirname($file);
+        if (!is_dir($dir)) {
+            @mkdir($dir, 0755, true);
+        }
         $line = '[' . date('Y-m-d H:i:s') . '] ' . $msg . "\n";
         @file_put_contents($file, $line, FILE_APPEND | LOCK_EX);
     }
@@ -50,8 +54,12 @@ if ($debug) {
     error_reporting(E_ALL);
 }
 
-// Convert PHP errors to exceptions and catch uncaught exceptions
+// Convert PHP errors to exceptions and catch uncaught exceptions.
+// PHP 8.0+ no longer suppresses custom error handlers via @; check manually.
 set_error_handler(function($severity, $message, $file, $line) {
+    if (!(error_reporting() & $severity)) {
+        return false; // respect the @ operator
+    }
     throw new ErrorException($message, 0, $severity, $file, $line);
 });
 set_exception_handler(function($e) use ($logFile, $debug) {
