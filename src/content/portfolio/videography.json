@@ -7,7 +7,7 @@
     "longDescription": "A documentary examining how Taiwan's young university graduates navigate stagnant wages and rising living costs. The film follows everyday workers as they share coping strategies and question the promise of higher education.",
     "heading": "Producer | Director | Videographer",
     "location": "📍 Taiwan",
-    "ogImage": "https://jineechen.com/assets/video/stuck-low-pay/stuck-with-low-pay-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/stuck-low-pay/stuck-with-low-pay-800.webp",
     "visible": true,
     "videos": [
       {
@@ -18,7 +18,7 @@
     ],
     "portfolioCard": {
       "cardTitle": "CNA Insider | Asia's Stuck Generation",
-      "thumbnail": "/assets/video/stuck-low-pay/stuck-with-low-pay-800.webp"
+      "thumbnail": "/assets/videography/stuck-low-pay/stuck-with-low-pay-800.webp"
     }
   },
   {
@@ -29,7 +29,7 @@
     "longDescription": "A short documentary profiling Singaporean electronic-pop artist Jasmine Sokko and her journey chasing music dreams. Part of the 'Dear Singapore' series, the film explores the personal sacrifices and creative vision behind her rise.",
     "heading": "Field Producer | Local Fixer",
     "location": "📍 Taiwan",
-    "ogImage": "https://jineechen.com/assets/video/singer-jasmin-sokko/singer-jasmin-sokko-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/singer-jasmin-sokko/singer-jasmin-sokko-800.webp",
     "visible": true,
     "videos": [
       {
@@ -40,7 +40,7 @@
     ],
     "portfolioCard": {
       "cardTitle": "CNA | Dear Singapore",
-      "thumbnail": "/assets/video/singer-jasmin-sokko/singer-jasmin-sokko-800.webp"
+      "thumbnail": "/assets/videography/singer-jasmin-sokko/singer-jasmin-sokko-800.webp"
     }
   },
   {
@@ -51,7 +51,7 @@
     "longDescription": "A five-part Mandarin-language documentary series revisiting Singapore's heritage districts and the memories they hold. Each episode uncovers the history of an iconic location — from Katong's beauty pageants to Fort Canning's playgrounds and the legendary satay club.",
     "heading": "Producer | Director | Videographer",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/video/re-old-times/re-old-times-1-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/re-old-times/re-old-times-1-800.webp",
     "visible": true,
     "videos": [
       {
@@ -82,11 +82,11 @@
     ],
     "portfolioCard": {
       "cardTitle": "8world | RE: Old Times",
-      "thumbnail": "/assets/video/re-old-times/re-old-times-1-800.webp",
+      "thumbnail": "/assets/videography/re-old-times/re-old-times-1-800.webp",
       "previewImages": [
-        "/assets/video/re-old-times/re-old-times-1-800.webp",
-        "/assets/video/re-old-times/re-old-times-2-800.webp",
-        "/assets/video/re-old-times/re-old-times-3-800.webp"
+        "/assets/videography/re-old-times/re-old-times-1-800.webp",
+        "/assets/videography/re-old-times/re-old-times-2-800.webp",
+        "/assets/videography/re-old-times/re-old-times-3-800.webp"
       ]
     }
   },
@@ -98,7 +98,7 @@
     "longDescription": "A documentary profiling healthy dining habits and recommendations for viewers in their 40s and 50s.",
     "heading": "Co-Director | Videographer",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/video/healthy-dining/healthy-dining-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/healthy-dining/healthy-dining-800.webp",
     "visible": true,
     "videos": [
       {
@@ -109,7 +109,7 @@
     ],
     "portfolioCard": {
       "cardTitle": "8world |《看见主播》40、50岁建康外食",
-      "thumbnail": "/assets/video/healthy-dining/healthy-dining-800.webp"
+      "thumbnail": "/assets/videography/healthy-dining/healthy-dining-800.webp"
     }
   },
   {
@@ -119,7 +119,7 @@
     "description": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
     "heading": "Videographer",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/video/social-media-addiction/social-media-addiction-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/social-media-addiction/social-media-addiction-800.webp",
     "visible": true,
     "videos": [
       {
@@ -130,7 +130,7 @@
     ],
     "portfolioCard": {
       "cardTitle": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
-      "thumbnail": "/assets/video/social-media-addiction/social-media-addiction-800.webp"
+      "thumbnail": "/assets/videography/social-media-addiction/social-media-addiction-800.webp"
     }
   },
   {
@@ -141,7 +141,7 @@
     "longDescription": "A three-part CNA Insider documentary series following visually impaired chefs as they open their own café in Singapore.",
     "heading": "Researcher | Producer | Director | Videographer",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/video/blind-kitchen-chefs/blind-kitchen-chefs-1-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/blind-kitchen-chefs/blind-kitchen-chefs-1-800.webp",
     "visible": true,
     "videos": [
       {
@@ -162,12 +162,35 @@
     ],
     "portfolioCard": {
       "cardTitle": "CNA Insider | Our Blind Kitchen",
-      "thumbnail": "/assets/video/blind-kitchen-chefs/blind-kitchen-chefs-1-800.webp",
+      "thumbnail": "/assets/videography/blind-kitchen-chefs/blind-kitchen-chefs-1-800.webp",
       "previewImages": [
-        "/assets/video/blind-kitchen-chefs/blind-kitchen-chefs-1-800.webp",
-        "/assets/video/blind-kitchen-chefs/blind-kitchen-chefs-2-800.webp",
-        "/assets/video/blind-kitchen-chefs/blind-kitchen-chefs-3-800.webp"
+        "/assets/videography/blind-kitchen-chefs/blind-kitchen-chefs-1-800.webp",
+        "/assets/videography/blind-kitchen-chefs/blind-kitchen-chefs-2-800.webp",
+        "/assets/videography/blind-kitchen-chefs/blind-kitchen-chefs-3-800.webp"
       ]
+    }
+  },
+  {
+    "type": "video",
+    "slug": "guardians-vietnam",
+    "title": "The Guardians 守護者| Vietnam 越南 | Documentary",
+    "description": ".",
+    "longDescription": "A Vietnamese saying goes: complete leaves have a responsibility to protect the broken leaves. A group of low-income people in Ho Chi Minh City lead simple lives so as to provide warmth to poorer families. They also salvage unidentified corpses in the Sai Kung River, giving them a final touch of dignity.\n越南俗语说，完整的树叶有责任保护破碎的树叶。胡志明市有着一群经济拮据的人，不惜过着最简朴的生活，也要为更穷苦的家庭提供一点温暖。除了悲悯生者，更不忌讳禁忌，从西贡河上打捞不知名的浮尸，为其举行葬礼，只盼能给往生者最后一丝尊严。",
+    "heading": "Producer | Director",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/guardians-vietnam/guardians-vietnam-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "The Guardians 守護者 | Me Watch",
+        "linkUrl": "https://www.mewatch.sg/watch/The-Guardians-E9-Vietnam-70547",
+        "previewImage": "/assets/videography/guardians-vietnam/guardians-vietnam-800.webp",
+        "uploadDate": "2023-01-01T00:00:00+08:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "Me Watch | The Guardians",
+      "thumbnail": "/assets/videography/guardians-vietnam/guardians-vietnam-800.webp"
     }
   },
   {
@@ -178,7 +201,7 @@
     "longDescription": "A short documentary exploring the art and tradition of lion dancing in Singapore. The film delves into the history, techniques, and cultural importance of this vibrant performance art.",
     "heading": "Producer | Director | Videographer",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/video/lion-dancers/lion-dancers-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/lion-dancers/lion-dancers-800.webp",
     "visible": true,
     "videos": [
       {
@@ -189,7 +212,7 @@
     ],
     "portfolioCard": {
       "cardTitle": "CNA | Lion Dancers",
-      "thumbnail": "/assets/video/lion-dancers/lion-dancers-800.webp"
+      "thumbnail": "/assets/videography/lion-dancers/lion-dancers-800.webp"
     }
   },
   {
@@ -200,7 +223,7 @@
     "longDescription": "A nine-episode Taiwanese web series pairing host Kunda with athletes and celebrities for fitness challenges and gym workouts.",
     "heading": "Executive Producer",
     "location": "📍 Taiwan",
-    "ogImage": "https://jineechen.com/assets/video/into-the-gym/into-the-gym-1-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/into-the-gym/into-the-gym-1-800.webp",
     "visible": true,
     "videos": [
       {
@@ -251,11 +274,11 @@
     ],
     "portfolioCard": {
       "cardTitle": "Johnson Health Tech",
-      "thumbnail": "/assets/video/into-the-gym/into-the-gym-1-800.webp",
+      "thumbnail": "/assets/videography/into-the-gym/into-the-gym-1-800.webp",
       "previewImages": [
-        "/assets/video/into-the-gym/into-the-gym-1-800.webp",
-        "/assets/video/into-the-gym/into-the-gym-2-800.webp",
-        "/assets/video/into-the-gym/into-the-gym-3-800.webp"
+        "/assets/videography/into-the-gym/into-the-gym-1-800.webp",
+        "/assets/videography/into-the-gym/into-the-gym-2-800.webp",
+        "/assets/videography/into-the-gym/into-the-gym-3-800.webp"
       ]
     }
   },
@@ -267,7 +290,7 @@
     "longDescription": "A four-episode food series exploring affordable local eats in Singapore and Taiwan. From hawker stalls and Michelin-rated meals under S$6 to old-school bento shops and a singing taxi driver's favourite eatery, each episode celebrates everyday food culture.",
     "heading": "Producer | Director | Videographer",
     "location": "📍 Singapore & Taiwan",
-    "ogImage": "https://jineechen.com/assets/video/lunch-with-us/lunch-with-us-1-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/lunch-with-us/lunch-with-us-1-800.webp",
     "visible": true,
     "videos": [
       {
@@ -293,11 +316,11 @@
     ],
     "portfolioCard": {
       "cardTitle": "CNA Insider | Lunch With Us",
-      "thumbnail": "/assets/video/lunch-with-us/lunch-with-us-1-800.webp",
+      "thumbnail": "/assets/videography/lunch-with-us/lunch-with-us-1-800.webp",
       "previewImages": [
-        "/assets/video/lunch-with-us/lunch-with-us-1-800.webp",
-        "/assets/video/lunch-with-us/lunch-with-us-2-800.webp",
-        "/assets/video/lunch-with-us/lunch-with-us-3-800.webp"
+        "/assets/videography/lunch-with-us/lunch-with-us-1-800.webp",
+        "/assets/videography/lunch-with-us/lunch-with-us-2-800.webp",
+        "/assets/videography/lunch-with-us/lunch-with-us-3-800.webp"
       ]
     }
   },
@@ -309,7 +332,7 @@
     "longDescription": "A television commercial campaign for Marigold, one of Singapore's leading dairy and beverage brands.",
     "heading": "Producer | Director",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/video/marigold-ad/marigold-ad-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/marigold-ad/marigold-ad-800.webp",
     "visible": false,
     "videos": [
       {
@@ -327,7 +350,7 @@
     "longDescription": "A corporate video produced for Singapore's Ministry of Manpower highlighting the annual Dormitory Awards. The piece showcases best practices in foreign-worker dormitory management and celebrates operators who provide safe, well-maintained living conditions.",
     "heading": "Producer | Director | Videographer",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/video/ministry-of-manpower/ministry-of-manpower-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/ministry-of-manpower/ministry-of-manpower-800.webp",
     "visible": false,
     "videos": [
       {
@@ -345,7 +368,7 @@
     "longDescription": "A television commercial campaign for Nestlé, featuring their Nescafé product line.",
     "heading": "Producer | Director",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/video/nescafe-ad/nescafe-ad-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/nescafe-ad/nescafe-ad-800.webp",
     "visible": false,
     "videos": [
       {
@@ -363,7 +386,7 @@
     "longDescription": "A two-part documentary embedded with Singapore Civil Defence Force paramedics and emergency responders.",
     "heading": "Producer | Director | Videographer",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/video/scdf-project/scdf-project-1-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/scdf-project/scdf-project-1-800.webp",
     "visible": true,
     "videos": [
       {
@@ -379,10 +402,10 @@
     ],
     "portfolioCard": {
       "cardTitle": "CNA Insider | SCDF",
-      "thumbnail": "/assets/video/scdf-project/scdf-project-1-800.webp",
+      "thumbnail": "/assets/videography/scdf-project/scdf-project-1-800.webp",
       "previewImages": [
-        "/assets/video/scdf-project/scdf-project-1-800.webp",
-        "/assets/video/scdf-project/scdf-project-2-800.webp"
+        "/assets/videography/scdf-project/scdf-project-1-800.webp",
+        "/assets/videography/scdf-project/scdf-project-2-800.webp"
       ]
     }
   },
@@ -394,7 +417,7 @@
     "longDescription": "A two-part documentary giving voice to scam victims in Singapore. Each episode follows a real person recounting how they were drawn into an investment or love scam, what warning signs they missed, and how they rebuilt afterward.",
     "heading": "Producer | Director | Videographer",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/video/i-fell/i-fell-1-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/i-fell/i-fell-1-800.webp",
     "visible": true,
     "videos": [
       {
@@ -410,10 +433,10 @@
     ],
     "portfolioCard": {
       "cardTitle": "CNA Insider | Scam",
-      "thumbnail": "/assets/video/i-fell/i-fell-1-800.webp",
+      "thumbnail": "/assets/videography/i-fell/i-fell-1-800.webp",
       "previewImages": [
-        "/assets/video/i-fell/i-fell-1-800.webp",
-        "/assets/video/i-fell/i-fell-2-800.webp"
+        "/assets/videography/i-fell/i-fell-1-800.webp",
+        "/assets/videography/i-fell/i-fell-2-800.webp"
       ]
     }
   },
@@ -425,7 +448,7 @@
     "longDescription": "A documentary profiling a robotics professional who chose to build his career in Singapore and the ways he gives back to the community. The film explores work culture, immigration and belonging.",
     "heading": "Producer | Director | Videographer",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/video/work-in-sgp/work-in-sgp-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/work-in-sgp/work-in-sgp-800.webp",
     "visible": true,
     "videos": [
       {
@@ -436,7 +459,7 @@
     ],
     "portfolioCard": {
       "cardTitle": "CNA Insider | MOM",
-      "thumbnail": "/assets/video/work-in-sgp/work-in-sgp-800.webp"
+      "thumbnail": "/assets/videography/work-in-sgp/work-in-sgp-800.webp"
     }
   },
   {
@@ -447,7 +470,7 @@
     "longDescription": "A documentary following a Singaporean father who spent 14 years as a stay-at-home dad raising his son. The film captures his reflections on sacrifice, identity and the decision to re-enter the workforce.",
     "heading": "Producer | Director | Videographer | Video Editor",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/video/stay-at-home-dad/stay-at-home-dad-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/stay-at-home-dad/stay-at-home-dad-800.webp",
     "visible": true,
     "videos": [
       {
@@ -458,7 +481,7 @@
     ],
     "portfolioCard": {
       "cardTitle": "CNA Insider | Stay at Home Dad",
-      "thumbnail": "/assets/video/stay-at-home-dad/stay-at-home-dad-800.webp"
+      "thumbnail": "/assets/videography/stay-at-home-dad/stay-at-home-dad-800.webp"
     }
   }
 ]

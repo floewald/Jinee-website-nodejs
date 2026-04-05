@@ -37,8 +37,12 @@ export interface PhotographyProject extends BaseProject {
 
 export interface VideoItem {
   title: string;
-  /** Full YouTube embed URL: https://www.youtube.com/embed/{ID} */
-  embedUrl: string;
+  /** Full YouTube embed URL: https://www.youtube.com/embed/{ID} — omit for non-embeddable videos */
+  embedUrl?: string;
+  /** External link for non-embeddable videos (e.g. mewatch). Use instead of embedUrl. */
+  linkUrl?: string;
+  /** Preview image shown when linkUrl is used instead of an embed */
+  previewImage?: string;
   /** ISO 8601 date string with timezone, e.g. "2023-01-01T00:00:00+08:00" */
   uploadDate: string;
 }

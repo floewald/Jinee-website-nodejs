@@ -44,7 +44,7 @@ export default async function VideoProjectPage({
     "@type": "VideoObject",
     name: project.videos[0]?.title ?? project.title,
     description: project.description,
-    thumbnailUrl: [`${SITE_URL}/assets/video/${slug}/${slug}-800.webp`],
+    thumbnailUrl: [`${SITE_URL}/assets/videography/${slug}/${slug}-800.webp`],
     embedUrl: project.videos[0]?.embedUrl,
     uploadDate: project.videos[0]?.uploadDate ?? "2023-01-01T00:00:00+08:00",
   };
@@ -61,7 +61,11 @@ export default async function VideoProjectPage({
       <hr className="section-title-divider" aria-hidden="true" />
       {project.location && <p className="project-location">{project.location}</p>}
       {project.longDescription && (
-        <p className="project-description">{project.longDescription}</p>
+        <p className="project-description">
+          {project.longDescription.split('\n').map((line, i, arr) => (
+            <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+          ))}
+        </p>
       )}
 
       <VideoPlayer videos={project.videos} />

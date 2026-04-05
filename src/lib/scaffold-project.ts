@@ -21,6 +21,12 @@ const CONTENT_JSON_FILENAMES: Record<ProjectType, string> = {
   "social-media": "social-media",
 };
 
+const ASSET_DIR_NAMES: Record<ProjectType, string> = {
+  photography: "photography",
+  video: "videography",
+  "social-media": "social-media",
+};
+
 export function getContentJsonPath(type: ProjectType): string {
   return path.join(ROOT, "src", "content", "portfolio", `${CONTENT_JSON_FILENAMES[type]}.json`);
 }
@@ -29,7 +35,7 @@ export function getContentJsonPath(type: ProjectType): string {
  * Returns the directory path where raw images for a new project should be placed.
  */
 export function getAssetsRawPath(type: ProjectType, slug: string): string {
-  return path.join(ROOT, "assets-raw", type, slug);
+  return path.join(ROOT, "assets-raw", ASSET_DIR_NAMES[type], slug);
 }
 
 type SkeletonEntry =
@@ -79,7 +85,7 @@ function videoSkeleton(slug: string, title: string) {
     longDescription: `<!-- Add longer paragraph for the project page -->`,
     heading: "Producer | Director",
     location: "📍 Singapore",
-    ogImage: `https://jineechen.com/assets/video/${slug}/${slug}-1-800.webp`,
+    ogImage: `https://jineechen.com/assets/videography/${slug}/${slug}-1-800.webp`,
     videos: [
       {
         title: `<!-- Add video title -->`,
@@ -89,7 +95,7 @@ function videoSkeleton(slug: string, title: string) {
     ],
     portfolioCard: {
       cardTitle: title,
-      thumbnail: `/assets/video/${slug}/${slug}-1-800.webp`,
+      thumbnail: `/assets/videography/${slug}/${slug}-1-800.webp`,
     },
   };
 }

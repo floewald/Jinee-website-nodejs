@@ -177,7 +177,7 @@ Upload the video(s) to YouTube and note the video ID from the URL:
 If you want a custom thumbnail for the project (instead of the YouTube auto-thumbnail), add it:
 
 ```
-assets-raw/video/my-video-project/thumbnail.jpg
+assets-raw/videography/my-video-project/thumbnail.jpg
 ```
 
 Run `npm run build` to generate WebP versions and update the static export.
@@ -195,7 +195,7 @@ Open `src/content/portfolio/videography.json` and add a new entry to the JSON ar
   "description": "Short description (120–160 chars).",
   "longDescription": "Longer intro paragraph shown at the top of the project page. Can be multiple sentences.",
   "heading": "📍 Singapore | Producer | Director | Videographer",
-  "ogImage": "https://jineechen.com/assets/video/my-video-project/thumbnail-800.webp",
+  "ogImage": "https://jineechen.com/assets/videography/my-video-project/thumbnail-800.webp",
   "videos": [
     {
       "title": "Episode 1: Full Episode Title Here",
@@ -210,7 +210,7 @@ Open `src/content/portfolio/videography.json` and add a new entry to the JSON ar
   ],
   "portfolioCard": {
     "cardTitle": "Short Card Title",
-    "thumbnail": "/assets/video/my-video-project/thumbnail-800.webp",
+    "thumbnail": "/assets/videography/my-video-project/thumbnail-800.webp",
     "order": 7
   }
 }
