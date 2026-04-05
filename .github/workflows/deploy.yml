@@ -39,18 +39,34 @@ jobs:
         env:
           NODE_ENV: production
 
-      # 5. Verify the build produced a valid static site structure
+      # 5. Log build structure (runs before verify so it's always visible in the Actions log,
+      #    even if verification fails — critical for debugging)
+      - name: Log build structure
+        run: |
+          echo "=== out/ top-level ==="
+          ls -la out/
+          echo "=== out/_next/static/ ==="
+          ls -la out/_next/static/
+          echo "=== chunks ($(find out/_next/static/chunks/ -type f 2>/dev/null | wc -l | tr -d ' ') files) ==="
+          ls out/_next/static/chunks/ 2>/dev/null | head -20 || echo "(missing)"
+          echo "=== .css files in chunks ==="
+          find out/_next/static/chunks/ -name '*.css' 2>/dev/null || echo "(none)"
+
+      # 6. Verify the build produced a valid static site structure
+      #    NOTE: Next.js with Tailwind v4 bundles CSS into chunks/ as .css files —
+      #    there is no separate static/css/ directory in this project.
       - name: Verify build output
         run: |
           fail() { echo "::error::$1" && exit 1; }
-          [ -d out/ ]                          || fail "Build failed: out/ directory missing"
-          [ -f out/index.html ]                || fail "Build failed: out/index.html not found"
-          [ -d out/_next/static/chunks/ ]      || fail "Build failed: out/_next/static/chunks/ missing"
+          [ -d out/ ]                             || fail "Build failed: out/ directory missing"
+          [ -f out/index.html ]                   || fail "Build failed: out/index.html not found"
+          [ -d out/_next/static/chunks/ ]         || fail "Build failed: out/_next/static/chunks/ missing"
           [ -n "$(ls out/_next/static/chunks/)" ] || fail "Build failed: out/_next/static/chunks/ is empty"
-          [ -d out/_next/static/css/ ]         || fail "Build failed: out/_next/static/css/ missing"
+          CSS_COUNT=$(find out/_next/static/chunks/ -name '*.css' | wc -l | tr -d ' ')
+          [ "$CSS_COUNT" -gt 0 ]                 || fail "Build failed: no .css files found in chunks/"
           echo "Build OK — $(find out/ -type f | wc -l | tr -d ' ') files"
           echo "  chunks: $(find out/_next/static/chunks/ -type f | wc -l | tr -d ' ') files"
-          echo "  css:    $(find out/_next/static/css/    -type f | wc -l | tr -d ' ') files"
+          echo "  css:    $CSS_COUNT .css files in chunks/"
 
       # 6. Warn if Git LFS objects are approaching the 1 GB free-tier limit (90 % = 900 MB).
       #    This is a no-op when LFS is not in use; activates automatically if LFS is adopted.
@@ -64,17 +80,7 @@ jobs:
             fi
           fi
 
-      # 7. Log build structure for debugging (visible in Actions log)
-      - name: Log build structure
-        run: |
-          echo "=== out/ top-level ==="
-          ls -la out/
-          echo "=== out/_next/static/ ==="
-          ls -la out/_next/static/
-          echo "=== chunks count: $(find out/_next/static/chunks/ -type f | wc -l | tr -d ' ') ==="
-          echo "=== css count:    $(find out/_next/static/css/    -type f | wc -l | tr -d ' ') ==="
-
-      # 8. Deploy out/ to the FTP server
+      # 7. Deploy out/ to the FTP server
       #    Credentials are stored in GitHub repository Secrets (Settings → Secrets and variables → Actions)
       #    Use workflow_dispatch with clean_slate=true after a server wipe or partial deploy.
       #    WARNING: clean_slate=true deletes all files in server-dir first — assets will be
