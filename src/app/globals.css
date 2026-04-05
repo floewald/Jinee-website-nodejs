@@ -141,6 +141,10 @@ body {
   --site-hero-mobile-height-multiplier: 2;
   --site-hero-mobile-padding-vertical: 10px;
   --site-hero-dropdown-right: 0px;
+  /* Mobile header height: top-pad(10) + logo(28) + gap(8) + tagline(text + 8px vert-pad) + bottom-pad(10)
+     2 lines (~500–800px): 10+28+8+(51+8)+10 = 115px → 120px safe
+     3 lines (<480px):     10+28+8+(77+8)+10 = 141px → 148px safe */
+  --site-hero-mobile-height: 125px;
   --mobile-nav-max-width: 88vw;
   --primary-menu-expanded-padding-bottom: 14px;
 
@@ -388,7 +392,7 @@ section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
     padding-left: var(--site-hero-padding-horizontal);
     padding-top: var(--site-hero-mobile-padding-vertical);
     padding-bottom: var(--site-hero-mobile-padding-vertical);
-    min-height: calc(var(--nav-height) * var(--site-hero-mobile-height-multiplier) + var(--site-hero-extra-bottom-gap));
+    min-height: var(--site-hero-mobile-height);
   }
   .header-left, .logo-tagline-wrap { flex-direction: column; align-items: flex-start; gap: .5rem; }
   .header-right { margin-left: 0; }
@@ -1844,12 +1848,17 @@ img {
 }
 
 @media (max-width: 800px) {
-  body { padding-top: 84px !important; }
-  section, h1, h2, h3 { scroll-margin-top: 84px !important; }
+  body { padding-top: var(--site-hero-mobile-height); }
+  section, h1, h2, h3 { scroll-margin-top: var(--site-hero-mobile-height); }
   h1 { font-size: clamp(1.9rem, 7.5vw, 2.8rem); line-height: 1.08; margin-bottom: 0.6rem; }
-  .portfolio-hub,
+  .portfolio-hub { padding-top: 1.5rem; }
   .portfolio-category,
-  .project-page { padding-top: 1.5rem; }
+  .project-page { padding-top: 2rem; }
+}
+
+/* Narrower viewports: tagline wraps to 3 lines → taller header */
+@media (max-width: 480px) {
+  :root { --site-hero-mobile-height: 148px; }
 }
 
 

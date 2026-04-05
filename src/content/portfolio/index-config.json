@@ -13,7 +13,7 @@
     "party-01":  { "src": "/assets/photography/private-party/Jinee_Chen_Party photos-2-1600.webp", "alt": "Private party — guests celebrating together", "objectPosition": "center 30%" }
   },
   "collageImages":       ["travel-01", "travel-02", "travel-03", "travel-04", "party-01",  "travel-05", "travel-06", "travel-07", "travel-08", "travel-09", "travel-10"],
-  "collageImagesMobile": ["travel-01", "travel-03", "party-01",  "travel-06", "travel-09"],
+  "collageImagesMobile": ["travel-01", "travel-03", "travel-06", "party-01", "travel-09"],
   "slideshowImages":     ["travel-01", "travel-02", "travel-03", "travel-05", "travel-06", "travel-07", "travel-08", "travel-09", "travel-10"],
   "socialMediaLinks": [
     {
