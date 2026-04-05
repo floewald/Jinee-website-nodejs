@@ -16,8 +16,8 @@ describe("getThumbUrl", () => {
 
 describe("getMdUrl", () => {
   it("appends -800.webp to the basename", () => {
-    expect(getMdUrl("/assets/video/stuck-low-pay", "thumb")).toBe(
-      "/assets/video/stuck-low-pay/thumb-800.webp"
+    expect(getMdUrl("/assets/videography/stuck-low-pay", "thumb")).toBe(
+      "/assets/videography/stuck-low-pay/thumb-800.webp"
     );
   });
 });
