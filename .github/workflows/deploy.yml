@@ -68,7 +68,7 @@ jobs:
           echo "  chunks: $(find out/_next/static/chunks/ -type f | wc -l | tr -d ' ') files"
           echo "  css:    $CSS_COUNT .css files in chunks/"
 
-      # 6. Warn if Git LFS objects are approaching the 1 GB free-tier limit (90 % = 900 MB).
+      # 7. Warn if Git LFS objects are approaching the 1 GB free-tier limit (90 % = 900 MB).
       #    This is a no-op when LFS is not in use; activates automatically if LFS is adopted.
       - name: Check Git LFS storage usage
         run: |
@@ -80,7 +80,7 @@ jobs:
             fi
           fi
 
-      # 7. Deploy out/ to the FTP server
+      # 8. Deploy out/ to the FTP server
       #    Credentials are stored in GitHub repository Secrets (Settings → Secrets and variables → Actions)
       #    Use workflow_dispatch with clean_slate=true after a server wipe or partial deploy.
       #    WARNING: clean_slate=true deletes all files in server-dir first — assets will be
@@ -243,10 +243,10 @@ jobs:
               f.write(contact)
           PYEOF
 
-      # Uploads the generated config to /private/download/ on the server.
-      # download.php (in www/download/) resolves ../../private/download/download_config.php
-      # which is why this goes to the private folder, NOT www/download/.
-      # Set FTP_BACKEND_DIR = private/download/  (must end with /)
+      # Uploads generated configs to subfolders of FTP_BACKEND_DIR.
+      # FTP_BACKEND_DIR must end with /  (e.g. private/)
+      # → download_config.php lands at  FTP_BACKEND_DIR/download/
+      # → contact/config.php    lands at  FTP_BACKEND_DIR/contact/
       - name: Upload download_config.php via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -254,12 +254,10 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: /tmp/backend-config/
-          server-dir: ${{ secrets.FTP_BACKEND_DIR }}
+          server-dir: ${{ secrets.FTP_BACKEND_DIR }}download/
           state-name: .ftp-deploy-backend-config-state.json
           dangerous-clean-slate: false
 
-      # Uploads generated contact config to /backend/contact/ in webroot.
-      # Set FTP_BACKEND_CONTACT_DIR to e.g. /public_html/backend/contact/ (must end with /)
       - name: Upload contact config.php via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -267,6 +265,42 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: /tmp/backend-contact/
-          server-dir: ${{ secrets.FTP_BACKEND_CONTACT_DIR }}
+          server-dir: ${{ secrets.FTP_BACKEND_DIR }}contact/
           state-name: .ftp-deploy-contact-config-state.json
           dangerous-clean-slate: false
+
+  # Deploys PHP scripts, vendor (PHPMailer), and .htaccess from backend/ to www/backend/.
+  # Credential config files are intentionally excluded — they are handled by the
+  # deploy-backend-config job above. dangerous-clean-slate is always false here:
+  # setting it to true would delete config.php (uploaded by deploy-backend-config)
+  # because that file is excluded from the local dir.
+  deploy-backend-php:
+    runs-on: ubuntu-latest
+    needs: deploy-backend-config
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy backend PHP scripts via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./backend/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}backend/
+          state-name: .ftp-deploy-backend-php-state.json
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/config.php
+            **/config.template.php
+            **/config.example.php
+            **/download_config.php
+            **/download_config.template.php
+            **/download_config.example.php
+            **/logs/**
+            **/rate-limit/**
+            **/tmp/**

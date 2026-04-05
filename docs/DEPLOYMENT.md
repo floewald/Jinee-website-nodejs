@@ -39,8 +39,7 @@ Add these secrets:
 | `FTP_USERNAME` | Your FTP username |
 | `FTP_PASSWORD` | Your FTP password |
 | `FTP_SERVER_DIR` | Remote path for the static site, e.g. `/public_html/` (must end with `/`) |
-| `FTP_BACKEND_DIR` | Remote path for the generated `download_config.php`, **must be** `private/download/` (outside webroot, must end with `/`) |
-| `FTP_BACKEND_CONTACT_DIR` | Remote path for generated `backend/contact/config.php`, e.g. `/public_html/backend/contact/` (must end with `/`) |
+| `FTP_BACKEND_DIR` | Base remote path for backend configs, e.g. `private/` (must end with `/`). Subfolders `download/` and `contact/` are appended automatically. |
 
 **Download passwords** — one per downloadable project
 
@@ -91,7 +90,7 @@ GitHub Actions will:
 | New/changed images | ✅ Yes (if `assets-raw/` changed) | The `deploy-assets` job only runs when image source files change |
 | `backend/download/download_config.php` | ✅ Yes (generated from template) | Passwords injected from GitHub Secrets at deploy time |
 | `backend/contact/config.php` | ✅ Yes (generated from template) | SMTP/recipient settings injected from GitHub Secrets at deploy time |
-| `backend/` PHP files | ❌ No | Upload manually via FTP — see below |
+| `backend/` PHP files | ✅ Yes (via `deploy-backend-php` job) | Excludes credential configs, logs, rate-limit, tmp |
 | `backend/contact/config.example.php` | ❌ No | Example only; never used in production directly |
 
 ### Viewing deploy status
