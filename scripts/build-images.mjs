@@ -35,7 +35,7 @@ const RAW_BASE = path.join(ROOT, "assets-raw");
 const OUT_BASE = path.join(ROOT, "public", "assets");
 
 /** Types that are organised in slug sub-directories and need an images.json manifest. */
-const PORTFOLIO_TYPES = ["photography", "social-media", "video"];
+const PORTFOLIO_TYPES = ["photography", "social-media", "videography"];
 
 /** Width breakpoints for responsive variants. */
 const SIZES = [

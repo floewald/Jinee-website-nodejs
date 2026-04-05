@@ -27,15 +27,22 @@ interface ImageManifestItem {
  * for use in card slideshows.  Falls back to an empty array when no manifest
  * exists (e.g. video projects that only have a thumbnail).
  */
+const ASSET_FOLDER: Record<"photography" | "social-media" | "video", string> = {
+  photography: "photography",
+  "social-media": "social-media",
+  video: "videography",
+};
+
 export function getProjectSlideshowImages(
   slug: string,
   type: "photography" | "social-media" | "video"
 ): SlideshowImage[] {
+  const folder = ASSET_FOLDER[type];
   const manifestPath = path.join(
     process.cwd(),
     "public",
     "assets",
-    type,
+    folder,
     slug,
     "images.json"
   );
@@ -49,7 +56,7 @@ export function getProjectSlideshowImages(
     fs.readFileSync(manifestPath, "utf-8")
   );
 
-  const baseUrl = `/assets/${type}/${slug}`;
+  const baseUrl = `/assets/${folder}/${slug}`;
 
   return data.filter((item) => item.md).map((item) => ({
     src: `${baseUrl}/${item.md}`,
@@ -65,11 +72,12 @@ export function getGalleryImages(
   slug: string,
   type: "photography" | "social-media" | "video"
 ): GalleryImage[] {
+  const folder = ASSET_FOLDER[type];
   const manifestPath = path.join(
     process.cwd(),
     "public",
     "assets",
-    type,
+    folder,
     slug,
     "images.json"
   );
@@ -83,7 +91,7 @@ export function getGalleryImages(
     fs.readFileSync(manifestPath, "utf-8")
   );
 
-  const baseUrl = `/assets/${type}/${slug}`;
+  const baseUrl = `/assets/${folder}/${slug}`;
 
   return data
     .filter((item) => item.md)

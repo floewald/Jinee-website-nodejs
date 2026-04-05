@@ -32,7 +32,7 @@ try {
   process.exit(1);
 }
 
-const TYPES = ["photography", "social-media", "video"];
+const TYPES = ["photography", "social-media", "videography"];
 let total = 0;
 let skipped = 0;
 

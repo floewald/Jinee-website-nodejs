@@ -37,7 +37,7 @@ describe("social-media-addiction project", () => {
   });
 
   it("has a portfolioCard with a thumbnail", () => {
-    expect(project?.portfolioCard?.thumbnail).toMatch(/\/assets\/video\//);
+    expect(project?.portfolioCard?.thumbnail).toMatch(/\/assets\/videography\//);
   });
 
   it("can be found by slug via getProjectBySlug", () => {
@@ -50,8 +50,8 @@ describe("social-media-addiction project", () => {
 describe("video portfolio card ordering", () => {
   const cardProjects = videoProjects.filter((p) => p.portfolioCard);
 
-  it("has 13 projects with portfolio cards", () => {
-    expect(cardProjects.length).toBe(13);
+  it("has 14 projects with portfolio cards", () => {
+    expect(cardProjects.length).toBe(14);
   });
 
   it("order matches lineup defined in videography.json", () => {
@@ -62,6 +62,7 @@ describe("video portfolio card ordering", () => {
       "healthy-dining",
       "social-media-addiction",
       "blind-kitchen-chefs",
+      "guardians-vietnam",
       "lion-dancers",
       "into-the-gym",
       "lunch-with-us",
@@ -76,11 +77,11 @@ describe("video portfolio card ordering", () => {
 });
 
 describe("video projects JSON-LD data completeness", () => {
-  it("every video project has at least one video with embedUrl", () => {
+  it("every video project has at least one video with embedUrl or linkUrl", () => {
     videoProjects.forEach((p) => {
       expect(p.videos.length).toBeGreaterThan(0);
       p.videos.forEach((v) => {
-        expect(v.embedUrl).toBeTruthy();
+        expect(v.embedUrl || v.linkUrl).toBeTruthy();
       });
     });
   });

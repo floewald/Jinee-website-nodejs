@@ -35,7 +35,7 @@ if (!fs.existsSync(ASSETS_BASE)) {
   process.exit(0);
 }
 
-const TYPES = /** @type {const} */ (["photography", "video", "social-media"]);
+const TYPES = /** @type {const} */ (["photography", "videography", "social-media"]);
 
 /** @type {{ type: string; slug: string }[]} */
 const missing = [];

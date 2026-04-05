@@ -37,6 +37,9 @@ const ROOT = path.resolve(__dirname, "..");
 
 const TYPES = ["photography", "video", "social-media"];
 
+const ASSET_DIR = { photography: "photography", video: "videography", "social-media": "social-media" };
+const CONTENT_JSON_FILE = { photography: "photography", video: "videography", "social-media": "social-media" };
+
 // ── Pure helpers (mirrors src/lib/scaffold-project.ts) ──────────────────────
 
 function validateSlug(slug) {
@@ -44,24 +47,25 @@ function validateSlug(slug) {
 }
 
 function getContentJsonPath(type) {
-  return path.join(ROOT, "src", "content", "portfolio", `${type}.json`);
+  return path.join(ROOT, "src", "content", "portfolio", `${CONTENT_JSON_FILE[type]}.json`);
 }
 
 function getAssetsRawPath(type, slug) {
-  return path.join(ROOT, "assets-raw", type, slug);
+  return path.join(ROOT, "assets-raw", ASSET_DIR[type], slug);
 }
 
 function buildSkeleton(type, slug, title) {
+  const assetDir = ASSET_DIR[type];
   const base = {
     type,
     slug,
     title,
     description: `<!-- Add 120-160 character SEO description for ${title} -->`,
     heading: type === "video" ? "Producer | Director | \uD83D\uDCCD Singapore" : "\uD83D\uDCCD Singapore | Photographer",
-    ogImage: `https://jineechen.com/assets/${type}/${slug}/${slug}-1-800.webp`,
+    ogImage: `https://jineechen.com/assets/${assetDir}/${slug}/${slug}-1-800.webp`,
     portfolioCard: {
       cardTitle: title,
-      thumbnail: `/assets/${type}/${slug}/${slug}-1-800.webp`,
+      thumbnail: `/assets/${assetDir}/${slug}/${slug}-1-800.webp`,
     },
   };
 

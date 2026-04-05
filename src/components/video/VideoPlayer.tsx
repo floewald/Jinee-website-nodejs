@@ -12,6 +12,27 @@ function LazyVideoEmbed({ video }: VideoEmbedProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isVisible = useIntersection(ref, { rootMargin: "200px" });
 
+  // Non-embeddable external video — show a clickable image preview
+  if (!video.embedUrl && video.linkUrl) {
+    return (
+      <div className="video-embed-wrap">
+        <a
+          href={video.linkUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="video-embed-link"
+          aria-label={`Watch: ${video.title}`}
+        >
+          {video.previewImage && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={video.previewImage} alt={video.title} className="video-embed-link__img" />
+          )}
+          <span className="video-embed-link__label">Watch ↗</span>
+        </a>
+      </div>
+    );
+  }
+
   return (
     <div className="video-embed-wrap" ref={ref}>
       {isVisible ? (

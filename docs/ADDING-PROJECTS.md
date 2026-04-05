@@ -177,7 +177,7 @@ Upload the video(s) to YouTube and note the video ID from the URL:
 If you want a custom thumbnail for the project (instead of the YouTube auto-thumbnail), add it:
 
 ```
-assets-raw/video/my-video-project/thumbnail.jpg
+assets-raw/videography/my-video-project/thumbnail.jpg
 ```
 
 Run `npm run build` to generate WebP versions and update the static export.

@@ -12,8 +12,12 @@ const PortfolioCardSchema = z.object({
 
 const VideoItemSchema = z.object({
   title: z.string().min(1),
-  embedUrl: z.string().url(),
+  embedUrl: z.string().url().optional(),
+  linkUrl: z.string().url().optional(),
+  previewImage: z.string().optional(),
   uploadDate: z.string().min(1),
+}).refine((v) => v.embedUrl || v.linkUrl, {
+  message: "VideoItem must have either embedUrl or linkUrl",
 });
 
 const BaseProjectSchema = z.object({

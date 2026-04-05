@@ -42,7 +42,7 @@ const VALID_VIDEO = {
   title: "Stuck with Low Pay",
   description: "Documentary",
   heading: "Producer | Director | 📍 Taiwan",
-  ogImage: "https://jineechen.com/assets/video/stuck-low-pay/img-800.webp",
+  ogImage: "https://jineechen.com/assets/videography/stuck-low-pay/img-800.webp",
   videos: [
     {
       title: "Stuck With Low Pay",
