@@ -125,9 +125,16 @@ jobs:
       # Detect whether any file under assets-raw/ changed.
       # Writes `changed=true` or `changed=false` to $GITHUB_OUTPUT.
       # Handles force-pushes and first-ever pushes (before SHA is all zeroes).
+      # Also forces true on a clean-slate workflow_dispatch — the server was wiped,
+      # so assets must be re-uploaded regardless of whether they changed in git.
       - name: Check for asset changes
         id: asset_changes
         run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ github.event.inputs.clean_slate }}" == "true" ]]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Forced asset upload: clean-slate workflow_dispatch"
+            exit 0
+          fi
           BEFORE="${{ github.event.before }}"
           AFTER="${{ github.event.after }}"
           if [[ "$BEFORE" == "0000000000000000000000000000000000000000" ]]; then
