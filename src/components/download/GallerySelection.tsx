@@ -14,9 +14,9 @@ interface GallerySelectionProps {
   onSelectionChange: (filename: string, checked: boolean) => void;
 }
 
-/** Converts a WebP src path to the .jpg basename used for download. */
+/** Converts a WebP src path to the basename used for download. */
 function toDownloadFilename(src: string): string {
-  return src.split("/").pop()!.replace(/\.webp$/i, ".jpg");
+  return src.split("/").pop()!;
 }
 
 export default function GallerySelection({

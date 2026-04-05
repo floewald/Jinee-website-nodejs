@@ -16,7 +16,7 @@ interface GalleryWithDownloadProps {
 }
 
 function toDownloadFilename(src: string): string {
-  return src.split("/").pop()!.replace(/\.webp$/i, ".jpg");
+  return src.split("/").pop()!;
 }
 
 export default function GalleryWithDownload({
