@@ -63,8 +63,8 @@ export default function ContactForm() {
       const data = new FormData();
       data.append("ajax", "1");
       data.append("csrf_token", token);
-      data.append("first_name", form.firstName);
-      data.append("last_name", form.lastName);
+      data.append("firstName", form.firstName);
+      data.append("lastName", form.lastName);
       data.append("email", form.email);
       data.append("phone", form.phone);
       data.append("message", form.message);

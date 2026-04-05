@@ -68,11 +68,11 @@ export default function DownloadModal({
       });
 
       const contentType = res.headers.get("content-type") ?? "";
-      if (contentType.includes("application/json")) {
+      if (!res.ok || contentType.includes("application/json")) {
         const json = await res.json();
-        if (json.status === "error") {
+        if (!res.ok || json.error || json.status === "error") {
           setStatus("error");
-          setErrorMessage(json.message ?? "Download failed.");
+          setErrorMessage(json.message ?? json.error ?? "Download failed.");
           return;
         }
       }

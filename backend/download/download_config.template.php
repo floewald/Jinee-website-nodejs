@@ -24,9 +24,10 @@ return [
     'assets_base'  => __DIR__ . '/../../www/assets',
 
     // Path to the private originals folder (outside webroot on production).
-    // If this folder does not exist, download.php falls back to assets_base.
-    // On OVH: set to something like '/home/username/private_assets'
-    'private_base' => __DIR__ . '/../../private_assets',
+    // download_config.php lives at private/download/ on the server.
+    // From there, ../assets-raw resolves to private/assets-raw/ — where
+    // deploy-raw-assets uploads the original JPG/JPEG files.
+    'private_base' => __DIR__ . '/../assets-raw',
 
     // Limits
     'max_files'    => 1000,
