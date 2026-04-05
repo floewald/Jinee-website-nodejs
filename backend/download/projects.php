@@ -5,9 +5,9 @@ ini_set('display_errors', 0);
 $cfg = null;
 $candidates = [
     // Prefer a config placed outside the public webroot for production.
-    __DIR__ . '/../../private/download/download_config.php',   // production: private/download/ folder
-    __DIR__ . '/../download_config.php',                       // parent folder (local dev)
-    __DIR__ . '/download_config.php',                          // fallback to local file in repo
+    __DIR__ . '/../../../private/download/download_config.php', // production: www/backend/download → private/download/
+    __DIR__ . '/../download_config.php',                        // parent folder (local dev)
+    __DIR__ . '/download_config.php',                           // fallback to local file in repo
 ];
 foreach ($candidates as $p) {
     if (file_exists($p) && is_readable($p)) {

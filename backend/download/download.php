@@ -180,6 +180,38 @@ function respond($code, $msg, $details = null, $redirect = null, $remainingAttem
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    // Debug endpoint: GET /backend/download/download.php?debug=1
+    if (isset($_GET['debug'])) {
+        header('Content-Type: text/plain; charset=utf-8');
+        echo "Download handler debug\n";
+        echo "PHP version: " . PHP_VERSION . "\n";
+        echo "__DIR__: " . __DIR__ . "\n\n";
+        echo "=== Config resolution ===\n";
+        $debugCandidates = [
+            __DIR__ . '/../../../private/download/download_config.php',
+            __DIR__ . '/../download_config.php',
+            __DIR__ . '/config/download_config.php',
+            __DIR__ . '/download_config.php',
+        ];
+        foreach ($debugCandidates as $p) {
+            $exists = file_exists($p) ? 'EXISTS' : 'missing';
+            $readable = (file_exists($p) && is_readable($p)) ? ' (readable)' : '';
+            echo "  $p\n    → $exists$readable\n";
+        }
+        echo "\n=== Config values ===\n";
+        if (is_array($cfg)) {
+            $assetsBase = $cfg['assets_base'] ?? '(not set)';
+            $privateBase = $cfg['private_base'] ?? '(not set)';
+            echo "  assets_base:   $assetsBase\n";
+            echo "  assets exists: " . (is_dir($assetsBase) ? 'YES' : 'NO') . "\n";
+            echo "  private_base:  $privateBase\n";
+            echo "  private exists: " . (is_dir($privateBase) ? 'YES' : 'NO') . "\n";
+            echo "  projects: " . implode(', ', array_keys($cfg['projects'] ?? [])) . "\n";
+        } else {
+            echo "  Config NOT loaded\n";
+        }
+        exit;
+    }
     respond(405, 'Method not allowed — use POST');
 }
 

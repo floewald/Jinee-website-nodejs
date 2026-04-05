@@ -34,8 +34,10 @@ jobs:
         run: npm ci
 
       # 4. Build the static site → produces the out/ directory
+      #    build:next skips image generation (build:images) — images are excluded
+      #    from the main FTP deploy and are handled by the deploy-assets job.
       - name: Build static site
-        run: npm run build
+        run: npm run validate:manifests && npm run build:next
         env:
           NODE_ENV: production
 
@@ -166,7 +168,7 @@ jobs:
 
       - name: Build static site (to include new images in out/assets/)
         if: steps.asset_changes.outputs.changed == 'true'
-        run: npm run build
+        run: npm run build:next
         env:
           NODE_ENV: production
 

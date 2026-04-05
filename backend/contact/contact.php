@@ -81,8 +81,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['debug'])) {
     }
     echo "Contact handler debug\n";
     echo "PHP version: " . PHP_VERSION . "\n";
+    echo "__DIR__: " . __DIR__ . "\n\n";
+    echo "=== Config resolution ===\n";
+    $debugConfigCandidates = [
+        __DIR__ . '/../../../private/contact/config.php',
+        __DIR__ . '/config.php',
+    ];
+    foreach ($debugConfigCandidates as $p) {
+        $exists = file_exists($p) ? 'EXISTS' : 'missing';
+        echo "  $p\n    → $exists\n";
+    }
+    echo "\n=== Runtime state ===\n";
     echo "Vendor/autoload present: {$vendorExists}\n";
     echo "Configured recipient: {$cfgRecipient}\n";
+    echo "Logs dir writable: " . (is_writable(__DIR__ . '/logs') ? 'yes' : 'NO — will fail silently') . "\n";
     echo "Server name: " . ($_SERVER['SERVER_NAME'] ?? 'n/a') . "\n";
     exit;
 }

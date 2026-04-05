@@ -18,20 +18,23 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 return [
-    // Path to the publicly served WebP assets
-    'assets_base'  => __DIR__ . '/../../public/assets',
+    // Path to the publicly served WebP assets.
+    // download_config.php is deployed to private/download/ on the server.
+    // From there, ../../www/assets resolves to the webroot assets folder.
+    'assets_base'  => __DIR__ . '/../../www/assets',
 
-    // Path to the private originals folder (outside webroot on production)
-    // On OVH: '/home/username/private_assets'
-    'private_base' => __DIR__ . '/../../assets-raw',
+    // Path to the private originals folder (outside webroot on production).
+    // If this folder does not exist, download.php falls back to assets_base.
+    // On OVH: set to something like '/home/username/private_assets'
+    'private_base' => __DIR__ . '/../../private_assets',
 
     // Limits
     'max_files'    => 1000,
     'max_bytes'    => 2 * 1024 * 1024 * 1024, // 2 GB
     'warn_bytes'   => 200 * 1024 * 1024,       // 200 MB
 
-    // Base folder for server-side download logs
-    'logs_base'    => __DIR__ . '/../../logs',
+    // Log files written here (private/download/ — always writable by the deploy)
+    'logs_base'    => __DIR__,
 
     // ── Projects available for download ──────────────────────────────────────
     // slug => ['folder' => '<relative path>', 'password' => '<token>', 'visible' => true]
