@@ -1,10 +1,17 @@
 name: Build & Deploy
 
-# Trigger: push to main branch (adjust branch name if yours is different)
+# Trigger: push to main branch, or manually via GitHub UI (Actions → Run workflow)
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      clean_slate:
+        description: 'Wipe server dir before uploading (use after a server wipe or partial deploy)'
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   build-and-deploy:
@@ -32,12 +39,18 @@ jobs:
         env:
           NODE_ENV: production
 
-      # 5. Verify the build produced a valid site
+      # 5. Verify the build produced a valid static site structure
       - name: Verify build output
         run: |
-          [ -d out/ ] || (echo "::error::Build failed: out/ directory missing" && exit 1)
-          [ -f out/index.html ] || (echo "::error::Build failed: index.html not found" && exit 1)
+          fail() { echo "::error::$1" && exit 1; }
+          [ -d out/ ]                          || fail "Build failed: out/ directory missing"
+          [ -f out/index.html ]                || fail "Build failed: out/index.html not found"
+          [ -d out/_next/static/chunks/ ]      || fail "Build failed: out/_next/static/chunks/ missing"
+          [ -n "$(ls out/_next/static/chunks/)" ] || fail "Build failed: out/_next/static/chunks/ is empty"
+          [ -d out/_next/static/css/ ]         || fail "Build failed: out/_next/static/css/ missing"
           echo "Build OK — $(find out/ -type f | wc -l | tr -d ' ') files"
+          echo "  chunks: $(find out/_next/static/chunks/ -type f | wc -l | tr -d ' ') files"
+          echo "  css:    $(find out/_next/static/css/    -type f | wc -l | tr -d ' ') files"
 
       # 6. Warn if Git LFS objects are approaching the 1 GB free-tier limit (90 % = 900 MB).
       #    This is a no-op when LFS is not in use; activates automatically if LFS is adopted.
@@ -51,8 +64,21 @@ jobs:
             fi
           fi
 
-      # 7. Deploy out/ to the FTP server
+      # 7. Log build structure for debugging (visible in Actions log)
+      - name: Log build structure
+        run: |
+          echo "=== out/ top-level ==="
+          ls -la out/
+          echo "=== out/_next/static/ ==="
+          ls -la out/_next/static/
+          echo "=== chunks count: $(find out/_next/static/chunks/ -type f | wc -l | tr -d ' ') ==="
+          echo "=== css count:    $(find out/_next/static/css/    -type f | wc -l | tr -d ' ') ==="
+
+      # 8. Deploy out/ to the FTP server
       #    Credentials are stored in GitHub repository Secrets (Settings → Secrets and variables → Actions)
+      #    Use workflow_dispatch with clean_slate=true after a server wipe or partial deploy.
+      #    WARNING: clean_slate=true deletes all files in server-dir first — assets will be
+      #    wiped too, so only use it when you intend a full redeploy (deploy-assets must also run).
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -63,6 +89,8 @@ jobs:
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
           # Only upload changed files (faster incremental deploys)
           state-name: .ftp-deploy-sync-state.json
+          # Set to true via workflow_dispatch to recover from a server wipe or partial deploy
+          dangerous-clean-slate: ${{ github.event.inputs.clean_slate == 'true' }}
           # Exclude the heavy assets/ folder from automatic sync
           # (assets only need re-uploading when you add/change images;
           #  see the conditional job below for that)
