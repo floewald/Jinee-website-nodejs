@@ -51,6 +51,10 @@ backend/download/tmp/
 # Generated assets from scripts/build-images.mjs
 public/assets/*
 
+# images.json manifests are small JSON metadata — commit them so CI can
+# run validate:manifests without needing to regenerate images first.
+!public/assets/**/images.json
+
 # Fonts: keep only committed self-hosted Inter files
 !public/assets/fonts/
 public/assets/fonts/*
