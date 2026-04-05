@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(204); exit; }
 // so you can keep secrets outside the public folder. Falls back to local download_config.php.
 $cfg = null;
 $candidates = [
-    __DIR__ . '/../../private/download/download_config.php',   // Private folder on production (/www/download -> /private/download)
+    __DIR__ . '/../../../private/download/download_config.php', // Private folder on production (www/backend/download → private/download)
     __DIR__ . '/../download_config.php',                       // Parent directory (common for local dev)
     __DIR__ . '/config/download_config.php',                   // Config subfolder
     __DIR__ . '/download_config.php',                          // Same directory (fallback)

@@ -15,10 +15,18 @@ header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, X-CSRF-Token');
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(204); exit; }
 
-// Load config if present (create contact/config.php from .example-config.php)
+// Load config: prefer private/ folder outside webroot (www/backend/contact → private/contact)
+// Falls back to same directory for local dev.
 $config = [];
-if (file_exists(__DIR__ . '/config.php')) {
-    include __DIR__ . '/config.php';
+$config_candidates = [
+    __DIR__ . '/../../../private/contact/config.php', // Production: private/contact/config.php
+    __DIR__ . '/config.php',                          // Local dev fallback
+];
+foreach ($config_candidates as $config_path) {
+    if (file_exists($config_path)) {
+        include $config_path;
+        break;
+    }
 }
 
 $recipient = $config['recipient'] ?? 'hello@jineechen.com';
