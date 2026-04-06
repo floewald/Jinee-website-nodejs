@@ -2,11 +2,11 @@
   {
     "type": "video",
     "slug": "stuck-low-pay",
-    "title": "Asia's Stuck Generation | Documentary",
+    "title": "CNA Insider | Asia’s Stuck Generation",
     "description": "Documentary exploring how young graduates cope with low pay and high costs.",
     "longDescription": "A documentary examining how Taiwan's young university graduates navigate stagnant wages and rising living costs. The film follows everyday workers as they share coping strategies and question the promise of higher education.",
     "heading": "Producer | Director | Videographer",
-    "location": "📍 Taiwan",
+    "location": "📍 Singapore & Taiwan",
     "ogImage": "https://jineechen.com/assets/videography/stuck-low-pay/stuck-with-low-pay-800.webp",
     "visible": true,
     "videos": [
@@ -17,7 +17,7 @@
       }
     ],
     "portfolioCard": {
-      "cardTitle": "CNA Insider | Asia's Stuck Generation",
+      "cardTitle": "CNA Insider | Asia’s Stuck Generation",
       "thumbnail": "/assets/videography/stuck-low-pay/stuck-with-low-pay-800.webp"
     }
   },
