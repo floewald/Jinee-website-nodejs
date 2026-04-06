@@ -172,6 +172,32 @@
   },
   {
     "type": "video",
+    "slug": "uniqlo",
+    "title": "CNA Insider | UNIQLO",
+    "description": "CNA Insider series \"UNIQLO\".",
+    "longDescription": [
+      "What makes a shop accessible to people with needs, such as the blind/visually impaired, wheelchair users or those with autism and sensory issues?",
+      "",
+      "UNIQLO Singapore rolled out its pilot Access initiative in 2023, and CNA Insider got three shoppers to test out its quiet-hour assisted shopping services, as well as wider walkways and a wheelchair-friendly fitting room."
+    ],
+    "heading": "Co-Producer | Videographer",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/uniqlo/uniqlo-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "We Try UNIQLO’s Private Shopping Services, For Customers With Special Needs",
+        "embedUrl": "https://www.youtube.com/embed/HWArUxR66qc",
+        "uploadDate": "2023-01-01T00:00:00+08:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA Insider | UNIQLO",
+      "thumbnail": "/assets/videography/uniqlo/uniqlo-800.webp"
+    }
+  },
+  {
+    "type": "video",
     "slug": "living-with-chronic-pain",
     "title": "CNA Insider | Fibromyalgia",
     "description": "CNA Insider | Fibromyalgia",
