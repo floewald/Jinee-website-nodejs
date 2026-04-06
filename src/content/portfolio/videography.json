@@ -632,8 +632,8 @@
   {
     "type": "video",
     "slug": "stay-at-home-dad",
-    "title": "Stay-At-Home Dad | Documentary",
-    "description": "Documentary about a stay-at-home dad's 14-year journey.",
+    "title": "CNA Insider | Documentary",
+    "description": "CNA Insider series \"Stay at Home Dad\".",
     "longDescription": "A documentary following a Singaporean father who spent 14 years as a stay-at-home dad raising his son. The film captures his reflections on sacrifice, identity and the decision to re-enter the workforce.",
     "heading": "Producer | Director | Videographer | Video Editor",
     "location": "📍 Singapore",
@@ -647,7 +647,7 @@
       }
     ],
     "portfolioCard": {
-      "cardTitle": "CNA Insider | Stay at Home Dad",
+      "cardTitle": "CNA Insider | Documentary",
       "thumbnail": "/assets/videography/stay-at-home-dad/stay-at-home-dad-800.webp"
     }
   }
