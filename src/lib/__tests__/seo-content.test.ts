@@ -50,8 +50,8 @@ describe("social-media-addiction project", () => {
 describe("video portfolio card ordering", () => {
   const cardProjects = videoProjects.filter((p) => p.portfolioCard);
 
-  it("has 18 projects with portfolio cards", () => {
-    expect(cardProjects.length).toBe(18);
+  it("has 19 projects with portfolio cards", () => {
+    expect(cardProjects.length).toBe(19);
   });
 
   it("order matches lineup defined in videography.json", () => {
@@ -62,6 +62,7 @@ describe("video portfolio card ordering", () => {
       "healthy-dining",
       "social-media-addiction",
       "blind-kitchen-chefs",
+      "uniqlo",
       "living-with-chronic-pain",
       "mark-your-calendar",
       "red-dot-detectives",
