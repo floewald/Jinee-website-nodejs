@@ -115,21 +115,21 @@
   {
     "type": "video",
     "slug": "social-media-addiction",
-    "title": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
-    "description": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
+    "title": "8world | 前线追踪",
+    "description": "8world | 前线追踪",
     "heading": "Videographer",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/social-media-addiction/social-media-addiction-800.webp",
     "visible": true,
     "videos": [
       {
-        "title": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
+        "title": "8world | 前线追踪",
         "embedUrl": "https://www.youtube.com/embed/tZ5tjTqomvg",
         "uploadDate": "2023-01-01T00:00:00+08:00"
       }
     ],
     "portfolioCard": {
-      "cardTitle": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
+      "cardTitle": "8world | 前线追踪",
       "thumbnail": "/assets/videography/social-media-addiction/social-media-addiction-800.webp"
     }
   },
