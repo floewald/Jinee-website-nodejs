@@ -49,11 +49,12 @@ backend/download/rate-limit/
 backend/download/tmp/
 
 # Generated assets from scripts/build-images.mjs
-public/assets/*
-
-# images.json manifests are small JSON metadata — commit them so CI can
-# run validate:manifests without needing to regenerate images first.
-!public/assets/**/images.json
+# Ignore generated image files but NOT images.json manifests (needed by CI for validate:manifests)
+public/assets/**/*.webp
+public/assets/**/*.jpg
+public/assets/**/*.jpeg
+public/assets/**/*.png
+public/assets/**/*.gif
 
 # Fonts: keep only committed self-hosted Inter files
 !public/assets/fonts/
