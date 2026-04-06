@@ -93,8 +93,8 @@
   {
     "type": "video",
     "slug": "healthy-dining",
-    "title": "8world |《看见主播》40、50岁建康外食",
-    "description": "8world |《看见主播》40、50岁建康外食",
+    "title": "8world | 看见主播",
+    "description": "8world | 看见主播",
     "longDescription": "A documentary profiling healthy dining habits and recommendations for viewers in their 40s and 50s.",
     "heading": "Co-Director | Videographer",
     "location": "📍 Singapore",
@@ -102,42 +102,42 @@
     "visible": true,
     "videos": [
       {
-        "title": "8world |《看见主播》40、50岁建康外食",
+        "title": "8world | 看见主播",
         "embedUrl": "https://www.youtube.com/embed/hJn7y2VvjQs",
         "uploadDate": "2023-01-01T00:00:00+08:00"
       }
     ],
     "portfolioCard": {
-      "cardTitle": "8world |《看见主播》40、50岁建康外食",
+      "cardTitle": "8world | 看见主播",
       "thumbnail": "/assets/videography/healthy-dining/healthy-dining-800.webp"
     }
   },
   {
     "type": "video",
     "slug": "social-media-addiction",
-    "title": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
-    "description": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
+    "title": "8world | 前线追踪",
+    "description": "8world | 前线追踪",
     "heading": "Videographer",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/social-media-addiction/social-media-addiction-800.webp",
     "visible": true,
     "videos": [
       {
-        "title": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
+        "title": "8world | 前线追踪",
         "embedUrl": "https://www.youtube.com/embed/tZ5tjTqomvg",
         "uploadDate": "2023-01-01T00:00:00+08:00"
       }
     ],
     "portfolioCard": {
-      "cardTitle": "8world | 前线追踪 | 深陷社媒四年 他删光所有应用",
+      "cardTitle": "8world | 前线追踪",
       "thumbnail": "/assets/videography/social-media-addiction/social-media-addiction-800.webp"
     }
   },
   {
     "type": "video",
     "slug": "blind-kitchen-chefs",
-    "title": "CNA Insider | Blind Kitchen Chefs",
-    "description": "CNA Insider series 'Blind Kitchen Chefs'.",
+    "title": "CNA Insider | Our Blind Kitchen",
+    "description": "CNA Insider series \"Our Blind Kitchen\".",
     "longDescription": "A three-part CNA Insider documentary series following visually impaired chefs as they open their own café in Singapore.",
     "heading": "Researcher | Producer | Director | Videographer",
     "location": "📍 Singapore",
@@ -363,7 +363,7 @@
   {
     "type": "video",
     "slug": "lion-dancers",
-    "title": "Lion Dancers | Documentary",
+    "title": "CNA Insider | Gen Z Lion Dancers",
     "description": "Documentary featuring lion dancers and their cultural significance.",
     "longDescription": "A short documentary exploring the art and tradition of lion dancing in Singapore. The film delves into the history, techniques, and cultural importance of this vibrant performance art.",
     "heading": "Producer | Director | Videographer",
@@ -378,7 +378,7 @@
       }
     ],
     "portfolioCard": {
-      "cardTitle": "CNA | Lion Dancers",
+      "cardTitle": "CNA Insider | Gen Z Lion Dancers",
       "thumbnail": "/assets/videography/lion-dancers/lion-dancers-800.webp"
     }
   },
@@ -452,8 +452,8 @@
   {
     "type": "video",
     "slug": "lunch-with-us",
-    "title": "Lunch With Us | Food Series",
-    "description": "Food exploration series discovering hidden gems and local flavors.",
+    "title": "CNA Insider | Lunch With Us",
+    "description": "CNA Insider series 'Lunch With Us'.",
     "longDescription": "A four-episode food series exploring affordable local eats in Singapore and Taiwan. From hawker stalls and Michelin-rated meals under S$6 to old-school bento shops and a singing taxi driver's favourite eatery, each episode celebrates everyday food culture.",
     "heading": "Producer | Director | Videographer",
     "location": "📍 Singapore & Taiwan",
@@ -548,8 +548,8 @@
   {
     "type": "video",
     "slug": "scdf-project",
-    "title": "SCDF | Documentary",
-    "description": "Documentary following Singapore Civil Defence Force emergency services.",
+    "title": "CNA Insider | SCDF 995 Calls",
+    "description": "CNA Insider series 'SCDF 995 Calls'.",
     "longDescription": "A two-part documentary embedded with Singapore Civil Defence Force paramedics and emergency responders.",
     "heading": "Producer | Director | Videographer",
     "location": "📍 Singapore",
@@ -568,7 +568,7 @@
       }
     ],
     "portfolioCard": {
-      "cardTitle": "CNA Insider | SCDF",
+      "cardTitle": "CNA Insider | SCDF 995 Calls",
       "thumbnail": "/assets/videography/scdf-project/scdf-project-1-800.webp",
       "previewImages": [
         "/assets/videography/scdf-project/scdf-project-1-800.webp",
@@ -610,7 +610,7 @@
   {
     "type": "video",
     "slug": "work-in-sgp",
-    "title": "Work In Singapore | Documentary",
+    "title": "CNA Insider | MOM",
     "description": "Documentary about working life in Singapore and giving back.",
     "longDescription": "A documentary profiling a robotics professional who chose to build his career in Singapore and the ways he gives back to the community. The film explores work culture, immigration and belonging.",
     "heading": "Producer | Director | Videographer",
@@ -632,8 +632,8 @@
   {
     "type": "video",
     "slug": "stay-at-home-dad",
-    "title": "Stay-At-Home Dad | Documentary",
-    "description": "Documentary about a stay-at-home dad's 14-year journey.",
+    "title": "CNA Insider | Documentary",
+    "description": "CNA Insider series \"Stay at Home Dad\".",
     "longDescription": "A documentary following a Singaporean father who spent 14 years as a stay-at-home dad raising his son. The film captures his reflections on sacrifice, identity and the decision to re-enter the workforce.",
     "heading": "Producer | Director | Videographer | Video Editor",
     "location": "📍 Singapore",
@@ -647,7 +647,7 @@
       }
     ],
     "portfolioCard": {
-      "cardTitle": "CNA Insider | Stay at Home Dad",
+      "cardTitle": "CNA Insider | Documentary",
       "thumbnail": "/assets/videography/stay-at-home-dad/stay-at-home-dad-800.webp"
     }
   }
