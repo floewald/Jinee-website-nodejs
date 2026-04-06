@@ -363,7 +363,7 @@
   {
     "type": "video",
     "slug": "lion-dancers",
-    "title": "Lion Dancers | Documentary",
+    "title": "CNA Insider | Gen Z Lion Dancers",
     "description": "Documentary featuring lion dancers and their cultural significance.",
     "longDescription": "A short documentary exploring the art and tradition of lion dancing in Singapore. The film delves into the history, techniques, and cultural importance of this vibrant performance art.",
     "heading": "Producer | Director | Videographer",
@@ -378,7 +378,7 @@
       }
     ],
     "portfolioCard": {
-      "cardTitle": "CNA | Lion Dancers",
+      "cardTitle": "CNA Insider | Gen Z Lion Dancers",
       "thumbnail": "/assets/videography/lion-dancers/lion-dancers-800.webp"
     }
   },
@@ -452,8 +452,8 @@
   {
     "type": "video",
     "slug": "lunch-with-us",
-    "title": "Lunch With Us | Food Series",
-    "description": "Food exploration series discovering hidden gems and local flavors.",
+    "title": "CNA Insider | Lunch With Us",
+    "description": "CNA Insider series 'Lunch With Us'.",
     "longDescription": "A four-episode food series exploring affordable local eats in Singapore and Taiwan. From hawker stalls and Michelin-rated meals under S$6 to old-school bento shops and a singing taxi driver's favourite eatery, each episode celebrates everyday food culture.",
     "heading": "Producer | Director | Videographer",
     "location": "📍 Singapore & Taiwan",
