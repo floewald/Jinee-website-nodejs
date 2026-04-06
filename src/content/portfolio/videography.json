@@ -172,25 +172,63 @@
   },
   {
     "type": "video",
-    "slug": "i-eat-therefore-i-am",
-    "title": "I Eat Therefore I am | 我食。故我在 | Infotainment",
-    "description": ".",
-    "longDescription": "A Vietnamese saying goes: complete leaves have a responsibility to protect the broken leaves. A group of low-income people in Ho Chi Minh City lead simple lives so as to provide warmth to poorer families. They also salvage unidentified corpses in the Sai Kung River, giving them a final touch of dignity.\n越南俗语说，完整的树叶有责任保护破碎的树叶。胡志明市有着一群经济拮据的人，不惜过着最简朴的生活，也要为更穷苦的家庭提供一点温暖。除了悲悯生者，更不忌讳禁忌，从西贡河上打捞不知名的浮尸，为其举行葬礼，只盼能给往生者最后一丝尊严。",
+    "slug": "red-dot-detectives",
+    "title": "Little Red Dot Detectives | Infotainment",
+    "description": "Indian cusine vegetarian cusine and Ayurveda.",
+    "longDescription": "S1 EP6 Little India:\nIn the lively ethnic district of Little India, you can immerse in the vibrant culture and array of activities! Visit the Indian Heritage Centre to learn about the history of early Indian immigrants who moved to Singapore, savour Indian snacks, learn to make a garland and get a Henna tattoo, all at Little India!\n小印度是新加坡著名的印度人社区，在这川流不息的地区，有着琳琅满目的商品！ 你可在印度文化遗产中心，了解小印度先祖移民的历史背景，尝一口甜腻的印度小吃，学习制作花环和做海娜手绘！让搜密主组员带领大家，一起揭开小印度的神秘面纱！\n\nS2 EP5 Ang Mo Kio:\nDid you know that Bishan's name originated from a cemetery, while Ang Mo Kio's name is related to a bridge? Discover nostalgic mosaic children's playgrounds, colourful murals that reflect our old kampongs and find out stories of car-plates making. Let's explore the unique flavour of these estates!\n据说碧山的地名源自坟场而宏茂桥的地名则是和一条用来运输军用物资的桥有关。著名的组屋区中可以找到具怀旧风格的马赛克儿童游乐场，反映甘榜生活面貌的彩色壁画，以及有趣的车牌制造。一起去发掘这一带的独特风情!",
     "heading": "Producer | Director",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/videography/i-eat-therefore/i-eat-therefore-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/i-eat-therefore/i-eat-therefore-1-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "S1 EP6 Little India | Host: 葉慧馨+曾思涵",
+        "linkUrl": "https://www.mewatch.sg/watch/I-Eat-Therefore-I-am-E10-78693",
+        "previewImage": "/assets/videography/red-dot-detectives/red-dot-detectives-2-800.webp",
+        "uploadDate": "2023-01-01T00:00:00+08:00"
+      },
+      {
+        "title": "S2 EP5 Ang Mo Kio | Host: 葉慧馨+冼恩",
+        "linkUrl": "https://www.mewatch.sg/watch/Little-Red-Dot-Detectives-S2-E5-180385",
+        "previewImage": "/assets/videography/red-dot-detectives/red-dot-detectives-3-800.webp",
+        "uploadDate": "2023-01-01T00:00:00+08:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "Me Watch | Little Red Dot Detectives",
+      "thumbnail": "/assets/videography/red-dot-detectives/red-dot-detectives-1-800.webp",
+      "previewImages": [
+        "/assets/videography/red-dot-detectives/red-dot-detectives-1-800.webp",
+        "/assets/videography/red-dot-detectives/red-dot-detectives-2-800.webp",
+        "/assets/videography/red-dot-detectives/red-dot-detectives-3-800.webp"
+      ]
+    }
+  },
+  {
+    "type": "video",
+    "slug": "i-eat-therefore-i-am",
+    "title": "I Eat Therefore I am | 我食。故我在 | Infotainment",
+    "description": "Indian cusine vegetarian cusine and Ayurveda.",
+    "longDescription": "In India, vegetarian cuisine is a common dietary habit and life philosophy. Ayurveda is a 5,000-year-old medical system, considered to be the oldest in the world. Ayurvedic Medicine encourages a balance in the body through diet, herbal medicine, massage and meditation.\n在印度，素食料理不仅是饮食习惯，更是生活哲学。举世闻名的阿育吠陀饮食蕴含了丰富的养生智慧。阿育吠陀的意涵是“生命的科学”，是一门拥有5千年历史，被认为是世界最古老的医学体系。透过饮食、草药、按摩以及冥想来保持人体内三大生命能量的平衡是阿育吠陀医学的基础。",
+    "heading": "Producer | Director",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/i-eat-therefore/i-eat-therefore-1-800.webp",
     "visible": true,
     "videos": [
       {
         "title": "I Eat Therefore I am | 我食。故我在",
         "linkUrl": "https://www.mewatch.sg/watch/I-Eat-Therefore-I-am-E10-78693",
-        "previewImage": "/assets/videography/i-eat-therefore/i-eat-therefore-800.webp",
+        "previewImage": "/assets/videography/i-eat-therefore/i-eat-therefore-2-800.webp",
         "uploadDate": "2023-01-01T00:00:00+08:00"
       }
     ],
     "portfolioCard": {
       "cardTitle": "Me Watch | I Eat Therefore I am",
-      "thumbnail": "/assets/videography/i-eat-therefore/i-eat-therefore-800.webp"
+      "thumbnail": "/assets/videography/i-eat-therefore/i-eat-therefore-1-800.webp",
+      "previewImages": [
+        "/assets/videography/i-eat-therefore/i-eat-therefore-1-800.webp",
+        "/assets/videography/i-eat-therefore/i-eat-therefore-2-800.webp"
+      ]
     }
   },
   {
@@ -201,19 +239,24 @@
     "longDescription": "A Vietnamese saying goes: complete leaves have a responsibility to protect the broken leaves. A group of low-income people in Ho Chi Minh City lead simple lives so as to provide warmth to poorer families. They also salvage unidentified corpses in the Sai Kung River, giving them a final touch of dignity.\n越南俗语说，完整的树叶有责任保护破碎的树叶。胡志明市有着一群经济拮据的人，不惜过着最简朴的生活，也要为更穷苦的家庭提供一点温暖。除了悲悯生者，更不忌讳禁忌，从西贡河上打捞不知名的浮尸，为其举行葬礼，只盼能给往生者最后一丝尊严。",
     "heading": "Producer | Director",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/videography/guardians-vietnam/guardians-vietnam-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/guardians-vietnam/guardians-vietnam-1-800.webp",
     "visible": true,
     "videos": [
       {
         "title": "The Guardians 守護者 | Me Watch",
         "linkUrl": "https://www.mewatch.sg/watch/The-Guardians-E9-Vietnam-70547",
-        "previewImage": "/assets/videography/guardians-vietnam/guardians-vietnam-800.webp",
+        "previewImage": "/assets/videography/guardians-vietnam/guardians-vietnam-2-800.webp",
         "uploadDate": "2023-01-01T00:00:00+08:00"
       }
     ],
     "portfolioCard": {
       "cardTitle": "Me Watch | The Guardians",
-      "thumbnail": "/assets/videography/guardians-vietnam/guardians-vietnam-800.webp"
+      "thumbnail": "/assets/videography/guardians-vietnam/guardians-vietnam-1-800.webp",
+      "previewImages": [
+        "/assets/videography/guardians-vietnam/guardians-vietnam-1-800.webp",
+        "/assets/videography/guardians-vietnam/guardians-vietnam-2-800.webp"
+      ]
+
     }
   },
   {

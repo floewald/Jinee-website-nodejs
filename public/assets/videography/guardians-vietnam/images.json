@@ -1,9 +1,16 @@
 [
   {
-    "basename": "guardians-vietnam",
-    "thumb": "guardians-vietnam-320.webp",
-    "md": "guardians-vietnam-800.webp",
-    "lg": "guardians-vietnam-1600.webp",
+    "basename": "guardians-vietnam-1",
+    "thumb": "guardians-vietnam-1-320.webp",
+    "md": "guardians-vietnam-1-800.webp",
+    "lg": "guardians-vietnam-1-1600.webp",
+    "original": null
+  },
+  {
+    "basename": "guardians-vietnam-2",
+    "thumb": "guardians-vietnam-2-320.webp",
+    "md": "guardians-vietnam-2-800.webp",
+    "lg": "guardians-vietnam-2-1600.webp",
     "original": null
   }
 ]
