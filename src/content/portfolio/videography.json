@@ -93,8 +93,8 @@
   {
     "type": "video",
     "slug": "healthy-dining",
-    "title": "8world |《看见主播》40、50岁建康外食",
-    "description": "8world |《看见主播》40、50岁建康外食",
+    "title": "8world | 看见主播",
+    "description": "8world | 看见主播",
     "longDescription": "A documentary profiling healthy dining habits and recommendations for viewers in their 40s and 50s.",
     "heading": "Co-Director | Videographer",
     "location": "📍 Singapore",
@@ -102,13 +102,13 @@
     "visible": true,
     "videos": [
       {
-        "title": "8world |《看见主播》40、50岁建康外食",
+        "title": "8world | 看见主播",
         "embedUrl": "https://www.youtube.com/embed/hJn7y2VvjQs",
         "uploadDate": "2023-01-01T00:00:00+08:00"
       }
     ],
     "portfolioCard": {
-      "cardTitle": "8world |《看见主播》40、50岁建康外食",
+      "cardTitle": "8world | 看见主播",
       "thumbnail": "/assets/videography/healthy-dining/healthy-dining-800.webp"
     }
   },
