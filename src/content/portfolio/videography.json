@@ -548,8 +548,8 @@
   {
     "type": "video",
     "slug": "scdf-project",
-    "title": "SCDF | Documentary",
-    "description": "Documentary following Singapore Civil Defence Force emergency services.",
+    "title": "CNA Insider | SCDF 995 Calls",
+    "description": "CNA Insider series 'SCDF 995 Calls'.",
     "longDescription": "A two-part documentary embedded with Singapore Civil Defence Force paramedics and emergency responders.",
     "heading": "Producer | Director | Videographer",
     "location": "📍 Singapore",
@@ -568,7 +568,7 @@
       }
     ],
     "portfolioCard": {
-      "cardTitle": "CNA Insider | SCDF",
+      "cardTitle": "CNA Insider | SCDF 995 Calls",
       "thumbnail": "/assets/videography/scdf-project/scdf-project-1-800.webp",
       "previewImages": [
         "/assets/videography/scdf-project/scdf-project-1-800.webp",
