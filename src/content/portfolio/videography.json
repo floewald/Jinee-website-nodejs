@@ -172,6 +172,27 @@
   },
   {
     "type": "video",
+    "slug": "living-with-chronic-pain",
+    "title": "CNA Insider | Fibromyalgia",
+    "description": "CNA Insider | Fibromyalgia",
+    "heading": "Co-Producer | Videographer",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/living-with-chronic-pain/living-with-chronic-pain-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "Living With Chronic Pain That Even Doctors Don’t Believe - This Is Fibromyalgia",
+        "embedUrl": "https://www.youtube.com/embed/cxNqO_RsdqM",
+        "uploadDate": "2023-01-01T00:00:00+08:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "Living With Chronic Pain That Even Doctors Don’t Believe - This Is Fibromyalgia",
+      "thumbnail": "/assets/videography/living-with-chronic-pain/living-with-chronic-pain-800.webp"
+    }
+  },
+  {
+    "type": "video",
     "slug": "mark-your-calendar",
     "title": "Mark Your Calendar | Infotainment",
     "description": "Indian cusine vegetarian cusine and Ayurveda.",
