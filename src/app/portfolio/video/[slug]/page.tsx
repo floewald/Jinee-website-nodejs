@@ -62,7 +62,10 @@ export default async function VideoProjectPage({
       {project.location && <p className="project-location">{project.location}</p>}
       {project.longDescription && (
         <p className="project-description">
-          {project.longDescription.split('\n').map((line, i, arr) => (
+          {(Array.isArray(project.longDescription)
+            ? project.longDescription
+            : project.longDescription.split('\n')
+          ).map((line, i, arr) => (
             <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
           ))}
         </p>

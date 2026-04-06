@@ -52,7 +52,7 @@ export interface VideoProject extends BaseProject {
   /** Filming location(s), e.g. "Singapore" or "Singapore & Taiwan" */
   location?: string;
   /** Longer intro paragraph shown above the video player */
-  longDescription?: string;
+  longDescription?: string | string[];
   videos: VideoItem[];
 }
 
