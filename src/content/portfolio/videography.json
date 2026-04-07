@@ -654,7 +654,7 @@
   {
     "type": "video",
     "slug": "stay-at-home-dad",
-    "title": "CNA Insider | Documentary",
+    "title": "CNA Insider | TV Spin Offs",
     "description": "CNA Insider series \"Stay at Home Dad\".",
     "longDescription": "A documentary following a Singaporean father who spent 14 years as a stay-at-home dad raising his son. The film captures his reflections on sacrifice, identity and the decision to re-enter the workforce.",
     "heading": "Producer | Director | Videographer | Video Editor",
@@ -669,7 +669,7 @@
       }
     ],
     "portfolioCard": {
-      "cardTitle": "CNA Insider | Documentary",
+      "cardTitle": "CNA Insider | TV Spin Offs",
       "thumbnail": "/assets/videography/stay-at-home-dad/stay-at-home-dad-800.webp"
     }
   }
