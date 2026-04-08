@@ -220,14 +220,16 @@
   {
     "type": "video",
     "slug": "mark-your-calendar",
-    "title": "Mark Your Calendar | Infotainment",
+    "title": "Mark Your Calendar | 历历在目 | Infotainment",
     "description": "Indian cusine vegetarian cusine and Ayurveda.",
     "longDescription": [
       "EP10 萬聖節Halloween:",
-      "Beyond the fun and thrills of Halloween, is an intriguing origin. Join our Hosts in an annual Halloween parade, and a Trick or Treat party in Singapore, as they explore the traditions behind this festival! 万圣节Halloween的由来是什么？为什么有Trick or treat 不给糖就捣蛋的活动？南瓜灯背后又有什么有趣的故事？这一集，一起参加刺激好玩的万圣节活动，了解异国的文化和习俗！",
+      "Beyond the fun and thrills of Halloween, is an intriguing origin. Join our Hosts in an annual Halloween parade, and a Trick or Treat party in Singapore, as they explore the traditions behind this festival!",
+      "万圣节Halloween的由来是什么？为什么有Trick or treat 不给糖就捣蛋的活动？南瓜灯背后又有什么有趣的故事？这一集，一起参加刺激好玩的万圣节活动，了解异国的文化和习俗！",
       "",
       "EP11 屠妖節 Deepavali:",
-      "Every Deepavali, places will be lit with stunning decorations. People will light up lamps to signify that \"light has conquered darkness\". Discover different traditions related to Deepavali, like henna, Hindu temple practices and our local Deepavali Festival Village. 屠妖节是兴都教徒重要的传统节日，也称排灯节。每年的屠妖节，兴都教徒都会在家里点燃油灯，象征印度教里的\"光明征服黑暗\"。 从汉娜手绘、庙里祈福到逛市集，这一集，跟随主持人一同探索屠妖节背后的传统意义和习俗！",
+      "Every Deepavali, places will be lit with stunning decorations. People will light up lamps to signify that \"light has conquered darkness\". Discover different traditions related to Deepavali, like henna, Hindu temple practices and our local Deepavali Festival Village.",
+      "屠妖节是兴都教徒重要的传统节日，也称排灯节。每年的屠妖节，兴都教徒都会在家里点燃油灯，象征印度教里的\"光明征服黑暗\"。 从汉娜手绘、庙里祈福到逛市集，这一集，跟随主持人一同探索屠妖节背后的传统意义和习俗！",
       "",
       "EP12 冬至 Winter Solstice",
       "Eating rice dumplings during Winter Solstice is a long-held tradition, originating from China. This episode, our host will explore activities like making tang-yuan , brewing Chinese herbs, and how the Hong Kong community celebrates the festival.",
@@ -268,7 +270,7 @@
       }
     ],
     "portfolioCard": {
-      "cardTitle": "Me Watch | Mark Your Calendar",
+      "cardTitle": "Mark Your Calendar | 历历在目 | Infotainment",
       "thumbnail": "/assets/videography/mark-your-calendar/mark-your-calendar-1-800.webp",
       "previewImages": [
         "/assets/videography/mark-your-calendar/mark-your-calendar-1-800.webp",
@@ -311,7 +313,7 @@
       }
     ],
     "portfolioCard": {
-      "cardTitle": "Me Watch | Little Red Dot Detectives",
+      "cardTitle": "Little Red Dot Detectives | Infotainment",
       "thumbnail": "/assets/videography/red-dot-detectives/red-dot-detectives-1-800.webp",
       "previewImages": [
         "/assets/videography/red-dot-detectives/red-dot-detectives-1-800.webp",
@@ -336,14 +338,14 @@
     "visible": true,
     "videos": [
       {
-        "title": "I Eat Therefore I am | 我食。故我在",
+        "title": "I Eat Therefore I am | 我食。故我在 | E10",
         "linkUrl": "https://www.mewatch.sg/watch/I-Eat-Therefore-I-am-E10-78693",
         "previewImage": "/assets/videography/i-eat-therefore/i-eat-therefore-2-800.webp",
         "uploadDate": "2023-01-01T00:00:00+08:00"
       }
     ],
     "portfolioCard": {
-      "cardTitle": "Me Watch | I Eat Therefore I am",
+      "cardTitle": "I Eat Therefore I am | 我食。故我在",
       "thumbnail": "/assets/videography/i-eat-therefore/i-eat-therefore-1-800.webp",
       "previewImages": [
         "/assets/videography/i-eat-therefore/i-eat-therefore-1-800.webp",
@@ -366,14 +368,14 @@
     "visible": true,
     "videos": [
       {
-        "title": "The Guardians 守護者 | Me Watch",
+        "title": "The Guardians 守護者| Vietnam 越南 | Infotainment | E9",
         "linkUrl": "https://www.mewatch.sg/watch/The-Guardians-E9-Vietnam-70547",
         "previewImage": "/assets/videography/guardians-vietnam/guardians-vietnam-2-800.webp",
         "uploadDate": "2023-01-01T00:00:00+08:00"
       }
     ],
     "portfolioCard": {
-      "cardTitle": "The Guardians 守護者| Vietnam 越南 | Infotainment",
+      "cardTitle": "The Guardians 守護者 | Vietnam 越南 | Infotainment",
       "thumbnail": "/assets/videography/guardians-vietnam/guardians-vietnam-1-800.webp",
       "previewImages": [
         "/assets/videography/guardians-vietnam/guardians-vietnam-1-800.webp",
