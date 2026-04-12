@@ -850,11 +850,14 @@ a.project-card:focus { color: var(--charcoal); text-decoration: none; }
 .instagram-section {
   container-type: inline-size;
 }
+.social-media-section + .social-media-section {
+  margin-top: 3rem;
+}
+/* Mobile: horizontal scroll, 2.5 cards visible to hint at more content */
 .instagram-previews {
   display: grid;
   grid-auto-flow: column;
-  /* --sm-preview-cols is set via inline style from SOCIAL_MEDIA_PREVIEW_COLUMNS in constants.ts */
-  grid-auto-columns: calc((100cqi - (var(--sm-preview-cols, 5) - 1) * 12px) / var(--sm-preview-cols, 5));
+  grid-auto-columns: calc(100cqi / 2.5);
   gap: 12px;
   margin-top: 1.25rem;
   overflow-x: auto;
@@ -862,6 +865,15 @@ a.project-card:focus { color: var(--charcoal); text-decoration: none; }
   scrollbar-width: none;
 }
 .instagram-previews::-webkit-scrollbar { display: none; }
+/* Tablet / desktop: wrap into rows; --sm-preview-cols cards per row */
+@container (min-width: 660px) {
+  .instagram-previews {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(var(--sm-preview-cols, 5), 1fr);
+    grid-auto-columns: unset;
+    overflow-x: visible;
+  }
+}
 .instagram-preview {
   display: block;
   position: relative;

@@ -50,17 +50,15 @@ export default function SocialMediaIndexPage() {
 
   return (
     <main className="portfolio-category container">
-      <h1 className="page-title">Social Media</h1>
-      <hr className="section-title-divider" aria-hidden="true" />
-
       {socialMediaSections.map((section) => {
         const projects = visible.filter((p) => p.category === section.key);
         if (!projects.length) return null;
         return (
-          <div key={section.key}>
-            <p className="section-category-label">{section.label}</p>
+          <section key={section.key} className="social-media-section">
+            <h1 className="page-title">{section.label}</h1>
+            <hr className="section-title-divider" aria-hidden="true" />
             {renderGrid(projects)}
-          </div>
+          </section>
         );
       })}
     </main>
