@@ -62,8 +62,11 @@ test.describe("Visual regression", () => {
             transition-duration: 0s !important;
           }
           /* Hide Next.js dev indicators */
-          nextjs-portal, [data-nextjs-dialog], [data-next-mark] {
+          nextjs-portal, [data-nextjs-dialog], [data-next-mark],
+          [data-nextjs-toast], [data-nextjs-dev-toolbar] {
             display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
           }
         `;
         document.head.appendChild(style);
@@ -73,9 +76,17 @@ test.describe("Visual regression", () => {
           (el as HTMLElement).style.display = "none";
         });
 
-        // Hide Next.js dev compilation indicator
-        document.querySelectorAll('[data-next-mark], [data-nextjs-dialog], nextjs-portal').forEach((el) => {
+        // Hide Next.js dev compilation indicator (including shadow DOM)
+        document.querySelectorAll('[data-next-mark], [data-nextjs-dialog], nextjs-portal, [data-nextjs-toast], [data-nextjs-dev-toolbar]').forEach((el) => {
           (el as HTMLElement).style.display = "none";
+          (el as HTMLElement).remove();
+        });
+        // Also remove any remaining fixed/absolute positioned dev indicators at bottom-left
+        document.querySelectorAll('body > *').forEach((el) => {
+          const htmlEl = el as HTMLElement;
+          if (htmlEl.tagName && htmlEl.tagName.includes('-') && htmlEl.shadowRoot) {
+            htmlEl.remove();
+          }
         });
 
         // Mask YouTube/video embeds — external content varies between runs
