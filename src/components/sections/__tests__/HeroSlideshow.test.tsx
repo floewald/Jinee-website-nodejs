@@ -10,7 +10,6 @@ jest.mock("next/image", () => ({
       priority?: boolean;
     }
   ) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { fill: _f, sizes: _s, priority: _p, ...rest } = props;
     // eslint-disable-next-line @next/next/no-img-element
     return <img alt="" {...rest} />;

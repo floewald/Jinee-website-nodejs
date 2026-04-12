@@ -9,7 +9,7 @@
  *  - Single-image: no autoplay timer started
  */
 
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { render, fireEvent, act } from "@testing-library/react";
 import CardSlideshow from "@/components/gallery/CardSlideshow";
 
 jest.mock("next/image", () => ({
@@ -23,7 +23,6 @@ jest.mock("next/image", () => ({
       placeholder?: string;
     }
   ) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { unoptimized: _u, fill: _f, sizes: _s, placeholder: _p, ...rest } = props;
     // eslint-disable-next-line @next/next/no-img-element
     return <img alt="" {...rest} />;

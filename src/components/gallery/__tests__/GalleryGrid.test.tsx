@@ -4,7 +4,6 @@ import GalleryGrid from "@/components/gallery/GalleryGrid";
 jest.mock("next/image", () => ({
   __esModule: true,
   default: (props: React.ImgHTMLAttributes<HTMLImageElement> & { unoptimized?: boolean }) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { unoptimized: _unoptimized, ...rest } = props;
     // eslint-disable-next-line @next/next/no-img-element
     return <img alt="" {...rest} />;
