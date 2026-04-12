@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { BACKEND_URL } from "@/lib/constants";
+import { btn } from "@/lib/button-styles";
 
 interface DownloadModalProps {
   isOpen: boolean;
@@ -172,7 +173,7 @@ export default function DownloadModal({
 
           <button
             type="button"
-            className="btn btn--primary btn--large"
+            className={btn({ visual: "primary", size: "large" })}
             disabled={status === "loading"}
             onClick={handleDownload}
           >

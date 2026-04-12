@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { BACKEND_URL } from "@/lib/constants";
+import { btn } from "@/lib/button-styles";
 
 const DRAFT_KEY = "contactFormDraft";
 
@@ -196,7 +197,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="btn btn--primary"
+        className={btn({ visual: "primary" })}
       >
         {status === "sending" ? "Sending…" : "Send Message"}
       </button>

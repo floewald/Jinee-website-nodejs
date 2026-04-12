@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { btn } from "@/lib/button-styles";
 
 interface DownloadToolbarProps {
   selectionMode: boolean;
@@ -45,7 +46,7 @@ export default function DownloadToolbar({
   return (
     <div className="download-toolbar">
       <button
-        className={`download-toggle btn btn--outline${selectionMode ? " is-active" : ""}`}
+        className={`download-toggle ${btn({ visual: "outline", active: selectionMode || undefined })}`}
         aria-pressed={selectionMode}
         onClick={handleToggleSelection}
       >
@@ -55,7 +56,7 @@ export default function DownloadToolbar({
       {selectionMode && (
         <>
           <button
-            className="btn btn--primary download-button"
+            className={`${btn({ visual: "primary" })} download-button`}
             disabled={selectedCount === 0}
             onClick={onDownload}
           >
@@ -73,14 +74,14 @@ export default function DownloadToolbar({
           </span>
 
           <button
-            className={`btn btn--outline${allSelected ? " is-active" : ""}`}
+            className={btn({ visual: "outline", active: allSelected || undefined })}
             onClick={handleSelectAll}
           >
             All
           </button>
 
           <button
-            className={`btn btn--outline${clearFlash ? " is-active" : ""}`}
+            className={btn({ visual: "outline", active: clearFlash || undefined })}
             onClick={handleClearSelection}
           >
             Clear

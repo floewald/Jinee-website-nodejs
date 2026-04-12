@@ -89,9 +89,9 @@ describe("FeaturedSection", () => {
     expect(document.querySelector(".instagram-preview")).toBeNull();
   });
 
-  it('renders "More Video Projects" link with btn--primary class', () => {
+  it('renders "More Video Projects" link with button styling', () => {
     const link = screen.getByText("More Video Projects");
     expect(link).toHaveAttribute("href", "/portfolio/video/");
-    expect(link).toHaveClass("btn--primary");
+    expect(link).toHaveClass("visual-primary");
   });
 });

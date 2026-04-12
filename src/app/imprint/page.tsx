@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { btn } from "@/lib/button-styles";
 
 export const metadata: Metadata = {
   title: "Impressum / Author",
@@ -38,7 +39,7 @@ export default function ImprintPage() {
         </p>
 
         <div style={{ marginTop: "2rem", textAlign: "center" }}>
-          <Link href="/" className="btn btn--primary">
+          <Link href="/" className={btn({ visual: "primary" })}>
             Back to Home
           </Link>
         </div>

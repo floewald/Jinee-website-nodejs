@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getVideoCards } from "@/lib/portfolio-config";
+import { btn } from "@/lib/button-styles";
 import { getProjectSlideshowImages, type SlideshowImage } from "@/lib/gallery-images";
 import CardSlideshow from "@/components/gallery/CardSlideshow";
 import RevealGrid from "@/components/portfolio/RevealGrid";
@@ -60,7 +61,7 @@ export default function FeaturedSection() {
         </RevealGrid>
 
         <div className="section-cta">
-          <Link href="/portfolio/video/" className="btn btn--primary">
+          <Link href="/portfolio/video/" className={btn({ visual: "primary" })}>
             More Video Projects
           </Link>
         </div>

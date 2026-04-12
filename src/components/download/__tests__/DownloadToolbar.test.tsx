@@ -67,14 +67,14 @@ describe("DownloadToolbar", () => {
     render(
       <DownloadToolbar {...baseProps} selectionMode={true} selectedCount={5} totalCount={5} />
     );
-    expect(screen.getByRole("button", { name: /^all$/i })).toHaveClass("is-active");
+    expect(screen.getByRole("button", { name: /^all$/i })).toHaveClass("active");
   });
 
   it("shows All button as inactive when not all images are selected", () => {
     render(
       <DownloadToolbar {...baseProps} selectionMode={true} selectedCount={3} totalCount={5} />
     );
-    expect(screen.getByRole("button", { name: /^all$/i })).not.toHaveClass("is-active");
+    expect(screen.getByRole("button", { name: /^all$/i })).not.toHaveClass("active");
   });
 
   it("flashes Clear button as active for 100ms then resets", () => {
@@ -83,10 +83,10 @@ describe("DownloadToolbar", () => {
     const clearBtn = screen.getByRole("button", { name: /clear/i });
 
     fireEvent.click(clearBtn);
-    expect(clearBtn).toHaveClass("is-active");
+    expect(clearBtn).toHaveClass("active");
 
     act(() => jest.advanceTimersByTime(100));
-    expect(clearBtn).not.toHaveClass("is-active");
+    expect(clearBtn).not.toHaveClass("active");
     jest.useRealTimers();
   });
 
@@ -94,7 +94,7 @@ describe("DownloadToolbar", () => {
     const { rerender } = render(
       <DownloadToolbar {...baseProps} selectionMode={true} selectedCount={5} totalCount={5} />
     );
-    expect(screen.getByRole("button", { name: /^all$/i })).toHaveClass("is-active");
+    expect(screen.getByRole("button", { name: /^all$/i })).toHaveClass("active");
 
     rerender(<DownloadToolbar {...baseProps} selectionMode={false} />);
     expect(screen.queryByRole("button", { name: /^all$/i })).not.toBeInTheDocument();

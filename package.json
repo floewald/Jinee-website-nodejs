@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "panda codegen --silent && next dev",
-    "build": "panda codegen --silent && npm run build:images && npm run validate:manifests && next build",
-    "build:next": "panda codegen --silent && next build",
+    "dev": "panda codegen --silent && panda cssgen --outfile src/styled-system/styles.css --silent && next dev",
+    "dev:fast": "next dev",
+    "build": "panda codegen --silent && panda cssgen --outfile src/styled-system/styles.css --silent && npm run build:images && npm run validate:manifests && next build",
+    "build:next": "panda codegen --silent && panda cssgen --outfile src/styled-system/styles.css --silent && next build",
     "build:images": "bash scripts/build-images.sh",
     "preview": "npm run build:next && bash scripts/build-preview-zip.sh",
     "validate:manifests": "node scripts/validate-manifests.mjs",

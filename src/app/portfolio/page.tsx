@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import { btn } from "@/lib/button-styles";
 import {
   getPhotographyCards,
   getVideoCards,
@@ -72,7 +73,7 @@ export default function PortfolioPage() {
             })}
           </RevealGrid>
           <div className="section-cta">
-            <Link href="/portfolio/photography/" className="btn btn--primary">
+            <Link href="/portfolio/photography/" className={btn({ visual: "primary" })}>
               More Photography Projects
             </Link>
           </div>
@@ -128,7 +129,7 @@ export default function PortfolioPage() {
             })}
           </RevealGrid>
           <div className="section-cta">
-            <Link href="/portfolio/video/" className="btn btn--inverted">
+            <Link href="/portfolio/video/" className={btn({ visual: "inverted" })}>
               More Video Projects
             </Link>
           </div>
@@ -178,7 +179,7 @@ export default function PortfolioPage() {
           </RevealGrid>
           </div>
           <div className="section-cta">
-            <Link href="/portfolio/social-media/" className="btn btn--primary">
+            <Link href="/portfolio/social-media/" className={btn({ visual: "primary" })}>
               More Social Media Projects
             </Link>
           </div>
