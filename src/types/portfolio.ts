@@ -75,6 +75,8 @@ export interface SocialMediaProject extends BaseProject {
   instagramUrl?: string;
   /** Content category used to group projects in the social media index */
   category?: "lifestyle" | "editorial";
+  /** Hashtags shown below the thumbnail in card mode */
+  tags?: string[];
 }
 
 export type AnyProject = PhotographyProject | VideoProject | SocialMediaProject;

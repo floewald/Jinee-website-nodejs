@@ -34,3 +34,10 @@ export const SLIDESHOW_JITTER_MS = 4000;
  * a CSS custom property (--sm-preview-cols) — no CSS edits required.
  */
 export const SOCIAL_MEDIA_PREVIEW_COLUMNS = 5;
+
+/**
+ * When true, social media previews render as project cards with a thumbnail
+ * and hashtags below. When false, renders plain thumbnail-only tiles.
+ * Per-project hashtags are configured via the `tags` array in social-media.json.
+ */
+export const SOCIAL_MEDIA_CARD_MODE = true;

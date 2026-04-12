@@ -54,6 +54,7 @@ export const SocialMediaProjectSchema = BaseProjectSchema.extend({
   customContent: z.string().optional(),
   instagramUrl: z.string().url().optional(),
   category: z.enum(["lifestyle", "editorial"]).optional(),
+  tags: z.array(z.string()).optional(),
 });
 
 // ── Social-media manifest (sections + projects) ─────────────────────────────

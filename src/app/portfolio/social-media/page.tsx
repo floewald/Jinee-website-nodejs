@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { socialMediaProjects, socialMediaSections, projectPath } from "@/lib/portfolio-config";
-import { SOCIAL_MEDIA_PREVIEW_COLUMNS } from "@/lib/constants";
+import { SOCIAL_MEDIA_PREVIEW_COLUMNS, SOCIAL_MEDIA_CARD_MODE } from "@/lib/constants";
 import RevealGrid from "@/components/portfolio/RevealGrid";
 
 export const metadata: Metadata = {
@@ -21,25 +21,33 @@ export default function SocialMediaIndexPage() {
           {projects.map((project) => {
             const href = project.instagramUrl ?? projectPath(project);
             const isExternal = !!project.instagramUrl;
+            const previewClass = `instagram-preview${SOCIAL_MEDIA_CARD_MODE ? " instagram-preview--card" : ""}`;
             return (
               <Link
                 key={project.slug}
                 href={href}
-                className="instagram-preview"
+                className={previewClass}
                 {...(isExternal
                   ? { target: "_blank", rel: "noopener noreferrer" }
                   : {})}
               >
-                <Image
-                  src={project.ogImage.replace("https://jineechen.com", "")}
-                  alt={project.title}
-                  width={400}
-                  height={711}
-                  loading="lazy"
-                  className="instagram-preview__img"
-                  unoptimized
-                />
-                <span className="play-overlay" aria-hidden="true">▶</span>
+                <div className="instagram-preview__thumb">
+                  <Image
+                    src={project.ogImage.replace("https://jineechen.com", "")}
+                    alt={project.title}
+                    width={400}
+                    height={711}
+                    loading="lazy"
+                    className="instagram-preview__img"
+                    unoptimized
+                  />
+                  <span className="play-overlay" aria-hidden="true">▶</span>
+                </div>
+                {SOCIAL_MEDIA_CARD_MODE && project.tags && project.tags.length > 0 && (
+                  <div className="instagram-preview__body">
+                    <p className="instagram-preview__tags">{project.tags.join(" ")}</p>
+                  </div>
+                )}
               </Link>
             );
           })}
