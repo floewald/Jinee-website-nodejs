@@ -42,12 +42,15 @@ jobs:
           else
             CHANGED=$(git diff --name-only "$BEFORE" "$AFTER" 2>/dev/null || echo "")
           fi
-          if echo "$CHANGED" | grep -q 'assets-raw/'; then
+          # Trigger when source images changed OR when portfolio content/manifests changed.
+          # The second condition catches "new project added" pushes where only JSON manifests
+          # are committed but new WebP files are still needed on the server.
+          if echo "$CHANGED" | grep -qE 'assets-raw/|src/content/'; then
             echo "changed=true" >> $GITHUB_OUTPUT
-            echo "assets-raw/ changes detected"
+            echo "Asset-relevant changes detected (assets-raw/ or src/content/)"
           else
             echo "changed=false" >> $GITHUB_OUTPUT
-            echo "No assets-raw/ changes — skipping asset deploys"
+            echo "No asset-relevant changes — skipping asset deploys"
           fi
 
   build-and-deploy:
