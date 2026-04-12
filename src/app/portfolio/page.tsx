@@ -7,7 +7,7 @@ import {
   socialMediaProjects,
   projectPath,
 } from "@/lib/portfolio-config";
-import { MAX_CARDS } from "@/lib/constants";
+import { MAX_CARDS, SOCIAL_MEDIA_PREVIEW_COLUMNS } from "@/lib/constants";
 import { getProjectSlideshowImages, type SlideshowImage } from "@/lib/gallery-images";
 import CardSlideshow from "@/components/gallery/CardSlideshow";
 import RevealGrid from "@/components/portfolio/RevealGrid";
@@ -140,7 +140,8 @@ export default function PortfolioPage() {
         <div className="container">
           <h2 className="section-title section-title--center">Social Media</h2>
           <hr className="section-title-divider" aria-hidden="true" />
-          <RevealGrid className="instagram-previews">
+          <div className="instagram-section" style={{ "--sm-preview-cols": SOCIAL_MEDIA_PREVIEW_COLUMNS } as React.CSSProperties}>
+            <RevealGrid className="instagram-previews">
             {socialMediaPreviews.map((project) => {
               const href = project.instagramUrl ?? projectPath(project);
               const isExternal = !!project.instagramUrl;
@@ -167,6 +168,7 @@ export default function PortfolioPage() {
               );
             })}
           </RevealGrid>
+          </div>
           <div className="section-cta">
             <Link href="/portfolio/social-media/" className="btn btn--primary">
               More Social Media Projects

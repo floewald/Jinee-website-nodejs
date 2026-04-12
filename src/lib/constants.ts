@@ -26,3 +26,11 @@ export const CONTACT_PAGE_THEME = "section-bg-charcoal" as const;
 export const SLIDESHOW_CYCLE_MS = 4000;
 /** Extra random milliseconds added on top of SLIDESHOW_CYCLE_MS per card (0–this value). */
 export const SLIDESHOW_JITTER_MS = 4000;
+
+/**
+ * Number of social media preview cards visible at once in each horizontal
+ * section strip (Lifestyle, Editorial) on the social media index page and the
+ * portfolio hub preview. Changing this value re-calculates the card width via
+ * a CSS custom property (--sm-preview-cols) — no CSS edits required.
+ */
+export const SOCIAL_MEDIA_PREVIEW_COLUMNS = 5;

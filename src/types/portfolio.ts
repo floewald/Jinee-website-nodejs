@@ -56,6 +56,12 @@ export interface VideoProject extends BaseProject {
   videos: VideoItem[];
 }
 
+/** A display section defined in social-media.json, grouping projects by category */
+export interface SocialMediaSection {
+  key: "lifestyle" | "editorial";
+  label: string;
+}
+
 export interface SocialMediaProject extends BaseProject {
   type: "social-media";
   /** Whether to show a gallery grid on this page */

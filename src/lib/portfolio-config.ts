@@ -2,12 +2,13 @@ import type {
   PhotographyProject,
   VideoProject,
   SocialMediaProject,
+  SocialMediaSection,
   PortfolioProject,
   PortfolioIndexConfig,
   CollageImageConfig,
 } from "@/types/portfolio";
 
-import { validatePortfolioData } from "@/lib/portfolio-schemas";
+import { validatePortfolioData, SocialMediaManifestSchema } from "@/lib/portfolio-schemas";
 
 import photographyData from "@/content/portfolio/photography.json";
 import videoData from "@/content/portfolio/videography.json";
@@ -57,10 +58,10 @@ export const videoProjects = validatePortfolioData(
   videoData
 ) as VideoProject[];
 
-export const socialMediaProjects = validatePortfolioData(
-  "social-media",
-  socialMediaData
-) as SocialMediaProject[];
+// social-media.json is a manifest object { sections, projects } — parse with full schema
+const socialMediaManifest = SocialMediaManifestSchema.parse(socialMediaData);
+export const socialMediaSections: SocialMediaSection[] = socialMediaManifest.sections;
+export const socialMediaProjects = socialMediaManifest.projects as SocialMediaProject[];
 
 const _raw = indexConfigData as unknown as PortfolioIndexRawConfig;
 

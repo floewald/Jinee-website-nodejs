@@ -56,6 +56,18 @@ export const SocialMediaProjectSchema = BaseProjectSchema.extend({
   category: z.enum(["lifestyle", "editorial"]).optional(),
 });
 
+// ── Social-media manifest (sections + projects) ─────────────────────────────
+
+export const SocialMediaSectionSchema = z.object({
+  key: z.enum(["lifestyle", "editorial"]),
+  label: z.string().min(1),
+});
+
+export const SocialMediaManifestSchema = z.object({
+  sections: z.array(SocialMediaSectionSchema),
+  projects: z.array(SocialMediaProjectSchema),
+});
+
 // ── Typed union ──────────────────────────────────────────────────────────────
 
 const schemaByType = {

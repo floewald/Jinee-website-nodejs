@@ -847,10 +847,14 @@ a.project-card:focus { color: var(--charcoal); text-decoration: none; }
 @media (max-width: 700px) { .project-cards, .project-grid { grid-template-columns: 1fr; } }
 
 /* Instagram previews */
+.instagram-section {
+  container-type: inline-size;
+}
 .instagram-previews {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 160px;
+  /* --sm-preview-cols is set via inline style from SOCIAL_MEDIA_PREVIEW_COLUMNS in constants.ts */
+  grid-auto-columns: calc((100cqi - (var(--sm-preview-cols, 5) - 1) * 12px) / var(--sm-preview-cols, 5));
   gap: 12px;
   margin-top: 1.25rem;
   overflow-x: auto;

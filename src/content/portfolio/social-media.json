@@ -1,4 +1,9 @@
-[
+{
+  "sections": [
+    { "key": "lifestyle", "label": "Lifestyle" },
+    { "key": "editorial", "label": "Editorial" }
+  ],
+  "projects": [
   {
     "type": "social-media",
     "slug": "ig-motivational",
@@ -347,4 +352,5 @@
     "instagramUrl": "https://www.instagram.com/reel/DDopepTTwxh/",
     "category": "editorial"
   }
-]
+  ]
+}
