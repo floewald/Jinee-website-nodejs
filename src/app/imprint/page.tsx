@@ -9,8 +9,9 @@ export const metadata: Metadata = {
 
 export default function ImprintPage() {
   return (
-    <main className="container">
+    <main className="portfolio-hub">
       <section className="portfolio-section section-bg-white">
+        <div className="container">
         <h1 className="section-heading-full">Impressum / Author</h1>
 
         <p>
@@ -41,6 +42,7 @@ export default function ImprintPage() {
           <Link href="/" className="btn btn--primary">
             Back to Home
           </Link>
+        </div>
         </div>
       </section>
     </main>

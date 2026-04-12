@@ -9,17 +9,20 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main className="container">
+    <main className="portfolio-hub">
       <section className="portfolio-section section-bg-white section--compact">
+        <div className="container">
         <h1 className="section-heading-full">Privacy Policy</h1>
         <p className="last-updated">Last updated: 18 January 2026</p>
         <p>
           This page explains what personal data we collect, why, and how you can
           control it.
         </p>
+        </div>
       </section>
 
       <section className="portfolio-section section-bg-white section--compact">
+        <div className="container">
         <h2>What we collect</h2>
         <ul className="services-list">
           <li>
@@ -113,6 +116,7 @@ export default function PrivacyPage() {
           <Link href="/" className="btn btn--primary">
             Back to Home
           </Link>
+        </div>
         </div>
       </section>
     </main>
