@@ -882,6 +882,8 @@ a.project-card:focus { color: var(--charcoal); text-decoration: none; }
   background: transparent;
   border: none;
   text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .instagram-preview__img,
 .instagram-preview img {

@@ -1,37 +1,9 @@
 [
   {
-    "basename": "ig-house-unboxing-1",
-    "thumb": "ig-house-unboxing-1-320.webp",
-    "md": "ig-house-unboxing-1-800.webp",
-    "lg": "ig-house-unboxing-1-1600.webp",
-    "original": null
-  },
-  {
-    "basename": "ig-house-unboxing-2",
-    "thumb": "ig-house-unboxing-2-320.webp",
-    "md": "ig-house-unboxing-2-800.webp",
-    "lg": "ig-house-unboxing-2-1600.webp",
-    "original": null
-  },
-  {
-    "basename": "ig-house-unboxing-3",
-    "thumb": "ig-house-unboxing-3-320.webp",
-    "md": "ig-house-unboxing-3-800.webp",
-    "lg": "ig-house-unboxing-3-1600.webp",
-    "original": null
-  },
-  {
-    "basename": "ig-house-unboxing-4",
-    "thumb": "ig-house-unboxing-4-320.webp",
-    "md": "ig-house-unboxing-4-800.webp",
-    "lg": "ig-house-unboxing-4-1600.webp",
-    "original": null
-  },
-  {
-    "basename": "ig-house-unboxing-5",
-    "thumb": "ig-house-unboxing-5-320.webp",
-    "md": "ig-house-unboxing-5-800.webp",
-    "lg": "ig-house-unboxing-5-1600.webp",
+    "basename": "ig-house-unboxing",
+    "thumb": "ig-house-unboxing-320.webp",
+    "md": "ig-house-unboxing-800.webp",
+    "lg": "ig-house-unboxing-1600.webp",
     "original": null
   }
 ]

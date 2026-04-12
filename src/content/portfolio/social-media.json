@@ -8,25 +8,14 @@
     "type": "social-media",
     "slug": "ig-motivational",
     "title": "Motivational Content | Social Media",
-    "description": "Social Media Content",
-    "heading": "📱 Social Media | Motivational Content",
+    "description": "Instagram lifestyle reel for Motivational Content.",
+    "heading": "📱 Instagram Reel | Motivational Content",
     "ogImage": "https://jineechen.com/assets/social-media/ig-motivational/ig-motivational-800.webp",
     "visible": true,
     "enableDownload": false,
     "hasGallery": false,
-    "customContent": "<p class=\"lead\">Check out my motivational content on <a href=\"https://www.instagram.com/\" target=\"_blank\" rel=\"noopener\">Instagram</a>.</p>"
-  },
-  {
-    "type": "social-media",
-    "slug": "ig-house-unboxing",
-    "title": "House Unboxing | Social Media",
-    "description": "House unboxing social media content.",
-    "heading": "📱 Social Media | House Unboxing",
-    "ogImage": "https://jineechen.com/assets/social-media/ig-house-unboxing/ig-house-unboxing-1-800.webp",
-    "visible": true,
-    "enableDownload": false,
-    "hasGallery": true,
-    "imageCount": 15
+    "instagramUrl": "https://www.instagram.com/p/DHz8PZCS181/",
+    "category": "lifestyle"
   },
   {
     "type": "social-media",
@@ -37,8 +26,9 @@
     "ogImage": "https://jineechen.com/assets/social-media/ig-own-travel-log/ig-own-travel-log-1-800.webp",
     "visible": true,
     "enableDownload": false,
-    "hasGallery": true,
-    "imageCount": 25
+    "hasGallery": false,
+    "instagramUrl": "https://www.instagram.com/reel/DJHEeO-NH3B/?igsh=ZnRwd2NwbjllZW9j",
+    "category": "lifestyle"
   },
   {
     "type": "social-media",
@@ -146,6 +136,19 @@
   },
   {
     "type": "social-media",
+    "slug": "ig-house-unboxing",
+    "title": "House Unboxing | Social Media",
+    "description": "Instagram lifestyle reel — house unboxing experience.",
+    "heading": "📱 Instagram Reel | House Unboxing",
+    "ogImage": "https://jineechen.com/assets/social-media/ig-house-unboxing/ig-house-unboxing-800.webp",
+    "visible": true,
+    "enableDownload": false,
+    "hasGallery": false,
+    "instagramUrl": "https://www.instagram.com/p/DLH-jGtIxf3/",
+    "category": "lifestyle"
+  },
+  {
+    "type": "social-media",
     "slug": "ig-kitchen-top",
     "title": "Kitchen Top | Social Media",
     "description": "Instagram lifestyle reel — kitchen counter reveal.",
@@ -185,19 +188,6 @@
   },
   {
     "type": "social-media",
-    "slug": "ig-siew-may",
-    "title": "Siew May | Social Media",
-    "description": "Instagram editorial reel content.",
-    "heading": "📱 Instagram Reel | Siew May",
-    "ogImage": "https://jineechen.com/assets/social-media/ig-siew-may/ig-siew-may-800.webp",
-    "visible": true,
-    "enableDownload": false,
-    "hasGallery": false,
-    "instagramUrl": "https://www.instagram.com/reel/CtLum7FgpcM/",
-    "category": "editorial"
-  },
-  {
-    "type": "social-media",
     "slug": "ig-maleware-scammers",
     "title": "Malware Scammers | Social Media",
     "description": "Instagram editorial reel content.",
@@ -207,6 +197,19 @@
     "enableDownload": false,
     "hasGallery": false,
     "instagramUrl": "https://www.instagram.com/reel/CyS3hV7BW7P/",
+    "category": "editorial"
+  },
+  {
+    "type": "social-media",
+    "slug": "ig-siew-may",
+    "title": "Siew May | Social Media",
+    "description": "Instagram editorial reel content.",
+    "heading": "📱 Instagram Reel | Siew May",
+    "ogImage": "https://jineechen.com/assets/social-media/ig-siew-may/ig-siew-may-800.webp",
+    "visible": true,
+    "enableDownload": false,
+    "hasGallery": false,
+    "instagramUrl": "https://www.instagram.com/reel/CtLum7FgpcM/",
     "category": "editorial"
   },
   {
@@ -224,41 +227,15 @@
   },
   {
     "type": "social-media",
-    "slug": "ig-scdf-emergency",
-    "title": "SCDF Emergency | Social Media",
+    "slug": "ig-startup-robot",
+    "title": "Startup Robot | Social Media",
     "description": "Instagram editorial reel content.",
-    "heading": "📱 Instagram Reel | SCDF Emergency",
-    "ogImage": "https://jineechen.com/assets/social-media/ig-scdf-emergency/ig-scdf-emergency-800.webp",
+    "heading": "📱 Instagram Reel | Startup Robot",
+    "ogImage": "https://jineechen.com/assets/social-media/ig-startup-robot/ig-startup-robot-800.webp",
     "visible": true,
     "enableDownload": false,
     "hasGallery": false,
-    "instagramUrl": "https://www.instagram.com/reel/C4ShQYeBRne/",
-    "category": "editorial"
-  },
-  {
-    "type": "social-media",
-    "slug": "ig-advanced-practicing-nurse",
-    "title": "Advanced Practicing Nurse | Social Media",
-    "description": "Instagram editorial reel content.",
-    "heading": "📱 Instagram Reel | Advanced Practicing Nurse",
-    "ogImage": "https://jineechen.com/assets/social-media/ig-advanced-practicing-nurse/ig-advanced-practicing-nurse-800.webp",
-    "visible": true,
-    "enableDownload": false,
-    "hasGallery": false,
-    "instagramUrl": "https://www.instagram.com/reel/C6dx88-NJfo/",
-    "category": "editorial"
-  },
-  {
-    "type": "social-media",
-    "slug": "ig-scdf-no-emergency",
-    "title": "SCDF — No Emergency | Social Media",
-    "description": "Instagram editorial reel content.",
-    "heading": "📱 Instagram Reel | SCDF — No Emergency",
-    "ogImage": "https://jineechen.com/assets/social-media/ig-scdf-no-emergency/ig-scdf-no-emergency-800.webp",
-    "visible": true,
-    "enableDownload": false,
-    "hasGallery": false,
-    "instagramUrl": "https://www.instagram.com/reel/C4fZPaghEl_/",
+    "instagramUrl": "https://www.instagram.com/reel/DC4Cxz5zKDY/",
     "category": "editorial"
   },
   {
@@ -302,15 +279,41 @@
   },
   {
     "type": "social-media",
-    "slug": "ig-startup-robot",
-    "title": "Startup Robot | Social Media",
+    "slug": "ig-advanced-practicing-nurse",
+    "title": "Advanced Practicing Nurse | Social Media",
     "description": "Instagram editorial reel content.",
-    "heading": "📱 Instagram Reel | Startup Robot",
-    "ogImage": "https://jineechen.com/assets/social-media/ig-startup-robot/ig-startup-robot-800.webp",
+    "heading": "📱 Instagram Reel | Advanced Practicing Nurse",
+    "ogImage": "https://jineechen.com/assets/social-media/ig-advanced-practicing-nurse/ig-advanced-practicing-nurse-800.webp",
     "visible": true,
     "enableDownload": false,
     "hasGallery": false,
-    "instagramUrl": "https://www.instagram.com/reel/DC4Cxz5zKDY/",
+    "instagramUrl": "https://www.instagram.com/reel/C6dx88-NJfo/",
+    "category": "editorial"
+  },
+  {
+    "type": "social-media",
+    "slug": "ig-scdf-emergency",
+    "title": "SCDF Emergency | Social Media",
+    "description": "Instagram editorial reel content.",
+    "heading": "📱 Instagram Reel | SCDF Emergency",
+    "ogImage": "https://jineechen.com/assets/social-media/ig-scdf-emergency/ig-scdf-emergency-800.webp",
+    "visible": true,
+    "enableDownload": false,
+    "hasGallery": false,
+    "instagramUrl": "https://www.instagram.com/reel/C4ShQYeBRne/",
+    "category": "editorial"
+  },
+  {
+    "type": "social-media",
+    "slug": "ig-scdf-no-emergency",
+    "title": "SCDF — No Emergency | Social Media",
+    "description": "Instagram editorial reel content.",
+    "heading": "📱 Instagram Reel | SCDF — No Emergency",
+    "ogImage": "https://jineechen.com/assets/social-media/ig-scdf-no-emergency/ig-scdf-no-emergency-800.webp",
+    "visible": true,
+    "enableDownload": false,
+    "hasGallery": false,
+    "instagramUrl": "https://www.instagram.com/reel/C4fZPaghEl_/",
     "category": "editorial"
   },
   {
