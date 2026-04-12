@@ -26,6 +26,17 @@ const routes: { name: string; path: string }[] = [
 test.describe("Visual regression", () => {
   for (const route of routes) {
     test(`${route.name} matches baseline`, async ({ page }) => {
+      // Intercept timers before page JS runs to prevent slideshow cycling
+      await page.addInitScript(() => {
+        const origSetInterval = window.setInterval.bind(window);
+        // @ts-expect-error — overriding for test stabilization
+        window.setInterval = (...args: Parameters<typeof origSetInterval>) => {
+          // Block short intervals (slideshow timers are typically < 10s)
+          if (typeof args[1] === "number" && args[1] < 15000) return 0;
+          return origSetInterval(...args);
+        };
+      });
+
       await page.goto(route.path, { waitUntil: "networkidle" });
 
       // Wait for React hydration and initial layout
@@ -50,11 +61,20 @@ test.describe("Visual regression", () => {
             animation-duration: 0s !important;
             transition-duration: 0s !important;
           }
+          /* Hide Next.js dev indicators */
+          nextjs-portal, [data-nextjs-dialog], [data-next-mark] {
+            display: none !important;
+          }
         `;
         document.head.appendChild(style);
 
         // Hide cookie banner
-        document.querySelectorAll(".cookie-banner").forEach((el) => {
+        document.querySelectorAll('[role="region"][aria-label="Cookie consent"]').forEach((el) => {
+          (el as HTMLElement).style.display = "none";
+        });
+
+        // Hide Next.js dev compilation indicator
+        document.querySelectorAll('[data-next-mark], [data-nextjs-dialog], nextjs-portal').forEach((el) => {
           (el as HTMLElement).style.display = "none";
         });
 
@@ -75,13 +95,15 @@ test.describe("Visual regression", () => {
         document.querySelectorAll(".card-slideshow__slide").forEach((el) => {
           const htmlEl = el as HTMLElement;
           htmlEl.style.transition = "none";
-        });
-        document.querySelectorAll(".card-slideshow__slide--active").forEach((el) => {
-          el.classList.remove("card-slideshow__slide--active");
+          htmlEl.style.opacity = "0";
+          htmlEl.classList.remove("card-slideshow__slide--active");
         });
         document.querySelectorAll(".card-slideshow").forEach((slideshow) => {
-          const firstSlide = slideshow.querySelector(".card-slideshow__slide");
-          if (firstSlide) firstSlide.classList.add("card-slideshow__slide--active");
+          const firstSlide = slideshow.querySelector(".card-slideshow__slide") as HTMLElement | null;
+          if (firstSlide) {
+            firstSlide.classList.add("card-slideshow__slide--active");
+            firstSlide.style.opacity = "1";
+          }
         });
       });
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { css, cx } from "@/styled-system/css";
 
 const COOKIE_NAME = "site_consent";
 const COOKIE_DAYS = 400;
@@ -55,29 +56,105 @@ export default function CookieBanner() {
 
   if (!visible) return null;
 
+  const bannerStyle = css({
+    position: "fixed",
+    left: "1rem",
+    right: "1rem",
+    bottom: "1rem",
+    zIndex: 12000,
+    background: "rgba(31,31,31,0.95)",
+    color: "#fff",
+    padding: "14px 16px",
+    borderRadius: "10px",
+    display: "flex",
+    gap: "12px",
+    alignItems: "center",
+    justifyContent: "space-between",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
+    maxWidth: "calc(100% - 40px)",
+    boxSizing: "border-box",
+  });
+
+  const messageStyle = css({
+    flex: "1 1 60%",
+    color: "#fff",
+    fontSize: "0.95rem",
+    lineHeight: "1.3",
+  });
+
+  const messageLinkStyle = css({ color: "#fff" });
+
+  const actionsStyle = css({
+    display: "flex",
+    gap: "10px",
+    alignItems: "center",
+  });
+
+  const btnBase = css({
+    cursor: "pointer",
+    border: "none",
+    padding: "10px 14px",
+    borderRadius: "8px",
+    fontWeight: 600,
+    fontSize: "0.98rem",
+  });
+
+  const btnAccept = css({
+    background: "#fff",
+    color: "var(--charcoal)",
+  });
+
+  const btnReject = css({
+    background: "transparent",
+    color: "#fff",
+    border: "1px solid rgba(255,255,255,0.4)",
+  });
+
+  const bannerMobile = css({
+    "@media (max-width: 700px)": {
+      flexDirection: "column",
+      alignItems: "stretch",
+      gap: "10px",
+      left: "12px",
+      right: "12px",
+    },
+  });
+
+  const messageMobile = css({
+    "@media (max-width: 700px)": {
+      flex: "unset",
+    },
+  });
+
+  const actionsMobile = css({
+    "@media (max-width: 700px)": {
+      justifyContent: "flex-end",
+    },
+  });
+
   return (
     <div
       role="region"
       aria-label="Cookie consent"
-      className="cookie-consent-banner"
+      className={cx(bannerStyle, bannerMobile)}
     >
-      <div className="cookie-consent__message">
+      <div className={cx(messageStyle, messageMobile)}>
         We use cookies to improve the site. Non-essential cookies (analytics)
         are only set with your consent. See our{" "}
-        <a href="/privacy/">
+        <a href="/privacy/" className={messageLinkStyle}>
           Privacy Policy
         </a>
         .
       </div>
-      <div className="cookie-consent__actions">
+      <div className={cx(actionsStyle, actionsMobile)}>
         <button
-          className="cookie-consent__btn cookie-consent__btn--accept"
+          className={cx(btnBase, btnAccept)}
           onClick={accept}
         >
           Accept
         </button>
         <button
-          className="cookie-consent__btn cookie-consent__btn--reject"
+          className={cx(btnBase, btnReject)}
           onClick={reject}
         >
           Reject

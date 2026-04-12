@@ -1606,53 +1606,8 @@ button.download-toggle.is-active:hover { background: #333; }
 .download-modal__password-toggle svg { display: block; }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   COOKIE CONSENT BANNER
+   COOKIE CONSENT BANNER — migrated to Panda CSS (src/components/ui/CookieBanner.tsx)
    ══════════════════════════════════════════════════════════════════════════════ */
-.cookie-consent-banner {
-  position: fixed;
-  left: 1rem;
-  right: 1rem;
-  bottom: 1rem;
-  z-index: 12000;
-  background: rgba(31,31,31,0.95);
-  color: #fff;
-  padding: 14px 16px;
-  border-radius: 10px;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  max-width: calc(100% - 40px);
-  box-sizing: border-box;
-}
-.cookie-consent__message {
-  flex: 1 1 60%;
-  color: #fff;
-  font-size: 0.95rem;
-  line-height: 1.3;
-}
-.cookie-consent__message a { color: #fff; }
-.cookie-consent__actions { display: flex; gap: 10px; align-items: center; }
-.cookie-consent__btn {
-  cursor: pointer;
-  border: none;
-  padding: 10px 14px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.98rem;
-}
-.cookie-consent__btn--accept { background: #fff; color: var(--charcoal); }
-.cookie-consent__btn--reject {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.4);
-}
-@media (max-width: 700px) {
-  .cookie-consent-banner { flex-direction: column; align-items: stretch; gap: 10px; left: 12px; right: 12px; }
-  .cookie-consent__message { flex: unset; }
-  .cookie-consent__actions { justify-content: flex-end; }
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    PORTFOLIO SUBPAGES (back links, descriptions, category pages)
