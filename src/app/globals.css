@@ -1754,7 +1754,8 @@ button.download-toggle.is-active:hover { background: #333; }
 .page-title {
   font-size: 2rem;
   font-weight: 600;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+  padding-top: 0.5rem;
   text-align: center;
 }
 .page-subtitle {
@@ -1903,7 +1904,7 @@ img {
   h1 { font-size: clamp(1.9rem, 7.5vw, 2.8rem); line-height: 1.08; margin-bottom: 0.6rem; }
   .portfolio-hub { padding-top: 1.5rem; }
   .portfolio-category,
-  .project-page { padding-top: 2rem; }
+  .project-page { padding-top: 1.5rem; }
 }
 
 /* Narrower viewports: tagline wraps to 2 lines → taller header */
