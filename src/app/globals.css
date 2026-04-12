@@ -141,10 +141,8 @@ body {
   --site-hero-mobile-height-multiplier: 2;
   --site-hero-mobile-padding-vertical: 10px;
   --site-hero-dropdown-right: 0px;
-  /* Mobile header height: top-pad(10) + logo(28) + gap(8) + tagline(text + 8px vert-pad) + bottom-pad(10)
-     2 lines (~500–800px): 10+28+8+(51+8)+10 = 115px → 120px safe
-     3 lines (<480px):     10+28+8+(77+8)+10 = 141px → 148px safe */
-  --site-hero-mobile-height: 125px;
+  /* Mobile header height: top-pad(10) + logo(28) + gap(8) + tagline(1 line ~20px) + bottom-pad(10) = 76px → 80px safe */
+  --site-hero-mobile-height: 80px;
   --mobile-nav-max-width: 88vw;
   --primary-menu-expanded-padding-bottom: 14px;
 
@@ -397,14 +395,7 @@ section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
   .header-left, .logo-tagline-wrap { flex-direction: column; align-items: flex-start; gap: .5rem; }
   .header-right { margin-left: 0; }
   .site-header .logo { max-height: 28px; width: auto; height: auto; padding-left: 0; }
-  .tagline {
-    background: rgba(255,255,255,0.95);
-    padding: 4px 8px;
-    border-radius: 6px;
-    display: inline-block;
-    padding-left: 0;
-    padding-right: 0;
-  }
+  .tagline { font-size: 0.85rem; white-space: normal; }
 
   .nav-toggle {
     display: inline-flex !important;
@@ -1915,9 +1906,9 @@ img {
   .project-page { padding-top: 2rem; }
 }
 
-/* Narrower viewports: tagline wraps to 3 lines → taller header */
-@media (max-width: 480px) {
-  :root { --site-hero-mobile-height: 148px; }
+/* Narrower viewports: tagline wraps to 2 lines → taller header */
+@media (max-width: 560px) {
+  :root { --site-hero-mobile-height: 104px; }
 }
 
 
