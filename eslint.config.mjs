@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Ignore the legacy nextapp sub-project and its build artifacts:
+    "nextapp/**",
   ]),
 ]);
 

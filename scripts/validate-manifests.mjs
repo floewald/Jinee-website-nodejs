@@ -49,7 +49,9 @@ for (const type of TYPES) {
   }
 
   /** @type {Array<{ slug: string; portfolioCard?: unknown }>} */
-  const projects = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
+  const raw = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
+  // social-media.json uses a manifest envelope { sections, projects }
+  const projects = Array.isArray(raw) ? raw : (raw.projects ?? []);
 
   for (const project of projects) {
     // Only validate projects that are shown as portfolio cards
@@ -78,7 +80,8 @@ if (missing.length > 0) {
 const total = TYPES.reduce((sum, type) => {
   const jsonPath = path.join(CONTENT_BASE, type === "social-media" ? "social-media.json" : `${type}.json`);
   if (!fs.existsSync(jsonPath)) return sum;
-  const projects = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
+  const raw = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
+  const projects = Array.isArray(raw) ? raw : (raw.projects ?? []);
   return sum + projects.filter((/** @type {{ portfolioCard?: unknown }} */ p) => p.portfolioCard).length;
 }, 0);
 

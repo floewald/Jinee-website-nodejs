@@ -56,6 +56,12 @@ export interface VideoProject extends BaseProject {
   videos: VideoItem[];
 }
 
+/** A display section defined in social-media.json, grouping projects by category */
+export interface SocialMediaSection {
+  key: "lifestyle" | "editorial";
+  label: string;
+}
+
 export interface SocialMediaProject extends BaseProject {
   type: "social-media";
   /** Whether to show a gallery grid on this page */
@@ -65,6 +71,12 @@ export interface SocialMediaProject extends BaseProject {
   enableDownload?: boolean;
   /** Raw HTML string injected when hasGallery is false */
   customContent?: string;
+  /** Direct Instagram reel/post URL for linking from the index grid */
+  instagramUrl?: string;
+  /** Content category used to group projects in the social media index */
+  category?: "lifestyle" | "editorial";
+  /** Hashtags shown below the thumbnail in card mode */
+  tags?: string[];
 }
 
 export type AnyProject = PhotographyProject | VideoProject | SocialMediaProject;
@@ -109,7 +121,7 @@ export interface PortfolioIndexConfig {
   collageImagesMobile?: CollageImageConfig[];
   /** Images shown in the hero slideshow (can differ from collageImages) */
   slideshowImages?: CollageImageConfig[];
-  socialMediaLinks: InstagramLink[];
+  socialMediaLinks?: InstagramLink[];
   videoSectionTitle: string;
   /**
    * How hero slideshow handles portrait / mixed images:

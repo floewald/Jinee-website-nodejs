@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { portfolioIndexConfig } from "@/lib/portfolio-config";
+import { socialMediaProjects, socialMediaSections, projectPath } from "@/lib/portfolio-config";
+import { SOCIAL_MEDIA_PREVIEW_COLUMNS, SOCIAL_MEDIA_CARD_MODE } from "@/lib/constants";
 import RevealGrid from "@/components/portfolio/RevealGrid";
 
 export const metadata: Metadata = {
@@ -10,35 +11,64 @@ export const metadata: Metadata = {
 };
 
 export default function SocialMediaIndexPage() {
-  const links = portfolioIndexConfig.socialMediaLinks;
+  const visible = socialMediaProjects.filter((p) => p.visible !== false);
+  const colStyle = { "--sm-preview-cols": SOCIAL_MEDIA_PREVIEW_COLUMNS } as React.CSSProperties;
+
+  function renderGrid(projects: typeof visible) {
+    return (
+      <div className="instagram-section" style={colStyle}>
+        <RevealGrid className="instagram-previews">
+          {projects.map((project) => {
+            const href = project.instagramUrl ?? projectPath(project);
+            const isExternal = !!project.instagramUrl;
+            const previewClass = `instagram-preview${SOCIAL_MEDIA_CARD_MODE ? " instagram-preview--card" : ""}`;
+            return (
+              <Link
+                key={project.slug}
+                href={href}
+                className={previewClass}
+                {...(isExternal
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+              >
+                <div className="instagram-preview__thumb">
+                  <Image
+                    src={project.ogImage.replace("https://jineechen.com", "")}
+                    alt={project.title}
+                    width={400}
+                    height={711}
+                    loading="lazy"
+                    className="instagram-preview__img"
+                    unoptimized
+                  />
+                  <span className="play-overlay" aria-hidden="true">▶</span>
+                </div>
+                {SOCIAL_MEDIA_CARD_MODE && project.tags && project.tags.length > 0 && (
+                  <div className="instagram-preview__body">
+                    <p className="instagram-preview__tags">{project.tags.join(" ")}</p>
+                  </div>
+                )}
+              </Link>
+            );
+          })}
+        </RevealGrid>
+      </div>
+    );
+  }
 
   return (
     <main className="portfolio-category container">
-      <h1 className="page-title">Social Media</h1>
-      <hr className="section-title-divider" aria-hidden="true" />
-
-      <RevealGrid className="instagram-previews">
-        {links.map((link) => (
-          <Link
-            key={link.url}
-            href={link.url}
-            className="instagram-preview"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src={link.image}
-              alt={link.alt}
-              width={400}
-              height={711}
-              loading="lazy"
-              className="instagram-preview__img"
-              unoptimized
-            />
-            <span className="play-overlay" aria-hidden="true">▶</span>
-          </Link>
-        ))}
-      </RevealGrid>
+      {socialMediaSections.map((section) => {
+        const projects = visible.filter((p) => p.category === section.key);
+        if (!projects.length) return null;
+        return (
+          <section key={section.key} className="social-media-section">
+            <h1 className="page-title">{section.label}</h1>
+            <hr className="section-title-divider" aria-hidden="true" />
+            {renderGrid(projects)}
+          </section>
+        );
+      })}
     </main>
   );
 }

@@ -165,6 +165,17 @@ the top. Use lower values (e.g. `20%`) to bias upward, higher values
 - **Homepage collage hover zoom:** adjust `transform: scale(1.1)` in `.gallery-cols .gallery-item:hover .gallery-img` in `src/app/globals.css`.
 - **Slideshow speed:** change `SLIDESHOW_CYCLE_MS` (minimum interval, default: 4000 ms) and `SLIDESHOW_JITTER_MS` (random extra range, default: 4000 ms) in `src/lib/constants.ts`. Each card picks a random interval between those two values on mount.
 - **About / Contact page theme:** change `ABOUT_PAGE_THEME` and `CONTACT_PAGE_THEME` in `src/lib/constants.ts`. Set either `"section-bg-charcoal"` (dark) or `"section-bg-white"` (light). Each constant controls its respective page independently.
+- **Social media grid columns:** change `SOCIAL_MEDIA_PREVIEW_COLUMNS` in `src/lib/constants.ts` (default: `5`). This controls how many cards are visible at once in each horizontal strip on the Social Media index page and the portfolio hub preview. The card width is computed from this value via a CSS custom property (`--sm-preview-cols`) using container query units (`cqi`), so no CSS edits are needed.
+- **Social media card mode:** toggle `SOCIAL_MEDIA_CARD_MODE` in `src/lib/constants.ts` (default: `true`). When `true`, each preview renders as a project card — portrait thumbnail on top, hashtags below in a card body. When `false`, only the thumbnail tile is shown. Per-project hashtags are set via the `tags` string array in `src/content/portfolio/social-media.json`. Projects without a `tags` field show no body even when card mode is on.
+
+### Social media sections
+
+The Social Media index page is section-driven by `src/content/portfolio/social-media.json`. The file has two top-level keys:
+
+- **`sections`** — ordered array of `{ key, label }` objects. Each entry defines one display section (currently `lifestyle` and `editorial`). Add, remove, or reorder entries here to change what sections appear and in which order. The page component reads this array at build time.
+- **`projects`** — array of social media project objects (same shape as other portfolio manifests, with the extra `category` and `instagramUrl` fields). Set `category` on each project to the matching section `key` so it appears in that section.
+
+Projects whose `category` does not match any defined section key are simply not shown on the index page (but their individual project pages still exist).
 
 The `.gallery-item` container uses `will-change: transform` to force a GPU compositing layer, ensuring `overflow: hidden` + `border-radius` correctly clips scaled images on hover.
 

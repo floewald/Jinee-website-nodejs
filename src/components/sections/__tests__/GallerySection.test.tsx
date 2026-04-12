@@ -18,7 +18,6 @@ jest.mock("@/lib/portfolio-config", () => ({
       { src: "/assets/img2.webp", alt: "Image 2", srcFull: "/assets/img2.webp" },
       { src: "/assets/img3.webp", alt: "Image 3", srcFull: "/assets/img3.webp" },
     ],
-    socialMediaLinks: [],
     videoSectionTitle: "Video",
   },
 }));

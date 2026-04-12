@@ -19,11 +19,12 @@ import {
   PhotographyProjectSchema,
   VideoProjectSchema,
   SocialMediaProjectSchema,
+  SocialMediaManifestSchema,
   validatePortfolioData,
 } from "@/lib/portfolio-schemas";
 import photographyData from "@/content/portfolio/photography.json";
 import videoData from "@/content/portfolio/videography.json";
-import socialMediaData from "@/content/portfolio/social-media.json";
+import socialMediaManifestData from "@/content/portfolio/social-media.json";
 
 const VALID_PHOTO = {
   type: "photography" as const,
@@ -156,9 +157,9 @@ describe("Real JSON content files", () => {
     expect(() => validatePortfolioData("video", videoData)).not.toThrow();
   });
 
-  it("social-media.json passes SocialMediaProjectSchema", () => {
+  it("social-media.json passes SocialMediaManifestSchema", () => {
     expect(() =>
-      validatePortfolioData("social-media", socialMediaData)
+      SocialMediaManifestSchema.parse(socialMediaManifestData)
     ).not.toThrow();
   });
 });
