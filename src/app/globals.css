@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../styled-system/styles.css";
 
 /* ─── Self-hosted Inter font (GDPR-safe, no Google Fonts CDN) ─────────────── */
 @font-face {
@@ -52,26 +53,29 @@
 }
 
 /* ─── Base reset (mirrors original) ────────────────────────────────────────── */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* Wrapped in @layer so Panda CSS utility classes can override during migration */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-html {
-  font-size: 16px;
-  -webkit-text-size-adjust: 100%;
-  /* scroll-behavior is controlled by SmoothScroll.tsx (src/lib/scroll-config.ts) */
-}
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    /* scroll-behavior is controlled by SmoothScroll.tsx (src/lib/scroll-config.ts) */
+  }
 
-body {
-  background-color: var(--color-site-bg);
-  color: var(--color-site-text);
-  font-family: var(--font-sans);
-  font-weight: 400;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  body {
+    background-color: var(--color-site-bg);
+    color: var(--color-site-text);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
 /* ─── Accessibility ─────────────────────────────────────────────────────────── */
@@ -159,16 +163,16 @@ body {
   padding-top: var(--site-hero-current-height);
 }
 
-/* ─── Links ────────────────────────────────────────────────────────────────── */
-a { color: var(--charcoal); text-decoration: underline; }
-a:hover, a:focus { color: var(--charcoal); opacity: 0.9; }
-
-/* ─── Typography ──────────────────────────────────────────────────────────── */
-h1 { font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 600; margin-bottom: 0.5rem; }
-h2 { font-size: clamp(1.2rem, 3.5vw, 1.5rem); margin-bottom: 1rem; }
-h3 { font-size: 1.2rem; }
-p { color: var(--muted-text); max-width: 65ch; }
-section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
+/* ─── Links & Typography (in @layer base so Panda utilities can override) ── */
+@layer base {
+  a { color: var(--charcoal); text-decoration: underline; }
+  a:hover, a:focus { color: var(--charcoal); opacity: 0.9; }
+  h1 { font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 600; margin-bottom: 0.5rem; }
+  h2 { font-size: clamp(1.2rem, 3.5vw, 1.5rem); margin-bottom: 1rem; }
+  h3 { font-size: 1.2rem; }
+  p { color: var(--muted-text); max-width: 65ch; }
+  section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
+}
 
 /* ─── Container ───────────────────────────────────────────────────────────── */
 .container {
@@ -1164,41 +1168,8 @@ input::placeholder, textarea::placeholder {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   FOOTER
+   FOOTER — migrated to Panda CSS (src/components/layout/Footer.tsx)
    ══════════════════════════════════════════════════════════════════════════════ */
-.site-footer {
-  border-top: 1px solid var(--border-color);
-  margin-top: 0;
-  font-size: 0.95rem;
-  color: var(--muted-text);
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 2rem;
-}
-.site-footer__col { flex: 1 1 0; }
-.site-footer__copyright { margin: 0; color: var(--muted-text); }
-.site-footer__contact { margin: 0; color: var(--muted-text); }
-.site-footer__contact a { color: var(--muted-text); }
-.site-footer__links {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-  align-items: center;
-}
-.site-footer__link {
-  color: var(--muted-text);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  padding-bottom: 0.1rem;
-}
-.site-footer__link:hover { color: var(--charcoal); border-bottom-color: var(--border-color); }
-
-@media (max-width: 800px) {
-  .site-footer { flex-direction: column; align-items: flex-start; padding-left: 1rem; padding-right: 1rem; gap: .6rem; }
-  .site-footer__links { justify-content: flex-start; }
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    LIGHTBOX

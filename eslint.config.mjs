@@ -23,6 +23,8 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Ignore the legacy nextapp sub-project and its build artifacts:
     "nextapp/**",
+    // Panda CSS generated output:
+    "src/styled-system/**",
   ]),
 ]);
 

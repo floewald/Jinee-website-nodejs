@@ -14,6 +14,7 @@ const config: Config = {
     ],
   },
   moduleNameMapper: {
+    "^@/styled-system/(.*)$": "<rootDir>/src/__mocks__/styled-system/$1",
     "^@/(.*)$": "<rootDir>/src/$1",
     "\\.(css|less|scss|sass)$": "<rootDir>/src/__mocks__/fileMock.ts",
     "\\.(jpg|jpeg|png|gif|webp|svg|ico|woff|woff2)$":
