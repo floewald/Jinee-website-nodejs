@@ -25,15 +25,18 @@ jest.mock("@/lib/portfolio-config", () => ({
       portfolioCard: { cardTitle: "Stuck with Low Pay", thumbnail: "/stuck-t.webp" },
     },
   ],
-  portfolioIndexConfig: {
-    socialMediaLinks: [
-      {
-        url: "https://www.instagram.com/reel/test/",
-        image: "/assets/social-media/ig-own-travel-log/ig-own-travel-log-1.webp",
-        alt: "Instagram own travel log 1",
-      },
-    ],
-  },
+  socialMediaProjects: [
+    {
+      slug: "ig-motivational",
+      type: "social-media",
+      title: "Motivational",
+      description: "Motivational reels",
+      heading: "Instagram",
+      ogImage: "https://jineechen.com/assets/social-media/ig-motivational/ig-motivational-800.webp",
+      visible: true,
+    },
+  ],
+  portfolioIndexConfig: {},
   projectPath: (p: { type: string; slug: string }) => `/portfolio/${p.type}/${p.slug}/`,
 }));
 
@@ -78,25 +81,9 @@ describe("PortfolioPage (hub)", () => {
     expect(screen.getByText("Videography")).toBeInTheDocument();
   });
 
-  it("renders a Social Media section heading", () => {
-    expect(screen.getByText("Social Media")).toBeInTheDocument();
-  });
-
   it("renders project cards with cardTitle", () => {
     expect(screen.getByText("Travel Photography")).toBeInTheDocument();
     expect(screen.getByText("Stuck with Low Pay")).toBeInTheDocument();
-  });
-
-  it("renders social media instagram previews with play overlay", () => {
-    expect(document.querySelectorAll(".play-overlay")).toHaveLength(1);
-  });
-
-  it("renders social media preview links to external instagram urls", () => {
-    const socialLink = document.querySelector(".instagram-preview") as HTMLAnchorElement | null;
-    expect(socialLink).not.toBeNull();
-    expect(socialLink).toHaveAttribute("href", "https://www.instagram.com/reel/test/");
-    expect(socialLink).toHaveAttribute("target", "_blank");
-    expect(socialLink).toHaveAttribute("rel", "noopener noreferrer");
   });
 
   it("renders no description paragraph in project cards", () => {
@@ -110,9 +97,5 @@ describe("PortfolioPage (hub)", () => {
 
   it("renders 'More Video Projects' CTA", () => {
     expect(screen.getByText(/more video projects/i)).toBeInTheDocument();
-  });
-
-  it("renders 'More Social Media Projects' CTA", () => {
-    expect(screen.getByText(/more social media projects/i)).toBeInTheDocument();
   });
 });

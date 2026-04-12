@@ -65,6 +65,10 @@ export interface SocialMediaProject extends BaseProject {
   enableDownload?: boolean;
   /** Raw HTML string injected when hasGallery is false */
   customContent?: string;
+  /** Direct Instagram reel/post URL for linking from the index grid */
+  instagramUrl?: string;
+  /** Content category used to group projects in the social media index */
+  category?: "lifestyle" | "editorial";
 }
 
 export type AnyProject = PhotographyProject | VideoProject | SocialMediaProject;
@@ -109,7 +113,7 @@ export interface PortfolioIndexConfig {
   collageImagesMobile?: CollageImageConfig[];
   /** Images shown in the hero slideshow (can differ from collageImages) */
   slideshowImages?: CollageImageConfig[];
-  socialMediaLinks: InstagramLink[];
+  socialMediaLinks?: InstagramLink[];
   videoSectionTitle: string;
   /**
    * How hero slideshow handles portrait / mixed images:

@@ -21,13 +21,6 @@ jest.mock("@/lib/portfolio-config", () => ({
     },
   ],
   portfolioIndexConfig: {
-    socialMediaLinks: [
-      {
-        url: "https://instagram.com/p/test1",
-        image: "/ig1.webp",
-        alt: "IG post 1",
-      },
-    ],
     videoSectionTitle: "My Work",
   },
 }));

@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import {
   getPhotographyCards,
   getVideoCards,
-  portfolioIndexConfig,
+  socialMediaProjects,
   projectPath,
 } from "@/lib/portfolio-config";
 import { MAX_CARDS } from "@/lib/constants";
@@ -20,7 +20,9 @@ export const metadata: Metadata = {
 export default function PortfolioPage() {
   const photographyCards = getPhotographyCards().slice(0, MAX_CARDS);
   const videoCards = getVideoCards().slice(0, MAX_CARDS);
-  const socialMediaLinks = portfolioIndexConfig.socialMediaLinks;
+  const socialMediaPreviews = socialMediaProjects
+    .filter((p) => p.visible !== false)
+    .slice(0, 5);
 
   return (
     <main className="portfolio-hub">
@@ -139,26 +141,31 @@ export default function PortfolioPage() {
           <h2 className="section-title section-title--center">Social Media</h2>
           <hr className="section-title-divider" aria-hidden="true" />
           <RevealGrid className="instagram-previews">
-            {socialMediaLinks.map((link) => (
-              <Link
-                key={link.url}
-                href={link.url}
-                className="instagram-preview"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src={link.image}
-                  alt={link.alt}
-                  width={400}
-                  height={711}
-                  loading="lazy"
-                  className="instagram-preview__img"
-                  unoptimized
-                />
-                <span className="play-overlay" aria-hidden="true">▶</span>
-              </Link>
-            ))}
+            {socialMediaPreviews.map((project) => {
+              const href = project.instagramUrl ?? projectPath(project);
+              const isExternal = !!project.instagramUrl;
+              return (
+                <Link
+                  key={project.slug}
+                  href={href}
+                  className="instagram-preview"
+                  {...(isExternal
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                >
+                  <Image
+                    src={project.ogImage.replace("https://jineechen.com", "")}
+                    alt={project.title}
+                    width={400}
+                    height={711}
+                    loading="lazy"
+                    className="instagram-preview__img"
+                    unoptimized
+                  />
+                  <span className="play-overlay" aria-hidden="true">▶</span>
+                </Link>
+              );
+            })}
           </RevealGrid>
           <div className="section-cta">
             <Link href="/portfolio/social-media/" className="btn btn--primary">

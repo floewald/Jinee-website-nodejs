@@ -52,6 +52,8 @@ export const SocialMediaProjectSchema = BaseProjectSchema.extend({
   imageCount: z.number().int().nonnegative().optional(),
   enableDownload: z.boolean().optional(),
   customContent: z.string().optional(),
+  instagramUrl: z.string().url().optional(),
+  category: z.enum(["lifestyle", "editorial"]).optional(),
 });
 
 // ── Typed union ──────────────────────────────────────────────────────────────

@@ -5,7 +5,6 @@ import type {
   PortfolioProject,
   PortfolioIndexConfig,
   CollageImageConfig,
-  InstagramLink,
 } from "@/types/portfolio";
 
 import { validatePortfolioData } from "@/lib/portfolio-schemas";
@@ -28,7 +27,6 @@ interface PortfolioIndexRawConfig {
   collageImages: string[];
   collageImagesMobile?: string[];
   slideshowImages?: string[];
-  socialMediaLinks: InstagramLink[];
   videoSectionTitle: string;
   heroFit?: string;
 }
@@ -74,7 +72,6 @@ export const portfolioIndexConfig: PortfolioIndexConfig = {
   slideshowImages: _raw.slideshowImages
     ? resolveImages(_raw.slideshowImages, _raw.slugs)
     : undefined,
-  socialMediaLinks: _raw.socialMediaLinks,
   videoSectionTitle: _raw.videoSectionTitle,
   heroFit: _raw.heroFit as PortfolioIndexConfig["heroFit"],
 };
