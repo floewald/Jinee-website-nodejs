@@ -72,11 +72,18 @@ export const sectionHeadingFull = css({
  * (imprint, privacy). Ensures consistent vertical rhythm: large gap above
  * each h2, smaller gap below — regardless of whether the preceding element
  * is a paragraph, list, or another block.
+ * Also aligns paragraph and list widths so both share the same reading measure.
  */
 export const proseSection = css({
   "& h2": {
     marginTop: "2rem",
     marginBottom: "0.75rem",
+  },
+  "& p": {
+    maxWidth: "72ch",
+  },
+  "& ul": {
+    maxWidth: "72ch",
   },
 });
 
