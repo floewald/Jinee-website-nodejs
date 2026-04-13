@@ -904,85 +904,8 @@ input::placeholder, textarea::placeholder {
    ══════════════════════════════════════════════════════════════════════════════ */
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   VIDEO PLAYER
+   VIDEO PLAYER — migrated to Panda CSS (src/components/video/VideoPlayer.tsx)
    ══════════════════════════════════════════════════════════════════════════════ */
-.video-player {
-  margin-top: 1rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: auto;
-  column-gap: 1.5rem;
-  row-gap: 0.75rem;
-}
-/* Each item spans 2 row tracks (title + embed); subgrid aligns titles per visual row */
-.video-player__item {
-  display: grid;
-  grid-row: span 2;
-  grid-template-rows: subgrid;
-}
-.video-player__title { font-size: 1.05rem; font-weight: 700; align-self: start; }
-/* Responsive video grid: 3 → 2 → 1 columns */
-@media (max-width: 900px) {
-  .video-player { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 540px) {
-  .video-player { grid-template-columns: 1fr; }
-}
-.video-embed-wrap { margin-bottom: 0.75rem; }
-.video-embed {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  border: none;
-}
-.video-embed iframe {
-  position: absolute;
-  left: 0; top: 0; width: 100%; height: 100%;
-}
-.video-embed--placeholder {
-  background: #f4f4f4;
-}
-
-/* Non-embeddable video: clickable image preview */
-.video-embed-link {
-  display: block;
-  position: relative;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  text-decoration: none;
-  background: #111;
-}
-.video-embed-link__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: opacity 0.2s;
-}
-.video-embed-link:hover .video-embed-link__img {
-  opacity: 0.8;
-}
-.video-embed-link__label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  text-align: center;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-  letter-spacing: 0.03em;
-}
-/* When the iframe IS the .video-embed (Next.js VideoPlayer inlines it) */
-iframe.video-embed {
-  position: relative;
-  padding-bottom: 0;
-  aspect-ratio: 16 / 9;
-  height: auto;
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    DOWNLOAD TOOLBAR + MODAL
