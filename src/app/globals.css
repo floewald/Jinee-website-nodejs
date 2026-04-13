@@ -315,50 +315,6 @@ a.project-card:focus { color: var(--charcoal); text-decoration: none; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   BUTTONS — migrated to Panda CSS (src/styled-system/recipes/btn)
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   ABOUT SECTION — migrated to Panda CSS (src/components/sections/AboutSection.tsx)
-   ══════════════════════════════════════════════════════════════════════════════ */
-/* Visible white spacer between About (charcoal) and Contact (charcoal) sections */
-.section-spacer-white {
-  background: #fff;
-  height: 3rem;
-  width: 100%;
-  display: block;
-}
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   CONTACT SECTION — migrated to Panda CSS (src/components/sections/ContactSection.tsx)
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   CONTACT FORM — migrated to Panda CSS (src/components/forms/ContactForm.tsx)
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   FOOTER — migrated to Panda CSS (src/components/layout/Footer.tsx)
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LIGHTBOX — migrated to Panda CSS (src/components/gallery/Lightbox.tsx)
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   CARD SLIDESHOW — migrated to Panda CSS (src/components/gallery/CardSlideshow.tsx)
-   ══════════════════════════════════════════════════════════════════════════════ */
-/* Portrait image sits above blur bg and overlay (z-index set inline in JSX) */
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   SLIDESHOW — migrated to Panda CSS (src/components/gallery/Slideshow.tsx)
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   VIDEO PLAYER — migrated to Panda CSS (src/components/video/VideoPlayer.tsx)
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* ══════════════════════════════════════════════════════════════════════════════
    DOWNLOAD TOOLBAR + MODAL — base styles migrated to Panda CSS
    (src/components/download/download-styles.ts)
    State-dependent :has() and context selectors remain here.
@@ -387,11 +343,6 @@ a.project-card:focus { color: var(--charcoal); text-decoration: none; }
 
 /* ══════════════════════════════════════════════════════════════════════════════
    COOKIE CONSENT BANNER — migrated to Panda CSS (src/components/ui/CookieBanner.tsx)
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   PORTFOLIO SUBPAGES — base styles migrated to Panda CSS
-   (src/lib/portfolio-styles.ts)
    ══════════════════════════════════════════════════════════════════════════════ */
 
 /* ══════════════════════════════════════════════════════════════════════════════
