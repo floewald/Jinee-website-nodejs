@@ -2,7 +2,15 @@
 
 import Image from "next/image";
 import Masonry from "react-masonry-css";
+import { cx } from "@/styled-system/css";
 import type { GalleryImage } from "@/components/gallery/Lightbox";
+import {
+  projectGallery,
+  projectGalleryCol,
+  galleryItem,
+  galleryItemTrigger,
+  galleryImg,
+} from "@/components/gallery/gallery-styles";
 
 const BREAKPOINT_COLS = { default: 3, 900: 2, 480: 1 };
 
@@ -29,17 +37,17 @@ export default function GallerySelection({
   return (
     <Masonry
       breakpointCols={BREAKPOINT_COLS}
-      className={`project-gallery${selectionMode ? " selection-mode" : ""}`}
-      columnClassName="project-gallery__col"
+      className={cx(projectGallery, "project-gallery", selectionMode && "selection-mode")}
+      columnClassName={cx(projectGalleryCol, "project-gallery__col")}
     >
       {images.map((img, i) => {
         const filename = toDownloadFilename(img.src);
         const isChecked = selected.includes(filename);
 
         return (
-          <div key={`${img.src}-${i}`} className="gallery-item">
+          <div key={`${img.src}-${i}`} className={cx(galleryItem, "gallery-item")}>
             <button
-              className="gallery-item__trigger"
+              className={cx(galleryItemTrigger, "gallery-item__trigger")}
               onClick={() => {
                 if (selectionMode) {
                   onSelectionChange(filename, !isChecked);
@@ -59,7 +67,7 @@ export default function GallerySelection({
                 width={800}
                 height={0}
                 loading="lazy"
-                className="gallery-img"
+                className={cx(galleryImg, "gallery-img")}
                 unoptimized
               />
             </button>

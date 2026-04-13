@@ -231,70 +231,10 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
    ══════════════════════════════════════════════════════════════════════════════ */
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   PROJECT GALLERY — masonry layout (react-masonry-css)
-   react-masonry-css renders:
-     .project-gallery           → flex container (replaces the old CSS grid)
-     .project-gallery__col      → each column div
+   PROJECT GALLERY — base styles migrated to Panda CSS
+   (src/components/gallery/gallery-styles.ts)
+   Hover + scroll-reveal animations kept here (target BEM classes via cx()).
    ══════════════════════════════════════════════════════════════════════════════ */
-.project-gallery {
-  display: flex;
-  gap: 0.9rem;
-  margin-top: var(--gallery-content-gap);
-  width: 100%;
-}
-.project-gallery__col {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-  flex: 1;
-  min-width: 0;
-}
-
-/* CSS columns masonry (homepage collage)
-   Keep balanced fill while preserving aligned top edge across columns. */
-.gallery-cols {
-  columns: 3;
-  column-gap: 0.9rem;
-  column-fill: balance;
-  margin-top: var(--gallery-content-gap);
-}
-.gallery-cols .gallery-item {
-  break-inside: avoid;
-  vertical-align: top;
-  margin-bottom: 0.9rem;
-  display: inline-block;
-  width: 100%;
-}
-@media (max-width: 900px) { .gallery-cols { columns: 2; } }
-@media (max-width: 480px) { .gallery-cols { columns: 1; } }
-.gallery-item {
-  display: block;
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  overflow: hidden;
-  border-radius: var(--radius-md);
-  width: 100%;
-  will-change: transform; /* Force compositing layer so border-radius clips scaled children */
-}
-.gallery-item__trigger {
-  display: block;
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  overflow: hidden;
-  border-radius: var(--radius-md);
-  width: 100%;
-}
-.gallery-img {
-  width: 100%;
-  height: auto;      /* natural aspect ratio — no fixed height */
-  display: block;
-  border-radius: 0;
-  transition: transform 0.35s ease;
-}
 
 .gallery-cols .gallery-item:hover .gallery-img,
 .gallery-cols .gallery-item:focus-visible .gallery-img {
