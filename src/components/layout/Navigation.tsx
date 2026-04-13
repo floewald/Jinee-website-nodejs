@@ -179,9 +179,9 @@ const navSubmenu = css({
   "@media (min-width: 801px)": {
     display: "flex",
     flexDirection: "column",
-    gap: 0,
-    padding: "0.5rem 0",
-    paddingBottom: "14px",
+    alignItems: "center",
+    gap: "2rem",
+    padding: 0,
     margin: 0,
     position: "absolute",
     top: "100%",
