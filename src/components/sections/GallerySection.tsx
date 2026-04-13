@@ -1,6 +1,13 @@
 import GalleryWithLightbox from "@/components/gallery/GalleryWithLightbox";
+import { css } from "@/styled-system/css";
 import { portfolioIndexConfig } from "@/lib/portfolio-config";
 import type { GalleryImage } from "@/lib/gallery-images";
+
+const collage = css({
+  width: "100%",
+  overflow: "hidden",
+  padding: "0 clamp(12px, 1.5vw, 24px)",
+});
 
 /** 3×3 travel-photography collage shown on the homepage.
  *  Images are configured in src/content/portfolio/index-config.json → collageImages
@@ -13,10 +20,10 @@ export default function GallerySection() {
 
   return (
     <section id="gallery" className="section-bg-white gallery-section">
-      <div className="collage-hv collage-3x3 gallery-desktop-only">
+      <div className={`${collage} gallery-desktop-only`}>
         <GalleryWithLightbox images={collageImages} useColumnsLayout />
       </div>
-      <div className="collage-hv gallery-mobile-only">
+      <div className={`${collage} gallery-mobile-only`}>
         <GalleryWithLightbox images={mobileImages} useColumnsLayout />
       </div>
     </section>
