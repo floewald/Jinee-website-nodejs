@@ -76,6 +76,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  /* Suppress Next.js "width or height modified" CLS warnings — Panda utilities can override */
+  img { height: auto; }
 }
 
 /* ─── Accessibility ─────────────────────────────────────────────────────────── */
@@ -344,13 +347,6 @@ a.project-card:focus { color: var(--charcoal); text-decoration: none; }
 /* ══════════════════════════════════════════════════════════════════════════════
    COOKIE CONSENT BANNER — migrated to Panda CSS (src/components/ui/CookieBanner.tsx)
    ══════════════════════════════════════════════════════════════════════════════ */
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   IMAGE aspect-ratio fix (suppresses Next.js "width or height modified" warnings)
-   ══════════════════════════════════════════════════════════════════════════════ */
-img {
-  height: auto;
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    ACCESSIBILITY — reduced motion

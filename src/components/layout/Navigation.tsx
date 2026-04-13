@@ -202,8 +202,7 @@ const navSubmenu = css({
       textDecoration: "none",
       fontWeight: 500,
       fontSize: "1.1rem",
-      borderBottom: "2px solid transparent",
-      transition: "border-color 0.2s",
+      borderBottom: "none",
       whiteSpace: "nowrap",
     },
     "& li a:hover, & li a:focus": {
