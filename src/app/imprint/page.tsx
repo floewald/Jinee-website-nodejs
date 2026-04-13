@@ -2,18 +2,18 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { cx } from "@/styled-system/css";
 import { btn } from "@/lib/button-styles";
-import { portfolioSection, sectionHeadingFull } from "@/lib/portfolio-styles";
+import { portfolioSection, sectionHeadingFull, proseSection } from "@/lib/portfolio-styles";
 
 export const metadata: Metadata = {
   title: "Impressum / Author",
   description: "Author and ownership information for the site. Contact hello@jineechen.com for enquiries.",
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
 };
 
 export default function ImprintPage() {
   return (
     <main className="container">
-      <section className={cx(portfolioSection, "portfolio-section")}>
+      <section className={cx(portfolioSection, proseSection, "portfolio-section")}>
         <h1 className={cx(sectionHeadingFull, "section-heading-full")}>Impressum / Author</h1>
 
         <p>

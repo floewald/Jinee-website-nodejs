@@ -41,12 +41,13 @@ For content workflow see [ADDING-PROJECTS.md](ADDING-PROJECTS.md).
 
 ---
 
-## Panda CSS Migration (branch: `redesign/panda-css`)
+## Panda CSS Migration ✅ Complete
 
-Migrating from monolithic `globals.css` (~1800 lines) to Panda CSS `css()`/`cx()` utilities
+Migrated from monolithic `globals.css` (~1800 lines) to Panda CSS `css()`/`cx()` utilities
 with pixel-perfect visual regression validation.
 
 **Started**: 2026-04-12  
+**Completed**: 2026-04-13  
 **Approach**: Component-by-component; visual regression baseline with Playwright (22 tests)
 
 | Commit | Component | Lines removed | Status |
@@ -66,6 +67,14 @@ with pixel-perfect visual regression validation.
 | 2bf0898 | Download Toolbar + Modal (`download-styles.ts`) | ~170 | ✅ |
 | 077d385 | Portfolio Subpages + Static Pages (`portfolio-styles.ts`) | ~140 | ✅ |
 | 288d6db | Cleanup: empty comments + dead CSS | ~49 | ✅ |
+
+**Post-migration visual bug fixes** (found after baseline comparison):
+
+| Commit | Fix | Status |
+|--------|-----|--------|
+| f660d20 | Nav submenu: padding / gap / alignItems cascade override | ✅ |
+| b95b952 | Nav submenu hover: border-bottom underline (matching top-level links) | ✅ |
+| 2fc30d4 | 4 visual bugs: instagram card flex layout, contact link color, imprint/privacy container, primary button visibility | ✅ |
 
 ### Remaining in globals.css (~380 lines — intentionally kept):
 

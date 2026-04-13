@@ -15,6 +15,8 @@ For the system overview see [ARCHITECTURE.md](ARCHITECTURE.md). For requirements
 │  src/app/**                    (Next.js 16 App Router)       │
 │  src/components/**             (React 19 Server + Client)    │
 │  src/lib/**                    (build-time + pure utils)     │
+│  src/lib/*-styles.ts           (Panda CSS style modules)     │
+│  src/app/globals.css           (design tokens + global rules)│
 └───────────────────────┬──────────────────────────────────────┘
                         │  npm run build
                         ▼

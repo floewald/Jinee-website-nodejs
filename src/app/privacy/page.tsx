@@ -8,12 +8,13 @@ import {
   sectionHeadingFull,
   lastUpdated,
   servicesList,
+  proseSection,
 } from "@/lib/portfolio-styles";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "Privacy Policy for jineechen.com — what data we collect and how you can control it.",
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
 };
 
 export default function PrivacyPage() {
@@ -28,7 +29,7 @@ export default function PrivacyPage() {
         </p>
       </section>
 
-      <section className={cx(portfolioSection, sectionCompact, "portfolio-section", "section--compact")}>
+      <section className={cx(portfolioSection, sectionCompact, proseSection, "portfolio-section", "section--compact")}>
         <h2>What we collect</h2>
         <ul className={cx(servicesList, "services-list")}>
           <li>

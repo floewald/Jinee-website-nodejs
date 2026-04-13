@@ -67,6 +67,19 @@ export const sectionHeadingFull = css({
   marginBottom: "1.2rem",
 });
 
+/**
+ * Apply to any section that contains flowing prose with multiple h2 headings
+ * (imprint, privacy). Ensures consistent vertical rhythm: large gap above
+ * each h2, smaller gap below — regardless of whether the preceding element
+ * is a paragraph, list, or another block.
+ */
+export const proseSection = css({
+  "& h2": {
+    marginTop: "2rem",
+    marginBottom: "0.75rem",
+  },
+});
+
 export const sectionCompact = css({
   paddingTop: "1.5rem",
   paddingBottom: "1.5rem",

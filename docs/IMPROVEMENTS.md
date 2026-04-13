@@ -30,6 +30,21 @@ For the technical design see [DESIGN.md](DESIGN.md).
 
 ---
 
+## Panda CSS migration (completed 2026-04-13)
+
+| # | Item | Area | Status |
+|---|------|------|--------|
+| P-1 | Migrate all component styles from `globals.css` to Panda CSS `css()`/`cx()` utilities (~1200 lines moved) | Maintainability | ✅ |
+| P-2 | Visual regression test suite (22 tests, 11 routes × 2 browsers) as migration guard | Testing | ✅ |
+| P-3 | Nav submenu cascade fix: padding / gap / alignItems overrides competing global selector | Bug fix | ✅ |
+| P-4 | Nav submenu hover border-bottom underline (matching top-level link mechanism) | Bug fix | ✅ |
+| P-5 | Instagram card `display: flex !important` — Panda stylesheet source-order conflict | Bug fix | ✅ |
+| P-6 | Contact link colour `!important` — unlayered `.section-bg-charcoal a` beating `@layer utilities` | Bug fix | ✅ |
+| P-7 | Imprint / Privacy pages: removed `section-bg-white` full-bleed class from sections inside `.container` | Bug fix | ✅ |
+| P-8 | Primary button visibility — removed `background: transparent` from `base` css() to fix `cx()` source-order conflict with `primary` visual | Bug fix | ✅ |
+
+---
+
 ## Deferred items
 
 | Item | Reason |
