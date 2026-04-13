@@ -58,22 +58,27 @@ with pixel-perfect visual regression validation.
 | 7134679 | Button fixes + About Section | ~55 | ✅ |
 | 810618a | CardSlideshow + Slideshow | ~89 | ✅ |
 | 276b7be | VideoPlayer | ~77 | ✅ |
+| 6032f1b | Contact Section + Lightbox | ~130 | ✅ |
+| 226a2f5 | Contact Form | ~84 | ✅ |
+| b81a475 | Hero Slideshow + Gallery Collage | ~50 | ✅ |
+| f2a4941 | Project Gallery (`gallery-styles.ts`) | ~60 | ✅ |
+| 390c59b | Featured Section (`featured-styles.ts`) | ~250 | ✅ |
+| 2bf0898 | Download Toolbar + Modal (`download-styles.ts`) | ~170 | ✅ |
+| 077d385 | Portfolio Subpages + Static Pages (`portfolio-styles.ts`) | ~140 | ✅ |
+| 288d6db | Cleanup: empty comments + dead CSS | ~49 | ✅ |
 
-### Remaining sections (~1200 lines):
+### Remaining in globals.css (~380 lines — intentionally kept):
 
-| Section | Est. lines | Priority |
-|---------|-----------|----------|
-| Section Backgrounds | ~35 | Last (shared by 8+ components) |
-| Hero Slideshow | ~45 | Next |
-| Gallery Collage | ~10 | Next |
-| Project Gallery | ~70 | Medium |
-| Featured Section | ~310 | Medium (shared classes: project-card, section-title) |
-| Contact Section | ~45 | Medium |
-| Contact Form | ~85 | Medium |
-| Lightbox | ~90 | Medium |
-| Download Toolbar + Modal | ~215 | Low (3 components, cross-refs) |
-| Portfolio Subpages | ~140 | Low |
-| Image fix / Accessibility / Mobile Sync | ~30 | Low |
+| Category | Lines | Reason |
+|----------|-------|--------|
+| Font faces + design tokens + base reset | ~110 | Global foundation, CSS custom properties |
+| Container + links + typography | ~30 | @layer base rules, global selectors |
+| Section backgrounds (full-bleed) | ~20 | Used by 8+ components with complex descendant selectors |
+| Scroll-reveal animations | ~35 | `[data-reveal-ready]` attribute selectors, dynamic `.reveal--visible` class |
+| Hover transforms + context selectors | ~30 | Cross-component descendant selectors (e.g. `.project-card:hover .project-card__thumb img`) |
+| Selection mode + checkbox `:has()` | ~20 | CSS `:has()` pseudo-class not supported in Panda |
+| Reduced motion + mobile overrides | ~25 | Global `@media` queries |
+| Utility classes (sr-only, scrollbar-hide, no-scroll) | ~15 | Shared global utilities |
 
 ### Key technical notes
 
