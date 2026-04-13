@@ -223,6 +223,12 @@ body {
 .section-bg-charcoal a:not(.project-card):not([class*="bg_"]):not([class*="c_"]):hover,
 .section-bg-charcoal a:not(.project-card):not([class*="bg_"]):not([class*="c_"]):focus { color: #fff; opacity: 0.8; }
 section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
+/* Context overrides: Panda utilities can't beat unlayered section-bg-* padding,
+   so these are kept here at the same specificity but declared later (wins by source order). */
+.gallery-section { padding-bottom: 0; }
+/* padding-top: 1px stops margin-bottom of the zero-height .sectionDividerLine from
+   collapsing through the section boundary and creating an external gap. */
+.featured-projects { padding-top: 1px; padding-bottom: 1rem; }
 
 /* ══════════════════════════════════════════════════════════════════════════════
    HERO SLIDESHOW — migrated to Panda CSS

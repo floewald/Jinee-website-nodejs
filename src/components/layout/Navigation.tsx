@@ -207,8 +207,7 @@ const navSubmenu = css({
       transition: "border-color 0.2s",
     },
     "& li a:hover, & li a:focus": {
-      textDecoration: "none",
-      borderBottom: "2px solid var(--charcoal)",
+      textDecoration: "underline",
     },
     "& li:first-child a": { marginTop: "calc(0.7rem + 0.5rem)" },
     "& li:last-child a": { marginBottom: "calc(0.7rem + 0.5rem)" },
