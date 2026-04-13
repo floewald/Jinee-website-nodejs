@@ -1,9 +1,22 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import { cx } from "@/styled-system/css";
 import { socialMediaProjects, socialMediaSections, projectPath } from "@/lib/portfolio-config";
 import { SOCIAL_MEDIA_PREVIEW_COLUMNS, SOCIAL_MEDIA_CARD_MODE } from "@/lib/constants";
 import RevealGrid from "@/components/portfolio/RevealGrid";
+import {
+  sectionTitleDivider,
+  playOverlay,
+  instagramSection,
+  instagramPreviews,
+  instagramPreview,
+  instagramPreviewCard,
+  instagramPreviewThumb,
+  instagramPreviewImg,
+  instagramPreviewBody,
+  instagramPreviewTags,
+} from "@/components/portfolio/featured-styles";
 
 export const metadata: Metadata = {
   title: "Social Media",
@@ -16,36 +29,40 @@ export default function SocialMediaIndexPage() {
 
   function renderGrid(projects: typeof visible) {
     return (
-      <div className="instagram-section" style={colStyle}>
-        <RevealGrid className="instagram-previews">
+      <div className={cx(instagramSection, "instagram-section")} style={colStyle}>
+        <RevealGrid className={cx(instagramPreviews, "instagram-previews")}>
           {projects.map((project) => {
             const href = project.instagramUrl ?? projectPath(project);
             const isExternal = !!project.instagramUrl;
-            const previewClass = `instagram-preview${SOCIAL_MEDIA_CARD_MODE ? " instagram-preview--card" : ""}`;
             return (
               <Link
                 key={project.slug}
                 href={href}
-                className={previewClass}
+                className={cx(
+                  instagramPreview,
+                  "instagram-preview",
+                  SOCIAL_MEDIA_CARD_MODE && instagramPreviewCard,
+                  SOCIAL_MEDIA_CARD_MODE && "instagram-preview--card",
+                )}
                 {...(isExternal
                   ? { target: "_blank", rel: "noopener noreferrer" }
                   : {})}
               >
-                <div className="instagram-preview__thumb">
+                <div className={cx(instagramPreviewThumb, "instagram-preview__thumb")}>
                   <Image
                     src={project.ogImage.replace("https://jineechen.com", "")}
                     alt={project.title}
                     width={400}
                     height={711}
                     loading="lazy"
-                    className="instagram-preview__img"
+                    className={cx(instagramPreviewImg, "instagram-preview__img")}
                     unoptimized
                   />
-                  <span className="play-overlay" aria-hidden="true">▶</span>
+                  <span className={cx(playOverlay, "play-overlay")} aria-hidden="true">▶</span>
                 </div>
                 {SOCIAL_MEDIA_CARD_MODE && project.tags && project.tags.length > 0 && (
-                  <div className="instagram-preview__body">
-                    <p className="instagram-preview__tags">{project.tags.join(" ")}</p>
+                  <div className={cx(instagramPreviewBody, "instagram-preview__body")}>
+                    <p className={cx(instagramPreviewTags, "instagram-preview__tags")}>{project.tags.join(" ")}</p>
                   </div>
                 )}
               </Link>
@@ -64,7 +81,7 @@ export default function SocialMediaIndexPage() {
         return (
           <section key={section.key} className="social-media-section">
             <h1 className="page-title">{section.label}</h1>
-            <hr className="section-title-divider" aria-hidden="true" />
+            <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
             {renderGrid(projects)}
           </section>
         );

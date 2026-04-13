@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { cx } from "@/styled-system/css";
 import {
   photographyProjects,
   getSlugsByType,
@@ -8,6 +9,7 @@ import { SITE_URL } from "@/lib/constants";
 import { getGalleryImages } from "@/lib/gallery-images";
 import GalleryWithLightbox from "@/components/gallery/GalleryWithLightbox";
 import GalleryWithDownload from "@/components/download/GalleryWithDownload";
+import { sectionTitleDivider } from "@/components/portfolio/featured-styles";
 
 interface Params {
   slug: string;
@@ -66,7 +68,7 @@ export default async function PhotographyProjectPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(galleryJsonLd) }}
       />
       <h1 className="project-heading">{project.heading}</h1>
-      <hr className="section-title-divider" aria-hidden="true" />
+      <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
       {project.description && (
         <p className="project-description">{project.description}</p>
       )}

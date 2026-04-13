@@ -1,24 +1,38 @@
 import Link from "next/link";
 import Image from "next/image";
+import { cx } from "@/styled-system/css";
 import { getVideoCards } from "@/lib/portfolio-config";
 import { btn } from "@/lib/button-styles";
 import { getProjectSlideshowImages, type SlideshowImage } from "@/lib/gallery-images";
 import CardSlideshow from "@/components/gallery/CardSlideshow";
 import RevealGrid from "@/components/portfolio/RevealGrid";
+import {
+  featuredProjects,
+  sectionDividerLine,
+  sectionTitle,
+  sectionTitleCenter,
+  sectionTitleDivider,
+  projectCards,
+  projectCard,
+  projectCardThumb,
+  projectCardImg,
+  projectCardBody,
+  projectCardTitle,
+  projectCardLocation,
+  sectionCta,
+} from "@/components/portfolio/featured-styles";
 
 export default function FeaturedSection() {
   const videoCards = getVideoCards().slice(0, 6);
 
   return (
-    <section id="portfolio" className="featured-projects section-bg-white">
-      {/* Full-viewport-width charcoal rule above the heading */}
-      <div className="section-divider-line" aria-hidden="true" />
+    <section id="portfolio" className={cx(featuredProjects, "featured-projects", "section-bg-white")}>
+      <div className={cx(sectionDividerLine, "section-divider-line")} aria-hidden="true" />
       <div className="container">
-        <h2 className="section-title section-title--center">Videography</h2>
-        <hr className="section-title-divider" aria-hidden="true" />
+        <h2 className={cx(sectionTitle, sectionTitleCenter, "section-title", "section-title--center")}>Videography</h2>
+        <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
 
-        {/* Video cards */}
-        <RevealGrid className="project-cards">
+        <RevealGrid className={cx(projectCards, "project-cards")}>
           {videoCards.map((project, cardIndex) => {
             const slideshowImages = getProjectSlideshowImages(project.slug, "video");
             const previewImages: SlideshowImage[] = slideshowImages.length > 1
@@ -28,9 +42,9 @@ export default function FeaturedSection() {
             <Link
               key={project.slug}
               href={`/portfolio/video/${project.slug}/`}
-              className="project-card"
+              className={cx(projectCard, "project-card")}
             >
-              <div className="project-card__thumb">
+              <div className={cx(projectCardThumb, "project-card__thumb")}>
                 {previewImages && previewImages.length > 1 ? (
                   <CardSlideshow
                     images={previewImages}
@@ -44,15 +58,15 @@ export default function FeaturedSection() {
                     width={800}
                     height={450}
                     loading="lazy"
-                    className="project-card__img"
+                    className={cx(projectCardImg, "project-card__img")}
                     unoptimized
                   />
                 )}
               </div>
-              <div className="project-card__body">
-                <h3 className="project-card__title">{project.heading}</h3>
+              <div className={cx(projectCardBody, "project-card__body")}>
+                <h3 className={cx(projectCardTitle, "project-card__title")}>{project.heading}</h3>
                 {project.type === "video" && project.location && (
-                  <p className="project-card__location">{project.location}</p>
+                  <p className={cx(projectCardLocation, "project-card__location")}>{project.location}</p>
                 )}
               </div>
             </Link>
@@ -60,7 +74,7 @@ export default function FeaturedSection() {
           })}
         </RevealGrid>
 
-        <div className="section-cta">
+        <div className={cx(sectionCta, "section-cta")}>
           <Link href="/portfolio/video/" className={btn({ visual: "primary" })}>
             More Video Projects
           </Link>

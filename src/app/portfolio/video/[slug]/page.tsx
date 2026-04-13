@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { cx } from "@/styled-system/css";
 import { videoProjects, getSlugsByType } from "@/lib/portfolio-config";
 import { SITE_URL } from "@/lib/constants";
 import VideoPlayer from "@/components/video/VideoPlayer";
+import { sectionTitleDivider } from "@/components/portfolio/featured-styles";
 
 interface Params {
   slug: string;
@@ -56,9 +58,9 @@ export default async function VideoProjectPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(videoJsonLd) }}
       />
       <h1 className="project-heading">{project.title}</h1>
-      <hr className="section-title-divider" aria-hidden="true" />
+      <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
       <p className="project-roles">{project.heading}</p>
-      <hr className="section-title-divider" aria-hidden="true" />
+      <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
       {project.location && <p className="project-location">{project.location}</p>}
       {project.longDescription && (
         <p className="project-description">

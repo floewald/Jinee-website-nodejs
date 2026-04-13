@@ -242,9 +242,10 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   FEATURED SECTION (homepage "Videography")
+   FEATURED SECTION — base styles migrated to Panda CSS
+   (src/components/portfolio/featured-styles.ts)
+   Scroll-reveal, hover transforms, and context-dependent selectors remain here.
    ══════════════════════════════════════════════════════════════════════════════ */
-.gallery-section { padding-bottom: 0; }
 
 /* ─── Scroll-reveal animation ───────────────────────────────────────────────
    Items start hidden only once JS has set data-reveal-ready on the container.
@@ -259,7 +260,6 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   opacity: 1;
   transform: translateY(0);
 }
-/* In CSS-columns collage, avoid per-item Y offset so all columns start flush. */
 [data-reveal-ready].gallery-cols .gallery-item {
   transform: none;
   transition: opacity 0.45s ease;
@@ -267,8 +267,6 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 [data-reveal-ready].gallery-cols .gallery-item.reveal--visible {
   transform: none;
 }
-
-/* Same animation for project cards and instagram previews */
 [data-reveal-ready] .project-card {
   opacity: 0;
   transform: translateY(22px);
@@ -287,267 +285,33 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   opacity: 1;
   transform: translateY(0);
 }
-.featured-projects { padding-top: 0; padding-bottom: 1rem; }
-.section-title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
 
-/* Full-width rule above section heading
-   .section-divider-line must be a direct child of a full-bleed section
-   (i.e. inside .section-bg-white or .section-bg-charcoal which are width:100vw) */
-.section-divider-line {
-  /* ── To toggle the separator on/off: comment out the border-top line below ── */
-  border-top: none; /* 1px solid #d1d5db;  */
-  width: 100%;
-  margin-bottom: 1.75rem;
-}
-.section-title--center {
-  text-align: center;
-  padding-top: 0.5rem;
-}
-/* Content-width separator rendered below section headings */
-.section-title-divider {
-  border: none;
-  border-top: 1px solid #d1d5db;
-  margin: 0 0 1.5rem;
-  width: 100%;
-}
-/* Tighter symmetric spacing when dividers separate inline metadata in project pages */
-.project-page .section-title-divider {
-  margin: 0.2rem 0;
-}
-
-/* Play overlay on Instagram/video preview thumbnails */
-.play-overlay {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  border-radius: 999px;
-  padding: .55rem .85rem;
-  font-size: 1.3rem;
-  line-height: 1;
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* project-cards = project-grid (3-col) */
-.project-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-top: 1.25rem;
-  align-items: stretch;
-}
-.project-card {
-  display: flex;
-  flex-direction: column;
-  border-radius: 8px;
-  overflow: hidden;
-  text-decoration: none;
-  color: var(--charcoal);
-  background: #fff;
-  border: 1px solid var(--border-color);
-  height: 100%;
-  transition: box-shadow .18s ease;
-}
+/* ─── Context-dependent selectors (globals only) ────────────────────────── */
 a.project-card,
 a.project-card:hover,
 a.project-card:focus { color: var(--charcoal); text-decoration: none; }
 .section-bg-charcoal .project-card { border-color: #333; }
-.project-card:hover {
-  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-}
-.project-card__thumb {
-  overflow: hidden;
-}
-.project-card__thumb img,
-.project-card__thumb .project-card__img {
-  transition: transform 0.35s ease;
-}
+
+/* Hover transforms for project cards */
 .project-card:hover .project-card__thumb img,
 .project-card:hover .project-card__thumb .project-card__img {
   transform: scale(1.05);
 }
-/* Scale images inside CardSlideshow on parent hover */
 .project-card:hover .card-slideshow__slide .project-card__img {
   transform: scale(1.1);
 }
-.project-card__img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  display: block;
-}
-.project-card__body {
-  margin-top: auto;
-  padding: .8rem;
-  min-height: 56px;
-}
-.project-card__title {
-  margin: 0;
-  color: var(--charcoal);
-  font-size: 1.05rem;
-  line-height: 1.2;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 0.3rem;
-}
-/* Role + location split used in FeaturedSection card bodies */
-.project-card__role {
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.2;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 0.3rem;
-}
-.project-card__location {
-  margin: 0.3rem 0 0;
-  font-size: 0.9rem;
-  line-height: 1.3;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-/* Also style legacy .project-grid (used on portfolio category pages) */
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  border-radius: var(--radius-md);
-  align-items: stretch;
-}
-.project-grid .project-card img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  display: block;
-}
-.project-card__meta {
-  margin-top: auto;
-  padding: .8rem;
-  min-height: 56px;
-}
-.project-card__meta h3 {
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.2;
+
+/* Tighter divider spacing in project detail pages */
+.project-page .section-title-divider {
+  margin: 0.2rem 0;
 }
 
-@media (max-width: 1000px) { .project-cards, .project-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 700px) { .project-cards, .project-grid { grid-template-columns: 1fr; } }
+/* Instagram preview hover */
+.instagram-preview:hover .instagram-preview__thumb img { transform: scale(1.05); }
 
-/* Instagram previews */
-.instagram-section {
-  container-type: inline-size;
-}
+/* Adjacent social media sections get spacing */
 .social-media-section + .social-media-section {
   margin-top: 3rem;
-}
-/* Mobile: horizontal scroll, 2.5 cards visible to hint at more content */
-.instagram-previews {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: calc(100cqi / 2.5);
-  gap: 20px;
-  margin-top: 1.25rem;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.instagram-previews::-webkit-scrollbar { display: none; }
-/* Tablet / desktop: wrap into rows; --sm-preview-cols cards per row */
-@container (min-width: 660px) {
-  .instagram-previews {
-    grid-auto-flow: row;
-    grid-template-columns: repeat(var(--sm-preview-cols, 5), 1fr);
-    grid-auto-columns: unset;
-    overflow-x: visible;
-  }
-}
-.instagram-preview {
-  display: block;
-  position: relative;
-  border-radius: 8px;
-  background: transparent;
-  border: none;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-}
-/* Thumbnail wrapper — clips the image and play overlay */
-.instagram-preview__thumb {
-  position: relative;
-  overflow: hidden;
-  border-radius: inherit;
-  will-change: transform; /* Force compositing layer so border-radius clips scaled image */
-}
-.instagram-preview__img,
-.instagram-preview img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 9 / 16;
-  object-fit: cover;
-  transition: transform 0.35s ease;
-}
-.instagram-preview:hover .instagram-preview__thumb img { transform: scale(1.05); }
-/* Card mode: flex column + overflow:hidden matches project-card boundaries */
-.instagram-preview--card {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: #fff;
-  border: 1px solid var(--border-color);
-  transition: box-shadow .18s ease;
-}
-.instagram-preview--card:hover {
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-}
-/* Card's overflow:hidden clips the top corners; thumb needs no radius of its own */
-.instagram-preview--card .instagram-preview__thumb {
-  border-radius: 0;
-}
-.instagram-preview__body {
-  margin-top: auto;
-  padding: 0.4rem 0.5rem 1rem;
-}
-.instagram-preview__tags {
-  margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: var(--charcoal);
-  opacity: 0.9;
-  word-break: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 0.3rem;
-}
-
-/* Section CTA */
-.section-cta {
-  text-align: center;
-  margin-top: 2rem;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
