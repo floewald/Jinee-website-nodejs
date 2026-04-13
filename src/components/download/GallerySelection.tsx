@@ -11,6 +11,11 @@ import {
   galleryItemTrigger,
   galleryImg,
 } from "@/components/gallery/gallery-styles";
+import {
+  galleryCheckbox,
+  inlineSelect,
+  galleryCheckboxIcon,
+} from "./download-styles";
 
 const BREAKPOINT_COLS = { default: 3, 900: 2, 480: 1 };
 
@@ -73,10 +78,10 @@ export default function GallerySelection({
             </button>
 
             {selectionMode && (
-              <label className="gallery-checkbox">
+              <label className={cx(galleryCheckbox, "gallery-checkbox")}>
                 <input
                   type="checkbox"
-                  className="inline-select"
+                  className={cx(inlineSelect, "inline-select")}
                   aria-label={`Select ${img.alt} for download`}
                   value={filename}
                   checked={isChecked}
@@ -86,7 +91,7 @@ export default function GallerySelection({
                   tabIndex={-1}
                 />
                 <svg
-                  className="gallery-checkbox-icon"
+                  className={cx(galleryCheckboxIcon, "gallery-checkbox-icon")}
                   viewBox="0 0 22 22"
                   fill="none"
                   aria-hidden="true"
