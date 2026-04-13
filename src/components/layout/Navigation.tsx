@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { scrollToTop } from "@/lib/scroll-config";
 import { css, cx } from "@/styled-system/css";
+import { skipLinkFocus } from "@/lib/portfolio-styles";
 
 /* ── Style constants ─────────────────────────────────────────────────────── */
 
@@ -265,7 +266,7 @@ export default function Navigation() {
 
   return (
     <>
-      <a className="skip-link sr-only focus:not-sr-only" href="#main-content">
+      <a className={cx(skipLinkFocus, "skip-link", "sr-only", "focus:not-sr-only")} href="#main-content">
         Skip to content
       </a>
       <nav

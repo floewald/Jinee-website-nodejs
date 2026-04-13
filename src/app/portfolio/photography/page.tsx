@@ -4,6 +4,7 @@ import { getPhotographyCards } from "@/lib/portfolio-config";
 import ProjectCardsGrid from "@/components/portfolio/ProjectCardsGrid";
 import RevealGrid from "@/components/portfolio/RevealGrid";
 import { sectionTitleDivider } from "@/components/portfolio/featured-styles";
+import { portfolioCategory, pageTitle } from "@/lib/portfolio-styles";
 
 export const metadata: Metadata = {
   title: "Photography",
@@ -14,8 +15,8 @@ export default function PhotographyIndexPage() {
   const projects = getPhotographyCards();
 
   return (
-    <main className="portfolio-category container">
-      <h1 className="page-title">Photography</h1>
+    <main className={cx(portfolioCategory, "portfolio-category", "container")}>
+      <h1 className={cx(pageTitle, "page-title")}>Photography</h1>
       <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
       <RevealGrid>
         <ProjectCardsGrid

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { cx } from "@/styled-system/css";
 import { btn } from "@/lib/button-styles";
+import { portfolioSection, sectionHeadingFull } from "@/lib/portfolio-styles";
 
 export const metadata: Metadata = {
   title: "Impressum / Author",
@@ -11,8 +13,8 @@ export const metadata: Metadata = {
 export default function ImprintPage() {
   return (
     <main className="container">
-      <section className="portfolio-section section-bg-white">
-        <h1 className="section-heading-full">Impressum / Author</h1>
+      <section className={cx(portfolioSection, "portfolio-section", "section-bg-white")}>
+        <h1 className={cx(sectionHeadingFull, "section-heading-full")}>Impressum / Author</h1>
 
         <p>
           This website is owned and operated by{" "}

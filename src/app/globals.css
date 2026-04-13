@@ -390,147 +390,9 @@ a.project-card:focus { color: var(--charcoal); text-decoration: none; }
    ══════════════════════════════════════════════════════════════════════════════ */
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   PORTFOLIO SUBPAGES (back links, descriptions, category pages)
+   PORTFOLIO SUBPAGES — base styles migrated to Panda CSS
+   (src/lib/portfolio-styles.ts)
    ══════════════════════════════════════════════════════════════════════════════ */
-.back-to-projects {
-  display: inline-block;
-  margin-top: 30px;
-  margin-left: 0;
-}
-.portfolio-section { padding-top: 0; }
-.project-description {
-  max-width: 100%;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-  line-height: 1.6;
-  color: var(--charcoal);
-}
-.subpage-offset { padding-top: 0; }
-
-/* Portfolio hub + category index pages */
-.portfolio-hub,
-.portfolio-category,
-.project-page {
-  padding-top: 2rem;
-  padding-bottom: 3rem;
-}
-.page-title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  padding-top: 0.5rem;
-  text-align: center;
-}
-.page-subtitle {
-  color: var(--muted-text);
-  margin-bottom: 2rem;
-}
-.project-heading {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-.project-roles {
-  font-size: 1rem;
-  color: var(--muted-text);
-  margin: 0.4rem 0 0.5rem;
-}
-.project-location {
-  font-size: 0.95rem;
-  color: var(--muted-text);
-  margin: 0.5rem 0 1.25rem;
-}
-.gallery-empty {
-  color: var(--muted-text);
-  font-style: italic;
-  margin-top: 2rem;
-}
-.project-custom-content {
-  margin-top: 1.5rem;
-  line-height: 1.6;
-}
-.project-custom-content img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-/* Portfolio hub category cards */
-.portfolio-categories {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  margin-top: 1.5rem;
-}
-.category-card {
-  display: block;
-  padding: 1.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  text-decoration: none;
-  color: var(--charcoal);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-.category-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-}
-.category-card__title {
-  font-size: 1.2rem;
-  margin-bottom: 0.4rem;
-}
-.category-card__desc {
-  color: var(--muted-text);
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-@media (max-width: 700px) {
-  .portfolio-categories { grid-template-columns: 1fr; }
-}
-
-/* Static pages (imprint, privacy) */
-.section-heading-full {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 1.2rem;
-}
-.section--compact { padding-top: 1.5rem; padding-bottom: 1.5rem; }
-.last-updated {
-  color: var(--muted-text);
-  font-size: 0.9rem;
-  font-style: italic;
-  margin-bottom: 1rem;
-}
-.services-list {
-  list-style: disc;
-  padding-left: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--muted-text);
-}
-.services-list li {
-  margin-bottom: 0.4rem;
-  line-height: 1.5;
-}
-
-/* Skip-link (visible on focus) */
-.skip-link:focus {
-  position: fixed;
-  top: 8px;
-  left: 8px;
-  z-index: 20000;
-  width: auto;
-  height: auto;
-  padding: 0.5rem 1rem;
-  clip: unset;
-  margin: 0;
-  overflow: visible;
-  white-space: normal;
-  background: var(--charcoal);
-  color: #fff;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  text-decoration: none;
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    IMAGE aspect-ratio fix (suppresses Next.js "width or height modified" warnings)
@@ -552,14 +414,8 @@ img {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   MOBILE SYNC
+   MOBILE SYNC — gallery toggle migrated to Panda (src/lib/portfolio-styles.ts)
    ══════════════════════════════════════════════════════════════════════════════ */
-.gallery-desktop-only { display: block; }
-.gallery-mobile-only  { display: none; }
-@media (max-width: 800px) {
-  .gallery-desktop-only { display: none; }
-  .gallery-mobile-only  { display: block; }
-}
 
 @media (max-width: 800px) {
   body { padding-top: var(--site-hero-mobile-height); }

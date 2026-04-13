@@ -5,6 +5,13 @@ import { videoProjects, getSlugsByType } from "@/lib/portfolio-config";
 import { SITE_URL } from "@/lib/constants";
 import VideoPlayer from "@/components/video/VideoPlayer";
 import { sectionTitleDivider } from "@/components/portfolio/featured-styles";
+import {
+  projectPage,
+  projectHeading,
+  projectDescription,
+  projectRoles,
+  projectLocation,
+} from "@/lib/portfolio-styles";
 
 interface Params {
   slug: string;
@@ -52,18 +59,18 @@ export default async function VideoProjectPage({
   };
 
   return (
-    <main className="project-page container">
+    <main className={cx(projectPage, "project-page", "container")}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(videoJsonLd) }}
       />
-      <h1 className="project-heading">{project.title}</h1>
+      <h1 className={cx(projectHeading, "project-heading")}>{project.title}</h1>
       <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
-      <p className="project-roles">{project.heading}</p>
+      <p className={cx(projectRoles, "project-roles")}>{project.heading}</p>
       <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
-      {project.location && <p className="project-location">{project.location}</p>}
+      {project.location && <p className={cx(projectLocation, "project-location")}>{project.location}</p>}
       {project.longDescription && (
-        <p className="project-description">
+        <p className={cx(projectDescription, "project-description")}>
           {(Array.isArray(project.longDescription)
             ? project.longDescription
             : project.longDescription.split('\n')

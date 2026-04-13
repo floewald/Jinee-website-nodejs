@@ -35,6 +35,7 @@ import {
   instagramPreviewBody,
   instagramPreviewTags,
 } from "@/components/portfolio/featured-styles";
+import { portfolioHub, portfolioSection } from "@/lib/portfolio-styles";
 
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -49,9 +50,9 @@ export default function PortfolioPage() {
     .slice(0, 5);
 
   return (
-    <main className="portfolio-hub">
+    <main className={cx(portfolioHub, "portfolio-hub")}>
       {/* Photography section */}
-      <section className="portfolio-section section-bg-white">
+      <section className={cx(portfolioSection, "portfolio-section", "section-bg-white")}>
         <div className="container">
           <h2 className={cx(sectionTitle, sectionTitleCenter, "section-title", "section-title--center")}>Photography</h2>
           <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
@@ -104,7 +105,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Video section */}
-      <section className="portfolio-section section-bg-charcoal">
+      <section className={cx(portfolioSection, "portfolio-section", "section-bg-charcoal")}>
         <div className="container">
           <h2 className={cx(sectionTitle, sectionTitleCenter, "section-title", "section-title--center")}>
             Videography
@@ -160,7 +161,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Social Media section */}
-      <section className="portfolio-section section-bg-white">
+      <section className={cx(portfolioSection, "portfolio-section", "section-bg-white")}>
         <div className="container">
           <h2 className={cx(sectionTitle, sectionTitleCenter, "section-title", "section-title--center")}>Social Media</h2>
           <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />

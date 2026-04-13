@@ -17,6 +17,7 @@ import {
   instagramPreviewBody,
   instagramPreviewTags,
 } from "@/components/portfolio/featured-styles";
+import { portfolioCategory, pageTitle } from "@/lib/portfolio-styles";
 
 export const metadata: Metadata = {
   title: "Social Media",
@@ -74,13 +75,13 @@ export default function SocialMediaIndexPage() {
   }
 
   return (
-    <main className="portfolio-category container">
+    <main className={cx(portfolioCategory, "portfolio-category", "container")}>
       {socialMediaSections.map((section) => {
         const projects = visible.filter((p) => p.category === section.key);
         if (!projects.length) return null;
         return (
           <section key={section.key} className="social-media-section">
-            <h1 className="page-title">{section.label}</h1>
+            <h1 className={cx(pageTitle, "page-title")}>{section.label}</h1>
             <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
             {renderGrid(projects)}
           </section>
