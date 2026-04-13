@@ -1,17 +1,69 @@
 import Image from "next/image";
 import ContactForm from "@/components/forms/ContactForm";
+import { css } from "@/styled-system/css";
 import { CONTACT_PAGE_THEME } from "@/lib/constants";
+
+const contactGrid = css({
+  display: "grid",
+  gridTemplateColumns: "360px 1fr",
+  gap: "2rem",
+  alignItems: "stretch",
+  marginTop: "1rem",
+  "@media (max-width: 900px)": {
+    gridTemplateColumns: "1fr",
+  },
+});
+
+const contactCard = css({
+  background: "#fff",
+  border: "1px solid var(--border-color)",
+  padding: "1.2rem",
+  borderRadius: "8px",
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.6rem",
+  height: "100%",
+  "& p": {
+    color: "var(--charcoal)",
+    maxWidth: "none",
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
+  },
+  "& a": { color: "var(--charcoal)", opacity: 1 },
+  "& a:hover, & a:focus": { color: "var(--charcoal)", opacity: 0.7 },
+});
+
+const contactPhoto = css({
+  width: "100%",
+  height: "auto",
+  objectFit: "cover",
+  borderRadius: "8px",
+  marginBottom: ".9rem",
+  maxHeight: "320px",
+  "@media (max-width: 900px)": {
+    maxHeight: "220px",
+  },
+});
+
+const iconStyle = css({
+  width: "18px",
+  height: "18px",
+  verticalAlign: "middle",
+  marginRight: "6px",
+  display: "inline-block",
+});
 
 export default function ContactSection() {
   return (
     <section id="contact" className={CONTACT_PAGE_THEME}>
       <div className="container">
-        <div className="contact-grid">
+        <div className={contactGrid}>
           {/* Contact card */}
-          <div className="contact-info">
-            <div className="contact-card">
+          <div>
+            <div className={contactCard}>
               <Image
-                className="contact-photo"
+                className={contactPhoto}
                 src="/assets/photos/DSC09978_YT.webp"
                 alt="Jinee Chen — professional portrait"
                 width={200}
@@ -22,7 +74,7 @@ export default function ContactSection() {
 
               <p>
                 <svg
-                  className="icon"
+                  className={iconStyle}
                   width="18"
                   height="18"
                   viewBox="0 0 24 24"
@@ -51,7 +103,7 @@ export default function ContactSection() {
 
               <p>
                 <svg
-                  className="icon"
+                  className={iconStyle}
                   width="18"
                   height="18"
                   viewBox="0 0 24 24"
@@ -73,7 +125,7 @@ export default function ContactSection() {
 
               <p>
                 <svg
-                  className="icon"
+                  className={iconStyle}
                   width="18"
                   height="18"
                   viewBox="0 0 24 24"
@@ -96,7 +148,7 @@ export default function ContactSection() {
 
               <p>
                 <svg
-                  className="icon"
+                  className={iconStyle}
                   width="18"
                   height="18"
                   viewBox="0 0 24 24"

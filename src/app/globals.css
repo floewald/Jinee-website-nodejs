@@ -219,10 +219,6 @@ body {
 .section-bg-charcoal a:not(.project-card):not([class*="bg_"]):not([class*="c_"]) { color: #fff; }
 .section-bg-charcoal a:not(.project-card):not([class*="bg_"]):not([class*="c_"]):hover,
 .section-bg-charcoal a:not(.project-card):not([class*="bg_"]):not([class*="c_"]):focus { color: #fff; opacity: 0.8; }
-/* contact-card sits on a white background inside the charcoal section — restore dark link colour */
-.section-bg-charcoal .contact-info .contact-card a { color: var(--charcoal); opacity: 1; }
-.section-bg-charcoal .contact-info .contact-card a:hover,
-.section-bg-charcoal .contact-info .contact-card a:focus { color: var(--charcoal); opacity: 0.7; }
 section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -676,47 +672,8 @@ a.project-card:focus { color: var(--charcoal); text-decoration: none; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   CONTACT SECTION
+   CONTACT SECTION — migrated to Panda CSS (src/components/sections/ContactSection.tsx)
    ══════════════════════════════════════════════════════════════════════════════ */
-.contact-grid {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 2rem;
-  align-items: stretch;
-  margin-top: 1rem;
-}
-.contact-info .contact-card {
-  background: #fff;
-  border: 1px solid var(--border-color);
-  padding: 1.2rem;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  height: 100%;
-}
-.contact-card p { color: var(--charcoal); max-width: none; display: flex; align-items: center; gap: 0.5rem; }
-.contact-card a { color: var(--charcoal); }
-.contact-photo {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: .9rem;
-  max-height: 320px;
-}
-.contact-info .icon {
-  width: 18px;
-  height: 18px;
-  vertical-align: middle;
-  margin-right: 6px;
-  display: inline-block;
-}
-
-@media (max-width: 900px) {
-  .contact-grid { grid-template-columns: 1fr; }
-  .contact-photo { max-height: 220px; }
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    CONTACT FORM
@@ -805,94 +762,8 @@ input::placeholder, textarea::placeholder {
    ══════════════════════════════════════════════════════════════════════════════ */
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   LIGHTBOX
+   LIGHTBOX — migrated to Panda CSS (src/components/gallery/Lightbox.tsx)
    ══════════════════════════════════════════════════════════════════════════════ */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-.lightbox__backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-}
-.lightbox__content {
-  position: relative;
-  max-width: calc(100vw - 80px);
-  max-height: calc(100vh - 100px);
-  width: min(1100px, 90vw);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.lightbox__frame {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 0;
-  border-radius: 10px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
-  overflow: hidden;
-  aspect-ratio: var(--lb-ratio, 3 / 2);
-  max-height: calc(100vh - 120px);
-  width: 100%; /* fill the lightbox__content width; aspect-ratio drives height */
-  max-width: 100%;
-  /* Frosted-glass background visible beneath portrait images */
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: rgba(0,0,0,0.3);
-}
-.lightbox__img-wrap {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-/* Blurred background for portrait (tall) images in lightbox */
-.lightbox__portrait-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  filter: blur(16px);
-  transform: scale(1.12);
-  z-index: 0;
-  border-radius: inherit;
-}
-.lightbox__img {
-  object-fit: contain;
-  border-radius: 8px;
-}
-.lightbox__btn {
-  position: absolute;
-  background: rgba(0,0,0,0.7);
-  color: #fff;
-  border: none;
-  padding: .5rem .75rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  line-height: 1;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-  z-index: 2;
-  cursor: pointer;
-}
-.lightbox__close { position: absolute; top: 8px; right: 8px; }
-.lightbox__prev { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); }
-.lightbox__next { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); }
-/* .lightbox__counter removed — counter is no longer rendered */
-@media (max-width: 800px) {
-  .lightbox__content { max-width: calc(100vw - 40px); max-height: calc(100vh - 60px); }
-}
-@media (max-width: 600px) {
-  .lightbox__btn { padding: .7rem .9rem; font-size: 1.25rem; min-width: 44px; min-height: 44px; }
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    CARD SLIDESHOW — migrated to Panda CSS (src/components/gallery/CardSlideshow.tsx)

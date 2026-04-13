@@ -3,7 +3,103 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
+import { css, cx } from "@/styled-system/css";
 import { useSwipe } from "@/hooks/useSwipe";
+
+const lbOverlay = css({
+  position: "fixed",
+  inset: "0",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: 9999,
+});
+
+const lbBackdrop = css({
+  position: "absolute",
+  inset: "0",
+  background: "rgba(0,0,0,0.7)",
+});
+
+const lbContent = css({
+  position: "relative",
+  maxWidth: "calc(100vw - 80px)",
+  maxHeight: "calc(100vh - 100px)",
+  width: "min(1100px, 90vw)",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  "@media (max-width: 800px)": {
+    maxWidth: "calc(100vw - 40px)",
+    maxHeight: "calc(100vh - 60px)",
+  },
+});
+
+const lbFrame = css({
+  position: "relative",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  lineHeight: "0",
+  borderRadius: "10px",
+  boxShadow: "0 12px 40px rgba(0,0,0,0.45)",
+  overflow: "hidden",
+  aspectRatio: "var(--lb-ratio, 3 / 2)",
+  maxHeight: "calc(100vh - 120px)",
+  width: "100%",
+  maxWidth: "100%",
+  backdropFilter: "blur(20px)",
+  background: "rgba(0,0,0,0.3)",
+});
+
+const lbImgWrap = css({
+  position: "absolute",
+  inset: "0",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+});
+
+const lbPortraitBg = css({
+  position: "absolute",
+  inset: "0",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  filter: "blur(16px)",
+  transform: "scale(1.12)",
+  zIndex: 0,
+  borderRadius: "inherit",
+});
+
+const lbImg = css({
+  objectFit: "contain",
+  borderRadius: "8px",
+});
+
+const lbBtn = css({
+  position: "absolute",
+  background: "rgba(0,0,0,0.7)",
+  color: "#fff",
+  border: "none",
+  padding: ".5rem .75rem",
+  borderRadius: "8px",
+  fontSize: "1rem",
+  lineHeight: "1",
+  boxShadow: "0 6px 18px rgba(0,0,0,0.45)",
+  zIndex: 2,
+  cursor: "pointer",
+  "@media (max-width: 600px)": {
+    padding: ".7rem .9rem",
+    fontSize: "1.25rem",
+    minWidth: "44px",
+    minHeight: "44px",
+  },
+});
+
+const lbClose = css({ top: "8px", right: "8px" });
+const lbPrev = css({ left: "8px", top: "50%", transform: "translateY(-50%)" });
+const lbNext = css({ right: "8px", top: "50%", transform: "translateY(-50%)" });
 
 export interface GalleryImage {
   src: string;
@@ -154,11 +250,11 @@ export default function Lightbox({
 
   return createPortal(
     <div
-      className="lightbox"
+      className={lbOverlay}
       aria-hidden={!isOpen}
     >
       <div
-        className="lightbox__backdrop"
+        className={cx(lbBackdrop, "lightbox__backdrop")}
         data-testid="lightbox-backdrop"
         onClick={onClose}
         aria-hidden="true"
@@ -167,10 +263,10 @@ export default function Lightbox({
         role="dialog"
         aria-modal="true"
         aria-label={current.alt}
-        className="lightbox__content"
+        className={lbContent}
       >
         <div
-          className="lightbox__frame"
+          className={lbFrame}
           style={{
             "--lb-ratio": lbRatio,
             cursor: zoomed ? (isDragging ? "grabbing" : "grab") : "zoom-in",
@@ -182,14 +278,14 @@ export default function Lightbox({
           {/* Blurred background for portrait images */}
           {isPortrait && (
             <div
-              className="lightbox__portrait-bg"
+              className={lbPortraitBg}
               style={{ backgroundImage: `url(${imgSrc})` }}
               aria-hidden="true"
             />
           )}
 
           <button
-            className="lightbox__btn lightbox__prev"
+            className={cx(lbBtn, lbPrev, "lightbox__btn lightbox__prev")}
             onClick={onPrev}
             aria-label="Previous"
           >
@@ -197,7 +293,7 @@ export default function Lightbox({
           </button>
 
           <div
-            className="lightbox__img-wrap"
+            className={lbImgWrap}
             style={{
               transform: zoomed
                 ? `translate3d(${pan.x}px, ${pan.y}px, 0) scale(2.2)`
@@ -219,7 +315,7 @@ export default function Lightbox({
               src={imgSrc}
               alt={current.alt}
               fill
-              className="lightbox__img"
+              className={cx(lbImg, "lightbox__img")}
               style={{ objectFit: "contain" }}
               draggable={false}
               onDragStart={(e) => e.preventDefault()}
@@ -236,7 +332,7 @@ export default function Lightbox({
           </div>
 
           <button
-            className="lightbox__btn lightbox__next"
+            className={cx(lbBtn, lbNext, "lightbox__btn lightbox__next")}
             onClick={onNext}
             aria-label="Next"
           >
@@ -244,7 +340,7 @@ export default function Lightbox({
           </button>
 
           <button
-            className="lightbox__btn lightbox__close"
+            className={cx(lbBtn, lbClose, "lightbox__btn lightbox__close")}
             onClick={onClose}
             aria-label="Close"
           >
