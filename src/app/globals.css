@@ -676,86 +676,8 @@ a.project-card:focus { color: var(--charcoal); text-decoration: none; }
    ══════════════════════════════════════════════════════════════════════════════ */
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   CONTACT FORM
+   CONTACT FORM — migrated to Panda CSS (src/components/forms/ContactForm.tsx)
    ══════════════════════════════════════════════════════════════════════════════ */
-.contact-form {
-  display: flex;
-}
-.contact-form form,
-form.contact-form {
-  background: #fff;
-  border: 1px solid var(--border-color);
-  padding: .9rem;
-  border-radius: 8px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-.form-row {
-  display: flex;
-  gap: 0.8rem;
-}
-@media (max-width: 600px) {
-  .form-row { flex-direction: column; }
-}
-.form-group {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-.form-group label {
-  font-size: .95rem;
-  margin-bottom: .25rem;
-  color: var(--charcoal);
-}
-.form-group--checkbox {
-  flex-direction: row;
-  align-items: center;
-  gap: .5rem;
-}
-.form-group--checkbox label { margin-bottom: 0; }
-input[type="text"], input[type="email"], input[type="tel"], textarea {
-  padding: .45rem .6rem;
-  border: 1px solid #e6e6e6;
-  border-radius: 6px;
-  font-size: 1rem; /* ≥16px prevents iOS Safari auto-zoom on focus */
-  width: 100%;
-  font-family: inherit;
-  line-height: 1.5;
-  color: var(--charcoal); /* prevent inheriting white text from dark section backgrounds */
-  background: #fff;
-}
-textarea { resize: vertical; max-height: 160px; }
-input::placeholder, textarea::placeholder {
-  color: #9ca3af;
-  opacity: 1; /* Firefox shows placeholders at 0.54 opacity by default */
-}
-.form-success {
-  color: #2e7d32;
-  font-size: 0.95rem;
-  padding: .5rem 0;
-}
-.form-error {
-  color: #c62828;
-  font-size: 0.95rem;
-  padding: .5rem 0;
-}
-.send-button {
-  background: var(--charcoal);
-  color: #fff;
-  border: none;
-}
-
-/* Honeypot — hidden from real users */
-.hp {
-  position: absolute;
-  left: -9999px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    FOOTER — migrated to Panda CSS (src/components/layout/Footer.tsx)
