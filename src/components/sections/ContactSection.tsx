@@ -1,6 +1,6 @@
 import Image from "next/image";
 import ContactForm from "@/components/forms/ContactForm";
-import { css } from "@/styled-system/css";
+import { css, cx } from "@/styled-system/css";
 import { CONTACT_PAGE_THEME } from "@/lib/constants";
 
 const contactGrid = css({
@@ -53,6 +53,8 @@ const iconStyle = css({
   marginRight: "6px",
   display: "inline-block",
 });
+
+const contactFormWrap = css({ display: "flex" });
 
 export default function ContactSection() {
   return (
@@ -171,7 +173,7 @@ export default function ContactSection() {
           </div>
 
           {/* Contact form */}
-          <div className="contact-form">
+          <div className={cx(contactFormWrap, "contact-form")}>
             <ContactForm />
           </div>
         </div>
