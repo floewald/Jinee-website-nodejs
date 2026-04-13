@@ -13,7 +13,6 @@ const base = css({
   alignSelf: "flex-start",
   border: "1px solid transparent",
   background: "transparent",
-  color: "inherit",
   font: "inherit",
   fontSize: "0.95rem",
   lineHeight: "1.4",

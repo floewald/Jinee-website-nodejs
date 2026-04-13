@@ -214,15 +214,11 @@ body {
    Component-level CSS rules (e.g. .about-text h2, .section-title) set explicit
    dark colours that override the inherited #fff from .section-bg-charcoal.
    These context selectors restore legibility without touching component styles. */
-.section-bg-charcoal .section-title,
-.section-bg-charcoal .about-text h2 { color: #fff; }
+.section-bg-charcoal .section-title { color: #fff; }
 .section-bg-charcoal .section-title-divider { border-top-color: rgba(255,255,255,0.2); }
-.section-bg-charcoal .about-text p,
-.section-bg-charcoal .about-chinese-text,
-.section-bg-charcoal .about-chinese-text p { color: rgba(255,255,255,0.88); }
-.section-bg-charcoal a:not(.project-card):not(.btn) { color: #fff; }
-.section-bg-charcoal a:not(.project-card):not(.btn):hover,
-.section-bg-charcoal a:not(.project-card):not(.btn):focus { color: #fff; opacity: 0.8; }
+.section-bg-charcoal a:not(.project-card):not([class*="bg_"]):not([class*="c_"]) { color: #fff; }
+.section-bg-charcoal a:not(.project-card):not([class*="bg_"]):not([class*="c_"]):hover,
+.section-bg-charcoal a:not(.project-card):not([class*="bg_"]):not([class*="c_"]):focus { color: #fff; opacity: 0.8; }
 /* contact-card sits on a white background inside the charcoal section — restore dark link colour */
 .section-bg-charcoal .contact-info .contact-card a { color: var(--charcoal); opacity: 1; }
 .section-bg-charcoal .contact-info .contact-card a:hover,
@@ -669,32 +665,8 @@ a.project-card:focus { color: var(--charcoal); text-decoration: none; }
    ══════════════════════════════════════════════════════════════════════════════ */
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   ABOUT SECTION
+   ABOUT SECTION — migrated to Panda CSS (src/components/sections/AboutSection.tsx)
    ══════════════════════════════════════════════════════════════════════════════ */
-.about-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2.5rem;
-  align-items: flex-start;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-.about-image {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-.about-image img, .avatar {
-  display: block;
-  /* Height-driven sizing: let width follow the image's natural aspect ratio */
-  width: auto;
-  height: clamp(480px, 50vh, 480px);
-  max-width: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-}
 /* Visible white spacer between About (charcoal) and Contact (charcoal) sections */
 .section-spacer-white {
   background: #fff;
@@ -702,28 +674,6 @@ a.project-card:focus { color: var(--charcoal); text-decoration: none; }
   width: 100%;
   display: block;
 }
-
-.about-text { flex: 1 1 350px; }
-.about-text p {
-  color: var(--text-color);
-  font-size: 1rem;
-  line-height: 1.6;
-  padding-bottom: 12px;
-  max-width: none;
-}
-.about-text h2 {
-  font-size: clamp(1.25rem, 2.5vw, 2rem);
-  border-bottom: none;
-  padding-bottom: 0;
-  margin-bottom: 1.2em;
-  color: var(--charcoal);
-}
-.about-chinese-text {
-  margin-top: 2rem;
-  font-size: 1rem;
-  color: var(--text-color);
-}
-.about-chinese-text p { color: var(--text-color); }
 
 /* ══════════════════════════════════════════════════════════════════════════════
    CONTACT SECTION

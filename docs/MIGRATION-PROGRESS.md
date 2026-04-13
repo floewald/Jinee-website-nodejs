@@ -34,9 +34,56 @@ For content workflow see [ADDING-PROJECTS.md](ADDING-PROJECTS.md).
 |--------|-------|
 | Static pages generated | 38 |
 | Sitemap URLs | 34 (7 static + 27 projects) |
-| Unit tests | 254 passing, 33 suites |
+| Unit tests | 288 passing, 38 suites |
 | E2E tests | 37 passing (Playwright, Chromium) |
+| Visual regression tests | 22 (11 routes × 2 browsers) |
 | TypeScript errors | 0 |
+
+---
+
+## Panda CSS Migration (branch: `redesign/panda-css`)
+
+Migrating from monolithic `globals.css` (~1800 lines) to Panda CSS `css()`/`cx()` utilities
+with pixel-perfect visual regression validation.
+
+**Started**: 2026-04-12  
+**Approach**: Component-by-component; visual regression baseline with Playwright (22 tests)
+
+| Commit | Component | Lines removed | Status |
+|--------|-----------|--------------|--------|
+| d949096 | Panda scaffolding + Footer | ~60 | ✅ |
+| 2864f57 | Buttons (`button-styles.ts`) | ~40 | ✅ |
+| 08afd69 | CookieBanner | ~50 | ✅ |
+| 565aab8 | Header + Navigation | ~280 | ✅ |
+| pending | Button color fix + submenu spacing | — | 🔧 |
+
+### Remaining sections (~1500 lines):
+
+| Section | Est. lines | Priority |
+|---------|-----------|----------|
+| Section Backgrounds | ~35 | Next |
+| Hero Slideshow | ~45 | Next |
+| Gallery Collage | ~10 | Next |
+| Project Gallery | ~70 | Medium |
+| Featured Section | ~310 | Medium |
+| About Section | ~55 | Medium |
+| Contact Section | ~45 | Medium |
+| Contact Form | ~85 | Medium |
+| Lightbox | ~90 | Medium |
+| Card Slideshow | ~40 | Medium |
+| Slideshow | ~55 | Medium |
+| Video Player | ~80 | Medium |
+| Download Toolbar + Modal | ~215 | Low |
+| Portfolio Subpages | ~140 | Low |
+| Image fix / Accessibility / Mobile Sync | ~30 | Low |
+
+### Key technical notes
+
+- Panda CSS v1.9.1 with `preflight: false`, `jsxFramework: "react"`
+- **Recipes don't work** — Tailwind v4 PostCSS strips `@layer recipes`; use `css()`/`cx()` only
+- `panda cssgen --outfile src/styled-system/styles.css` must run with `panda codegen`
+- Visual regression: `addInitScript` timer interception for slideshow determinism
+- Cookie banner hidden via `[role="region"][aria-label="Cookie consent"]` (class-agnostic)
 
 ---
 

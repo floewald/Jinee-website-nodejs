@@ -1,13 +1,65 @@
 import Image from "next/image";
+import { css, cx } from "@/styled-system/css";
 import { ABOUT_PAGE_THEME } from "@/lib/constants";
+
+const aboutContainer = css({
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "2.5rem",
+  alignItems: "flex-start",
+  maxWidth: "1100px",
+  margin: "0 auto",
+  padding: "2rem 1rem",
+});
+
+const aboutImage = css({
+  flex: "0 0 auto",
+  display: "flex",
+  alignItems: "flex-start",
+  justifyContent: "center",
+});
+
+const avatar = css({
+  display: "block",
+  width: "auto",
+  height: "clamp(480px, 50vh, 480px)",
+  maxWidth: "100%",
+  objectFit: "cover",
+  borderRadius: "8px",
+});
+
+const aboutText = css({
+  flex: "1 1 350px",
+  "& p": {
+    color: "rgba(255,255,255,0.88)",
+    fontSize: "1rem",
+    lineHeight: "1.6",
+    paddingBottom: "12px",
+    maxWidth: "none",
+  },
+  "& h2": {
+    fontSize: "clamp(1.25rem, 2.5vw, 2rem)",
+    borderBottom: "none",
+    paddingBottom: "0",
+    marginBottom: "1.2em",
+    color: "#fff",
+  },
+});
+
+const aboutChinese = css({
+  marginTop: "2rem",
+  fontSize: "1rem",
+  color: "rgba(255,255,255,0.88)",
+  "& p": { color: "rgba(255,255,255,0.88)" },
+});
 
 export default function AboutSection() {
   return (
     <section id="about" className={ABOUT_PAGE_THEME}>
-      <div className="about-container container">
-        <div className="about-image">
+      <div className={cx(aboutContainer, "container")}>
+        <div className={aboutImage}>
           <Image
-            className="avatar"
+            className={avatar}
             src="/assets/photos/GOA05725-1.webp"
             alt="Jinee Chen portrait"
             width={520}
@@ -17,7 +69,7 @@ export default function AboutSection() {
           />
         </div>
 
-        <div className="about-text">
+        <div className={aboutText}>
           <h2>Video Producer | Photographer</h2>
           <p>📍 Location: Singapore 🇸🇬 &amp; Taipei 🇹🇼</p>
           <p>
@@ -34,7 +86,7 @@ export default function AboutSection() {
             collaborations &amp; bookings!
           </p>
 
-          <div className="about-chinese-text" lang="zh-Hant">
+          <div className={aboutChinese} lang="zh-Hant">
             <p>
               哈囉！我是Jinee，很高興在此與您相遇 :)<br />
               我專精於透過攝影捕捉生活風格，並協助品牌用影像說故事。<br />

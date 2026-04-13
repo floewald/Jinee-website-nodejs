@@ -196,7 +196,7 @@ const navSubmenu = css({
     minWidth: "180px",
     "& li a": {
       display: "block",
-      padding: "0.2rem 1rem",
+      padding: "0.8rem 1rem",
       color: "var(--text-color)",
       textDecoration: "none",
       borderBottom: "none",
