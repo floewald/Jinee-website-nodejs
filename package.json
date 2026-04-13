@@ -55,5 +55,8 @@
       "eslint --fix",
       "jest --bail --findRelatedTests --passWithNoTests"
     ]
+  },
+  "overrides": {
+    "picomatch": "^4.0.4"
   }
 }
