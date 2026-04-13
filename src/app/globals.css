@@ -895,99 +895,13 @@ input::placeholder, textarea::placeholder {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   CARD SLIDESHOW (auto-cycling preview on project index cards)
+   CARD SLIDESHOW — migrated to Panda CSS (src/components/gallery/CardSlideshow.tsx)
    ══════════════════════════════════════════════════════════════════════════════ */
-.card-slideshow {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background: #f5f5f5;  /* light fallback visible before first image loads */
-}
-.card-slideshow__slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  background: transparent;
-  isolation: isolate;
-}
-.card-slideshow__slide--active {
-  opacity: 1;
-}
-/* Portrait images inside card slide: blurred background fills the frame */
-.card-slideshow__bg {
-  position: absolute;
-  inset: -12%;       /* extends beyond frame so blur doesn't show hard edges */
-  background-size: cover;
-  background-position: center;
-  filter: blur(14px);
-  z-index: 0;
-}
-/* Semi-transparent overlay on top of the blur to soften/dim it */
-.card-slideshow__bg-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1;
-}
 /* Portrait image sits above blur bg and overlay (z-index set inline in JSX) */
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   SLIDESHOW
+   SLIDESHOW — migrated to Panda CSS (src/components/gallery/Slideshow.tsx)
    ══════════════════════════════════════════════════════════════════════════════ */
-.slideshow {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-.slideshow__track {
-  display: flex;
-  width: 100%;
-}
-.slideshow__slide {
-  flex: 0 0 100%;
-  min-width: 100%;
-}
-.slideshow__img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  aspect-ratio: 16 / 9;
-}
-.slideshow__btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  border: none;
-  padding: 8px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  z-index: 2;
-}
-.slideshow__prev { left: 8px; }
-.slideshow__next { right: 8px; }
-.slideshow__dots {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 12px;
-  display: flex;
-  gap: 6px;
-  z-index: 3;
-}
-.slideshow__dot {
-  width: 10px; height: 10px; border-radius: 50%; border: none;
-  background: rgba(255,255,255,0.35); cursor: pointer; padding: 0;
-}
-.slideshow__dot--active { background: #fff; }
-
-@media (max-width: 600px) {
-  .slideshow__btn { padding: 10px 12px; font-size: 1.1rem; }
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    VIDEO PLAYER
