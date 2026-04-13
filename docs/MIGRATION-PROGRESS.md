@@ -55,25 +55,23 @@ with pixel-perfect visual regression validation.
 | 2864f57 | Buttons (`button-styles.ts`) | ~40 | ✅ |
 | 08afd69 | CookieBanner | ~50 | ✅ |
 | 565aab8 | Header + Navigation | ~280 | ✅ |
-| pending | Button color fix + submenu spacing | — | 🔧 |
+| 7134679 | Button fixes + About Section | ~55 | ✅ |
+| 810618a | CardSlideshow + Slideshow | ~89 | ✅ |
+| 276b7be | VideoPlayer | ~77 | ✅ |
 
-### Remaining sections (~1500 lines):
+### Remaining sections (~1200 lines):
 
 | Section | Est. lines | Priority |
 |---------|-----------|----------|
-| Section Backgrounds | ~35 | Next |
+| Section Backgrounds | ~35 | Last (shared by 8+ components) |
 | Hero Slideshow | ~45 | Next |
 | Gallery Collage | ~10 | Next |
 | Project Gallery | ~70 | Medium |
-| Featured Section | ~310 | Medium |
-| About Section | ~55 | Medium |
+| Featured Section | ~310 | Medium (shared classes: project-card, section-title) |
 | Contact Section | ~45 | Medium |
 | Contact Form | ~85 | Medium |
 | Lightbox | ~90 | Medium |
-| Card Slideshow | ~40 | Medium |
-| Slideshow | ~55 | Medium |
-| Video Player | ~80 | Medium |
-| Download Toolbar + Modal | ~215 | Low |
+| Download Toolbar + Modal | ~215 | Low (3 components, cross-refs) |
 | Portfolio Subpages | ~140 | Low |
 | Image fix / Accessibility / Mobile Sync | ~30 | Low |
 
