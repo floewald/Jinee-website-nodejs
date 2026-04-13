@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <main className="container">
-      <section className={cx(portfolioSection, sectionCompact, "portfolio-section", "section-bg-white", "section--compact")}>
+      <section className={cx(portfolioSection, sectionCompact, "portfolio-section", "section--compact")}>
         <h1 className={cx(sectionHeadingFull, "section-heading-full")}>Privacy Policy</h1>
         <p className={cx(lastUpdated, "last-updated")}>Last updated: 18 January 2026</p>
         <p>
@@ -28,7 +28,7 @@ export default function PrivacyPage() {
         </p>
       </section>
 
-      <section className={cx(portfolioSection, sectionCompact, "portfolio-section", "section-bg-white", "section--compact")}>
+      <section className={cx(portfolioSection, sectionCompact, "portfolio-section", "section--compact")}>
         <h2>What we collect</h2>
         <ul className={cx(servicesList, "services-list")}>
           <li>

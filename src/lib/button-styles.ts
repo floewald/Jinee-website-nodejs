@@ -12,7 +12,6 @@ const base = css({
   cursor: "pointer",
   alignSelf: "flex-start",
   border: "1px solid transparent",
-  background: "transparent",
   font: "inherit",
   fontSize: "0.95rem",
   lineHeight: "1.4",

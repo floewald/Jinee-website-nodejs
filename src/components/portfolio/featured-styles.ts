@@ -189,7 +189,7 @@ export const instagramPreviewImg = css({
 });
 
 export const instagramPreviewCard = css({
-  display: "flex",
+  display: "flex !important",
   flexDirection: "column",
   overflow: "hidden",
   background: "#fff",

@@ -30,8 +30,8 @@ const contactCard = css({
     alignItems: "center",
     gap: "0.5rem",
   },
-  "& a": { color: "var(--charcoal)", opacity: 1 },
-  "& a:hover, & a:focus": { color: "var(--charcoal)", opacity: 0.7 },
+  "& a": { color: "var(--charcoal) !important", opacity: 1 },
+  "& a:hover, & a:focus": { color: "var(--charcoal) !important", opacity: 0.7 },
 });
 
 const contactPhoto = css({

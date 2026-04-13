@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function ImprintPage() {
   return (
     <main className="container">
-      <section className={cx(portfolioSection, "portfolio-section", "section-bg-white")}>
+      <section className={cx(portfolioSection, "portfolio-section")}>
         <h1 className={cx(sectionHeadingFull, "section-heading-full")}>Impressum / Author</h1>
 
         <p>
