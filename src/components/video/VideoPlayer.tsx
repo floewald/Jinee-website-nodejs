@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { css, cx } from "@/styled-system/css";
 import { useIntersection } from "@/hooks/useIntersection";
 import type { VideoItem } from "@/types/portfolio";
@@ -112,8 +113,7 @@ function LazyVideoEmbed({ video }: VideoEmbedProps) {
           aria-label={`Watch: ${video.title}`}
         >
           {video.previewImage && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={video.previewImage} alt={video.title} className={linkImgStyle} />
+            <Image src={video.previewImage} alt={video.title} width={640} height={360} className={linkImgStyle} loading="lazy" unoptimized />
           )}
           <span className={linkLabelStyle}>Watch ↗</span>
         </a>

@@ -97,7 +97,6 @@ export default function GalleryGrid({
         height={0}
         loading="lazy"
         className={cx(galleryImg, "gallery-img")}
-        sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw"
         unoptimized
         style={{ height: "auto" }}
         {...(img.blur ? { placeholder: "blur" as const, blurDataURL: img.blur } : {})}

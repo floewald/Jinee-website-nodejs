@@ -121,6 +121,7 @@ export default function HeroSlideshow({
             width={1600}
             height={900}
             priority={i === 0}
+            loading="eager"
             className={cx(
               heroImgStyle,
               "hero-img",

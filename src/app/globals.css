@@ -269,13 +269,6 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   opacity: 1;
   transform: translateY(0);
 }
-[data-reveal-ready].gallery-cols .gallery-item {
-  transform: none;
-  transition: opacity 0.45s ease;
-}
-[data-reveal-ready].gallery-cols .gallery-item.reveal--visible {
-  transform: none;
-}
 [data-reveal-ready] .project-card {
   opacity: 0;
   transform: translateY(22px);
