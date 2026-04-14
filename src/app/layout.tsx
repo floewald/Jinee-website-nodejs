@@ -31,7 +31,8 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
     default: `${SITE_NAME} — ${SITE_TAGLINE}`,
   },
-  description: SITE_TAGLINE,
+  description:
+    "Jinee Chen is a Singapore-based videographer and photographer specialising in documentary storytelling, events, travel, and social media content creation.",
   metadataBase: new URL(SITE_URL),
   openGraph: {
     siteName: SITE_NAME,
@@ -40,6 +41,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    // TODO: replace with Jinee's actual Twitter/X handle once confirmed
+    // site: "@jineechen",
+    // creator: "@jineechen",
   },
   robots: { index: true, follow: true },
   icons: {
@@ -62,9 +66,10 @@ const personJsonLd = {
   "@type": "Person",
   name: SITE_NAME,
   url: `${SITE_URL}/`,
+  // TODO: replace with Jinee's actual profile URLs once confirmed
   sameAs: [
-    "https://www.instagram.com/",
-    "https://www.linkedin.com/",
+    "https://www.instagram.com/jineechen/",
+    "https://www.linkedin.com/in/jineechen/",
   ],
 };
 

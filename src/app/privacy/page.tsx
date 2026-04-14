@@ -1,30 +1,37 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { cx } from "@/styled-system/css";
+import { btn } from "@/lib/button-styles";
+import {
+  portfolioSection,
+  sectionCompact,
+  sectionHeadingFull,
+  lastUpdated,
+  servicesList,
+  proseSection,
+} from "@/lib/portfolio-styles";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "Privacy Policy for jineechen.com — what data we collect and how you can control it.",
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
 };
 
 export default function PrivacyPage() {
   return (
-    <main className="portfolio-hub">
-      <section className="portfolio-section section-bg-white section--compact">
-        <div className="container">
-        <h1 className="section-heading-full">Privacy Policy</h1>
-        <p className="last-updated">Last updated: 18 January 2026</p>
+    <main className="container">
+      <section className={cx(portfolioSection, sectionCompact, "portfolio-section", "section--compact")}>
+        <h1 className={cx(sectionHeadingFull, "section-heading-full")}>Privacy Policy</h1>
+        <p className={cx(lastUpdated, "last-updated")}>Last updated: 18 January 2026</p>
         <p>
           This page explains what personal data we collect, why, and how you can
           control it.
         </p>
-        </div>
       </section>
 
-      <section className="portfolio-section section-bg-white section--compact">
-        <div className="container">
+      <section className={cx(portfolioSection, sectionCompact, proseSection, "portfolio-section", "section--compact")}>
         <h2>What we collect</h2>
-        <ul className="services-list">
+        <ul className={cx(servicesList, "services-list")}>
           <li>
             Data you provide in the contact form: name, email, phone (optional)
             and message.
@@ -66,7 +73,7 @@ export default function PrivacyPage() {
           limited diagnostic data when you use the download feature. This may
           include:
         </p>
-        <ul className="services-list">
+        <ul className={cx(servicesList, "services-list")}>
           <li>
             A request identifier (used to correlate client and server logs).
           </li>
@@ -113,10 +120,9 @@ export default function PrivacyPage() {
         </p>
 
         <div style={{ marginTop: "2rem", textAlign: "center" }}>
-          <Link href="/" className="btn btn--primary">
+          <Link href="/" className={btn({ visual: "primary" })}>
             Back to Home
           </Link>
-        </div>
         </div>
       </section>
     </main>

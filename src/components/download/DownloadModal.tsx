@@ -1,7 +1,24 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { cx } from "@/styled-system/css";
 import { BACKEND_URL } from "@/lib/constants";
+import { btn } from "@/lib/button-styles";
+import {
+  downloadModal,
+  downloadModalBackdrop,
+  downloadModalDialog,
+  downloadModalHeader,
+  downloadModalTitle,
+  downloadModalClose,
+  downloadModalBody,
+  downloadModalBodyPrimary,
+  downloadModalInfo,
+  downloadModalNoticeError,
+  downloadModalPasswordWrapper,
+  downloadModalInput,
+  downloadModalPasswordToggle,
+} from "./download-styles";
 
 interface DownloadModalProps {
   isOpen: boolean;
@@ -97,18 +114,18 @@ export default function DownloadModal({
   }
 
   return (
-    <div className="download-modal is-open" aria-hidden="false">
+    <div className={cx(downloadModal, "download-modal", "is-open")} aria-hidden="false">
       <div
-        className="download-modal__backdrop"
+        className={cx(downloadModalBackdrop, "download-modal__backdrop")}
         data-testid="download-backdrop"
         onClick={onClose}
         aria-hidden="true"
       />
-      <div role="dialog" aria-modal="true" className="download-modal__dialog">
-        <header className="download-modal__header">
-          <h3 className="download-modal__title">Download Selected Images</h3>
+      <div role="dialog" aria-modal="true" className={cx(downloadModalDialog, "download-modal__dialog")}>
+        <header className={cx(downloadModalHeader, "download-modal__header")}>
+          <h3 className={cx(downloadModalTitle, "download-modal__title")}>Download Selected Images</h3>
           <button
-            className="download-modal__close"
+            className={cx(downloadModalClose, "download-modal__close")}
             onClick={onClose}
             aria-label="Close"
           >
@@ -118,8 +135,8 @@ export default function DownloadModal({
           </button>
         </header>
 
-        <section className="download-modal__body">
-          <p className="download-modal__info">
+        <section className={cx(downloadModalBody, "download-modal__body")}>
+          <p className={cx(downloadModalInfo, "download-modal__info")}>
             You have selected{" "}
             <strong>{selectedFiles.length} image(s)</strong>.
             <br />
@@ -127,19 +144,19 @@ export default function DownloadModal({
           </p>
 
           {status === "error" && (
-            <div role="alert" className="download-modal__notice download-modal__notice--error">
+            <div role="alert" className={cx(downloadModalNoticeError, "download-modal__notice", "download-modal__notice--error")}>
               {errorMessage}
             </div>
           )}
 
-          <div className="download-modal__password-wrapper">
+          <div className={cx(downloadModalPasswordWrapper, "download-modal__password-wrapper")}>
             <label htmlFor="dm-password" className="sr-only">
               Password
             </label>
             <input
               id="dm-password"
               type={showPassword ? "text" : "password"}
-              className="download-modal__input"
+              className={cx(downloadModalInput, "download-modal__input")}
               placeholder="Enter download password"
               autoComplete="off"
               value={password}
@@ -150,7 +167,7 @@ export default function DownloadModal({
             />
             <button
               type="button"
-              className="download-modal__password-toggle"
+              className={cx(downloadModalPasswordToggle, "download-modal__password-toggle")}
               aria-label={showPassword ? "Hide password" : "Show password"}
               onClick={() => setShowPassword((v) => !v)}
             >
@@ -172,7 +189,7 @@ export default function DownloadModal({
 
           <button
             type="button"
-            className="btn btn--primary btn--large"
+            className={cx(downloadModalBodyPrimary, btn({ visual: "primary", size: "large" }))}
             disabled={status === "loading"}
             onClick={handleDownload}
           >

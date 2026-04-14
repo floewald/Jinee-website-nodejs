@@ -1,7 +1,79 @@
 "use client";
 
 import { useState } from "react";
+import { css, cx } from "@/styled-system/css";
 import { BACKEND_URL } from "@/lib/constants";
+import { btn } from "@/lib/button-styles";
+
+const formCard = css({
+  background: "#fff",
+  border: "1px solid var(--border-color)",
+  padding: ".9rem",
+  borderRadius: "8px",
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.6rem",
+});
+
+const formRow = css({
+  display: "flex",
+  gap: "0.8rem",
+  "@media (max-width: 600px)": {
+    flexDirection: "column",
+  },
+});
+
+const formGroup = css({
+  display: "flex",
+  flexDirection: "column",
+  flex: 1,
+  "& label": {
+    fontSize: ".95rem",
+    marginBottom: ".25rem",
+    color: "var(--charcoal)",
+  },
+});
+
+const formGroupCheckbox = css({
+  flexDirection: "row",
+  alignItems: "center",
+  gap: ".5rem",
+  "& label": { marginBottom: 0 },
+});
+
+const inputStyle = css({
+  padding: ".45rem .6rem",
+  border: "1px solid #e6e6e6",
+  borderRadius: "6px",
+  fontSize: "1rem",
+  width: "100%",
+  fontFamily: "inherit",
+  lineHeight: "1.5",
+  color: "var(--charcoal)",
+  background: "#fff",
+  "&::placeholder": {
+    color: "#9ca3af",
+    opacity: 1,
+  },
+});
+
+const textareaStyle = css({
+  resize: "vertical",
+  maxHeight: "160px",
+});
+
+const formSuccess = css({
+  color: "#2e7d32",
+  fontSize: "0.95rem",
+  padding: ".5rem 0",
+});
+
+const formError = css({
+  color: "#c62828",
+  fontSize: "0.95rem",
+  padding: ".5rem 0",
+});
 
 const DRAFT_KEY = "contactFormDraft";
 
@@ -93,17 +165,18 @@ export default function ContactForm() {
   }
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit} noValidate>
+    <form className={cx(formCard, "contact-form")} onSubmit={handleSubmit} noValidate>
       {/* Honeypot */}
       <input type="text" name="website" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
 
-      <div className="form-row">
-        <div className="form-group">
+      <div className={cx(formRow, "form-row")}>
+        <div className={formGroup}>
           <label htmlFor="cf-first-name">First Name</label>
           <input
             id="cf-first-name"
             name="firstName"
             type="text"
+            className={inputStyle}
             value={form.firstName}
             onChange={handleChange}
             required
@@ -112,12 +185,13 @@ export default function ContactForm() {
           />
         </div>
 
-        <div className="form-group">
+        <div className={formGroup}>
           <label htmlFor="cf-last-name">Last Name</label>
           <input
             id="cf-last-name"
             name="lastName"
             type="text"
+            className={inputStyle}
             value={form.lastName}
             onChange={handleChange}
             required
@@ -127,12 +201,13 @@ export default function ContactForm() {
         </div>
       </div>
 
-      <div className="form-group">
+      <div className={formGroup}>
         <label htmlFor="cf-email">Email</label>
         <input
           id="cf-email"
           name="email"
           type="email"
+          className={inputStyle}
           value={form.email}
           onChange={handleChange}
           required
@@ -141,12 +216,13 @@ export default function ContactForm() {
         />
       </div>
 
-      <div className="form-group">
+      <div className={formGroup}>
         <label htmlFor="cf-phone">Phone (optional)</label>
         <input
           id="cf-phone"
           name="phone"
           type="tel"
+          className={inputStyle}
           value={form.phone}
           onChange={handleChange}
           autoComplete="tel"
@@ -154,11 +230,12 @@ export default function ContactForm() {
         />
       </div>
 
-      <div className="form-group">
+      <div className={formGroup}>
         <label htmlFor="cf-message">Message</label>
         <textarea
           id="cf-message"
           name="message"
+          className={cx(inputStyle, textareaStyle)}
           rows={5}
           value={form.message}
           onChange={handleChange}
@@ -167,7 +244,7 @@ export default function ContactForm() {
         />
       </div>
 
-      <div className="form-group form-group--checkbox">
+      <div className={cx(formGroup, formGroupCheckbox)}>
         <input
           id="cf-consent"
           name="consent"
@@ -183,12 +260,12 @@ export default function ContactForm() {
 
       {/* Feedback */}
       {status === "success" && (
-        <div role="status" className="form-success">
+        <div role="status" className={formSuccess}>
           Message sent! Thank you for reaching out.
         </div>
       )}
       {(status === "error" || status === "network-error") && (
-        <div role="alert" className="form-error">
+        <div role="alert" className={formError}>
           {errorMessage || "Submission failed. Please try again."}
         </div>
       )}
@@ -196,7 +273,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="btn btn--primary"
+        className={btn({ visual: "primary" })}
       >
         {status === "sending" ? "Sending…" : "Send Message"}
       </button>

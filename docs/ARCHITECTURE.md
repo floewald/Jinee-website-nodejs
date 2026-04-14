@@ -6,7 +6,7 @@ Technical deep-dive into the Jinee Chen portfolio website. For local setup see [
 
 ## Overview
 
-The site is a **static Next.js 16 application** — pages are rendered to pure HTML at build time (`output: 'export'`) and deployed via FTP. A separate PHP backend handles the two server-side features (contact form and download system).
+The site is a **static Next.js 16 application** — pages are rendered to pure HTML at build time (`output: 'export'`) and deployed via FTP. Styling uses **Panda CSS v1.9.1** (atomic `css()`/`cx()` utilities, zero runtime) layered on top of a minimal `globals.css` for design tokens, font faces, and intentionally global rules. A separate PHP backend handles the two server-side features (contact form and download system).
 
 ```
 Content JSON files
@@ -89,6 +89,35 @@ PHP (backend/download/download.php)
   ├─ File path validation (realpath + whitelist)
   └─ Serves ZIP stream or pre-built archive
 ```
+
+---
+
+## Styling Architecture
+
+The project uses a two-layer CSS model:
+
+```
+globals.css                         (unlayered — always wins)
+  ├── Font faces + CSS custom properties (design tokens)
+  ├── Base reset / typography / container
+  ├── Section backgrounds (full-bleed escape technique)
+  ├── Scroll-reveal animations ([data-reveal-ready])
+  ├── Cross-component hover transforms
+  ├── Selection mode + :has() pseudo-class rules
+  ├── Reduced-motion + mobile global overrides
+  └── Utility classes (sr-only, scrollbar-hide, no-scroll)
+
+Panda CSS — @layer utilities                (generated → src/styled-system/styles.css)
+  ├── Atomic utility classes (css() calls in *.ts style files)
+  └── Applied via cx() in component JSX
+```
+
+**Key rules:**
+- Panda CSS is `preflight: false` — Tailwind v4's base reset does the browser normalisation
+- Unlayered globals.css always wins over `@layer utilities` — use `"value !important"` on Panda values when a global selector fights back (e.g. `.section-bg-charcoal a`)
+- `cx()` source-order: when two `css()` calls both set the same property, the rule appearing **later** in the Panda stylesheet wins regardless of `cx()` argument order; resolve by adding `!important` to the value that must win
+- Recipes do not work — Tailwind v4 PostCSS strips `@layer recipes`; use plain `css()`/`cx()` pattern instead
+- Regenerate after any style-file change: `npx panda codegen --silent && npx panda cssgen --outfile src/styled-system/styles.css --silent`
 
 ---
 

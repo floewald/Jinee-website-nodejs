@@ -2,6 +2,50 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { css, cx } from "@/styled-system/css";
+
+const heroSectionStyle = css({
+  position: "relative",
+  width: "100%",
+  overflow: "hidden",
+  padding: 0,
+  margin: 0,
+  height: "var(--hero-height)",
+});
+
+const heroSlide = css({
+  position: "absolute",
+  inset: 0,
+  opacity: 0,
+  transition: "opacity 0.9s ease-in-out",
+});
+
+const heroSlideActive = css({ opacity: 1 });
+
+const heroSlideWhiteBg = css({ backgroundColor: "#ffffff" });
+
+const heroBgBlur = css({
+  position: "absolute",
+  inset: "-8%",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  filter: "blur(28px)",
+  opacity: 0.85,
+  zIndex: 0,
+});
+
+const heroImgStyle = css({
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  display: "block",
+});
+
+const heroImgContain = css({
+  objectFit: "contain",
+  position: "relative",
+  zIndex: 1,
+});
 
 export interface HeroSlide {
   src: string;
@@ -50,22 +94,23 @@ export default function HeroSlideshow({
   if (slides.length === 0) return null;
 
   return (
-    <section className="hero-section" aria-label="Hero slideshow">
+    <section className={cx(heroSectionStyle, "hero-section")} aria-label="Hero slideshow">
       {slides.map((slide, i) => (
         <div
           key={slide.src}
-          className={[
+          className={cx(
+            heroSlide,
             "hero-slide",
-            i === current ? "hero-slide--active" : "",
-            fit === "white" ? "hero-slide--white-bg" : "",
-          ]
-            .filter(Boolean)
-            .join(" ")}
+            i === current && heroSlideActive,
+            i === current && "hero-slide--active",
+            fit === "white" && heroSlideWhiteBg,
+            fit === "white" && "hero-slide--white-bg",
+          )}
           aria-hidden={i !== current}
         >
           {fit === "blur" && (
             <div
-              className="hero-slide__bg-blur"
+              className={cx(heroBgBlur, "hero-slide__bg-blur")}
               style={{ backgroundImage: `url("${slide.src}")` }}
               aria-hidden="true"
             />
@@ -76,7 +121,12 @@ export default function HeroSlideshow({
             width={1600}
             height={900}
             priority={i === 0}
-            className={`hero-img${fit !== "cover" ? " hero-img--contain" : ""}`}
+            className={cx(
+              heroImgStyle,
+              "hero-img",
+              fit !== "cover" && heroImgContain,
+              fit !== "cover" && "hero-img--contain",
+            )}
             style={fit === "cover" && slide.objectPosition
               ? { objectPosition: slide.objectPosition }
               : undefined}

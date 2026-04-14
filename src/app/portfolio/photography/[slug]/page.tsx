@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { cx } from "@/styled-system/css";
 import {
   photographyProjects,
   getSlugsByType,
@@ -8,6 +9,13 @@ import { SITE_URL } from "@/lib/constants";
 import { getGalleryImages } from "@/lib/gallery-images";
 import GalleryWithLightbox from "@/components/gallery/GalleryWithLightbox";
 import GalleryWithDownload from "@/components/download/GalleryWithDownload";
+import { sectionTitleDivider } from "@/components/portfolio/featured-styles";
+import {
+  projectPage,
+  projectHeading,
+  projectDescription,
+  galleryEmpty,
+} from "@/lib/portfolio-styles";
 
 interface Params {
   slug: string;
@@ -60,15 +68,15 @@ export default async function PhotographyProjectPage({
   };
 
   return (
-    <main className="project-page container">
+    <main className={cx(projectPage, "project-page", "container")}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(galleryJsonLd) }}
       />
-      <h1 className="project-heading">{project.heading}</h1>
-      <hr className="section-title-divider" aria-hidden="true" />
+      <h1 className={cx(projectHeading, "project-heading")}>{project.heading}</h1>
+      <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
       {project.description && (
-        <p className="project-description">{project.description}</p>
+        <p className={cx(projectDescription, "project-description")}>{project.description}</p>
       )}
 
       {images.length > 0 ? (
@@ -78,7 +86,7 @@ export default async function PhotographyProjectPage({
           <GalleryWithLightbox images={images} showSlideshow={project.showSlideshow ?? false} />
         )
       ) : (
-        <p className="gallery-empty">No images available yet.</p>
+        <p className={cx(galleryEmpty, "gallery-empty")}>No images available yet.</p>
       )}
     </main>
   );

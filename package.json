@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "npm run build:images && npm run validate:manifests && next build",
-    "build:next": "next build",
+    "dev": "panda codegen --silent && panda cssgen --outfile src/styled-system/styles.css --silent && next dev",
+    "dev:fast": "next dev",
+    "build": "panda codegen --silent && panda cssgen --outfile src/styled-system/styles.css --silent && npm run build:images && npm run validate:manifests && next build",
+    "build:next": "panda codegen --silent && panda cssgen --outfile src/styled-system/styles.css --silent && next build",
     "build:images": "bash scripts/build-images.sh",
     "preview": "npm run build:next && bash scripts/build-preview-zip.sh",
     "validate:manifests": "node scripts/validate-manifests.mjs",
@@ -18,7 +19,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:e2e": "playwright test",
-    "prepare": "husky"
+    "prepare": "panda codegen --silent && husky"
   },
   "dependencies": {
     "next": "^16.2.3",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@fontsource-variable/inter": "^5.2.8",
+    "@pandacss/dev": "^1.9.1",
     "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
@@ -53,5 +55,8 @@
       "eslint --fix",
       "jest --bail --findRelatedTests --passWithNoTests"
     ]
+  },
+  "overrides": {
+    "picomatch": "^4.0.4"
   }
 }

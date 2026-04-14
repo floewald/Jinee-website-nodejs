@@ -26,9 +26,13 @@ React is a JavaScript library for building user interfaces. Instead of writing r
 
 Next.js is a framework built on top of React. It adds things like file-based routing (the folder `src/app/about/page.tsx` automatically becomes the `/about` URL), optimised images, and the ability to export everything as static HTML files.
 
-### Tailwind CSS
+### Styling — Panda CSS + Tailwind CSS
 
-Tailwind CSS is a styling system. Instead of writing a separate `.css` file, you apply short utility classes directly in your HTML/JSX: `class="text-center font-bold"`. However, in this project most custom styles are in `src/app/globals.css` using plain CSS — Tailwind is used mainly for the base reset.
+This project uses **Panda CSS** for component styling. It is a build-time CSS tool — instead of writing a separate `.css` file with class names, you write JavaScript objects inside style files (e.g. `src/lib/button-styles.ts`) and Panda generates atomic CSS at build time. The result is a single generated stylesheet with zero runtime overhead.
+
+**Tailwind CSS v4** is also included, but only for the browser base reset (it normalises default browser styles). You will never write Tailwind utility class names like `text-center` in JSX — they are not used in this project.
+
+Global styles that cannot be expressed as atomic utilities (design tokens, fonts, scroll animations, section backgrounds) live in `src/app/globals.css`.
 
 ### npm (Node Package Manager)
 

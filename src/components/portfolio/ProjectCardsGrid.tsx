@@ -1,10 +1,20 @@
 import Link from "next/link";
 import Image from "next/image";
+import { cx } from "@/styled-system/css";
 import { getProjectSlideshowImages } from "@/lib/gallery-images";
 import { projectPath } from "@/lib/portfolio-config";
 import CardSlideshow from "@/components/gallery/CardSlideshow";
 import type { PortfolioProject, ProjectType } from "@/types/portfolio";
 import type { SlideshowImage } from "@/lib/gallery-images";
+import {
+  projectCards,
+  projectCard,
+  projectCardThumb,
+  projectCardImg,
+  projectCardBody,
+  projectCardTitle,
+  projectCardLocation,
+} from "./featured-styles";
 
 interface ProjectCardsGridProps {
   projects: PortfolioProject[];
@@ -26,7 +36,7 @@ export default function ProjectCardsGrid({
   fallbackImageHeight,
 }: ProjectCardsGridProps) {
   return (
-    <div className="project-cards">
+    <div className={cx(projectCards, "project-cards")}>
       {projects.map((project, cardIndex) => {
         const slideshowImages = getProjectSlideshowImages(project.slug, type);
         const previewImages: SlideshowImage[] =
@@ -38,9 +48,9 @@ export default function ProjectCardsGrid({
           <Link
             key={project.slug}
             href={projectPath(project)}
-            className="project-card"
+            className={cx(projectCard, "project-card")}
           >
-            <div className="project-card__thumb">
+            <div className={cx(projectCardThumb, "project-card__thumb")}>
               {previewImages.length > 1 ? (
                 <CardSlideshow
                   images={previewImages}
@@ -54,15 +64,15 @@ export default function ProjectCardsGrid({
                   width={800}
                   height={fallbackImageHeight}
                   loading="lazy"
-                  className="project-card__img"
+                  className={cx(projectCardImg, "project-card__img")}
                   unoptimized
                 />
               )}
             </div>
-            <div className="project-card__body">
-              <h2 className="project-card__title">{project.title}</h2>
+            <div className={cx(projectCardBody, "project-card__body")}>
+              <h2 className={cx(projectCardTitle, "project-card__title")}>{project.title}</h2>
               {project.type === "video" && project.location && (
-                <p className="project-card__location">{project.location}</p>
+                <p className={cx(projectCardLocation, "project-card__location")}>{project.location}</p>
               )}
             </div>
           </Link>

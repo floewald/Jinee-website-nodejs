@@ -2,10 +2,46 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { css, cx } from "@/styled-system/css";
 import { useSwipe } from "@/hooks/useSwipe";
 import { SLIDESHOW_CYCLE_MS, SLIDESHOW_JITTER_MS } from "@/lib/constants";
 
 import type { SlideshowImage } from "@/lib/gallery-images";
+
+const slideshowRoot = css({
+  position: "relative",
+  width: "100%",
+  aspectRatio: "16 / 9",
+  overflow: "hidden",
+  background: "#f5f5f5",
+});
+
+const slideBase = css({
+  position: "absolute",
+  inset: "0",
+  opacity: 0,
+  transition: "opacity 0.5s ease",
+  background: "transparent",
+  isolation: "isolate",
+});
+
+const slideActive = css({ opacity: 1 });
+
+const blurBg = css({
+  position: "absolute",
+  inset: "-12%",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  filter: "blur(14px)",
+  zIndex: 0,
+});
+
+const blurOverlay = css({
+  position: "absolute",
+  inset: "0",
+  background: "rgba(0, 0, 0, 0.4)",
+  zIndex: 1,
+});
 
 interface CardSlideshowProps {
   images: SlideshowImage[];
@@ -74,22 +110,29 @@ export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
   }
 
   return (
-    <div className="card-slideshow" {...swipeHandlers}>
+    <div className={cx(slideshowRoot, "card-slideshow")} {...swipeHandlers}>
       {images.map((image, i) => {
         const isPortrait = portraitFlags[i];
+        const active = i === idx;
         return (
           <div
             key={image.src}
-            className={`card-slideshow__slide${i === idx ? " card-slideshow__slide--active" : ""}${isPortrait ? " card-slideshow__slide--portrait" : ""}`}
+            className={cx(
+              slideBase,
+              active && slideActive,
+              "card-slideshow__slide",
+              active && "card-slideshow__slide--active",
+              isPortrait && "card-slideshow__slide--portrait",
+            )}
           >
             {isPortrait && (
               <>
                 <div
-                  className="card-slideshow__bg"
+                  className={cx(blurBg, "card-slideshow__bg")}
                   style={{ backgroundImage: `url("${image.src}")` }}
                   aria-hidden="true"
                 />
-                <div className="card-slideshow__bg-overlay" aria-hidden="true" />
+                <div className={cx(blurOverlay, "card-slideshow__bg-overlay")} aria-hidden="true" />
               </>
             )}
             <Image

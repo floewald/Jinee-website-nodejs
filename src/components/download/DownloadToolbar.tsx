@@ -1,6 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { cx } from "@/styled-system/css";
+import { btn } from "@/lib/button-styles";
+import {
+  downloadToolbar,
+  toolbarBtn,
+  selectedCountBadge,
+  toolbarPipe,
+} from "./download-styles";
 
 interface DownloadToolbarProps {
   selectionMode: boolean;
@@ -43,9 +51,9 @@ export default function DownloadToolbar({
   }
 
   return (
-    <div className="download-toolbar">
+    <div className={cx(downloadToolbar, "download-toolbar")}>
       <button
-        className={`download-toggle btn btn--outline${selectionMode ? " is-active" : ""}`}
+        className={cx(toolbarBtn, `download-toggle ${btn({ visual: "outline", active: selectionMode || undefined })}`)}
         aria-pressed={selectionMode}
         onClick={handleToggleSelection}
       >
@@ -55,7 +63,7 @@ export default function DownloadToolbar({
       {selectionMode && (
         <>
           <button
-            className="btn btn--primary download-button"
+            className={cx(toolbarBtn, `${btn({ visual: "primary" })} download-button`)}
             disabled={selectedCount === 0}
             onClick={onDownload}
           >
@@ -66,21 +74,21 @@ export default function DownloadToolbar({
             </svg>
           </button>
 
-          <span className="toolbar-pipe" aria-hidden="true">|</span>
+          <span className={cx(toolbarPipe, "toolbar-pipe")} aria-hidden="true">|</span>
 
-          <span className="selected-count selected-count--badge" aria-live="polite">
+          <span className={cx(selectedCountBadge, "selected-count", "selected-count--badge")} aria-live="polite">
             {selectedCount} selected
           </span>
 
           <button
-            className={`btn btn--outline${allSelected ? " is-active" : ""}`}
+            className={btn({ visual: "outline", active: allSelected || undefined })}
             onClick={handleSelectAll}
           >
             All
           </button>
 
           <button
-            className={`btn btn--outline${clearFlash ? " is-active" : ""}`}
+            className={btn({ visual: "outline", active: clearFlash || undefined })}
             onClick={handleClearSelection}
           >
             Clear

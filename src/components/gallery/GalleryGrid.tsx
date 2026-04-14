@@ -3,7 +3,16 @@
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 import Masonry from "react-masonry-css";
+import { cx } from "@/styled-system/css";
 import type { GalleryImage } from "./Lightbox";
+import {
+  projectGallery,
+  projectGalleryCol,
+  galleryCols,
+  galleryColsItem,
+  galleryItem,
+  galleryImg,
+} from "./gallery-styles";
 
 interface GalleryGridProps {
   images: GalleryImage[];
@@ -68,10 +77,16 @@ export default function GalleryGrid({
 
   if (images.length === 0) return null;
 
+  const inColumns = useColumnsLayout;
+
   const galleryItems = images.map((img, i) => (
     <button
       key={`${img.src}-${i}`}
-      className="gallery-item"
+      className={cx(
+        inColumns ? galleryColsItem : undefined,
+        galleryItem,
+        "gallery-item",
+      )}
       onClick={() => onImageClick(i)}
       aria-label={`Open image: ${img.alt}`}
     >
@@ -81,7 +96,7 @@ export default function GalleryGrid({
         width={800}
         height={0}
         loading="lazy"
-        className="gallery-img"
+        className={cx(galleryImg, "gallery-img")}
         sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw"
         unoptimized
         style={{ height: "auto" }}
@@ -92,7 +107,7 @@ export default function GalleryGrid({
 
   if (useColumnsLayout) {
     return (
-      <div ref={containerRef} className="gallery-cols">
+      <div ref={containerRef} className={cx(galleryCols, "gallery-cols")}>
         {galleryItems}
       </div>
     );
@@ -102,8 +117,8 @@ export default function GalleryGrid({
     <div ref={containerRef}>
       <Masonry
         breakpointCols={BREAKPOINT_COLS}
-        className="project-gallery"
-        columnClassName="project-gallery__col"
+        className={cx(projectGallery, "project-gallery")}
+        columnClassName={cx(projectGalleryCol, "project-gallery__col")}
       >
         {galleryItems}
       </Masonry>

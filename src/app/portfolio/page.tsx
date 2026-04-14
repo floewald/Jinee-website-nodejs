@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import { cx } from "@/styled-system/css";
+import { btn } from "@/lib/button-styles";
 import {
   getPhotographyCards,
   getVideoCards,
@@ -11,6 +13,29 @@ import { MAX_CARDS, SOCIAL_MEDIA_PREVIEW_COLUMNS, SOCIAL_MEDIA_CARD_MODE } from 
 import { getProjectSlideshowImages, type SlideshowImage } from "@/lib/gallery-images";
 import CardSlideshow from "@/components/gallery/CardSlideshow";
 import RevealGrid from "@/components/portfolio/RevealGrid";
+import {
+  sectionTitle,
+  sectionTitleCenter,
+  sectionTitleDivider,
+  sectionCta,
+  projectGrid,
+  projectCard,
+  projectCardThumb,
+  projectCardImg,
+  projectCardBody,
+  projectCardTitle,
+  projectCardLocation,
+  playOverlay,
+  instagramSection,
+  instagramPreviews,
+  instagramPreview,
+  instagramPreviewCard,
+  instagramPreviewThumb,
+  instagramPreviewImg,
+  instagramPreviewBody,
+  instagramPreviewTags,
+} from "@/components/portfolio/featured-styles";
+import { portfolioHub, portfolioSection } from "@/lib/portfolio-styles";
 
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -25,13 +50,13 @@ export default function PortfolioPage() {
     .slice(0, 5);
 
   return (
-    <main className="portfolio-hub">
+    <main className={cx(portfolioHub, "portfolio-hub")}>
       {/* Photography section */}
-      <section className="portfolio-section section-bg-white">
+      <section className={cx(portfolioSection, "portfolio-section", "section-bg-white")}>
         <div className="container">
-          <h2 className="section-title section-title--center">Photography</h2>
-          <hr className="section-title-divider" aria-hidden="true" />
-          <RevealGrid className="project-grid">
+          <h2 className={cx(sectionTitle, sectionTitleCenter, "section-title", "section-title--center")}>Photography</h2>
+          <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
+          <RevealGrid className={cx(projectGrid, "project-grid")}>
             {photographyCards.map((project, cardIndex) => {
               const slideshowImages = getProjectSlideshowImages(project.slug, "photography");
               const previewImages: SlideshowImage[] = slideshowImages.length > 1
@@ -41,9 +66,9 @@ export default function PortfolioPage() {
               <Link
                 key={project.slug}
                 href={projectPath(project)}
-                className="project-card"
+                className={cx(projectCard, "project-card")}
               >
-                <div className="project-card__thumb">
+                <div className={cx(projectCardThumb, "project-card__thumb")}>
                   {previewImages && previewImages.length > 1 ? (
                     <CardSlideshow
                       images={previewImages}
@@ -57,13 +82,13 @@ export default function PortfolioPage() {
                       width={800}
                       height={534}
                       loading="lazy"
-                      className="project-card__img"
+                      className={cx(projectCardImg, "project-card__img")}
                       unoptimized
                     />
                   )}
                 </div>
-                <div className="project-card__body">
-                  <h3 className="project-card__title">
+                <div className={cx(projectCardBody, "project-card__body")}>
+                  <h3 className={cx(projectCardTitle, "project-card__title")}>
                     {project.title}
                   </h3>
                 </div>
@@ -71,8 +96,8 @@ export default function PortfolioPage() {
               );
             })}
           </RevealGrid>
-          <div className="section-cta">
-            <Link href="/portfolio/photography/" className="btn btn--primary">
+          <div className={cx(sectionCta, "section-cta")}>
+            <Link href="/portfolio/photography/" className={btn({ visual: "primary" })}>
               More Photography Projects
             </Link>
           </div>
@@ -80,13 +105,13 @@ export default function PortfolioPage() {
       </section>
 
       {/* Video section */}
-      <section className="portfolio-section section-bg-charcoal">
+      <section className={cx(portfolioSection, "portfolio-section", "section-bg-charcoal")}>
         <div className="container">
-          <h2 className="section-title section-title--center">
+          <h2 className={cx(sectionTitle, sectionTitleCenter, "section-title", "section-title--center")}>
             Videography
           </h2>
-          <hr className="section-title-divider" aria-hidden="true" />
-          <RevealGrid className="project-grid">
+          <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
+          <RevealGrid className={cx(projectGrid, "project-grid")}>
             {videoCards.map((project, cardIndex) => {
               const slideshowImages = getProjectSlideshowImages(project.slug, "video");
               const previewImages: SlideshowImage[] = slideshowImages.length > 1
@@ -96,9 +121,9 @@ export default function PortfolioPage() {
               <Link
                 key={project.slug}
                 href={projectPath(project)}
-                className="project-card"
+                className={cx(projectCard, "project-card")}
               >
-                <div className="project-card__thumb">
+                <div className={cx(projectCardThumb, "project-card__thumb")}>
                   {previewImages.length > 1 ? (
                     <CardSlideshow
                       images={previewImages}
@@ -112,23 +137,23 @@ export default function PortfolioPage() {
                       width={800}
                       height={450}
                       loading="lazy"
-                      className="project-card__img"
+                      className={cx(projectCardImg, "project-card__img")}
                       unoptimized
                     />
                   )}
                 </div>
-                <div className="project-card__body">
-                  <h3 className="project-card__title">{project.title}</h3>
+                <div className={cx(projectCardBody, "project-card__body")}>
+                  <h3 className={cx(projectCardTitle, "project-card__title")}>{project.title}</h3>
                   {project.location && (
-                    <p className="project-card__location">{project.location}</p>
+                    <p className={cx(projectCardLocation, "project-card__location")}>{project.location}</p>
                   )}
                 </div>
               </Link>
               );
             })}
           </RevealGrid>
-          <div className="section-cta">
-            <Link href="/portfolio/video/" className="btn btn--inverted">
+          <div className={cx(sectionCta, "section-cta")}>
+            <Link href="/portfolio/video/" className={btn({ visual: "inverted" })}>
               More Video Projects
             </Link>
           </div>
@@ -136,40 +161,44 @@ export default function PortfolioPage() {
       </section>
 
       {/* Social Media section */}
-      <section className="portfolio-section section-bg-white">
+      <section className={cx(portfolioSection, "portfolio-section", "section-bg-white")}>
         <div className="container">
-          <h2 className="section-title section-title--center">Social Media</h2>
-          <hr className="section-title-divider" aria-hidden="true" />
-          <div className="instagram-section" style={{ "--sm-preview-cols": SOCIAL_MEDIA_PREVIEW_COLUMNS } as React.CSSProperties}>
-            <RevealGrid className="instagram-previews">
+          <h2 className={cx(sectionTitle, sectionTitleCenter, "section-title", "section-title--center")}>Social Media</h2>
+          <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
+          <div className={cx(instagramSection, "instagram-section")} style={{ "--sm-preview-cols": SOCIAL_MEDIA_PREVIEW_COLUMNS } as React.CSSProperties}>
+            <RevealGrid className={cx(instagramPreviews, "instagram-previews")}>
             {socialMediaPreviews.map((project) => {
               const href = project.instagramUrl ?? projectPath(project);
               const isExternal = !!project.instagramUrl;
-              const previewClass = `instagram-preview${SOCIAL_MEDIA_CARD_MODE ? " instagram-preview--card" : ""}`;
               return (
                 <Link
                   key={project.slug}
                   href={href}
-                  className={previewClass}
+                  className={cx(
+                    instagramPreview,
+                    "instagram-preview",
+                    SOCIAL_MEDIA_CARD_MODE && instagramPreviewCard,
+                    SOCIAL_MEDIA_CARD_MODE && "instagram-preview--card",
+                  )}
                   {...(isExternal
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
                 >
-                  <div className="instagram-preview__thumb">
+                  <div className={cx(instagramPreviewThumb, "instagram-preview__thumb")}>
                     <Image
                       src={project.ogImage.replace("https://jineechen.com", "")}
                       alt={project.title}
                       width={400}
                       height={711}
                       loading="lazy"
-                      className="instagram-preview__img"
+                      className={cx(instagramPreviewImg, "instagram-preview__img")}
                       unoptimized
                     />
-                    <span className="play-overlay" aria-hidden="true">▶</span>
+                    <span className={cx(playOverlay, "play-overlay")} aria-hidden="true">▶</span>
                   </div>
                   {SOCIAL_MEDIA_CARD_MODE && project.tags && project.tags.length > 0 && (
-                    <div className="instagram-preview__body">
-                      <p className="instagram-preview__tags">{project.tags.join(" ")}</p>
+                    <div className={cx(instagramPreviewBody, "instagram-preview__body")}>
+                      <p className={cx(instagramPreviewTags, "instagram-preview__tags")}>{project.tags.join(" ")}</p>
                     </div>
                   )}
                 </Link>
@@ -177,8 +206,8 @@ export default function PortfolioPage() {
             })}
           </RevealGrid>
           </div>
-          <div className="section-cta">
-            <Link href="/portfolio/social-media/" className="btn btn--primary">
+          <div className={cx(sectionCta, "section-cta")}>
+            <Link href="/portfolio/social-media/" className={btn({ visual: "primary" })}>
               More Social Media Projects
             </Link>
           </div>

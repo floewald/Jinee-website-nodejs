@@ -1,18 +1,20 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { cx } from "@/styled-system/css";
+import { btn } from "@/lib/button-styles";
+import { portfolioSection, sectionHeadingFull, proseSection } from "@/lib/portfolio-styles";
 
 export const metadata: Metadata = {
   title: "Impressum / Author",
   description: "Author and ownership information for the site. Contact hello@jineechen.com for enquiries.",
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
 };
 
 export default function ImprintPage() {
   return (
-    <main className="portfolio-hub">
-      <section className="portfolio-section section-bg-white">
-        <div className="container">
-        <h1 className="section-heading-full">Impressum / Author</h1>
+    <main className="container">
+      <section className={cx(portfolioSection, proseSection, "portfolio-section")}>
+        <h1 className={cx(sectionHeadingFull, "section-heading-full")}>Impressum / Author</h1>
 
         <p>
           This website is owned and operated by{" "}
@@ -39,10 +41,9 @@ export default function ImprintPage() {
         </p>
 
         <div style={{ marginTop: "2rem", textAlign: "center" }}>
-          <Link href="/" className="btn btn--primary">
+          <Link href="/" className={btn({ visual: "primary" })}>
             Back to Home
           </Link>
-        </div>
         </div>
       </section>
     </main>

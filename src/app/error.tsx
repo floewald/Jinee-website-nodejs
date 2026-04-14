@@ -3,6 +3,8 @@
 // throws an unhandled error at runtime.
 // https://nextjs.org/docs/app/building-your-application/routing/error-handling
 
+import { btn } from "@/lib/button-styles";
+
 export default function GlobalError({
   reset,
 }: {
@@ -13,7 +15,7 @@ export default function GlobalError({
     <main className="container" style={{ padding: "4rem 1rem", textAlign: "center" }}>
       <h1>Something went wrong</h1>
       <p>An unexpected error occurred. Please try again.</p>
-      <button onClick={reset} className="btn">
+      <button onClick={reset} className={btn()}>
         Try again
       </button>
     </main>

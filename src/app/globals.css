@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../styled-system/styles.css";
 
 /* ─── Self-hosted Inter font (GDPR-safe, no Google Fonts CDN) ─────────────── */
 @font-face {
@@ -52,26 +53,32 @@
 }
 
 /* ─── Base reset (mirrors original) ────────────────────────────────────────── */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* Wrapped in @layer so Panda CSS utility classes can override during migration */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-html {
-  font-size: 16px;
-  -webkit-text-size-adjust: 100%;
-  /* scroll-behavior is controlled by SmoothScroll.tsx (src/lib/scroll-config.ts) */
-}
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    /* scroll-behavior is controlled by SmoothScroll.tsx (src/lib/scroll-config.ts) */
+  }
 
-body {
-  background-color: var(--color-site-bg);
-  color: var(--color-site-text);
-  font-family: var(--font-sans);
-  font-weight: 400;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  body {
+    background-color: var(--color-site-bg);
+    color: var(--color-site-text);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Suppress Next.js "width or height modified" CLS warnings — Panda utilities can override */
+  img { height: auto; }
 }
 
 /* ─── Accessibility ─────────────────────────────────────────────────────────── */
@@ -159,16 +166,16 @@ body {
   padding-top: var(--site-hero-current-height);
 }
 
-/* ─── Links ────────────────────────────────────────────────────────────────── */
-a { color: var(--charcoal); text-decoration: underline; }
-a:hover, a:focus { color: var(--charcoal); opacity: 0.9; }
-
-/* ─── Typography ──────────────────────────────────────────────────────────── */
-h1 { font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 600; margin-bottom: 0.5rem; }
-h2 { font-size: clamp(1.2rem, 3.5vw, 1.5rem); margin-bottom: 1rem; }
-h3 { font-size: 1.2rem; }
-p { color: var(--muted-text); max-width: 65ch; }
-section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
+/* ─── Links & Typography (in @layer base so Panda utilities can override) ── */
+@layer base {
+  a { color: var(--charcoal); text-decoration: underline; }
+  a:hover, a:focus { color: var(--charcoal); opacity: 0.9; }
+  h1 { font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 600; margin-bottom: 0.5rem; }
+  h2 { font-size: clamp(1.2rem, 3.5vw, 1.5rem); margin-bottom: 1rem; }
+  h3 { font-size: 1.2rem; }
+  p { color: var(--muted-text); max-width: 65ch; }
+  section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
+}
 
 /* ─── Container ───────────────────────────────────────────────────────────── */
 .container {
@@ -184,283 +191,9 @@ section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   HEADER  (Next.js component uses .site-header; legacy uses .site-hero)
+   HEADER — migrated to Panda CSS (src/components/layout/Header.tsx)
+   NAVIGATION — migrated to Panda CSS (src/components/layout/Navigation.tsx)
    ══════════════════════════════════════════════════════════════════════════════ */
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  min-height: var(--site-hero-current-height);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--bg-color);
-  padding: var(--site-hero-padding-vertical) var(--site-hero-padding-horizontal);
-  z-index: 1300;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  width: 100vw;
-  box-sizing: border-box;
-}
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-}
-.logo-tagline-wrap,
-.logo-stack {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.4rem;
-}
-.logo {
-  max-height: var(--logo-size-fluid);
-  width: auto;   /* both dims auto — suppresses Next.js image warning */
-  height: auto;
-  display: block;
-}
-.tagline {
-  font-size: 1rem;
-  color: var(--muted-text);
-  font-weight: 400;
-  margin: 0;
-  white-space: normal;
-  max-width: 680px;
-}
-.tagline-subtle { opacity: 0.75; }
-.header-right { margin-left: auto; }
-
-/* Make logo + tagline non-selectable / non-draggable */
-.site-header .logo-tagline-wrap > a,
-.site-header .logo-tagline-wrap > a .logo,
-.logo-tagline-wrap .tagline {
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-user-drag: none;
-  cursor: pointer;
-}
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   NAVIGATION
-   ══════════════════════════════════════════════════════════════════════════════ */
-.sticky-nav {
-  position: static;
-  z-index: 1200;
-  background: transparent;
-}
-.main-nav { width: 100%; }
-.main-nav ul {
-  display: flex;
-  gap: 2rem;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-.main-nav a {
-  color: var(--text-color);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1.1rem;
-  padding: .35rem .5rem;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.2s;
-}
-.main-nav a:hover, .main-nav a:focus {
-  border-bottom: 2px solid var(--charcoal);
-}
-
-/* ── Explicit desktop nav: override any reset on ≥801px ──────────────────── */
-@media (min-width: 801px) {
-  .main-nav > ul {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-    justify-content: flex-end;
-    align-items: center;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: static;
-    max-height: none;
-    overflow: visible;
-    opacity: 1;
-    visibility: visible;
-    background: none;
-    box-shadow: none;
-    border: none;
-  }
-}
-
-/* Hamburger button — hidden on desktop */
-.nav-toggle {
-  display: none;
-  background: transparent;
-  border: none;
-  padding: .4rem .6rem;
-  cursor: pointer;
-  align-self: center;
-}
-.nav-toggle:focus { outline: 2px solid rgba(0,0,0,0.12); outline-offset: 2px; }
-.nav-toggle__bars {
-  display: inline-block;
-  width: 22px;
-  height: 2px;
-  background: var(--charcoal);
-  position: relative;
-}
-.nav-toggle__bars::before, .nav-toggle__bars::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  width: 22px;
-  height: 2px;
-  background: var(--charcoal);
-}
-.nav-toggle__bars::before { top: -7px; }
-.nav-toggle__bars::after  { top:  7px; }
-
-/* Portfolio submenu (desktop) */
-.nav-item-portfolio { position: static; }
-.nav-portfolio-toggle::after {
-  content: '';
-  display: none;
-}
-
-@media (min-width: 801px) {
-  .nav-portfolio-toggle { position: relative; }
-  .nav-portfolio-toggle::before {
-    content: "";
-    position: absolute;
-    left: 0; right: 0; top: 100%;
-    height: 30px;
-    background: transparent;
-    pointer-events: auto;
-    z-index: 999;
-  }
-  .nav-submenu {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding: 0.5rem 0;
-    padding-bottom: 14px;
-    margin: 0;
-    position: absolute;
-    top: 100%;
-    right: 11.5rem;
-    left: auto;
-    background: var(--bg-color);
-    border: 1px solid var(--border-color);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 220ms ease, visibility 220ms ease;
-    z-index: 1000;
-    min-width: 180px;
-  }
-  .nav-item-portfolio:hover .nav-submenu {
-    opacity: 1;
-    visibility: visible;
-  }
-  .nav-submenu li a {
-    display: block;
-    padding: 0.2rem 1rem;
-    color: var(--text-color);
-    text-decoration: none;
-    border-bottom: none;
-    white-space: nowrap;
-  }
-  .nav-submenu li a:hover { text-decoration: none; }
-  /* Extra breathing room below the last submenu entry (Video) */
-  .nav-submenu li:first-child a { margin-top: calc(0.7rem + 0.5rem); }
-  .nav-submenu li:last-child a { margin-bottom: calc(0.7rem + 0.5rem); }
-}
-
-/* ── Mobile nav ──────────────────────────────────────────────────────────── */
-@media (max-width: 800px) {
-  .site-header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem;
-    overflow: visible;
-    padding-right: var(--site-hero-toggle-space-right);
-    padding-left: var(--site-hero-padding-horizontal);
-    padding-top: var(--site-hero-mobile-padding-vertical);
-    padding-bottom: var(--site-hero-mobile-padding-vertical);
-    min-height: var(--site-hero-mobile-height);
-  }
-  .header-left, .logo-tagline-wrap { flex-direction: column; align-items: flex-start; gap: .5rem; }
-  .header-right { margin-left: 0; }
-  .site-header .logo { max-height: 28px; width: auto; height: auto; padding-left: 0; }
-  .tagline { font-size: 0.85rem; white-space: normal; }
-
-  .nav-toggle {
-    display: inline-flex !important;
-    position: absolute;
-    right: var(--site-hero-padding-horizontal);
-    top: var(--site-hero-padding-vertical);
-    z-index: 17000;
-  }
-  .main-nav { position: static !important; }
-  .main-nav > ul#primary-menu {
-    position: absolute;
-    right: var(--site-hero-dropdown-right);
-    left: auto;
-    top: 100%;
-    margin-top: 0;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 320ms ease, opacity 220ms ease;
-    background: var(--bg-color);
-    padding: .35rem .6rem;
-    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    z-index: 16001;
-    max-width: var(--mobile-nav-max-width);
-    min-width: 140px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .main-nav > ul#primary-menu.open {
-    max-height: 9999px !important;
-    opacity: 1 !important;
-    padding-bottom: var(--primary-menu-expanded-padding-bottom);
-    overflow: visible !important;
-  }
-  .main-nav > ul#primary-menu > li { width: 100%; }
-  .main-nav > ul#primary-menu > li > a { display: block; padding: .7rem 1rem; }
-
-  /* Submenu inline on mobile */
-  .nav-submenu {
-    position: static !important;
-    display: none !important;
-    flex-direction: column;
-    opacity: 1 !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    margin: 0;
-    width: 100%;
-  }
-  .nav-item-portfolio.open .nav-submenu { display: flex !important; }
-  .nav-submenu li { width: 100%; }
-  .nav-submenu li a { padding: 0.6rem 1rem 0.6rem 2.2rem !important; display: block !important; font-size: 0.95rem; }
-
-  /* Hamburger → X animation */
-  .nav-toggle__bars, .nav-toggle__bars::before, .nav-toggle__bars::after {
-    transition: transform 220ms ease, top 220ms ease, opacity 200ms ease, background 200ms ease;
-  }
-  .nav-toggle[aria-expanded="true"] .nav-toggle__bars { background: transparent; }
-  .nav-toggle[aria-expanded="true"] .nav-toggle__bars::before { transform: rotate(45deg); top: 0; }
-  .nav-toggle[aria-expanded="true"] .nav-toggle__bars::after  { transform: rotate(-45deg); top: 0; }
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    SECTION BACKGROUNDS (full-bleed alternating)
@@ -484,141 +217,33 @@ section, h1, h2, h3 { scroll-margin-top: var(--anchor-offset); }
    Component-level CSS rules (e.g. .about-text h2, .section-title) set explicit
    dark colours that override the inherited #fff from .section-bg-charcoal.
    These context selectors restore legibility without touching component styles. */
-.section-bg-charcoal .section-title,
-.section-bg-charcoal .about-text h2 { color: #fff; }
+.section-bg-charcoal .section-title { color: #fff; }
 .section-bg-charcoal .section-title-divider { border-top-color: rgba(255,255,255,0.2); }
-.section-bg-charcoal .about-text p,
-.section-bg-charcoal .about-chinese-text,
-.section-bg-charcoal .about-chinese-text p { color: rgba(255,255,255,0.88); }
-.section-bg-charcoal a:not(.project-card):not(.btn) { color: #fff; }
-.section-bg-charcoal a:not(.project-card):not(.btn):hover,
-.section-bg-charcoal a:not(.project-card):not(.btn):focus { color: #fff; opacity: 0.8; }
-/* contact-card sits on a white background inside the charcoal section — restore dark link colour */
-.section-bg-charcoal .contact-info .contact-card a { color: var(--charcoal); opacity: 1; }
-.section-bg-charcoal .contact-info .contact-card a:hover,
-.section-bg-charcoal .contact-info .contact-card a:focus { color: var(--charcoal); opacity: 0.7; }
+.section-bg-charcoal a:not(.project-card):not([class*="bg_"]):not([class*="c_"]) { color: #fff; }
+.section-bg-charcoal a:not(.project-card):not([class*="bg_"]):not([class*="c_"]):hover,
+.section-bg-charcoal a:not(.project-card):not([class*="bg_"]):not([class*="c_"]):focus { color: #fff; opacity: 0.8; }
 section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
+/* Context overrides: Panda utilities can't beat unlayered section-bg-* padding,
+   so these are kept here at the same specificity but declared later (wins by source order). */
+.gallery-section { padding-bottom: 0; }
+/* padding-top: 1px stops margin-bottom of the zero-height .sectionDividerLine from
+   collapsing through the section boundary and creating an external gap. */
+.featured-projects { padding-top: 1px; padding-bottom: 1rem; }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   HERO SLIDESHOW (homepage full-width cycling slideshow)
+   HERO SLIDESHOW — migrated to Panda CSS
+   (src/components/sections/HeroSection.tsx, HeroSlideshow.tsx)
    ══════════════════════════════════════════════════════════════════════════════ */
-.hero-section {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  padding: 0;
-  margin: 0;
-  height: var(--hero-height);
-}
-.hero-slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.9s ease-in-out;
-}
-.hero-slide--active {
-  opacity: 1;
-}
-.hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Hero blur-background mode (for portrait/mixed images) */
-.hero-slide__bg-blur {
-  position: absolute;
-  inset: -8%;
-  background-size: cover;
-  background-position: center;
-  filter: blur(28px);
-  opacity: 0.85;
-  z-index: 0;
-}
-.hero-slide--white-bg {
-  background-color: #ffffff;
-}
-.hero-img--contain {
-  object-fit: contain;
-  position: relative;
-  z-index: 1;
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   GALLERY COLLAGE (homepage)
+   GALLERY COLLAGE — migrated to Panda CSS (src/components/sections/GallerySection.tsx)
    ══════════════════════════════════════════════════════════════════════════════ */
-.collage-hv.collage-3x3 {
-  width: 100%;
-  overflow: hidden;
-  padding: 0 clamp(12px, 1.5vw, 24px);
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   PROJECT GALLERY — masonry layout (react-masonry-css)
-   react-masonry-css renders:
-     .project-gallery           → flex container (replaces the old CSS grid)
-     .project-gallery__col      → each column div
+   PROJECT GALLERY — base styles migrated to Panda CSS
+   (src/components/gallery/gallery-styles.ts)
+   Hover + scroll-reveal animations kept here (target BEM classes via cx()).
    ══════════════════════════════════════════════════════════════════════════════ */
-.project-gallery {
-  display: flex;
-  gap: 0.9rem;
-  margin-top: var(--gallery-content-gap);
-  width: 100%;
-}
-.project-gallery__col {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-  flex: 1;
-  min-width: 0;
-}
-
-/* CSS columns masonry (homepage collage)
-   Keep balanced fill while preserving aligned top edge across columns. */
-.gallery-cols {
-  columns: 3;
-  column-gap: 0.9rem;
-  column-fill: balance;
-  margin-top: var(--gallery-content-gap);
-}
-.gallery-cols .gallery-item {
-  break-inside: avoid;
-  vertical-align: top;
-  margin-bottom: 0.9rem;
-  display: inline-block;
-  width: 100%;
-}
-@media (max-width: 900px) { .gallery-cols { columns: 2; } }
-@media (max-width: 480px) { .gallery-cols { columns: 1; } }
-.gallery-item {
-  display: block;
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  overflow: hidden;
-  border-radius: var(--radius-md);
-  width: 100%;
-  will-change: transform; /* Force compositing layer so border-radius clips scaled children */
-}
-.gallery-item__trigger {
-  display: block;
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  overflow: hidden;
-  border-radius: var(--radius-md);
-  width: 100%;
-}
-.gallery-img {
-  width: 100%;
-  height: auto;      /* natural aspect ratio — no fixed height */
-  display: block;
-  border-radius: 0;
-  transition: transform 0.35s ease;
-}
 
 .gallery-cols .gallery-item:hover .gallery-img,
 .gallery-cols .gallery-item:focus-visible .gallery-img {
@@ -626,9 +251,10 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   FEATURED SECTION (homepage "Videography")
+   FEATURED SECTION — base styles migrated to Panda CSS
+   (src/components/portfolio/featured-styles.ts)
+   Scroll-reveal, hover transforms, and context-dependent selectors remain here.
    ══════════════════════════════════════════════════════════════════════════════ */
-.gallery-section { padding-bottom: 0; }
 
 /* ─── Scroll-reveal animation ───────────────────────────────────────────────
    Items start hidden only once JS has set data-reveal-ready on the container.
@@ -643,7 +269,6 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   opacity: 1;
   transform: translateY(0);
 }
-/* In CSS-columns collage, avoid per-item Y offset so all columns start flush. */
 [data-reveal-ready].gallery-cols .gallery-item {
   transform: none;
   transition: opacity 0.45s ease;
@@ -651,8 +276,6 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 [data-reveal-ready].gallery-cols .gallery-item.reveal--visible {
   transform: none;
 }
-
-/* Same animation for project cards and instagram previews */
 [data-reveal-ready] .project-card {
   opacity: 0;
   transform: translateY(22px);
@@ -671,903 +294,49 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
   opacity: 1;
   transform: translateY(0);
 }
-.featured-projects { padding-top: 0; padding-bottom: 1rem; }
-.section-title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
 
-/* Full-width rule above section heading
-   .section-divider-line must be a direct child of a full-bleed section
-   (i.e. inside .section-bg-white or .section-bg-charcoal which are width:100vw) */
-.section-divider-line {
-  /* ── To toggle the separator on/off: comment out the border-top line below ── */
-  border-top: none; /* 1px solid #d1d5db;  */
-  width: 100%;
-  margin-bottom: 1.75rem;
-}
-.section-title--center {
-  text-align: center;
-  padding-top: 0.5rem;
-}
-/* Content-width separator rendered below section headings */
-.section-title-divider {
-  border: none;
-  border-top: 1px solid #d1d5db;
-  margin: 0 0 1.5rem;
-  width: 100%;
-}
-/* Tighter symmetric spacing when dividers separate inline metadata in project pages */
-.project-page .section-title-divider {
-  margin: 0.2rem 0;
-}
-
-/* Play overlay on Instagram/video preview thumbnails */
-.play-overlay {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  border-radius: 999px;
-  padding: .55rem .85rem;
-  font-size: 1.3rem;
-  line-height: 1;
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* project-cards = project-grid (3-col) */
-.project-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-top: 1.25rem;
-  align-items: stretch;
-}
-.project-card {
-  display: flex;
-  flex-direction: column;
-  border-radius: 8px;
-  overflow: hidden;
-  text-decoration: none;
-  color: var(--charcoal);
-  background: #fff;
-  border: 1px solid var(--border-color);
-  height: 100%;
-  transition: box-shadow .18s ease;
-}
+/* ─── Context-dependent selectors (globals only) ────────────────────────── */
 a.project-card,
 a.project-card:hover,
 a.project-card:focus { color: var(--charcoal); text-decoration: none; }
 .section-bg-charcoal .project-card { border-color: #333; }
-.project-card:hover {
-  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-}
-.project-card__thumb {
-  overflow: hidden;
-}
-.project-card__thumb img,
-.project-card__thumb .project-card__img {
-  transition: transform 0.35s ease;
-}
+
+/* Hover transforms for project cards */
 .project-card:hover .project-card__thumb img,
 .project-card:hover .project-card__thumb .project-card__img {
   transform: scale(1.05);
 }
-/* Scale images inside CardSlideshow on parent hover */
 .project-card:hover .card-slideshow__slide .project-card__img {
   transform: scale(1.1);
 }
-.project-card__img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  display: block;
-}
-.project-card__body {
-  margin-top: auto;
-  padding: .8rem;
-  min-height: 56px;
-}
-.project-card__title {
-  margin: 0;
-  color: var(--charcoal);
-  font-size: 1.05rem;
-  line-height: 1.2;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 0.3rem;
-}
-/* Role + location split used in FeaturedSection card bodies */
-.project-card__role {
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.2;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 0.3rem;
-}
-.project-card__location {
-  margin: 0.3rem 0 0;
-  font-size: 0.9rem;
-  line-height: 1.3;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-/* Also style legacy .project-grid (used on portfolio category pages) */
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  border-radius: var(--radius-md);
-  align-items: stretch;
-}
-.project-grid .project-card img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  display: block;
-}
-.project-card__meta {
-  margin-top: auto;
-  padding: .8rem;
-  min-height: 56px;
-}
-.project-card__meta h3 {
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.2;
+
+/* Tighter divider spacing in project detail pages */
+.project-page .section-title-divider {
+  margin: 0.2rem 0;
 }
 
-@media (max-width: 1000px) { .project-cards, .project-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 700px) { .project-cards, .project-grid { grid-template-columns: 1fr; } }
+/* Instagram preview hover */
+.instagram-preview:hover .instagram-preview__thumb img { transform: scale(1.05); }
 
-/* Instagram previews */
-.instagram-section {
-  container-type: inline-size;
-}
+/* Adjacent social media sections get spacing */
 .social-media-section + .social-media-section {
   margin-top: 3rem;
 }
-/* Mobile: horizontal scroll, 2.5 cards visible to hint at more content */
-.instagram-previews {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: calc(100cqi / 2.5);
-  gap: 20px;
-  margin-top: 1.25rem;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.instagram-previews::-webkit-scrollbar { display: none; }
-/* Tablet / desktop: wrap into rows; --sm-preview-cols cards per row */
-@container (min-width: 660px) {
-  .instagram-previews {
-    grid-auto-flow: row;
-    grid-template-columns: repeat(var(--sm-preview-cols, 5), 1fr);
-    grid-auto-columns: unset;
-    overflow-x: visible;
-  }
-}
-.instagram-preview {
-  display: block;
-  position: relative;
-  border-radius: 8px;
-  background: transparent;
-  border: none;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-}
-/* Thumbnail wrapper — clips the image and play overlay */
-.instagram-preview__thumb {
-  position: relative;
-  overflow: hidden;
-  border-radius: inherit;
-  will-change: transform; /* Force compositing layer so border-radius clips scaled image */
-}
-.instagram-preview__img,
-.instagram-preview img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 9 / 16;
-  object-fit: cover;
-  transition: transform 0.35s ease;
-}
-.instagram-preview:hover .instagram-preview__thumb img { transform: scale(1.05); }
-/* Card mode: flex column + overflow:hidden matches project-card boundaries */
-.instagram-preview--card {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: #fff;
-  border: 1px solid var(--border-color);
-  transition: box-shadow .18s ease;
-}
-.instagram-preview--card:hover {
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-}
-/* Card's overflow:hidden clips the top corners; thumb needs no radius of its own */
-.instagram-preview--card .instagram-preview__thumb {
-  border-radius: 0;
-}
-.instagram-preview__body {
-  margin-top: auto;
-  padding: 0.4rem 0.5rem 1rem;
-}
-.instagram-preview__tags {
-  margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: var(--charcoal);
-  opacity: 0.9;
-  word-break: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 0.3rem;
-}
-
-/* Section CTA */
-.section-cta {
-  text-align: center;
-  margin-top: 2rem;
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   BUTTONS
+   DOWNLOAD TOOLBAR + MODAL — base styles migrated to Panda CSS
+   (src/components/download/download-styles.ts)
+   State-dependent :has() and context selectors remain here.
    ══════════════════════════════════════════════════════════════════════════════ */
-.btn {
-  padding: .6rem .95rem;
-  border-radius: 6px;
-  cursor: pointer;
-  align-self: flex-start;
-  border: 1px solid transparent;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  font-size: 0.95rem;
-  line-height: 1.4;
-  text-decoration: none;
-  display: inline-block;
-}
-.btn:hover { opacity: .95; }
-a.btn.btn--primary,
-a.btn.btn--primary:hover,
-a.btn.btn--primary:focus { background: #1f1f1f; color: #fff; opacity: 1; }
-a.btn.btn--primary:hover { opacity: .95; }
-a.btn.btn--inverted,
-a.btn.btn--inverted:hover,
-a.btn.btn--inverted:focus { background: #fff; color: var(--charcoal); border: 1px solid var(--border-color); opacity: 1; }
-a.btn.btn--inverted:hover { opacity: .95; }
-a.btn.btn--outline,
-a.btn.btn--outline:hover,
-a.btn.btn--outline:focus { background: transparent; color: var(--charcoal); border: 1px solid var(--charcoal); opacity: 1; }
-a.btn.btn--outline:hover { opacity: .95; }
-a.btn.btn--ghost,
-a.btn.btn--ghost:hover,
-a.btn.btn--ghost:focus { background: transparent; color: var(--charcoal); border: none; opacity: 1; }
-/* Non-link buttons (button elements) */
-button.btn.btn--primary { background: #1f1f1f; color: #fff; transition: background 0.15s; }
-button.btn.btn--primary:hover,
-button.btn.btn--primary:focus { background: #333; color: #fff; opacity: 1; }
-button.btn.btn--inverted { background: #fff; color: var(--charcoal); border: 1px solid var(--border-color); transition: background 0.15s; }
-button.btn.btn--inverted:hover,
-button.btn.btn--inverted:focus { background: #f5f5f5; color: var(--charcoal); border: 1px solid var(--border-color); opacity: 1; }
-button.btn.btn--outline { background: transparent; color: var(--charcoal); border: 1px solid var(--border-color); transition: background 0.15s, color 0.15s, border-color 0.15s; }
-button.btn.btn--outline:focus { background: transparent; color: var(--charcoal); border: 1px solid var(--border-color); opacity: 1; }
-button.btn.btn--outline:hover,
-button.btn.btn--outline.is-active { background: var(--charcoal); color: #fff; border-color: var(--charcoal); opacity: 1; }
-button.btn.btn--outline.is-active:hover { background: #333; }
-.btn--large { padding: .75rem 1.2rem; font-size: 1rem; }
 
-/* ══════════════════════════════════════════════════════════════════════════════
-   ABOUT SECTION
-   ══════════════════════════════════════════════════════════════════════════════ */
-.about-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2.5rem;
-  align-items: flex-start;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-.about-image {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-.about-image img, .avatar {
-  display: block;
-  /* Height-driven sizing: let width follow the image's natural aspect ratio */
-  width: auto;
-  height: clamp(480px, 50vh, 480px);
-  max-width: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-}
-/* Visible white spacer between About (charcoal) and Contact (charcoal) sections */
-.section-spacer-white {
-  background: #fff;
-  height: 3rem;
-  width: 100%;
-  display: block;
-}
-
-.about-text { flex: 1 1 350px; }
-.about-text p {
-  color: var(--text-color);
-  font-size: 1rem;
-  line-height: 1.6;
-  padding-bottom: 12px;
-  max-width: none;
-}
-.about-text h2 {
-  font-size: clamp(1.25rem, 2.5vw, 2rem);
-  border-bottom: none;
-  padding-bottom: 0;
-  margin-bottom: 1.2em;
-  color: var(--charcoal);
-}
-.about-chinese-text {
-  margin-top: 2rem;
-  font-size: 1rem;
-  color: var(--text-color);
-}
-.about-chinese-text p { color: var(--text-color); }
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   CONTACT SECTION
-   ══════════════════════════════════════════════════════════════════════════════ */
-.contact-grid {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 2rem;
-  align-items: stretch;
-  margin-top: 1rem;
-}
-.contact-info .contact-card {
-  background: #fff;
-  border: 1px solid var(--border-color);
-  padding: 1.2rem;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  height: 100%;
-}
-.contact-card p { color: var(--charcoal); max-width: none; display: flex; align-items: center; gap: 0.5rem; }
-.contact-card a { color: var(--charcoal); }
-.contact-photo {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: .9rem;
-  max-height: 320px;
-}
-.contact-info .icon {
-  width: 18px;
-  height: 18px;
-  vertical-align: middle;
-  margin-right: 6px;
-  display: inline-block;
-}
-
-@media (max-width: 900px) {
-  .contact-grid { grid-template-columns: 1fr; }
-  .contact-photo { max-height: 220px; }
-}
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   CONTACT FORM
-   ══════════════════════════════════════════════════════════════════════════════ */
-.contact-form {
-  display: flex;
-}
-.contact-form form,
-form.contact-form {
-  background: #fff;
-  border: 1px solid var(--border-color);
-  padding: .9rem;
-  border-radius: 8px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-.form-row {
-  display: flex;
-  gap: 0.8rem;
-}
-@media (max-width: 600px) {
-  .form-row { flex-direction: column; }
-}
-.form-group {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-.form-group label {
-  font-size: .95rem;
-  margin-bottom: .25rem;
-  color: var(--charcoal);
-}
-.form-group--checkbox {
-  flex-direction: row;
-  align-items: center;
-  gap: .5rem;
-}
-.form-group--checkbox label { margin-bottom: 0; }
-input[type="text"], input[type="email"], input[type="tel"], textarea {
-  padding: .45rem .6rem;
-  border: 1px solid #e6e6e6;
-  border-radius: 6px;
-  font-size: 1rem; /* ≥16px prevents iOS Safari auto-zoom on focus */
-  width: 100%;
-  font-family: inherit;
-  line-height: 1.5;
-  color: var(--charcoal); /* prevent inheriting white text from dark section backgrounds */
-  background: #fff;
-}
-textarea { resize: vertical; max-height: 160px; }
-input::placeholder, textarea::placeholder {
-  color: #9ca3af;
-  opacity: 1; /* Firefox shows placeholders at 0.54 opacity by default */
-}
-.form-success {
-  color: #2e7d32;
-  font-size: 0.95rem;
-  padding: .5rem 0;
-}
-.form-error {
-  color: #c62828;
-  font-size: 0.95rem;
-  padding: .5rem 0;
-}
-.send-button {
-  background: var(--charcoal);
-  color: #fff;
-  border: none;
-}
-
-/* Honeypot — hidden from real users */
-.hp {
-  position: absolute;
-  left: -9999px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   FOOTER
-   ══════════════════════════════════════════════════════════════════════════════ */
-.site-footer {
-  border-top: 1px solid var(--border-color);
-  margin-top: 0;
-  font-size: 0.95rem;
-  color: var(--muted-text);
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 2rem;
-}
-.site-footer__col { flex: 1 1 0; }
-.site-footer__copyright { margin: 0; color: var(--muted-text); }
-.site-footer__contact { margin: 0; color: var(--muted-text); }
-.site-footer__contact a { color: var(--muted-text); }
-.site-footer__links {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-  align-items: center;
-}
-.site-footer__link {
-  color: var(--muted-text);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  padding-bottom: 0.1rem;
-}
-.site-footer__link:hover { color: var(--charcoal); border-bottom-color: var(--border-color); }
-
-@media (max-width: 800px) {
-  .site-footer { flex-direction: column; align-items: flex-start; padding-left: 1rem; padding-right: 1rem; gap: .6rem; }
-  .site-footer__links { justify-content: flex-start; }
-}
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   LIGHTBOX
-   ══════════════════════════════════════════════════════════════════════════════ */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-.lightbox__backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-}
-.lightbox__content {
-  position: relative;
-  max-width: calc(100vw - 80px);
-  max-height: calc(100vh - 100px);
-  width: min(1100px, 90vw);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.lightbox__frame {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 0;
-  border-radius: 10px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
-  overflow: hidden;
-  aspect-ratio: var(--lb-ratio, 3 / 2);
-  max-height: calc(100vh - 120px);
-  width: 100%; /* fill the lightbox__content width; aspect-ratio drives height */
-  max-width: 100%;
-  /* Frosted-glass background visible beneath portrait images */
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: rgba(0,0,0,0.3);
-}
-.lightbox__img-wrap {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-/* Blurred background for portrait (tall) images in lightbox */
-.lightbox__portrait-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  filter: blur(16px);
-  transform: scale(1.12);
-  z-index: 0;
-  border-radius: inherit;
-}
-.lightbox__img {
-  object-fit: contain;
-  border-radius: 8px;
-}
-.lightbox__btn {
-  position: absolute;
-  background: rgba(0,0,0,0.7);
-  color: #fff;
-  border: none;
-  padding: .5rem .75rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  line-height: 1;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-  z-index: 2;
-  cursor: pointer;
-}
-.lightbox__close { position: absolute; top: 8px; right: 8px; }
-.lightbox__prev { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); }
-.lightbox__next { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); }
-/* .lightbox__counter removed — counter is no longer rendered */
-@media (max-width: 800px) {
-  .lightbox__content { max-width: calc(100vw - 40px); max-height: calc(100vh - 60px); }
-}
-@media (max-width: 600px) {
-  .lightbox__btn { padding: .7rem .9rem; font-size: 1.25rem; min-width: 44px; min-height: 44px; }
-}
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   CARD SLIDESHOW (auto-cycling preview on project index cards)
-   ══════════════════════════════════════════════════════════════════════════════ */
-.card-slideshow {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background: #f5f5f5;  /* light fallback visible before first image loads */
-}
-.card-slideshow__slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  background: transparent;
-  isolation: isolate;
-}
-.card-slideshow__slide--active {
-  opacity: 1;
-}
-/* Portrait images inside card slide: blurred background fills the frame */
-.card-slideshow__bg {
-  position: absolute;
-  inset: -12%;       /* extends beyond frame so blur doesn't show hard edges */
-  background-size: cover;
-  background-position: center;
-  filter: blur(14px);
-  z-index: 0;
-}
-/* Semi-transparent overlay on top of the blur to soften/dim it */
-.card-slideshow__bg-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1;
-}
-/* Portrait image sits above blur bg and overlay (z-index set inline in JSX) */
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   SLIDESHOW
-   ══════════════════════════════════════════════════════════════════════════════ */
-.slideshow {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-.slideshow__track {
-  display: flex;
-  width: 100%;
-}
-.slideshow__slide {
-  flex: 0 0 100%;
-  min-width: 100%;
-}
-.slideshow__img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  aspect-ratio: 16 / 9;
-}
-.slideshow__btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  border: none;
-  padding: 8px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  z-index: 2;
-}
-.slideshow__prev { left: 8px; }
-.slideshow__next { right: 8px; }
-.slideshow__dots {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 12px;
-  display: flex;
-  gap: 6px;
-  z-index: 3;
-}
-.slideshow__dot {
-  width: 10px; height: 10px; border-radius: 50%; border: none;
-  background: rgba(255,255,255,0.35); cursor: pointer; padding: 0;
-}
-.slideshow__dot--active { background: #fff; }
-
-@media (max-width: 600px) {
-  .slideshow__btn { padding: 10px 12px; font-size: 1.1rem; }
-}
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   VIDEO PLAYER
-   ══════════════════════════════════════════════════════════════════════════════ */
-.video-player {
-  margin-top: 1rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: auto;
-  column-gap: 1.5rem;
-  row-gap: 0.75rem;
-}
-/* Each item spans 2 row tracks (title + embed); subgrid aligns titles per visual row */
-.video-player__item {
-  display: grid;
-  grid-row: span 2;
-  grid-template-rows: subgrid;
-}
-.video-player__title { font-size: 1.05rem; font-weight: 700; align-self: start; }
-/* Responsive video grid: 3 → 2 → 1 columns */
-@media (max-width: 900px) {
-  .video-player { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 540px) {
-  .video-player { grid-template-columns: 1fr; }
-}
-.video-embed-wrap { margin-bottom: 0.75rem; }
-.video-embed {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  border: none;
-}
-.video-embed iframe {
-  position: absolute;
-  left: 0; top: 0; width: 100%; height: 100%;
-}
-.video-embed--placeholder {
-  background: #f4f4f4;
-}
-
-/* Non-embeddable video: clickable image preview */
-.video-embed-link {
-  display: block;
-  position: relative;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  text-decoration: none;
-  background: #111;
-}
-.video-embed-link__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: opacity 0.2s;
-}
-.video-embed-link:hover .video-embed-link__img {
-  opacity: 0.8;
-}
-.video-embed-link__label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  text-align: center;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-  letter-spacing: 0.03em;
-}
-/* When the iframe IS the .video-embed (Next.js VideoPlayer inlines it) */
-iframe.video-embed {
-  position: relative;
-  padding-bottom: 0;
-  aspect-ratio: 16 / 9;
-  height: auto;
-}
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   DOWNLOAD TOOLBAR + MODAL
-   ══════════════════════════════════════════════════════════════════════════════ */
-.download-toolbar {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: .75rem;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding: .5rem 0;
-  overflow-x: auto;
-}
-@media (max-width: 600px) {
-  .download-toolbar {
-    flex-wrap: wrap;
-    overflow-x: visible;
-  }
-}
-.download-toolbar .btn {
-  align-self: center;
-  white-space: nowrap;
-  padding: .35rem .7rem;
-  line-height: 1.4;
-  display: inline-flex;
-  align-items: center;
-}
-.selected-count--badge {
-  background: #f0f0f0;
-  border-radius: 999px;
-  padding: .35rem .7rem;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: var(--charcoal);
-  white-space: nowrap;
-}
-button.download-toggle.is-active,
-button.download-toggle.is-active:hover,
-button.download-toggle.is-active:focus { background: var(--charcoal); color: #fff; border-color: var(--charcoal); }
-button.download-toggle.is-active:hover { background: #333; }
-.toolbar-divider {
-  width: 1px;
-  align-self: stretch;
-  background: #d0d0d0;
-  flex-shrink: 0;
-}
-.toolbar-pipe {
-  align-self: center;
-  color: #d0d0d0;
-  font-size: 1.1rem;
-  line-height: 1;
-  user-select: none;
-}
-@media (max-width: 600px) {
-  .toolbar-pipe { display: none; }
-}
-
-/* Selection mode checkbox overlay */
+/* Selection mode contextual cursors */
 .selection-mode .gallery-item { position: relative; cursor: pointer; }
 .selection-mode .gallery-item__trigger { cursor: pointer; }
-.gallery-checkbox {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  z-index: 2;
-  width: 22px;
-  height: 22px;
-  display: block;
-  opacity: 0.6;
-}
-/* Hide native input; use label ::before/::after for custom styling */
-.inline-select {
-  position: absolute;
-  opacity: 0;
-  width: 22px;
-  height: 22px;
-  margin: 0;
-  cursor: pointer;
-  z-index: 1;
-}
-.gallery-checkbox::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.45);
-  border: 1.5px solid rgba(255, 255, 255, 0.7);
-  border-radius: 7px;
-  box-sizing: border-box;
-  backdrop-filter: blur(2px);
-  transition: background 0.15s, border-color 0.15s;
-}
+
+/* Checkbox checked / focus-visible states (CSS :has() — not expressible in Panda) */
 .gallery-checkbox:has(.inline-select:checked)::before {
   background: rgba(255, 255, 255, 0.7);
   border-color: #999;
-}
-.gallery-checkbox-icon {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.15s;
 }
 .gallery-checkbox:has(.inline-select:checked) .gallery-checkbox-icon {
   opacity: 1;
@@ -1581,300 +350,9 @@ button.download-toggle.is-active:hover { background: #333; }
   outline-offset: 2px;
 }
 
-/* Download modal */
-.download-modal {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
-}
-.download-modal__backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-}
-.download-modal__dialog {
-  position: relative;
-  background: #fff;
-  border-radius: 12px;
-  padding: 0;
-  max-width: 598px;
-  width: 90%;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.25);
-  z-index: 1;
-}
-.download-modal__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid var(--border-color);
-}
-.download-modal__title { font-size: 1.2rem; font-weight: 700; margin: 0; }
-.download-modal__close {
-  background: #1f1f1f;
-  border: none;
-  color: #fff;
-  border-radius: 6px;
-  width: 26px;
-  height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-.download-modal__body {
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.download-modal__body .btn--primary {
-  width: calc(100% - 0px);
-  align-self: stretch;
-  text-align: center;
-  justify-content: center;
-}
-.download-modal__info { font-size: 0.95rem; color: #333; max-width: none; line-height: 1.6; }
-.download-modal__notice--error { color: #c62828; font-size: 0.9rem; }
-.download-modal__password-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-.download-modal__input {
-  flex: 1;
-  width: 100%;
-  padding: .75rem 3rem .75rem .875rem;
-  border: 1px solid #d0d0d0;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-family: inherit;
-  outline: none;
-}
-.download-modal__input:focus {
-  border-color: #888;
-  box-shadow: 0 0 0 2px rgba(0,0,0,0.08);
-}
-.download-modal__password-toggle {
-  position: absolute;
-  right: .75rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #888;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-}
-.download-modal__password-toggle:hover { color: #333; }
-.download-modal__password-toggle svg { display: block; }
-
 /* ══════════════════════════════════════════════════════════════════════════════
-   COOKIE CONSENT BANNER
+   COOKIE CONSENT BANNER — migrated to Panda CSS (src/components/ui/CookieBanner.tsx)
    ══════════════════════════════════════════════════════════════════════════════ */
-.cookie-consent-banner {
-  position: fixed;
-  left: 1rem;
-  right: 1rem;
-  bottom: 1rem;
-  z-index: 12000;
-  background: rgba(31,31,31,0.95);
-  color: #fff;
-  padding: 14px 16px;
-  border-radius: 10px;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  max-width: calc(100% - 40px);
-  box-sizing: border-box;
-}
-.cookie-consent__message {
-  flex: 1 1 60%;
-  color: #fff;
-  font-size: 0.95rem;
-  line-height: 1.3;
-}
-.cookie-consent__message a { color: #fff; }
-.cookie-consent__actions { display: flex; gap: 10px; align-items: center; }
-.cookie-consent__btn {
-  cursor: pointer;
-  border: none;
-  padding: 10px 14px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.98rem;
-}
-.cookie-consent__btn--accept { background: #fff; color: var(--charcoal); }
-.cookie-consent__btn--reject {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.4);
-}
-@media (max-width: 700px) {
-  .cookie-consent-banner { flex-direction: column; align-items: stretch; gap: 10px; left: 12px; right: 12px; }
-  .cookie-consent__message { flex: unset; }
-  .cookie-consent__actions { justify-content: flex-end; }
-}
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   PORTFOLIO SUBPAGES (back links, descriptions, category pages)
-   ══════════════════════════════════════════════════════════════════════════════ */
-.back-to-projects {
-  display: inline-block;
-  margin-top: 30px;
-  margin-left: 0;
-}
-.portfolio-section { padding-top: 0; }
-.project-description {
-  max-width: 100%;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-  line-height: 1.6;
-  color: var(--charcoal);
-}
-.subpage-offset { padding-top: 0; }
-
-/* Portfolio hub + category index pages */
-.portfolio-hub,
-.portfolio-category,
-.project-page {
-  padding-top: 2rem;
-  padding-bottom: 3rem;
-}
-.page-title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  padding-top: 0.5rem;
-  text-align: center;
-}
-.page-subtitle {
-  color: var(--muted-text);
-  margin-bottom: 2rem;
-}
-.project-heading {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-.project-roles {
-  font-size: 1rem;
-  color: var(--muted-text);
-  margin: 0.4rem 0 0.5rem;
-}
-.project-location {
-  font-size: 0.95rem;
-  color: var(--muted-text);
-  margin: 0.5rem 0 1.25rem;
-}
-.gallery-empty {
-  color: var(--muted-text);
-  font-style: italic;
-  margin-top: 2rem;
-}
-.project-custom-content {
-  margin-top: 1.5rem;
-  line-height: 1.6;
-}
-.project-custom-content img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-/* Portfolio hub category cards */
-.portfolio-categories {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  margin-top: 1.5rem;
-}
-.category-card {
-  display: block;
-  padding: 1.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  text-decoration: none;
-  color: var(--charcoal);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-.category-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-}
-.category-card__title {
-  font-size: 1.2rem;
-  margin-bottom: 0.4rem;
-}
-.category-card__desc {
-  color: var(--muted-text);
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-@media (max-width: 700px) {
-  .portfolio-categories { grid-template-columns: 1fr; }
-}
-
-/* Static pages (imprint, privacy) */
-.section-heading-full {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 1.2rem;
-}
-.section--compact { padding-top: 1.5rem; padding-bottom: 1.5rem; }
-.last-updated {
-  color: var(--muted-text);
-  font-size: 0.9rem;
-  font-style: italic;
-  margin-bottom: 1rem;
-}
-.services-list {
-  list-style: disc;
-  padding-left: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--muted-text);
-}
-.services-list li {
-  margin-bottom: 0.4rem;
-  line-height: 1.5;
-}
-
-/* Skip-link (visible on focus) */
-.skip-link:focus {
-  position: fixed;
-  top: 8px;
-  left: 8px;
-  z-index: 20000;
-  width: auto;
-  height: auto;
-  padding: 0.5rem 1rem;
-  clip: unset;
-  margin: 0;
-  overflow: visible;
-  white-space: normal;
-  background: var(--charcoal);
-  color: #fff;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  text-decoration: none;
-}
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   IMAGE aspect-ratio fix (suppresses Next.js "width or height modified" warnings)
-   ══════════════════════════════════════════════════════════════════════════════ */
-img {
-  height: auto;
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    ACCESSIBILITY — reduced motion
@@ -1889,14 +367,8 @@ img {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   MOBILE SYNC
+   MOBILE SYNC — gallery toggle migrated to Panda (src/lib/portfolio-styles.ts)
    ══════════════════════════════════════════════════════════════════════════════ */
-.gallery-desktop-only { display: block; }
-.gallery-mobile-only  { display: none; }
-@media (max-width: 800px) {
-  .gallery-desktop-only { display: none; }
-  .gallery-mobile-only  { display: block; }
-}
 
 @media (max-width: 800px) {
   body { padding-top: var(--site-hero-mobile-height); }

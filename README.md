@@ -10,8 +10,9 @@ Personal portfolio website for **Jinee Chen**, a female photographer and videogr
 |-------|-----------|
 | Framework | [Next.js 16](https://nextjs.org/) — App Router |
 | Language | TypeScript |
-| Styling | [Tailwind CSS v4](https://tailwindcss.com/) |
-| CMS (optional) | [TinaCMS](https://tina.io/) — file-based visual editing, Phase 7 |
+| Styling | [Panda CSS v1.9.1](https://panda-css.com/) — atomic `css()`/`cx()` utilities + global `globals.css` |
+| Base reset | Tailwind CSS v4 (PostCSS — base reset only; no utility classes in HTML) |
+| CMS | Not applicable (TinaCMS deferred indefinitely) |
 | Backend | PHP 7+ (contact form, download system) — served from `backend/` |
 | Email | PHPMailer via SMTP |
 | Testing | Jest + React Testing Library + Playwright |
