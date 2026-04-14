@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-04-14T22:55:04.557Z",
+  "pages": {
+    "/": {
+      "score": 59,
+      "metrics": {
+        "FCP": 1228,
+        "LCP": 29826,
+        "TBT": 40,
+        "CLS": 0.3147,
+        "SI": 2961
+      }
+    },
+    "/portfolio/": {
+      "score": 66,
+      "metrics": {
+        "FCP": 1215,
+        "LCP": 48923,
+        "TBT": 19,
+        "CLS": 0,
+        "SI": 11019
+      }
+    },
+    "/portfolio/photography/": {
+      "score": 65,
+      "metrics": {
+        "FCP": 756,
+        "LCP": 28829,
+        "TBT": 19,
+        "CLS": 0,
+        "SI": 12099
+      }
+    }
+  }
+}

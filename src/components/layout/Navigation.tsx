@@ -229,6 +229,13 @@ const navSubmenu = css({
       padding: "0.6rem 1rem 0.6rem 2.2rem !important",
       display: "block !important",
       fontSize: "0.95rem",
+      textDecoration: "none",
+      borderBottom: "2px solid transparent",
+      transition: "border-color 0.2s",
+    },
+    "& li a:hover, & li a:focus": {
+      borderBottom: "2px solid var(--charcoal)",
+      textDecoration: "none",
     },
   },
 });

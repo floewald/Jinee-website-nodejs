@@ -19,6 +19,8 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:e2e": "playwright test",
+    "perf": "node scripts/lighthouse-perf.mjs",
+    "perf:skip-build": "node scripts/lighthouse-perf.mjs --skip-build",
     "prepare": "panda codegen --silent && husky"
   },
   "dependencies": {
@@ -44,6 +46,7 @@
     "husky": "^9.1.7",
     "jest": "^30.3.0",
     "jest-environment-jsdom": "^30.3.0",
+    "lighthouse": "^13.1.0",
     "lint-staged": "^16.4.0",
     "sharp": "^0.34.5",
     "tailwindcss": "^4",
