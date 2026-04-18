@@ -172,6 +172,34 @@
   },
   {
     "type": "video",
+    "slug": "fertility-rate-sgp",
+    "title": "8world | Fertility Rate in Singapore",
+    "description": "8world series \"Fertility Rate in Singapore\".",
+    "longDescription": [
+      "Elon Musk, the world’s richest man, once said that Singapore is heading toward “extinction,” with a fertility rate of just 0.87. Faced with this reality, should this generation still choose to have children?",
+      "",
+      "Some, like Lo Hok Him, choose not to: “I don’t want my child to come into this world and suffer.” Others, like Michael See Chern Siong, have gone the opposite way—he now has eight children: “There was a time when I couldn’t even have one.”",
+      "",
+      "Miscarriages, surgeries, financial pressure… When having a child is no longer just a choice, but a cost—what would you decide? Do you avoid it for fear your child might suffer? Or believe that life also brings joy? Or perhaps, that in the end—love is the answer?"
+    ],
+    "heading": "Field Producer",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/fertility-rate-sgp/fertility-rate-sgp-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "Frontline | Fertility rate falls to 0.87 Are Singaporeans going extinct?!",
+        "embedUrl": "https://www.youtube.com/embed/p5xyxnfQVlk",
+        "uploadDate": "2023-01-01T00:00:00+08:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "8world | Fertility Rate in Singapore",
+      "thumbnail": "/assets/videography/fertility-rate-sgp/fertility-rate-sgp-800.webp"
+    }
+  },
+  {
+    "type": "video",
     "slug": "uniqlo",
     "title": "CNA Insider | UNIQLO",
     "description": "CNA Insider series \"UNIQLO\".",
