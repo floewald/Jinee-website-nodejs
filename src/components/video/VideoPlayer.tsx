@@ -53,13 +53,6 @@ const embedStyle = css({
 
 const embedPlaceholder = css({ background: "#f4f4f4" });
 
-const iframeEmbed = css({
-  position: "relative",
-  paddingBottom: "0",
-  aspectRatio: "16 / 9",
-  height: "auto",
-});
-
 const linkStyle = css({
   display: "block",
   position: "relative",
@@ -99,7 +92,7 @@ interface VideoEmbedProps {
 
 function LazyVideoEmbed({ video }: VideoEmbedProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isVisible = useIntersection(ref, { rootMargin: "200px" });
+  const isVisible = useIntersection(ref, { rootMargin: "200px", once: true });
 
   // Non-embeddable external video — show a clickable image preview
   if (!video.embedUrl && video.linkUrl) {
@@ -124,14 +117,15 @@ function LazyVideoEmbed({ video }: VideoEmbedProps) {
   return (
     <div className={cx(embedWrap, "video-embed-wrap")} ref={ref}>
       {isVisible ? (
-        <iframe
-          className={cx(embedStyle, iframeEmbed)}
-          src={video.embedUrl}
-          title={video.title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          loading="lazy"
-        />
+        <div className={cx(embedStyle, "video-embed__ratio")}>
+          <iframe
+            src={video.embedUrl}
+            title={video.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            loading="lazy"
+          />
+        </div>
       ) : (
         <div className={cx(embedStyle, embedPlaceholder, "video-embed--placeholder")} aria-hidden="true" />
       )}
