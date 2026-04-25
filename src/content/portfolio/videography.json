@@ -172,6 +172,39 @@
   },
   {
     "type": "video",
+    "slug": "7-days-archery",
+    "title": "8World | 七天我可以 7 Days, I Can Do It",
+    "description": "8world series \"7 Days, I Can Do It\".",
+    "longDescription": [
+      "Renowned chef Eric Teo is swift and precise with a knife in the kitchen. He assumes archery would be just as simple — \"just shoot the arrow\".",
+      "But once he steps onto the range, he quickly realizes it’s far more complex.",
+      "",
+      "After six days of training, celebrity chef Tiong Teck faces his final challenge on Day 7:",
+      "shooting 36 arrows from a distance of 15 meters, with a target score of at least 300 points."
+    ],
+    "heading": "Researcher | Writer",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/fertility-rate-sgp/fertility-rate-sgp-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "7 Days, I Can Do It | Celebrity Chef Eric Teo Learns Archery in 7 Days",
+        "embedUrl": "https://www.youtube.com/embed/EFe2vDcFMRE",
+        "uploadDate": "2023-01-01T00:00:00+08:00"
+      },
+      {
+        "title": "7 Days, I Can Do It | 36 Arrows, 300 Points — Can Chef Eric Teo Do It?",
+        "embedUrl": "https://www.youtube.com/embed/B0IURhVM0TE",
+        "uploadDate": "2023-01-01T00:00:00+08:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "8World | 七天我可以 7 Days, I Can Do It",
+      "thumbnail": "/assets/videography/7-days-archery/7-days-archery-800.webp"
+    }
+  },
+  {
+    "type": "video",
     "slug": "fertility-rate-sgp",
     "title": "8world | Fertility Rate in Singapore",
     "description": "8world series \"Fertility Rate in Singapore\".",
