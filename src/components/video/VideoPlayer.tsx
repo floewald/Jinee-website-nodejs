@@ -9,14 +9,14 @@ import type { VideoItem } from "@/types/portfolio";
 const playerGrid = css({
   marginTop: "1rem",
   display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
+  gridTemplateColumns: "repeat(2, 1fr)",
   gridAutoRows: "auto",
   columnGap: "1.5rem",
   rowGap: "0.75rem",
-  "@media (max-width: 900px)": {
-    gridTemplateColumns: "repeat(2, 1fr)",
+  "@media (min-width: 1600px)": {
+    gridTemplateColumns: "repeat(3, 1fr)",
   },
-  "@media (max-width: 540px)": {
+  "@media (max-width: 600px)": {
     gridTemplateColumns: "1fr",
   },
 });
