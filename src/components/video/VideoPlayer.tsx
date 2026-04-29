@@ -33,7 +33,7 @@ const playerTitle = css({
   alignSelf: "start",
 });
 
-const embedWrap = css({ marginBottom: "0.75rem" });
+const embedWrap = css({ marginBottom: "3rem" });
 
 const embedStyle = css({
   position: "relative",
