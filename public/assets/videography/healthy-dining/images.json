@@ -1,9 +1,16 @@
 [
   {
-    "basename": "healthy-dining",
-    "thumb": "healthy-dining-320.webp",
-    "md": "healthy-dining-800.webp",
-    "lg": "healthy-dining-1600.webp",
+    "basename": "healthy-dining-1",
+    "thumb": "healthy-dining-1-320.webp",
+    "md": "healthy-dining-1-800.webp",
+    "lg": "healthy-dining-1-1600.webp",
+    "original": null
+  },
+  {
+    "basename": "healthy-dining-2",
+    "thumb": "healthy-dining-2-320.webp",
+    "md": "healthy-dining-2-800.webp",
+    "lg": "healthy-dining-2-1600.webp",
     "original": null
   }
 ]

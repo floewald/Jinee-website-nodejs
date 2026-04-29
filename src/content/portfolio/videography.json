@@ -102,8 +102,13 @@
     "visible": true,
     "videos": [
       {
-        "title": "8world | 看见主播",
+        "title": "【看见主播 | 王征】40+这么吃，才不会发福？外食族必看",
         "embedUrl": "https://www.youtube.com/embed/hJn7y2VvjQs",
+        "uploadDate": "2023-01-01T00:00:00+08:00"
+      },
+      {
+        "title": "【看见主播 | 王征】40岁后最危险的不是压力",
+        "embedUrl": "https://www.youtube.com/embed/wzVyJJ10vlo",
         "uploadDate": "2023-01-01T00:00:00+08:00"
       }
     ],
