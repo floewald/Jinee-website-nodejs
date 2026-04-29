@@ -69,7 +69,7 @@ const personJsonLd = {
   // TODO: replace with Jinee's actual profile URLs once confirmed
   sameAs: [
     "https://www.instagram.com/jineechen/",
-    "https://www.linkedin.com/in/jineechen/",
+    "https://www.linkedin.com/in/jinee-chen/",
   ],
 };
 
