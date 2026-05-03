@@ -1,151 +1,267 @@
 # SEO — Customer Input Needed
 
-The following SEO improvements have been planned (see [SEO.md](SEO.md)) but require
-information or decisions from Jinee before they can be implemented.
+**Updated:** 2026-04-29  
+**Related master plan:** `docs/SEO.md`
+
+This file is the short action checklist for inputs Jinee needs to provide before the strongest SEO and Google Ads improvements can be implemented. Technical actions that do not need business input are tracked in `docs/SEO.md`.
 
 ---
 
-## 1. Social media profile URLs (SEO-3)
+## P0 — Needed before Google Ads
 
-The Person structured data (used by Google for entity recognition / Knowledge Panel)
-currently contains placeholder URLs. Please provide the exact profile URLs.
+### 1. Confirm the first services to sell
 
-**Needed:**
+The site should not target every creative service equally at first. Please choose the top 1–3 services to prioritize.
 
-| Platform | Current placeholder | Your actual URL |
-|----------|---------------------|-----------------|
-| Instagram | `https://www.instagram.com/jineechen/` | Confirm or correct the handle |
-| LinkedIn | `https://www.linkedin.com/in/jineechen/` | Confirm or correct the handle |
+Options:
 
-**File to update**: `src/app/layout.tsx` — `sameAs` array in `personJsonLd`
+- Event photographer in Singapore
+- Event videographer in Singapore
+- Combined photographer + videographer coverage
+- Corporate video producer in Singapore
+- Documentary producer / field producer / local fixer in Singapore
+- Social media content creator / reels videographer in Singapore
+- Travel / lifestyle photographer
+- Portrait / private event photographer
 
----
+**Why it matters:** service priority determines the first landing pages, homepage copy, navigation, Google Ads ad groups, and portfolio proof selection.
 
-## 2. Twitter / X handle (SEO-7)
+### 2. Confirm the primary conversion goal
 
-The Twitter card metadata can include your handle so posts shared on X are attributed to you.
+Choose the main action the website and ads should optimize for:
 
-**Needed:**
-- Do you have an active Twitter / X account? If yes, what is the handle (e.g. `@jineechen`)?
+- Contact form submission
+- Calendly booking
+- Email click
+- WhatsApp click
+- Phone call
+- Instagram DM
 
-**File to update**: `src/app/layout.tsx` — uncomment and fill in `site`/`creator` in `twitter` metadata
+**Why it matters:** conversion tracking and landing page CTAs should focus on the action most likely to become paid work.
 
----
+### 3. Confirm public phone or WhatsApp
 
-## 3. Homepage OG image (SEO-5)
+Please confirm whether a phone number or WhatsApp link can be shown publicly.
 
-When your site or any page without a specific image is shared on social media (WhatsApp,
-Telegram, X, LinkedIn, Facebook), a branded preview image should appear.
-Without one, the link preview is blank.
-
-**Needed:**
-- A landscape image (1200 × 630 px, JPG or PNG) that would represent the homepage.
-  Ideal: your portrait photo or a striking hero shot with your name as text overlay.
-  You can also ask to auto-generate this from one of the existing hero photos.
-- Place the file at: `public/assets/photos/og-home.jpg`
-
-**File to update**: `src/app/layout.tsx` — add `openGraph.images`
+**Why it matters:** local service searches and paid ads convert better when visitors can contact quickly, especially on mobile.
 
 ---
 
-## 4. Per-project OG images (SEO-18)
+## P1 — Needed for local SEO and trust
 
-Each project page uses a 800px wide WebP thumbnail as the OG image. Ideal OG images
-are 1200 × 630 px (landscape). Landscape shots crop fine, but portrait shots may look
-odd when shared.
+### 4. Service area and location focus
 
-**Question:** Would you like to add dedicated 1200×630 OG images for projects?
-- Option A: Accept the current 800px thumbnails (good enough for most cases)
-- Option B: Add the 1200w size to the image pipeline and set a specific `ogImage` per project
+Please confirm the intended service area:
 
----
+- Singapore only
+- Singapore primary, Taiwan secondary
+- Singapore + Taiwan + regional/international travel
 
-## 5. Expanded project descriptions (SEO-6)
+**Why it matters:** affects `ProfessionalService` schema, page copy, Google Business Profile, and keyword targeting.
 
-Several project descriptions are very short (under 60 characters). These show up as the
-grey preview line in Google search results. Longer, more descriptive text leads to more
-clicks.
+### 5. Deliverables and turnaround times
 
-**Projects that need better descriptions:**
+For each priority service, provide typical deliverables and turnaround expectations.
 
-| Project | Current description (characters) | Target: 120–160 characters |
-|---------|----------------------------------|----------------------------|
-| `20260124-west-side-art-tour` | "NTU Museum Walking Tour West Side Art." (38) | Add location, context, type of photography |
-| `20260201-mediacorp-2026-cny-road-show` | "Event photography coverage of Mediacorp's 2026 Chinese New Year Road Show." (75) | Could be expanded with atmosphere/scope |
-| `event-photography` | "Professional event photography portfolio showcasing corporate events, conferences, and celebrations." (98) | Close, but could include location (Singapore) |
-| `travel-photography` | "Travel photography from around the world — landscapes, cultures, and adventures." (81) | Good length; consider adding Jinee's name |
+Examples:
 
-**File to update**: `src/content/portfolio/photography.json` — `description` field per project
+- Edited photo count per hour or per event
+- Highlight video duration
+- Short-form reels count
+- Raw footage availability
+- Editing rounds included
+- Delivery format
+- Typical delivery timeline
 
-The same applies to video and social media projects — complete descriptions improve SEO
-for those portfolio pages too.
+**Why it matters:** buyers compare reliability and clarity, not just portfolio quality.
 
----
+### 6. Pricing guidance
 
-## 6. Video upload dates (SEO-11)
+Please decide whether the site can show:
 
-Video pages have structured data (VideoObject) that Google uses for Video carousels in
-search results. Google requires a real `uploadDate` for each video. Currently the site
-falls back to `"2023-01-01"` when no date is set.
+- Starting prices, e.g. `from SGD ...`
+- Package ranges
+- `Contact for quote` only
+- Private pricing, but with rough project-size guidance
 
-**Needed**: For each video project, provide the approximate publish / upload date (ISO format: `YYYY-MM-DD`).
+**Why it matters:** pricing guidance improves lead quality and Google Ads landing page usefulness.
 
-**File to update**: `src/content/portfolio/videography.json` — add `"uploadDate": "YYYY-MM-DD"` to each `videos[]` entry
+### 7. Testimonials and reviews
 
----
+Please provide any approved testimonials or reviews, ideally with:
 
-## 7. LocalBusiness structured data (SEO-12)
+- Client name or company
+- Project type
+- Permission to display publicly
+- Link to Google review if available
 
-Adding a `ProfessionalService` schema can help Jinee appear in local search results
-("photographer singapore", "videographer singapore") and Google Maps.
+**Why it matters:** reviews and testimonials are essential trust signals in crowded Singapore searches.
 
-**Needed:**
-- Business phone number (optional, but helps for local SEO)
-- Preferred service area(s): Singapore only, or also Taiwan / international?
-- Price range indicator (e.g. "$$" or "from SGD 500")
-- Any certifications or awards to list?
+### 8. Client logo permissions
 
----
+Please confirm which client/publication logos can be shown on the website.
 
-## 8. Imprint page — personal details to confirm
+Potential proof examples from the portfolio include CNA, 8World, Mediacorp, SCDF, NTU Museum, and other visible project clients, subject to permission.
 
-**File**: `src/app/imprint/page.tsx`
+**Why it matters:** recognizable logos help service landing pages convert.
 
-The imprint currently lists:
-- Owner: **Jinee Chen & Florian Ewald**
-- Location: **Singapore & Taipei**
-- Email: **hello@jineechen.com**
+### 9. Google Business Profile status
 
-**Questions:**
-1. Should Florian remain listed as co-owner on the live site, or should it be Jinee Chen only?
-2. Is there a registered business name (sole proprietorship, studio name, etc.)?
-3. Is a physical address required (depends on whether the site targets German/EU visitors; if so, a Impressum with full address is legally required under German law)?
-4. Should a phone number be listed?
+Please confirm:
+
+- Does Jinee already have a Google Business Profile?
+- Which Google account owns it?
+- Is the profile verified?
+- Are reviews already present?
+- Should the profile show a physical address or only a service area?
+
+**Why it matters:** Google local results are heavily influenced by profile completeness, reviews, relevance, distance, and prominence.
 
 ---
 
-## 9. Google Search Console setup (SEO-19)
+## P1 — Needed for structured data and metadata
 
-To monitor crawl health, rankings, and Core Web Vitals after launch:
+### 10. Social profile URLs
 
-**Actions needed from Jinee:**
-1. Access to the domain's DNS panel (or the website FTP root) to add a verification record
-2. Decision on which Google account to connect GSC to
+Please confirm exact public profile URLs.
 
-Once deployed, this is a ~15 minute setup. I can handle the technical steps once you have access.
+| Platform | Current/likely URL | Confirm or correct |
+|---|---|---|
+| Instagram | `https://www.instagram.com/jineechen/` | Needed |
+| LinkedIn | `https://www.linkedin.com/in/jinee-chen/` | Needed |
+| YouTube/Vimeo | Not configured | Optional |
+| X/Twitter | Not configured | Optional |
+| TikTok | Not configured | Optional |
+
+**Why it matters:** profile URLs support entity recognition through `sameAs` structured data and social previews.
+
+### 11. Real or approximate video upload dates - DONE
+
+Most video entries currently use placeholder-style dates. Please provide real or approximate publication dates in `YYYY-MM-DD` format for important video projects first.
+
+Start with:
+
+- `stuck-low-pay`
+- `singer-jasmin-sokko`
+- `re-old-times`
+- `healthy-dining`
+- `social-media-addiction`
+- `blind-kitchen-chefs`
+- `uniqlo`
+- `living-with-chronic-pain`
+- `mark-your-calendar`
+- `red-dot-detectives`
+- `i-eat-therefore`
+
+**Why it matters:** improves `VideoObject` structured data and video-search eligibility.
+
+### 12. Default Open Graph image
+
+Please choose or approve a 1200×630 image for generic social previews.
+
+Options:
+
+- A strong portrait of Jinee with text overlay
+- A hero portfolio image with branding
+- A simple branded graphic using existing site typography
+
+**Why it matters:** improves previews on WhatsApp, LinkedIn, Facebook, X, Telegram, and other sharing surfaces.
 
 ---
 
-## Summary — input needed
+## P2 — Needed for content depth
 
-| # | Item | Effort once input received |
-|---|------|---------------------------|
-| 1 | Social media profile URLs | 5 min |
-| 2 | Twitter/X handle | 5 min |
-| 3 | Homepage OG image (design/photo) | 30 min |
-| 4 | Per-project OG image decision | Depends on choice |
-| 5 | Expanded project descriptions | 1–2 hr writing |
-| 6 | Video upload dates | 30 min |
-| 7 | LocalBusiness details | 30 min |
-| 8 | Imprint ownership details | 10 min |
-| 9 | Google Search Console — domain access | 15 min |
+### 13. Project description rewrites
+
+Many current descriptions are short, duplicate, or placeholders. Please provide context for the top projects first.
+
+For each project, useful notes are:
+
+- Client or publication
+- Location
+- Jinee's role
+- Service delivered
+- Production context
+- What made the project valuable or distinctive
+- Whether it should target event, documentary, social, corporate, or photography search intent
+
+**Why it matters:** stronger descriptions improve meta snippets, long-tail rankings, and buyer confidence.
+
+### 14. Case-study notes for strongest projects
+
+Please choose 3–5 flagship projects and provide short notes for each.
+
+Recommended case-study fields:
+
+- Client / project type
+- Goal
+- Jinee's role
+- Deliverables
+- Location
+- Outcome or where the work was used
+- Similar services available for new clients
+
+**Why it matters:** case studies turn the portfolio into commercial proof and support service landing pages.
+
+### 15. Social media examples to keep on-site
+
+Please choose which Instagram/social media examples should become internal website case studies instead of only linking out to Instagram.
+
+**Why it matters:** internal pages build SEO value; direct Instagram links send context and visitors away from the website.
+
+### 16. Female photographer/videographer positioning
+
+Please confirm whether the site should intentionally target `female photographer Singapore` or `female videographer Singapore`.
+
+**Why it matters:** this can be a useful niche signal, but it should be intentional and authentic rather than forced.
+
+---
+
+## P3 — Legal and operations details
+
+### 17. Imprint / business details
+
+Please confirm:
+
+- Public business name
+- Whether Florian should remain listed on the imprint
+- Whether a physical address is required or should stay private
+- Whether a phone number should be listed
+- Whether there is a registered business/entity name
+
+**Why it matters:** business details affect legal pages, local trust, and structured data.
+
+### 18. Google Search Console access
+
+To complete setup after deployment, please provide either:
+
+- DNS access for domain verification, or
+- Permission to add an HTML verification file/tag, or
+- Access to an existing verified Google Search Console property
+
+**Why it matters:** Search Console is needed to monitor indexing, sitemap errors, Core Web Vitals, search queries, and coverage drops.
+
+---
+
+## Summary table
+
+| Priority | Input | Effort after input |
+|---|---|---:|
+| P0 | First services to sell | Medium |
+| P0 | Primary conversion goal | Small |
+| P0 | Phone/WhatsApp decision | Small |
+| P1 | Service area | Small |
+| P1 | Deliverables and turnaround | Medium |
+| P1 | Pricing guidance | Small |
+| P1 | Testimonials/reviews | Medium |
+| P1 | Client logo permissions | Small |
+| P1 | Google Business Profile status | Medium |
+| P1 | Social profile URLs | Small |
+| P1 | Video upload dates | Small |
+| P1 | Default OG image | Small |
+| P2 | Project rewrite notes | Large |
+| P2 | Flagship case-study notes | Large |
+| P2 | Social examples for internal pages | Medium |
+| P2 | Female creator positioning | Small |
+| P3 | Imprint/business details | Small |
+| P3 | Search Console access | Small |

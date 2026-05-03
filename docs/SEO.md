@@ -1,370 +1,460 @@
-# SEO Audit & Improvement Plan
+# SEO Assessment & Improvement Plan
 
-**Audited**: 2026-04-13  
-**Site**: jineechen.com — static Next.js export, 38 pages  
-**Stack**: Next.js 16 App Router metadata API, JSON-LD structured data, self-hosted fonts, WebP images
+**Updated:** 2026-04-29  
+**Site:** `jineechen.com` — static Next.js export  
+**Goal:** improve organic and paid-search readiness for a photographer, videographer, video producer, documentary producer, and social media content creator in Singapore.
 
-Items are ordered **quick wins first → longer-run investments last**.  
-Each item states the exact file(s) to touch and the expected benefit.
-
----
-
-## Quick Wins (≤ 1 hour each)
-
-### SEO-1 — Fix page title duplication on About and Contact pages
-
-**File**: `src/app/about/page.tsx`, `src/app/contact/page.tsx`  
-**Problem**: The root layout defines `title.template: "%s | Jinee Chen"`. Child pages that already embed "Jinee Chen" in their title string produce doubled names:
-- `"About — Jinee Chen"` → rendered as **"About — Jinee Chen | Jinee Chen"**
-- `"Contact — Jinee Chen"` → rendered as **"Contact — Jinee Chen | Jinee Chen"**
-
-**Fix**: Use only the segment that fills `%s`:
-```ts
-// about/page.tsx
-export const metadata: Metadata = {
-  title: "About",
-  description: "...",
-};
-
-// contact/page.tsx
-export const metadata: Metadata = {
-  title: "Contact",
-  description: "...",
-};
-```
-**Impact**: Cleaner `<title>` tags; avoids Google truncating duplicated brand names.
+This is the current source of truth for SEO work. It consolidates the earlier `SEO.md`, `SEO-CUSTOMER-INPUT.md`, and the 2026-04-29 adversarial assessment.
 
 ---
 
-### SEO-2 — Add a dedicated homepage `metadata` export with richer description
+## Executive summary
 
-**File**: `src/app/page.tsx`  
-**Problem**: The homepage has no `export const metadata` — it falls back to the root layout default, whose `description` is just the tagline (`"Videographer & Photographer based in Singapore"`). This is 50 characters; Google ideal is 120–160.
+The website has a strong visual portfolio and a solid technical base: static export, sitemap, robots.txt, metadata, WebP images, self-hosted fonts, portfolio manifests, and some structured data. The main gap is commercial search positioning. The site currently reads more like a polished portfolio than a local service website designed to rank and convert for crowded Singapore searches.
 
-**Fix**:
-```ts
-export const metadata: Metadata = {
-  title: "Jinee Chen — Videographer & Photographer in Singapore",
-  description:
-    "Jinee Chen is a Singapore-based videographer and photographer specialising in documentary storytelling, events, travel, and social media content creation.",
-  openGraph: {
-    title: "Jinee Chen — Videographer & Photographer in Singapore",
-    description:
-      "Documentary storytelling, event photography, travel, and social media content. Based in Singapore and Taipei.",
-    images: [{ url: "/assets/photos/og-home.jpg", width: 1200, height: 630 }],
-  },
-};
-```
-**Impact**: Better click-through rate from search results; richer social media previews.
+Competitors for Singapore photography and videography queries commonly use dedicated landing pages with exact service intent, client logos, testimonials, pricing or package cues, turnaround times, FAQs, Google reviews, and strong calls to action. This site has the proof to compete, especially in documentary, broadcast, event, and social content work, but that proof needs to be packaged into service pages and richer case studies before Google Ads spend.
+
+Highest-priority work:
+
+1. Fix sitemap accuracy so only generated, indexable URLs are submitted.
+2. Create dedicated Singapore service landing pages instead of relying only on portfolio categories.
+3. Rewrite thin, duplicate, and placeholder project descriptions.
+4. Strengthen local SEO signals with `ProfessionalService` schema, Google Business Profile, reviews, and service details.
+5. Prepare Google Ads landing pages with conversion tracking, clear deliverables, trust proof, and mobile performance checks.
 
 ---
 
-### SEO-3 — Fix placeholder `sameAs` URLs in Person JSON-LD
+## Adversarial review summary
 
-**File**: `src/app/layout.tsx`  
-**Problem**: The `personJsonLd` has:
-```ts
-sameAs: [
-  "https://www.instagram.com/",   // ← generic homepage, not Jinee's profile
-  "https://www.linkedin.com/",    // ← generic homepage, not Jinee's profile
-],
-```
-Google uses `sameAs` to build an entity knowledge graph. Placeholder URLs break entity disambiguation.
+### SEO expert lens
 
-**Fix**: Replace with Jinee's actual profile URLs:
-```ts
-sameAs: [
-  "https://www.instagram.com/jineechen/",   // actual Instagram profile
-  "https://www.linkedin.com/in/jineechen/", // actual LinkedIn profile
-],
-```
-**Impact**: Entity recognition in Google's Knowledge Graph; may trigger Knowledge Panel.
+- The technical foundation is usable, but sitemap quality and route consistency need cleanup.
+- The site does not yet target enough high-intent Singapore service keywords through dedicated pages.
+- Portfolio content has valuable proof but many metadata descriptions are too thin or duplicated.
+- Local entity signals are incomplete: service area, business profile, reviews, and service schema need reinforcement.
+- Google Ads should wait until service-specific landing pages and conversion tracking exist.
 
----
+### Corporate event customer lens
 
-### SEO-4 — Shorten `manifest.json` `short_name`
+This visitor wants quick answers about event photography, event videography, conference coverage, launch events, turnaround time, deliverables, sample galleries, pricing range, and trust proof. Current portfolio examples help, but the site does not yet make the offer explicit enough.
 
-**File**: `public/manifest.json`  
-**Problem**: `short_name` is identical to `name` (60+ chars). The PWA spec recommends ≤12 characters for `short_name` (used on home screen icons).
+### Brand / social media customer lens
 
-**Fix**:
-```json
-"short_name": "Jinee Chen"
-```
-**Impact**: Proper home-screen icon labelling; avoids PWA audit warnings in Lighthouse.
+This visitor wants to know whether Jinee can create reels, short-form brand content, founder content, launch videos, captions, thumbnails, and platform-ready edits. Examples exist, but social media content is not yet framed as a service offer on the website.
+
+### Documentary / broadcast customer lens
+
+This visitor wants a local producer, field producer, videographer, fixer, researcher, or director in Singapore/Taiwan. The portfolio supports this strongly, but the site needs a dedicated landing page for this differentiated niche.
 
 ---
 
-### SEO-5 — Add a default OG image for the homepage in the root layout
+## Current strengths
 
-**File**: `src/app/layout.tsx` (and add `public/assets/photos/og-home.jpg`)  
-**Problem**: No fallback `openGraph.images` in root metadata. When any page without page-specific OG images is shared (e.g. `/portfolio/`, `/about/`) there is no preview image.
-
-**Fix**: Create a 1200×630px branded OG image (site name + a hero photo) and add:
-```ts
-openGraph: {
-  siteName: SITE_NAME,
-  type: "website",
-  locale: "en_SG",
-  images: [{ url: "/assets/photos/og-home.jpg", width: 1200, height: 630, alt: "Jinee Chen — Videographer & Photographer" }],
-},
-```
-**Impact**: Every shared link shows a branded preview instead of a blank card.
+| Strength | Evidence | SEO value |
+|---|---|---|
+| Singapore positioning exists | `src/lib/constants.ts`, homepage metadata | Useful base relevance for local searches |
+| Static export is crawlable | `next.config.ts`, `src/app/sitemap.ts`, `public/robots.txt` | Search engines can discover pages |
+| Portfolio data is structured | `src/content/portfolio/*.json` | Easier to scale metadata and schema |
+| Structured data foundation exists | `Person`, `VideoObject`, `ImageGallery` JSON-LD | Good base for entity and rich-result eligibility |
+| Strong proof assets | CNA, 8World, Mediacorp, SCDF, Uniqlo-style examples | Differentiates from generic freelancers |
+| Visual performance base is good | WebP assets, self-hosted fonts | Helpful for image-heavy UX |
+| Conversion paths exist | Email, Calendly, contact form, Instagram | Basic lead capture is already present |
 
 ---
 
-### SEO-6 — Add richer descriptions to thin-content project entries
+## Current critical findings
 
-**Files**: `src/content/portfolio/photography.json`, `src/content/portfolio/videography.json`, `src/content/portfolio/social-media.json`  
-**Problem**: Several project `description` fields are very short (< 60 characters):
-- `"NTU Museum Walking Tour West Side Art."` (38 chars)
-- `"NTU Museum Walking Tour West Side Art."` (38 chars)
+### 1. Sitemap includes URLs that are hidden or do not exist
 
-These are used verbatim as meta descriptions. Google recommends 120–160 characters.
+**Priority:** P0  
+**Effort:** Small  
+**Needs human input:** No
 
-**Fix**: Expand descriptions to include context: client name, location, type of work, mood/style.  
-Example: `"Photography coverage of the NTU Museum Walking Tour along West Side Art trail — capturing guided groups, heritage architecture, and street art installations in western Singapore."`  
-**Impact**: Better SERP snippet quality; relevant keyword density for long-tail searches.
+Observed issues:
 
----
+- `src/app/portfolio/social-media/[slug]/page.tsx` does not exist, but the sitemap lists social media project detail URLs.
+- Hidden projects are still included in the sitemap, including `behind-the-scenes`, `marigold-ad`, `ministry-of-manpower`, and `nescafe-ad`.
+- All sitemap entries use `new Date()` as `lastModified`, so every build makes every page look newly changed.
 
-### SEO-7 — Add `twitter:site` handle to Twitter card metadata
+Recommended fixes:
 
-**File**: `src/app/layout.tsx`  
-**Problem**: Twitter card metadata only sets `card: "summary_large_image"` but no `site` handle. Without it, posts shared on X don't attribute the site.
+- Filter project routes with `visible !== false`.
+- Remove social media detail URLs from the sitemap unless real pages are added.
+- Add sitemap tests that verify every sitemap URL has a generated route.
+- Add `updatedAt` or `publishedAt` fields later for more accurate `lastModified` values.
 
-**Fix**:
-```ts
-twitter: {
-  card: "summary_large_image",
-  site: "@jineechen",   // actual Twitter/X handle
-  creator: "@jineechen",
-},
-```
-**Impact**: Twitter/X cards display the correct attribution; may boost engagement.
+### 2. Dedicated service landing pages are missing
 
----
+**Priority:** P0  
+**Effort:** Medium to Large  
+**Needs human input:** Partly
 
-### SEO-8 — Add `noindex` to imprint and privacy pages
+Current routes are portfolio-led rather than buyer-intent-led. The site needs pages built around the queries people search before hiring someone.
 
-**File**: `src/app/imprint/page.tsx`, `src/app/privacy/page.tsx`  
-**Problem**: Policy pages currently have `robots: { index: true, follow: true }` set explicitly. These pages carry no ranking value and dilute crawl budget.
+Recommended pages:
 
-**Fix**:
-```ts
-robots: { index: false, follow: false },
-```
-**Impact**: Saves crawl budget; prevents policy pages from appearing in SERPs.
+| Service page | Primary intent | Suggested URL |
+|---|---|---|
+| Event Photographer Singapore | Corporate/private event photography | `/services/event-photographer-singapore/` |
+| Event Videographer Singapore | Event films, highlight reels, interviews | `/services/event-videographer-singapore/` |
+| Photographer & Videographer Singapore | Combined coverage/package intent | `/services/photographer-videographer-singapore/` |
+| Video Producer Singapore | Planning, producing, filming, brand content | `/services/video-producer-singapore/` |
+| Documentary Producer Singapore | Broadcast, field producer, fixer, documentary support | `/services/documentary-producer-singapore/` |
+| Social Media Content Creator Singapore | Reels, short-form video, editorial social content | `/services/social-media-content-creator-singapore/` |
 
----
+Each page should include:
 
-## Medium Priority (few hours each)
+- One clear `h1` matching the service/search intent.
+- Short positioning copy with Singapore service area.
+- Deliverables and use cases.
+- Relevant portfolio examples.
+- Trust proof: clients, publications, testimonials, reviews.
+- Process and turnaround.
+- FAQ section.
+- Direct CTA to contact, Calendly, email, and optionally WhatsApp/phone.
 
-### SEO-9 — Add BreadcrumbList structured data to portfolio category and project pages
+### 3. Project descriptions are thin, duplicated, or placeholders
 
-**Files**: `src/app/portfolio/photography/page.tsx`, `src/app/portfolio/video/page.tsx`, `src/app/portfolio/social-media/page.tsx`, `src/app/portfolio/[category]/[slug]/page.tsx`  
-**Problem**: No breadcrumb structured data. Google uses `BreadcrumbList` to annotate search results with `/Portfolio > Photography > Event Photography` style links (breadcrumb rich result).
+**Priority:** P1  
+**Effort:** Medium  
+**Needs human input:** Partly
 
-**Fix example** (photography category page):
-```ts
-const breadcrumbJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Portfolio", item: `${SITE_URL}/portfolio/` },
-    { "@type": "ListItem", position: 2, name: "Photography", item: `${SITE_URL}/portfolio/photography/` },
-  ],
-};
-```
-**Impact**: Breadcrumb rich results in SERPs; improved click-through for category pages.
+Repository audit found:
 
----
+- 58 project descriptions under 120 characters.
+- 46 project descriptions under 80 characters.
+- `guardians-vietnam` has a one-character description: `.`.
+- 14 social media projects use the duplicate description `Instagram editorial reel content.`.
+- 3 video projects use the duplicate phrase `Indian cusine vegetarian cusine and Ayurveda.`.
+- Most video entries use `2023-01-01T00:00:00+08:00`, which looks like a placeholder upload date.
 
-### SEO-10 — Add `ImageGallery` / `ImageObject` structured data on photography project pages
+Recommended rewrite pattern:
 
-**File**: `src/app/portfolio/photography/[slug]/page.tsx`  
-**Problem**: Project pages render galleries of 30–100 professional images but Google has no structured signal about them.
+> `[Service type] in [location] for [client/project type], covering [deliverables] with [style/outcome]. Jinee served as [role].`
 
-**Fix**: Add a `ImageGallery` (or array of `ImageObject`) JSON-LD based on the project's `images.json` manifest. Limit to first 10 images for performance.
+Example direction:
 
-**Impact**: Google Image Search may surface these images directly in SERPs with attribution; important for a photographer's portfolio.
+- Weak: `CNA Insider series "Our Blind Kitchen".`
+- Stronger: `Documentary video production in Singapore for CNA Insider, following visually impaired chefs opening a café. Jinee worked across research, producing, directing, and videography.`
 
----
+### 4. Local SEO signals are incomplete
 
-### SEO-11 — Supply real `uploadDate` for VideoObject structured data
+**Priority:** P1  
+**Effort:** Small to Medium  
+**Needs human input:** Partly
 
-**File**: `src/app/portfolio/video/[slug]/page.tsx`, `src/content/portfolio/videography.json`  
-**Problem**: VideoObject JSON-LD falls back to `"2023-01-01T00:00:00+08:00"` when `uploadDate` is missing from the JSON config. Google Video carousels require a real `uploadDate`.
+Recommended technical work:
 
-**Fix**: Add an `uploadDate` field to each video entry in `videography.json` (ISO 8601 format). The JSON schema in `portfolio-schemas.ts` should make it required for video projects.
+- Add `ProfessionalService` JSON-LD with `name`, `url`, `email`, `areaServed`, `serviceType`, `sameAs`, and Singapore service area.
+- Add richer `Person` schema on `/about/` with `jobTitle`, `knowsAbout`, and `hasOccupation`.
+- Add `BreadcrumbList` schema on service, category, and project pages.
+- Add canonical metadata for core pages.
 
-**Impact**: Eligible for Google Video carousels and rich video results.
+Recommended business work:
 
----
+- Create or optimize Google Business Profile.
+- Request Google reviews from prior clients.
+- Keep service categories, service area, name, contact details, and website content consistent.
+- Add photos/videos to Google Business Profile.
 
-### SEO-12 — Add `LocalBusiness` / `ProfessionalService` structured data
+### 5. Google Ads readiness is incomplete
 
-**File**: `src/app/layout.tsx` or `src/app/about/page.tsx`  
-**Problem**: Jinee offers commercial services in Singapore. Google's local search surfaces `LocalBusiness` schema in map packs and knowledge panels.
+**Priority:** P1  
+**Effort:** Medium  
+**Needs human input:** Partly
 
-**Fix**: Add alongside the existing `Person` schema:
-```ts
-const professionalServiceJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Jinee Chen Photography & Videography",
-  url: SITE_URL,
-  telephone: "+65-XXXX-XXXX",  // optional
-  email: "hello@jineechen.com",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Singapore",
-    addressCountry: "SG",
-  },
-  serviceType: ["Photography", "Videography", "Social Media Content Creation"],
-  areaServed: ["Singapore", "Taiwan"],
-  priceRange: "$$",
-};
-```
-**Impact**: Local search visibility; may trigger knowledge panel / map pack appearance for "photographer singapore" type queries.
+Before running ads:
 
----
+- Build one landing page per ad group/search intent.
+- Add conversion tracking for contact form submissions, Calendly clicks, email clicks, phone/WhatsApp clicks, and Instagram clicks.
+- Add explicit deliverables, process, response expectations, turnaround, usage rights, and price guidance where possible.
+- Add testimonials, reviews, or case studies.
+- Confirm negative keywords before broad matching.
+- Test mobile landing pages and page speed after deployment.
 
-### SEO-13 — Add a dedicated Person schema on the About page
+Suggested first ad groups:
 
-**File**: `src/app/about/page.tsx`  
-**Problem**: `Person` JSON-LD is in the root layout (applies to every page). A dedicated, richer Person schema on the About page is the most authoritative signal for entity recognition.
+| Ad group | Landing page | Example keyword direction |
+|---|---|---|
+| Event photography | `/services/event-photographer-singapore/` | event photographer singapore, corporate event photographer singapore |
+| Event videography | `/services/event-videographer-singapore/` | event videographer singapore, corporate event videography singapore |
+| Documentary / broadcast | `/services/documentary-producer-singapore/` | documentary producer singapore, field producer singapore |
+| Social media content | `/services/social-media-content-creator-singapore/` | social media videographer singapore, reels creator singapore |
 
-**Fix**: Add to `about/page.tsx` with `jobTitle`, `knowsAbout`, `hasOccupation`:
-```ts
-const personJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Jinee Chen",
-  jobTitle: "Videographer & Photographer",
-  url: `${SITE_URL}/about/`,
-  image: `${SITE_URL}/assets/photos/jinee-avatar.webp`,
-  knowsAbout: ["Photography", "Videography", "Documentary Storytelling", "Event Photography"],
-  hasOccupation: {
-    "@type": "Occupation",
-    name: "Videographer & Photographer",
-    occupationLocation: { "@type": "Country", name: "Singapore" },
-  },
-};
-```
-**Impact**: Stronger entity signal; better Person Knowledge Panel chance.
+Avoid starting with broad `photographer singapore` unless budget is high and conversion tracking is reliable.
 
 ---
 
-### SEO-14 — Improve `sitemap.ts` with real `lastModified` dates
+## Additional findings
 
-**File**: `src/app/sitemap.ts`  
-**Problem**: All URLs currently report `lastModified: new Date()` — meaning every build marks every URL as "just modified". This teaches Googlebot that all pages change on every deployment, leading to inefficient recrawl allocation.
+### Heading structure
 
-**Fix**: Add a `publishedAt` or `updatedAt` field to each project's JSON config. The sitemap should use that value, falling back to `new Date()` only for the homepage.
+**Priority:** P1  
+**Effort:** Small  
+**Needs human input:** No
 
-**Impact**: Googlebot recrawls updated pages sooner and stable pages less often — better crawl budget use.
+Observed issues:
+
+- `/about/` renders an `h2` but no visible `h1`.
+- `/contact/` lacks a clear visible `h1`.
+- `/portfolio/` uses section `h2`s but no page-level `h1`.
+- `/portfolio/social-media/` renders multiple `h1` elements through mapped sections.
+- Homepage uses a screen-reader-only `h1`; acceptable technically, but less persuasive for humans.
+
+Recommended fixes:
+
+- Add one visible `h1` per core route.
+- Use `h2` for sections.
+- Make the homepage headline communicate commercial positioning, e.g. `Singapore Photographer, Videographer & Video Producer`.
+
+### Category metadata
+
+**Priority:** P1  
+**Effort:** Small  
+**Needs human input:** No
+
+Current titles such as `Photography`, `Videography`, and `Social Media` are too generic.
+
+Suggested direction:
+
+- `Photography Portfolio — Event & Travel Photographer in Singapore`
+- `Videography Portfolio — Documentary & Corporate Videographer in Singapore`
+- `Social Media Content Portfolio — Reels & Editorial Video in Singapore`
+
+### Portfolio buying confidence
+
+**Priority:** P2  
+**Effort:** Medium  
+**Needs human input:** Partly
+
+Project pages should answer:
+
+- What was the client goal?
+- What did Jinee deliver?
+- What role did Jinee play?
+- What was the production scale?
+- What kind of client should hire her for similar work?
+- What should the visitor do next?
+
+Recommended repeatable project fields:
+
+- Client / project type
+- Role
+- Services delivered
+- Location
+- Outcome or use case
+- Relevant CTA
+
+### Social media project SEO leakage
+
+**Priority:** P2  
+**Effort:** Medium  
+**Needs human input:** Partly
+
+Many social media tiles link directly to Instagram. That is useful for watching reels, but it sends SEO and conversion context away from the website.
+
+Recommended fixes:
+
+- Create internal case-study pages for important social media examples.
+- Embed or link to Instagram from the internal page.
+- Add context: platform, hook, goal, format, role, and outcome.
+
+### Image SEO and performance
+
+**Priority:** P2  
+**Effort:** Medium  
+**Needs human input:** Partly
+
+Recommended fixes:
+
+- Keep eager/priority loading only for the first hero slide.
+- Add `sizes` to hero slideshow images.
+- Improve alt text for key portfolio images where the subject and context are known.
+- Add `ImageObject` structured data for selected photography projects.
+- Add relevant surrounding text near image galleries.
+
+### Open Graph and social previews
+
+**Priority:** P2  
+**Effort:** Small to Medium  
+**Needs human input:** Yes for final image choice
+
+Recommended fixes:
+
+- Add a default 1200×630 OG image for the site.
+- Keep project-level OG images, but consider dedicated 1200×630 assets for the strongest projects.
+- Add page-specific OG title/description for service pages and portfolio categories.
 
 ---
 
-## Longer-Run Investments
+## Actions that can be done without human feedback
 
-### SEO-15 — Lighthouse / Core Web Vitals audit on deployed site
-
-**Requirement**: Needs the site to be live at `https://jineechen.com`.  
-**Tool**: Google PageSpeed Insights / Google Search Console Core Web Vitals report.  
-**Focus areas**:
-- **LCP (Largest Contentful Paint)**: The hero slideshow image should be the LCP element. Verify it has `priority={true}` (preloaded).
-- **CLS (Cumulative Layout Shift)**: Gallery grids loading LQIP placeholders should use `aspect-ratio` reservations.
-- **INP (Interaction to Next Paint)**: Lightbox open, slideshow clicks.
-- **TTFB**: Static export served from CDN should be near-zero.
-
----
-
-### SEO-16 — `hreflang` for bilingual content
-
-**Problem**: The About page contains Chinese text (traditional / simplified). Google may serve the Chinese content to the wrong region without `hreflang` declarations.
-
-**Fix**: Add `alternates.languages` to the About page metadata:
-```ts
-alternates: {
-  canonical: `${SITE_URL}/about/`,
-  languages: {
-    "en-SG": `${SITE_URL}/about/`,
-    "zh-TW": `${SITE_URL}/about/`,  // if a Chinese version is created
-  },
-},
-```
-**Impact**: Correct language serving for multilingual users; avoids duplicate content penalties.
+| Priority | Action | Effort | Likely files | Why it matters |
+|---|---:|---:|---|---|
+| P0 | Clean sitemap to include only generated/indexable URLs | Small | `src/app/sitemap.ts`, tests | Removes crawl errors and sitemap noise |
+| P0 | Remove social media detail URLs unless pages exist | Small | `src/app/sitemap.ts` | Avoids submitting non-existent URLs |
+| P0 | Exclude `visible: false` projects from sitemap | Small | `src/app/sitemap.ts` | Avoids hidden projects being crawled from sitemap |
+| P1 | Add one visible `h1` per core page | Small | `src/app/**`, section components | Improves clarity and accessibility |
+| P1 | Improve category metadata with Singapore terms | Small | portfolio category pages | Better local relevance |
+| P1 | Add basic `ProfessionalService` schema without phone | Small | `src/app/layout.tsx` or schema helper | Reinforces local service entity |
+| P1 | Add canonical metadata for core routes | Small | metadata exports | Reduces URL ambiguity |
+| P1 | Add `BreadcrumbList` JSON-LD | Medium | portfolio/service pages | Better hierarchy and rich-result eligibility |
+| P2 | Fix hero slideshow eager loading | Small | `src/components/sections/HeroSlideshow.tsx` | Improves page-speed readiness |
+| P2 | Scaffold service page templates | Medium | `src/app/services/**` | Creates SEO/ad landing page structure |
+| P2 | Add internal service ↔ portfolio links | Medium | service/portfolio components | Builds topical clusters |
+| P2 | Add sitemap-route consistency tests | Medium | Jest tests | Prevents future SEO regressions |
+| P3 | Refresh related docs after implementation | Small | `docs/**` | Keeps the plan accurate |
 
 ---
 
-### SEO-17 — Internal linking & navigation breadcrumbs (visible)
+## Actions requiring Jinee/business input
 
-**Problem**: No visible breadcrumb navigation on project pages (only `<h1>` with project title). Users arriving from Google on a project page have no visual path back to the portfolio category. Visible breadcrumbs also reinforce the structured data (SEO-9).
+The detailed checklist lives in `docs/SEO-CUSTOMER-INPUT.md`.
 
-**Fix**: Add a small `<nav aria-label="Breadcrumb">` above the page `<h1>` on all portfolio project and category pages with links: Home → Portfolio → {Category} → {Project title}.
-
-**Impact**: Improved UX reduces bounce rate; reinforces site hierarchy signals to Google.
-
----
-
-### SEO-18 — Open Graph images per portfolio project
-
-**Problem**: Each project's `ogImage` field in the JSON config uses a 800px WebP thumbnail. Ideal OG images are 1200×630px (1.91:1 aspect ratio). Landscape photography thumbnails may crop awkwardly when shared.
-
-**Fix**: Add a dedicated `ogImage` field sized 1200×630 to the image pipeline (new `build-images` size: `1200w`). Update the `ogImage` field convention in the JSON configs and `ADDING-PROJECTS.md`.
-
-**Impact**: Professional, correctly-proportioned social card previews for every project link.
-
----
-
-### SEO-19 — Google Search Console setup and monitoring
-
-**Requirement**: Deployed site.  
-**Actions**:
-1. Verify ownership via DNS TXT record or HTML tag in `layout.tsx` metadata
-2. Submit `sitemap.xml` to GSC
-3. Monitor crawl errors, manual actions, and Core Web Vitals report
-4. Set up GSC email alerts for coverage drops
+| Priority | Needed input | Effort after input | Why it matters |
+|---|---:|---:|---|
+| P0 | Which services to sell first | Medium | Determines landing page and ad strategy |
+| P0 | Primary conversion goal | Small | Required for Google Ads tracking |
+| P0 | Public phone/WhatsApp decision | Small | Improves local conversions |
+| P1 | Service deliverables and turnaround | Medium | Buyers compare reliability, not visuals only |
+| P1 | Pricing range or starting prices | Small | Improves ad lead quality |
+| P1 | Testimonials/reviews and permission | Medium | Critical trust signal |
+| P1 | Client logo permissions | Small | Makes proof more persuasive |
+| P1 | Google Business Profile status | Medium | Critical for local search |
+| P1 | Real/approximate video upload dates | Small | Improves `VideoObject` structured data |
+| P2 | Case-study notes for strongest projects | Large | Converts portfolio into long-tail SEO assets |
+| P2 | Default OG image choice | Small | Improves social previews |
+| P2 | Female photographer/videographer keyword angle | Small | Potential niche positioning if intentional |
+| P3 | Taiwan as secondary service area | Small | Affects local SEO and schema focus |
 
 ---
 
-### SEO-20 — Content strategy: project descriptions optimised for target keywords
+## Effort clusters
 
-**Problem**: Project page descriptions are written for human readers but lack structured keyword targeting. For a Singapore-based photographer, priority keywords include:
-- "event photographer singapore"
-- "corporate videographer singapore"
-- "documentary videography singapore"
-- "walking tour photography singapore"
+### Extra-small fixes: under 30 minutes each
 
-**Fix**: Audit each project's `description` (used as meta description) and first `<p>` on the project page to naturally include 1–2 relevant keyword phrases without over-optimisation.
+- Confirm current `sameAs` social URLs.
+- Add or omit Twitter/X metadata based on whether an active handle exists.
+- Adjust category metadata titles/descriptions.
+- Add missing visible page headings.
+- Remove hidden projects from sitemap.
+- Add basic canonical URLs for core pages.
 
-**Impact**: Incremental ranking improvement for high-intent local searches.
+### Small fixes: 30 minutes to 2 hours
+
+- Clean sitemap and update tests.
+- Add basic `ProfessionalService` schema.
+- Fix hero slideshow eager loading.
+- Add reusable breadcrumb schema helper.
+- Add simple homepage service intro copy using existing facts only.
+
+### Medium fixes: half day to 1 day
+
+- Create service landing page templates.
+- Add visible breadcrumbs across portfolio pages.
+- Rewrite top-priority metadata and introductory copy.
+- Add selected `ImageObject` structured data.
+- Add conversion tracking hooks.
+- Add internal linking between service pages and portfolio projects.
+
+### Large fixes: 1 to 3 days
+
+- Write full service pages with proof, deliverables, FAQs, and CTAs.
+- Rewrite all thin portfolio descriptions.
+- Create internal social media case-study pages.
+- Add case-study sections for best commercial examples.
+- Prepare Google Ads landing pages and ad group mapping.
+
+### Ongoing work
+
+- Collect reviews.
+- Publish fresh portfolio/case-study updates.
+- Monitor Google Search Console.
+- Monitor Google Ads Quality Score, search terms, landing page experience, and conversion rates.
+- Add new long-tail pages based on real impressions and leads.
 
 ---
 
-## Summary Table
+## Recommended 30-day roadmap
 
-| # | Item | Effort | Impact | Priority |
-|---|------|--------|--------|----------|
-| SEO-1 | Fix title duplication (About, Contact) | 5 min | Medium | 🔴 High |
-| SEO-2 | Homepage `metadata` export + rich description | 15 min | High | 🔴 High |
-| SEO-3 | Fix placeholder `sameAs` URLs in Person JSON-LD | 5 min | High | 🔴 High |
-| SEO-4 | Shorten `manifest.json` `short_name` | 2 min | Low | 🟡 Medium |
-| SEO-5 | Default OG image for all pages | 1 hr | High | 🔴 High |
-| SEO-6 | Expand thin project descriptions | 1–2 hr | High | 🔴 High |
-| SEO-7 | Add `twitter:site` handle | 5 min | Low | 🟢 Low |
-| SEO-8 | `noindex` imprint + privacy pages | 5 min | Medium | 🟡 Medium |
-| SEO-9 | BreadcrumbList structured data | 2 hr | Medium | 🟡 Medium |
-| SEO-10 | ImageGallery / ImageObject structured data | 3 hr | High | 🟡 Medium |
-| SEO-11 | Real `uploadDate` for VideoObject | 1 hr | High | 🟡 Medium |
-| SEO-12 | LocalBusiness / ProfessionalService schema | 30 min | High | 🟡 Medium |
-| SEO-13 | Rich Person schema on About page | 30 min | Medium | 🟡 Medium |
-| SEO-14 | Real `lastModified` dates in sitemap | 2 hr | Medium | 🟢 Low |
-| SEO-15 | Lighthouse / CWV audit (post-deploy) | 2 hr | High | 🔴 High |
-| SEO-16 | `hreflang` for bilingual content | 1 hr | Low | 🟢 Low |
-| SEO-17 | Visible breadcrumb navigation | 3 hr | Medium | 🟡 Medium |
-| SEO-18 | OG images at 1200×630 per project | 4 hr | Medium | 🟢 Low |
-| SEO-19 | Google Search Console setup | 1 hr | High | 🔴 High |
-| SEO-20 | Keyword-targeted project descriptions | 4–8 hr | High | 🟡 Medium |
+### Week 1 — Technical cleanup before ads
+
+1. Fix sitemap accuracy.
+2. Clean heading structure.
+3. Add canonical URLs.
+4. Add breadcrumb schema.
+5. Add basic local service schema.
+6. Fix hero image loading.
+7. Verify in Google Search Console after deployment.
+
+### Week 2 — Service intent pages
+
+1. Create `/services/` hub.
+2. Create event photographer and event videographer pages first.
+3. Create video producer / documentary producer page as the differentiator.
+4. Link pages to best existing portfolio work.
+5. Add CTAs to contact, Calendly, email, and optionally WhatsApp/phone.
+
+### Week 3 — Content and trust
+
+1. Rewrite the top 10 most important project descriptions.
+2. Add 3 to 5 case studies.
+3. Add testimonials or client proof if permitted.
+4. Add FAQ blocks for pricing, turnaround, deliverables, booking, and usage rights.
+
+### Week 4 — Ads readiness
+
+1. Add conversion tracking.
+2. Create one landing page per ad group.
+3. Start with exact/phrase match service keywords.
+4. Add negative keywords such as jobs, salary, course, free, internship, school, DIY, template, camera, and unrelated wedding terms if weddings are not targeted.
+5. Monitor search terms and landing page experience before scaling budget.
+
+---
+
+## Suggested keyword strategy
+
+Avoid relying only on broad terms like `photographer singapore`. They are crowded, expensive, and ambiguous. Build around more specific buyer intent.
+
+| Intent cluster | Example target phrases | Recommended page |
+|---|---|---|
+| Event photography | event photographer singapore, corporate event photographer singapore, conference photographer singapore | Event Photographer Singapore |
+| Event videography | event videographer singapore, corporate event videography singapore, event highlight video singapore | Event Videographer Singapore |
+| Combined package | photographer and videographer singapore, event photography and videography singapore | Photographer & Videographer Singapore |
+| Documentary / broadcast | documentary producer singapore, field producer singapore, local fixer singapore, documentary videographer singapore | Documentary Producer Singapore |
+| Brand content | brand videographer singapore, corporate video producer singapore, social media video production singapore | Video Producer / Social Media Content |
+| Social reels | reels creator singapore, social media videographer singapore, short-form video singapore | Social Media Content Creator Singapore |
+
+---
+
+## Older SEO items now considered complete or superseded
+
+| Former item | Status |
+|---|---|
+| About/contact title duplication | Complete: page titles now use short segment titles |
+| Homepage metadata export | Complete |
+| Manifest `short_name` | Complete |
+| Privacy/imprint `noindex` | Complete |
+| Placeholder `sameAs` URLs | Partly complete; still needs profile confirmation |
+| Default OG image | Still needs image choice |
+| Breadcrumb structured data | Still open |
+| ImageGallery/ImageObject improvements | Still open |
+| Real video upload dates | Still needs input |
+| LocalBusiness/ProfessionalService schema | Still open |
+| Rich About page Person schema | Still open |
+| Real sitemap `lastModified` values | Still open after sitemap cleanup |
+| Search Console setup | Still needs deployed-site access |
+| Keyword-targeted project descriptions | Still open |
+
+---
+
+## Sources and benchmarks consulted
+
+- [Google Search Central — SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
+- [Google Search Central — Image SEO best practices](https://developers.google.com/search/docs/appearance/google-images)
+- [Google Search Central — LocalBusiness structured data](https://developers.google.com/search/docs/appearance/structured-data/local-business)
+- [Google Search Central — Build and submit a sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)
+- [Google Business Profile Help — Improve local ranking](https://support.google.com/business/answer/7091/improve-your-local-ranking-on-google)
+- [Google Ads Help — Quality Score](https://support.google.com/google-ads/answer/6167118)
+- [Google Ads Help — Landing page performance](https://support.google.com/google-ads/answer/7543502)
+- Competitive SERP examples reviewed: teofu Media, Visual Sixty Five, Motion Pixel, Bespoke Photography, fewStones, Jose Jeuland, Mount Studio, and similar Singapore photography/videography service pages.
