@@ -2,7 +2,7 @@
  * CardSlideshow — unit tests
  *
  * Tests cover:
- *  - Initial render (all images present, first slide active)
+ *  - Initial render (only a bounded slide window is present, first slide active)
  *  - Swipe left  → advance to next slide
  *  - Swipe right → go to previous slide (wraps to last)
  *  - Wraps from last slide back to first on swipe left
@@ -23,9 +23,16 @@ jest.mock("next/image", () => ({
       placeholder?: string;
     }
   ) => {
-    const { unoptimized: _u, fill: _f, sizes: _s, placeholder: _p, ...rest } = props;
+    const {
+      unoptimized: _u,
+      fill: _f,
+      sizes: _s,
+      placeholder: _p,
+      blurDataURL,
+      ...rest
+    } = props;
     // eslint-disable-next-line @next/next/no-img-element
-    return <img alt="" {...rest} />;
+    return <img alt="" data-blur-data-url={blurDataURL} {...rest} />;
   },
 }));
 
@@ -34,6 +41,14 @@ const IMAGES = [
   { src: "/img/b-800.webp" },
   { src: "/img/c-800.webp" },
 ];
+
+const MANY_IMAGES = Array.from({ length: 12 }, (_, i) => ({
+  src: `/img/${String(i + 1).padStart(2, "0")}-800.webp`,
+}));
+
+const REPLACEMENT_IMAGES = Array.from({ length: 4 }, (_, i) => ({
+  src: `/new/${String(i + 1).padStart(2, "0")}-800.webp`,
+}));
 
 beforeEach(() => jest.useFakeTimers());
 afterEach(() => {
@@ -54,10 +69,120 @@ function swipeRight(el: Element) {
 }
 
 describe("CardSlideshow", () => {
-  it("renders one img element per image", () => {
-    const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" cardIndex={0} />);
-    // querySelector finds all <img> regardless of alt/role
+  it("renders only a bounded active/adjacent slide window when many images are provided", () => {
+    const { container } = render(<CardSlideshow images={MANY_IMAGES} alt="Gallery" cardIndex={0} />);
+
     expect(container.querySelectorAll("img")).toHaveLength(3);
+    expect(container.querySelector('img[src="/img/12-800.webp"]')).toBeInTheDocument();
+    expect(container.querySelector('img[src="/img/01-800.webp"]')).toBeInTheDocument();
+    expect(container.querySelector('img[src="/img/02-800.webp"]')).toBeInTheDocument();
+    expect(container.querySelector('img[src="/img/07-800.webp"]')).not.toBeInTheDocument();
+  });
+
+  it("keeps looping through images that were not mounted initially", () => {
+    const { container } = render(<CardSlideshow images={MANY_IMAGES} alt="Gallery" cardIndex={0} />);
+    const track = container.querySelector(".card-slideshow")!;
+
+    for (let i = 0; i < 6; i += 1) {
+      swipeLeft(track);
+    }
+
+    const activeImg = container.querySelector(".card-slideshow__slide--active img");
+    expect(activeImg).toHaveAttribute("src", MANY_IMAGES[6].src);
+    expect(container.querySelectorAll("img").length).toBeLessThan(MANY_IMAGES.length);
+  });
+
+  it("wraps through every image in a bounded large slideshow", () => {
+    const { container } = render(<CardSlideshow images={MANY_IMAGES} alt="Gallery" cardIndex={0} />);
+    const track = container.querySelector(".card-slideshow")!;
+
+    for (let i = 0; i < MANY_IMAGES.length; i += 1) {
+      swipeLeft(track);
+    }
+
+    const activeImg = container.querySelector(".card-slideshow__slide--active img");
+    expect(activeImg).toHaveAttribute("src", MANY_IMAGES[0].src);
+    expect(container.querySelectorAll("img").length).toBeLessThan(MANY_IMAGES.length);
+  });
+
+  it("detects portrait orientation from the preloaded next image", () => {
+    const OriginalImage = window.Image;
+
+    class MockPreloadImage {
+      naturalWidth = 800;
+      naturalHeight = 1200;
+      onload: (() => void) | null = null;
+      private _src = "";
+
+      set src(value: string) {
+        this._src = value;
+        this.onload?.();
+      }
+
+      get src() {
+        return this._src;
+      }
+    }
+
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).Image = jest.fn(() => new MockPreloadImage());
+
+      const { container } = render(<CardSlideshow images={MANY_IMAGES} alt="Gallery" cardIndex={0} />);
+
+      const nextSlide = container
+        .querySelector('img[src="/img/02-800.webp"]')
+        ?.closest(".card-slideshow__slide");
+      expect(nextSlide).toHaveClass("card-slideshow__slide--portrait");
+    } finally {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).Image = OriginalImage;
+    }
+  });
+
+  it("ignores stale preload portrait results after images change", () => {
+    const OriginalImage = window.Image;
+    const preloadImages: Array<{
+      naturalWidth: number;
+      naturalHeight: number;
+      onload: (() => void) | null;
+      src: string;
+    }> = [];
+
+    class MockPreloadImage {
+      naturalWidth = 800;
+      naturalHeight = 1200;
+      onload: (() => void) | null = null;
+      src = "";
+    }
+
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).Image = jest.fn(() => {
+        const image = new MockPreloadImage();
+        preloadImages.push(image);
+        return image;
+      });
+
+      const { container, rerender } = render(
+        <CardSlideshow images={MANY_IMAGES.slice(0, 4)} alt="Gallery" cardIndex={0} />
+      );
+      const stalePreload = preloadImages[0];
+
+      rerender(<CardSlideshow images={REPLACEMENT_IMAGES} alt="Gallery" cardIndex={0} />);
+
+      act(() => {
+        stalePreload.onload?.();
+      });
+
+      const replacementNextSlide = container
+        .querySelector('img[src="/new/02-800.webp"]')
+        ?.closest(".card-slideshow__slide");
+      expect(replacementNextSlide).not.toHaveClass("card-slideshow__slide--portrait");
+    } finally {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).Image = OriginalImage;
+    }
   });
 
   it("the first slide is active on initial render", () => {
@@ -102,7 +227,7 @@ describe("CardSlideshow", () => {
       <CardSlideshow images={imagesWithBlur} alt="Blur test" cardIndex={0} />
     );
     const img = container.querySelector("img")!;
-    expect(img).toHaveAttribute("blurDataURL", "data:image/webp;base64,TESTBLUR");
+    expect(img).toHaveAttribute("data-blur-data-url", "data:image/webp;base64,TESTBLUR");
   });
 
   it("does not start autoplay when only one image is provided", () => {
@@ -122,17 +247,19 @@ describe("CardSlideshow", () => {
     const mockImageInstance = { src: "" };
     const MockImage = jest.fn(() => mockImageInstance);
     const origImage = window.Image;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any).Image = MockImage;
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).Image = MockImage;
 
-    const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" cardIndex={0} />);
-    swipeLeft(container.querySelector(".card-slideshow")!);
+      const { container } = render(<CardSlideshow images={IMAGES} alt="Gallery" cardIndex={0} />);
+      swipeLeft(container.querySelector(".card-slideshow")!);
 
-    // After advancing to index 1, the next image (index 2) should be preloaded
-    expect(MockImage).toHaveBeenCalled();
-    expect(mockImageInstance.src).toBe(IMAGES[2].src);
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any).Image = origImage;
+      // After advancing to index 1, the next image (index 2) should be preloaded
+      expect(MockImage).toHaveBeenCalled();
+      expect(mockImageInstance.src).toBe(IMAGES[2].src);
+    } finally {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).Image = origImage;
+    }
   });
 });

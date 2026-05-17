@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useCallback, useState, useEffect } from "react";
 import Image from "next/image";
 import { css, cx } from "@/styled-system/css";
 import { useSwipe } from "@/hooks/useSwipe";
@@ -53,11 +53,17 @@ interface CardSlideshowProps {
   cardIndex?: number;
 }
 
+function getRenderedSlideIndices(total: number, activeIndex: number): number[] {
+  if (total <= 3) return Array.from({ length: total }, (_, i) => i);
+
+  const prevIndex = (activeIndex - 1 + total) % total;
+  const nextIndex = (activeIndex + 1) % total;
+  return [prevIndex, activeIndex, nextIndex];
+}
+
 export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
   const [idx, setIdx] = useState(0);
-  const [portraitFlags, setPortraitFlags] = useState<boolean[]>(() =>
-    Array(images.length).fill(false)
-  );
+  const [portraitBySrc, setPortraitBySrc] = useState<Record<string, boolean>>({});
   // Lazy initializer runs exactly once (not on re-renders) — safe to use
   // Math.random() here. Each card gets its own random interval and start
   // delay so no two cards ever stay in sync.
@@ -69,6 +75,16 @@ export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
   const next = () => setIdx((prev) => (prev + 1) % images.length);
   const prev = () => setIdx((prev) => (prev - 1 + images.length) % images.length);
   const { handlers: swipeHandlers } = useSwipe({ onSwipeLeft: next, onSwipeRight: prev });
+
+  const markPortraitFlag = useCallback((src: string, width: number, height: number) => {
+    if (width <= 0 || height <= width) return;
+    setPortraitBySrc((prev) => {
+      if (prev[src]) return prev;
+      return { ...prev, [src]: true };
+    });
+  }, []);
+
+  const activeIndex = images.length === 0 ? 0 : idx % images.length;
 
   useEffect(() => {
     if (images.length <= 1) return;
@@ -93,27 +109,34 @@ export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
   // in the browser cache before the slide transition fires.
   useEffect(() => {
     if (images.length <= 1) return;
-    const nextSrc = images[(idx + 1) % images.length].src;
+    const nextIndex = (activeIndex + 1) % images.length;
+    const nextSrc = images[nextIndex].src;
     const img = new window.Image();
+    let cancelled = false;
+    img.onload = () => {
+      if (cancelled) return;
+      if (images[nextIndex]?.src !== nextSrc) return;
+      markPortraitFlag(nextSrc, img.naturalWidth, img.naturalHeight);
+    };
     img.src = nextSrc;
-  }, [idx, images]);
 
-  function handleLoad(e: React.SyntheticEvent<HTMLImageElement>, i: number) {
+    return () => {
+      cancelled = true;
+      img.onload = null;
+    };
+  }, [activeIndex, images, markPortraitFlag]);
+
+  function handleLoad(e: React.SyntheticEvent<HTMLImageElement>, src: string) {
     const img = e.currentTarget;
-    if (img.naturalWidth > 0 && img.naturalHeight > img.naturalWidth) {
-      setPortraitFlags((prev) => {
-        const next = [...prev];
-        next[i] = true;
-        return next;
-      });
-    }
+    markPortraitFlag(src, img.naturalWidth, img.naturalHeight);
   }
 
   return (
     <div className={cx(slideshowRoot, "card-slideshow")} {...swipeHandlers}>
-      {images.map((image, i) => {
-        const isPortrait = portraitFlags[i];
-        const active = i === idx;
+      {getRenderedSlideIndices(images.length, activeIndex).map((i) => {
+        const image = images[i];
+        const isPortrait = portraitBySrc[image.src];
+        const active = i === activeIndex;
         return (
           <div
             key={image.src}
@@ -147,7 +170,7 @@ export default function CardSlideshow({ images, alt }: CardSlideshowProps) {
               }}
               unoptimized
               {...(image.blur ? { placeholder: "blur" as const, blurDataURL: image.blur } : {})}
-              onLoad={(e) => handleLoad(e, i)}
+              onLoad={(e) => handleLoad(e, image.src)}
             />
           </div>
         );
