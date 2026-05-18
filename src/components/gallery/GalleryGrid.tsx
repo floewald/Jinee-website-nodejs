@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef, useEffect } from "react";
 import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { cx } from "@/styled-system/css";
@@ -35,46 +34,6 @@ export default function GalleryGrid({
   onImageClick,
   useColumnsLayout = false,
 }: GalleryGridProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    const items = Array.from(
-      container.querySelectorAll<HTMLElement>(".gallery-item")
-    );
-    if (items.length === 0) return;
-
-    // Pre-mark items already in viewport so they never jump when data-reveal-ready is added
-    items.forEach((item) => {
-      const rect = item.getBoundingClientRect();
-      if (
-        rect.top < window.innerHeight &&
-        rect.bottom > 0 &&
-        rect.left < window.innerWidth &&
-        rect.right > 0
-      ) {
-        item.classList.add("reveal--visible");
-      }
-    });
-    // Set attribute AFTER pre-marking so visible items stay put (no translateY flash)
-    container.setAttribute("data-reveal-ready", "");
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            (entry.target as HTMLElement).classList.add("reveal--visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.01, rootMargin: "0px 50px 0px 0px" }
-    );
-    items.forEach((item) => observer.observe(item));
-    return () => observer.disconnect();
-  }, [images, useColumnsLayout]);
-
   if (images.length === 0) return null;
 
   const inColumns = useColumnsLayout;
@@ -106,14 +65,14 @@ export default function GalleryGrid({
 
   if (useColumnsLayout) {
     return (
-      <div ref={containerRef} className={cx(galleryCols, "gallery-cols")}>
+      <div className={cx(galleryCols, "gallery-cols")}>
         {galleryItems}
       </div>
     );
   }
 
   return (
-    <div ref={containerRef}>
+    <div>
       <Masonry
         breakpointCols={BREAKPOINT_COLS}
         className={cx(projectGallery, "project-gallery")}
