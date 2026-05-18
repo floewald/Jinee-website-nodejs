@@ -8,6 +8,18 @@ interface RevealGridProps {
   className?: string;
 }
 
+const REVEAL_BOTTOM_BUFFER_PX = 160;
+const REVEAL_SIDE_BUFFER_PX = 50;
+
+function isWithinRevealRange(rect: DOMRect) {
+  return (
+    rect.top < window.innerHeight + REVEAL_BOTTOM_BUFFER_PX &&
+    rect.bottom > -REVEAL_BOTTOM_BUFFER_PX &&
+    rect.left < window.innerWidth + REVEAL_SIDE_BUFFER_PX &&
+    rect.right > -REVEAL_SIDE_BUFFER_PX
+  );
+}
+
 /**
  * Thin client wrapper that adds scroll-triggered slide-in animation to
  * .project-card and .gallery-item children via IntersectionObserver.
@@ -28,12 +40,7 @@ export default function RevealGrid({ children, className }: RevealGridProps) {
     // Pre-mark items already in viewport so they never jump on mount
     items.forEach((item) => {
       const rect = item.getBoundingClientRect();
-      if (
-        rect.top < window.innerHeight &&
-        rect.bottom > 0 &&
-        rect.left < window.innerWidth &&
-        rect.right > 0
-      ) {
+      if (isWithinRevealRange(rect)) {
         item.classList.add("reveal--visible");
       }
     });
@@ -48,7 +55,10 @@ export default function RevealGrid({ children, className }: RevealGridProps) {
           }
         });
       },
-      { threshold: 0.01, rootMargin: "0px 50px 0px 0px" }
+      {
+        threshold: 0,
+        rootMargin: `0px ${REVEAL_SIDE_BUFFER_PX}px ${REVEAL_BOTTOM_BUFFER_PX}px ${REVEAL_SIDE_BUFFER_PX}px`,
+      }
     );
     items.forEach((item) => observer.observe(item));
     return () => observer.disconnect();
