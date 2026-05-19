@@ -24,16 +24,33 @@ describe("RevealGrid", () => {
     expect(container.firstChild).toHaveClass("project-grid");
   });
 
-  it("sets data-reveal-ready after mount", () => {
+  it("does not gate visibility behind data-reveal-ready", () => {
     const { container } = render(
       <RevealGrid>
         <div className="project-card">card</div>
       </RevealGrid>
     );
-    expect(container.firstChild).toHaveAttribute("data-reveal-ready");
+    expect(container.firstChild).not.toHaveAttribute("data-reveal-ready");
   });
 
-  it("observes .project-card children", () => {
+  it("observes out-of-range .project-card children for progressive animation", () => {
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(
+        () =>
+          ({
+            top: 2000,
+            bottom: 2200,
+            left: 0,
+            right: 200,
+            width: 200,
+            height: 200,
+            x: 0,
+            y: 2000,
+            toJSON: () => ({}),
+          }) as DOMRect
+      );
+
     render(
       <RevealGrid>
         <a className="project-card">Card 1</a>

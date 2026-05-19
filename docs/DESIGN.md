@@ -113,9 +113,9 @@ git push origin main           → GitHub Actions deploys out/ via FTP
 | `Navigation` | Client | `src/components/layout/` | Desktop submenu, mobile hamburger |
 | `Footer` | Server | `src/components/layout/` | Email, Calendly, legal links |
 | `CookieBanner` | Client | `src/components/layout/` | GDPR consent banner |
-| `GalleryGrid` | Client | `src/components/gallery/` | Responsive image grid; scroll-reveal via IntersectionObserver; portrait detection |
+| `GalleryGrid` | Client | `src/components/gallery/` | Responsive image grid; fail-open load-triggered tile motion; lightbox entry |
 | `GalleryWithLightbox` | Client | `src/components/gallery/` | Composes GalleryGrid + useLightbox + Lightbox |
-| `GalleryWithDownload` | Client | `src/components/gallery/` | Adds DownloadToolbar + GallerySelection + DownloadModal |
+| `GalleryWithDownload` | Client | `src/components/download/` | Adds DownloadToolbar + GallerySelection + DownloadModal |
 | `GallerySection` | Client | `src/components/sections/` | Slideshow + GalleryWithLightbox (homepage collage) |
 | `Lightbox` | Client | `src/components/gallery/` | Portal overlay; keyboard + swipe nav; portrait fill |
 | `Slideshow` | Client | `src/components/gallery/` | Full-image auto-advance strip |
@@ -123,10 +123,10 @@ git push origin main           → GitHub Actions deploys out/ via FTP
 | `VideoPlayer` | Client | `src/components/portfolio/` | Lazy YouTube embed via IntersectionObserver |
 | `ProjectCardsGrid` | Server | `src/components/portfolio/` | Category index grid (shared by photography + video) |
 | `ContactForm` | Client | `src/components/sections/` | AJAX form with CSRF, honeypot, sessionStorage draft |
-| `DownloadModal` | Client | `src/components/gallery/` | Password + CSRF → ZIP download |
-| `DownloadToolbar` | Client | `src/components/gallery/` | Select all, count, download button |
-| `RevealGrid` | Client | `src/components/portfolio/` | Scroll-triggered slide-in wrapper for project cards via IntersectionObserver |
-| `GallerySelection` | Client | `src/components/gallery/` | Checkbox overlay on GalleryGrid |
+| `DownloadModal` | Client | `src/components/download/` | Password + CSRF → ZIP download |
+| `DownloadToolbar` | Client | `src/components/download/` | Select all, count, download button |
+| `RevealGrid` | Client | `src/components/portfolio/` | Fail-open near-viewport motion wrapper for cards/previews |
+| `GallerySelection` | Client | `src/components/download/` | Checkbox overlay on GalleryGrid |
 
 ### 3.4 Custom hooks
 
@@ -136,6 +136,7 @@ git push origin main           → GitHub Actions deploys out/ via FTP
 | `useLightbox` | `src/hooks/useLightbox.ts` | Open/close/index; keyboard event listener. |
 | `useIntersection` | `src/hooks/useIntersection.ts` | `IntersectionObserver` wrapper. `once` mode for lazy loads. |
 | `useMediaQuery` | `src/hooks/useMediaQuery.ts` | SSR-safe boolean for a media query string. |
+| `useProgressiveReveal` | `src/hooks/useProgressiveReveal.ts` | Scroll/viewport motion for teaser content. Fail-open by design. |
 
 ---
 
@@ -272,12 +273,11 @@ RootLayout
 page.tsx  [Server]
 ├── Slideshow                [Client]  (if showSlideshow !== false)
 ├── GalleryWithLightbox      [Client]  (if !enableDownload)
-│   ├── GalleryGrid          [Server]
+│   ├── GalleryGrid          [Client]
 │   └── Lightbox             [Client, portal]
 └── GalleryWithDownload      [Client]  (if enableDownload)
     ├── DownloadToolbar      [Client]
     ├── GallerySelection     [Client]
-    │   └── GalleryGrid      [Server]
     ├── Lightbox             [Client, portal]
     └── DownloadModal        [Client]
 ```

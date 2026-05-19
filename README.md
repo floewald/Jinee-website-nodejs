@@ -99,12 +99,15 @@ npm run dev
 │   │   ├── useSwipe.ts        # Touch swipe detection
 │   │   ├── useLightbox.ts     # Lightbox open/close/navigate state
 │   │   ├── useIntersection.ts # IntersectionObserver wrapper
+│   │   ├── useProgressiveReveal.ts # Fail-open motion for cards/previews
 │   │   └── useMediaQuery.ts   # Responsive breakpoint boolean
 │   ├── lib/
 │   │   ├── portfolio-config.ts  # Typed project config loader (Zod-validated at build time)
 │   │   ├── portfolio-schemas.ts # Zod schemas for photography / video / social-media
 │   │   ├── scaffold-project.ts  # Pure logic for create-project CLI
 │   │   ├── image-utils.ts       # WebP URL helpers (thumb/md/lg)
+│   │   ├── reveal-config.ts     # Central motion tuning tokens
+│   │   ├── reveal-helpers.ts    # Web Animations reveal helpers
 │   │   └── constants.ts         # Site-wide constants
 │   ├── types/
 │   │   └── portfolio.ts         # TypeScript types for portfolio data
@@ -130,6 +133,7 @@ npm run dev
 │   └── validate-manifests.mjs # Build-time manifest checker
 ├── e2e/                       # Playwright end-to-end tests
 ├── docs/                      # Developer & contributor documentation
+│   ├── GLOSSARY.md
 │   ├── ARCHITECTURE.md
 │   ├── DEVELOPMENT.md
 │   ├── DEPLOYMENT.md
@@ -151,6 +155,7 @@ npm run dev
 | Document | Audience | Purpose |
 |----------|----------|---------|
 | [docs/GETTING-STARTED.md](docs/GETTING-STARTED.md) | **New developers** | Complete beginner's guide — zero-knowledge intro to the tech stack, first-time setup, and day-to-day workflow |
+| [docs/GLOSSARY.md](docs/GLOSSARY.md) | Everyone | Shared vocabulary for repo-specific terms, motion patterns, and gallery concepts |
 | [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) | Developers / PMs | Functional and non-functional requirements; deferred items |
 | [docs/DESIGN.md](docs/DESIGN.md) | Developers | Detailed software design: modules, data model, algorithms, security, testing |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Developers | Component hierarchy, data flow, image pipeline, PHP endpoints |

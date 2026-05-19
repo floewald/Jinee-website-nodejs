@@ -83,7 +83,7 @@ with pixel-perfect visual regression validation.
 | Font faces + design tokens + base reset | ~110 | Global foundation, CSS custom properties |
 | Container + links + typography | ~30 | @layer base rules, global selectors |
 | Section backgrounds (full-bleed) | ~20 | Used by 8+ components with complex descendant selectors |
-| Scroll-reveal animations | ~35 | `[data-reveal-ready]` attribute selectors, dynamic `.reveal--visible` class |
+| Progressive reveal motion | ~10 | Globals keep only notes/selectors; fail-open reveal logic moved to TS helpers/hooks |
 | Hover transforms + context selectors | ~30 | Cross-component descendant selectors (e.g. `.project-card:hover .project-card__thumb img`) |
 | Selection mode + checkbox `:has()` | ~20 | CSS `:has()` pseudo-class not supported in Panda |
 | Reduced motion + mobile overrides | ~25 | Global `@media` queries |

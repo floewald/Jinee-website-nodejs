@@ -106,6 +106,8 @@ export interface GalleryImage {
   alt: string;
   srcFull?: string;
   blur?: string;
+  width?: number;
+  height?: number;
 }
 
 interface LightboxProps {
@@ -352,4 +354,3 @@ export default function Lightbox({
     document.body
   );
 }
-

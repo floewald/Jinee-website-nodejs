@@ -1,8 +1,11 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { cx } from "@/styled-system/css";
+import { animateRevealElement, isElementWithinRevealRange } from "@/lib/reveal-helpers";
+import { useLoadedGalleryReveal } from "@/hooks/useLoadedGalleryReveal";
 import type { GalleryImage } from "./Lightbox";
 import {
   projectGallery,
@@ -34,6 +37,18 @@ export default function GalleryGrid({
   onImageClick,
   useColumnsLayout = false,
 }: GalleryGridProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  useLoadedGalleryReveal(containerRef);
+
+  function handleImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
+    // Gallery tiles use image-load reveal, not viewport reveal, because the
+    // gallery must stay visible even if layout settles late on Safari.
+    const item = e.currentTarget.closest(".gallery-item");
+    if (item instanceof HTMLElement && isElementWithinRevealRange(item)) {
+      animateRevealElement(item);
+    }
+  }
+
   if (images.length === 0) return null;
 
   const inColumns = useColumnsLayout;
@@ -52,27 +67,28 @@ export default function GalleryGrid({
       <Image
         src={img.src}
         alt={img.alt}
-        width={800}
-        height={0}
+        width={img.width ?? 800}
+        height={img.height ?? 0}
         loading="lazy"
         className={cx(galleryImg, "gallery-img")}
         unoptimized
         style={{ height: "auto" }}
         {...(img.blur ? { placeholder: "blur" as const, blurDataURL: img.blur } : {})}
+        onLoad={handleImageLoad}
       />
     </button>
   ));
 
   if (useColumnsLayout) {
     return (
-      <div className={cx(galleryCols, "gallery-cols")}>
+      <div ref={containerRef} className={cx(galleryCols, "gallery-cols")}>
         {galleryItems}
       </div>
     );
   }
 
   return (
-    <div>
+    <div ref={containerRef}>
       <Masonry
         breakpointCols={BREAKPOINT_COLS}
         className={cx(projectGallery, "project-gallery")}
