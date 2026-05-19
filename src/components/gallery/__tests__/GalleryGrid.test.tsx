@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { render, screen, fireEvent } from "@testing-library/react";
 import GalleryGrid from "@/components/gallery/GalleryGrid";
 
@@ -24,6 +26,18 @@ const IMAGES = [
   { src: "/img/b-800.webp", alt: "Photo B", srcFull: "/img/b-1600.webp" },
   { src: "/img/c-800.webp", alt: "Photo C", srcFull: "/img/c-1600.webp" },
 ];
+
+const GLOBALS_CSS = fs.readFileSync(
+  path.join(process.cwd(), "src/app/globals.css"),
+  "utf8"
+);
+
+beforeAll(() => {
+  const style = document.createElement("style");
+  style.setAttribute("data-testid", "globals-css");
+  style.textContent = GLOBALS_CSS;
+  document.head.appendChild(style);
+});
 
 describe("GalleryGrid", () => {
   it("renders a grid item for every image", () => {
@@ -84,5 +98,17 @@ describe("GalleryGrid", () => {
     render(<GalleryGrid images={IMAGES} onImageClick={jest.fn()} useColumnsLayout />);
     expect(document.querySelector(".gallery-cols")).toBeInTheDocument();
     expect(screen.queryByTestId("masonry-grid")).toBeNull();
+  });
+
+  it("keeps gallery items visible by default even before any reveal class is applied", () => {
+    render(
+      <div data-reveal-ready="">
+        <GalleryGrid images={IMAGES} onImageClick={jest.fn()} />
+      </div>
+    );
+
+    const firstItem = screen.getByRole("img", { name: "Photo A" }).closest("button");
+    expect(firstItem).not.toBeNull();
+    expect(window.getComputedStyle(firstItem!).opacity).not.toBe("0");
   });
 });

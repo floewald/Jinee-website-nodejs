@@ -1,8 +1,10 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { cx } from "@/styled-system/css";
+import { animateRevealElement } from "@/lib/reveal-helpers";
 import type { GalleryImage } from "@/components/gallery/Lightbox";
 import {
   projectGallery,
@@ -39,76 +41,104 @@ export default function GallerySelection({
   onImageClick,
   onSelectionChange,
 }: GallerySelectionProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const animateLoadedItems = () => {
+      container.querySelectorAll<HTMLImageElement>(".gallery-item img").forEach((img) => {
+        if (!img.complete) return;
+        const item = img.closest(".gallery-item");
+        if (item instanceof HTMLElement) animateRevealElement(item);
+      });
+    };
+
+    animateLoadedItems();
+    const timeoutId = window.setTimeout(animateLoadedItems, 400);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [images]);
+
+  function handleImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
+    const item = e.currentTarget.closest(".gallery-item");
+    if (item instanceof HTMLElement) animateRevealElement(item);
+  }
+
   return (
-    <Masonry
-      breakpointCols={BREAKPOINT_COLS}
-      className={cx(projectGallery, "project-gallery", selectionMode && "selection-mode")}
-      columnClassName={cx(projectGalleryCol, "project-gallery__col")}
-    >
-      {images.map((img, i) => {
-        const filename = toDownloadFilename(img.src);
-        const isChecked = selected.includes(filename);
+    <div ref={containerRef}>
+      <Masonry
+        breakpointCols={BREAKPOINT_COLS}
+        className={cx(projectGallery, "project-gallery", selectionMode && "selection-mode")}
+        columnClassName={cx(projectGalleryCol, "project-gallery__col")}
+      >
+        {images.map((img, i) => {
+          const filename = toDownloadFilename(img.src);
+          const isChecked = selected.includes(filename);
 
-        return (
-          <div key={`${img.src}-${i}`} className={cx(galleryItem, "gallery-item")}>
-            <button
-              className={cx(galleryItemTrigger, "gallery-item__trigger")}
-              onClick={() => {
-                if (selectionMode) {
-                  onSelectionChange(filename, !isChecked);
-                } else {
-                  onImageClick(i);
-                }
-              }}
-              aria-label={
-                selectionMode
-                  ? `${isChecked ? "Deselect" : "Select"} ${img.alt}`
-                  : `Open image: ${img.alt}`
-              }
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                width={800}
-                height={0}
-                loading="lazy"
-                className={cx(galleryImg, "gallery-img")}
-                unoptimized
-              />
-            </button>
-
-            {selectionMode && (
-              <label className={cx(galleryCheckbox, "gallery-checkbox")}>
-                <input
-                  type="checkbox"
-                  className={cx(inlineSelect, "inline-select")}
-                  aria-label={`Select ${img.alt} for download`}
-                  value={filename}
-                  checked={isChecked}
-                  onChange={(e) =>
-                    onSelectionChange(filename, e.target.checked)
+          return (
+            <div key={`${img.src}-${i}`} className={cx(galleryItem, "gallery-item")}>
+              <button
+                className={cx(galleryItemTrigger, "gallery-item__trigger")}
+                onClick={() => {
+                  if (selectionMode) {
+                    onSelectionChange(filename, !isChecked);
+                  } else {
+                    onImageClick(i);
                   }
-                  tabIndex={-1}
+                }}
+                aria-label={
+                  selectionMode
+                    ? `${isChecked ? "Deselect" : "Select"} ${img.alt}`
+                    : `Open image: ${img.alt}`
+                }
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  width={800}
+                  height={0}
+                  loading="lazy"
+                  className={cx(galleryImg, "gallery-img")}
+                  unoptimized
+                  onLoad={handleImageLoad}
                 />
-                <svg
-                  className={cx(galleryCheckboxIcon, "gallery-checkbox-icon")}
-                  viewBox="0 0 22 22"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M 3.5 11.5 L 8.5 16.5 L 19 5"
-                    stroke="#595959"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+              </button>
+
+              {selectionMode && (
+                <label className={cx(galleryCheckbox, "gallery-checkbox")}>
+                  <input
+                    type="checkbox"
+                    className={cx(inlineSelect, "inline-select")}
+                    aria-label={`Select ${img.alt} for download`}
+                    value={filename}
+                    checked={isChecked}
+                    onChange={(e) =>
+                      onSelectionChange(filename, e.target.checked)
+                    }
+                    tabIndex={-1}
                   />
-                </svg>
-              </label>
-            )}
-          </div>
-        );
-      })}
-    </Masonry>
+                  <svg
+                    className={cx(galleryCheckboxIcon, "gallery-checkbox-icon")}
+                    viewBox="0 0 22 22"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M 3.5 11.5 L 8.5 16.5 L 19 5"
+                      stroke="#595959"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </label>
+              )}
+            </div>
+          );
+        })}
+      </Masonry>
+    </div>
   );
 }
