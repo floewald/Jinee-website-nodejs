@@ -256,37 +256,11 @@ section { margin-bottom: 0; padding-top: 0.5rem; padding-bottom: 0.5rem; }
    Scroll-reveal, hover transforms, and context-dependent selectors remain here.
    ══════════════════════════════════════════════════════════════════════════════ */
 
-/* ─── Scroll-reveal animation ───────────────────────────────────────────────
-   Items start hidden only once JS has set data-reveal-ready on the container.
-   IntersectionObserver then adds .reveal--visible when items scroll into view.
-   ──────────────────────────────────────────────────────────────────────────── */
-[data-reveal-ready] .gallery-item {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.45s ease, transform 0.45s ease;
-}
-[data-reveal-ready] .gallery-item.reveal--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-[data-reveal-ready] .project-card {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.45s ease, transform 0.45s ease;
-}
-[data-reveal-ready] .project-card.reveal--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-[data-reveal-ready] .instagram-preview {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.45s ease, transform 0.45s ease;
-}
-[data-reveal-ready] .instagram-preview.reveal--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* ─── Progressive reveal animation ─────────────────────────────────────────
+   Scroll-based motion is handled via the Web Animations API in
+   `useProgressiveReveal`. Content stays visible by default, so JS/layout
+   timing issues can't leave cards or gallery items hidden.
+   ────────────────────────────────────────────────────────────────────────── */
 
 /* ─── Context-dependent selectors (globals only) ────────────────────────── */
 a.project-card,
@@ -376,5 +350,4 @@ a.project-card:focus { color: var(--charcoal); text-decoration: none; }
 @media (max-width: 560px) {
   :root { --site-hero-mobile-height: 104px; }
 }
-
 
