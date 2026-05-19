@@ -4,6 +4,8 @@ import {
   REVEAL_DURATION_MS,
   REVEAL_EASING,
   REVEAL_OFFSET_PX,
+  REVEAL_RESCAN_LONG_MS,
+  REVEAL_RESCAN_SHORT_MS,
   REVEAL_SIDE_BUFFER_PX,
 } from "@/lib/reveal-config";
 import { animateRevealElement } from "@/lib/reveal-helpers";
@@ -47,6 +49,12 @@ export function useProgressiveReveal(
   const offsetPx = options.offsetPx ?? DEFAULT_OPTIONS.offsetPx;
   const easing = options.easing ?? DEFAULT_OPTIONS.easing;
 
+  /**
+   * Use for teaser content that should feel scroll-aware, not for core gallery
+   * tiles. Teasers can animate on viewport entry; galleries need a load-aware
+   * path because late image/layout settlement on Safari previously caused hidden
+   * content bugs.
+   */
   useEffect(() => {
     const root = ref.current;
     if (!root) return;
@@ -61,6 +69,9 @@ export function useProgressiveReveal(
     if (items.length === 0) return;
 
     const scanVisibleItems = () => {
+      // Hydration and late card thumbnail sizing can shift teaser geometry
+      // after first paint. Re-scanning lets near-viewport cards still animate
+      // without ever hiding content if early geometry was incomplete.
       items.forEach((item) => {
         if (isWithinRevealRange(item.getBoundingClientRect(), resolvedOptions)) {
           animateRevealElement(item, resolvedOptions);
@@ -80,7 +91,7 @@ export function useProgressiveReveal(
       },
       {
         threshold: 0,
-        rootMargin: `0px ${resolvedOptions.sideBufferPx}px ${resolvedOptions.bottomBufferPx}px ${resolvedOptions.sideBufferPx}px`,
+        rootMargin: `${resolvedOptions.bottomBufferPx}px ${resolvedOptions.sideBufferPx}px ${resolvedOptions.bottomBufferPx}px ${resolvedOptions.sideBufferPx}px`,
       }
     );
 
@@ -89,9 +100,11 @@ export function useProgressiveReveal(
       observer.observe(item);
     });
 
+    // Short delayed passes catch late layout stabilization from image decode
+    // and static-export hydration without turning reveal into a correctness gate.
     const rescanTimeouts = [
-      window.setTimeout(scanVisibleItems, 180),
-      window.setTimeout(scanVisibleItems, 600),
+      window.setTimeout(scanVisibleItems, REVEAL_RESCAN_SHORT_MS),
+      window.setTimeout(scanVisibleItems, REVEAL_RESCAN_LONG_MS),
     ];
 
     window.addEventListener("load", scanVisibleItems);

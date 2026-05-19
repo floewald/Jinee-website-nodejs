@@ -22,9 +22,9 @@ jest.mock("react-masonry-css", () => ({
 }));
 
 const IMAGES = [
-  { src: "/img/a-800.webp", alt: "Photo A", srcFull: "/img/a-1600.webp" },
-  { src: "/img/b-800.webp", alt: "Photo B", srcFull: "/img/b-1600.webp" },
-  { src: "/img/c-800.webp", alt: "Photo C", srcFull: "/img/c-1600.webp" },
+  { src: "/img/a-800.webp", alt: "Photo A", srcFull: "/img/a-1600.webp", width: 800, height: 540 },
+  { src: "/img/b-800.webp", alt: "Photo B", srcFull: "/img/b-1600.webp", width: 800, height: 1200 },
+  { src: "/img/c-800.webp", alt: "Photo C", srcFull: "/img/c-1600.webp", width: 800, height: 533 },
 ];
 
 const GLOBALS_CSS = fs.readFileSync(
@@ -98,6 +98,14 @@ describe("GalleryGrid", () => {
     render(<GalleryGrid images={IMAGES} onImageClick={jest.fn()} useColumnsLayout />);
     expect(document.querySelector(".gallery-cols")).toBeInTheDocument();
     expect(screen.queryByTestId("masonry-grid")).toBeNull();
+  });
+
+  it("passes intrinsic width and height through to gallery images", () => {
+    render(<GalleryGrid images={IMAGES} onImageClick={jest.fn()} />);
+
+    expect(screen.getByRole("img", { name: "Photo A" })).toHaveAttribute("width", "800");
+    expect(screen.getByRole("img", { name: "Photo A" })).toHaveAttribute("height", "540");
+    expect(screen.getByRole("img", { name: "Photo B" })).toHaveAttribute("height", "1200");
   });
 
   it("keeps gallery items visible by default even before any reveal class is applied", () => {

@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { cx } from "@/styled-system/css";
-import { animateRevealElement } from "@/lib/reveal-helpers";
+import { animateRevealElement, isElementWithinRevealRange } from "@/lib/reveal-helpers";
+import { useLoadedGalleryReveal } from "@/hooks/useLoadedGalleryReveal";
 import type { GalleryImage } from "./Lightbox";
 import {
   projectGallery,
@@ -37,28 +38,15 @@ export default function GalleryGrid({
   useColumnsLayout = false,
 }: GalleryGridProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const animateLoadedItems = () => {
-      container.querySelectorAll<HTMLImageElement>(".gallery-item img").forEach((img) => {
-        if (!img.complete) return;
-        const item = img.closest(".gallery-item");
-        if (item instanceof HTMLElement) animateRevealElement(item);
-      });
-    };
-
-    animateLoadedItems();
-    const timeoutId = window.setTimeout(animateLoadedItems, 400);
-
-    return () => window.clearTimeout(timeoutId);
-  }, [images]);
+  useLoadedGalleryReveal(containerRef);
 
   function handleImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
+    // Gallery tiles use image-load reveal, not viewport reveal, because the
+    // gallery must stay visible even if layout settles late on Safari.
     const item = e.currentTarget.closest(".gallery-item");
-    if (item instanceof HTMLElement) animateRevealElement(item);
+    if (item instanceof HTMLElement && isElementWithinRevealRange(item)) {
+      animateRevealElement(item);
+    }
   }
 
   if (images.length === 0) return null;
@@ -79,8 +67,8 @@ export default function GalleryGrid({
       <Image
         src={img.src}
         alt={img.alt}
-        width={800}
-        height={0}
+        width={img.width ?? 800}
+        height={img.height ?? 0}
         loading="lazy"
         className={cx(galleryImg, "gallery-img")}
         unoptimized

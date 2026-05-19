@@ -101,7 +101,7 @@ globals.css                         (unlayered — always wins)
   ├── Font faces + CSS custom properties (design tokens)
   ├── Base reset / typography / container
   ├── Section backgrounds (full-bleed escape technique)
-  ├── Scroll-reveal animations ([data-reveal-ready])
+  ├── Fail-open motion notes (WAAPI-driven helpers live in TS)
   ├── Cross-component hover transforms
   ├── Selection mode + :has() pseudo-class rules
   ├── Reduced-motion + mobile global overrides
@@ -139,7 +139,7 @@ Homepage (src/app/page.tsx)
 │   ├─ GalleryGrid        — portrait images span 2 grid rows with blurred bg fill
 │   └─ Lightbox           — keyboard/swipe nav (Esc/←/→); createPortal to document.body
 ├─ FeaturedSection        — video project cards (with CardSlideshow) + IG previews
-│   └─ CardSlideshow      — auto-cycles previewImages; staggered by prime offset (see below)
+│   └─ CardSlideshow      — auto-cycles previewImages with per-card randomised timing
 ├─ AboutSection           — avatar, bilingual bio
 └─ ContactSection
     └─ ContactForm        — AJAX, CSRF, sessionStorage drafts
@@ -175,24 +175,40 @@ Social media project page (src/app/portfolio/social-media/[slug]/page.tsx)
 |------|------|---------|
 | `useSwipe` | `src/hooks/useSwipe.ts` | Detects touch swipe direction (left/right). Threshold: 50px, ignores vertical-dominated swipes. |
 | `useLightbox` | `src/hooks/useLightbox.ts` | Manages lightbox open/close/index state. Handles keyboard events (arrows, Escape). |
-| `useIntersection` | `src/hooks/useIntersection.ts` | Wraps `IntersectionObserver`. Used for lazy-loading YouTube embeds and image preloading. |
+| `useIntersection` | `src/hooks/useIntersection.ts` | Wraps `IntersectionObserver`. Used for lazy-loading YouTube embeds. |
 | `useMediaQuery` | `src/hooks/useMediaQuery.ts` | Returns `boolean` for a media query string. Used for mobile-vs-desktop nav behaviour. |
+| `useProgressiveReveal` | `src/hooks/useProgressiveReveal.ts` | Fail-open reveal hook for cards/previews. Content stays visible even if observer timing fails. |
+
+---
+
+## Fail-open motion
+
+The site now uses a **fail-open motion model**:
+
+- Cards and previews are visible by default
+- JavaScript adds motion as progressive enhancement
+- Visibility never depends on an observer callback
+
+This rule was added after Mobile Safari exposed a brittle failure mode in the old hide-then-show approach: masonry and image layout could settle after the first reveal pass, leaving some items loaded but still visually hidden.
+
+Current split:
+
+- `RevealGrid` + `useProgressiveReveal` provide **progressive reveal** for project cards, social previews, and similar teaser content near the viewport
+- `GalleryGrid` and `GallerySelection` use **load-triggered reveal** when their images finish loading, which is safer for masonry and CSS-column layouts
+
+Tuning values live in [src/lib/reveal-config.ts](/Users/florianewald/Documents/01_git_projects/Jinee-website-nodejs/src/lib/reveal-config.ts).
 
 ---
 
 ## CardSlideshow — stagger algorithm
 
-`src/components/gallery/CardSlideshow.tsx` uses a **prime-step module-level counter** to ensure all visible cards cycle independently:
+`src/components/gallery/CardSlideshow.tsx` gives each card its own randomised cycle interval and start delay on mount.
 
-```
-offset = (instanceCounter++ × 997) mod 4000  ms
-```
+- Base cycle: `SLIDESHOW_CYCLE_MS`
+- Extra jitter range: `SLIDESHOW_JITTER_MS`
+- Result: visible cards do not flip in lockstep
 
-- Cycle length: **4000 ms** per image
-- Step: **997 ms** — prime, so `gcd(997, 4000) = 1`
-- Result: 4000 unique phase offsets before any wrap-around; no two cards share a phase
-
-Why this matters: a naive 3-bucket scheme (0 / 1333 / 2667 ms) caused every 4th card to be in-phase with card 0, so groups of cards visibly flipped together. The prime step eliminates this entirely.
+Why this matters: synchronized card flips look mechanical and distract from the content. Randomised timing keeps the page feeling quieter and more editorial.
 
 Portrait images inside a slide are detected via `onLoad` measuring `naturalHeight > naturalWidth`. When detected, the slide switches to `object-fit: contain` and a CSS `::before` pseudo-element blurs the same image as a background fill — matching the lightbox portrait treatment.
 

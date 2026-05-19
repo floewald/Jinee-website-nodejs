@@ -142,7 +142,12 @@ For client-side interactivity (state, effects, browser APIs), add `'use client'`
 
 ### Gallery layout
 
-Photo galleries use `react-masonry-css` (shortest-column-first masonry). The `GalleryGrid` component renders images at their natural aspect ratio — no portrait detection or blur backgrounds. Breakpoints: 3 columns ≥900 px, 2 columns ≥480 px, 1 column below that.
+Photo galleries use two layouts:
+
+- `react-masonry-css` for standard masonry grids
+- CSS columns for some mixed-orientation galleries where browser balancing produces a steadier mobile result
+
+`GalleryGrid` renders images at their natural aspect ratio. Gallery tiles use load-triggered reveal: they stay visible by default and animate only after the image has loaded, which avoids Safari blank-row failures caused by hide-then-show reveal logic.
 
 The homepage collage images are configured in `src/content/portfolio/index-config.json` (`collageImages` array). Each entry requires `src`, `alt`, and `srcFull`.
 
@@ -164,6 +169,7 @@ the top. Use lower values (e.g. `20%`) to bias upward, higher values
 - **Global radius value:** set `--radius-site` in `src/app/globals.css` (derived: `--radius-sm`, `--radius-md`, `--radius-lg`).
 - **Homepage collage hover zoom:** adjust `transform: scale(1.1)` in `.gallery-cols .gallery-item:hover .gallery-img` in `src/app/globals.css`.
 - **Slideshow speed:** change `SLIDESHOW_CYCLE_MS` (minimum interval, default: 4000 ms) and `SLIDESHOW_JITTER_MS` (random extra range, default: 4000 ms) in `src/lib/constants.ts`. Each card picks a random interval between those two values on mount.
+- **Reveal motion:** tune `REVEAL_DURATION_MS`, `REVEAL_OFFSET_PX`, `REVEAL_EASING`, `REVEAL_BOTTOM_BUFFER_PX`, and `REVEAL_SIDE_BUFFER_PX` in `src/lib/reveal-config.ts`.
 - **About / Contact page theme:** change `ABOUT_PAGE_THEME` and `CONTACT_PAGE_THEME` in `src/lib/constants.ts`. Set either `"section-bg-charcoal"` (dark) or `"section-bg-white"` (light). Each constant controls its respective page independently.
 - **Social media grid columns:** change `SOCIAL_MEDIA_PREVIEW_COLUMNS` in `src/lib/constants.ts` (default: `5`). This controls how many cards are visible at once in each horizontal strip on the Social Media index page and the portfolio hub preview. The card width is computed from this value via a CSS custom property (`--sm-preview-cols`) using container query units (`cqi`), so no CSS edits are needed.
 - **Social media card mode:** toggle `SOCIAL_MEDIA_CARD_MODE` in `src/lib/constants.ts` (default: `true`). When `true`, each preview renders as a project card — portrait thumbnail on top, hashtags below in a card body. When `false`, only the thumbnail tile is shown. Applies to both the Social Media index page and the portfolio hub preview. Per-project hashtags are set via the `tags` string array in `src/content/portfolio/social-media.json`. Projects without a `tags` field show no body even when card mode is on.

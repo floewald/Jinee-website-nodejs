@@ -36,6 +36,16 @@ function TestGrid() {
 
 describe("useProgressiveReveal", () => {
   const animateMock = jest.fn();
+  const matchMediaMock = jest.fn().mockImplementation(() => ({
+    matches: false,
+    media: "(prefers-reduced-motion: reduce)",
+    onchange: null,
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  }));
 
   beforeAll(() => {
     Object.defineProperty(window, "IntersectionObserver", {
@@ -47,11 +57,27 @@ describe("useProgressiveReveal", () => {
       writable: true,
       value: animateMock,
     });
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: matchMediaMock,
+    });
   });
 
   beforeEach(() => {
     MockIntersectionObserver.instances = [];
     animateMock.mockReset();
+    matchMediaMock.mockClear();
+    matchMediaMock.mockImplementation(() => ({
+      matches: false,
+      media: "(prefers-reduced-motion: reduce)",
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    }));
   });
 
   it("keeps items visible by default instead of gating them behind reveal classes", () => {
@@ -82,6 +108,40 @@ describe("useProgressiveReveal", () => {
     render(<TestGrid />);
 
     await waitFor(() => expect(animateMock).toHaveBeenCalled());
+  });
+
+  it("skips WAAPI motion when the user prefers reduced motion", async () => {
+    const rectInRange = {
+      top: 120,
+      bottom: 320,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: 120,
+      toJSON: () => ({}),
+    };
+
+    matchMediaMock.mockImplementation((query: string) => ({
+      matches: query === "(prefers-reduced-motion: reduce)",
+      media: query,
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    }));
+
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(() => rectInRange as DOMRect);
+
+    render(<TestGrid />);
+
+    await waitFor(() => expect(matchMediaMock).toHaveBeenCalled());
+    expect(animateMock).not.toHaveBeenCalled();
   });
 
   it("animates items once when they intersect later", () => {

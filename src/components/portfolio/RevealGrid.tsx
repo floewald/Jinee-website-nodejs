@@ -10,13 +10,13 @@ interface RevealGridProps {
 }
 
 /**
- * Thin client wrapper that adds scroll-triggered slide-in animation to
- * .project-card and .gallery-item children via IntersectionObserver.
+ * Thin client wrapper that adds fail-open near-viewport motion to teaser
+ * content. Children stay visible by default; the observer only adds polish.
  * Keeps parent pages as Server Components.
  */
 export default function RevealGrid({ children, className }: RevealGridProps) {
   const ref = useRef<HTMLDivElement>(null);
-  useProgressiveReveal(ref, ".project-card, .gallery-item, .instagram-preview");
+  useProgressiveReveal(ref, ".project-card, .instagram-preview");
 
   return (
     <div ref={ref} className={className}>
