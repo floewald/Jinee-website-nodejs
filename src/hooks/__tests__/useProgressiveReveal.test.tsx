@@ -1,6 +1,7 @@
 import { act, render, waitFor } from "@testing-library/react";
 import { useRef } from "react";
 import { useProgressiveReveal } from "@/hooks/useProgressiveReveal";
+import { REVEAL_OFFSET_PX } from "@/lib/reveal-config";
 
 class MockIntersectionObserver {
   callback: IntersectionObserverCallback;
@@ -68,6 +69,11 @@ describe("useProgressiveReveal", () => {
     MockIntersectionObserver.instances = [];
     animateMock.mockReset();
     matchMediaMock.mockClear();
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 0,
+    });
     matchMediaMock.mockImplementation(() => ({
       matches: false,
       media: "(prefers-reduced-motion: reduce)",
@@ -108,6 +114,13 @@ describe("useProgressiveReveal", () => {
     render(<TestGrid />);
 
     await waitFor(() => expect(animateMock).toHaveBeenCalled());
+    expect(animateMock).toHaveBeenCalledWith(
+      [
+        expect.objectContaining({ transform: "translateY(0px)" }),
+        expect.objectContaining({ transform: "translateY(0)" }),
+      ],
+      expect.any(Object)
+    );
   });
 
   it("skips WAAPI motion when the user prefers reduced motion", async () => {
@@ -166,11 +179,24 @@ describe("useProgressiveReveal", () => {
 
     expect(animateMock).not.toHaveBeenCalled();
 
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 120,
+    });
+
     MockIntersectionObserver.instances[0].fire([
       { isIntersecting: true, target } as Partial<IntersectionObserverEntry>,
     ]);
 
     expect(animateMock).toHaveBeenCalledTimes(1);
+    expect(animateMock).toHaveBeenCalledWith(
+      [
+        expect.objectContaining({ transform: `translateY(${REVEAL_OFFSET_PX}px)` }),
+        expect.objectContaining({ transform: "translateY(0)" }),
+      ],
+      expect.any(Object)
+    );
 
     MockIntersectionObserver.instances[0].fire([
       { isIntersecting: true, target } as Partial<IntersectionObserverEntry>,
@@ -215,6 +241,13 @@ describe("useProgressiveReveal", () => {
     window.dispatchEvent(new Event("load"));
 
     expect(animateMock).toHaveBeenCalled();
+    expect(animateMock).toHaveBeenCalledWith(
+      [
+        expect.objectContaining({ transform: "translateY(0px)" }),
+        expect.objectContaining({ transform: "translateY(0)" }),
+      ],
+      expect.any(Object)
+    );
   });
 
   it("rescans shortly after mount for masonry reflow changes", () => {

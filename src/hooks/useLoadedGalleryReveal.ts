@@ -4,7 +4,11 @@ import {
   REVEAL_BOTTOM_BUFFER_PX,
   REVEAL_SIDE_BUFFER_PX,
 } from "@/lib/reveal-config";
-import { animateRevealElement, isElementWithinRevealRange } from "@/lib/reveal-helpers";
+import {
+  animateRevealElement,
+  hasUserScrolledSinceLoad,
+  isElementWithinRevealRange,
+} from "@/lib/reveal-helpers";
 
 /**
  * Fail-open gallery motion.
@@ -20,12 +24,14 @@ export function useLoadedGalleryReveal(ref: RefObject<Element | null>, selector 
     if (!container) return;
 
     const animateLoadedItems = () => {
+      const revealOptions = hasUserScrolledSinceLoad() ? undefined : { offsetPx: 0 };
+
       container.querySelectorAll<HTMLImageElement>(selector).forEach((img) => {
         if (!img.complete) return;
         const item = img.closest(".gallery-item");
         if (!(item instanceof HTMLElement)) return;
         if (!isElementWithinRevealRange(item)) return;
-        animateRevealElement(item);
+        animateRevealElement(item, revealOptions);
       });
     };
 
@@ -35,11 +41,13 @@ export function useLoadedGalleryReveal(ref: RefObject<Element | null>, selector 
 
     const observer = new IntersectionObserver(
       (entries) => {
+        const revealOptions = hasUserScrolledSinceLoad() ? undefined : { offsetPx: 0 };
+
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           const item = entry.target as HTMLElement;
           const img = item.querySelector<HTMLImageElement>("img");
-          if (img?.complete) animateRevealElement(item);
+          if (img?.complete) animateRevealElement(item, revealOptions);
         });
       },
       {

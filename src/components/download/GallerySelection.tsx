@@ -4,7 +4,11 @@ import { useRef } from "react";
 import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { cx } from "@/styled-system/css";
-import { animateRevealElement, isElementWithinRevealRange } from "@/lib/reveal-helpers";
+import {
+  animateRevealElement,
+  hasUserScrolledSinceLoad,
+  isElementWithinRevealRange,
+} from "@/lib/reveal-helpers";
 import { useLoadedGalleryReveal } from "@/hooks/useLoadedGalleryReveal";
 import type { GalleryImage } from "@/components/gallery/Lightbox";
 import {
@@ -50,7 +54,7 @@ export default function GallerySelection({
     // if timing is odd, so load can add motion but never gate visibility.
     const item = e.currentTarget.closest(".gallery-item");
     if (item instanceof HTMLElement && isElementWithinRevealRange(item)) {
-      animateRevealElement(item);
+      animateRevealElement(item, hasUserScrolledSinceLoad() ? undefined : { offsetPx: 0 });
     }
   }
 

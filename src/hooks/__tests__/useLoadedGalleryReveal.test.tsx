@@ -1,6 +1,27 @@
 import { act, render, waitFor } from "@testing-library/react";
 import { useRef } from "react";
 import { useLoadedGalleryReveal } from "@/hooks/useLoadedGalleryReveal";
+import { REVEAL_OFFSET_PX } from "@/lib/reveal-config";
+
+class MockIntersectionObserver {
+  callback: IntersectionObserverCallback;
+  observe = jest.fn();
+  disconnect = jest.fn();
+  unobserve = jest.fn();
+  static instances: MockIntersectionObserver[] = [];
+
+  constructor(callback: IntersectionObserverCallback) {
+    this.callback = callback;
+    MockIntersectionObserver.instances.push(this);
+  }
+
+  fire(entries: Partial<IntersectionObserverEntry>[]) {
+    this.callback(
+      entries as IntersectionObserverEntry[],
+      this as unknown as IntersectionObserver
+    );
+  }
+}
 
 function TestGallery() {
   const ref = useRef<HTMLDivElement>(null);
@@ -30,6 +51,11 @@ describe("useLoadedGalleryReveal", () => {
   }));
 
   beforeAll(() => {
+    Object.defineProperty(window, "IntersectionObserver", {
+      writable: true,
+      value: MockIntersectionObserver,
+    });
+
     Object.defineProperty(HTMLElement.prototype, "animate", {
       writable: true,
       value: animateMock,
@@ -43,8 +69,14 @@ describe("useLoadedGalleryReveal", () => {
 
   beforeEach(() => {
     jest.useFakeTimers();
+    MockIntersectionObserver.instances = [];
     animateMock.mockReset();
     matchMediaMock.mockClear();
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 0,
+    });
     matchMediaMock.mockImplementation(() => ({
       matches: false,
       media: "(prefers-reduced-motion: reduce)",
@@ -68,6 +100,22 @@ describe("useLoadedGalleryReveal", () => {
   });
 
   it("animates already-loaded gallery items", async () => {
+    const rectInRange = {
+      top: 120,
+      bottom: 320,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: 120,
+      toJSON: () => ({}),
+    };
+
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(() => rectInRange as DOMRect);
+
     const { getByTestId } = render(<TestGallery />);
 
     act(() => {
@@ -76,9 +124,28 @@ describe("useLoadedGalleryReveal", () => {
 
     await waitFor(() => expect(animateMock).toHaveBeenCalled());
     expect(getByTestId("item")).toHaveAttribute("data-reveal-animated", "true");
+    expect(animateMock).toHaveBeenCalledWith(
+      [
+        expect.objectContaining({ transform: "translateY(0px)" }),
+        expect.objectContaining({ transform: "translateY(0)" }),
+      ],
+      expect.any(Object)
+    );
   });
 
   it("marks items as revealed without WAAPI motion when reduced motion is preferred", async () => {
+    const rectInRange = {
+      top: 120,
+      bottom: 320,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: 120,
+      toJSON: () => ({}),
+    };
+
     matchMediaMock.mockImplementation((query: string) => ({
       matches: query === "(prefers-reduced-motion: reduce)",
       media: query,
@@ -90,6 +157,10 @@ describe("useLoadedGalleryReveal", () => {
       dispatchEvent: jest.fn(),
     }));
 
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(() => rectInRange as DOMRect);
+
     const { getByTestId } = render(<TestGallery />);
 
     act(() => {
@@ -99,5 +170,49 @@ describe("useLoadedGalleryReveal", () => {
     await waitFor(() => expect(matchMediaMock).toHaveBeenCalled());
     expect(animateMock).not.toHaveBeenCalled();
     expect(getByTestId("item")).toHaveAttribute("data-reveal-animated", "true");
+  });
+
+  it("uses slide + fade when a loaded gallery item enters later after scrolling", async () => {
+    const rectOutOfRange = {
+      top: 2200,
+      bottom: 2400,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: 2200,
+      toJSON: () => ({}),
+    };
+
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(() => rectOutOfRange as DOMRect);
+
+    const { getByTestId } = render(<TestGallery />);
+    const item = getByTestId("item");
+
+    expect(animateMock).not.toHaveBeenCalled();
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 120,
+    });
+
+    act(() => {
+      MockIntersectionObserver.instances[0].fire([
+        { isIntersecting: true, target: item } as Partial<IntersectionObserverEntry>,
+      ]);
+    });
+
+    await waitFor(() => expect(animateMock).toHaveBeenCalledTimes(1));
+    expect(animateMock).toHaveBeenCalledWith(
+      [
+        expect.objectContaining({ transform: `translateY(${REVEAL_OFFSET_PX}px)` }),
+        expect.objectContaining({ transform: "translateY(0)" }),
+      ],
+      expect.any(Object)
+    );
   });
 });

@@ -8,7 +8,7 @@ import {
   REVEAL_RESCAN_SHORT_MS,
   REVEAL_SIDE_BUFFER_PX,
 } from "@/lib/reveal-config";
-import { animateRevealElement } from "@/lib/reveal-helpers";
+import { animateRevealElement, hasUserScrolledSinceLoad } from "@/lib/reveal-helpers";
 
 export interface ProgressiveRevealOptions {
   bottomBufferPx?: number;
@@ -69,12 +69,16 @@ export function useProgressiveReveal(
     if (items.length === 0) return;
 
     const scanVisibleItems = () => {
+      const revealOptions = hasUserScrolledSinceLoad()
+        ? resolvedOptions
+        : { ...resolvedOptions, offsetPx: 0 };
+
       // Hydration and late card thumbnail sizing can shift teaser geometry
       // after first paint. Re-scanning lets near-viewport cards still animate
       // without ever hiding content if early geometry was incomplete.
       items.forEach((item) => {
         if (isWithinRevealRange(item.getBoundingClientRect(), resolvedOptions)) {
-          animateRevealElement(item, resolvedOptions);
+          animateRevealElement(item, revealOptions);
         }
       });
     };
@@ -83,9 +87,13 @@ export function useProgressiveReveal(
 
     const observer = new IntersectionObserver(
       (entries) => {
+        const revealOptions = hasUserScrolledSinceLoad()
+          ? resolvedOptions
+          : { ...resolvedOptions, offsetPx: 0 };
+
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          animateRevealElement(entry.target as HTMLElement, resolvedOptions);
+          animateRevealElement(entry.target as HTMLElement, revealOptions);
           observer.unobserve(entry.target);
         });
       },
