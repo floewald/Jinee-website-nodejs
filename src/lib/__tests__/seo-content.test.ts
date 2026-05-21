@@ -59,7 +59,7 @@ describe("video portfolio card ordering", () => {
       "stuck-low-pay",
       "singer-jasmin-sokko",
       "re-old-times",
-      "healthy-dining",
+      "health-wang-zhen",
       "social-media-addiction",
       "blind-kitchen-chefs",
       "7-days-archery",

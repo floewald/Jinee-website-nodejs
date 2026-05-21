@@ -13,6 +13,10 @@ function prefersReducedMotion() {
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+export function hasUserScrolledSinceLoad() {
+  return typeof window !== "undefined" && window.scrollY > 0;
+}
+
 export function isElementWithinRevealRange(item: HTMLElement) {
   const rect = item.getBoundingClientRect();
   return (
@@ -32,7 +36,7 @@ export function animateRevealElement(
   }
 ) {
   if (item.dataset.revealAnimated === "true") return;
-      item.dataset.revealAnimated = "true";
+  item.dataset.revealAnimated = "true";
 
   // Fail-open rule: content is already visible in base CSS/HTML. Animation is
   // only polish. If WAAPI is unavailable or timing is odd, users still see the item.
