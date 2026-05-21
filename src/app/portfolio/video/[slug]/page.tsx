@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cx } from "@/styled-system/css";
 import { videoProjects, getSlugsByType } from "@/lib/portfolio-config";
-import { SITE_URL } from "@/lib/constants";
 import VideoPlayer from "@/components/video/VideoPlayer";
 import { sectionTitleDivider } from "@/components/portfolio/featured-styles";
 import {
@@ -53,7 +52,7 @@ export default async function VideoProjectPage({
     "@type": "VideoObject",
     name: project.videos[0]?.title ?? project.title,
     description: project.description,
-    thumbnailUrl: [`${SITE_URL}/assets/videography/${slug}/${slug}-800.webp`],
+    thumbnailUrl: [project.ogImage],
     embedUrl: project.videos[0]?.embedUrl,
     uploadDate: project.videos[0]?.uploadDate ?? "2023-01-01T00:00:00+08:00",
   };

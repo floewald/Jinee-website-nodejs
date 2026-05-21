@@ -92,13 +92,19 @@
   },
   {
     "type": "video",
-    "slug": "healthy-dining",
+    "slug": "health-wang-zhen",
     "title": "8world | 看见主播",
     "description": "8world | 看见主播",
-    "longDescription": "A documentary profiling healthy dining habits and recommendations for viewers in their 40s and 50s.",
+    "longDescription": [
+      "熟食中心解决三餐，中年人要怎么选才健康？进入四五十岁，身体开始明显改变，机能开始衰退。新陈代谢放慢，慢性病开始蠢蠢欲动。这时的身体状态，直接影响接下来银发生活的品质。但这个年龄层的人往往也最忙碌，外食族比比皆是。既然躲不过外食，有没有现实又叫健康的选择法？不仅满足当下需求，也为未来赚足老本？随主播王征和营养专家去觅好食！",
+      "",
+      "如果你40、50岁，总觉得累，或许你觉得这就是生活，工作忙碌，家事繁杂，有压力不稀奇，但或许你已经出了大问题！抑郁和焦虑是新加坡最普遍的心理问题，中年人却是最忽略这个问题而变成最高危的群体。情绪波动和抑郁焦虑，怎么区分？哪些警讯不能错过？出了问题又该怎么做？跟主播王征一起，找心理医生解惑排忧。",
+      "",
+      "高血压和高血脂在新加坡患病率高，再加上初期几乎没症状，因此被视为头号无声杀手。过了40岁，患上慢性病的风险提高，这时感觉好不一定是真的好，知道有问题却不行动更致命。这一集《看见主播》，王征为你揭开健康错觉的面纱，重新认识高血压和高血脂。"
+    ],
     "heading": "Co-Director | Videographer",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/videography/healthy-dining/healthy-dining-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/health-wang-zhen/health-wang-zhen-800.webp",
     "visible": true,
     "videos": [
       {
@@ -110,11 +116,16 @@
         "title": "【看见主播 | 王征】40岁后最危险的不是压力",
         "embedUrl": "https://www.youtube.com/embed/wzVyJJ10vlo",
         "uploadDate": "2023-01-01T00:00:00+08:00"
+      },
+      {
+        "title": "【看见主播 | 王征】40岁后你以为的健康，可能是错觉",
+        "embedUrl": "https://www.youtube.com/embed/E1bhkM_Ees4",
+        "uploadDate": "2023-01-01T00:00:00+08:00"
       }
     ],
     "portfolioCard": {
       "cardTitle": "8world | 看见主播",
-      "thumbnail": "/assets/videography/healthy-dining/healthy-dining-800.webp"
+      "thumbnail": "/assets/videography/health-wang-zhen/health-wang-zhen-800.webp"
     }
   },
   {

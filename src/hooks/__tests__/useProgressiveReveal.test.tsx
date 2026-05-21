@@ -292,4 +292,5 @@ describe("useProgressiveReveal", () => {
     expect(animateMock).toHaveBeenCalled();
     jest.useRealTimers();
   });
+
 });
