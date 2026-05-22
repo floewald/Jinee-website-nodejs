@@ -5,9 +5,8 @@ import {
   REVEAL_SIDE_BUFFER_PX,
 } from "@/lib/reveal-config";
 import {
-  animateRevealElement,
-  hasUserScrolledSinceLoad,
   isElementWithinRevealRange,
+  revealElement,
 } from "@/lib/reveal-helpers";
 
 /**
@@ -24,14 +23,12 @@ export function useLoadedGalleryReveal(ref: RefObject<Element | null>, selector 
     if (!container) return;
 
     const animateLoadedItems = () => {
-      const revealOptions = hasUserScrolledSinceLoad() ? undefined : { offsetPx: 0 };
-
       container.querySelectorAll<HTMLImageElement>(selector).forEach((img) => {
         if (!img.complete) return;
         const item = img.closest(".gallery-item");
         if (!(item instanceof HTMLElement)) return;
         if (!isElementWithinRevealRange(item)) return;
-        animateRevealElement(item, revealOptions);
+        revealElement(item);
       });
     };
 
@@ -41,13 +38,13 @@ export function useLoadedGalleryReveal(ref: RefObject<Element | null>, selector 
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const revealOptions = hasUserScrolledSinceLoad() ? undefined : { offsetPx: 0 };
-
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           const item = entry.target as HTMLElement;
           const img = item.querySelector<HTMLImageElement>("img");
-          if (img?.complete) animateRevealElement(item, revealOptions);
+          if (img?.complete) {
+            revealElement(item);
+          }
         });
       },
       {

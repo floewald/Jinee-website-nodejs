@@ -5,9 +5,8 @@ import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { cx } from "@/styled-system/css";
 import {
-  animateRevealElement,
-  hasUserScrolledSinceLoad,
   isElementWithinRevealRange,
+  revealElement,
 } from "@/lib/reveal-helpers";
 import { useLoadedGalleryReveal } from "@/hooks/useLoadedGalleryReveal";
 import type { GalleryImage } from "./Lightbox";
@@ -49,7 +48,7 @@ export default function GalleryGrid({
     // gallery must stay visible even if layout settles late on Safari.
     const item = e.currentTarget.closest(".gallery-item");
     if (item instanceof HTMLElement && isElementWithinRevealRange(item)) {
-      animateRevealElement(item, hasUserScrolledSinceLoad() ? undefined : { offsetPx: 0 });
+      revealElement(item);
     }
   }
 

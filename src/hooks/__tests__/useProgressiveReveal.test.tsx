@@ -5,13 +5,15 @@ import { REVEAL_OFFSET_PX } from "@/lib/reveal-config";
 
 class MockIntersectionObserver {
   callback: IntersectionObserverCallback;
+  options?: IntersectionObserverInit;
   observe = jest.fn();
   disconnect = jest.fn();
   unobserve = jest.fn();
   static instances: MockIntersectionObserver[] = [];
 
-  constructor(callback: IntersectionObserverCallback) {
+  constructor(callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
     this.callback = callback;
+    this.options = options;
     MockIntersectionObserver.instances.push(this);
   }
 
@@ -199,6 +201,119 @@ describe("useProgressiveReveal", () => {
     ]);
 
     expect(animateMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("configures the observer to trigger before teaser cards enter the viewport", () => {
+    const rectOutOfRange = {
+      top: 2000,
+      bottom: 2200,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: 2000,
+      toJSON: () => ({}),
+    };
+
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(() => rectOutOfRange as DOMRect);
+
+    render(<TestGrid />);
+
+    expect(MockIntersectionObserver.instances[0].options?.rootMargin).toBe("160px 50px 160px 50px");
+  });
+
+  it("still animates an item when the observer fires just before viewport entry", () => {
+    const rectOutOfRange = {
+      top: 2000,
+      bottom: 2200,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: 2000,
+      toJSON: () => ({}),
+    };
+    const rectJustOutsideViewport = {
+      top: 769,
+      bottom: 969,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: 769,
+      toJSON: () => ({}),
+    };
+
+    const rectSpy = jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(() => rectOutOfRange as DOMRect);
+
+    const { getByTestId } = render(<TestGrid />);
+    const target = getByTestId("second");
+
+    rectSpy.mockImplementation(() => rectJustOutsideViewport as DOMRect);
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 120,
+    });
+
+    MockIntersectionObserver.instances[0].fire([
+      { isIntersecting: true, target } as Partial<IntersectionObserverEntry>,
+    ]);
+
+    expect(animateMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("skips observer WAAPI motion once an intersecting item is already visibly in the viewport", () => {
+    const rectOutOfRange = {
+      top: 2000,
+      bottom: 2200,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: 2000,
+      toJSON: () => ({}),
+    };
+    const rectSlightlyVisible = {
+      top: 720,
+      bottom: 920,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: 720,
+      toJSON: () => ({}),
+    };
+
+    const rectSpy = jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(() => rectOutOfRange as DOMRect);
+
+    const { getByTestId } = render(<TestGrid />);
+    const target = getByTestId("second");
+
+    rectSpy.mockImplementation(() => rectSlightlyVisible as DOMRect);
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 120,
+    });
+
+    MockIntersectionObserver.instances[0].fire([
+      { isIntersecting: true, target } as Partial<IntersectionObserverEntry>,
+    ]);
+
+    expect(animateMock).not.toHaveBeenCalled();
+    expect(target).toHaveAttribute("data-reveal-animated", "true");
   });
 
   it("skips late WAAPI reveal when an intersecting item is already visible after scroll", () => {

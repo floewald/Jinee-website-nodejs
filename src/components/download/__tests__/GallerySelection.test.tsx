@@ -1,6 +1,22 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import GallerySelection from "@/components/download/GallerySelection";
 
+jest.mock("next/image", () => ({
+  __esModule: true,
+  default: (props: React.ImgHTMLAttributes<HTMLImageElement> & { unoptimized?: boolean }) => {
+    const { unoptimized: _unoptimized, ...rest } = props;
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img alt="" {...rest} />;
+  },
+}));
+
+jest.mock("react-masonry-css", () => ({
+  __esModule: true,
+  default: ({ children }: { children: React.ReactNode }) => (
+    <div data-testid="masonry-grid">{children}</div>
+  ),
+}));
+
 const IMAGES = [
   { src: "/img/a-800.webp", alt: "Photo A", srcFull: "/img/a-1600.webp", width: 800, height: 540 },
   { src: "/img/b-800.webp", alt: "Photo B", srcFull: "/img/b-1600.webp", width: 800, height: 1200 },
@@ -8,6 +24,29 @@ const IMAGES = [
 ];
 
 describe("GallerySelection", () => {
+  const animateMock = jest.fn();
+
+  beforeAll(() => {
+    Object.defineProperty(HTMLElement.prototype, "animate", {
+      configurable: true,
+      writable: true,
+      value: animateMock,
+    });
+  });
+
+  beforeEach(() => {
+    animateMock.mockReset();
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 0,
+    });
+    Object.defineProperty(HTMLImageElement.prototype, "complete", {
+      configurable: true,
+      get: () => false,
+    });
+  });
+
   it("renders all images", () => {
     render(
       <GallerySelection
@@ -94,5 +133,45 @@ describe("GallerySelection", () => {
     expect(screen.getByRole("img", { name: "Photo A" })).toHaveAttribute("width", "800");
     expect(screen.getByRole("img", { name: "Photo A" })).toHaveAttribute("height", "540");
     expect(screen.getByRole("img", { name: "Photo B" })).toHaveAttribute("height", "1200");
+  });
+
+  it("does not replay WAAPI motion when an in-view selection image finishes loading after scroll", () => {
+    const rectVisibleInViewport = {
+      top: 40,
+      bottom: 240,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: 40,
+      toJSON: () => ({}),
+    };
+
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(() => rectVisibleInViewport as DOMRect);
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 220,
+    });
+
+    render(
+      <GallerySelection
+        images={IMAGES}
+        selectionMode={false}
+        selected={[]}
+        onImageClick={jest.fn()}
+        onSelectionChange={jest.fn()}
+      />
+    );
+
+    const image = screen.getByRole("img", { name: "Photo A" });
+    fireEvent.load(image);
+
+    expect(animateMock).not.toHaveBeenCalled();
+    expect(image.closest(".gallery-item")).toHaveAttribute("data-reveal-animated", "true");
   });
 });

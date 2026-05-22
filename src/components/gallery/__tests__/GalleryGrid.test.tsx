@@ -40,6 +40,29 @@ beforeAll(() => {
 });
 
 describe("GalleryGrid", () => {
+  const animateMock = jest.fn();
+
+  beforeAll(() => {
+    Object.defineProperty(HTMLElement.prototype, "animate", {
+      configurable: true,
+      writable: true,
+      value: animateMock,
+    });
+  });
+
+  beforeEach(() => {
+    animateMock.mockReset();
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 0,
+    });
+    Object.defineProperty(HTMLImageElement.prototype, "complete", {
+      configurable: true,
+      get: () => false,
+    });
+  });
+
   it("renders a grid item for every image", () => {
     render(<GalleryGrid images={IMAGES} onImageClick={jest.fn()} />);
     const items = screen.getAllByRole("img");
@@ -118,5 +141,37 @@ describe("GalleryGrid", () => {
     const firstItem = screen.getByRole("img", { name: "Photo A" }).closest("button");
     expect(firstItem).not.toBeNull();
     expect(window.getComputedStyle(firstItem!).opacity).not.toBe("0");
+  });
+
+  it("does not replay WAAPI motion when an in-view image finishes loading after scroll", () => {
+    const rectVisibleInViewport = {
+      top: 40,
+      bottom: 240,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: 40,
+      toJSON: () => ({}),
+    };
+
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(() => rectVisibleInViewport as DOMRect);
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 220,
+    });
+
+    render(<GalleryGrid images={IMAGES} onImageClick={jest.fn()} />);
+
+    const image = screen.getByRole("img", { name: "Photo A" });
+    fireEvent.load(image);
+
+    expect(animateMock).not.toHaveBeenCalled();
+    expect(image.closest(".gallery-item")).toHaveAttribute("data-reveal-animated", "true");
   });
 });

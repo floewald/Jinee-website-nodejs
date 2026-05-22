@@ -7,6 +7,14 @@ import {
   REVEAL_START_OPACITY,
 } from "@/lib/reveal-config";
 
+const NO_LATE_FLICKER_VISIBLE_THRESHOLD_PX = 1;
+
+export interface RevealAnimationOptions {
+  durationMs?: number;
+  offsetPx?: number;
+  easing?: string;
+}
+
 function prefersReducedMotion() {
   return typeof window !== "undefined" &&
     typeof window.matchMedia === "function" &&
@@ -27,23 +35,16 @@ export function isElementWithinRevealRange(item: HTMLElement) {
   );
 }
 
-function isElementVisibleInViewport(item: HTMLElement) {
+function getVisibleHeightInViewport(item: HTMLElement) {
   const rect = item.getBoundingClientRect();
-  return (
-    rect.top < window.innerHeight &&
-    rect.bottom > 0 &&
-    rect.left < window.innerWidth &&
-    rect.right > 0
-  );
+  const visibleTop = Math.max(rect.top, 0);
+  const visibleBottom = Math.min(rect.bottom, window.innerHeight);
+  return Math.max(0, visibleBottom - visibleTop);
 }
 
 export function animateRevealElement(
   item: HTMLElement,
-  options?: {
-    durationMs?: number;
-    offsetPx?: number;
-    easing?: string;
-  }
+  options?: RevealAnimationOptions,
 ) {
   if (item.dataset.revealAnimated === "true") return;
   item.dataset.revealAnimated = "true";
@@ -53,7 +54,7 @@ export function animateRevealElement(
   if (
     prefersReducedMotion() ||
     typeof item.animate !== "function" ||
-    isElementVisibleInViewport(item)
+    getVisibleHeightInViewport(item) > NO_LATE_FLICKER_VISIBLE_THRESHOLD_PX
   ) {
     return;
   }
@@ -72,4 +73,22 @@ export function animateRevealElement(
       fill: "both",
     }
   );
+}
+
+function getRevealOptionsForCurrentScroll(options?: RevealAnimationOptions) {
+  if (hasUserScrolledSinceLoad()) {
+    return options;
+  }
+
+  return {
+    ...options,
+    offsetPx: 0,
+  };
+}
+
+export function revealElement(
+  item: HTMLElement,
+  options?: RevealAnimationOptions,
+) {
+  animateRevealElement(item, getRevealOptionsForCurrentScroll(options));
 }

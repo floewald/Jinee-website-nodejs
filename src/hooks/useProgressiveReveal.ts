@@ -8,7 +8,7 @@ import {
   REVEAL_RESCAN_SHORT_MS,
   REVEAL_SIDE_BUFFER_PX,
 } from "@/lib/reveal-config";
-import { animateRevealElement, hasUserScrolledSinceLoad } from "@/lib/reveal-helpers";
+import { revealElement } from "@/lib/reveal-helpers";
 
 export interface ProgressiveRevealOptions {
   bottomBufferPx?: number;
@@ -65,21 +65,21 @@ export function useProgressiveReveal(
       offsetPx,
       easing,
     };
+    const observerEntryBufferPx = Math.max(
+      resolvedOptions.bottomBufferPx,
+      resolvedOptions.offsetPx
+    );
     const items = Array.from(root.querySelectorAll<HTMLElement>(selector));
     if (items.length === 0) return;
 
     const scanVisibleItems = () => {
-      const revealOptions = hasUserScrolledSinceLoad()
-        ? resolvedOptions
-        : { ...resolvedOptions, offsetPx: 0 };
-
       // Hydration and late card thumbnail sizing can shift teaser geometry
       // after first paint. Re-scanning lets near-viewport cards still animate
       // without ever hiding content if early geometry was incomplete.
       items.forEach((item) => {
         const rect = item.getBoundingClientRect();
         if (isWithinRevealRange(rect, resolvedOptions)) {
-          animateRevealElement(item, revealOptions);
+          revealElement(item, resolvedOptions);
         }
       });
     };
@@ -88,19 +88,17 @@ export function useProgressiveReveal(
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const revealOptions = hasUserScrolledSinceLoad()
-          ? resolvedOptions
-          : { ...resolvedOptions, offsetPx: 0 };
-
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          animateRevealElement(entry.target as HTMLElement, revealOptions);
+          revealElement(entry.target as HTMLElement, resolvedOptions);
           observer.unobserve(entry.target);
         });
       },
       {
         threshold: 0,
-        rootMargin: `${resolvedOptions.bottomBufferPx}px ${resolvedOptions.sideBufferPx}px ${resolvedOptions.bottomBufferPx}px ${resolvedOptions.sideBufferPx}px`,
+        // Trigger entry reveal while the card is still offscreen so the
+        // existing no-late-flicker guard does not suppress the motion.
+        rootMargin: `${observerEntryBufferPx}px ${resolvedOptions.sideBufferPx}px ${observerEntryBufferPx}px ${resolvedOptions.sideBufferPx}px`,
       }
     );
 
