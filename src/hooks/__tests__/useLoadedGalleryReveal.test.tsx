@@ -99,7 +99,7 @@ describe("useLoadedGalleryReveal", () => {
     jest.useRealTimers();
   });
 
-  it("animates already-loaded gallery items", async () => {
+  it("marks already-visible loaded gallery items as revealed without late WAAPI motion", async () => {
     const rectInRange = {
       top: 120,
       bottom: 320,
@@ -122,15 +122,11 @@ describe("useLoadedGalleryReveal", () => {
       jest.runAllTimers();
     });
 
-    await waitFor(() => expect(animateMock).toHaveBeenCalled());
-    expect(getByTestId("item")).toHaveAttribute("data-reveal-animated", "true");
-    expect(animateMock).toHaveBeenCalledWith(
-      [
-        expect.objectContaining({ transform: "translateY(0px)" }),
-        expect.objectContaining({ transform: "translateY(0)" }),
-      ],
-      expect.any(Object)
+    await waitFor(() =>
+      expect(getByTestId("item")).toHaveAttribute("data-reveal-animated", "true")
     );
+    expect(getByTestId("item")).toHaveAttribute("data-reveal-animated", "true");
+    expect(animateMock).not.toHaveBeenCalled();
   });
 
   it("marks items as revealed without WAAPI motion when reduced motion is preferred", async () => {

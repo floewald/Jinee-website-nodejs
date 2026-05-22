@@ -77,7 +77,8 @@ export function useProgressiveReveal(
       // after first paint. Re-scanning lets near-viewport cards still animate
       // without ever hiding content if early geometry was incomplete.
       items.forEach((item) => {
-        if (isWithinRevealRange(item.getBoundingClientRect(), resolvedOptions)) {
+        const rect = item.getBoundingClientRect();
+        if (isWithinRevealRange(rect, resolvedOptions)) {
           animateRevealElement(item, revealOptions);
         }
       });

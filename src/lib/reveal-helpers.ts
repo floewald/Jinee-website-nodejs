@@ -27,6 +27,16 @@ export function isElementWithinRevealRange(item: HTMLElement) {
   );
 }
 
+function isElementVisibleInViewport(item: HTMLElement) {
+  const rect = item.getBoundingClientRect();
+  return (
+    rect.top < window.innerHeight &&
+    rect.bottom > 0 &&
+    rect.left < window.innerWidth &&
+    rect.right > 0
+  );
+}
+
 export function animateRevealElement(
   item: HTMLElement,
   options?: {
@@ -40,7 +50,13 @@ export function animateRevealElement(
 
   // Fail-open rule: content is already visible in base CSS/HTML. Animation is
   // only polish. If WAAPI is unavailable or timing is odd, users still see the item.
-  if (prefersReducedMotion() || typeof item.animate !== "function") return;
+  if (
+    prefersReducedMotion() ||
+    typeof item.animate !== "function" ||
+    isElementVisibleInViewport(item)
+  ) {
+    return;
+  }
 
   item.animate(
     [

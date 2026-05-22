@@ -94,7 +94,7 @@ describe("useProgressiveReveal", () => {
     expect(getByTestId("second")).not.toHaveClass("reveal--visible");
   });
 
-  it("animates items that start within the reveal range", async () => {
+  it("marks items that start within the viewport as revealed without late WAAPI motion", async () => {
     const rectInRange = {
       top: 120,
       bottom: 320,
@@ -111,16 +111,12 @@ describe("useProgressiveReveal", () => {
       .spyOn(HTMLElement.prototype, "getBoundingClientRect")
       .mockImplementation(() => rectInRange as DOMRect);
 
-    render(<TestGrid />);
+    const { getByTestId } = render(<TestGrid />);
 
-    await waitFor(() => expect(animateMock).toHaveBeenCalled());
-    expect(animateMock).toHaveBeenCalledWith(
-      [
-        expect.objectContaining({ transform: "translateY(0px)" }),
-        expect.objectContaining({ transform: "translateY(0)" }),
-      ],
-      expect.any(Object)
+    await waitFor(() =>
+      expect(getByTestId("first")).toHaveAttribute("data-reveal-animated", "true")
     );
+    expect(animateMock).not.toHaveBeenCalled();
   });
 
   it("skips WAAPI motion when the user prefers reduced motion", async () => {
@@ -205,7 +201,55 @@ describe("useProgressiveReveal", () => {
     expect(animateMock).toHaveBeenCalledTimes(1);
   });
 
-  it("rescans visible items after the page load event settles layout", () => {
+  it("skips late WAAPI reveal when an intersecting item is already visible after scroll", () => {
+    const rectOutOfRange = {
+      top: 2000,
+      bottom: 2200,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: 2000,
+      toJSON: () => ({}),
+    };
+    const rectVisibleInViewport = {
+      top: 40,
+      bottom: 240,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: 40,
+      toJSON: () => ({}),
+    };
+
+    const rectSpy = jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(() => rectOutOfRange as DOMRect);
+
+    const { getByTestId } = render(<TestGrid />);
+    const target = getByTestId("second");
+
+    expect(animateMock).not.toHaveBeenCalled();
+
+    rectSpy.mockImplementation(() => rectVisibleInViewport as DOMRect);
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 220,
+    });
+
+    MockIntersectionObserver.instances[0].fire([
+      { isIntersecting: true, target } as Partial<IntersectionObserverEntry>,
+    ]);
+
+    expect(animateMock).not.toHaveBeenCalled();
+    expect(target).toHaveAttribute("data-reveal-animated", "true");
+  });
+
+  it("marks visible items as revealed when page-load rescan settles layout", () => {
     const rectOutOfRange = {
       top: 2000,
       bottom: 2200,
@@ -233,24 +277,18 @@ describe("useProgressiveReveal", () => {
       .spyOn(HTMLElement.prototype, "getBoundingClientRect")
       .mockImplementation(() => rectOutOfRange as DOMRect);
 
-    render(<TestGrid />);
+    const { getByTestId } = render(<TestGrid />);
 
     expect(animateMock).not.toHaveBeenCalled();
 
     rectSpy.mockImplementation(() => rectInRange as DOMRect);
     window.dispatchEvent(new Event("load"));
 
-    expect(animateMock).toHaveBeenCalled();
-    expect(animateMock).toHaveBeenCalledWith(
-      [
-        expect.objectContaining({ transform: "translateY(0px)" }),
-        expect.objectContaining({ transform: "translateY(0)" }),
-      ],
-      expect.any(Object)
-    );
+    expect(animateMock).not.toHaveBeenCalled();
+    expect(getByTestId("first")).toHaveAttribute("data-reveal-animated", "true");
   });
 
-  it("rescans shortly after mount for masonry reflow changes", () => {
+  it("marks items as revealed when short rescan catches masonry reflow changes", () => {
     jest.useFakeTimers();
 
     const rectOutOfRange = {
@@ -280,7 +318,7 @@ describe("useProgressiveReveal", () => {
       .spyOn(HTMLElement.prototype, "getBoundingClientRect")
       .mockImplementation(() => rectOutOfRange as DOMRect);
 
-    render(<TestGrid />);
+    const { getByTestId } = render(<TestGrid />);
     expect(animateMock).not.toHaveBeenCalled();
 
     rectSpy.mockImplementation(() => rectInRange as DOMRect);
@@ -289,7 +327,8 @@ describe("useProgressiveReveal", () => {
       jest.advanceTimersByTime(300);
     });
 
-    expect(animateMock).toHaveBeenCalled();
+    expect(animateMock).not.toHaveBeenCalled();
+    expect(getByTestId("first")).toHaveAttribute("data-reveal-animated", "true");
     jest.useRealTimers();
   });
 
