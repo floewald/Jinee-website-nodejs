@@ -94,14 +94,8 @@
     "type": "video",
     "slug": "health-wang-zhen",
     "title": "8world | 看见主播",
-    "description": "8world | 看见主播",
-    "longDescription": [
-      "熟食中心解决三餐，中年人要怎么选才健康？进入四五十岁，身体开始明显改变，机能开始衰退。新陈代谢放慢，慢性病开始蠢蠢欲动。这时的身体状态，直接影响接下来银发生活的品质。但这个年龄层的人往往也最忙碌，外食族比比皆是。既然躲不过外食，有没有现实又叫健康的选择法？不仅满足当下需求，也为未来赚足老本？随主播王征和营养专家去觅好食！",
-      "",
-      "如果你40、50岁，总觉得累，或许你觉得这就是生活，工作忙碌，家事繁杂，有压力不稀奇，但或许你已经出了大问题！抑郁和焦虑是新加坡最普遍的心理问题，中年人却是最忽略这个问题而变成最高危的群体。情绪波动和抑郁焦虑，怎么区分？哪些警讯不能错过？出了问题又该怎么做？跟主播王征一起，找心理医生解惑排忧。",
-      "",
-      "高血压和高血脂在新加坡患病率高，再加上初期几乎没症状，因此被视为头号无声杀手。过了40岁，患上慢性病的风险提高，这时感觉好不一定是真的好，知道有问题却不行动更致命。这一集《看见主播》，王征为你揭开健康错觉的面纱，重新认识高血压和高血脂。"
-    ],
+    "description": "8world health series on midlife nutrition, mental health, and chronic disease risk in Singapore.",
+    "longDescription": "A three-part 8world series fronted by anchor Wang Zheng that turns midlife health concerns into practical, accessible stories. Across the episodes, the reporting looks at how busy Singaporeans in their 40s and 50s eat when they rely on hawker food, how to spot mental-health warning signs that get dismissed as everyday stress, and why hypertension and high cholesterol often stay hidden until serious harm is done.\n\nJinee co-directed and shot the series in Singapore.",
     "heading": "Co-Director | Videographer",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/health-wang-zhen/health-wang-zhen-800.webp",
@@ -110,17 +104,17 @@
       {
         "title": "【看见主播 | 王征】40+这么吃，才不会发福？外食族必看",
         "embedUrl": "https://www.youtube.com/embed/hJn7y2VvjQs",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2026-03-05T02:01:05-08:00"
       },
       {
         "title": "【看见主播 | 王征】40岁后最危险的不是压力",
         "embedUrl": "https://www.youtube.com/embed/wzVyJJ10vlo",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2026-04-29T01:00:56-07:00"
       },
       {
         "title": "【看见主播 | 王征】40岁后你以为的健康，可能是错觉",
         "embedUrl": "https://www.youtube.com/embed/E1bhkM_Ees4",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2026-05-21T01:00:11-07:00"
       }
     ],
     "portfolioCard": {
@@ -132,16 +126,17 @@
     "type": "video",
     "slug": "social-media-addiction",
     "title": "8world | 前线追踪",
-    "description": "8world | 前线追踪",
+    "description": "8world Frontline report on social media addiction, school phone rules, and teen screen habits in Singapore.",
+    "longDescription": "This Frontline report examines what compulsive social-media use looks like for young people in Singapore, following a subject who deletes every app after years of overuse. The story connects personal dependency with a wider policy shift as schools tighten phone rules and families ask whether restrictions can change behaviour once the habit is already formed.\n\nJinee shot the episode for 8world.",
     "heading": "Videographer",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/social-media-addiction/social-media-addiction-800.webp",
     "visible": true,
     "videos": [
       {
-        "title": "8world | 前线追踪",
+        "title": "前线追踪 | 深陷社媒四年 他删光所有应用",
         "embedUrl": "https://www.youtube.com/embed/tZ5tjTqomvg",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2026-02-24T03:56:52-08:00"
       }
     ],
     "portfolioCard": {
@@ -153,8 +148,8 @@
     "type": "video",
     "slug": "blind-kitchen-chefs",
     "title": "CNA Insider | Our Blind Kitchen",
-    "description": "CNA Insider series \"Our Blind Kitchen\".",
-    "longDescription": "A three-part CNA Insider documentary series following visually impaired chefs as they open their own café in Singapore.",
+    "description": "Three-part CNA Insider documentary on visually impaired chefs building an inclusive cafe in Singapore.",
+    "longDescription": "This three-part documentary follows visually impaired chefs as they work toward opening an inclusive cafe in Singapore. The series tracks the pressure behind the idea as the team navigates kitchen safety, staffing setbacks, and the wider question of what meaningful employment and independence can look like for people with partial sight.\n\nJinee researched, produced, directed, and shot the series.",
     "heading": "Researcher | Producer | Director | Videographer",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/blind-kitchen-chefs/blind-kitchen-chefs-1-800.webp",
@@ -163,17 +158,17 @@
       {
         "title": "Episode 1: We're Chefs, We're Partly Blind & We're Opening A Cafe",
         "embedUrl": "https://www.youtube.com/embed/Mc-Eg2Ehv2g",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2023-03-09T05:00:15-08:00"
       },
       {
         "title": "Episode 2: A Chef Makes A Shock Exit, But Why?",
         "embedUrl": "https://www.youtube.com/embed/BWNsK8-QzjU",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2023-03-10T05:00:06-08:00"
       },
       {
         "title": "Episode 3: I Hire A Chef With Cerebral Palsy, 3 Days Before Opening",
         "embedUrl": "https://www.youtube.com/embed/40ixbtJvP98",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2023-03-11T05:00:02-08:00"
       }
     ],
     "portfolioCard": {
@@ -190,73 +185,65 @@
     "type": "video",
     "slug": "7-days-archery",
     "title": "8World | 七天我可以 7 Days, I Can Do It",
-    "description": "8world series \"7 Days, I Can Do It\".",
-    "longDescription": [
-      "Renowned chef Eric Teo is swift and precise with a knife in the kitchen. He assumes archery would be just as simple — \"just shoot the arrow\".",
-      "But once he steps onto the range, he quickly realizes it’s far more complex.",
-      "",
-      "After six days of training, celebrity chef Tiong Teck faces his final challenge on Day 7:",
-      "shooting 36 arrows from a distance of 15 meters, with a target score of at least 300 points."
-    ],
+    "description": "8world challenge series following chef Eric Teo as he learns archery and attempts a 300-point test in seven days.",
+    "longDescription": "This two-part 8world challenge follows chef Eric Teo as he swaps the kitchen for the archery range and tries to learn a new discipline in seven days. The story mixes light entertainment with a clear training arc, from first-time technique and physical strain to a final 36-arrow test at 15 metres with a 300-point goal.\n\nJinee contributed as researcher and writer.",
     "heading": "Researcher | Writer",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/videography/fertility-rate-sgp/fertility-rate-sgp-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/7-days-archery/7-days-archery-1-800.webp",
     "visible": true,
     "videos": [
       {
         "title": "7 Days, I Can Do It | Celebrity Chef Eric Teo Learns Archery in 7 Days",
         "embedUrl": "https://www.youtube.com/embed/EFe2vDcFMRE",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2026-04-22T21:00:12-07:00"
       },
       {
         "title": "7 Days, I Can Do It | 36 Arrows, 300 Points — Can Chef Eric Teo Do It?",
         "embedUrl": "https://www.youtube.com/embed/B0IURhVM0TE",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2026-04-25T04:45:01-07:00"
       }
     ],
     "portfolioCard": {
       "cardTitle": "8World | 七天我可以 7 Days, I Can Do It",
-      "thumbnail": "/assets/videography/7-days-archery/7-days-archery-800.webp"
+      "thumbnail": "/assets/videography/7-days-archery/7-days-archery-1-800.webp"
     }
   },
   {
     "type": "video",
     "slug": "fertility-rate-sgp",
-    "title": "8world | Fertility Rate in Singapore",
-    "description": "8world series \"Fertility Rate in Singapore\".",
+    "title": "8world | Frontline",
+    "description": "8world Frontline stories on fertility, caregiving, and the family choices Singaporeans make under pressure.",
     "longDescription": [
-      "Elon Musk, the world’s richest man, once said that Singapore is heading toward “extinction,” with a fertility rate of just 0.87. Faced with this reality, should this generation still choose to have children?",
-      "",
-      "Some, like Lo Hok Him, choose not to: “I don’t want my child to come into this world and suffer.” Others, like Michael See Chern Siong, have gone the opposite way—he now has eight children: “There was a time when I couldn’t even have one.”",
-      "",
-      "Miscarriages, surgeries, financial pressure… When having a child is no longer just a choice, but a cost—what would you decide? Do you avoid it for fear your child might suffer? Or believe that life also brings joy? Or perhaps, that in the end—love is the answer?"
+      "This 8world Frontline pairing looks at two family decisions under pressure in Singapore: whether to have children in an era of record-low fertility, and who pauses life to care for ageing parents or sick family members. One episode weighs the emotional and financial cost of parenthood; the other follows male caregivers navigating exhaustion, stigma, and responsibility.",
+      "Jinee contributed as field producer on both episodes."
     ],
     "heading": "Field Producer",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/videography/fertility-rate-sgp/fertility-rate-sgp-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/fertility-rate-sgp/fertility-rate-sgp-1-800.webp",
     "visible": true,
     "videos": [
       {
         "title": "Frontline | Fertility rate falls to 0.87 Are Singaporeans going extinct?!",
         "embedUrl": "https://www.youtube.com/embed/p5xyxnfQVlk",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2026-04-15T06:51:53-07:00"
+      },
+      {
+        "title": "Frontline | Who Says Caring for Parents Is Only for Women?",
+        "embedUrl": "https://www.youtube.com/embed/Up8c6SZ5s-w",
+        "uploadDate": "2026-05-30T19:30:27-07:00"
       }
     ],
     "portfolioCard": {
-      "cardTitle": "8world | Fertility Rate in Singapore",
-      "thumbnail": "/assets/videography/fertility-rate-sgp/fertility-rate-sgp-800.webp"
+      "cardTitle": "8world | Frontline",
+      "thumbnail": "/assets/videography/fertility-rate-sgp/fertility-rate-sgp-1-800.webp"
     }
   },
   {
     "type": "video",
     "slug": "uniqlo",
     "title": "CNA Insider | UNIQLO",
-    "description": "CNA Insider series \"UNIQLO\".",
-    "longDescription": [
-      "What makes a shop accessible to people with needs, such as the blind/visually impaired, wheelchair users or those with autism and sensory issues?",
-      "",
-      "UNIQLO Singapore rolled out its pilot Access initiative in 2023, and CNA Insider got three shoppers to test out its quiet-hour assisted shopping services, as well as wider walkways and a wheelchair-friendly fitting room."
-    ],
+    "description": "CNA Insider feature on inclusive retail design and UNIQLO's assisted shopping pilot in Singapore.",
+    "longDescription": "This CNA Insider feature tests how inclusive retail design works in practice, following shoppers who are blind, use wheelchairs, or live with autism and sensory sensitivities as they navigate a UNIQLO store. The story focuses on real usability, from quiet-hour appointments and assisted shopping to wider walkways and an accessible fitting room.\n\nJinee co-produced and shot the piece in Singapore.",
     "heading": "Co-Producer | Videographer",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/uniqlo/uniqlo-800.webp",
@@ -265,7 +252,7 @@
       {
         "title": "We Try UNIQLO’s Private Shopping Services, For Customers With Special Needs",
         "embedUrl": "https://www.youtube.com/embed/HWArUxR66qc",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2023-12-18T05:00:11-08:00"
       }
     ],
     "portfolioCard": {
@@ -277,7 +264,8 @@
     "type": "video",
     "slug": "living-with-chronic-pain",
     "title": "CNA Insider | Fibromyalgia",
-    "description": "CNA Insider | Fibromyalgia",
+    "description": "CNA Insider documentary on fibromyalgia and the strain of living with chronic pain that often goes unseen.",
+    "longDescription": "This documentary follows people living with fibromyalgia, a condition marked by widespread pain even when standard tests appear normal. The story looks at the medical uncertainty, social doubt, and emotional exhaustion that come when patients must keep explaining an illness others cannot easily see.\n\nJinee co-produced and shot the piece in Singapore.",
     "heading": "Co-Producer | Videographer",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/living-with-chronic-pain/living-with-chronic-pain-800.webp",
@@ -286,7 +274,7 @@
       {
         "title": "Living With Chronic Pain That Even Doctors Don’t Believe - This Is Fibromyalgia",
         "embedUrl": "https://www.youtube.com/embed/cxNqO_RsdqM",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2024-01-19T20:00:16-08:00"
       }
     ],
     "portfolioCard": {
@@ -298,24 +286,8 @@
     "type": "video",
     "slug": "mark-your-calendar",
     "title": "Mark Your Calendar | 历历在目 | Infotainment",
-    "description": "Indian cusine vegetarian cusine and Ayurveda.",
-    "longDescription": [
-      "EP10 萬聖節Halloween:",
-      "Beyond the fun and thrills of Halloween, is an intriguing origin. Join our Hosts in an annual Halloween parade, and a Trick or Treat party in Singapore, as they explore the traditions behind this festival!",
-      "万圣节Halloween的由来是什么？为什么有Trick or treat 不给糖就捣蛋的活动？南瓜灯背后又有什么有趣的故事？这一集，一起参加刺激好玩的万圣节活动，了解异国的文化和习俗！",
-      "",
-      "EP11 屠妖節 Deepavali:",
-      "Every Deepavali, places will be lit with stunning decorations. People will light up lamps to signify that \"light has conquered darkness\". Discover different traditions related to Deepavali, like henna, Hindu temple practices and our local Deepavali Festival Village.",
-      "屠妖节是兴都教徒重要的传统节日，也称排灯节。每年的屠妖节，兴都教徒都会在家里点燃油灯，象征印度教里的\"光明征服黑暗\"。 从汉娜手绘、庙里祈福到逛市集，这一集，跟随主持人一同探索屠妖节背后的传统意义和习俗！",
-      "",
-      "EP12 冬至 Winter Solstice",
-      "Eating rice dumplings during Winter Solstice is a long-held tradition, originating from China. This episode, our host will explore activities like making tang-yuan , brewing Chinese herbs, and how the Hong Kong community celebrates the festival.",
-      "说到冬至，就想到汤圆，你知道为什么要庆祝冬至吗？虽然新加坡没有冬天，不过冬至还是华人在冬天最重要的团圆日子 ，因此这传统也流传到新加坡。通过做汤圆、煮中药和做盆菜，探索冬至的由来和意义，以及不同庆祝冬至的文化和习俗！",
-      "",
-      "EP13 聖誕節 Christmas:",
-      "Christmas is a religious festival but since the advent of Santa-Claus and Christmas trees, it has become a festival celebrated worldwide. This episode explores Christmas traditions such as writing letters to Santa, logcake making and church mass services!",
-      "圣诞节原本是基督教徒的节日，但因为圣诞老人、圣诞树的流传，圣诞节已经是世界各地人们重视的节日之一。想知道圣诞老人、圣诞树和圣诞袜子背后的故事吗？这一集，和主持人一起学做树桐蛋糕，参观圣诞节弥撒，了解圣诞节的传说和庆祝活动背后的意义。"
-    ],
+    "description": "Infotainment series exploring how Singapore celebrates Halloween, Deepavali, Winter Solstice, and Christmas.",
+    "longDescription": "This four-episode infotainment series uses major festivals as a way into Singapore's multicultural calendar. The selected episodes follow hosts into Halloween parades and trick-or-treat parties, Deepavali traditions and festival markets, Winter Solstice food rituals, and Christmas activities from logcake making to church services.\n\nJinee produced and directed the series in Singapore.",
     "heading": "Producer | Director",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/mark-your-calendar/mark-your-calendar-1-800.webp",
@@ -361,16 +333,8 @@
     "type": "video",
     "slug": "red-dot-detectives",
     "title": "Little Red Dot Detectives | Infotainment",
-    "description": "Indian cusine vegetarian cusine and Ayurveda.",
-    "longDescription": [
-      "S1 EP6 Little India:",
-      "In the lively ethnic district of Little India, you can immerse in the vibrant culture and array of activities! Visit the Indian Heritage Centre to learn about the history of early Indian immigrants who moved to Singapore, savour Indian snacks, learn to make a garland and get a Henna tattoo, all at Little India!",
-      "小印度是新加坡著名的印度人社区，在这川流不息的地区，有着琳琅满目的商品！ 你可在印度文化遗产中心，了解小印度先祖移民的历史背景，尝一口甜腻的印度小吃，学习制作花环和做海娜手绘！让搜密主组员带领大家，一起揭开小印度的神秘面纱！",
-      "",
-      "S2 EP5 Ang Mo Kio:",
-      "Did you know that Bishan's name originated from a cemetery, while Ang Mo Kio's name is related to a bridge? Discover nostalgic mosaic children's playgrounds, colourful murals that reflect our old kampongs and find out stories of car-plates making. Let's explore the unique flavour of these estates!",
-      "据说碧山的地名源自坟场而宏茂桥的地名则是和一条用来运输军用物资的桥有关。著名的组屋区中可以找到具怀旧风格的马赛克儿童游乐场，反映甘榜生活面貌的彩色壁画，以及有趣的车牌制造。一起去发掘这一带的独特风情!"
-    ],
+    "description": "Infotainment travel series uncovering local history and everyday culture in Little India and Ang Mo Kio.",
+    "longDescription": "This family-friendly infotainment series introduces neighbourhood history through on-location discovery. In the featured episodes, the hosts explore Little India through migration history, food, garland-making, and henna, then move to Ang Mo Kio and Bishan to uncover estate names, mosaic playgrounds, murals, and small trades that shaped daily life.\n\nJinee produced and directed the series.",
     "heading": "Producer | Director",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/red-dot-detectives/red-dot-detectives-1-800.webp",
@@ -403,12 +367,8 @@
     "type": "video",
     "slug": "i-eat-therefore",
     "title": "I Eat Therefore I am | 我食。故我在 | Infotainment",
-    "description": "Indian cusine vegetarian cusine and Ayurveda.",
-    "longDescription": [
-      "Ep 10:",
-      "In India, vegetarian cuisine is a common dietary habit and life philosophy. Ayurveda is a 5,000-year-old medical system, considered to be the oldest in the world. Ayurvedic Medicine encourages a balance in the body through diet, herbal medicine, massage and meditation.",
-      "在印度，素食料理不仅是饮食习惯，更是生活哲学。举世闻名的阿育吠陀饮食蕴含了丰富的养生智慧。阿育吠陀的意涵是\"生命的科学\"，是一门拥有5千年历史，被认为是世界最古老的医学体系。透过饮食、草药、按摩以及冥想来保持人体内三大生命能量的平衡是阿育吠陀医学的基础。"
-    ],
+    "description": "Food and culture episode on Indian vegetarian cuisine and the wellness philosophy of Ayurveda.",
+    "longDescription": "This episode explores Indian vegetarian cuisine through the lens of Ayurveda, treating food as both daily ritual and a system of balance. The storytelling connects ingredients, cooking, and wellness traditions in a way that makes the cultural philosophy accessible to a general audience.\n\nJinee produced and directed the episode.",
     "heading": "Producer | Director",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/i-eat-therefore/i-eat-therefore-1-800.webp",
@@ -434,11 +394,8 @@
     "type": "video",
     "slug": "guardians-vietnam",
     "title": "The Guardians 守護者| Vietnam 越南 | Infotainment",
-    "description": ".",
-    "longDescription": [
-      "A Vietnamese saying goes: complete leaves have a responsibility to protect the broken leaves. A group of low-income people in Ho Chi Minh City lead simple lives so as to provide warmth to poorer families. They also salvage unidentified corpses in the Sai Kung River, giving them a final touch of dignity.",
-      "越南俗语说，完整的树叶有责任保护破碎的树叶。胡志明市有着一群经济拮据的人，不惜过着最简朴的生活，也要为更穷苦的家庭提供一点温暖。除了悲悯生者，更不忌讳禁忌，从西贡河上打捞不知名的浮尸，为其举行葬礼，只盼能给往生者最后一丝尊严。"
-    ],
+    "description": "Infotainment documentary on volunteer groups in Ho Chi Minh City caring for the poor and the unidentified dead.",
+    "longDescription": "This documentary follows volunteers in Ho Chi Minh City who live modestly so they can care for poorer families and reclaim dignity for the unidentified dead recovered from the Saigon River. The story balances compassion, ritual, and social reality to show how ordinary people take responsibility for lives and deaths most others overlook.\n\nJinee produced and directed the piece.",
     "heading": "Producer | Director",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/guardians-vietnam/guardians-vietnam-1-800.webp",
@@ -487,8 +444,8 @@
     "type": "video",
     "slug": "into-the-gym",
     "title": "Into The Gym | Johnson Health Tech Web Series",
-    "description": "Web series 'Into The Gym' following fitness journeys and celebrity workouts.",
-    "longDescription": "A nine-episode Taiwanese web series pairing host Kunda with athletes and celebrities for fitness challenges and gym workouts.",
+    "description": "Johnson Health Tech web series pairing Kunda with athletes and creators for fitness challenges and workouts.",
+    "longDescription": "A nine-episode branded web series that turns Johnson Health Tech products into repeatable entertainment formats, pairing host Kunda with athletes, entertainers, and creators for training sessions, sports challenges, and celebrity fitness routines. Across the season, each guest brings a distinct audience and skill set, helping the brand reach both hardcore fitness fans and casual lifestyle viewers.\n\nJinee served as executive producer.",
     "heading": "Executive Producer",
     "location": "📍 Taiwan",
     "ogImage": "https://jineechen.com/assets/videography/into-the-gym/into-the-gym-1-800.webp",
@@ -497,47 +454,47 @@
       {
         "title": "坤達對決世界球后戴資穎，看小戴挑戰100秒20宮格羽球準度挑戰！【 EP1 】",
         "embedUrl": "https://www.youtube.com/embed/By-B1i4-ycM",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2020-10-02T06:00:02-07:00"
       },
       {
         "title": "坤達揪Joeman健身，意外發現防綠帽神器【EP2】",
         "embedUrl": "https://www.youtube.com/embed/GMptm0xWmDE",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2020-10-09T06:00:04-07:00"
       },
       {
         "title": "坤達揪 法國人酷KU健身，進階版炸裂胸肌訓練。KU：竟然有這種方法？！【EP3】feat.酷的夢",
         "embedUrl": "https://www.youtube.com/embed/VWjZghxpRIQ",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2020-10-16T06:00:09-07:00"
       },
       {
         "title": "袁艾菲為金鐘獻上深V裸背，坤達以美背三式相助艾菲【EP4】",
         "embedUrl": "https://www.youtube.com/embed/2Edw6oepr4Q",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2020-10-23T06:00:01-07:00"
       },
       {
         "title": "每朝女神張景嵐性感報到！獨家小蠻腰健身菜單，坤達:「我們可以偷偷的⋯」【EP5】",
         "embedUrl": "https://www.youtube.com/embed/euwdFe45FCo",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2020-10-30T06:00:17-07:00"
       },
       {
         "title": "全壘打大賽！坤達蔡哥拚盡尊嚴，努力揮擊。陳晨威：讓你們拿鋁棒【EP6】",
         "embedUrl": "https://www.youtube.com/embed/Uw2HHGLbybg",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2020-11-06T05:00:11-08:00"
       },
       {
         "title": "雙生鬥士 Yin&Yei 籃壇帥度破表，籃球一哥 坤達表情逐漸母湯！【EP7】",
         "embedUrl": "https://www.youtube.com/embed/ydZs8oBhySQ",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2020-11-13T05:00:13-08:00"
       },
       {
         "title": "UFC八角鐵籠的終極格鬥賽？ 夢多直誇天才！坤達：我有看第一神拳？！【EP8】",
         "embedUrl": "https://www.youtube.com/embed/KhUUDk4-4bs",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2020-11-20T05:00:07-08:00"
       },
       {
         "title": "坤達使出回憶殺！Johnson@mirror眾星開箱體驗！【EP9】坤達一打十超精彩健身魔鏡開箱合集",
         "embedUrl": "https://www.youtube.com/embed/Tftq_1S8FYw",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2020-11-27T05:00:30-08:00"
       }
     ],
     "portfolioCard": {
@@ -554,8 +511,8 @@
     "type": "video",
     "slug": "lunch-with-us",
     "title": "CNA Insider | Lunch With Us",
-    "description": "CNA Insider series 'Lunch With Us'.",
-    "longDescription": "A four-episode food series exploring affordable local eats in Singapore and Taiwan. From hawker stalls and Michelin-rated meals under S$6 to old-school bento shops and a singing taxi driver's favourite eatery, each episode celebrates everyday food culture.",
+    "description": "CNA Insider food series exploring affordable, character-rich meals across Singapore and Taipei.",
+    "longDescription": "This four-part food series uses affordable meals as a way into local culture, from Tekka's Indian-Pakistani hawker fare to Taiwanese bentos, budget fast-food counters, and a karaoke cab driver's comfort-food circuit. Each episode is built around a guide with a strong point of view, keeping the storytelling personal, useful, and location-specific.\n\nJinee produced, directed, and shot the series.",
     "heading": "Producer | Director | Videographer",
     "location": "📍 Singapore & Taiwan",
     "ogImage": "https://jineechen.com/assets/videography/lunch-with-us/lunch-with-us-1-800.webp",
@@ -564,22 +521,22 @@
       {
         "title": "Budget 'Fast-Food' Hopping In Taiwan: From Vegetarian to Pork Cheap Eats | Taipei",
         "embedUrl": "https://www.youtube.com/embed/Y1St1wL66l4",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2025-05-29T21:00:43-07:00"
       },
       {
         "title": "S$6 Michelin Meals at Indian-Pakistani Hawker Stall in Tekka | Singapore",
         "embedUrl": "https://www.youtube.com/embed/C-vwkA4zGco",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2025-06-04T21:00:28-07:00"
       },
       {
         "title": "Taiwan-style Bento Meals With Old-School Touch & Retro Vibe | Taipei",
         "embedUrl": "https://www.youtube.com/embed/uN64AgpxHAU",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2025-05-30T21:01:04-07:00"
       },
       {
         "title": "Taiwan's Karaoke Cabbie Takes Us To Comfort Food 'Club' | Taipei",
         "embedUrl": "https://www.youtube.com/embed/wX9KKu0cpOo",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2025-05-29T21:01:09-07:00"
       }
     ],
     "portfolioCard": {
@@ -650,8 +607,8 @@
     "type": "video",
     "slug": "scdf-project",
     "title": "CNA Insider | SCDF 995 Calls",
-    "description": "CNA Insider series 'SCDF 995 Calls'.",
-    "longDescription": "A two-part documentary embedded with Singapore Civil Defence Force paramedics and emergency responders.",
+    "description": "Two-part CNA Insider series embedded with SCDF emergency crews, from 995 calls to frontline ambulance response.",
+    "longDescription": "This two-part documentary goes inside Singapore's emergency medical system, following 995 call takers, dispatchers, paramedics, and ambulance crews under pressure. The reporting moves between operational detail and emotional reality, covering abusive callers, blocked ambulances, and the split-second decisions that shape patient outcomes.\n\nJinee co-produced, directed, and shot the series.",
     "heading": "Co-Producer | Director | Videographer",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/scdf-project/scdf-project-1-800.webp",
@@ -660,12 +617,12 @@
       {
         "title": "SCDF Officers React To Abusive Calls, Emotional Cases And Ambulance-Blocking Drivers",
         "embedUrl": "https://www.youtube.com/embed/CHc3Gd4Y4VM",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2024-12-05T05:00:20-08:00"
       },
       {
         "title": "On Call With Singapore's SCDF Emergency Medical Services: When Minutes Can Mean Life Or Death",
         "embedUrl": "https://www.youtube.com/embed/9PjWLStxWCc",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2024-03-07T05:00:06-08:00"
       }
     ],
     "portfolioCard": {
@@ -681,8 +638,8 @@
     "type": "video",
     "slug": "i-fell",
     "title": "CNA Insider | Scam Series",
-    "description": "Documentary series about scam victims sharing their stories.",
-    "longDescription": "A two-part documentary giving voice to scam victims in Singapore. Each episode follows a real person recounting how they were drawn into an investment or love scam, what warning signs they missed, and how they rebuilt afterward.",
+    "description": "Two-part CNA Insider scam series told through survivors of investment and romance fraud.",
+    "longDescription": "This two-part documentary series reconstructs how online scams gain trust before taking money, using first-person accounts from victims of investment and romance schemes. Each episode stays close to the subject's decision-making, showing the emotional manipulation, warning signs, and aftermath that make these cases resonate beyond the headline.\n\nJinee produced, directed, and shot the series.",
     "heading": "Producer | Director | Videographer",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/i-fell/i-fell-1-800.webp",
@@ -691,12 +648,12 @@
       {
         "title": "I Fell For An Investment Scam: Here's How They Got Me",
         "embedUrl": "https://www.youtube.com/embed/QMt3EdPC7-Q",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2022-10-25T06:19:10-07:00"
       },
       {
         "title": "I Fell For A Love Scam: How They Made It Seem So Real",
         "embedUrl": "https://www.youtube.com/embed/bzWprvJyzZs",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2022-10-21T05:30:12-07:00"
       }
     ],
     "portfolioCard": {
@@ -712,8 +669,8 @@
     "type": "video",
     "slug": "work-in-sgp",
     "title": "CNA Insider | MOM",
-    "description": "Documentary about working life in Singapore and giving back.",
-    "longDescription": "A documentary profiling a robotics professional who chose to build his career in Singapore and the ways he gives back to the community. The film explores work culture, immigration and belonging.",
+    "description": "CNA Insider profile of a robotics engineer building a career and community in Singapore.",
+    "longDescription": "This documentary profiles a Thai-born robotics engineer who built his career in Singapore and now uses that experience to mentor and give back. The story combines professional ambition with questions of belonging, contribution, and what makes a place feel worth staying in.\n\nJinee produced, directed, and shot the film.",
     "heading": "Producer | Director | Videographer",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/work-in-sgp/work-in-sgp-800.webp",
@@ -722,7 +679,7 @@
       {
         "title": "I Build Robots For A Living. Here's Why I Chose To Work In Singapore & How I'm Giving Back",
         "embedUrl": "https://www.youtube.com/embed/asVm61iRhmA",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2024-11-14T05:00:03-08:00"
       }
     ],
     "portfolioCard": {
@@ -734,8 +691,8 @@
     "type": "video",
     "slug": "stay-at-home-dad",
     "title": "CNA Insider | TV Spin Offs",
-    "description": "CNA Insider series \"Stay at Home Dad\".",
-    "longDescription": "A documentary following a Singaporean father who spent 14 years as a stay-at-home dad raising his son. The film captures his reflections on sacrifice, identity and the decision to re-enter the workforce.",
+    "description": "CNA Insider documentary about a Singapore father rebuilding life after 14 years as a stay-at-home caregiver.",
+    "longDescription": "This documentary follows a father who spent 14 years as the primary caregiver for his son and is now trying to rebuild an identity outside the home. The film looks at masculinity, sacrifice, and the emotional cost of putting one role on hold for so long.\n\nJinee produced, directed, shot, and edited the film.",
     "heading": "Producer | Director | Videographer | Video Editor",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/stay-at-home-dad/stay-at-home-dad-800.webp",
@@ -744,7 +701,7 @@
       {
         "title": "I Spent 14 Years As A Stay-At-Home Dad For My Son. Here's Why It's Time To Reclaim My Life",
         "embedUrl": "https://www.youtube.com/embed/8nRIG_hO_PU",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
+        "uploadDate": "2024-06-15T06:00:07-07:00"
       }
     ],
     "portfolioCard": {

@@ -8,8 +8,11 @@ import {
   projectPage,
   projectHeading,
   projectDescription,
+  projectMeta,
   projectRoles,
   projectLocation,
+  videoProjectDescription,
+  videoSectionHeading,
 } from "@/lib/portfolio-styles";
 
 interface Params {
@@ -56,6 +59,12 @@ export default async function VideoProjectPage({
     embedUrl: project.videos[0]?.embedUrl,
     uploadDate: project.videos[0]?.uploadDate ?? "2023-01-01T00:00:00+08:00",
   };
+  const descriptionParagraphs = project.longDescription
+    ? (Array.isArray(project.longDescription)
+        ? project.longDescription
+        : project.longDescription.split("\n")
+      ).filter((line) => line.trim().length > 0)
+    : [];
 
   return (
     <main className={cx(projectPage, "project-page", "container")}>
@@ -65,20 +74,21 @@ export default async function VideoProjectPage({
       />
       <h1 className={cx(projectHeading, "project-heading")}>{project.title}</h1>
       <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
-      <p className={cx(projectRoles, "project-roles")}>{project.heading}</p>
-      <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
-      {project.location && <p className={cx(projectLocation, "project-location")}>{project.location}</p>}
-      {project.longDescription && (
-        <p className={cx(projectDescription, "project-description")}>
-          {(Array.isArray(project.longDescription)
-            ? project.longDescription
-            : project.longDescription.split('\n')
-          ).map((line, i, arr) => (
-            <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+      <div className={cx(projectMeta, "project-meta")}>
+        <p className={cx(projectRoles, "project-roles")}>{project.heading}</p>
+        {project.location && <p className={cx(projectLocation, "project-location")}>{project.location}</p>}
+      </div>
+      {descriptionParagraphs.length > 0 && (
+        <div className={cx(projectDescription, videoProjectDescription, "project-description")}>
+          {descriptionParagraphs.map((line, i) => (
+            <p key={i}>{line}</p>
           ))}
-        </p>
+        </div>
       )}
 
+      {project.videos.length > 1 && (
+        <h2 className={cx(videoSectionHeading, "video-section-heading")}>Episodes</h2>
+      )}
       <VideoPlayer videos={project.videos} />
     </main>
   );

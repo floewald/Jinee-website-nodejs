@@ -41,16 +41,41 @@ export const projectDescription = css({
   color: "var(--charcoal)",
 });
 
+export const videoProjectDescription = css({
+  maxWidth: "100%",
+  "& p": {
+    marginBottom: "1rem",
+  },
+  "& p:last-child": {
+    marginBottom: 0,
+  },
+});
+
+export const projectMeta = css({
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "0.35rem 0.9rem",
+  alignItems: "center",
+  margin: "0.6rem 0 1.25rem",
+});
+
 export const projectRoles = css({
   fontSize: "1rem",
   color: "var(--muted-text)",
-  margin: "0.4rem 0 0.5rem",
+  margin: 0,
 });
 
 export const projectLocation = css({
   fontSize: "0.95rem",
   color: "var(--muted-text)",
-  margin: "0.5rem 0 1.25rem",
+  margin: 0,
+});
+
+export const videoSectionHeading = css({
+  fontSize: "1.15rem",
+  fontWeight: 600,
+  marginTop: "2rem",
+  marginBottom: "0.75rem",
 });
 
 export const galleryEmpty = css({

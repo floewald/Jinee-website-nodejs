@@ -9,6 +9,7 @@
  */
 
 import { videoProjects, getProjectBySlug } from "@/lib/portfolio-config";
+import { getProjectSlideshowImages } from "@/lib/gallery-images";
 
 describe("social-media-addiction project", () => {
   const project = videoProjects.find((p) => p.slug === "social-media-addiction");
@@ -103,5 +104,28 @@ describe("video projects JSON-LD data completeness", () => {
     videoProjects.forEach((p) => {
       expect(p.description).toBeTruthy();
     });
+  });
+});
+
+describe("fertility-rate-sgp Frontline series", () => {
+  const project = videoProjects.find((p) => p.slug === "fertility-rate-sgp");
+
+  it("includes both Frontline episodes in the series", () => {
+    expect(project?.videos.map((v) => v.embedUrl)).toEqual([
+      "https://www.youtube.com/embed/p5xyxnfQVlk",
+      "https://www.youtube.com/embed/Up8c6SZ5s-w",
+    ]);
+  });
+
+  it("uses a concise series description and two generated card preview images", () => {
+    expect(project?.description.length).toBeLessThanOrEqual(160);
+    expect(project?.description).toContain("Frontline");
+    expect(project?.portfolioCard?.thumbnail).toBe(
+      "/assets/videography/fertility-rate-sgp/fertility-rate-sgp-1-800.webp"
+    );
+    expect(getProjectSlideshowImages("fertility-rate-sgp", "video").map((image) => image.src)).toEqual([
+      "/assets/videography/fertility-rate-sgp/fertility-rate-sgp-1-800.webp",
+      "/assets/videography/fertility-rate-sgp/fertility-rate-sgp-2-800.webp",
+    ]);
   });
 });

@@ -9,7 +9,7 @@
     "visible": true,
     "enableDownload": true,
     "showSlideshow": false,
-    "imageCount": 50,
+    "imageCount": 24,
     "portfolioCard": {
       "cardTitle": "Mediacorp 2026 CNY Road Show",
       "thumbnail": "/assets/photography/20260201-mediacorp-2026-cny-road-show/20260201-kharissa-01-800.webp",
@@ -51,7 +51,7 @@
     "visible": true,
     "enableDownload": false,
     "showSlideshow": false,
-    "imageCount": 30,
+    "imageCount": 7,
     "portfolioCard": {
       "cardTitle": "Event Photography",
       "thumbnail": "/assets/photography/event-photography/5d8df6dd-cca3-47a3-af9f-6dbb0aa79ca1-800.webp",
@@ -72,7 +72,7 @@
     "visible": true,
     "enableDownload": false,
     "showSlideshow": false,
-    "imageCount": 40,
+    "imageCount": 15,
     "portfolioCard": {
       "cardTitle": "Travel Photography",
       "thumbnail": "/assets/photography/travel-photography/00002-800.webp",
@@ -114,7 +114,7 @@
     "visible": true,
     "enableDownload": true,
     "showSlideshow": false,
-    "imageCount": 60,
+    "imageCount": 39,
     "portfolioCard": {
       "cardTitle": "Indie Singapore Little India Walking Tour",
       "thumbnail": "/assets/photography/walking-tour-little-india/20251106-IMG_0563-800.webp",
@@ -135,7 +135,7 @@
     "visible": true,
     "enableDownload": false,
     "showSlideshow": false,
-    "imageCount": 60,
+    "imageCount": 10,
     "portfolioCard": {
       "cardTitle": "Singapore Birthday Party",
       "thumbnail": "/assets/photography/private-party/Jinee_Chen_Party photos-1-800.webp",
@@ -156,7 +156,7 @@
     "visible": true,
     "enableDownload": false,
     "showSlideshow": false,
-    "imageCount": 25,
+    "imageCount": 8,
     "portfolioCard": {
       "cardTitle": "Kali Majapahit Training Camp",
       "thumbnail": "/assets/photography/sports-photography/06d86064-231a-44a0-a8ca-5caffa746419-800.webp",
@@ -177,6 +177,6 @@
     "visible": false,
     "enableDownload": false,
     "showSlideshow": false,
-    "imageCount": 20
+    "imageCount": 2
   }
 ]
