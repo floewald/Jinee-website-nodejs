@@ -43,6 +43,8 @@ export interface VideoItem {
   linkUrl?: string;
   /** Preview image shown when linkUrl is used instead of an embed */
   previewImage?: string;
+  /** Episode-side copy shown alongside the video player */
+  description?: string | string[];
   /** ISO 8601 date string with timezone, e.g. "2023-01-01T00:00:00+08:00" */
   uploadDate: string;
 }

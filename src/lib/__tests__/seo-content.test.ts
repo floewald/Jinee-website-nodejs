@@ -3,7 +3,7 @@
  *
  * Verifies:
  *  - new social-media-addiction project is correctly added
- *  - all video portfolio cards have consecutive orders (no gaps)
+ *  - video portfolio cards follow the expected lineup order
  *  - card ordering in videography.json matches legacy site order
  *  - JSON-LD required fields are present on all video projects
  */
@@ -85,6 +85,11 @@ describe("video portfolio card ordering", () => {
 });
 
 describe("video projects JSON-LD data completeness", () => {
+  const hasEpisodeCopy = (value?: string | string[]) =>
+    Array.isArray(value)
+      ? value.some((line) => line.trim().length > 0)
+      : Boolean(value?.trim());
+
   it("every video project has at least one video with embedUrl or linkUrl", () => {
     videoProjects.forEach((p) => {
       expect(p.videos.length).toBeGreaterThan(0);
@@ -103,6 +108,14 @@ describe("video projects JSON-LD data completeness", () => {
   it("every video project has a description for VideoObject schema", () => {
     videoProjects.forEach((p) => {
       expect(p.description).toBeTruthy();
+    });
+  });
+
+  it("every video has episode copy", () => {
+    videoProjects.forEach((p) => {
+      p.videos.forEach((v) => {
+        expect(hasEpisodeCopy(v.description)).toBe(true);
+      });
     });
   });
 });
