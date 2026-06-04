@@ -39,6 +39,7 @@ const videos: VideoItem[] = [
   {
     title: "Episode 1: Test Video",
     embedUrl: "https://www.youtube.com/embed/abc123",
+    description: ["Episode-specific copy.", "Second paragraph."],
     uploadDate: "2026-01-01T00:00:00+08:00",
   },
   {
@@ -87,21 +88,32 @@ describe("VideoPlayer", () => {
 
   it("renders one item per video", () => {
     render(<VideoPlayer videos={videos} />);
-    const items = document.querySelectorAll(".video-player__item");
+    const items = document.querySelectorAll(".video-episode-row");
     expect(items).toHaveLength(2);
   });
 
-  it("shows title for each video when multiple videos", () => {
+  it("alternates desktop row layout by index for multi-video projects", () => {
+    render(<VideoPlayer videos={videos} />);
+    const rows = document.querySelectorAll(".video-episode-row");
+    expect(rows).toHaveLength(2);
+    expect(rows[0]).toHaveAttribute("data-episode-layout", "media-left");
+    expect(rows[1]).toHaveAttribute("data-episode-layout", "media-right");
+  });
+
+  it("shows title and episode copy for each video when multiple videos", () => {
     render(<VideoPlayer videos={videos} />);
     expect(screen.getByText("Episode 1: Test Video")).toBeInTheDocument();
     expect(screen.getByText("Episode 2: Another")).toBeInTheDocument();
+    expect(screen.getByText("Episode-specific copy.")).toBeInTheDocument();
+    expect(screen.getByText("Second paragraph.")).toBeInTheDocument();
   });
 
-  it("shows title even when only one video", () => {
+  it("shows a single row using the first-row desktop direction when only one video is present", () => {
     render(<VideoPlayer videos={[videos[0]]} />);
-    expect(
-      screen.queryByText("Episode 1: Test Video")
-    ).toBeInTheDocument();
+    expect(screen.getByText("Episode 1: Test Video")).toBeInTheDocument();
+    expect(document.querySelectorAll(".video-episode-row")).toHaveLength(1);
+    const row = document.querySelector(".video-episode-row");
+    expect(row).toHaveAttribute("data-episode-layout", "media-left");
   });
 
   it("renders placeholder even when iframe is not yet mounted", () => {
@@ -162,16 +174,16 @@ describe("VideoPlayer", () => {
   it("omits data-should-reveal when tile is above the fold on initial load", () => {
     stubRect({ top: 100, bottom: 300 });
     render(<VideoPlayer videos={[videos[0]]} />);
-    const item = document.querySelector(".video-player__item") as HTMLElement;
+    const item = document.querySelector(".video-episode-row") as HTMLElement;
     expect(item).not.toBeNull();
     expect(item.hasAttribute("data-should-reveal")).toBe(false);
   });
 
-  it("marks tile as hidden when it is below the fold at mount", () => {
+  it("marks below-fold rows as hidden when they mount offscreen", () => {
     // window.innerHeight is 768 in jsdom; top > that means below the fold.
     stubRect({ top: 1200, bottom: 1400 });
     render(<VideoPlayer videos={[videos[0]]} />);
-    const item = document.querySelector(".video-player__item") as HTMLElement;
+    const item = document.querySelector(".video-episode-row") as HTMLElement;
     expect(item).not.toBeNull();
     expect(item.getAttribute("data-should-reveal")).toBe("hidden");
   });
@@ -179,7 +191,7 @@ describe("VideoPlayer", () => {
   it("flips data-should-reveal to 'animate' and disconnects when the observer fires", () => {
     stubRect({ top: 1200, bottom: 1400 });
     render(<VideoPlayer videos={[videos[0]]} />);
-    const item = document.querySelector(".video-player__item") as HTMLElement;
+    const item = document.querySelector(".video-episode-row") as HTMLElement;
     expect(item.getAttribute("data-should-reveal")).toBe("hidden");
     expect(ioInstances).toHaveLength(1);
 
@@ -200,7 +212,7 @@ describe("VideoPlayer", () => {
     Object.defineProperty(window, "scrollY", { configurable: true, value: 400 });
     stubRect({ top: 100, bottom: 300 });
     render(<VideoPlayer videos={[videos[0]]} />);
-    const item = document.querySelector(".video-player__item") as HTMLElement;
+    const item = document.querySelector(".video-episode-row") as HTMLElement;
     expect(item.hasAttribute("data-should-reveal")).toBe(false);
   });
 
@@ -224,7 +236,7 @@ describe("VideoPlayer", () => {
     // Below-fold tile that would normally get data-should-reveal="hidden".
     stubRect({ top: 1200, bottom: 1400 });
     render(<VideoPlayer videos={[videos[0]]} />);
-    const item = document.querySelector(".video-player__item") as HTMLElement;
+    const item = document.querySelector(".video-episode-row") as HTMLElement;
     expect(item.hasAttribute("data-should-reveal")).toBe(false);
     // Cleanup: remove matchMedia so other tests see the default (undefined).
     Object.defineProperty(window, "matchMedia", {

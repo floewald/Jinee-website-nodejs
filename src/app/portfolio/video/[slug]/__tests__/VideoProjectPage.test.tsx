@@ -53,24 +53,28 @@ jest.mock("@/components/video/VideoPlayer", () => ({
 }));
 
 describe("VideoProjectPage", () => {
-  it("renders longDescription as separate paragraphs and groups project metadata", async () => {
+  it("renders intro copy with a compact facts block for multi-video projects", async () => {
     render(await VideoProjectPage({ params: Promise.resolve({ slug: "multi-video" }) }));
 
+    expect(screen.getByText("Role")).toBeInTheDocument();
+    expect(screen.getByText("Location")).toBeInTheDocument();
     expect(screen.getByText("Producer | Director")).toBeInTheDocument();
     expect(screen.getByText("Singapore")).toBeInTheDocument();
-    expect(document.querySelector(".project-meta")).toHaveTextContent("Producer | Director");
-    expect(document.querySelector(".project-meta")).toHaveTextContent("Singapore");
+    expect(screen.queryByText("Format")).not.toBeInTheDocument();
 
     const paragraphs = document.querySelectorAll(".project-description p");
     expect(paragraphs).toHaveLength(2);
     expect(paragraphs[0]).toHaveTextContent("First paragraph.");
     expect(paragraphs[1]).toHaveTextContent("Second paragraph.");
-    expect(screen.getByRole("heading", { name: "Episodes" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Episodes" })).not.toBeInTheDocument();
   });
 
-  it("does not add an episodes heading for a single video", async () => {
+  it("renders a single video project without a format field", async () => {
     render(await VideoProjectPage({ params: Promise.resolve({ slug: "single-video" }) }));
 
+    expect(screen.getByText("Role")).toBeInTheDocument();
+    expect(screen.getByText("Videographer")).toBeInTheDocument();
+    expect(screen.queryByText("Format")).not.toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Episodes" })).not.toBeInTheDocument();
     expect(screen.getByTestId("video-player")).toHaveTextContent("Only video");
   });

@@ -113,6 +113,37 @@ describe("VideoProjectSchema", () => {
       VideoProjectSchema.parse({ ...VALID_VIDEO, longDescription: "Long text" })
     ).not.toThrow();
   });
+
+  it("preserves optional per-video description as a string", () => {
+    const parsed = VideoProjectSchema.parse({
+      ...VALID_VIDEO,
+      videos: [
+        {
+          ...VALID_VIDEO.videos[0],
+          description: "Episode-specific copy.",
+        },
+      ],
+    });
+
+    expect(parsed.videos[0].description).toBe("Episode-specific copy.");
+  });
+
+  it("preserves optional per-video description as string array", () => {
+    const parsed = VideoProjectSchema.parse({
+      ...VALID_VIDEO,
+      videos: [
+        {
+          ...VALID_VIDEO.videos[0],
+          description: ["Episode-specific copy.", "Second paragraph."],
+        },
+      ],
+    });
+
+    expect(parsed.videos[0].description).toEqual([
+      "Episode-specific copy.",
+      "Second paragraph.",
+    ]);
+  });
 });
 
 // ── SocialMediaProjectSchema ─────────────────────────────────────────────────

@@ -7,33 +7,50 @@ import { useIntersection } from "@/hooks/useIntersection";
 import { getYouTubeThumbnailUrl, getYouTubeVideoId } from "@/lib/youtube";
 import type { VideoItem } from "@/types/portfolio";
 
-const playerGrid = css({
+const playerStack = css({
   marginTop: "1rem",
   display: "grid",
-  gridTemplateColumns: "repeat(2, 1fr)",
-  gridAutoRows: "auto",
-  columnGap: "1.5rem",
-  rowGap: "0.75rem",
-  "@media (min-width: 1400px)": {
-    gridTemplateColumns: "repeat(3, 1fr)",
-  },
-  "@media (max-width: 540px)": {
-    gridTemplateColumns: "1fr",
+  rowGap: "2rem",
+});
+
+const episodeRow = css({
+  display: "grid",
+  gridTemplateColumns: "1fr",
+  rowGap: "1rem",
+  alignItems: "start",
+  "@media (min-width: 900px)": {
+    gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1.2fr)",
+    columnGap: "2rem",
   },
 });
 
-const playerItem = css({
+const episodeText = css({
   display: "grid",
-  gridRow: "span 2",
-  gridTemplateRows: "subgrid",
-  // Entry animation gating lives in globals.css via [data-should-reveal] so
-  // above-fold tiles on initial load can opt out and render instantly.
+  rowGap: "0.75rem",
+  alignContent: "start",
+});
+
+const episodeMedia = css({
+  minWidth: 0,
+  "@media (min-width: 900px)": {
+    '&[data-media-side="left"]': {
+      order: -1,
+    },
+  },
 });
 
 const playerTitle = css({
   fontSize: "1.05rem",
   fontWeight: 700,
-  alignSelf: "start",
+  color: "var(--color-site-text)",
+  lineHeight: 1.3,
+});
+
+const episodeDescription = css({
+  margin: 0,
+  maxWidth: "58ch",
+  fontSize: "0.98rem",
+  lineHeight: 1.7,
 });
 
 const embedWrap = css({ marginBottom: "0.75rem" });
@@ -116,6 +133,13 @@ const linkLabelStyle = css({
 interface VideoEmbedProps {
   video: VideoItem;
   eager?: boolean;
+}
+
+function toParagraphs(value?: string | string[]): string[] {
+  if (!value) return [];
+  return (Array.isArray(value) ? value : value.split("\n"))
+    .map((line) => line.trim())
+    .filter(Boolean);
 }
 
 // Safety net for the crossfade. If onLoad never fires (network drop, blocked
@@ -219,19 +243,21 @@ function LazyVideoEmbed({ video, eager = false }: VideoEmbedProps) {
   );
 }
 
-interface VideoTileProps {
+interface EpisodeRowProps {
   video: VideoItem;
   index: number;
   eager: boolean;
+  layout: "media-left" | "media-right";
 }
 
-function VideoTile({ video, index, eager }: VideoTileProps) {
-  const tileRef = useRef<HTMLDivElement>(null);
+function EpisodeRow({ video, index, eager, layout }: EpisodeRowProps) {
+  const rowRef = useRef<HTMLDivElement>(null);
+  const paragraphs = toParagraphs(video.description);
 
   // useLayoutEffect so the attribute lands before paint — prevents a frame of
-  // visible content briefly hiding when JS marks the tile below-fold.
+  // visible content briefly hiding when JS marks the row below-fold.
   useLayoutEffect(() => {
-    const el = tileRef.current;
+    const el = rowRef.current;
     if (!el) return;
 
     // Reduced-motion users skip the whole reveal mechanism — fail-open default
@@ -248,16 +274,33 @@ function VideoTile({ video, index, eager }: VideoTileProps) {
     const inViewport =
       rect.top < window.innerHeight && rect.bottom > 0;
 
-    // Tile already visible (initial load, refresh-with-scroll-position, bfcache
+    // Row already visible (initial load, refresh-with-scroll-position, bfcache
     // restore, mid-scroll nav): leave at fail-open default. scrollY is *not*
     // part of the check — that re-introduced the late-fade flicker bug.
     if (inViewport) return;
 
     el.setAttribute("data-should-reveal", "hidden");
+    el.style.opacity = "0";
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0]?.isIntersecting) {
           el.setAttribute("data-should-reveal", "animate");
+          if (typeof el.animate === "function") {
+            el.animate(
+              [
+                { opacity: 0, transform: "translateY(12px)" },
+                { opacity: 1, transform: "translateY(0)" },
+              ],
+              {
+                duration: 600,
+                easing: "ease-out",
+                fill: "both",
+                delay: index * 80,
+              }
+            );
+          }
+          el.style.opacity = "1";
+          el.style.transform = "translateY(0)";
           observer.disconnect();
         }
       },
@@ -265,16 +308,31 @@ function VideoTile({ video, index, eager }: VideoTileProps) {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [index]);
 
   return (
     <div
-      ref={tileRef}
-      className={cx(playerItem, "video-player__item")}
-      style={{ "--video-tile-index": index } as React.CSSProperties}
+      ref={rowRef}
+      className={cx(episodeRow, "video-episode-row")}
+      data-episode-layout={layout}
     >
-      <h3 className={playerTitle}>{video.title}</h3>
-      <LazyVideoEmbed video={video} eager={eager} />
+      <div className={cx(episodeText, "video-episode-text")}>
+        <h3 className={playerTitle}>{video.title}</h3>
+        {paragraphs.map((paragraph, paragraphIndex) => (
+          <p
+            key={`${video.title}-${paragraphIndex}`}
+            className={cx(episodeDescription, "video-episode-copy")}
+          >
+            {paragraph}
+          </p>
+        ))}
+      </div>
+      <div
+        className={cx(episodeMedia, "video-episode-media")}
+        data-media-side={layout === "media-left" ? "left" : "right"}
+      >
+        <LazyVideoEmbed video={video} eager={eager} />
+      </div>
     </div>
   );
 }
@@ -285,9 +343,15 @@ interface VideoPlayerProps {
 
 export default function VideoPlayer({ videos }: VideoPlayerProps) {
   return (
-    <div className={cx(playerGrid, "video-player")}>
+    <div className={cx(playerStack, "video-player")}>
       {videos.map((v, i) => (
-        <VideoTile key={i} video={v} index={i} eager={i < 2} />
+        <EpisodeRow
+          key={i}
+          video={v}
+          index={i}
+          eager={i < 2}
+          layout={i % 2 === 0 ? "media-left" : "media-right"}
+        />
       ))}
     </div>
   );

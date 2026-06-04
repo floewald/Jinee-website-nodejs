@@ -7,12 +7,13 @@ import { sectionTitleDivider } from "@/components/portfolio/featured-styles";
 import {
   projectPage,
   projectHeading,
-  projectDescription,
-  projectMeta,
-  projectRoles,
-  projectLocation,
   videoProjectDescription,
-  videoSectionHeading,
+  videoProjectHeader,
+  videoProjectIntro,
+  compactProjectFacts,
+  compactProjectFact,
+  compactProjectFactLabel,
+  compactProjectFactValue,
 } from "@/lib/portfolio-styles";
 
 interface Params {
@@ -74,21 +75,31 @@ export default async function VideoProjectPage({
       />
       <h1 className={cx(projectHeading, "project-heading")}>{project.title}</h1>
       <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
-      <div className={cx(projectMeta, "project-meta")}>
-        <p className={cx(projectRoles, "project-roles")}>{project.heading}</p>
-        {project.location && <p className={cx(projectLocation, "project-location")}>{project.location}</p>}
-      </div>
-      {descriptionParagraphs.length > 0 && (
-        <div className={cx(projectDescription, videoProjectDescription, "project-description")}>
+      <div className={cx(videoProjectHeader, "video-project-header")}>
+        <div
+          className={cx(
+            videoProjectDescription,
+            videoProjectIntro,
+            "project-description",
+          )}
+        >
           {descriptionParagraphs.map((line, i) => (
             <p key={i}>{line}</p>
           ))}
         </div>
-      )}
-
-      {project.videos.length > 1 && (
-        <h2 className={cx(videoSectionHeading, "video-section-heading")}>Episodes</h2>
-      )}
+        <dl className={cx(compactProjectFacts, "compact-project-facts")}>
+          <div className={cx(compactProjectFact, "compact-project-fact")}>
+            <dt className={cx(compactProjectFactLabel, "compact-project-fact-label")}>Role</dt>
+            <dd className={cx(compactProjectFactValue, "compact-project-fact-value")}>{project.heading}</dd>
+          </div>
+          <div className={cx(compactProjectFact, "compact-project-fact")}>
+            <dt className={cx(compactProjectFactLabel, "compact-project-fact-label")}>Location</dt>
+            <dd className={cx(compactProjectFactValue, "compact-project-fact-value")}>
+              {project.location ?? "Not specified"}
+            </dd>
+          </div>
+        </dl>
+      </div>
       <VideoPlayer videos={project.videos} />
     </main>
   );

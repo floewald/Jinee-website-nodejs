@@ -51,6 +51,81 @@ export const videoProjectDescription = css({
   },
 });
 
+export const videoProjectHeader = css({
+  display: "grid",
+  gap: "1rem",
+  alignItems: "start",
+  gridTemplateColumns: "1fr",
+  marginTop: "1.25rem",
+  marginBottom: "2rem",
+  "@media (min-width: 760px)": {
+    gridTemplateColumns: "minmax(0, 1.7fr) minmax(14rem, 0.9fr)",
+    gap: "1.75rem",
+  },
+});
+
+export const videoProjectIntro = css({
+  minWidth: 0,
+  maxWidth: "100%",
+  marginTop: 0,
+  marginBottom: 0,
+  lineHeight: "1.6",
+  color: "var(--charcoal)",
+  order: 1,
+  "@media (min-width: 760px)": {
+    order: 0,
+  },
+});
+
+export const compactProjectFacts = css({
+  display: "grid",
+  gap: "0.9rem",
+  alignContent: "start",
+  position: "relative",
+  order: -1,
+  paddingBottom: "1rem",
+  borderBottom: "1px solid var(--border-color)",
+  "&::before": {
+    content: '""',
+    display: "none",
+  },
+  "@media (min-width: 760px)": {
+    order: 0,
+    paddingBottom: 0,
+    paddingLeft: "2rem",
+    borderBottom: "none",
+    "&::before": {
+      display: "block",
+      position: "absolute",
+      left: 0,
+      top: "0.1rem",
+      bottom: "0.1rem",
+      width: "1px",
+      background: "var(--border-color)",
+    },
+  },
+});
+
+export const compactProjectFact = css({
+  display: "grid",
+  gap: "0.2rem",
+});
+
+export const compactProjectFactLabel = css({
+  fontSize: "0.78rem",
+  fontWeight: 600,
+  letterSpacing: "0.08em",
+  textTransform: "uppercase",
+  color: "var(--muted-text)",
+});
+
+export const compactProjectFactValue = css({
+  fontSize: "1rem",
+  lineHeight: "1.5",
+  color: "var(--charcoal)",
+  margin: 0,
+});
+
 export const projectMeta = css({
   display: "flex",
   flexWrap: "wrap",
@@ -69,13 +144,6 @@ export const projectLocation = css({
   fontSize: "0.95rem",
   color: "var(--muted-text)",
   margin: 0,
-});
-
-export const videoSectionHeading = css({
-  fontSize: "1.15rem",
-  fontWeight: 600,
-  marginTop: "2rem",
-  marginBottom: "0.75rem",
 });
 
 export const galleryEmpty = css({

@@ -1,7 +1,11 @@
 import { act, render, waitFor } from "@testing-library/react";
 import { useRef } from "react";
 import { useProgressiveReveal } from "@/hooks/useProgressiveReveal";
-import { REVEAL_OFFSET_PX } from "@/lib/reveal-config";
+import {
+  REVEAL_BOTTOM_BUFFER_PX,
+  REVEAL_OFFSET_PX,
+  REVEAL_SIDE_BUFFER_PX,
+} from "@/lib/reveal-config";
 
 class MockIntersectionObserver {
   callback: IntersectionObserverCallback;
@@ -222,7 +226,14 @@ describe("useProgressiveReveal", () => {
 
     render(<TestGrid />);
 
-    expect(MockIntersectionObserver.instances[0].options?.rootMargin).toBe("160px 50px 160px 50px");
+    const observerEntryBufferPx = Math.max(
+      REVEAL_BOTTOM_BUFFER_PX,
+      REVEAL_OFFSET_PX
+    );
+
+    expect(MockIntersectionObserver.instances[0].options?.rootMargin).toBe(
+      `${observerEntryBufferPx}px ${REVEAL_SIDE_BUFFER_PX}px ${observerEntryBufferPx}px ${REVEAL_SIDE_BUFFER_PX}px`
+    );
   });
 
   it("still animates an item when the observer fires just before viewport entry", () => {
