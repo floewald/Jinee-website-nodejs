@@ -101,8 +101,8 @@
     "type": "video",
     "slug": "health-wang-zhen",
     "title": "8world | 看见主播",
-    "description": "8world health series on midlife nutrition, mental health, and chronic disease risk in Singapore.",
-    "longDescription": "A three-part 8world series fronted by anchor Wang Zheng that turns midlife health concerns into practical, accessible stories. Across the episodes, the reporting looks at how busy Singaporeans in their 40s and 50s eat when they rely on hawker food, how to spot mental-health warning signs that get dismissed as everyday stress, and why hypertension and high cholesterol often stay hidden until serious harm is done.\n\nJinee co-directed and shot the series in Singapore.",
+    "description": "8world health series on midlife nutrition, mental health, menopause, and chronic disease risk in Singapore.",
+    "longDescription": "A four-part 8world series fronted by anchor Wang Zheng that turns midlife health concerns into practical, accessible stories. Across the episodes, the reporting looks at how busy Singaporeans in their 40s and 50s eat when they rely on hawker food, how to spot mental-health warning signs that get dismissed as everyday stress, why hypertension and high cholesterol often stay hidden until serious harm is done, and how menopause can reshape the body in ways many women only recognise once the changes have taken hold.\n\nJinee co-directed and shot the series in Singapore.",
     "heading": "Co-Director | Videographer",
     "location": "📍 Singapore",
     "ogImage": "https://jineechen.com/assets/videography/health-wang-zhen/health-wang-zhen-800.webp",
@@ -128,6 +128,15 @@
         "embedUrl": "https://www.youtube.com/embed/E1bhkM_Ees4",
         "description": "The reporting looks at how hidden risks such as high blood pressure and cholesterol stay invisible until a serious health scare forces action.",
         "uploadDate": "2026-05-21T01:00:11-07:00"
+      },
+      {
+        "title": "【看见主播 | 王征】女性40+，身体正在发生什么变化？",
+        "embedUrl": "https://www.youtube.com/embed/n4xH6jyliQE",
+        "description": [
+          "Wang Zheng guides viewers through a rethinking of menopause, explaining why women 45+ may notice waist gain and other body changes even when they are not eating more.",
+          "The episode frames menopause as a subtle but long-lasting transition, with doctors describing it less as decline than as a kind of 'phoenix rising'."
+        ],
+        "uploadDate": "2026-06-18T01:00:37-07:00"
       }
     ],
     "portfolioCard": {
