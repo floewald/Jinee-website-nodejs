@@ -4,10 +4,6 @@ import { useRef } from "react";
 import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { cx } from "@/styled-system/css";
-import {
-  isElementWithinRevealRange,
-  revealElement,
-} from "@/lib/reveal-helpers";
 import { useLoadedGalleryReveal } from "@/hooks/useLoadedGalleryReveal";
 import type { GalleryImage } from "./Lightbox";
 import {
@@ -48,15 +44,6 @@ export default function GalleryGrid({
   useLoadedGalleryReveal(containerRef);
   const hiddenOnMobile = new Set(hiddenOnMobileIndices);
 
-  function handleImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
-    // Gallery tiles use image-load reveal, not viewport reveal, because the
-    // gallery must stay visible even if layout settles late on Safari.
-    const item = e.currentTarget.closest(".gallery-item");
-    if (item instanceof HTMLElement && isElementWithinRevealRange(item)) {
-      revealElement(item);
-    }
-  }
-
   if (images.length === 0) return null;
 
   const inColumns = useColumnsLayout;
@@ -83,7 +70,6 @@ export default function GalleryGrid({
         unoptimized
         style={{ height: "auto" }}
         {...(img.blur ? { placeholder: "blur" as const, blurDataURL: img.blur } : {})}
-        onLoad={handleImageLoad}
       />
     </button>
   ));

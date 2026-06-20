@@ -143,7 +143,7 @@ describe("GalleryGrid", () => {
     expect(window.getComputedStyle(firstItem!).opacity).not.toBe("0");
   });
 
-  it("does not replay WAAPI motion when an in-view image finishes loading after scroll", () => {
+  it("does not trigger reveal from image load events after scroll", () => {
     const rectVisibleInViewport = {
       top: 40,
       bottom: 240,
@@ -172,6 +172,6 @@ describe("GalleryGrid", () => {
     fireEvent.load(image);
 
     expect(animateMock).not.toHaveBeenCalled();
-    expect(image.closest(".gallery-item")).toHaveAttribute("data-reveal-animated", "true");
+    expect(image.closest(".gallery-item")).not.toHaveAttribute("data-reveal-animated");
   });
 });
