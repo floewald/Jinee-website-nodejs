@@ -8,7 +8,6 @@ import {
   projectPath,
   getSlugsByType,
   photographyProjects,
-  portfolioIndexConfig,
   videoProjects,
   socialMediaProjects,
 } from "@/lib/portfolio-config";
@@ -107,14 +106,5 @@ describe("getSlugsByType", () => {
     const slugs = getSlugsByType("video");
     expect(slugs).toContain("stuck-low-pay");
     expect(slugs).toContain("blind-kitchen-chefs");
-  });
-});
-
-describe("portfolioIndexConfig", () => {
-  it("resolves intrinsic dimensions for homepage collage images", () => {
-    portfolioIndexConfig.collageImages.forEach((image) => {
-      expect(image.width).toBeGreaterThan(0);
-      expect(image.height).toBeGreaterThan(0);
-    });
   });
 });

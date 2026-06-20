@@ -14,9 +14,9 @@ import GallerySection from "@/components/sections/GallerySection";
 jest.mock("@/lib/portfolio-config", () => ({
   portfolioIndexConfig: {
     collageImages: [
-      { src: "/assets/img1.webp", alt: "Image 1", srcFull: "/assets/img1.webp", width: 800, height: 533 },
-      { src: "/assets/img2.webp", alt: "Image 2", srcFull: "/assets/img2.webp", width: 800, height: 533 },
-      { src: "/assets/img3.webp", alt: "Image 3", srcFull: "/assets/img3.webp", width: 800, height: 533 },
+      { src: "/assets/img1.webp", alt: "Image 1", srcFull: "/assets/img1.webp" },
+      { src: "/assets/img2.webp", alt: "Image 2", srcFull: "/assets/img2.webp" },
+      { src: "/assets/img3.webp", alt: "Image 3", srcFull: "/assets/img3.webp" },
     ],
     videoSectionTitle: "Video",
   },
@@ -26,16 +26,11 @@ jest.mock("@/lib/portfolio-config", () => ({
 jest.mock("@/components/gallery/GalleryWithLightbox", () => {
   return function MockGalleryWithLightbox({
     images,
-    mobileImages,
   }: {
     images: { src: string; alt: string }[];
-    mobileImages?: { src: string; alt: string }[];
   }) {
     return (
-      <div
-        data-testid="gallery-with-lightbox"
-        data-mobile-count={mobileImages?.length ?? 0}
-      >
+      <div data-testid="gallery-with-lightbox">
         {images.map((img, i) => (
           // eslint-disable-next-line @next/next/no-img-element
           <img key={i} src={img.src} alt={img.alt} />
@@ -54,15 +49,13 @@ describe("GallerySection", () => {
   it("renders images from config (not hardcoded)", () => {
     render(<GallerySection />);
     const images = screen.getAllByRole("img");
-    expect(images).toHaveLength(3);
+    expect(images).toHaveLength(6); // 3 mock images × 2 galleries (desktop + mobile)
   });
 
   it("passes config images to GalleryWithLightbox", () => {
     render(<GallerySection />);
-    const gallery = screen.getByTestId("gallery-with-lightbox");
-    expect(gallery).toBeInTheDocument();
-    expect(gallery).toHaveAttribute("data-mobile-count", "3");
-    expect(screen.getByAltText("Image 1")).toBeInTheDocument();
+    expect(screen.getAllByTestId("gallery-with-lightbox")[0]).toBeInTheDocument();
+    expect(screen.getAllByAltText("Image 1")[0]).toBeInTheDocument();
   });
 
   it("every image has an alt attribute", () => {

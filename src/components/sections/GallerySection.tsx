@@ -2,6 +2,7 @@ import GalleryWithLightbox from "@/components/gallery/GalleryWithLightbox";
 import { css, cx } from "@/styled-system/css";
 import { portfolioIndexConfig } from "@/lib/portfolio-config";
 import type { GalleryImage } from "@/lib/gallery-images";
+import { galleryDesktopOnly, galleryMobileOnly } from "@/lib/portfolio-styles";
 
 const collage = css({
   width: "100%",
@@ -22,12 +23,11 @@ export default function GallerySection() {
 
   return (
     <section id="gallery" className={cx(gallerySectionStyle, "section-bg-white", "gallery-section")}>
-      <div className={collage}>
-        <GalleryWithLightbox
-          images={collageImages}
-          mobileImages={mobileImages}
-          useColumnsLayout
-        />
+      <div className={cx(collage, galleryDesktopOnly, "gallery-desktop-only")}>
+        <GalleryWithLightbox images={collageImages} useColumnsLayout />
+      </div>
+      <div className={cx(collage, galleryMobileOnly, "gallery-mobile-only")}>
+        <GalleryWithLightbox images={mobileImages} useColumnsLayout />
       </div>
     </section>
   );

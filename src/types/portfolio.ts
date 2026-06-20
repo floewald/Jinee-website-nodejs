@@ -111,8 +111,6 @@ export interface CollageImageConfig {
   src: string;
   alt: string;
   srcFull: string;
-  width: number;
-  height: number;
   blur?: string;
   /** object-position for hero slideshow in cover mode, e.g. "center 30%" or "top" */
   objectPosition?: string;
