@@ -9,7 +9,7 @@ import type {
 } from "@/types/portfolio";
 
 import { validatePortfolioData, SocialMediaManifestSchema } from "@/lib/portfolio-schemas";
-import { findImageManifestItemByPublicPath } from "@/lib/image-manifests";
+import { readPublicImageDimensions } from "@/lib/asset-dimensions";
 
 import photographyData from "@/content/portfolio/photography.json";
 import videoData from "@/content/portfolio/videography.json";
@@ -46,9 +46,9 @@ function resolveImages(
       );
     }
 
-    const manifestItem = findImageManifestItemByPublicPath(entry.src);
+    const dimensions = readPublicImageDimensions(entry.src);
 
-    if (!manifestItem?.width || !manifestItem?.height) {
+    if (!dimensions) {
       throw new Error(
         `[portfolio-config] Could not read intrinsic dimensions for collage image "${key}" at "${entry.src}".`
       );
@@ -58,8 +58,8 @@ function resolveImages(
       src: entry.src,
       alt: entry.alt,
       srcFull: entry.src,
-      width: manifestItem.width,
-      height: manifestItem.height,
+      width: dimensions.width,
+      height: dimensions.height,
       ...(entry.objectPosition ? { objectPosition: entry.objectPosition } : {}),
     };
   });

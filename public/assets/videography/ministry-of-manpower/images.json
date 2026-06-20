@@ -4,17 +4,13 @@
     "thumb": "ministry-of-manpower-update-320.webp",
     "md": "ministry-of-manpower-update-800.webp",
     "lg": "ministry-of-manpower-update-1600.webp",
-    "original": "ministry-of-manpower-update.jpeg",
-    "width": 1748,
-    "height": 746
+    "original": null
   },
   {
     "basename": "ministry-of-manpower",
     "thumb": "ministry-of-manpower-320.webp",
     "md": "ministry-of-manpower-800.webp",
     "lg": "ministry-of-manpower-1600.webp",
-    "original": "ministry-of-manpower.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   }
 ]

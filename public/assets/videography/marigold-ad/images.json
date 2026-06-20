@@ -4,8 +4,6 @@
     "thumb": "marigold-ad-320.webp",
     "md": "marigold-ad-800.webp",
     "lg": "marigold-ad-1600.webp",
-    "original": "marigold-ad.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   }
 ]

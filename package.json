@@ -14,7 +14,7 @@
     "generate:lqip": "node scripts/generate-lqip.mjs",
     "start": "next start",
     "lint": "eslint",
-    "type-check": "panda codegen --silent && tsc --noEmit",
+    "type-check": "tsc --noEmit",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",

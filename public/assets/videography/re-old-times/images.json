@@ -4,44 +4,34 @@
     "thumb": "re-old-times-1-320.webp",
     "md": "re-old-times-1-800.webp",
     "lg": "re-old-times-1-1600.webp",
-    "original": "re-old-times-1.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   },
   {
     "basename": "re-old-times-2",
     "thumb": "re-old-times-2-320.webp",
     "md": "re-old-times-2-800.webp",
     "lg": "re-old-times-2-1600.webp",
-    "original": "re-old-times-2.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   },
   {
     "basename": "re-old-times-3",
     "thumb": "re-old-times-3-320.webp",
     "md": "re-old-times-3-800.webp",
     "lg": "re-old-times-3-1600.webp",
-    "original": "re-old-times-3.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   },
   {
     "basename": "re-old-times-4",
     "thumb": "re-old-times-4-320.webp",
     "md": "re-old-times-4-800.webp",
     "lg": "re-old-times-4-1600.webp",
-    "original": "re-old-times-4.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   },
   {
     "basename": "re-old-times-5",
     "thumb": "re-old-times-5-320.webp",
     "md": "re-old-times-5-800.webp",
     "lg": "re-old-times-5-1600.webp",
-    "original": "re-old-times-5.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   }
 ]

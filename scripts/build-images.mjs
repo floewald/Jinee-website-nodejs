@@ -141,7 +141,6 @@ async function processSlugDir(type, slug, rawDir, outDir, stats) {
   for (const filename of images) {
     const basename = filename.replace(/\.[^.]+$/, "");
     const srcPath = path.join(rawDir, filename);
-    const metadata = await sharp(srcPath).metadata();
 
     // Full-quality base variant (original dimensions)
     const baseResult = await convertToWebP(srcPath, path.join(outDir, `${basename}.webp`));
@@ -158,9 +157,7 @@ async function processSlugDir(type, slug, rawDir, outDir, stats) {
       thumb:    `${basename}-320.webp`,
       md:       `${basename}-800.webp`,
       lg:       `${basename}-1600.webp`,
-      original: filename,
-      width: metadata.width ?? undefined,
-      height: metadata.height ?? undefined,
+      original: null,
     };
     if (blurByBasename[basename]) entry.blur = blurByBasename[basename];
     manifest.push(entry);

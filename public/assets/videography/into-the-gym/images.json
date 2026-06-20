@@ -4,80 +4,62 @@
     "thumb": "into-the-gym-1-320.webp",
     "md": "into-the-gym-1-800.webp",
     "lg": "into-the-gym-1-1600.webp",
-    "original": "into-the-gym-1.jpg",
-    "width": 480,
-    "height": 360
+    "original": null
   },
   {
     "basename": "into-the-gym-2",
     "thumb": "into-the-gym-2-320.webp",
     "md": "into-the-gym-2-800.webp",
     "lg": "into-the-gym-2-1600.webp",
-    "original": "into-the-gym-2.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   },
   {
     "basename": "into-the-gym-3",
     "thumb": "into-the-gym-3-320.webp",
     "md": "into-the-gym-3-800.webp",
     "lg": "into-the-gym-3-1600.webp",
-    "original": "into-the-gym-3.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   },
   {
     "basename": "into-the-gym-4",
     "thumb": "into-the-gym-4-320.webp",
     "md": "into-the-gym-4-800.webp",
     "lg": "into-the-gym-4-1600.webp",
-    "original": "into-the-gym-4.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   },
   {
     "basename": "into-the-gym-5",
     "thumb": "into-the-gym-5-320.webp",
     "md": "into-the-gym-5-800.webp",
     "lg": "into-the-gym-5-1600.webp",
-    "original": "into-the-gym-5.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   },
   {
     "basename": "into-the-gym-6",
     "thumb": "into-the-gym-6-320.webp",
     "md": "into-the-gym-6-800.webp",
     "lg": "into-the-gym-6-1600.webp",
-    "original": "into-the-gym-6.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   },
   {
     "basename": "into-the-gym-7",
     "thumb": "into-the-gym-7-320.webp",
     "md": "into-the-gym-7-800.webp",
     "lg": "into-the-gym-7-1600.webp",
-    "original": "into-the-gym-7.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   },
   {
     "basename": "into-the-gym-8",
     "thumb": "into-the-gym-8-320.webp",
     "md": "into-the-gym-8-800.webp",
     "lg": "into-the-gym-8-1600.webp",
-    "original": "into-the-gym-8.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   },
   {
     "basename": "into-the-gym-9",
     "thumb": "into-the-gym-9-320.webp",
     "md": "into-the-gym-9-800.webp",
     "lg": "into-the-gym-9-1600.webp",
-    "original": "into-the-gym-9.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   }
 ]

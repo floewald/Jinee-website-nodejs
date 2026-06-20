@@ -4,8 +4,6 @@
     "thumb": "uniqlo-320.webp",
     "md": "uniqlo-800.webp",
     "lg": "uniqlo-1600.webp",
-    "original": "uniqlo.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   }
 ]

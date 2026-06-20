@@ -4,17 +4,13 @@
     "thumb": "fertility-rate-sgp-1-320.webp",
     "md": "fertility-rate-sgp-1-800.webp",
     "lg": "fertility-rate-sgp-1-1600.webp",
-    "original": "fertility-rate-sgp-1.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   },
   {
     "basename": "fertility-rate-sgp-2",
     "thumb": "fertility-rate-sgp-2-320.webp",
     "md": "fertility-rate-sgp-2-800.webp",
     "lg": "fertility-rate-sgp-2-1600.webp",
-    "original": "fertility-rate-sgp-2.jpg",
-    "width": 1280,
-    "height": 720
+    "original": null
   }
 ]

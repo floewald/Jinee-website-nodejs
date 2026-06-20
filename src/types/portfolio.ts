@@ -96,9 +96,6 @@ export interface ImageManifestItem {
   /** large WebP: basename-1600.webp */
   lg: string | null;
   original: string | null;
-  width?: number;
-  height?: number;
-  blur?: string;
 }
 
 // ─── Portfolio index page config ────────────────────────────────────────────
