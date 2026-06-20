@@ -73,6 +73,14 @@ interface HeroSlideshowProps {
   fit?: HeroFit;
 }
 
+function getRenderedSlideIndices(total: number, activeIndex: number): number[] {
+  if (total <= 3) return Array.from({ length: total }, (_, index) => index);
+
+  const prevIndex = (activeIndex - 1 + total) % total;
+  const nextIndex = (activeIndex + 1) % total;
+  return [prevIndex, activeIndex, nextIndex];
+}
+
 export default function HeroSlideshow({
   slides,
   intervalMs = 4000,
@@ -95,7 +103,9 @@ export default function HeroSlideshow({
 
   return (
     <section className={cx(heroSectionStyle, "hero-section")} aria-label="Hero slideshow">
-      {slides.map((slide, i) => (
+      {getRenderedSlideIndices(slides.length, current).map((i) => {
+        const slide = slides[i];
+        return (
         <div
           key={slide.src}
           className={cx(
@@ -134,7 +144,8 @@ export default function HeroSlideshow({
             unoptimized
           />
         </div>
-      ))}
+        );
+      })}
     </section>
   );
 }

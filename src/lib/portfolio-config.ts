@@ -42,9 +42,16 @@ interface PortfolioIndexRawConfig {
   heroFit?: string;
 }
 
+function getCollageGridSrc(src: string) {
+  return src.endsWith("-1600.webp")
+    ? src.replace(/-1600\.webp$/, "-800.webp")
+    : src;
+}
+
 function resolveImages(
   keys: string[],
-  slugs: Record<string, SlugEntry>
+  slugs: Record<string, SlugEntry>,
+  options?: { useGridSizedSrc?: boolean }
 ): CollageImageConfig[] {
   return keys.map((key) => {
     const entry = slugs[key];
@@ -72,8 +79,10 @@ function resolveImages(
       );
     }
 
+    const src = options?.useGridSizedSrc ? getCollageGridSrc(entry.src) : entry.src;
+
     return {
-      src: entry.src,
+      src,
       alt: entry.alt,
       srcFull: entry.src,
       width: dimensions.width,
@@ -102,9 +111,13 @@ export const socialMediaProjects = socialMediaManifest.projects as SocialMediaPr
 const _raw = indexConfigData as unknown as PortfolioIndexRawConfig;
 
 export const portfolioIndexConfig: PortfolioIndexConfig = {
-  collageImages: resolveImages(_raw.collageImages, _raw.slugs),
+  collageImages: resolveImages(_raw.collageImages, _raw.slugs, {
+    useGridSizedSrc: true,
+  }),
   collageImagesMobile: _raw.collageImagesMobile
-    ? resolveImages(_raw.collageImagesMobile, _raw.slugs)
+    ? resolveImages(_raw.collageImagesMobile, _raw.slugs, {
+      useGridSizedSrc: true,
+    })
     : undefined,
   slideshowImages: _raw.slideshowImages
     ? resolveImages(_raw.slideshowImages, _raw.slugs)

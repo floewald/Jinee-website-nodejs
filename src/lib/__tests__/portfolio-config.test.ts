@@ -117,4 +117,18 @@ describe("portfolioIndexConfig", () => {
       expect(image.height).toBeGreaterThan(0);
     });
   });
+
+  it("uses medium WebP sources for the homepage collage grid while keeping full-size lightbox sources", () => {
+    portfolioIndexConfig.collageImages.forEach((image) => {
+      expect(image.src).toMatch(/-800\.webp$/);
+      expect(image.srcFull).toMatch(/-1600\.webp$/);
+    });
+  });
+
+  it("keeps large WebP sources for the homepage hero slideshow", () => {
+    portfolioIndexConfig.slideshowImages?.forEach((image) => {
+      expect(image.src).toMatch(/-1600\.webp$/);
+      expect(image.srcFull).toBe(image.src);
+    });
+  });
 });

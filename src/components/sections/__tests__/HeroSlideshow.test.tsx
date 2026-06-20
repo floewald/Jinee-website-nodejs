@@ -22,6 +22,12 @@ const SLIDES = [
   { src: "/img/c.webp", alt: "Slide C" },
 ];
 
+const MANY_SLIDES = [
+  ...SLIDES,
+  { src: "/img/d.webp", alt: "Slide D" },
+  { src: "/img/e.webp", alt: "Slide E" },
+];
+
 beforeEach(() => jest.useFakeTimers());
 afterEach(() => {
   jest.runOnlyPendingTimers();
@@ -32,6 +38,13 @@ describe("HeroSlideshow", () => {
   it("renders all slides", () => {
     const { container } = render(
       <HeroSlideshow slides={SLIDES} intervalMs={1000} />
+    );
+    expect(container.querySelectorAll(".hero-slide")).toHaveLength(3);
+  });
+
+  it("renders only the neighboring slides needed for fade transitions when there are many slides", () => {
+    const { container } = render(
+      <HeroSlideshow slides={MANY_SLIDES} intervalMs={1000} />
     );
     expect(container.querySelectorAll(".hero-slide")).toHaveLength(3);
   });
