@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import { renderToStaticMarkup } from "react-dom/server";
 import GalleryWithLightbox from "@/components/gallery/GalleryWithLightbox";
 
 const mockUseMediaQuery = jest.fn();
@@ -12,13 +13,14 @@ jest.mock("@/components/gallery/GalleryGrid", () => ({
   default: ({
     images,
     onImageClick,
-    hiddenOnMobileIndices,
   }: {
     images: Array<{ alt: string }>;
     onImageClick: (index: number) => void;
-    hiddenOnMobileIndices?: number[];
   }) => (
-    <div data-testid="gallery-grid" data-hidden={hiddenOnMobileIndices?.join(",") ?? ""}>
+    <div
+      data-testid="gallery-grid"
+      data-images={images.map((image) => image.alt).join("|")}
+    >
       {images.map((image, index) => (
         <button
           key={image.alt}
@@ -76,19 +78,35 @@ describe("GalleryWithLightbox", () => {
 
     render(<GalleryWithLightbox images={DESKTOP_IMAGES} mobileImages={MOBILE_IMAGES} useColumnsLayout />);
 
-    expect(screen.getByTestId("gallery-grid")).toHaveAttribute("data-hidden", "1");
+    expect(screen.getByTestId("gallery-grid")).toHaveAttribute("data-images", "One|Two|Three|Four");
     expect(screen.getByTestId("lightbox")).toHaveAttribute("data-images", "One|Two|Three|Four");
   });
 
-  it("uses the curated mobile subset for lightbox navigation on mobile", () => {
+  it("uses the curated mobile subset for both the grid and lightbox navigation on mobile", () => {
     mockUseMediaQuery.mockReturnValue(true);
 
     render(<GalleryWithLightbox images={DESKTOP_IMAGES} mobileImages={MOBILE_IMAGES} useColumnsLayout />);
 
-    fireEvent.click(screen.getByTestId("grid-item-2"));
+    expect(screen.getByTestId("gallery-grid")).toHaveAttribute("data-images", "One|Three|Four");
+    fireEvent.click(screen.getByTestId("grid-item-1"));
 
     expect(screen.getByTestId("lightbox")).toHaveAttribute("data-open", "true");
     expect(screen.getByTestId("lightbox")).toHaveAttribute("data-images", "One|Three|Four");
     expect(screen.getByTestId("lightbox")).toHaveAttribute("data-current-index", "1");
+  });
+
+  it("server-renders a placeholder instead of the responsive gallery when a mobile subset exists", () => {
+    mockUseMediaQuery.mockReturnValue(false);
+
+    const html = renderToStaticMarkup(
+      <GalleryWithLightbox
+        images={DESKTOP_IMAGES}
+        mobileImages={MOBILE_IMAGES}
+        useColumnsLayout
+      />
+    );
+
+    expect(html).toContain("data-gallery-placeholder=\"responsive\"");
+    expect(html).not.toContain("data-testid=\"gallery-grid\"");
   });
 });

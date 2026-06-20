@@ -35,11 +35,29 @@ export const galleryColsItem = css({
   width: "100%",
 });
 
-/** Hide desktop-only collage tiles from the shared tree on mobile. */
-export const galleryColsItemHideOnMobile = css({
+/** Desktop-only responsive gallery shell shown before hydration. */
+export const galleryResponsiveShellDesktop = css({
+  display: "block",
   "@media (max-width: 800px)": {
     display: "none",
   },
+});
+
+/** Mobile-only responsive gallery shell shown before hydration. */
+export const galleryResponsiveShellMobile = css({
+  display: "none",
+  "@media (max-width: 800px)": {
+    display: "block",
+  },
+});
+
+/** Placeholder tile used before the responsive gallery resolves its viewport. */
+export const galleryPlaceholderSurface = css({
+  display: "block",
+  width: "100%",
+  borderRadius: "var(--radius-md)",
+  background: "linear-gradient(180deg, rgba(236,231,224,0.96) 0%, rgba(224,216,206,0.9) 100%)",
+  boxShadow: "inset 0 0 0 1px rgba(35, 27, 20, 0.06)",
 });
 
 /** `gallery-item` — clickable image wrapper */

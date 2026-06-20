@@ -1,12 +1,21 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useRef } from "react";
+import { cx } from "@/styled-system/css";
 import GalleryGrid from "./GalleryGrid";
 import Lightbox from "./Lightbox";
 import Slideshow from "./Slideshow";
+import { useHydrated } from "@/hooks/useHydrated";
 import { useLightbox } from "@/hooks/useLightbox";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import type { GalleryImage } from "./Lightbox";
+import {
+  galleryCols,
+  galleryColsItem,
+  galleryPlaceholderSurface,
+  galleryResponsiveShellDesktop,
+  galleryResponsiveShellMobile,
+} from "./gallery-styles";
 
 interface GalleryWithLightboxProps {
   images: GalleryImage[];
@@ -20,8 +29,49 @@ interface GalleryWithLightboxProps {
 
 const MOBILE_GALLERY_QUERY = "(max-width: 800px)";
 
-function imageKey(image: GalleryImage): string {
-  return image.srcFull ?? image.src;
+function getPlaceholderAspectRatio(image: GalleryImage) {
+  if (image.width && image.height && image.width > 0 && image.height > 0) {
+    return `${image.width} / ${image.height}`;
+  }
+
+  return "3 / 2";
+}
+
+function ResponsiveGalleryPlaceholder({
+  desktopImages,
+  mobileImages,
+}: {
+  desktopImages: GalleryImage[];
+  mobileImages: GalleryImage[];
+}) {
+  function renderShell(images: GalleryImage[]) {
+    return (
+      <div
+        className={cx(galleryCols, "gallery-cols")}
+        data-gallery-placeholder="responsive"
+        aria-hidden="true"
+      >
+        {images.map((image, index) => (
+          <div
+            key={`${image.src}-${index}-placeholder`}
+            className={galleryColsItem}
+          >
+            <div
+              className={galleryPlaceholderSurface}
+              style={{ aspectRatio: getPlaceholderAspectRatio(image) }}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <div className={galleryResponsiveShellDesktop}>{renderShell(desktopImages)}</div>
+      <div className={galleryResponsiveShellMobile}>{renderShell(mobileImages)}</div>
+    </>
+  );
 }
 
 export default function GalleryWithLightbox({
@@ -30,38 +80,13 @@ export default function GalleryWithLightbox({
   showSlideshow = false,
   useColumnsLayout = false,
 }: GalleryWithLightboxProps) {
+  const isHydrated = useHydrated();
   const isMobile = useMediaQuery(MOBILE_GALLERY_QUERY);
   const hasCuratedMobileSubset = !!mobileImages && mobileImages.length > 0;
-  const activeImages =
+  const renderedImages =
     hasCuratedMobileSubset && isMobile && mobileImages ? mobileImages : images;
 
-  const hiddenOnMobileIndices = useMemo(() => {
-    if (!hasCuratedMobileSubset || !mobileImages) return [];
-
-    const mobileKeys = new Set(mobileImages.map(imageKey));
-    return images.flatMap((image, index) =>
-      mobileKeys.has(imageKey(image)) ? [] : [index]
-    );
-  }, [hasCuratedMobileSubset, images, mobileImages]);
-
-  const activeIndexBySourceIndex = useMemo(() => {
-    if (!hasCuratedMobileSubset || !mobileImages || !isMobile) {
-      return new Map(images.map((_, index) => [index, index]));
-    }
-
-    const mobileIndexByKey = new Map(
-      mobileImages.map((image, index) => [imageKey(image), index])
-    );
-
-    return new Map(
-      images.flatMap((image, sourceIndex) => {
-        const activeIndex = mobileIndexByKey.get(imageKey(image));
-        return activeIndex === undefined ? [] : [[sourceIndex, activeIndex] as const];
-      })
-    );
-  }, [hasCuratedMobileSubset, images, isMobile, mobileImages]);
-
-  const { isOpen, currentIndex, open, close, next, prev } = useLightbox(activeImages);
+  const { isOpen, currentIndex, open, close, next, prev } = useLightbox(renderedImages);
   const previousIsMobile = useRef(isMobile);
 
   useEffect(() => {
@@ -71,24 +96,32 @@ export default function GalleryWithLightbox({
     previousIsMobile.current = isMobile;
   }, [close, isMobile, isOpen]);
 
-  function handleOpen(sourceIndex: number) {
-    const activeIndex = activeIndexBySourceIndex.get(sourceIndex);
-    if (activeIndex !== undefined) {
-      open(activeIndex);
-    }
+  function handleOpen(index: number) {
+    open(index);
+  }
+
+  // Static export cannot know the viewport during HTML generation. Rendering a
+  // lightweight shell first prevents mobile clients from receiving the desktop
+  // collage dataset and preloading the wrong image set before hydration.
+  if (hasCuratedMobileSubset && mobileImages && !isHydrated) {
+    return (
+      <ResponsiveGalleryPlaceholder
+        desktopImages={images}
+        mobileImages={mobileImages}
+      />
+    );
   }
 
   return (
     <>
-      {showSlideshow && activeImages.length > 0 && <Slideshow images={activeImages} />}
+      {showSlideshow && renderedImages.length > 0 && <Slideshow images={renderedImages} />}
       <GalleryGrid
-        images={images}
+        images={renderedImages}
         onImageClick={handleOpen}
         useColumnsLayout={useColumnsLayout}
-        hiddenOnMobileIndices={hiddenOnMobileIndices}
       />
       <Lightbox
-        images={activeImages}
+        images={renderedImages}
         isOpen={isOpen}
         currentIndex={currentIndex}
         onClose={close}

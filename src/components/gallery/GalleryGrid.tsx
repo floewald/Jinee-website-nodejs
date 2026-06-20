@@ -11,7 +11,6 @@ import {
   projectGalleryCol,
   galleryCols,
   galleryColsItem,
-  galleryColsItemHideOnMobile,
   galleryItem,
   galleryImg,
 } from "./gallery-styles";
@@ -24,8 +23,6 @@ interface GalleryGridProps {
    * Better for mixed portrait/landscape images: browser balances column heights.
    */
   useColumnsLayout?: boolean;
-  /** Indices that should stay in the DOM but disappear on mobile. */
-  hiddenOnMobileIndices?: number[];
 }
 
 const BREAKPOINT_COLS = {
@@ -38,11 +35,9 @@ export default function GalleryGrid({
   images,
   onImageClick,
   useColumnsLayout = false,
-  hiddenOnMobileIndices = [],
 }: GalleryGridProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   useLoadedGalleryReveal(containerRef);
-  const hiddenOnMobile = new Set(hiddenOnMobileIndices);
 
   if (images.length === 0) return null;
 
@@ -53,7 +48,6 @@ export default function GalleryGrid({
       key={`${img.src}-${i}`}
       className={cx(
         inColumns ? galleryColsItem : undefined,
-        inColumns && hiddenOnMobile.has(i) ? galleryColsItemHideOnMobile : undefined,
         galleryItem,
         "gallery-item",
       )}
