@@ -203,22 +203,6 @@ export const servicesList = css({
   },
 });
 
-/* ── Mobile / desktop gallery toggle ──────────────────────────────────────── */
-
-export const galleryDesktopOnly = css({
-  display: "block",
-  "@media (max-width: 800px)": {
-    display: "none",
-  },
-});
-
-export const galleryMobileOnly = css({
-  display: "none",
-  "@media (max-width: 800px)": {
-    display: "block",
-  },
-});
-
 /* ── Skip-link ────────────────────────────────────────────────────────────── */
 
 export const skipLinkFocus = css({
