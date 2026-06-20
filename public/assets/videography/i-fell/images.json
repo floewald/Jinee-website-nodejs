@@ -4,13 +4,17 @@
     "thumb": "i-fell-1-320.webp",
     "md": "i-fell-1-800.webp",
     "lg": "i-fell-1-1600.webp",
-    "original": null
+    "original": "i-fell-1.jpg",
+    "width": 1280,
+    "height": 720
   },
   {
     "basename": "i-fell-2",
     "thumb": "i-fell-2-320.webp",
     "md": "i-fell-2-800.webp",
     "lg": "i-fell-2-1600.webp",
-    "original": null
+    "original": "i-fell-2.jpg",
+    "width": 1280,
+    "height": 720
   }
 ]

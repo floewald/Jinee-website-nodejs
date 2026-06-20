@@ -4,13 +4,17 @@
     "thumb": "7-days-archery-1-320.webp",
     "md": "7-days-archery-1-800.webp",
     "lg": "7-days-archery-1-1600.webp",
-    "original": null
+    "original": "7-days-archery-1.jpg",
+    "width": 1280,
+    "height": 720
   },
   {
     "basename": "7-days-archery-2",
     "thumb": "7-days-archery-2-320.webp",
     "md": "7-days-archery-2-800.webp",
     "lg": "7-days-archery-2-1600.webp",
-    "original": null
+    "original": "7-days-archery-2.jpg",
+    "width": 1280,
+    "height": 720
   }
 ]

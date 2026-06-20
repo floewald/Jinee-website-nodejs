@@ -4,13 +4,17 @@
     "thumb": "guardians-vietnam-1-320.webp",
     "md": "guardians-vietnam-1-800.webp",
     "lg": "guardians-vietnam-1-1600.webp",
-    "original": null
+    "original": "guardians-vietnam-1.jpeg",
+    "width": 956,
+    "height": 538
   },
   {
     "basename": "guardians-vietnam-2",
     "thumb": "guardians-vietnam-2-320.webp",
     "md": "guardians-vietnam-2-800.webp",
     "lg": "guardians-vietnam-2-1600.webp",
-    "original": null
+    "original": "guardians-vietnam-2.jpeg",
+    "width": 330,
+    "height": 186
   }
 ]

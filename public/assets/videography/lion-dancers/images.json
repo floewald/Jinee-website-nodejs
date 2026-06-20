@@ -4,6 +4,8 @@
     "thumb": "lion-dancers-320.webp",
     "md": "lion-dancers-800.webp",
     "lg": "lion-dancers-1600.webp",
-    "original": null
+    "original": "lion-dancers.jpg",
+    "width": 1280,
+    "height": 720
   }
 ]

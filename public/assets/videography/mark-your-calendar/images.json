@@ -4,34 +4,44 @@
     "thumb": "mark-your-calendar-1-320.webp",
     "md": "mark-your-calendar-1-800.webp",
     "lg": "mark-your-calendar-1-1600.webp",
-    "original": null
+    "original": "mark-your-calendar-1.jpeg",
+    "width": 956,
+    "height": 538
   },
   {
     "basename": "mark-your-calendar-2",
     "thumb": "mark-your-calendar-2-320.webp",
     "md": "mark-your-calendar-2-800.webp",
     "lg": "mark-your-calendar-2-1600.webp",
-    "original": null
+    "original": "mark-your-calendar-2.jpeg",
+    "width": 440,
+    "height": 248
   },
   {
     "basename": "mark-your-calendar-3",
     "thumb": "mark-your-calendar-3-320.webp",
     "md": "mark-your-calendar-3-800.webp",
     "lg": "mark-your-calendar-3-1600.webp",
-    "original": null
+    "original": "mark-your-calendar-3.jpeg",
+    "width": 330,
+    "height": 186
   },
   {
     "basename": "mark-your-calendar-4",
     "thumb": "mark-your-calendar-4-320.webp",
     "md": "mark-your-calendar-4-800.webp",
     "lg": "mark-your-calendar-4-1600.webp",
-    "original": null
+    "original": "mark-your-calendar-4.jpeg",
+    "width": 330,
+    "height": 186
   },
   {
     "basename": "mark-your-calendar-5",
     "thumb": "mark-your-calendar-5-320.webp",
     "md": "mark-your-calendar-5-800.webp",
     "lg": "mark-your-calendar-5-1600.webp",
-    "original": null
+    "original": "mark-your-calendar-5.jpeg",
+    "width": 330,
+    "height": 186
   }
 ]

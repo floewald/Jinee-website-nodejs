@@ -1,6 +1,5 @@
-import fs from "fs";
 import path from "path";
-import { readPublicImageDimensions } from "@/lib/asset-dimensions";
+import { readImageManifest } from "@/lib/image-manifests";
 
 export interface GalleryImage {
   src: string;
@@ -13,15 +12,6 @@ export interface GalleryImage {
 
 export interface SlideshowImage {
   src: string;
-  blur?: string;
-}
-
-interface ImageManifestItem {
-  basename: string;
-  thumb: string | null;
-  md: string | null;
-  lg: string | null;
-  original: string | null;
   blur?: string;
 }
 
@@ -41,23 +31,13 @@ export function getProjectSlideshowImages(
   type: "photography" | "social-media" | "video"
 ): SlideshowImage[] {
   const folder = ASSET_FOLDER[type];
-  const manifestPath = path.join(
-    process.cwd(),
-    "public",
-    "assets",
-    folder,
-    slug,
-    "images.json"
-  );
+  const manifestPath = path.join(process.cwd(), "public", "assets", folder, slug, "images.json");
+  const data = readImageManifest(folder, slug);
 
-  if (!fs.existsSync(manifestPath)) {
+  if (!data) {
     console.warn(`[gallery-images] No manifest found for "${slug}" (${type}). Expected: ${manifestPath}`);
     return [];
   }
-
-  const data: ImageManifestItem[] = JSON.parse(
-    fs.readFileSync(manifestPath, "utf-8")
-  );
 
   const baseUrl = `/assets/${folder}/${slug}`;
 
@@ -76,23 +56,13 @@ export function getGalleryImages(
   type: "photography" | "social-media" | "video"
 ): GalleryImage[] {
   const folder = ASSET_FOLDER[type];
-  const manifestPath = path.join(
-    process.cwd(),
-    "public",
-    "assets",
-    folder,
-    slug,
-    "images.json"
-  );
+  const manifestPath = path.join(process.cwd(), "public", "assets", folder, slug, "images.json");
+  const data = readImageManifest(folder, slug);
 
-  if (!fs.existsSync(manifestPath)) {
+  if (!data) {
     console.warn(`[gallery-images] No manifest found for "${slug}" (${type}). Expected: ${manifestPath}`);
     return [];
   }
-
-  const data: ImageManifestItem[] = JSON.parse(
-    fs.readFileSync(manifestPath, "utf-8")
-  );
 
   const baseUrl = `/assets/${folder}/${slug}`;
 
@@ -102,7 +72,7 @@ export function getGalleryImages(
       src: `${baseUrl}/${item.md!}`,
       alt: item.basename,
       srcFull: item.lg ? `${baseUrl}/${item.lg}` : `${baseUrl}/${item.md!}`,
-      ...readPublicImageDimensions(`${baseUrl}/${item.md!}`),
+      ...(item.width && item.height ? { width: item.width, height: item.height } : {}),
       ...(item.blur ? { blur: item.blur } : {}),
     }));
 }

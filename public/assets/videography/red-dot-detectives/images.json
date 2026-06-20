@@ -4,20 +4,26 @@
     "thumb": "red-dot-detectives-1-320.webp",
     "md": "red-dot-detectives-1-800.webp",
     "lg": "red-dot-detectives-1-1600.webp",
-    "original": null
+    "original": "red-dot-detectives-1.jpeg",
+    "width": 956,
+    "height": 538
   },
   {
     "basename": "red-dot-detectives-2",
     "thumb": "red-dot-detectives-2-320.webp",
     "md": "red-dot-detectives-2-800.webp",
     "lg": "red-dot-detectives-2-1600.webp",
-    "original": null
+    "original": "red-dot-detectives-2.jpeg",
+    "width": 330,
+    "height": 186
   },
   {
     "basename": "red-dot-detectives-3",
     "thumb": "red-dot-detectives-3-320.webp",
     "md": "red-dot-detectives-3-800.webp",
     "lg": "red-dot-detectives-3-1600.webp",
-    "original": null
+    "original": "red-dot-detectives-3.jpeg",
+    "width": 330,
+    "height": 186
   }
 ]

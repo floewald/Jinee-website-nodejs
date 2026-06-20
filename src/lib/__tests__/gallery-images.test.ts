@@ -8,6 +8,7 @@
 
 import fs from "fs";
 import { getGalleryImages, getProjectSlideshowImages } from "@/lib/gallery-images";
+import { clearImageManifestCache } from "@/lib/image-manifests";
 
 jest.mock("fs");
 
@@ -15,6 +16,7 @@ const MISSING_SLUG = "no-such-project";
 
 beforeEach(() => {
   jest.spyOn(console, "warn").mockImplementation(() => {});
+  clearImageManifestCache();
   (fs.existsSync as jest.Mock).mockReturnValue(false);
 });
 
@@ -122,33 +124,20 @@ describe("getGalleryImages() blur passthrough", () => {
   });
 
   it("includes intrinsic width and height from the medium WebP asset", () => {
-    const realFs = jest.requireActual("fs") as typeof import("fs");
+    (fs.readFileSync as jest.Mock).mockReturnValue(
+      JSON.stringify([{
+        basename: "photo-1",
+        thumb: "photo-1-320.webp",
+        md: "photo-dims-800.webp",
+        lg: "photo-dims-1600.webp",
+        original: "photo-1.jpg",
+        width: 800,
+        height: 540,
+      }])
+    );
 
-    (fs.readFileSync as jest.Mock).mockImplementation((filePath: string, encoding?: BufferEncoding) => {
-      if (typeof filePath === "string" && filePath.endsWith("images.json")) {
-        return JSON.stringify([{
-          basename: "photo-1",
-          thumb: "photo-1-320.webp",
-          md: "photo-dims-800.webp",
-          lg: "photo-dims-1600.webp",
-          original: "photo-1.jpg",
-        }]);
-      }
-
-      return realFs.readFileSync(
-        realFs.existsSync(filePath)
-          ? filePath
-          : "public/assets/photography/travel-photography/00002-800.webp",
-        encoding as BufferEncoding | undefined
-      );
-    });
-
-    jest.isolateModules(() => {
-      // eslint-disable-next-line @typescript-eslint/no-require-imports -- fresh module instance needed for dimension-cache isolation
-      const { getGalleryImages: getIsolatedGalleryImages } = require("@/lib/gallery-images");
-      const result = getIsolatedGalleryImages("test-project", "photography");
-      expect(result[0]).toMatchObject({ width: 800, height: 540 });
-    });
+    const result = getGalleryImages("test-project", "photography");
+    expect(result[0]).toMatchObject({ width: 800, height: 540 });
   });
 });
 
