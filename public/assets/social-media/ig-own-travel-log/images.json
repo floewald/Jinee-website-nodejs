@@ -4,13 +4,17 @@
     "thumb": "ig-own-travel-log-1-320.webp",
     "md": "ig-own-travel-log-1-800.webp",
     "lg": "ig-own-travel-log-1-1600.webp",
-    "original": null
+    "original": "ig-own-travel-log-1.jpeg",
+    "width": 640,
+    "height": 1138
   },
   {
     "basename": "ig-own-travel-log-2",
     "thumb": "ig-own-travel-log-2-320.webp",
     "md": "ig-own-travel-log-2-800.webp",
     "lg": "ig-own-travel-log-2-1600.webp",
-    "original": null
+    "original": "ig-own-travel-log-2.jpeg",
+    "width": 720,
+    "height": 1280
   }
 ]

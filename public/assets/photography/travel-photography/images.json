@@ -4,104 +4,134 @@
     "thumb": "00002-320.webp",
     "md": "00002-800.webp",
     "lg": "00002-1600.webp",
-    "original": null
+    "original": "00002.jpg",
+    "width": 1818,
+    "height": 1228
   },
   {
     "basename": "00006",
     "thumb": "00006-320.webp",
     "md": "00006-800.webp",
     "lg": "00006-1600.webp",
-    "original": null
+    "original": "00006.jpg",
+    "width": 1727,
+    "height": 1167
   },
   {
     "basename": "00013",
     "thumb": "00013-320.webp",
     "md": "00013-800.webp",
     "lg": "00013-1600.webp",
-    "original": null
+    "original": "00013.jpg",
+    "width": 1745,
+    "height": 1179
   },
   {
     "basename": "0002_2",
     "thumb": "0002_2-320.webp",
     "md": "0002_2-800.webp",
     "lg": "0002_2-1600.webp",
-    "original": null
+    "original": "0002_2.jpg",
+    "width": 2100,
+    "height": 1391
   },
   {
     "basename": "0005_33",
     "thumb": "0005_33-320.webp",
     "md": "0005_33-800.webp",
     "lg": "0005_33-1600.webp",
-    "original": null
+    "original": "0005_33.jpg",
+    "width": 3089,
+    "height": 2048
   },
   {
     "basename": "0006_3",
     "thumb": "0006_3-320.webp",
     "md": "0006_3-800.webp",
     "lg": "0006_3-1600.webp",
-    "original": null
+    "original": "0006_3.jpg",
+    "width": 3089,
+    "height": 2048
   },
   {
     "basename": "0008_8",
     "thumb": "0008_8-320.webp",
     "md": "0008_8-800.webp",
     "lg": "0008_8-1600.webp",
-    "original": null
+    "original": "0008_8.jpg",
+    "width": 2100,
+    "height": 1391
   },
   {
     "basename": "0008_8_preview_mobile",
     "thumb": "0008_8_preview_mobile-320.webp",
     "md": "0008_8_preview_mobile-800.webp",
     "lg": "0008_8_preview_mobile-1600.webp",
-    "original": null
+    "original": "0008_8_preview_mobile.jpg",
+    "width": 1436,
+    "height": 1391
   },
   {
     "basename": "0015_12",
     "thumb": "0015_12-320.webp",
     "md": "0015_12-800.webp",
     "lg": "0015_12-1600.webp",
-    "original": null
+    "original": "0015_12.jpg",
+    "width": 3089,
+    "height": 2048
   },
   {
     "basename": "001819700010a",
     "thumb": "001819700010a-320.webp",
     "md": "001819700010a-800.webp",
     "lg": "001819700010a-1600.webp",
-    "original": null
+    "original": "001819700010a.jpg",
+    "width": 2674,
+    "height": 1958
   },
   {
     "basename": "0018_15",
     "thumb": "0018_15-320.webp",
     "md": "0018_15-800.webp",
     "lg": "0018_15-1600.webp",
-    "original": null
+    "original": "0018_15.jpg",
+    "width": 2987,
+    "height": 1980
   },
   {
     "basename": "0019_16",
     "thumb": "0019_16-320.webp",
     "md": "0019_16-800.webp",
     "lg": "0019_16-1600.webp",
-    "original": null
+    "original": "0019_16.jpg",
+    "width": 3089,
+    "height": 2048
   },
   {
     "basename": "0031_28",
     "thumb": "0031_28-320.webp",
     "md": "0031_28-800.webp",
     "lg": "0031_28-1600.webp",
-    "original": null
+    "original": "0031_28.jpg",
+    "width": 3003,
+    "height": 1991
   },
   {
     "basename": "0035_35",
     "thumb": "0035_35-320.webp",
     "md": "0035_35-800.webp",
     "lg": "0035_35-1600.webp",
-    "original": null
+    "original": "0035_35.jpg",
+    "width": 2100,
+    "height": 1391
   },
   {
     "basename": "0036_33",
     "thumb": "0036_33-320.webp",
     "md": "0036_33-800.webp",
     "lg": "0036_33-1600.webp",
-    "original": null
+    "original": "0036_33.jpg",
+    "width": 3001,
+    "height": 1990
   }
 ]

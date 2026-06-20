@@ -4,20 +4,26 @@
     "thumb": "blind-kitchen-chefs-1-320.webp",
     "md": "blind-kitchen-chefs-1-800.webp",
     "lg": "blind-kitchen-chefs-1-1600.webp",
-    "original": null
+    "original": "blind-kitchen-chefs-1.jpg",
+    "width": 1280,
+    "height": 720
   },
   {
     "basename": "blind-kitchen-chefs-2",
     "thumb": "blind-kitchen-chefs-2-320.webp",
     "md": "blind-kitchen-chefs-2-800.webp",
     "lg": "blind-kitchen-chefs-2-1600.webp",
-    "original": null
+    "original": "blind-kitchen-chefs-2.jpg",
+    "width": 1280,
+    "height": 720
   },
   {
     "basename": "blind-kitchen-chefs-3",
     "thumb": "blind-kitchen-chefs-3-320.webp",
     "md": "blind-kitchen-chefs-3-800.webp",
     "lg": "blind-kitchen-chefs-3-1600.webp",
-    "original": null
+    "original": "blind-kitchen-chefs-3.jpg",
+    "width": 1280,
+    "height": 720
   }
 ]

@@ -4,13 +4,17 @@
     "thumb": "0003_35-320.webp",
     "md": "0003_35-800.webp",
     "lg": "0003_35-1600.webp",
-    "original": null
+    "original": "0003_35.jpg",
+    "width": 3089,
+    "height": 2048
   },
   {
     "basename": "0010_28",
     "thumb": "0010_28-320.webp",
     "md": "0010_28-800.webp",
     "lg": "0010_28-1600.webp",
-    "original": null
+    "original": "0010_28.jpg",
+    "width": 3089,
+    "height": 2048
   }
 ]

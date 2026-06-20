@@ -4,13 +4,17 @@
     "thumb": "i-eat-therefore-1-320.webp",
     "md": "i-eat-therefore-1-800.webp",
     "lg": "i-eat-therefore-1-1600.webp",
-    "original": null
+    "original": "i-eat-therefore-1.jpeg",
+    "width": 956,
+    "height": 538
   },
   {
     "basename": "i-eat-therefore-2",
     "thumb": "i-eat-therefore-2-320.webp",
     "md": "i-eat-therefore-2-800.webp",
     "lg": "i-eat-therefore-2-1600.webp",
-    "original": null
+    "original": "i-eat-therefore-2.jpeg",
+    "width": 440,
+    "height": 248
   }
 ]

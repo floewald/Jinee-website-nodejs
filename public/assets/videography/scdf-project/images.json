@@ -4,13 +4,17 @@
     "thumb": "scdf-project-1-320.webp",
     "md": "scdf-project-1-800.webp",
     "lg": "scdf-project-1-1600.webp",
-    "original": null
+    "original": "scdf-project-1.jpg",
+    "width": 1280,
+    "height": 720
   },
   {
     "basename": "scdf-project-2",
     "thumb": "scdf-project-2-320.webp",
     "md": "scdf-project-2-800.webp",
     "lg": "scdf-project-2-1600.webp",
-    "original": null
+    "original": "scdf-project-2.jpg",
+    "width": 1280,
+    "height": 720
   }
 ]
