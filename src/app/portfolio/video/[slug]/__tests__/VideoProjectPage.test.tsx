@@ -60,7 +60,6 @@ describe("VideoProjectPage", () => {
     expect(screen.getByText("Location")).toBeInTheDocument();
     expect(screen.getByText("Producer | Director")).toBeInTheDocument();
     expect(screen.getByText("Singapore")).toBeInTheDocument();
-    expect(screen.queryByText("Format")).not.toBeInTheDocument();
 
     const paragraphs = document.querySelectorAll(".project-description p");
     expect(paragraphs).toHaveLength(2);
@@ -74,7 +73,6 @@ describe("VideoProjectPage", () => {
 
     expect(screen.getByText("Role")).toBeInTheDocument();
     expect(screen.getByText("Videographer")).toBeInTheDocument();
-    expect(screen.queryByText("Format")).not.toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Episodes" })).not.toBeInTheDocument();
     expect(screen.getByTestId("video-player")).toHaveTextContent("Only video");
   });

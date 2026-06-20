@@ -21,7 +21,6 @@ export const projectGalleryCol = css({
 export const galleryCols = css({
   columns: 3,
   columnGap: "0.9rem",
-  columnFill: "balance",
   marginTop: "var(--gallery-content-gap)",
   "@media (max-width: 900px)": { columns: 2 },
   "@media (max-width: 480px)": { columns: 1 },
@@ -36,6 +35,13 @@ export const galleryColsItem = css({
   width: "100%",
 });
 
+/** Hide desktop-only collage tiles from the shared tree on mobile. */
+export const galleryColsItemHideOnMobile = css({
+  "@media (max-width: 800px)": {
+    display: "none",
+  },
+});
+
 /** `gallery-item` — clickable image wrapper */
 export const galleryItem = css({
   display: "block",
@@ -46,7 +52,6 @@ export const galleryItem = css({
   overflow: "hidden",
   borderRadius: "var(--radius-md)",
   width: "100%",
-  willChange: "transform",
 });
 
 /** `gallery-item__trigger` — inner button in selection mode */

@@ -9,6 +9,7 @@ import type {
 } from "@/types/portfolio";
 
 import { validatePortfolioData, SocialMediaManifestSchema } from "@/lib/portfolio-schemas";
+import { readPublicImageDimensions } from "@/lib/asset-dimensions";
 
 import photographyData from "@/content/portfolio/photography.json";
 import videoData from "@/content/portfolio/videography.json";
@@ -38,10 +39,27 @@ function resolveImages(
 ): CollageImageConfig[] {
   return keys.map((key) => {
     const entry = slugs[key];
+
+    if (!entry) {
+      throw new Error(
+        `[portfolio-config] Unknown collage image key "${key}" in index-config.json.`
+      );
+    }
+
+    const dimensions = readPublicImageDimensions(entry.src);
+
+    if (!dimensions) {
+      throw new Error(
+        `[portfolio-config] Could not read intrinsic dimensions for collage image "${key}" at "${entry.src}".`
+      );
+    }
+
     return {
       src: entry.src,
       alt: entry.alt,
       srcFull: entry.src,
+      width: dimensions.width,
+      height: dimensions.height,
       ...(entry.objectPosition ? { objectPosition: entry.objectPosition } : {}),
     };
   });
