@@ -1,16 +1,16 @@
 {
   "slugs": {
-    "travel-01": { "src": "/assets/photography/travel-photography/0019_16-1600.webp",  "alt": "Travel scene — sunlit street with local architecture" },
-    "travel-02": { "src": "/assets/photography/travel-photography/0015_12-1600.webp",  "alt": "Travel scene — vibrant market in a Southeast Asian city" },
-    "travel-03": { "src": "/assets/photography/travel-photography/0031_28-1600.webp",  "alt": "Travel scene — golden hour over waterfront skyline" },
-    "travel-04": { "src": "/assets/photography/travel-photography/0018_15-1600.webp",  "alt": "Travel scene — twilight cityscape reflected in calm water" },
-    "travel-05": { "src": "/assets/photography/travel-photography/0006_3-1600.webp",   "alt": "Travel scene — narrow alleyway decorated with lanterns" },
-    "travel-06": { "src": "/assets/photography/travel-photography/0005_33-1600.webp",  "alt": "Travel scene — street vendor preparing local cuisine" },
-    "travel-07": { "src": "/assets/photography/travel-photography/00002-1600.webp",    "alt": "Travel scene — panoramic view of lush tropical landscape" },
-    "travel-08": { "src": "/assets/photography/travel-photography/0008_8-1600.webp",   "alt": "Travel scene — candid moment at an outdoor café" },
-    "travel-09": { "src": "/assets/photography/travel-photography/0035_35-1600.webp",  "alt": "Travel scene — colourful shophouses along a quiet street" },
-    "travel-10": { "src": "/assets/photography/travel-photography/0002_2-1600.webp",   "alt": "Travel scene — twilight cityscape reflected in calm water" },
-    "party-01":  { "src": "/assets/photography/private-party/Jinee_Chen_Party photos-2-1600.webp", "alt": "Private party — guests celebrating together", "objectPosition": "center 30%" }
+    "travel-01": { "src": "/assets/photography/travel-photography/0019_16-1600.webp",  "alt": "Travel scene — sunlit street with local architecture", "width": 1600, "height": 1061 },
+    "travel-02": { "src": "/assets/photography/travel-photography/0015_12-1600.webp",  "alt": "Travel scene — vibrant market in a Southeast Asian city", "width": 1600, "height": 1061 },
+    "travel-03": { "src": "/assets/photography/travel-photography/0031_28-1600.webp",  "alt": "Travel scene — golden hour over waterfront skyline", "width": 1600, "height": 1061 },
+    "travel-04": { "src": "/assets/photography/travel-photography/0018_15-1600.webp",  "alt": "Travel scene — twilight cityscape reflected in calm water", "width": 1600, "height": 1061 },
+    "travel-05": { "src": "/assets/photography/travel-photography/0006_3-1600.webp",   "alt": "Travel scene — narrow alleyway decorated with lanterns", "width": 1600, "height": 1061 },
+    "travel-06": { "src": "/assets/photography/travel-photography/0005_33-1600.webp",  "alt": "Travel scene — street vendor preparing local cuisine", "width": 1600, "height": 1061 },
+    "travel-07": { "src": "/assets/photography/travel-photography/00002-1600.webp",    "alt": "Travel scene — panoramic view of lush tropical landscape", "width": 1600, "height": 1081 },
+    "travel-08": { "src": "/assets/photography/travel-photography/0008_8-1600.webp",   "alt": "Travel scene — candid moment at an outdoor café", "width": 1600, "height": 1060 },
+    "travel-09": { "src": "/assets/photography/travel-photography/0035_35-1600.webp",  "alt": "Travel scene — colourful shophouses along a quiet street", "width": 1600, "height": 1060 },
+    "travel-10": { "src": "/assets/photography/travel-photography/0002_2-1600.webp",   "alt": "Travel scene — twilight cityscape reflected in calm water", "width": 1600, "height": 1060 },
+    "party-01":  { "src": "/assets/photography/private-party/Jinee_Chen_Party photos-2-1600.webp", "alt": "Private party — guests celebrating together", "objectPosition": "center 30%", "width": 1600, "height": 2400 }
   },
   "collageImages":       ["travel-01", "travel-02", "travel-03", "travel-04", "party-01",  "travel-05", "travel-06", "travel-07", "travel-08", "travel-09", "travel-10"],
   "collageImagesMobile": ["travel-01", "travel-03", "travel-06", "party-01", "travel-09"],

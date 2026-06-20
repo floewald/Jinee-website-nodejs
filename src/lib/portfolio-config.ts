@@ -22,7 +22,16 @@ interface SlugEntry {
   src: string;
   alt: string;
   objectPosition?: string;
+  width?: number;
+  height?: number;
 }
+
+// Fallback used only when intrinsic dimensions are unavailable both in the
+// committed config and on disk. Keeps the static build from ever failing on a
+// missing asset (deploy builds run `build:next` without the gitignored WebP
+// files present) while still reserving layout space to avoid the late-reveal
+// collapse glitch.
+const FALLBACK_COLLAGE_DIMENSIONS = { width: 1600, height: 1061 };
 
 interface PortfolioIndexRawConfig {
   slugs: Record<string, SlugEntry>;
@@ -46,11 +55,20 @@ function resolveImages(
       );
     }
 
-    const dimensions = readPublicImageDimensions(entry.src);
+    // Source of truth is the committed config (always present in deploy builds).
+    // Fall back to reading the on-disk WebP for local dev where new images may
+    // not yet have dimensions committed, then to a neutral default so the build
+    // can never fail on a missing asset.
+    const dimensions =
+      entry.width && entry.height
+        ? { width: entry.width, height: entry.height }
+        : readPublicImageDimensions(entry.src) ?? FALLBACK_COLLAGE_DIMENSIONS;
 
-    if (!dimensions) {
-      throw new Error(
-        `[portfolio-config] Could not read intrinsic dimensions for collage image "${key}" at "${entry.src}".`
+    if (dimensions === FALLBACK_COLLAGE_DIMENSIONS) {
+      console.warn(
+        `[portfolio-config] No intrinsic dimensions for collage image "${key}" at "${entry.src}". ` +
+          `Using fallback ${FALLBACK_COLLAGE_DIMENSIONS.width}×${FALLBACK_COLLAGE_DIMENSIONS.height}. ` +
+          `Add "width"/"height" to its slug in index-config.json.`
       );
     }
 
