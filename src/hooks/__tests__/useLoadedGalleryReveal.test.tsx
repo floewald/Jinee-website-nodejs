@@ -1,7 +1,6 @@
 import { act, render, waitFor } from "@testing-library/react";
 import { useRef } from "react";
 import { useLoadedGalleryReveal } from "@/hooks/useLoadedGalleryReveal";
-import { REVEAL_OFFSET_PX } from "@/lib/reveal-config";
 
 class MockIntersectionObserver {
   callback: IntersectionObserverCallback;
@@ -39,16 +38,6 @@ function TestGallery() {
 
 describe("useLoadedGalleryReveal", () => {
   const animateMock = jest.fn();
-  const matchMediaMock = jest.fn().mockImplementation(() => ({
-    matches: false,
-    media: "(prefers-reduced-motion: reduce)",
-    onchange: null,
-    addListener: jest.fn(),
-    removeListener: jest.fn(),
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  }));
 
   beforeAll(() => {
     Object.defineProperty(window, "IntersectionObserver", {
@@ -60,33 +49,17 @@ describe("useLoadedGalleryReveal", () => {
       writable: true,
       value: animateMock,
     });
-
-    Object.defineProperty(window, "matchMedia", {
-      writable: true,
-      value: matchMediaMock,
-    });
   });
 
   beforeEach(() => {
     jest.useFakeTimers();
     MockIntersectionObserver.instances = [];
     animateMock.mockReset();
-    matchMediaMock.mockClear();
     Object.defineProperty(window, "scrollY", {
       configurable: true,
       writable: true,
       value: 0,
     });
-    matchMediaMock.mockImplementation(() => ({
-      matches: false,
-      media: "(prefers-reduced-motion: reduce)",
-      onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    }));
 
     Object.defineProperty(HTMLImageElement.prototype, "complete", {
       configurable: true,
@@ -129,46 +102,7 @@ describe("useLoadedGalleryReveal", () => {
     expect(animateMock).not.toHaveBeenCalled();
   });
 
-  it("marks items as revealed without WAAPI motion when reduced motion is preferred", async () => {
-    const rectInRange = {
-      top: 120,
-      bottom: 320,
-      left: 0,
-      right: 200,
-      width: 200,
-      height: 200,
-      x: 0,
-      y: 120,
-      toJSON: () => ({}),
-    };
-
-    matchMediaMock.mockImplementation((query: string) => ({
-      matches: query === "(prefers-reduced-motion: reduce)",
-      media: query,
-      onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    }));
-
-    jest
-      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
-      .mockImplementation(() => rectInRange as DOMRect);
-
-    const { getByTestId } = render(<TestGallery />);
-
-    act(() => {
-      jest.runAllTimers();
-    });
-
-    await waitFor(() => expect(matchMediaMock).toHaveBeenCalled());
-    expect(animateMock).not.toHaveBeenCalled();
-    expect(getByTestId("item")).toHaveAttribute("data-reveal-animated", "true");
-  });
-
-  it("uses slide + fade when a loaded gallery item enters later after scrolling", async () => {
+  it("marks items as revealed without WAAPI motion when they enter later after scrolling", async () => {
     const rectOutOfRange = {
       top: 2200,
       bottom: 2400,
@@ -202,13 +136,9 @@ describe("useLoadedGalleryReveal", () => {
       ]);
     });
 
-    await waitFor(() => expect(animateMock).toHaveBeenCalledTimes(1));
-    expect(animateMock).toHaveBeenCalledWith(
-      [
-        expect.objectContaining({ transform: `translateY(${REVEAL_OFFSET_PX}px)` }),
-        expect.objectContaining({ transform: "translateY(0)" }),
-      ],
-      expect.any(Object)
+    await waitFor(() =>
+      expect(item).toHaveAttribute("data-reveal-animated", "true")
     );
+    expect(animateMock).not.toHaveBeenCalled();
   });
 });
