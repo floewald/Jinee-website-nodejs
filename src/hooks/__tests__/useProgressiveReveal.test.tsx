@@ -120,21 +120,32 @@ describe("useProgressiveReveal", () => {
     const { getByTestId } = render(<TestGrid />);
 
     await waitFor(() =>
-      expect(getByTestId("first")).toHaveAttribute("data-reveal-animated", "true")
+      expect(getByTestId("first")).toHaveAttribute("data-reveal-state", "settled")
     );
     expect(animateMock).not.toHaveBeenCalled();
   });
 
   it("skips WAAPI motion when the user prefers reduced motion", async () => {
-    const rectInRange = {
-      top: 120,
-      bottom: 320,
+    const rectOutOfRange = {
+      top: 2000,
+      bottom: 2200,
       left: 0,
       right: 200,
       width: 200,
       height: 200,
       x: 0,
-      y: 120,
+      y: 2000,
+      toJSON: () => ({}),
+    };
+    const rectPreEntry = {
+      top: window.innerHeight + 5,
+      bottom: window.innerHeight + 205,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: window.innerHeight + 5,
       toJSON: () => ({}),
     };
 
@@ -151,12 +162,28 @@ describe("useProgressiveReveal", () => {
 
     jest
       .spyOn(HTMLElement.prototype, "getBoundingClientRect")
-      .mockImplementation(() => rectInRange as DOMRect);
+      .mockImplementation(() => rectOutOfRange as DOMRect);
 
-    render(<TestGrid />);
+    const { getByTestId } = render(<TestGrid />);
+    const target = getByTestId("second");
+
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(() => rectPreEntry as DOMRect);
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 120,
+    });
+
+    MockIntersectionObserver.instances[0].fire([
+      { isIntersecting: true, target } as Partial<IntersectionObserverEntry>,
+    ]);
 
     await waitFor(() => expect(matchMediaMock).toHaveBeenCalled());
     expect(animateMock).not.toHaveBeenCalled();
+    expect(target).toHaveAttribute("data-reveal-state", "settled");
   });
 
   it("animates items once when they intersect later", () => {
@@ -192,6 +219,7 @@ describe("useProgressiveReveal", () => {
     ]);
 
     expect(animateMock).toHaveBeenCalledTimes(1);
+    expect(target).toHaveAttribute("data-reveal-state", "animated");
     expect(animateMock).toHaveBeenCalledWith(
       [
         expect.objectContaining({ transform: `translateY(${REVEAL_OFFSET_PX}px)` }),
@@ -324,7 +352,7 @@ describe("useProgressiveReveal", () => {
     ]);
 
     expect(animateMock).not.toHaveBeenCalled();
-    expect(target).toHaveAttribute("data-reveal-animated", "true");
+    expect(target).toHaveAttribute("data-reveal-state", "settled");
   });
 
   it("skips late WAAPI reveal when an intersecting item is already visible after scroll", () => {
@@ -372,7 +400,7 @@ describe("useProgressiveReveal", () => {
     ]);
 
     expect(animateMock).not.toHaveBeenCalled();
-    expect(target).toHaveAttribute("data-reveal-animated", "true");
+    expect(target).toHaveAttribute("data-reveal-state", "settled");
   });
 
   it("marks visible items as revealed when page-load rescan settles layout", () => {
@@ -411,7 +439,10 @@ describe("useProgressiveReveal", () => {
     window.dispatchEvent(new Event("load"));
 
     expect(animateMock).not.toHaveBeenCalled();
-    expect(getByTestId("first")).toHaveAttribute("data-reveal-animated", "true");
+    expect(getByTestId("first")).toHaveAttribute("data-reveal-state", "settled");
+    expect(MockIntersectionObserver.instances[0].unobserve).toHaveBeenCalledWith(
+      getByTestId("first")
+    );
   });
 
   it("marks items as revealed when short rescan catches masonry reflow changes", () => {
@@ -454,7 +485,54 @@ describe("useProgressiveReveal", () => {
     });
 
     expect(animateMock).not.toHaveBeenCalled();
-    expect(getByTestId("first")).toHaveAttribute("data-reveal-animated", "true");
+    expect(getByTestId("first")).toHaveAttribute("data-reveal-state", "settled");
+    expect(MockIntersectionObserver.instances[0].unobserve).toHaveBeenCalledWith(
+      getByTestId("first")
+    );
+    jest.useRealTimers();
+  });
+
+  it("keeps a pre-entry card eligible through recovery scans so the observer can still animate it", () => {
+    jest.useFakeTimers();
+
+    const rectPreEntry = {
+      top: window.innerHeight + 5,
+      bottom: window.innerHeight + 205,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: window.innerHeight + 5,
+      toJSON: () => ({}),
+    };
+
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(() => rectPreEntry as DOMRect);
+
+    const { getByTestId } = render(<TestGrid />);
+    const target = getByTestId("second");
+
+    window.dispatchEvent(new Event("load"));
+    act(() => {
+      jest.advanceTimersByTime(700);
+    });
+
+    expect(target).not.toHaveAttribute("data-reveal-state", "settled");
+    expect(animateMock).not.toHaveBeenCalled();
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 120,
+    });
+
+    MockIntersectionObserver.instances[0].fire([
+      { isIntersecting: true, target } as Partial<IntersectionObserverEntry>,
+    ]);
+
+    expect(animateMock).toHaveBeenCalledTimes(1);
     jest.useRealTimers();
   });
 

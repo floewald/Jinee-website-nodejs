@@ -3,11 +3,17 @@ import {
   REVEAL_DURATION_MS,
   REVEAL_EASING,
   REVEAL_OFFSET_PX,
-  REVEAL_SIDE_BUFFER_PX,
   REVEAL_START_OPACITY,
+  REVEAL_SIDE_BUFFER_PX,
 } from "@/lib/reveal-config";
-
-const NO_LATE_FLICKER_VISIBLE_THRESHOLD_PX = 1;
+import {
+  getRevealState,
+  isActuallyVisibleInViewport,
+  isInPreEntryBand,
+  markRevealAnimated,
+  markRevealAnimating,
+  markRevealSettled,
+} from "@/lib/reveal-state";
 
 export interface RevealAnimationOptions {
   durationMs?: number;
@@ -26,40 +32,32 @@ export function hasUserScrolledSinceLoad() {
 }
 
 export function isElementWithinRevealRange(item: HTMLElement) {
-  const rect = item.getBoundingClientRect();
-  return (
-    rect.top < window.innerHeight + REVEAL_BOTTOM_BUFFER_PX &&
-    rect.bottom > -REVEAL_BOTTOM_BUFFER_PX &&
-    rect.left < window.innerWidth + REVEAL_SIDE_BUFFER_PX &&
-    rect.right > -REVEAL_SIDE_BUFFER_PX
-  );
-}
-
-function getVisibleHeightInViewport(item: HTMLElement) {
-  const rect = item.getBoundingClientRect();
-  const visibleTop = Math.max(rect.top, 0);
-  const visibleBottom = Math.min(rect.bottom, window.innerHeight);
-  return Math.max(0, visibleBottom - visibleTop);
+  return isInPreEntryBand(item, {
+    bottomBufferPx: REVEAL_BOTTOM_BUFFER_PX,
+    sideBufferPx: REVEAL_SIDE_BUFFER_PX,
+  });
 }
 
 export function animateRevealElement(
   item: HTMLElement,
   options?: RevealAnimationOptions,
 ) {
-  if (item.dataset.revealAnimated === "true") return;
-  item.dataset.revealAnimated = "true";
+  if (getRevealState(item) !== "eligible") return;
 
   // Fail-open rule: content is already visible in base CSS/HTML. Animation is
   // only polish. If WAAPI is unavailable or timing is odd, users still see the item.
   if (
+    isActuallyVisibleInViewport(item) ||
     prefersReducedMotion() ||
-    typeof item.animate !== "function" ||
-    getVisibleHeightInViewport(item) > NO_LATE_FLICKER_VISIBLE_THRESHOLD_PX
+    typeof item.animate !== "function"
   ) {
+    markRevealSettled(item);
     return;
   }
 
-  item.animate(
+  if (!markRevealAnimating(item)) return;
+
+  const animation = item.animate(
     [
       {
         opacity: REVEAL_START_OPACITY,
@@ -73,6 +71,23 @@ export function animateRevealElement(
       fill: "both",
     }
   );
+
+  if (!animation || typeof animation.finished?.then !== "function") {
+    markRevealAnimated(item);
+    return;
+  }
+
+  void animation.finished
+    .then(() => {
+      if (getRevealState(item) === "animating") {
+        markRevealAnimated(item);
+      }
+    })
+    .catch(() => {
+      if (getRevealState(item) === "animating") {
+        markRevealAnimated(item);
+      }
+    });
 }
 
 function getRevealOptionsForCurrentScroll(options?: RevealAnimationOptions) {
@@ -91,4 +106,9 @@ export function revealElement(
   options?: RevealAnimationOptions,
 ) {
   animateRevealElement(item, getRevealOptionsForCurrentScroll(options));
+}
+
+export function settleRevealElement(item: HTMLElement) {
+  if (getRevealState(item) !== "eligible") return;
+  markRevealSettled(item);
 }

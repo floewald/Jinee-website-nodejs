@@ -5,9 +5,9 @@ import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { cx } from "@/styled-system/css";
 import {
-  isElementWithinRevealRange,
-  revealElement,
+  settleRevealElement,
 } from "@/lib/reveal-helpers";
+import { isActuallyVisibleInViewport } from "@/lib/reveal-state";
 import { useLoadedGalleryReveal } from "@/hooks/useLoadedGalleryReveal";
 import type { GalleryImage } from "@/components/gallery/Lightbox";
 import {
@@ -46,14 +46,17 @@ export default function GallerySelection({
   onSelectionChange,
 }: GallerySelectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  useLoadedGalleryReveal(containerRef);
+  const revealKey = `selection:masonry:${images
+    .map((image) => image.srcFull ?? image.src)
+    .join("|")}`;
+  useLoadedGalleryReveal(containerRef, ".gallery-item img", revealKey);
 
   function handleImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
-    // Same fail-open rule as GalleryGrid: selection mode must stay usable even
-    // if timing is odd, so load can add motion but never gate visibility.
+    // Load is recovery-only. If the tile is already visible, settle it; if it
+    // is merely near the viewport, keep it eligible for the observer entry path.
     const item = e.currentTarget.closest(".gallery-item");
-    if (item instanceof HTMLElement && isElementWithinRevealRange(item)) {
-      revealElement(item);
+    if (item instanceof HTMLElement && isActuallyVisibleInViewport(item)) {
+      settleRevealElement(item);
     }
   }
 

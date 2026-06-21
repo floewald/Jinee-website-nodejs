@@ -22,16 +22,24 @@ class MockIntersectionObserver {
   }
 }
 
-function TestGallery() {
+function TestGallery({
+  revealKey = "desktop",
+  imageSrcs = ["/img/a.webp"],
+}: {
+  revealKey?: string;
+  imageSrcs?: string[];
+}) {
   const ref = useRef<HTMLDivElement>(null);
-  useLoadedGalleryReveal(ref);
+  useLoadedGalleryReveal(ref, ".gallery-item img", revealKey);
 
   return (
     <div ref={ref}>
-      <button className="gallery-item" data-testid="item">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="Gallery item" src="/img/a.webp" />
-      </button>
+      {imageSrcs.map((src, index) => (
+        <button key={src} className="gallery-item" data-testid={`item-${index}`}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img alt={`Gallery item ${index}`} src={src} />
+        </button>
+      ))}
     </div>
   );
 }
@@ -96,13 +104,53 @@ describe("useLoadedGalleryReveal", () => {
     });
 
     await waitFor(() =>
-      expect(getByTestId("item")).toHaveAttribute("data-reveal-animated", "true")
+      expect(getByTestId("item-0")).toHaveAttribute("data-reveal-state", "settled")
     );
-    expect(getByTestId("item")).toHaveAttribute("data-reveal-animated", "true");
     expect(animateMock).not.toHaveBeenCalled();
+    expect(MockIntersectionObserver.instances[0].unobserve).toHaveBeenCalledWith(
+      getByTestId("item-0")
+    );
   });
 
-  it("marks items as revealed without WAAPI motion when they enter later after scrolling", async () => {
+  it("animates a gallery item when the observer catches it before visible entry", async () => {
+    const rectPreEntry = {
+      top: window.innerHeight + 5,
+      bottom: window.innerHeight + 205,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: window.innerHeight + 5,
+      toJSON: () => ({}),
+    };
+
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(() => rectPreEntry as DOMRect);
+
+    const { getByTestId } = render(<TestGallery />);
+    const item = getByTestId("item-0");
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 120,
+    });
+
+    act(() => {
+      MockIntersectionObserver.instances[0].fire([
+        { isIntersecting: true, target: item } as Partial<IntersectionObserverEntry>,
+      ]);
+    });
+
+    await waitFor(() =>
+      expect(item).toHaveAttribute("data-reveal-state", "animated")
+    );
+    expect(animateMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("re-observes gallery items when the reveal key changes for layout identity only", async () => {
     const rectOutOfRange = {
       top: 2200,
       bottom: 2400,
@@ -119,26 +167,81 @@ describe("useLoadedGalleryReveal", () => {
       .spyOn(HTMLElement.prototype, "getBoundingClientRect")
       .mockImplementation(() => rectOutOfRange as DOMRect);
 
-    const { getByTestId } = render(<TestGallery />);
-    const item = getByTestId("item");
+    const { getByTestId, rerender } = render(
+      <TestGallery revealKey="masonry:/img/a.webp" imageSrcs={["/img/a.webp"]} />
+    );
 
-    expect(animateMock).not.toHaveBeenCalled();
+    const firstItem = getByTestId("item-0");
+    expect(MockIntersectionObserver.instances[0].observe).toHaveBeenCalledWith(firstItem);
 
-    Object.defineProperty(window, "scrollY", {
-      configurable: true,
-      writable: true,
-      value: 120,
-    });
+    rerender(
+      <TestGallery revealKey="columns:/img/a.webp" imageSrcs={["/img/a.webp"]} />
+    );
+
+    const secondObserver = MockIntersectionObserver.instances[1];
+    const sameDatasetItem = getByTestId("item-0");
+
+    expect(MockIntersectionObserver.instances[0].disconnect).toHaveBeenCalled();
+    expect(secondObserver.observe).toHaveBeenCalledWith(sameDatasetItem);
 
     act(() => {
-      MockIntersectionObserver.instances[0].fire([
-        { isIntersecting: true, target: item } as Partial<IntersectionObserverEntry>,
+      secondObserver.fire([
+        { isIntersecting: true, target: sameDatasetItem } as Partial<IntersectionObserverEntry>,
       ]);
     });
 
     await waitFor(() =>
-      expect(item).toHaveAttribute("data-reveal-animated", "true")
+      expect(sameDatasetItem).toHaveAttribute("data-reveal-state", "animated")
     );
-    expect(animateMock).not.toHaveBeenCalled();
+    expect(animateMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("re-observes gallery items when the reveal key changes with a new dataset identity", async () => {
+    const rectOutOfRange = {
+      top: 2200,
+      bottom: 2400,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: 2200,
+      toJSON: () => ({}),
+    };
+
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(() => rectOutOfRange as DOMRect);
+
+    const { getByTestId, rerender } = render(
+      <TestGallery revealKey="masonry:/img/a.webp" imageSrcs={["/img/a.webp"]} />
+    );
+
+    const firstItem = getByTestId("item-0");
+    expect(MockIntersectionObserver.instances[0].observe).toHaveBeenCalledWith(firstItem);
+
+    rerender(
+      <TestGallery
+        revealKey="masonry:/img/b.webp|/img/c.webp"
+        imageSrcs={["/img/b.webp", "/img/c.webp"]}
+      />
+    );
+
+    const secondObserver = MockIntersectionObserver.instances[1];
+    const nextItem = getByTestId("item-1");
+
+    expect(MockIntersectionObserver.instances[0].disconnect).toHaveBeenCalled();
+    expect(secondObserver.observe).toHaveBeenCalledWith(nextItem);
+
+    act(() => {
+      secondObserver.fire([
+        { isIntersecting: true, target: nextItem } as Partial<IntersectionObserverEntry>,
+      ]);
+    });
+
+    await waitFor(() =>
+      expect(nextItem).toHaveAttribute("data-reveal-state", "animated")
+    );
+    expect(animateMock).toHaveBeenCalledTimes(1);
   });
 });

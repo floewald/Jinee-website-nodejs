@@ -8,7 +8,8 @@ import {
   REVEAL_RESCAN_SHORT_MS,
   REVEAL_SIDE_BUFFER_PX,
 } from "@/lib/reveal-config";
-import { revealElement } from "@/lib/reveal-helpers";
+import { revealElement, settleRevealElement } from "@/lib/reveal-helpers";
+import { getRevealState, isActuallyVisibleInViewport } from "@/lib/reveal-state";
 
 export interface ProgressiveRevealOptions {
   bottomBufferPx?: number;
@@ -25,18 +26,6 @@ const DEFAULT_OPTIONS: Required<ProgressiveRevealOptions> = {
   offsetPx: REVEAL_OFFSET_PX,
   easing: REVEAL_EASING,
 };
-
-function isWithinRevealRange(
-  rect: DOMRect,
-  options: Required<ProgressiveRevealOptions>
-) {
-  return (
-    rect.top < window.innerHeight + options.bottomBufferPx &&
-    rect.bottom > -options.bottomBufferPx &&
-    rect.left < window.innerWidth + options.sideBufferPx &&
-    rect.right > -options.sideBufferPx
-  );
-}
 
 export function useProgressiveReveal(
   ref: RefObject<Element | null>,
@@ -72,26 +61,13 @@ export function useProgressiveReveal(
     const items = Array.from(root.querySelectorAll<HTMLElement>(selector));
     if (items.length === 0) return;
 
-    const scanVisibleItems = () => {
-      // Hydration and late card thumbnail sizing can shift teaser geometry
-      // after first paint. Re-scanning lets near-viewport cards still animate
-      // without ever hiding content if early geometry was incomplete.
-      items.forEach((item) => {
-        const rect = item.getBoundingClientRect();
-        if (isWithinRevealRange(rect, resolvedOptions)) {
-          revealElement(item, resolvedOptions);
-        }
-      });
-    };
-
-    scanVisibleItems();
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          revealElement(entry.target as HTMLElement, resolvedOptions);
-          observer.unobserve(entry.target);
+          const item = entry.target as HTMLElement;
+          revealElement(item, resolvedOptions);
+          observer.unobserve(item);
         });
       },
       {
@@ -102,26 +78,42 @@ export function useProgressiveReveal(
       }
     );
 
-    items.forEach((item) => {
-      if (item.dataset.revealAnimated === "true") return;
-      observer.observe(item);
-    });
+    const observeEligibleItems = () => {
+      items.forEach((item) => {
+        if (getRevealState(item) !== "eligible") return;
+        observer.observe(item);
+      });
+    };
+
+    const settleVisibleItems = () => {
+      // Hydration and late card thumbnail sizing can shift teaser geometry
+      // after first paint. Re-scanning settles cards that are already visible
+      // without ever hiding content if early geometry was incomplete.
+      items.forEach((item) => {
+        if (!isActuallyVisibleInViewport(item)) return;
+        settleRevealElement(item);
+        observer.unobserve(item);
+      });
+    };
+
+    observeEligibleItems();
+    settleVisibleItems();
 
     // Short delayed passes catch late layout stabilization from image decode
     // and static-export hydration without turning reveal into a correctness gate.
     const rescanTimeouts = [
-      window.setTimeout(scanVisibleItems, REVEAL_RESCAN_SHORT_MS),
-      window.setTimeout(scanVisibleItems, REVEAL_RESCAN_LONG_MS),
+      window.setTimeout(settleVisibleItems, REVEAL_RESCAN_SHORT_MS),
+      window.setTimeout(settleVisibleItems, REVEAL_RESCAN_LONG_MS),
     ];
 
-    window.addEventListener("load", scanVisibleItems);
-    window.addEventListener("resize", scanVisibleItems);
+    window.addEventListener("load", settleVisibleItems);
+    window.addEventListener("resize", settleVisibleItems);
 
     return () => {
       observer.disconnect();
       rescanTimeouts.forEach((timeoutId) => window.clearTimeout(timeoutId));
-      window.removeEventListener("load", scanVisibleItems);
-      window.removeEventListener("resize", scanVisibleItems);
+      window.removeEventListener("load", settleVisibleItems);
+      window.removeEventListener("resize", settleVisibleItems);
     };
   }, [ref, selector, bottomBufferPx, sideBufferPx, durationMs, offsetPx, easing]);
 }

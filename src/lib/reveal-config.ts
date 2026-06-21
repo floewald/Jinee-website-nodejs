@@ -17,6 +17,7 @@ export const REVEAL_EASING = "cubic-bezier(0.22, 1, 0.36, 1)";
 export const REVEAL_BOTTOM_BUFFER_PX = 10;
 export const REVEAL_SIDE_BUFFER_PX = 50;
 export const REVEAL_START_OPACITY = 0.20;
+export const REVEAL_VISIBLE_THRESHOLD_PX = 1;
 export const REVEAL_RESCAN_SHORT_MS = 180;
 export const REVEAL_RESCAN_LONG_MS = 600;
 export const GALLERY_REVEAL_RESCAN_DELAY_MS = 400;

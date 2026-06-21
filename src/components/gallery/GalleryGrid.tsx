@@ -37,7 +37,10 @@ export default function GalleryGrid({
   useColumnsLayout = false,
 }: GalleryGridProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  useLoadedGalleryReveal(containerRef);
+  const revealKey = `${useColumnsLayout ? "columns" : "masonry"}:${images
+    .map((image) => image.srcFull ?? image.src)
+    .join("|")}`;
+  useLoadedGalleryReveal(containerRef, ".gallery-item img", revealKey);
 
   if (images.length === 0) return null;
 

@@ -172,6 +172,40 @@ describe("GallerySelection", () => {
     fireEvent.load(image);
 
     expect(animateMock).not.toHaveBeenCalled();
-    expect(image.closest(".gallery-item")).toHaveAttribute("data-reveal-animated", "true");
+    expect(image.closest(".gallery-item")).toHaveAttribute("data-reveal-state", "settled");
+  });
+
+  it("does not settle a selection tile on image load while it is only in the pre-entry band", () => {
+    const rectPreEntry = {
+      top: window.innerHeight + 5,
+      bottom: window.innerHeight + 205,
+      left: 0,
+      right: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: window.innerHeight + 5,
+      toJSON: () => ({}),
+    };
+
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(() => rectPreEntry as DOMRect);
+
+    render(
+      <GallerySelection
+        images={IMAGES}
+        selectionMode={false}
+        selected={[]}
+        onImageClick={jest.fn()}
+        onSelectionChange={jest.fn()}
+      />
+    );
+
+    const image = screen.getByRole("img", { name: "Photo A" });
+    fireEvent.load(image);
+
+    expect(animateMock).not.toHaveBeenCalled();
+    expect(image.closest(".gallery-item")).not.toHaveAttribute("data-reveal-state");
   });
 });
