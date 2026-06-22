@@ -1,5 +1,11 @@
 import { css } from "@/styled-system/css";
 
+export const scrollLinkedRevealSurface = {
+  opacity: "var(--reveal-opacity, 1)",
+  transform: "translateY(var(--reveal-translate-y, 0px))",
+  willChange: "opacity, transform",
+} as const;
+
 /* ── Section-level styles ─────────────────────────────────────────────────── */
 
 export const sectionTitle = css({
@@ -83,6 +89,7 @@ export const projectGrid = css({
 });
 
 export const projectCard = css({
+  ...scrollLinkedRevealSurface,
   display: "flex",
   flexDirection: "column",
   borderRadius: "8px",
@@ -162,6 +169,7 @@ export const instagramPreviews = css({
 });
 
 export const instagramPreview = css({
+  ...scrollLinkedRevealSurface,
   display: "block",
   position: "relative",
   borderRadius: "8px",

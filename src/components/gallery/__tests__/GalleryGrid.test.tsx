@@ -123,6 +123,11 @@ describe("GalleryGrid", () => {
     expect(screen.queryByTestId("masonry-grid")).toBeNull();
   });
 
+  it("keeps initially visible gallery tiles settled", () => {
+    render(<GalleryGrid images={IMAGES} onImageClick={jest.fn()} useColumnsLayout />);
+    expect(screen.getAllByRole("button")[0]).toHaveAttribute("data-reveal-state", "settled");
+  });
+
   it("passes intrinsic width and height through to gallery images", () => {
     render(<GalleryGrid images={IMAGES} onImageClick={jest.fn()} />);
 
@@ -143,7 +148,7 @@ describe("GalleryGrid", () => {
     expect(window.getComputedStyle(firstItem!).opacity).not.toBe("0");
   });
 
-  it("does not trigger reveal from image load events after scroll", () => {
+  it("settles visible gallery items from image load events after scroll", () => {
     const rectVisibleInViewport = {
       top: 40,
       bottom: 240,
@@ -172,6 +177,6 @@ describe("GalleryGrid", () => {
     fireEvent.load(image);
 
     expect(animateMock).not.toHaveBeenCalled();
-    expect(image.closest(".gallery-item")).not.toHaveAttribute("data-reveal-animated");
+    expect(image.closest(".gallery-item")).toHaveAttribute("data-reveal-state", "settled");
   });
 });

@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import RevealGrid from "@/components/portfolio/RevealGrid";
 
 beforeEach(() => {
@@ -31,6 +31,20 @@ describe("RevealGrid", () => {
       </RevealGrid>
     );
     expect(container.firstChild).not.toHaveAttribute("data-reveal-ready");
+  });
+
+  it("applies shared reveal treatment to project cards", () => {
+    render(
+      <RevealGrid>
+        <a className="project-card" href="#">
+          Card
+        </a>
+      </RevealGrid>
+    );
+    expect(screen.getByRole("link")).toHaveAttribute(
+      "style",
+      expect.stringContaining("opacity: var(--reveal-opacity, 1)")
+    );
   });
 
   it("observes out-of-range .project-card children for progressive animation", () => {

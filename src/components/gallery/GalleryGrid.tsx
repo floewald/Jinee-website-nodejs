@@ -1,10 +1,12 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type SyntheticEvent } from "react";
 import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { cx } from "@/styled-system/css";
-import { useLoadedGalleryReveal } from "@/hooks/useLoadedGalleryReveal";
+import { useScrollLinkedReveal } from "@/hooks/useScrollLinkedReveal";
+import { settleScrollLinkedReveal } from "@/lib/reveal-helpers";
+import { isActuallyVisibleInViewport } from "@/lib/reveal-state";
 import type { GalleryImage } from "./Lightbox";
 import {
   projectGallery,
@@ -37,14 +39,23 @@ export default function GalleryGrid({
   useColumnsLayout = false,
 }: GalleryGridProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const revealKey = `${useColumnsLayout ? "columns" : "masonry"}:${images
-    .map((image) => image.srcFull ?? image.src)
-    .join("|")}`;
-  useLoadedGalleryReveal(containerRef, ".gallery-item img", revealKey);
+  useScrollLinkedReveal(containerRef, ".gallery-item");
 
   if (images.length === 0) return null;
 
   const inColumns = useColumnsLayout;
+
+  function isPriorityImageIndex(index: number) {
+    if (!useColumnsLayout) return index < 3;
+    return images.length <= 5 ? index < 3 : index < 4;
+  }
+
+  function handleImageLoad(e: SyntheticEvent<HTMLImageElement>) {
+    const item = e.currentTarget.closest(".gallery-item");
+    if (item instanceof HTMLElement && isActuallyVisibleInViewport(item)) {
+      settleScrollLinkedReveal(item);
+    }
+  }
 
   const galleryItems = images.map((img, i) => (
     <button
@@ -56,13 +67,16 @@ export default function GalleryGrid({
       )}
       onClick={() => onImageClick(i)}
       aria-label={`Open image: ${img.alt}`}
+      data-reveal-state={isPriorityImageIndex(i) ? "settled" : undefined}
     >
       <Image
         src={img.src}
         alt={img.alt}
         width={img.width ?? 800}
         height={img.height ?? 0}
-        loading="lazy"
+        loading={isPriorityImageIndex(i) ? "eager" : "lazy"}
+        fetchPriority={isPriorityImageIndex(i) ? "high" : undefined}
+        onLoad={handleImageLoad}
         className={cx(galleryImg, "gallery-img")}
         unoptimized
         style={{ height: "auto" }}

@@ -70,6 +70,9 @@ export const galleryItem = css({
   overflow: "hidden",
   borderRadius: "var(--radius-md)",
   width: "100%",
+  opacity: "var(--reveal-opacity, 1)",
+  transform: "translateY(var(--reveal-translate-y, 0px))",
+  willChange: "opacity, transform",
 });
 
 /** `gallery-item__trigger` — inner button in selection mode */
