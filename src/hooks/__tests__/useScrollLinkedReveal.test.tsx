@@ -1,6 +1,7 @@
 import { act, render, screen } from "@testing-library/react";
 import { useEffect, useRef } from "react";
 import { useScrollLinkedReveal } from "@/hooks/useScrollLinkedReveal";
+import { RevealState } from "@/lib/reveal-state";
 
 let surfaceTop = 0;
 
@@ -21,14 +22,7 @@ function makeRect(top: number) {
 class MockIntersectionObserver {
   callback: IntersectionObserverCallback;
   options?: IntersectionObserverInit;
-  observe = jest.fn((item: Element) => {
-    this.fire([
-      {
-        isIntersecting: surfaceTop <= window.innerHeight + 120,
-        target: item,
-      },
-    ]);
-  });
+  observe = jest.fn();
   disconnect = jest.fn();
   unobserve = jest.fn();
   static instances: MockIntersectionObserver[] = [];
@@ -47,7 +41,13 @@ class MockIntersectionObserver {
   }
 }
 
-function TestSurface({ initialTop }: { initialTop: number }) {
+function TestSurface({
+  initialTop,
+  initialRevealState,
+}: {
+  initialTop: number;
+  initialRevealState?: Exclude<RevealState, "eligible">;
+}) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -58,9 +58,27 @@ function TestSurface({ initialTop }: { initialTop: number }) {
 
   return (
     <div ref={ref}>
-      <div className="reveal-target" data-testid="surface" />
+      <div
+        className="reveal-target"
+        data-reveal-state={initialRevealState}
+        data-testid="surface"
+      />
     </div>
   );
+}
+
+function fireObserverEntry({
+  target = screen.getByTestId("surface"),
+  isIntersecting = true,
+}: {
+  target?: Element;
+  isIntersecting?: boolean;
+} = {}) {
+  act(() => {
+    MockIntersectionObserver.instances[0].fire([
+      { isIntersecting, target } as Partial<IntersectionObserverEntry>,
+    ]);
+  });
 }
 
 function fireScrollFrame({ top }: { top: number }) {
@@ -99,6 +117,8 @@ describe("useScrollLinkedReveal", () => {
     MockIntersectionObserver.instances = [];
     rafCallbacks.length = 0;
     surfaceTop = 0;
+    (window.requestAnimationFrame as jest.Mock).mockClear();
+    (window.cancelAnimationFrame as jest.Mock).mockClear();
 
     Object.defineProperty(window, "innerHeight", {
       configurable: true,
@@ -129,6 +149,7 @@ describe("useScrollLinkedReveal", () => {
 
   it("settles items that are already visible on mount", () => {
     render(<TestSurface initialTop={120} />);
+    fireObserverEntry();
 
     expect(screen.getByTestId("surface")).toHaveAttribute(
       "data-reveal-state",
@@ -138,6 +159,7 @@ describe("useScrollLinkedReveal", () => {
 
   it("updates css variables while an item scrolls into range", () => {
     render(<TestSurface initialTop={980} />);
+    fireObserverEntry();
 
     fireScrollFrame({ top: 940 });
 
@@ -148,12 +170,37 @@ describe("useScrollLinkedReveal", () => {
 
   it("marks the item settled once progress reaches 1", () => {
     render(<TestSurface initialTop={980} />);
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
 
     fireScrollFrame({ top: 720 });
 
-    expect(screen.getByTestId("surface")).toHaveAttribute(
+    expect(surface).toHaveAttribute(
       "data-reveal-state",
       "settled"
     );
+    expect(MockIntersectionObserver.instances[0].unobserve).toHaveBeenCalledWith(
+      surface
+    );
+  });
+
+  it("does not settle during scroll frames before progress reaches 1", () => {
+    render(<TestSurface initialTop={980} />);
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+
+    fireScrollFrame({ top: 890 });
+
+    expect(surface).not.toHaveAttribute("data-reveal-state", "settled");
+    expect(surface.style.getPropertyValue("--reveal-progress")).not.toBe("1");
+    expect(MockIntersectionObserver.instances[0].unobserve).not.toHaveBeenCalled();
+  });
+
+  it("does not observe or mutate items that are already non-eligible", () => {
+    render(<TestSurface initialTop={980} initialRevealState="animated" />);
+
+    expect(MockIntersectionObserver.instances).toHaveLength(0);
+    expect(screen.getByTestId("surface").style.getPropertyValue("--reveal-progress"))
+      .toBe("");
   });
 });

@@ -3,8 +3,17 @@ import {
   applyRevealProgress,
   settleScrollLinkedReveal,
 } from "@/lib/reveal-helpers";
+import {
+  REVEAL_OFFSET_PX,
+  REVEAL_PROGRESS_ENTRY_OFFSET_PX,
+  REVEAL_PROGRESS_SETTLE_OFFSET_PX,
+  REVEAL_START_OPACITY,
+} from "@/lib/reveal-config";
 import { getRevealProgressFromRect } from "@/lib/reveal-progress";
-import { shouldSettleImmediatelyFromElement } from "@/lib/reveal-state";
+import {
+  getRevealState,
+  shouldSettleImmediatelyFromElement,
+} from "@/lib/reveal-state";
 
 interface ScrollLinkedRevealOptions {
   entryOffsetPx?: number;
@@ -18,16 +27,17 @@ export function useScrollLinkedReveal(
   selector: string,
   options: ScrollLinkedRevealOptions = {}
 ) {
-  const entryOffsetPx = options.entryOffsetPx ?? 120;
-  const settleOffsetPx = options.settleOffsetPx ?? 24;
-  const offsetPx = options.offsetPx ?? 32;
-  const startOpacity = options.startOpacity ?? 0.2;
+  const entryOffsetPx = options.entryOffsetPx ?? REVEAL_PROGRESS_ENTRY_OFFSET_PX;
+  const settleOffsetPx = options.settleOffsetPx ?? REVEAL_PROGRESS_SETTLE_OFFSET_PX;
+  const offsetPx = options.offsetPx ?? REVEAL_OFFSET_PX;
+  const startOpacity = options.startOpacity ?? REVEAL_START_OPACITY;
 
   useEffect(() => {
     const root = ref.current;
     if (!root) return;
 
-    const items = Array.from(root.querySelectorAll<HTMLElement>(selector));
+    const items = Array.from(root.querySelectorAll<HTMLElement>(selector))
+      .filter((item) => getRevealState(item) === "eligible");
     if (items.length === 0) return;
 
     const active = new Set<HTMLElement>();
@@ -35,6 +45,12 @@ export function useScrollLinkedReveal(
 
     const tick = () => {
       active.forEach((item) => {
+        if (getRevealState(item) !== "eligible") {
+          active.delete(item);
+          observer.unobserve(item);
+          return;
+        }
+
         const rect = item.getBoundingClientRect();
         const progress = getRevealProgressFromRect({
           top: rect.top,
@@ -46,9 +62,10 @@ export function useScrollLinkedReveal(
 
         applyRevealProgress(item, progress, offsetPx, startOpacity);
 
-        if (progress >= 1 || shouldSettleImmediatelyFromElement(item)) {
+        if (progress >= 1) {
           settleScrollLinkedReveal(item);
           active.delete(item);
+          observer.unobserve(item);
         }
       });
     };
@@ -65,6 +82,12 @@ export function useScrollLinkedReveal(
       (entries) => {
         entries.forEach((entry) => {
           const item = entry.target as HTMLElement;
+
+          if (getRevealState(item) !== "eligible") {
+            active.delete(item);
+            observer.unobserve(item);
+            return;
+          }
 
           if (shouldSettleImmediatelyFromElement(item)) {
             settleScrollLinkedReveal(item);
