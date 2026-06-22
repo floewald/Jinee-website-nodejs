@@ -6,6 +6,7 @@ import {
   REVEAL_START_OPACITY,
   REVEAL_SIDE_BUFFER_PX,
 } from "@/lib/reveal-config";
+import { clampRevealProgress } from "@/lib/reveal-progress";
 import {
   getRevealState,
   isActuallyVisibleInViewport,
@@ -20,6 +21,10 @@ export interface RevealAnimationOptions {
   offsetPx?: number;
   easing?: string;
 }
+
+const CSS_REVEAL_PROGRESS = "--reveal-progress";
+const CSS_REVEAL_OPACITY = "--reveal-opacity";
+const CSS_REVEAL_TRANSLATE_Y = "--reveal-translate-y";
 
 function prefersReducedMotion() {
   return typeof window !== "undefined" &&
@@ -110,5 +115,25 @@ export function revealElement(
 
 export function settleRevealElement(item: HTMLElement) {
   if (getRevealState(item) !== "eligible") return;
+  markRevealSettled(item);
+}
+
+export function applyRevealProgress(
+  item: HTMLElement,
+  progress: number,
+  offsetPx = REVEAL_OFFSET_PX,
+  startOpacity = REVEAL_START_OPACITY
+) {
+  const clampedProgress = clampRevealProgress(progress);
+  const opacity = startOpacity + (1 - startOpacity) * clampedProgress;
+  const translateY = offsetPx * (1 - clampedProgress);
+
+  item.style.setProperty(CSS_REVEAL_PROGRESS, `${clampedProgress}`);
+  item.style.setProperty(CSS_REVEAL_OPACITY, `${opacity}`);
+  item.style.setProperty(CSS_REVEAL_TRANSLATE_Y, `${translateY}px`);
+}
+
+export function settleScrollLinkedReveal(item: HTMLElement) {
+  applyRevealProgress(item, 1, 0, 1);
   markRevealSettled(item);
 }

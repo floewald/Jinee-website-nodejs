@@ -3,6 +3,7 @@ import {
   REVEAL_SIDE_BUFFER_PX,
   REVEAL_VISIBLE_THRESHOLD_PX,
 } from "@/lib/reveal-config";
+import { shouldSettleImmediately } from "@/lib/reveal-progress";
 
 export type RevealState = "eligible" | "animating" | "animated" | "settled";
 
@@ -62,6 +63,19 @@ export function isActuallyVisibleInViewport(item: HTMLElement) {
     rect.left < window.innerWidth &&
     rect.right > 0
   );
+}
+
+export function shouldSettleImmediatelyFromElement(item: HTMLElement) {
+  const rect = item.getBoundingClientRect();
+
+  return shouldSettleImmediately({
+    top: rect.top,
+    bottom: rect.bottom,
+    left: rect.left,
+    right: rect.right,
+    viewportHeight: window.innerHeight,
+    viewportWidth: window.innerWidth,
+  });
 }
 
 export function isInPreEntryBand(
