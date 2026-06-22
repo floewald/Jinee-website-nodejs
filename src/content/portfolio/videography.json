@@ -212,6 +212,29 @@
   },
   {
     "type": "video",
+    "slug": "father-son-suhaimi",
+    "title": "CNA Insider | On The Red Dot",
+    "description": "CNA Insider On The Red Dot documentary on comedian Suhaimi Yusof and his son navigating fame, family and a life-changing stroke.",
+    "longDescription": "This On The Red Dot documentary follows actor-comedian Suhaimi Yusof and his youngest son Sufi as they spend rare one-on-one time together, opening up about fame, family, and the impact of a life-changing stroke. The film stays close to their honest conversations about expectation, vulnerability, and the transition into adulthood, showing how long-overdue talks can strengthen the bonds that matter most.\n\nJinee produced and directed the piece in Singapore.",
+    "heading": "Producer | Director",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/father-son-suhaimi/father-son-suhaimi-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "\"There's A Lot Of Expectation\": Growing Up As Comedian Suhaimi Yusof's Son | On The Red Dot",
+        "embedUrl": "https://www.youtube.com/embed/b7YuRUi9B4s",
+        "description": "An intimate father-son portrait in which comedian Suhaimi Yusof and his son Sufi confront fame, expectation, and the aftermath of a stroke, using heartfelt conversations to redefine how they understand each other.",
+        "uploadDate": "2026-06-22T07:00:24-07:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA Insider | On The Red Dot",
+      "thumbnail": "/assets/videography/father-son-suhaimi/father-son-suhaimi-800.webp"
+    }
+  },
+  {
+    "type": "video",
     "slug": "7-days-archery",
     "title": "8World | 七天我可以 7 Days, I Can Do It",
     "description": "8world challenge series following chef Eric Teo as he learns archery and attempts a 300-point test in seven days.",

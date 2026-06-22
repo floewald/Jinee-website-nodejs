@@ -51,8 +51,8 @@ describe("social-media-addiction project", () => {
 describe("video portfolio card ordering", () => {
   const cardProjects = videoProjects.filter((p) => p.portfolioCard);
 
-  it("has 21 projects with portfolio cards", () => {
-    expect(cardProjects.length).toBe(21);
+  it("has 22 projects with portfolio cards", () => {
+    expect(cardProjects.length).toBe(22);
   });
 
   it("order matches lineup defined in videography.json", () => {
@@ -63,6 +63,7 @@ describe("video portfolio card ordering", () => {
       "health-wang-zhen",
       "social-media-addiction",
       "blind-kitchen-chefs",
+      "father-son-suhaimi",
       "7-days-archery",
       "fertility-rate-sgp",
       "uniqlo",
