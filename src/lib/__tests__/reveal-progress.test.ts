@@ -18,6 +18,32 @@ describe("reveal-progress", () => {
     ).toBe(true);
   });
 
+  it("does not settle items that are vertically outside the viewport", () => {
+    expect(
+      shouldSettleImmediately({
+        top: 950,
+        bottom: 1150,
+        left: 0,
+        right: 300,
+        viewportHeight: 900,
+        viewportWidth: 1200,
+      })
+    ).toBe(false);
+  });
+
+  it("does not settle items that are horizontally outside the viewport", () => {
+    expect(
+      shouldSettleImmediately({
+        top: 100,
+        bottom: 300,
+        left: 1300,
+        right: 1500,
+        viewportHeight: 900,
+        viewportWidth: 1200,
+      })
+    ).toBe(false);
+  });
+
   it("clamps progress between 0 and 1", () => {
     expect(clampRevealProgress(-0.2)).toBe(0);
     expect(clampRevealProgress(1.2)).toBe(1);
