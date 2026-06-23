@@ -39,7 +39,10 @@ export default function GalleryGrid({
   useColumnsLayout = false,
 }: GalleryGridProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  useScrollLinkedReveal(containerRef, ".gallery-item");
+  const revealKey = `${useColumnsLayout ? "columns" : "masonry"}:${images
+    .map((image) => image.srcFull ?? image.src)
+    .join("|")}`;
+  useScrollLinkedReveal(containerRef, ".gallery-item", { resetKey: revealKey });
 
   if (images.length === 0) return null;
 
@@ -67,7 +70,6 @@ export default function GalleryGrid({
       )}
       onClick={() => onImageClick(i)}
       aria-label={`Open image: ${img.alt}`}
-      data-reveal-state={isPriorityImageIndex(i) ? "settled" : undefined}
     >
       <Image
         src={img.src}

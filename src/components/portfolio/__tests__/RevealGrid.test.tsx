@@ -33,18 +33,16 @@ describe("RevealGrid", () => {
     expect(container.firstChild).not.toHaveAttribute("data-reveal-ready");
   });
 
-  it("applies shared reveal treatment to project cards", () => {
-    render(
+  it("applies shared reveal treatment without mutating project cards inline", () => {
+    const { container } = render(
       <RevealGrid>
         <a className="project-card" href="#">
           Card
         </a>
       </RevealGrid>
     );
-    expect(screen.getByRole("link")).toHaveAttribute(
-      "style",
-      expect.stringContaining("opacity: var(--reveal-opacity, 1)")
-    );
+    expect(container.firstChild).toHaveClass("panda-mock");
+    expect(screen.getByRole("link")).not.toHaveAttribute("style");
   });
 
   it("observes out-of-range .project-card children for progressive animation", () => {

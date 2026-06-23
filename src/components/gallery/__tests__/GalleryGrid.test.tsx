@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { render, screen, fireEvent } from "@testing-library/react";
 import GalleryGrid from "@/components/gallery/GalleryGrid";
+import type { GalleryImage } from "@/components/gallery/Lightbox";
 
 jest.mock("next/image", () => ({
   __esModule: true,
@@ -27,6 +28,16 @@ const IMAGES = [
   { src: "/img/c-800.webp", alt: "Photo C", srcFull: "/img/c-1600.webp", width: 800, height: 533 },
 ];
 
+function makeImages(prefix: string, count: number): GalleryImage[] {
+  return Array.from({ length: count }, (_, index) => ({
+    src: `/img/${prefix}-${index}-800.webp`,
+    alt: `${prefix} photo ${index}`,
+    srcFull: `/img/${prefix}-${index}-1600.webp`,
+    width: 800,
+    height: 540,
+  }));
+}
+
 const GLOBALS_CSS = fs.readFileSync(
   path.join(process.cwd(), "src/app/globals.css"),
   "utf8"
@@ -42,16 +53,33 @@ beforeAll(() => {
 describe("GalleryGrid", () => {
   const animateMock = jest.fn();
 
+  class MockIntersectionObserver {
+    observe = jest.fn();
+    disconnect = jest.fn();
+    unobserve = jest.fn();
+    static instances: MockIntersectionObserver[] = [];
+
+    constructor() {
+      MockIntersectionObserver.instances.push(this);
+    }
+  }
+
   beforeAll(() => {
     Object.defineProperty(HTMLElement.prototype, "animate", {
       configurable: true,
       writable: true,
       value: animateMock,
     });
+    Object.defineProperty(window, "IntersectionObserver", {
+      configurable: true,
+      writable: true,
+      value: MockIntersectionObserver,
+    });
   });
 
   beforeEach(() => {
     animateMock.mockReset();
+    MockIntersectionObserver.instances = [];
     Object.defineProperty(window, "scrollY", {
       configurable: true,
       writable: true,
@@ -123,9 +151,36 @@ describe("GalleryGrid", () => {
     expect(screen.queryByTestId("masonry-grid")).toBeNull();
   });
 
-  it("keeps initially visible gallery tiles settled", () => {
+  it("keeps priority gallery tiles eligible for reveal settling", () => {
     render(<GalleryGrid images={IMAGES} onImageClick={jest.fn()} useColumnsLayout />);
-    expect(screen.getAllByRole("button")[0]).toHaveAttribute("data-reveal-state", "settled");
+    expect(screen.getAllByRole("button")[0]).not.toHaveAttribute("data-reveal-state");
+  });
+
+  it("bounds priority loading to early gallery images", () => {
+    render(<GalleryGrid images={makeImages("priority", 6)} onImageClick={jest.fn()} useColumnsLayout />);
+
+    const images = screen.getAllByRole("img");
+    expect(images[0]).toHaveAttribute("loading", "eager");
+    expect(images[0]).toHaveAttribute("fetchpriority", "high");
+    expect(images[3]).toHaveAttribute("loading", "eager");
+    expect(images[3]).toHaveAttribute("fetchpriority", "high");
+    expect(images[4]).toHaveAttribute("loading", "lazy");
+    expect(images[4]).not.toHaveAttribute("fetchpriority");
+  });
+
+  it("observes a new image set after rerender", () => {
+    const { rerender } = render(
+      <GalleryGrid images={makeImages("first", 4)} onImageClick={jest.fn()} />
+    );
+
+    expect(MockIntersectionObserver.instances).toHaveLength(1);
+
+    rerender(<GalleryGrid images={makeImages("second", 4)} onImageClick={jest.fn()} />);
+
+    expect(MockIntersectionObserver.instances).toHaveLength(2);
+    expect(MockIntersectionObserver.instances[1].observe).toHaveBeenCalledWith(
+      screen.getByRole("img", { name: "second photo 0" }).closest(".gallery-item")
+    );
   });
 
   it("passes intrinsic width and height through to gallery images", () => {

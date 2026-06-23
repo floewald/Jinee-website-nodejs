@@ -44,9 +44,13 @@ class MockIntersectionObserver {
 function TestSurface({
   initialTop,
   initialRevealState,
+  resetKey,
+  surfaceId = "surface",
 }: {
   initialTop: number;
   initialRevealState?: Exclude<RevealState, "eligible">;
+  resetKey?: string;
+  surfaceId?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -54,14 +58,19 @@ function TestSurface({
     surfaceTop = initialTop;
   }, [initialTop]);
 
-  useScrollLinkedReveal(ref, ".reveal-target");
+  useScrollLinkedReveal(
+    ref,
+    ".reveal-target",
+    resetKey === undefined ? undefined : { resetKey }
+  );
 
   return (
     <div ref={ref}>
       <div
+        key={surfaceId}
         className="reveal-target"
         data-reveal-state={initialRevealState}
-        data-testid="surface"
+        data-testid={surfaceId}
       />
     </div>
   );
@@ -135,7 +144,7 @@ describe("useScrollLinkedReveal", () => {
     jest
       .spyOn(HTMLElement.prototype, "getBoundingClientRect")
       .mockImplementation(function getBoundingClientRect(this: HTMLElement) {
-        if (this.dataset.testid === "surface") {
+        if (this.classList.contains("reveal-target")) {
           return makeRect(surfaceTop);
         }
 
@@ -202,5 +211,21 @@ describe("useScrollLinkedReveal", () => {
     expect(MockIntersectionObserver.instances).toHaveLength(0);
     expect(screen.getByTestId("surface").style.getPropertyValue("--reveal-progress"))
       .toBe("");
+  });
+
+  it("observes new eligible items when the reset key changes", () => {
+    const { rerender } = render(
+      <TestSurface initialTop={980} resetKey="one" surfaceId="one" />
+    );
+
+    expect(MockIntersectionObserver.instances).toHaveLength(1);
+
+    rerender(<TestSurface initialTop={980} resetKey="two" surfaceId="two" />);
+
+    expect(MockIntersectionObserver.instances).toHaveLength(2);
+    expect(MockIntersectionObserver.instances[0].disconnect).toHaveBeenCalled();
+    expect(MockIntersectionObserver.instances[1].observe).toHaveBeenCalledWith(
+      screen.getByTestId("two")
+    );
   });
 });

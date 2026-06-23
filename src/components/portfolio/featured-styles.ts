@@ -6,6 +6,10 @@ export const scrollLinkedRevealSurface = {
   willChange: "opacity, transform",
 } as const;
 
+export const revealGrid = css({
+  "& .project-card, & .instagram-preview": scrollLinkedRevealSurface,
+});
+
 /* ── Section-level styles ─────────────────────────────────────────────────── */
 
 export const sectionTitle = css({

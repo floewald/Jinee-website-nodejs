@@ -20,6 +20,7 @@ interface ScrollLinkedRevealOptions {
   settleOffsetPx?: number;
   offsetPx?: number;
   startOpacity?: number;
+  resetKey?: string;
 }
 
 export function useScrollLinkedReveal(
@@ -31,6 +32,7 @@ export function useScrollLinkedReveal(
   const settleOffsetPx = options.settleOffsetPx ?? REVEAL_PROGRESS_SETTLE_OFFSET_PX;
   const offsetPx = options.offsetPx ?? REVEAL_OFFSET_PX;
   const startOpacity = options.startOpacity ?? REVEAL_START_OPACITY;
+  const resetKey = options.resetKey;
 
   useEffect(() => {
     const root = ref.current;
@@ -123,5 +125,5 @@ export function useScrollLinkedReveal(
       window.removeEventListener("scroll", scheduleTick);
       window.removeEventListener("resize", scheduleTick);
     };
-  }, [ref, selector, entryOffsetPx, settleOffsetPx, offsetPx, startOpacity]);
+  }, [ref, selector, entryOffsetPx, settleOffsetPx, offsetPx, startOpacity, resetKey]);
 }
