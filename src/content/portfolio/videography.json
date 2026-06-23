@@ -24,6 +24,58 @@
   },
   {
     "type": "video",
+    "slug": "father-son-suhaimi",
+    "title": "CNA Insider | On The Red Dot",
+    "description": "CNA Insider On The Red Dot documentary on comedian Suhaimi Yusof and his son navigating fame, family and a life-changing stroke.",
+    "longDescription": "This On The Red Dot documentary follows actor-comedian Suhaimi Yusof and his youngest son Sufi as they spend rare one-on-one time together, opening up about fame, family, and the impact of a life-changing stroke. The film stays close to their honest conversations about expectation, vulnerability, and the transition into adulthood, showing how long-overdue talks can strengthen the bonds that matter most.\n\nJinee produced and directed the piece in Singapore.",
+    "heading": "Producer | Director",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/father-son-suhaimi/father-son-suhaimi-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "\"There's A Lot Of Expectation\": Growing Up As Comedian Suhaimi Yusof's Son | On The Red Dot",
+        "embedUrl": "https://www.youtube.com/embed/b7YuRUi9B4s",
+        "description": "An intimate father-son portrait in which comedian Suhaimi Yusof and his son Sufi confront fame, expectation, and the aftermath of a stroke, using heartfelt conversations to redefine how they understand each other.",
+        "uploadDate": "2026-06-22T07:00:24-07:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA Insider | On The Red Dot",
+      "thumbnail": "/assets/videography/father-son-suhaimi/father-son-suhaimi-800.webp"
+    }
+  },
+  {
+    "type": "video",
+    "slug": "7-days-archery",
+    "title": "8World | 七天我可以 7 Days, I Can Do It",
+    "description": "8world challenge series following chef Eric Teo as he learns archery and attempts a 300-point test in seven days.",
+    "longDescription": "This two-part 8world challenge follows chef Eric Teo as he swaps the kitchen for the archery range and tries to learn a new discipline in seven days. The story mixes light entertainment with a clear training arc, from first-time technique and physical strain to a final 36-arrow test at 15 metres with a 300-point goal.\n\nJinee contributed as researcher and writer.",
+    "heading": "Researcher | Writer",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/7-days-archery/7-days-archery-1-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "7 Days, I Can Do It | Celebrity Chef Eric Teo Learns Archery in 7 Days",
+        "embedUrl": "https://www.youtube.com/embed/EFe2vDcFMRE",
+        "description": "Chef Eric Teo begins as a confident beginner, but the first episode quickly turns archery into a fish-out-of-water training story built on repetition, fatigue, and a surprisingly steep learning curve.",
+        "uploadDate": "2026-04-22T21:00:12-07:00"
+      },
+      {
+        "title": "7 Days, I Can Do It | 36 Arrows, 300 Points — Can Chef Eric Teo Do It?",
+        "embedUrl": "https://www.youtube.com/embed/B0IURhVM0TE",
+        "description": "The finale narrows the whole challenge to one clean test: 36 arrows, 15 metres, and a 300-point target that turns a light entertainment format into a suspenseful payoff.",
+        "uploadDate": "2026-04-25T04:45:01-07:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "8World | 七天我可以 7 Days, I Can Do It",
+      "thumbnail": "/assets/videography/7-days-archery/7-days-archery-1-800.webp"
+    }
+  },
+  {
+    "type": "video",
     "slug": "singer-jasmin-sokko",
     "title": "CNA | Dear Singapore",
     "description": "Documentary featuring singer Jasmine Sokko on chasing music dreams.",
@@ -43,6 +95,53 @@
     "portfolioCard": {
       "cardTitle": "CNA | Dear Singapore",
       "thumbnail": "/assets/videography/singer-jasmin-sokko/singer-jasmin-sokko-800.webp"
+    }
+  },
+  {
+    "type": "video",
+    "slug": "health-wang-zhen",
+    "title": "8world | 看见主播",
+    "description": "8world health series on midlife nutrition, mental health, menopause, and chronic disease risk in Singapore.",
+    "longDescription": "A four-part 8world series fronted by anchor Wang Zheng that turns midlife health concerns into practical, accessible stories. Across the episodes, the reporting looks at how busy Singaporeans in their 40s and 50s eat when they rely on hawker food, how to spot mental-health warning signs that get dismissed as everyday stress, why hypertension and high cholesterol often stay hidden until serious harm is done, and how menopause can reshape the body in ways many women only recognise once the changes have taken hold.\n\nJinee co-directed and shot the series in Singapore.",
+    "heading": "Co-Director | Videographer",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/health-wang-zhen/health-wang-zhen-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "【看见主播 | 王征】40+这么吃，才不会发福？外食族必看",
+        "embedUrl": "https://www.youtube.com/embed/hJn7y2VvjQs",
+        "description": [
+          "This episode focuses on the everyday diet traps facing midlife Singaporeans who depend on hawker meals and fast convenience.",
+          "It turns nutrition advice into practical food choices viewers can use without abandoning the routines of working life."
+        ],
+        "uploadDate": "2026-03-05T02:01:05-08:00"
+      },
+      {
+        "title": "【看见主播 | 王征】40岁后最危险的不是压力",
+        "embedUrl": "https://www.youtube.com/embed/wzVyJJ10vlo",
+        "description": "An episode about the warning signs that stress, burnout, and mental-health struggles are no longer manageable with the usual 'just push through' mindset.",
+        "uploadDate": "2026-04-29T01:00:56-07:00"
+      },
+      {
+        "title": "【看见主播 | 王征】40岁后你以为的健康，可能是错觉",
+        "embedUrl": "https://www.youtube.com/embed/E1bhkM_Ees4",
+        "description": "The reporting looks at how hidden risks such as high blood pressure and cholesterol stay invisible until a serious health scare forces action.",
+        "uploadDate": "2026-05-21T01:00:11-07:00"
+      },
+      {
+        "title": "【看见主播 | 王征】女性40+，身体正在发生什么变化？",
+        "embedUrl": "https://www.youtube.com/embed/n4xH6jyliQE",
+        "description": [
+          "Wang Zheng guides viewers through a rethinking of menopause, explaining why women 45+ may notice waist gain and other body changes even when they are not eating more.",
+          "The episode frames menopause as a subtle but long-lasting transition, with doctors describing it less as decline than as a kind of 'phoenix rising'."
+        ],
+        "uploadDate": "2026-06-18T01:00:37-07:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "8world | 看见主播",
+      "thumbnail": "/assets/videography/health-wang-zhen/health-wang-zhen-800.webp"
     }
   },
   {
@@ -99,75 +198,35 @@
   },
   {
     "type": "video",
-    "slug": "health-wang-zhen",
-    "title": "8world | 看见主播",
-    "description": "8world health series on midlife nutrition, mental health, menopause, and chronic disease risk in Singapore.",
-    "longDescription": "A four-part 8world series fronted by anchor Wang Zheng that turns midlife health concerns into practical, accessible stories. Across the episodes, the reporting looks at how busy Singaporeans in their 40s and 50s eat when they rely on hawker food, how to spot mental-health warning signs that get dismissed as everyday stress, why hypertension and high cholesterol often stay hidden until serious harm is done, and how menopause can reshape the body in ways many women only recognise once the changes have taken hold.\n\nJinee co-directed and shot the series in Singapore.",
-    "heading": "Co-Director | Videographer",
+    "slug": "scdf-project",
+    "title": "CNA Insider | SCDF 995 Calls",
+    "description": "Two-part CNA Insider series embedded with SCDF emergency crews, from 995 calls to frontline ambulance response.",
+    "longDescription": "This two-part documentary goes inside Singapore's emergency medical system, following 995 call takers, dispatchers, paramedics, and ambulance crews under pressure. The reporting moves between operational detail and emotional reality, covering abusive callers, blocked ambulances, and the split-second decisions that shape patient outcomes.\n\nJinee co-produced, directed, and shot the series.",
+    "heading": "Co-Producer | Director | Videographer",
     "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/videography/health-wang-zhen/health-wang-zhen-800.webp",
+    "ogImage": "https://jineechen.com/assets/videography/scdf-project/scdf-project-1-800.webp",
     "visible": true,
     "videos": [
       {
-        "title": "【看见主播 | 王征】40+这么吃，才不会发福？外食族必看",
-        "embedUrl": "https://www.youtube.com/embed/hJn7y2VvjQs",
-        "description": [
-          "This episode focuses on the everyday diet traps facing midlife Singaporeans who depend on hawker meals and fast convenience.",
-          "It turns nutrition advice into practical food choices viewers can use without abandoning the routines of working life."
-        ],
-        "uploadDate": "2026-03-05T02:01:05-08:00"
+        "title": "SCDF Officers React To Abusive Calls, Emotional Cases And Ambulance-Blocking Drivers",
+        "embedUrl": "https://www.youtube.com/embed/CHc3Gd4Y4VM",
+        "description": "Told through EMS officers' reflections, this companion piece shows how abuse, blocked ambulances, and emotional cases complicate emergency work long after the sirens fade.",
+        "uploadDate": "2024-12-05T05:00:20-08:00"
       },
       {
-        "title": "【看见主播 | 王征】40岁后最危险的不是压力",
-        "embedUrl": "https://www.youtube.com/embed/wzVyJJ10vlo",
-        "description": "An episode about the warning signs that stress, burnout, and mental-health struggles are no longer manageable with the usual 'just push through' mindset.",
-        "uploadDate": "2026-04-29T01:00:56-07:00"
-      },
-      {
-        "title": "【看见主播 | 王征】40岁后你以为的健康，可能是错觉",
-        "embedUrl": "https://www.youtube.com/embed/E1bhkM_Ees4",
-        "description": "The reporting looks at how hidden risks such as high blood pressure and cholesterol stay invisible until a serious health scare forces action.",
-        "uploadDate": "2026-05-21T01:00:11-07:00"
-      },
-      {
-        "title": "【看见主播 | 王征】女性40+，身体正在发生什么变化？",
-        "embedUrl": "https://www.youtube.com/embed/n4xH6jyliQE",
-        "description": [
-          "Wang Zheng guides viewers through a rethinking of menopause, explaining why women 45+ may notice waist gain and other body changes even when they are not eating more.",
-          "The episode frames menopause as a subtle but long-lasting transition, with doctors describing it less as decline than as a kind of 'phoenix rising'."
-        ],
-        "uploadDate": "2026-06-18T01:00:37-07:00"
+        "title": "On Call With Singapore's SCDF Emergency Medical Services: When Minutes Can Mean Life Or Death",
+        "embedUrl": "https://www.youtube.com/embed/9PjWLStxWCc",
+        "description": "With embedded access to call-takers, dispatchers, paramedics, and hospital staff, the film turns emergency response into a systems story where every minute carries human consequence.",
+        "uploadDate": "2024-03-07T05:00:06-08:00"
       }
     ],
     "portfolioCard": {
-      "cardTitle": "8world | 看见主播",
-      "thumbnail": "/assets/videography/health-wang-zhen/health-wang-zhen-800.webp"
-    }
-  },
-  {
-    "type": "video",
-    "slug": "social-media-addiction",
-    "title": "8world | 前线追踪",
-    "description": "8world Frontline report on social media addiction, school phone rules, and teen screen habits in Singapore.",
-    "longDescription": "This Frontline report examines what compulsive social-media use looks like for young people in Singapore, following a subject who deletes every app after years of overuse. The story connects personal dependency with a wider policy shift as schools tighten phone rules and families ask whether restrictions can change behaviour once the habit is already formed.\n\nJinee shot the episode for 8world.",
-    "heading": "Videographer",
-    "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/videography/social-media-addiction/social-media-addiction-800.webp",
-    "visible": true,
-    "videos": [
-      {
-        "title": "前线追踪 | 深陷社媒四年 他删光所有应用",
-        "embedUrl": "https://www.youtube.com/embed/tZ5tjTqomvg",
-        "description": [
-          "This Frontline report follows a 20-year-old who deletes every social-media app after four years of compulsive use, showing how endless scrolling and fear of missing out can take over daily life.",
-          "Part of 8world's long-running current-affairs series 前线追踪, the episode widens the story into Singapore's tighter school phone rules and the larger question of whether restrictions alone can change behavior."
-        ],
-        "uploadDate": "2026-02-24T03:56:52-08:00"
-      }
-    ],
-    "portfolioCard": {
-      "cardTitle": "8world | 前线追踪",
-      "thumbnail": "/assets/videography/social-media-addiction/social-media-addiction-800.webp"
+      "cardTitle": "CNA Insider | SCDF 995 Calls",
+      "thumbnail": "/assets/videography/scdf-project/scdf-project-1-800.webp",
+      "previewImages": [
+        "/assets/videography/scdf-project/scdf-project-1-800.webp",
+        "/assets/videography/scdf-project/scdf-project-2-800.webp"
+      ]
     }
   },
   {
@@ -212,54 +271,48 @@
   },
   {
     "type": "video",
-    "slug": "father-son-suhaimi",
-    "title": "CNA Insider | On The Red Dot",
-    "description": "CNA Insider On The Red Dot documentary on comedian Suhaimi Yusof and his son navigating fame, family and a life-changing stroke.",
-    "longDescription": "This On The Red Dot documentary follows actor-comedian Suhaimi Yusof and his youngest son Sufi as they spend rare one-on-one time together, opening up about fame, family, and the impact of a life-changing stroke. The film stays close to their honest conversations about expectation, vulnerability, and the transition into adulthood, showing how long-overdue talks can strengthen the bonds that matter most.\n\nJinee produced and directed the piece in Singapore.",
-    "heading": "Producer | Director",
-    "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/videography/father-son-suhaimi/father-son-suhaimi-800.webp",
+    "slug": "lunch-with-us",
+    "title": "CNA Insider | Lunch With Us",
+    "description": "CNA Insider food series exploring affordable, character-rich meals across Singapore and Taipei.",
+    "longDescription": "This four-part food series uses affordable meals as a way into local culture, from Tekka's Indian-Pakistani hawker fare to Taiwanese bentos, budget fast-food counters, and a karaoke cab driver's comfort-food circuit. Each episode is built around a guide with a strong point of view, keeping the storytelling personal, useful, and location-specific.\n\nJinee produced, directed, and shot the series.",
+    "heading": "Producer | Director | Videographer",
+    "location": "📍 Singapore & Taiwan",
+    "ogImage": "https://jineechen.com/assets/videography/lunch-with-us/lunch-with-us-1-800.webp",
     "visible": true,
     "videos": [
       {
-        "title": "\"There's A Lot Of Expectation\": Growing Up As Comedian Suhaimi Yusof's Son | On The Red Dot",
-        "embedUrl": "https://www.youtube.com/embed/b7YuRUi9B4s",
-        "description": "An intimate father-son portrait in which comedian Suhaimi Yusof and his son Sufi confront fame, expectation, and the aftermath of a stroke, using heartfelt conversations to redefine how they understand each other.",
-        "uploadDate": "2026-06-22T07:00:24-07:00"
-      }
-    ],
-    "portfolioCard": {
-      "cardTitle": "CNA Insider | On The Red Dot",
-      "thumbnail": "/assets/videography/father-son-suhaimi/father-son-suhaimi-800.webp"
-    }
-  },
-  {
-    "type": "video",
-    "slug": "7-days-archery",
-    "title": "8World | 七天我可以 7 Days, I Can Do It",
-    "description": "8world challenge series following chef Eric Teo as he learns archery and attempts a 300-point test in seven days.",
-    "longDescription": "This two-part 8world challenge follows chef Eric Teo as he swaps the kitchen for the archery range and tries to learn a new discipline in seven days. The story mixes light entertainment with a clear training arc, from first-time technique and physical strain to a final 36-arrow test at 15 metres with a 300-point goal.\n\nJinee contributed as researcher and writer.",
-    "heading": "Researcher | Writer",
-    "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/videography/7-days-archery/7-days-archery-1-800.webp",
-    "visible": true,
-    "videos": [
-      {
-        "title": "7 Days, I Can Do It | Celebrity Chef Eric Teo Learns Archery in 7 Days",
-        "embedUrl": "https://www.youtube.com/embed/EFe2vDcFMRE",
-        "description": "Chef Eric Teo begins as a confident beginner, but the first episode quickly turns archery into a fish-out-of-water training story built on repetition, fatigue, and a surprisingly steep learning curve.",
-        "uploadDate": "2026-04-22T21:00:12-07:00"
+        "title": "Budget 'Fast-Food' Hopping In Taiwan: From Vegetarian to Pork Cheap Eats | Taipei",
+        "embedUrl": "https://www.youtube.com/embed/Y1St1wL66l4",
+        "description": "A budget food crawl through Banqiao turns Taiwanese fast food into a neighborhood story, with local guide Matt Chen connecting low prices, long-simmered craft, and everyday eating habits.",
+        "uploadDate": "2025-05-29T21:00:43-07:00"
       },
       {
-        "title": "7 Days, I Can Do It | 36 Arrows, 300 Points — Can Chef Eric Teo Do It?",
-        "embedUrl": "https://www.youtube.com/embed/B0IURhVM0TE",
-        "description": "The finale narrows the whole challenge to one clean test: 36 arrows, 15 metres, and a 300-point target that turns a light entertainment format into a suspenseful payoff.",
-        "uploadDate": "2026-04-25T04:45:01-07:00"
+        "title": "S$6 Michelin Meals at Indian-Pakistani Hawker Stall in Tekka | Singapore",
+        "embedUrl": "https://www.youtube.com/embed/C-vwkA4zGco",
+        "description": "Guided by a chef through Tekka Centre, this episode folds heritage, affordability, and regional nuance into one lunch stop, ending at a Michelin-recognised stall known for S$6 Indian-Pakistani meals.",
+        "uploadDate": "2025-06-04T21:00:28-07:00"
+      },
+      {
+        "title": "Taiwan-style Bento Meals With Old-School Touch & Retro Vibe | Taipei",
+        "embedUrl": "https://www.youtube.com/embed/uN64AgpxHAU",
+        "description": "Writers lead this retro Taipei bento story through memory, decor, and food history, turning a simple lunch into a place-based portrait of old-school Taiwanese everyday culture.",
+        "uploadDate": "2025-05-30T21:01:04-07:00"
+      },
+      {
+        "title": "Taiwan's Karaoke Cabbie Takes Us To Comfort Food 'Club' | Taipei",
+        "embedUrl": "https://www.youtube.com/embed/wX9KKu0cpOo",
+        "description": "A karaoke-cab driver makes this Taipei lunch story character-first from the start, using personality and subculture to lead viewers into a long-running drivers' canteen and its comfort-food ritual.",
+        "uploadDate": "2025-05-29T21:01:09-07:00"
       }
     ],
     "portfolioCard": {
-      "cardTitle": "8World | 七天我可以 7 Days, I Can Do It",
-      "thumbnail": "/assets/videography/7-days-archery/7-days-archery-1-800.webp"
+      "cardTitle": "CNA Insider | Lunch With Us",
+      "thumbnail": "/assets/videography/lunch-with-us/lunch-with-us-1-800.webp",
+      "previewImages": [
+        "/assets/videography/lunch-with-us/lunch-with-us-1-800.webp",
+        "/assets/videography/lunch-with-us/lunch-with-us-2-800.webp",
+        "/assets/videography/lunch-with-us/lunch-with-us-3-800.webp"
+      ]
     }
   },
   {
@@ -295,6 +348,108 @@
     "portfolioCard": {
       "cardTitle": "8world | Frontline",
       "thumbnail": "/assets/videography/fertility-rate-sgp/fertility-rate-sgp-1-800.webp"
+    }
+  },
+  {
+    "type": "video",
+    "slug": "social-media-addiction",
+    "title": "8world | 前线追踪",
+    "description": "8world Frontline report on social media addiction, school phone rules, and teen screen habits in Singapore.",
+    "longDescription": "This Frontline report examines what compulsive social-media use looks like for young people in Singapore, following a subject who deletes every app after years of overuse. The story connects personal dependency with a wider policy shift as schools tighten phone rules and families ask whether restrictions can change behaviour once the habit is already formed.\n\nJinee shot the episode for 8world.",
+    "heading": "Videographer",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/social-media-addiction/social-media-addiction-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "前线追踪 | 深陷社媒四年 他删光所有应用",
+        "embedUrl": "https://www.youtube.com/embed/tZ5tjTqomvg",
+        "description": [
+          "This Frontline report follows a 20-year-old who deletes every social-media app after four years of compulsive use, showing how endless scrolling and fear of missing out can take over daily life.",
+          "Part of 8world's long-running current-affairs series 前线追踪, the episode widens the story into Singapore's tighter school phone rules and the larger question of whether restrictions alone can change behavior."
+        ],
+        "uploadDate": "2026-02-24T03:56:52-08:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "8world | 前线追踪",
+      "thumbnail": "/assets/videography/social-media-addiction/social-media-addiction-800.webp"
+    }
+  },
+  {
+    "type": "video",
+    "slug": "into-the-gym",
+    "title": "Into The Gym | Johnson Health Tech Web Series",
+    "description": "Johnson Health Tech web series pairing Kunda with athletes and creators for fitness challenges and workouts.",
+    "longDescription": "A nine-episode branded web series that turns Johnson Health Tech products into repeatable entertainment formats, pairing host Kunda with athletes, entertainers, and creators for training sessions, sports challenges, and celebrity fitness routines. Across the season, each guest brings a distinct audience and skill set, helping the brand reach both hardcore fitness fans and casual lifestyle viewers.\n\nJinee served as executive producer.",
+    "heading": "Executive Producer",
+    "location": "📍 Taiwan",
+    "ogImage": "https://jineechen.com/assets/videography/into-the-gym/into-the-gym-1-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "坤達對決世界球后戴資穎，看小戴挑戰100秒20宮格羽球準度挑戰！【 EP1 】",
+        "embedUrl": "https://www.youtube.com/embed/By-B1i4-ycM",
+        "description": "The season opener pairs host Kunda with badminton champion Tai Tzu-ying, turning a celebrity workout into a brisk challenge story built on precision, competitive tension, and world-class training habits.",
+        "uploadDate": "2020-10-02T06:00:02-07:00"
+      },
+      {
+        "title": "坤達揪Joeman健身，意外發現防綠帽神器【EP2】",
+        "embedUrl": "https://www.youtube.com/embed/GMptm0xWmDE",
+        "description": "A studio visit with Joeman mixes creator banter and fast-burn coaching, showing how the series can fold influencer culture and practical fitness tips into one brand-friendly format.",
+        "uploadDate": "2020-10-09T06:00:04-07:00"
+      },
+      {
+        "title": "坤達揪 法國人酷KU健身，進階版炸裂胸肌訓練。KU：竟然有這種方法？！【EP3】feat.酷的夢",
+        "embedUrl": "https://www.youtube.com/embed/VWjZghxpRIQ",
+        "description": "This episode teams Kunda with French creator KU for an advanced chest workout, then widens into food and lifestyle beats that keep the branded fitness format playful rather than repetitive.",
+        "uploadDate": "2020-10-16T06:00:09-07:00"
+      },
+      {
+        "title": "袁艾菲為金鐘獻上深V裸背，坤達以美背三式相助艾菲【EP4】",
+        "embedUrl": "https://www.youtube.com/embed/2Edw6oepr4Q",
+        "description": "A home-visit episode with Yuan Ai-fei blends cooking, comedy, and targeted back training, framing the workout around a real appearance goal instead of generic exercise advice.",
+        "uploadDate": "2020-10-23T06:00:01-07:00"
+      },
+      {
+        "title": "每朝女神張景嵐性感報到！獨家小蠻腰健身菜單，坤達:「我們可以偷偷的⋯」【EP5】",
+        "embedUrl": "https://www.youtube.com/embed/euwdFe45FCo",
+        "description": "With Zhang Ching-lan, the series leans into playful chemistry, combat-style cardio, and a defined ab routine, weaving product features into the episode without breaking the entertainment flow.",
+        "uploadDate": "2020-10-30T06:00:17-07:00"
+      },
+      {
+        "title": "全壘打大賽！坤達蔡哥拚盡尊嚴，努力揮擊。陳晨威：讓你們拿鋁棒【EP6】",
+        "embedUrl": "https://www.youtube.com/embed/Uw2HHGLbybg",
+        "description": "Shot at a pro ballpark, this baseball-themed episode scales the format up with stadium access, sports-star competition, and locker-room variety energy while keeping the workout challenge at its core.",
+        "uploadDate": "2020-11-06T05:00:11-08:00"
+      },
+      {
+        "title": "雙生鬥士 Yin&Yei 籃壇帥度破表，籃球一哥 坤達表情逐漸母湯！【EP7】",
+        "embedUrl": "https://www.youtube.com/embed/ydZs8oBhySQ",
+        "description": "Twin basketball players Yin and Yei bring a strong guest hook to an episode that balances on-court games, core training, and music-driven class moments that make digital fitness feel social and fun.",
+        "uploadDate": "2020-11-13T05:00:13-08:00"
+      },
+      {
+        "title": "UFC八角鐵籠的終極格鬥賽？ 夢多直誇天才！坤達：我有看第一神拳？！【EP8】",
+        "embedUrl": "https://www.youtube.com/embed/KhUUDk4-4bs",
+        "description": "An octagon-style challenge with Dreamondo pushes the series into fight-sports spectacle, using humor and host vulnerability to make a punishing workout feel human, accessible, and highly watchable.",
+        "uploadDate": "2020-11-20T05:00:07-08:00"
+      },
+      {
+        "title": "坤達使出回憶殺！Johnson@mirror眾星開箱體驗！【EP9】坤達一打十超精彩健身魔鏡開箱合集",
+        "embedUrl": "https://www.youtube.com/embed/Tftq_1S8FYw",
+        "description": "The season recap repackages standout guests, mirror functions, and challenge highlights into a campaign-friendly supercut that extends the series' value well beyond its weekly release.",
+        "uploadDate": "2020-11-27T05:00:30-08:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "Johnson Health Tech",
+      "thumbnail": "/assets/videography/into-the-gym/into-the-gym-1-800.webp",
+      "previewImages": [
+        "/assets/videography/into-the-gym/into-the-gym-1-800.webp",
+        "/assets/videography/into-the-gym/into-the-gym-2-800.webp",
+        "/assets/videography/into-the-gym/into-the-gym-3-800.webp"
+      ]
     }
   },
   {
@@ -341,6 +496,108 @@
     "portfolioCard": {
       "cardTitle": "Living With Chronic Pain That Even Doctors Don’t Believe - This Is Fibromyalgia",
       "thumbnail": "/assets/videography/living-with-chronic-pain/living-with-chronic-pain-800.webp"
+    }
+  },
+  {
+    "type": "video",
+    "slug": "work-in-sgp",
+    "title": "CNA Insider | MOM",
+    "description": "CNA Insider profile of a robotics engineer building a career and community in Singapore.",
+    "longDescription": "This documentary profiles a Thai-born robotics engineer who built his career in Singapore and now uses that experience to mentor and give back. The story combines professional ambition with questions of belonging, contribution, and what makes a place feel worth staying in.\n\nJinee produced, directed, and shot the film.",
+    "heading": "Producer | Director | Videographer",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/work-in-sgp/work-in-sgp-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "I Build Robots For A Living. Here's Why I Chose To Work In Singapore & How I'm Giving Back",
+        "embedUrl": "https://www.youtube.com/embed/asVm61iRhmA",
+        "description": "This profile follows Thai robotics engineer Krittin Kawkeeree as he builds autonomous systems and mentors local talent, linking one career story to bigger questions of belonging, opportunity, and contribution in Singapore.",
+        "uploadDate": "2024-11-14T05:00:03-08:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA Insider | MOM",
+      "thumbnail": "/assets/videography/work-in-sgp/work-in-sgp-800.webp"
+    }
+  },
+  {
+    "type": "video",
+    "slug": "stay-at-home-dad",
+    "title": "CNA Insider | TV Spin Offs",
+    "description": "CNA Insider documentary about a Singapore father rebuilding life after 14 years as a stay-at-home caregiver.",
+    "longDescription": "This documentary follows a father who spent 14 years as the primary caregiver for his son and is now trying to rebuild an identity outside the home. The film looks at masculinity, sacrifice, and the emotional cost of putting one role on hold for so long.\n\nJinee produced, directed, shot, and edited the film.",
+    "heading": "Producer | Director | Videographer | Video Editor",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/stay-at-home-dad/stay-at-home-dad-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "I Spent 14 Years As A Stay-At-Home Dad For My Son. Here's Why It's Time To Reclaim My Life",
+        "embedUrl": "https://www.youtube.com/embed/8nRIG_hO_PU",
+        "description": "A candid portrait of a father rebuilding life after 14 years of caregiving, using one family's story to explore masculinity, sacrifice, isolation, and the slow work of reclaiming selfhood.",
+        "uploadDate": "2024-06-15T06:00:07-07:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA Insider | TV Spin Offs",
+      "thumbnail": "/assets/videography/stay-at-home-dad/stay-at-home-dad-800.webp"
+    }
+  },
+  {
+    "type": "video",
+    "slug": "lion-dancers",
+    "title": "CNA Insider | Gen Z Lion Dancers",
+    "description": "Documentary featuring lion dancers and their cultural significance.",
+    "longDescription": "A short documentary exploring the art and tradition of lion dancing in Singapore. The film delves into the history, techniques, and cultural importance of this vibrant performance art.",
+    "heading": "Co-Producer | Director | Videographer",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/lion-dancers/lion-dancers-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "Gen Z Lion Dancers Of TikTok Fame: Is Passion Enough?",
+        "embedUrl": "https://www.youtube.com/embed/k_FZwxEskO4",
+        "description": "A character-led documentary about young lion dancers balancing viral attention, demanding physical training, and the question of whether cultural passion can sustain adult life.",
+        "uploadDate": "2023-01-01T00:00:00+08:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA Insider | Gen Z Lion Dancers",
+      "thumbnail": "/assets/videography/lion-dancers/lion-dancers-800.webp"
+    }
+  },
+  {
+    "type": "video",
+    "slug": "i-fell",
+    "title": "CNA Insider | Scam Series",
+    "description": "Two-part CNA Insider scam series told through survivors of investment and romance fraud.",
+    "longDescription": "This two-part documentary series reconstructs how online scams gain trust before taking money, using first-person accounts from victims of investment and romance schemes. Each episode stays close to the subject's decision-making, showing the emotional manipulation, warning signs, and aftermath that make these cases resonate beyond the headline.\n\nJinee produced, directed, and shot the series.",
+    "heading": "Producer | Director | Videographer",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/i-fell/i-fell-1-800.webp",
+    "visible": true,
+    "videos": [
+      {
+        "title": "I Fell For An Investment Scam: Here's How They Got Me",
+        "embedUrl": "https://www.youtube.com/embed/QMt3EdPC7-Q",
+        "description": "A first-person scam story that follows one victim from online trust to devastating loss, making the mechanics of a pig-butchering scheme feel personal, legible, and urgently real.",
+        "uploadDate": "2022-10-25T06:19:10-07:00"
+      },
+      {
+        "title": "I Fell For A Love Scam: How They Made It Seem So Real",
+        "embedUrl": "https://www.youtube.com/embed/bzWprvJyzZs",
+        "description": "Framed through a romance-led con, this episode shows how intimacy, secrecy, and future planning became the engine of financial fraud, giving scam psychology an unusually human face.",
+        "uploadDate": "2022-10-21T05:30:12-07:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA Insider | Scam Series",
+      "thumbnail": "/assets/videography/i-fell/i-fell-1-800.webp",
+      "previewImages": [
+        "/assets/videography/i-fell/i-fell-1-800.webp",
+        "/assets/videography/i-fell/i-fell-2-800.webp"
+      ]
     }
   },
   {
@@ -489,151 +746,6 @@
   },
   {
     "type": "video",
-    "slug": "lion-dancers",
-    "title": "CNA Insider | Gen Z Lion Dancers",
-    "description": "Documentary featuring lion dancers and their cultural significance.",
-    "longDescription": "A short documentary exploring the art and tradition of lion dancing in Singapore. The film delves into the history, techniques, and cultural importance of this vibrant performance art.",
-    "heading": "Co-Producer | Director | Videographer",
-    "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/videography/lion-dancers/lion-dancers-800.webp",
-    "visible": true,
-    "videos": [
-      {
-        "title": "Gen Z Lion Dancers Of TikTok Fame: Is Passion Enough?",
-        "embedUrl": "https://www.youtube.com/embed/k_FZwxEskO4",
-        "description": "A character-led documentary about young lion dancers balancing viral attention, demanding physical training, and the question of whether cultural passion can sustain adult life.",
-        "uploadDate": "2023-01-01T00:00:00+08:00"
-      }
-    ],
-    "portfolioCard": {
-      "cardTitle": "CNA Insider | Gen Z Lion Dancers",
-      "thumbnail": "/assets/videography/lion-dancers/lion-dancers-800.webp"
-    }
-  },
-  {
-    "type": "video",
-    "slug": "into-the-gym",
-    "title": "Into The Gym | Johnson Health Tech Web Series",
-    "description": "Johnson Health Tech web series pairing Kunda with athletes and creators for fitness challenges and workouts.",
-    "longDescription": "A nine-episode branded web series that turns Johnson Health Tech products into repeatable entertainment formats, pairing host Kunda with athletes, entertainers, and creators for training sessions, sports challenges, and celebrity fitness routines. Across the season, each guest brings a distinct audience and skill set, helping the brand reach both hardcore fitness fans and casual lifestyle viewers.\n\nJinee served as executive producer.",
-    "heading": "Executive Producer",
-    "location": "📍 Taiwan",
-    "ogImage": "https://jineechen.com/assets/videography/into-the-gym/into-the-gym-1-800.webp",
-    "visible": true,
-    "videos": [
-      {
-        "title": "坤達對決世界球后戴資穎，看小戴挑戰100秒20宮格羽球準度挑戰！【 EP1 】",
-        "embedUrl": "https://www.youtube.com/embed/By-B1i4-ycM",
-        "description": "The season opener pairs host Kunda with badminton champion Tai Tzu-ying, turning a celebrity workout into a brisk challenge story built on precision, competitive tension, and world-class training habits.",
-        "uploadDate": "2020-10-02T06:00:02-07:00"
-      },
-      {
-        "title": "坤達揪Joeman健身，意外發現防綠帽神器【EP2】",
-        "embedUrl": "https://www.youtube.com/embed/GMptm0xWmDE",
-        "description": "A studio visit with Joeman mixes creator banter and fast-burn coaching, showing how the series can fold influencer culture and practical fitness tips into one brand-friendly format.",
-        "uploadDate": "2020-10-09T06:00:04-07:00"
-      },
-      {
-        "title": "坤達揪 法國人酷KU健身，進階版炸裂胸肌訓練。KU：竟然有這種方法？！【EP3】feat.酷的夢",
-        "embedUrl": "https://www.youtube.com/embed/VWjZghxpRIQ",
-        "description": "This episode teams Kunda with French creator KU for an advanced chest workout, then widens into food and lifestyle beats that keep the branded fitness format playful rather than repetitive.",
-        "uploadDate": "2020-10-16T06:00:09-07:00"
-      },
-      {
-        "title": "袁艾菲為金鐘獻上深V裸背，坤達以美背三式相助艾菲【EP4】",
-        "embedUrl": "https://www.youtube.com/embed/2Edw6oepr4Q",
-        "description": "A home-visit episode with Yuan Ai-fei blends cooking, comedy, and targeted back training, framing the workout around a real appearance goal instead of generic exercise advice.",
-        "uploadDate": "2020-10-23T06:00:01-07:00"
-      },
-      {
-        "title": "每朝女神張景嵐性感報到！獨家小蠻腰健身菜單，坤達:「我們可以偷偷的⋯」【EP5】",
-        "embedUrl": "https://www.youtube.com/embed/euwdFe45FCo",
-        "description": "With Zhang Ching-lan, the series leans into playful chemistry, combat-style cardio, and a defined ab routine, weaving product features into the episode without breaking the entertainment flow.",
-        "uploadDate": "2020-10-30T06:00:17-07:00"
-      },
-      {
-        "title": "全壘打大賽！坤達蔡哥拚盡尊嚴，努力揮擊。陳晨威：讓你們拿鋁棒【EP6】",
-        "embedUrl": "https://www.youtube.com/embed/Uw2HHGLbybg",
-        "description": "Shot at a pro ballpark, this baseball-themed episode scales the format up with stadium access, sports-star competition, and locker-room variety energy while keeping the workout challenge at its core.",
-        "uploadDate": "2020-11-06T05:00:11-08:00"
-      },
-      {
-        "title": "雙生鬥士 Yin&Yei 籃壇帥度破表，籃球一哥 坤達表情逐漸母湯！【EP7】",
-        "embedUrl": "https://www.youtube.com/embed/ydZs8oBhySQ",
-        "description": "Twin basketball players Yin and Yei bring a strong guest hook to an episode that balances on-court games, core training, and music-driven class moments that make digital fitness feel social and fun.",
-        "uploadDate": "2020-11-13T05:00:13-08:00"
-      },
-      {
-        "title": "UFC八角鐵籠的終極格鬥賽？ 夢多直誇天才！坤達：我有看第一神拳？！【EP8】",
-        "embedUrl": "https://www.youtube.com/embed/KhUUDk4-4bs",
-        "description": "An octagon-style challenge with Dreamondo pushes the series into fight-sports spectacle, using humor and host vulnerability to make a punishing workout feel human, accessible, and highly watchable.",
-        "uploadDate": "2020-11-20T05:00:07-08:00"
-      },
-      {
-        "title": "坤達使出回憶殺！Johnson@mirror眾星開箱體驗！【EP9】坤達一打十超精彩健身魔鏡開箱合集",
-        "embedUrl": "https://www.youtube.com/embed/Tftq_1S8FYw",
-        "description": "The season recap repackages standout guests, mirror functions, and challenge highlights into a campaign-friendly supercut that extends the series' value well beyond its weekly release.",
-        "uploadDate": "2020-11-27T05:00:30-08:00"
-      }
-    ],
-    "portfolioCard": {
-      "cardTitle": "Johnson Health Tech",
-      "thumbnail": "/assets/videography/into-the-gym/into-the-gym-1-800.webp",
-      "previewImages": [
-        "/assets/videography/into-the-gym/into-the-gym-1-800.webp",
-        "/assets/videography/into-the-gym/into-the-gym-2-800.webp",
-        "/assets/videography/into-the-gym/into-the-gym-3-800.webp"
-      ]
-    }
-  },
-  {
-    "type": "video",
-    "slug": "lunch-with-us",
-    "title": "CNA Insider | Lunch With Us",
-    "description": "CNA Insider food series exploring affordable, character-rich meals across Singapore and Taipei.",
-    "longDescription": "This four-part food series uses affordable meals as a way into local culture, from Tekka's Indian-Pakistani hawker fare to Taiwanese bentos, budget fast-food counters, and a karaoke cab driver's comfort-food circuit. Each episode is built around a guide with a strong point of view, keeping the storytelling personal, useful, and location-specific.\n\nJinee produced, directed, and shot the series.",
-    "heading": "Producer | Director | Videographer",
-    "location": "📍 Singapore & Taiwan",
-    "ogImage": "https://jineechen.com/assets/videography/lunch-with-us/lunch-with-us-1-800.webp",
-    "visible": true,
-    "videos": [
-      {
-        "title": "Budget 'Fast-Food' Hopping In Taiwan: From Vegetarian to Pork Cheap Eats | Taipei",
-        "embedUrl": "https://www.youtube.com/embed/Y1St1wL66l4",
-        "description": "A budget food crawl through Banqiao turns Taiwanese fast food into a neighborhood story, with local guide Matt Chen connecting low prices, long-simmered craft, and everyday eating habits.",
-        "uploadDate": "2025-05-29T21:00:43-07:00"
-      },
-      {
-        "title": "S$6 Michelin Meals at Indian-Pakistani Hawker Stall in Tekka | Singapore",
-        "embedUrl": "https://www.youtube.com/embed/C-vwkA4zGco",
-        "description": "Guided by a chef through Tekka Centre, this episode folds heritage, affordability, and regional nuance into one lunch stop, ending at a Michelin-recognised stall known for S$6 Indian-Pakistani meals.",
-        "uploadDate": "2025-06-04T21:00:28-07:00"
-      },
-      {
-        "title": "Taiwan-style Bento Meals With Old-School Touch & Retro Vibe | Taipei",
-        "embedUrl": "https://www.youtube.com/embed/uN64AgpxHAU",
-        "description": "Writers lead this retro Taipei bento story through memory, decor, and food history, turning a simple lunch into a place-based portrait of old-school Taiwanese everyday culture.",
-        "uploadDate": "2025-05-30T21:01:04-07:00"
-      },
-      {
-        "title": "Taiwan's Karaoke Cabbie Takes Us To Comfort Food 'Club' | Taipei",
-        "embedUrl": "https://www.youtube.com/embed/wX9KKu0cpOo",
-        "description": "A karaoke-cab driver makes this Taipei lunch story character-first from the start, using personality and subculture to lead viewers into a long-running drivers' canteen and its comfort-food ritual.",
-        "uploadDate": "2025-05-29T21:01:09-07:00"
-      }
-    ],
-    "portfolioCard": {
-      "cardTitle": "CNA Insider | Lunch With Us",
-      "thumbnail": "/assets/videography/lunch-with-us/lunch-with-us-1-800.webp",
-      "previewImages": [
-        "/assets/videography/lunch-with-us/lunch-with-us-1-800.webp",
-        "/assets/videography/lunch-with-us/lunch-with-us-2-800.webp",
-        "/assets/videography/lunch-with-us/lunch-with-us-3-800.webp"
-      ]
-    }
-  },
-  {
-    "type": "video",
     "slug": "marigold-ad",
     "title": "Marigold | Commercial",
     "description": "Commercial for Marigold.",
@@ -688,117 +800,5 @@
         "uploadDate": "2023-01-01T00:00:00+08:00"
       }
     ]
-  },
-  {
-    "type": "video",
-    "slug": "scdf-project",
-    "title": "CNA Insider | SCDF 995 Calls",
-    "description": "Two-part CNA Insider series embedded with SCDF emergency crews, from 995 calls to frontline ambulance response.",
-    "longDescription": "This two-part documentary goes inside Singapore's emergency medical system, following 995 call takers, dispatchers, paramedics, and ambulance crews under pressure. The reporting moves between operational detail and emotional reality, covering abusive callers, blocked ambulances, and the split-second decisions that shape patient outcomes.\n\nJinee co-produced, directed, and shot the series.",
-    "heading": "Co-Producer | Director | Videographer",
-    "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/videography/scdf-project/scdf-project-1-800.webp",
-    "visible": true,
-    "videos": [
-      {
-        "title": "SCDF Officers React To Abusive Calls, Emotional Cases And Ambulance-Blocking Drivers",
-        "embedUrl": "https://www.youtube.com/embed/CHc3Gd4Y4VM",
-        "description": "Told through EMS officers' reflections, this companion piece shows how abuse, blocked ambulances, and emotional cases complicate emergency work long after the sirens fade.",
-        "uploadDate": "2024-12-05T05:00:20-08:00"
-      },
-      {
-        "title": "On Call With Singapore's SCDF Emergency Medical Services: When Minutes Can Mean Life Or Death",
-        "embedUrl": "https://www.youtube.com/embed/9PjWLStxWCc",
-        "description": "With embedded access to call-takers, dispatchers, paramedics, and hospital staff, the film turns emergency response into a systems story where every minute carries human consequence.",
-        "uploadDate": "2024-03-07T05:00:06-08:00"
-      }
-    ],
-    "portfolioCard": {
-      "cardTitle": "CNA Insider | SCDF 995 Calls",
-      "thumbnail": "/assets/videography/scdf-project/scdf-project-1-800.webp",
-      "previewImages": [
-        "/assets/videography/scdf-project/scdf-project-1-800.webp",
-        "/assets/videography/scdf-project/scdf-project-2-800.webp"
-      ]
-    }
-  },
-  {
-    "type": "video",
-    "slug": "i-fell",
-    "title": "CNA Insider | Scam Series",
-    "description": "Two-part CNA Insider scam series told through survivors of investment and romance fraud.",
-    "longDescription": "This two-part documentary series reconstructs how online scams gain trust before taking money, using first-person accounts from victims of investment and romance schemes. Each episode stays close to the subject's decision-making, showing the emotional manipulation, warning signs, and aftermath that make these cases resonate beyond the headline.\n\nJinee produced, directed, and shot the series.",
-    "heading": "Producer | Director | Videographer",
-    "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/videography/i-fell/i-fell-1-800.webp",
-    "visible": true,
-    "videos": [
-      {
-        "title": "I Fell For An Investment Scam: Here's How They Got Me",
-        "embedUrl": "https://www.youtube.com/embed/QMt3EdPC7-Q",
-        "description": "A first-person scam story that follows one victim from online trust to devastating loss, making the mechanics of a pig-butchering scheme feel personal, legible, and urgently real.",
-        "uploadDate": "2022-10-25T06:19:10-07:00"
-      },
-      {
-        "title": "I Fell For A Love Scam: How They Made It Seem So Real",
-        "embedUrl": "https://www.youtube.com/embed/bzWprvJyzZs",
-        "description": "Framed through a romance-led con, this episode shows how intimacy, secrecy, and future planning became the engine of financial fraud, giving scam psychology an unusually human face.",
-        "uploadDate": "2022-10-21T05:30:12-07:00"
-      }
-    ],
-    "portfolioCard": {
-      "cardTitle": "CNA Insider | Scam Series",
-      "thumbnail": "/assets/videography/i-fell/i-fell-1-800.webp",
-      "previewImages": [
-        "/assets/videography/i-fell/i-fell-1-800.webp",
-        "/assets/videography/i-fell/i-fell-2-800.webp"
-      ]
-    }
-  },
-  {
-    "type": "video",
-    "slug": "work-in-sgp",
-    "title": "CNA Insider | MOM",
-    "description": "CNA Insider profile of a robotics engineer building a career and community in Singapore.",
-    "longDescription": "This documentary profiles a Thai-born robotics engineer who built his career in Singapore and now uses that experience to mentor and give back. The story combines professional ambition with questions of belonging, contribution, and what makes a place feel worth staying in.\n\nJinee produced, directed, and shot the film.",
-    "heading": "Producer | Director | Videographer",
-    "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/videography/work-in-sgp/work-in-sgp-800.webp",
-    "visible": true,
-    "videos": [
-      {
-        "title": "I Build Robots For A Living. Here's Why I Chose To Work In Singapore & How I'm Giving Back",
-        "embedUrl": "https://www.youtube.com/embed/asVm61iRhmA",
-        "description": "This profile follows Thai robotics engineer Krittin Kawkeeree as he builds autonomous systems and mentors local talent, linking one career story to bigger questions of belonging, opportunity, and contribution in Singapore.",
-        "uploadDate": "2024-11-14T05:00:03-08:00"
-      }
-    ],
-    "portfolioCard": {
-      "cardTitle": "CNA Insider | MOM",
-      "thumbnail": "/assets/videography/work-in-sgp/work-in-sgp-800.webp"
-    }
-  },
-  {
-    "type": "video",
-    "slug": "stay-at-home-dad",
-    "title": "CNA Insider | TV Spin Offs",
-    "description": "CNA Insider documentary about a Singapore father rebuilding life after 14 years as a stay-at-home caregiver.",
-    "longDescription": "This documentary follows a father who spent 14 years as the primary caregiver for his son and is now trying to rebuild an identity outside the home. The film looks at masculinity, sacrifice, and the emotional cost of putting one role on hold for so long.\n\nJinee produced, directed, shot, and edited the film.",
-    "heading": "Producer | Director | Videographer | Video Editor",
-    "location": "📍 Singapore",
-    "ogImage": "https://jineechen.com/assets/videography/stay-at-home-dad/stay-at-home-dad-800.webp",
-    "visible": true,
-    "videos": [
-      {
-        "title": "I Spent 14 Years As A Stay-At-Home Dad For My Son. Here's Why It's Time To Reclaim My Life",
-        "embedUrl": "https://www.youtube.com/embed/8nRIG_hO_PU",
-        "description": "A candid portrait of a father rebuilding life after 14 years of caregiving, using one family's story to explore masculinity, sacrifice, isolation, and the slow work of reclaiming selfhood.",
-        "uploadDate": "2024-06-15T06:00:07-07:00"
-      }
-    ],
-    "portfolioCard": {
-      "cardTitle": "CNA Insider | TV Spin Offs",
-      "thumbnail": "/assets/videography/stay-at-home-dad/stay-at-home-dad-800.webp"
-    }
   }
 ]
