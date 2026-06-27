@@ -25,17 +25,26 @@ export const REVEAL_RESCAN_LONG_MS = 600;
 export const GALLERY_REVEAL_RESCAN_DELAY_MS = 400;
 
 /**
- * Shared tuning for the scroll-linked reveal, used across project cards, gallery
- * images (home masonry + photography), and video rows so they all reveal with
- * the same premium feel. A low start opacity makes the fade clearly visible, and
- * a high settle offset means an element only reaches full opacity once it has
- * scrolled up out of the lower third of the viewport — not the instant it peeks
- * in at the bottom. Passed as options so the timed-reveal path (download-mode
- * gallery) keeps the default config above.
+ * Tuning for the scroll-linked reveal (passed as options so the timed-reveal
+ * path keeps the default config above). A low start opacity makes the fade
+ * clearly visible; `settleOffsetPx` is the scroll distance — measured from the
+ * element's top — over which it fades up to full opacity, so a BIGGER value =
+ * SLOWER, more visible fade.
+ *
+ * Two variants: video rows are large and reveal one at a time, so a shorter
+ * settle reads well; grids (project cards + gallery images) have many small
+ * items, so a longer settle makes each item's fade slower and more noticeable.
  */
-export const SCROLL_LINKED_REVEAL_PRESET = {
+export const VIDEO_REVEAL_PRESET = {
   startOpacity: 0.15,
   entryOffsetPx: 100,
   settleOffsetPx: 200,
+  offsetPx: 60,
+} as const;
+
+export const GRID_REVEAL_PRESET = {
+  startOpacity: 0.15,
+  entryOffsetPx: 100,
+  settleOffsetPx: 300,
   offsetPx: 60,
 } as const;

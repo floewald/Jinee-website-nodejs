@@ -2,7 +2,7 @@
 
 import { useRef, type ReactNode } from "react";
 import { useScrollLinkedReveal } from "@/hooks/useScrollLinkedReveal";
-import { SCROLL_LINKED_REVEAL_PRESET } from "@/lib/reveal-config";
+import { GRID_REVEAL_PRESET } from "@/lib/reveal-config";
 import { cx } from "@/styled-system/css";
 import { revealGrid } from "./featured-styles";
 
@@ -21,7 +21,7 @@ const REVEAL_TARGET_SELECTOR = ".project-card, .instagram-preview";
  */
 export default function RevealGrid({ children, className }: RevealGridProps) {
   const ref = useRef<HTMLDivElement>(null);
-  useScrollLinkedReveal(ref, REVEAL_TARGET_SELECTOR, SCROLL_LINKED_REVEAL_PRESET);
+  useScrollLinkedReveal(ref, REVEAL_TARGET_SELECTOR, GRID_REVEAL_PRESET);
 
   return (
     <div ref={ref} className={cx(revealGrid, className)}>

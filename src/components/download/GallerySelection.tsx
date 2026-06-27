@@ -7,7 +7,7 @@ import { cx } from "@/styled-system/css";
 import { settleScrollLinkedReveal } from "@/lib/reveal-helpers";
 import { isActuallyVisibleInViewport } from "@/lib/reveal-state";
 import { useScrollLinkedReveal } from "@/hooks/useScrollLinkedReveal";
-import { SCROLL_LINKED_REVEAL_PRESET } from "@/lib/reveal-config";
+import { GRID_REVEAL_PRESET } from "@/lib/reveal-config";
 import type { GalleryImage } from "@/components/gallery/Lightbox";
 import {
   projectGallery,
@@ -52,7 +52,7 @@ export default function GallerySelection({
   // photography images reveal identically. The selection/checkbox UI is the only
   // thing that differs between the two galleries.
   useScrollLinkedReveal(containerRef, ".gallery-item", {
-    ...SCROLL_LINKED_REVEAL_PRESET,
+    ...GRID_REVEAL_PRESET,
     resetKey: revealKey,
   });
 

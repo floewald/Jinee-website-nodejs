@@ -5,7 +5,7 @@ import Image from "next/image";
 import { css, cx } from "@/styled-system/css";
 import { useIntersection } from "@/hooks/useIntersection";
 import { useScrollLinkedReveal } from "@/hooks/useScrollLinkedReveal";
-import { SCROLL_LINKED_REVEAL_PRESET } from "@/lib/reveal-config";
+import { VIDEO_REVEAL_PRESET } from "@/lib/reveal-config";
 import { scrollLinkedRevealSurface } from "@/components/portfolio/featured-styles";
 import { getYouTubeThumbnailUrl, getYouTubeVideoId } from "@/lib/youtube";
 import type { VideoItem } from "@/types/portfolio";
@@ -293,11 +293,11 @@ interface VideoPlayerProps {
 
 export default function VideoPlayer({ videos }: VideoPlayerProps) {
   const stackRef = useRef<HTMLDivElement>(null);
-  // Shared scroll-linked reveal — same engine AND tuning as project cards and
-  // gallery images (SCROLL_LINKED_REVEAL_PRESET). Runs in a passive effect and
+  // Shared scroll-linked reveal engine (same as project cards and gallery
+  // images) with the video-specific tuning. Runs in a passive effect and
   // re-measures on scroll, so it survives App Router soft navigations and can
   // never leave a row stuck hidden.
-  useScrollLinkedReveal(stackRef, ".video-episode-row", SCROLL_LINKED_REVEAL_PRESET);
+  useScrollLinkedReveal(stackRef, ".video-episode-row", VIDEO_REVEAL_PRESET);
 
   return (
     <div ref={stackRef} className={cx(playerStack, "video-player")}>
