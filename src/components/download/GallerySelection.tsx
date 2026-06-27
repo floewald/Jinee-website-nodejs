@@ -4,11 +4,10 @@ import { useRef } from "react";
 import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { cx } from "@/styled-system/css";
-import {
-  settleRevealElement,
-} from "@/lib/reveal-helpers";
+import { settleScrollLinkedReveal } from "@/lib/reveal-helpers";
 import { isActuallyVisibleInViewport } from "@/lib/reveal-state";
-import { useLoadedGalleryReveal } from "@/hooks/useLoadedGalleryReveal";
+import { useScrollLinkedReveal } from "@/hooks/useScrollLinkedReveal";
+import { SCROLL_LINKED_REVEAL_PRESET } from "@/lib/reveal-config";
 import type { GalleryImage } from "@/components/gallery/Lightbox";
 import {
   projectGallery,
@@ -49,14 +48,20 @@ export default function GallerySelection({
   const revealKey = `selection:masonry:${images
     .map((image) => image.srcFull ?? image.src)
     .join("|")}`;
-  useLoadedGalleryReveal(containerRef, ".gallery-item img", revealKey);
+  // Same scroll-linked reveal (and tuning) as the non-download gallery so all
+  // photography images reveal identically. The selection/checkbox UI is the only
+  // thing that differs between the two galleries.
+  useScrollLinkedReveal(containerRef, ".gallery-item", {
+    ...SCROLL_LINKED_REVEAL_PRESET,
+    resetKey: revealKey,
+  });
 
   function handleImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
-    // Load is recovery-only. If the tile is already visible, settle it; if it
-    // is merely near the viewport, keep it eligible for the observer entry path.
+    // Load is recovery-only: if the tile is already visible, settle it so a late
+    // image decode never leaves it mid-fade; otherwise leave it to the observer.
     const item = e.currentTarget.closest(".gallery-item");
     if (item instanceof HTMLElement && isActuallyVisibleInViewport(item)) {
-      settleRevealElement(item);
+      settleScrollLinkedReveal(item);
     }
   }
 

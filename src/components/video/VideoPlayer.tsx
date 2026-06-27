@@ -1,9 +1,12 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { css, cx } from "@/styled-system/css";
 import { useIntersection } from "@/hooks/useIntersection";
+import { useScrollLinkedReveal } from "@/hooks/useScrollLinkedReveal";
+import { SCROLL_LINKED_REVEAL_PRESET } from "@/lib/reveal-config";
+import { scrollLinkedRevealSurface } from "@/components/portfolio/featured-styles";
 import { getYouTubeThumbnailUrl, getYouTubeVideoId } from "@/lib/youtube";
 import type { VideoItem } from "@/types/portfolio";
 
@@ -18,6 +21,9 @@ const episodeRow = css({
   gridTemplateColumns: "1fr",
   rowGap: "1rem",
   alignItems: "start",
+  // Fail-open scroll-linked reveal surface (shared with grid tiles / project
+  // cards): visible by default, the hook only drives the `--reveal-*` vars.
+  ...scrollLinkedRevealSurface,
   "@media (min-width: 900px)": {
     gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1.2fr)",
     columnGap: "2rem",
@@ -245,74 +251,18 @@ function LazyVideoEmbed({ video, eager = false }: VideoEmbedProps) {
 
 interface EpisodeRowProps {
   video: VideoItem;
-  index: number;
   eager: boolean;
   layout: "media-left" | "media-right";
 }
 
-function EpisodeRow({ video, index, eager, layout }: EpisodeRowProps) {
-  const rowRef = useRef<HTMLDivElement>(null);
+function EpisodeRow({ video, eager, layout }: EpisodeRowProps) {
   const paragraphs = toParagraphs(video.description);
 
-  // useLayoutEffect so the attribute lands before paint — prevents a frame of
-  // visible content briefly hiding when JS marks the row below-fold.
-  useLayoutEffect(() => {
-    const el = rowRef.current;
-    if (!el) return;
-
-    // Reduced-motion users skip the whole reveal mechanism — fail-open default
-    // (opacity 1, no animation) covers them without the opacity 0 flash that
-    // the global animation-duration reset can't suppress.
-    if (
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return;
-    }
-
-    const rect = el.getBoundingClientRect();
-    const inViewport =
-      rect.top < window.innerHeight && rect.bottom > 0;
-
-    // Row already visible (initial load, refresh-with-scroll-position, bfcache
-    // restore, mid-scroll nav): leave at fail-open default. scrollY is *not*
-    // part of the check — that re-introduced the late-fade flicker bug.
-    if (inViewport) return;
-
-    el.setAttribute("data-should-reveal", "hidden");
-    el.style.opacity = "0";
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) {
-          el.setAttribute("data-should-reveal", "animate");
-          if (typeof el.animate === "function") {
-            el.animate(
-              [
-                { opacity: 0, transform: "translateY(12px)" },
-                { opacity: 1, transform: "translateY(0)" },
-              ],
-              {
-                duration: 600,
-                easing: "ease-out",
-                fill: "both",
-                delay: index * 80,
-              }
-            );
-          }
-          el.style.opacity = "1";
-          el.style.transform = "translateY(0)";
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "80px" }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [index]);
-
+  // Reveal is owned by the shared scroll-linked system (see VideoPlayer below).
+  // The row is fail-open: visible by default via the `--reveal-opacity` CSS var,
+  // so a soft navigation can never leave it stuck hidden.
   return (
     <div
-      ref={rowRef}
       className={cx(episodeRow, "video-episode-row")}
       data-episode-layout={layout}
     >
@@ -342,13 +292,19 @@ interface VideoPlayerProps {
 }
 
 export default function VideoPlayer({ videos }: VideoPlayerProps) {
+  const stackRef = useRef<HTMLDivElement>(null);
+  // Shared scroll-linked reveal — same engine AND tuning as project cards and
+  // gallery images (SCROLL_LINKED_REVEAL_PRESET). Runs in a passive effect and
+  // re-measures on scroll, so it survives App Router soft navigations and can
+  // never leave a row stuck hidden.
+  useScrollLinkedReveal(stackRef, ".video-episode-row", SCROLL_LINKED_REVEAL_PRESET);
+
   return (
-    <div className={cx(playerStack, "video-player")}>
+    <div ref={stackRef} className={cx(playerStack, "video-player")}>
       {videos.map((v, i) => (
         <EpisodeRow
           key={i}
           video={v}
-          index={i}
           eager={i < 2}
           layout={i % 2 === 0 ? "media-left" : "media-right"}
         />

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { cx } from "@/styled-system/css";
 import { useScrollLinkedReveal } from "@/hooks/useScrollLinkedReveal";
+import { SCROLL_LINKED_REVEAL_PRESET } from "@/lib/reveal-config";
 import { settleScrollLinkedReveal } from "@/lib/reveal-helpers";
 import { isActuallyVisibleInViewport } from "@/lib/reveal-state";
 import type { GalleryImage } from "./Lightbox";
@@ -42,7 +43,10 @@ export default function GalleryGrid({
   const revealKey = `${useColumnsLayout ? "columns" : "masonry"}:${images
     .map((image) => image.srcFull ?? image.src)
     .join("|")}`;
-  useScrollLinkedReveal(containerRef, ".gallery-item", { resetKey: revealKey });
+  useScrollLinkedReveal(containerRef, ".gallery-item", {
+    ...SCROLL_LINKED_REVEAL_PRESET,
+    resetKey: revealKey,
+  });
 
   if (images.length === 0) return null;
 

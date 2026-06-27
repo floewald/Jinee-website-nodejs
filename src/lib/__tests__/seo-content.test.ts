@@ -58,27 +58,27 @@ describe("video portfolio card ordering", () => {
   it("order matches lineup defined in videography.json", () => {
     const expectedOrder = [
       "stuck-low-pay",
-      "singer-jasmin-sokko",
-      "re-old-times",
-      "health-wang-zhen",
-      "social-media-addiction",
-      "blind-kitchen-chefs",
       "father-son-suhaimi",
       "7-days-archery",
+      "singer-jasmin-sokko",
+      "health-wang-zhen",
+      "re-old-times",
+      "scdf-project",
+      "blind-kitchen-chefs",
+      "lunch-with-us",
       "fertility-rate-sgp",
+      "social-media-addiction",
+      "into-the-gym",
       "uniqlo",
       "living-with-chronic-pain",
+      "work-in-sgp",
+      "stay-at-home-dad",
+      "lion-dancers",
+      "i-fell",
       "mark-your-calendar",
       "red-dot-detectives",
       "i-eat-therefore",
       "guardians-vietnam",
-      "lion-dancers",
-      "into-the-gym",
-      "lunch-with-us",
-      "scdf-project",
-      "i-fell",
-      "work-in-sgp",
-      "stay-at-home-dad",
     ];
     const actualOrder = cardProjects.map((p) => p.slug);
     expect(actualOrder).toEqual(expectedOrder);
@@ -124,14 +124,15 @@ describe("video projects JSON-LD data completeness", () => {
 describe("fertility-rate-sgp Frontline series", () => {
   const project = videoProjects.find((p) => p.slug === "fertility-rate-sgp");
 
-  it("includes both Frontline episodes in the series", () => {
+  it("includes all Frontline episodes in the series", () => {
     expect(project?.videos.map((v) => v.embedUrl)).toEqual([
       "https://www.youtube.com/embed/p5xyxnfQVlk",
       "https://www.youtube.com/embed/Up8c6SZ5s-w",
+      "https://www.youtube.com/embed/nBP1A1oEq9k",
     ]);
   });
 
-  it("uses a concise series description and two generated card preview images", () => {
+  it("uses a concise series description and three generated card preview images", () => {
     expect(project?.description.length).toBeLessThanOrEqual(160);
     expect(project?.description).toContain("Frontline");
     expect(project?.portfolioCard?.thumbnail).toBe(
@@ -140,6 +141,7 @@ describe("fertility-rate-sgp Frontline series", () => {
     expect(getProjectSlideshowImages("fertility-rate-sgp", "video").map((image) => image.src)).toEqual([
       "/assets/videography/fertility-rate-sgp/fertility-rate-sgp-1-800.webp",
       "/assets/videography/fertility-rate-sgp/fertility-rate-sgp-2-800.webp",
+      "/assets/videography/fertility-rate-sgp/fertility-rate-sgp-3-800.webp",
     ]);
   });
 });

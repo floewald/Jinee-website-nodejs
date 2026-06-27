@@ -49,23 +49,22 @@ const videos: VideoItem[] = [
   },
 ];
 
-// Helper: stub getBoundingClientRect on every HTMLDivElement so tiles register
-// as being in or out of the viewport during useLayoutEffect.
+// Helper: stub getBoundingClientRect on every HTMLDivElement so rows register
+// as being in or out of the viewport for the scroll-linked reveal.
 function stubRect(rect: { top: number; bottom: number }) {
-  const spy = jest
+  return jest
     .spyOn(HTMLDivElement.prototype, "getBoundingClientRect")
     .mockReturnValue({
       top: rect.top,
       bottom: rect.bottom,
       left: 0,
-      right: 0,
-      width: 0,
+      right: 100,
+      width: 100,
       height: rect.bottom - rect.top,
       x: 0,
       y: rect.top,
       toJSON: () => ({}),
     } as DOMRect);
-  return spy;
 }
 
 describe("VideoPlayer", () => {
@@ -171,79 +170,48 @@ describe("VideoPlayer", () => {
     expect(third.style.backgroundImage).toBe("");
   });
 
-  it("omits data-should-reveal when tile is above the fold on initial load", () => {
-    stubRect({ top: 100, bottom: 300 });
-    render(<VideoPlayer videos={[videos[0]]} />);
-    const item = document.querySelector(".video-episode-row") as HTMLElement;
-    expect(item).not.toBeNull();
-    expect(item.hasAttribute("data-should-reveal")).toBe(false);
+  it("is fail-open: never hard-hides a row with inline opacity on mount", () => {
+    // Reveal is the shared scroll-linked system: rows are visible by default
+    // (CSS `--reveal-opacity` resolves to 1) and JS never sets inline
+    // opacity:0, so a soft navigation can't leave a row stuck invisible.
+    render(<VideoPlayer videos={videos} />);
+    const rows = document.querySelectorAll<HTMLElement>(".video-episode-row");
+    expect(rows).toHaveLength(2);
+    rows.forEach((row) => {
+      expect(row.style.opacity).toBe("");
+      expect(row.hasAttribute("data-should-reveal")).toBe(false);
+    });
   });
 
-  it("marks below-fold rows as hidden when they mount offscreen", () => {
-    // window.innerHeight is 768 in jsdom; top > that means below the fold.
-    stubRect({ top: 1200, bottom: 1400 });
-    render(<VideoPlayer videos={[videos[0]]} />);
-    const item = document.querySelector(".video-episode-row") as HTMLElement;
-    expect(item).not.toBeNull();
-    expect(item.getAttribute("data-should-reveal")).toBe("hidden");
-  });
-
-  it("flips data-should-reveal to 'animate' and disconnects when the observer fires", () => {
-    stubRect({ top: 1200, bottom: 1400 });
-    render(<VideoPlayer videos={[videos[0]]} />);
-    const item = document.querySelector(".video-episode-row") as HTMLElement;
-    expect(item.getAttribute("data-should-reveal")).toBe("hidden");
+  it("attaches one scroll-linked reveal observer that watches every row", () => {
+    render(<VideoPlayer videos={videos} />);
+    const rows = document.querySelectorAll(".video-episode-row");
+    // One shared observer watches all rows in the stack.
     expect(ioInstances).toHaveLength(1);
+    expect(ioInstances[0].observe).toHaveBeenCalledTimes(rows.length);
+  });
+
+  it("settles a row to full opacity once the observer reports it on-screen", () => {
+    // Soft-nav recovery: even if a row first measured off-screen, once it is
+    // reported intersecting/visible the shared hook settles it to full opacity.
+    stubRect({ top: 100, bottom: 300 }); // on-screen
+    render(<VideoPlayer videos={[videos[0]]} />);
+    const item = document.querySelector(".video-episode-row") as HTMLElement;
+    expect(item.getAttribute("data-reveal-state")).toBeNull();
 
     act(() => {
       ioInstances[0].callback(
-        [{ isIntersecting: true } as IntersectionObserverEntry],
+        [
+          {
+            target: item,
+            isIntersecting: true,
+          } as unknown as IntersectionObserverEntry,
+        ],
         {} as IntersectionObserver
       );
     });
 
-    expect(item.getAttribute("data-should-reveal")).toBe("animate");
-    expect(ioInstances[0].disconnect).toHaveBeenCalled();
-  });
-
-  it("does not hide an in-viewport tile even when the page has been scrolled (bfcache / refresh)", () => {
-    // Reproduces the regression class fixed by commits bb60447 / d2d29fd:
-    // a tile that is already visible must never be hidden by JS after paint.
-    Object.defineProperty(window, "scrollY", { configurable: true, value: 400 });
-    stubRect({ top: 100, bottom: 300 });
-    render(<VideoPlayer videos={[videos[0]]} />);
-    const item = document.querySelector(".video-episode-row") as HTMLElement;
-    expect(item.hasAttribute("data-should-reveal")).toBe(false);
-  });
-
-  it("skips the reveal mechanism for reduced-motion users", () => {
-    // jsdom doesn't define matchMedia; define it just for this test so the
-    // reduced-motion branch in useLayoutEffect can read it.
-    Object.defineProperty(window, "matchMedia", {
-      configurable: true,
-      writable: true,
-      value: (query: string) => ({
-        matches: query === "(prefers-reduced-motion: reduce)",
-        media: query,
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
-        onchange: null,
-        dispatchEvent: jest.fn(() => true),
-      }),
-    });
-    // Below-fold tile that would normally get data-should-reveal="hidden".
-    stubRect({ top: 1200, bottom: 1400 });
-    render(<VideoPlayer videos={[videos[0]]} />);
-    const item = document.querySelector(".video-episode-row") as HTMLElement;
-    expect(item.hasAttribute("data-should-reveal")).toBe(false);
-    // Cleanup: remove matchMedia so other tests see the default (undefined).
-    Object.defineProperty(window, "matchMedia", {
-      configurable: true,
-      writable: true,
-      value: undefined,
-    });
+    expect(item.getAttribute("data-reveal-state")).toBe("settled");
   });
 
   it("eager-renders the first two iframes even when the intersection gate is closed", () => {

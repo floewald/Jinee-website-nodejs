@@ -12,5 +12,12 @@
     "md": "fertility-rate-sgp-2-800.webp",
     "lg": "fertility-rate-sgp-2-1600.webp",
     "original": null
+  },
+  {
+    "basename": "fertility-rate-sgp-3",
+    "thumb": "fertility-rate-sgp-3-320.webp",
+    "md": "fertility-rate-sgp-3-800.webp",
+    "lg": "fertility-rate-sgp-3-1600.webp",
+    "original": null
   }
 ]

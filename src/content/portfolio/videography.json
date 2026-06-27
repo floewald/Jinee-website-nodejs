@@ -343,11 +343,25 @@
           "It broadens the series from fertility decisions to the unequal care burdens shaping family life in Singapore."
         ],
         "uploadDate": "2026-05-30T19:30:27-07:00"
+      },
+      {
+        "title": "前线追踪 | 假按摩，真色情？ 前私会党候选帮主揭乱象内幕",
+        "embedUrl": "https://www.youtube.com/embed/nBP1A1oEq9k",
+        "description": [
+          "An investigative 前线追踪 report on how nominee licence holders, borrowed TCM credentials, and 'front-shop, back-room' setups let some massage parlours mask an illegal vice trade in Singapore.",
+          "Massage-chain owner Dickson Mah, TCM practitioner Heng Buck Teck, and former secret-society figure Wong Kee Soon expose the profit-driven ecosystem behind the racket as Singapore tightens its rules."
+        ],
+        "uploadDate": "2026-06-20T16:30:27-07:00"
       }
     ],
     "portfolioCard": {
       "cardTitle": "8world | Frontline",
-      "thumbnail": "/assets/videography/fertility-rate-sgp/fertility-rate-sgp-1-800.webp"
+      "thumbnail": "/assets/videography/fertility-rate-sgp/fertility-rate-sgp-1-800.webp",
+      "previewImages": [
+        "/assets/videography/fertility-rate-sgp/fertility-rate-sgp-1-800.webp",
+        "/assets/videography/fertility-rate-sgp/fertility-rate-sgp-2-800.webp",
+        "/assets/videography/fertility-rate-sgp/fertility-rate-sgp-3-800.webp"
+      ]
     }
   },
   {

@@ -38,6 +38,16 @@ export function useScrollLinkedReveal(
     const root = ref.current;
     if (!root) return;
 
+    // Reduced-motion users keep the fail-open default (CSS `--reveal-opacity`
+    // resolves to 1): content is fully visible and static, no scroll-linked
+    // motion is ever applied.
+    if (
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
     const items = Array.from(root.querySelectorAll<HTMLElement>(selector))
       .filter((item) => getRevealState(item) === "eligible");
     if (items.length === 0) return;
