@@ -48,9 +48,9 @@ export function useScrollLinkedReveal(
       return;
     }
 
-    const items = Array.from(root.querySelectorAll<HTMLElement>(selector))
+    const initialItems = Array.from(root.querySelectorAll<HTMLElement>(selector))
       .filter((item) => getRevealState(item) === "eligible");
-    if (items.length === 0) return;
+    if (initialItems.length === 0) return;
 
     const active = new Set<HTMLElement>();
     let rafId = 0;
@@ -123,7 +123,40 @@ export function useScrollLinkedReveal(
       }
     );
 
-    items.forEach((item) => observer.observe(item));
+    const observeItem = (item: HTMLElement) => {
+      // `observe` is idempotent, so re-observing a surviving node is safe.
+      if (getRevealState(item) === "eligible") {
+        observer.observe(item);
+      }
+    };
+
+    const observeWithin = (node: Node) => {
+      if (!(node instanceof HTMLElement)) return;
+      if (node.matches(selector)) observeItem(node);
+      node
+        .querySelectorAll<HTMLElement>(selector)
+        .forEach((item) => observeItem(item));
+    };
+
+    initialItems.forEach(observeItem);
+
+    // Layout libraries such as react-masonry-css render the default column
+    // count first, then recreate (not just reorder) tiles when they recalculate
+    // columns for the real viewport on mount. Tiles created by that second pass
+    // are brand-new DOM nodes that the initial `observe` pass never saw, so they
+    // would never reveal. Watch the subtree and observe any eligible tile that
+    // appears later. Fail-open: if MutationObserver is unavailable the base CSS
+    // still resolves `--reveal-opacity` to 1.
+    let mutationObserver: MutationObserver | null = null;
+    if (typeof MutationObserver === "function") {
+      mutationObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          mutation.addedNodes.forEach(observeWithin);
+        });
+      });
+      mutationObserver.observe(root, { childList: true, subtree: true });
+    }
+
     window.addEventListener("scroll", scheduleTick, { passive: true });
     window.addEventListener("resize", scheduleTick);
 
@@ -132,6 +165,7 @@ export function useScrollLinkedReveal(
         window.cancelAnimationFrame(rafId);
       }
       observer.disconnect();
+      mutationObserver?.disconnect();
       window.removeEventListener("scroll", scheduleTick);
       window.removeEventListener("resize", scheduleTick);
     };
