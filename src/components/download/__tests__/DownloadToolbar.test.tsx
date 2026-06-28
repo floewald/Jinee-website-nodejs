@@ -43,7 +43,7 @@ describe("DownloadToolbar", () => {
     render(
       <DownloadToolbar {...baseProps} selectionMode={true} selectedCount={3} />
     );
-    expect(screen.getByText(/3 selected/i)).toBeInTheDocument();
+    expect(screen.getByText(/3 of 5 selected/i)).toBeInTheDocument();
   });
 
   it("shows a download button when items are selected", () => {

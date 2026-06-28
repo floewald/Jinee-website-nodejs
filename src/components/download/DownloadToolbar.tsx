@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { cx } from "@/styled-system/css";
-import { btn } from "@/lib/button-styles";
 import {
-  downloadToolbar,
-  toolbarBtn,
-  selectedCountBadge,
-  toolbarPipe,
+  toolbarSelectIdle,
+  toolbarChip,
+  toolbarChipPrimary,
+  selectionBar,
+  selectionBarRule,
+  selectionStatus,
 } from "./download-styles";
 
 interface DownloadToolbarProps {
@@ -50,51 +51,63 @@ export default function DownloadToolbar({
     setTimeout(() => setClearFlash(false), 100);
   }
 
-  return (
-    <div className={cx(downloadToolbar, "download-toolbar")}>
+  // Idle: a single outline chip, rendered straight into <main> (no wrapper) so
+  // that the sticky bar which replaces it can stick within the tall page.
+  if (!selectionMode) {
+    return (
       <button
-        className={cx(toolbarBtn, `download-toggle ${btn({ visual: "outline", active: selectionMode || undefined })}`)}
-        aria-pressed={selectionMode}
+        className={cx(toolbarChip, toolbarSelectIdle, "download-toggle")}
+        aria-pressed={false}
         onClick={handleToggleSelection}
       >
         Select
       </button>
+    );
+  }
 
-      {selectionMode && (
-        <>
-          <button
-            className={cx(toolbarBtn, `${btn({ visual: "primary" })} download-button`)}
-            disabled={selectedCount === 0}
-            onClick={onDownload}
-          >
-            Download
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" style={{ marginLeft: "6px" }}>
-              <path d="M7 1v8M3.5 6l3.5 3.5L10.5 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M1 11h12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
-            </svg>
-          </button>
+  // Selection mode: the contained bar takes over, and sticks just below the
+  // fixed header as you scroll the gallery.
+  return (
+    <div className={cx(selectionBar, "download-toolbar")} role="group" aria-label="Photo selection">
+      <button
+        className={cx(toolbarChip, "download-toggle")}
+        aria-pressed={true}
+        onClick={handleToggleSelection}
+      >
+        Done
+      </button>
 
-          <span className={cx(toolbarPipe, "toolbar-pipe")} aria-hidden="true">|</span>
+      <span className={selectionBarRule} aria-hidden="true" />
 
-          <span className={cx(selectedCountBadge, "selected-count", "selected-count--badge")} aria-live="polite">
-            {selectedCount} selected
-          </span>
+      <span className={cx(selectionStatus, "selected-count")} aria-live="polite">
+        {selectedCount} of {totalCount} selected
+      </span>
 
-          <button
-            className={btn({ visual: "outline", active: allSelected || undefined })}
-            onClick={handleSelectAll}
-          >
-            All
-          </button>
+      <button
+        className={cx(toolbarChipPrimary, "download-button")}
+        disabled={selectedCount === 0}
+        onClick={onDownload}
+      >
+        Download
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M7 1v8M3.5 6l3.5 3.5L10.5 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M1 11h12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        </svg>
+      </button>
 
-          <button
-            className={btn({ visual: "outline", active: clearFlash || undefined })}
-            onClick={handleClearSelection}
-          >
-            Clear
-          </button>
-        </>
-      )}
+      <button
+        className={cx(toolbarChip, allSelected && "active")}
+        onClick={handleSelectAll}
+      >
+        All
+      </button>
+
+      <button
+        className={cx(toolbarChip, clearFlash && "active")}
+        onClick={handleClearSelection}
+      >
+        Clear
+      </button>
     </div>
   );
 }

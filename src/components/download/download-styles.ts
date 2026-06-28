@@ -2,56 +2,94 @@ import { css } from "@/styled-system/css";
 
 /* ── Download toolbar ─────────────────────────────────────────────────────── */
 
-export const downloadToolbar = css({
-  display: "flex",
-  flexWrap: "nowrap",
-  gap: ".75rem",
-  alignItems: "center",
+/** Spacing for the idle Select chip (rendered directly in <main>, so the sticky
+ *  bar that replaces it can stick within the tall page rather than a short wrapper). */
+export const toolbarSelectIdle = css({
   marginBottom: "1rem",
-  padding: ".5rem 0",
-  overflowX: "auto",
-  "@media (max-width: 600px)": {
-    flexWrap: "wrap",
-    overflowX: "visible",
-  },
 });
 
-/** Compact button overrides applied inside the toolbar */
-export const toolbarBtn = css({
-  alignSelf: "center",
-  whiteSpace: "nowrap",
-  padding: ".35rem .7rem",
-  lineHeight: "1.4",
+/* ── Toolbar: an outline "Select" chip that opens a contained selection bar ──
+   One palette throughout: ink #1f1f1f (--charcoal) · border #dcdcdc · surface
+   #fafafa · hover #f3f3f3. Idle shows only the Select chip; selection mode
+   replaces it with the bar, so no control ever sits alone beside the bar. */
+
+const chipBase = {
   display: "inline-flex",
   alignItems: "center",
-});
-
-export const selectedCountBadge = css({
-  background: "#f0f0f0",
-  borderRadius: "999px",
-  padding: ".35rem .7rem",
+  gap: "0.45rem",
+  padding: "0.5rem 0.95rem",
+  borderRadius: "6px",
+  font: "inherit",
   fontSize: "0.9rem",
   lineHeight: "1.4",
-  color: "var(--charcoal)",
   whiteSpace: "nowrap",
+  cursor: "pointer",
+  transition: "background 0.15s, color 0.15s, border-color 0.15s, opacity 0.15s",
+} as const;
+
+/** Outline chip — Select (idle), Done, All, Clear. `.active` fills it with ink. */
+export const toolbarChip = css({
+  ...chipBase,
+  background: "#fff",
+  color: "var(--charcoal)",
+  border: "1px solid #dcdcdc",
+  _hover: { background: "#f3f3f3" },
+  "&.active": {
+    background: "var(--charcoal)",
+    color: "#fff",
+    borderColor: "var(--charcoal)",
+  },
+  _focusVisible: { outline: "2px solid var(--charcoal)", outlineOffset: "2px" },
 });
 
-export const toolbarPipe = css({
-  alignSelf: "center",
-  color: "#d0d0d0",
-  fontSize: "1.1rem",
-  lineHeight: "1",
-  userSelect: "none",
-  "@media (max-width: 600px)": {
-    display: "none",
+/** Primary chip — Download (the one filled control). */
+export const toolbarChipPrimary = css({
+  ...chipBase,
+  background: "var(--charcoal)",
+  color: "#fff",
+  border: "1px solid var(--charcoal)",
+  _hover: { background: "#333", borderColor: "#333" },
+  "&:disabled": { opacity: 0.35, cursor: "default" },
+  _focusVisible: { outline: "2px solid var(--charcoal)", outlineOffset: "2px" },
+});
+
+/** Contained bar that groups the selection chips. Sticks just below the fixed
+ *  site header while in selection mode, so Download stays reachable as you
+ *  scroll the gallery. (top tracks the header height var; switches on mobile.) */
+export const selectionBar = css({
+  position: "sticky",
+  top: "calc(var(--site-hero-current-height) + 0.75rem)",
+  zIndex: 100,
+  display: "flex",
+  alignItems: "center",
+  gap: "0.6rem",
+  maxWidth: "100%",
+  overflowX: "auto",
+  marginBottom: "1rem",
+  background: "#fafafa",
+  border: "1px solid #ececec",
+  borderRadius: "8px",
+  padding: "0.55rem 0.65rem",
+  boxShadow: "0 4px 16px rgba(0, 0, 0, 0.06)",
+  "@media (max-width: 800px)": {
+    top: "calc(var(--site-hero-mobile-height) + 0.75rem)",
   },
 });
 
-export const toolbarDivider = css({
+export const selectionBarRule = css({
   width: "1px",
-  alignSelf: "stretch",
-  background: "#d0d0d0",
+  height: "1.4rem",
+  background: "#e5e5e5",
   flexShrink: 0,
+});
+
+/** "N of M selected" status — tabular figures so the number never jitters. */
+export const selectionStatus = css({
+  fontSize: "0.9rem",
+  color: "var(--charcoal)",
+  fontVariantNumeric: "tabular-nums",
+  whiteSpace: "nowrap",
+  padding: "0 0.15rem",
 });
 
 /* ── Download modal ───────────────────────────────────────────────────────── */
