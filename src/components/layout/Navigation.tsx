@@ -174,6 +174,19 @@ const navPortfolioToggle = css({
   },
 });
 
+/**
+ * Mobile-only "Overview" submenu item.
+ *
+ * On desktop it is hidden (the Portfolio parent already links to /portfolio/);
+ * on mobile `order: -1` floats it to the top of the column-flex submenu.
+ * Kept LAST in the DOM; the desktop submenu's vertical inset lives on the
+ * `<ul>` (see `navSubmenu`), so this hidden item never affects spacing.
+ */
+const overviewLinkItem = css({
+  "@media (min-width: 801px)": { display: "none !important" },
+  "@media (max-width: 800px)": { order: -1 },
+});
+
 const navSubmenu = css({
   listStyle: "none",
   "@media (min-width: 801px)": {
@@ -181,7 +194,11 @@ const navSubmenu = css({
     flexDirection: "column",
     alignItems: "center",
     gap: "2rem",
-    padding: 0,
+    /* Vertical inset lives on the <ul> (order-independent) rather than on the
+       first/last <li>, so a hidden mobile-only item in the DOM can never steal
+       the top/bottom margin. Reproduces the original 1.2rem top/bottom inset. */
+    paddingBlock: "calc(0.7rem + 0.5rem)",
+    paddingInline: 0,
     margin: 0,
     position: "absolute",
     top: "100%",
@@ -210,8 +227,6 @@ const navSubmenu = css({
       borderBottom: "2px solid var(--charcoal)",
       textDecoration: "none",
     },
-    "& li:first-child a": { marginTop: "calc(0.7rem + 0.5rem)" },
-    "& li:last-child a": { marginBottom: "calc(0.7rem + 0.5rem)" },
   },
   "@media (max-width: 800px)": {
     position: "static !important",
@@ -247,9 +262,15 @@ export default function Navigation() {
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const pathname = usePathname();
 
-  /** When already on the target page, scroll to top instead of re-navigating. */
+  /**
+   * Closes the mobile menu and, when already on the target page, scrolls to
+   * the top instead of re-navigating.  Used for top-level nav links AND for
+   * all submenu links (including the mobile-only Overview link).
+   */
   function handleNavClick(href: string) {
     return (e: React.MouseEvent<HTMLAnchorElement>) => {
+      setMenuOpen(false);
+      setSubmenuOpen(false);
       if (pathname === href) {
         e.preventDefault();
         scrollToTop();
@@ -286,7 +307,12 @@ export default function Navigation() {
           aria-controls="primary-menu"
           aria-expanded={menuOpen ? "true" : "false"}
           aria-label="Toggle menu"
-          onClick={() => setMenuOpen((open) => !open)}
+          onClick={() => {
+            // Reset the submenu whenever the menu is toggled so a reopen
+            // always starts in a clean (collapsed submenu) state.
+            setSubmenuOpen(false);
+            setMenuOpen((open) => !open);
+          }}
         >
           <span
             className={cx(navToggleBars, menuOpen && navToggleBarsOpen)}
@@ -310,21 +336,28 @@ export default function Navigation() {
               href="/portfolio/"
               className={cx(navLink, navPortfolioToggle)}
               onClick={handlePortfolioClick}
+              aria-expanded={submenuOpen ? "true" : "false"}
+              aria-controls="portfolio-submenu"
             >
               Portfolio
             </Link>
             <ul
+              id="portfolio-submenu"
               className={cx(navSubmenu, "nav-submenu-list")}
               aria-label="Portfolio categories"
             >
               <li>
-                <Link href="/portfolio/photography/">Photography</Link>
+                <Link href="/portfolio/photography/" onClick={handleNavClick("/portfolio/photography/")}>Photography</Link>
               </li>
               <li>
-                <Link href="/portfolio/video/">Videography</Link>
+                <Link href="/portfolio/video/" onClick={handleNavClick("/portfolio/video/")}>Videography</Link>
               </li>
               <li>
-                <Link href="/portfolio/social-media/">Social Media</Link>
+                <Link href="/portfolio/social-media/" onClick={handleNavClick("/portfolio/social-media/")}>Social Media</Link>
+              </li>
+              {/* Mobile-only; kept last in DOM, floated to top via order:-1 on mobile */}
+              <li className={overviewLinkItem}>
+                <Link href="/portfolio/" onClick={handleNavClick("/portfolio/")}>Overview</Link>
               </li>
             </ul>
           </li>
