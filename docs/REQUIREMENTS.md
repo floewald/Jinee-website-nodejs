@@ -177,7 +177,7 @@ Next.js 16 (output: 'export')
 | NFR-04.2 | All project data strongly typed via discriminated union types | ✅ |
 | NFR-04.3 | Site-wide constants centralised in `src/lib/constants.ts` | ✅ |
 | NFR-04.4 | No duplication in category index pages (`ProjectCardsGrid` component) | ✅ |
-| NFR-04.5 | Lint + type-check enforced as pre-commit hooks (Husky + lint-staged) | ✅ |
+| NFR-04.5 | Local quality gates enforced via Husky pre-commit and pre-push hooks | ✅ |
 | NFR-04.6 | ESLint + `next/core-web-vitals` ruleset | ✅ |
 
 ### NFR-05 Testing
@@ -188,8 +188,8 @@ Next.js 16 (output: 'export')
 | NFR-05.2 | Unit tests for all React components (React Testing Library) | ✅ |
 | NFR-05.3 | E2E tests covering all user journeys (Playwright, Chromium) | ✅ |
 | NFR-05.4 | Test-first (TDD) approach — failing tests written before implementation | ✅ |
-| NFR-05.5 | 254 unit tests, 33 suites, all passing; 37 E2E tests | ✅ |
-| NFR-05.6 | Pre-commit hook runs Jest `--findRelatedTests` on staged files | ✅ |
+| NFR-05.5 | 386 unit/component tests across 47 suites, all passing; 37 E2E tests | ✅ |
+| NFR-05.6 | Pre-commit hook runs Jest `--findRelatedTests` on staged files and validates manifests | ✅ |
 
 ### NFR-06 Build & deployment
 
@@ -197,7 +197,7 @@ Next.js 16 (output: 'export')
 |----|-------------|--------|
 | NFR-06.1 | `npm run build` is a single command (build:images → validate:manifests → next build) | ✅ |
 | NFR-06.2 | Build output verified in CI (checks `out/` exists and `index.html` is present) | ✅ |
-| NFR-06.3 | Auto-deploy via GitHub Actions on push to `main` | ✅ |
+| NFR-06.3 | Auto-deploy via GitHub Actions on push to `main`, with remote build/output verification | ✅ |
 | NFR-06.4 | Asset re-upload only when `assets-raw/` change detected (git diff) | ✅ |
 | NFR-06.5 | Git LFS quota alert fires at 90 % of 1 GB free tier | ✅ |
 | NFR-06.6 | PHP backend deployed manually via FTP (separate from static site) | ✅ |

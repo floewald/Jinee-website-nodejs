@@ -245,6 +245,8 @@ Place the preview image in `assets-raw/social-media/my-social-project/`, then ru
 Open `src/content/portfolio/social-media.json` and add a new entry to the `projects` array.
 The current live site does **not** generate individual social-media detail pages. Each preview links
 directly to `instagramUrl`, and optional `tags` render below the thumbnail when card mode is on.
+New scaffolded entries should start with `"visible": false` until the real Instagram URL and category
+are filled in. Validation rejects `REPLACE_THIS` placeholder URLs on visible projects.
 
 ```json
 {
@@ -254,6 +256,7 @@ directly to `instagramUrl`, and optional `tags` render below the thumbnail when 
   "description": "Social Media Content",
   "heading": "📱 Social Media | Motivational Content",
   "ogImage": "https://jineechen.com/assets/social-media/ig-motivational/ig-motivational-800.webp",
+  "visible": false,
   "hasGallery": false,
   "instagramUrl": "https://www.instagram.com/reel/REPLACE_THIS/",
   "category": "lifestyle",

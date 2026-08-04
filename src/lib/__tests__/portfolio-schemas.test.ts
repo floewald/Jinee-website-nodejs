@@ -160,6 +160,35 @@ describe("SocialMediaProjectSchema", () => {
     const { hasGallery: _h, ...without } = VALID_SOCIAL;
     expect(() => SocialMediaProjectSchema.parse(without)).toThrow();
   });
+
+  it("rejects visible projects without an instagramUrl", () => {
+    const { instagramUrl: _u, ...without } = VALID_SOCIAL;
+    expect(() => SocialMediaProjectSchema.parse(without)).toThrow(/instagramUrl/);
+  });
+
+  it("rejects visible projects with the scaffold instagramUrl placeholder", () => {
+    expect(() =>
+      SocialMediaProjectSchema.parse({
+        ...VALID_SOCIAL,
+        instagramUrl: "https://www.instagram.com/reel/REPLACE_THIS/",
+      })
+    ).toThrow(/placeholder/i);
+  });
+
+  it("rejects visible projects without a category", () => {
+    const { category: _c, ...without } = VALID_SOCIAL;
+    expect(() => SocialMediaProjectSchema.parse(without)).toThrow(/category/);
+  });
+
+  it("allows hidden scaffold entries to keep a placeholder instagramUrl until ready", () => {
+    expect(() =>
+      SocialMediaProjectSchema.parse({
+        ...VALID_SOCIAL,
+        visible: false,
+        instagramUrl: "https://www.instagram.com/reel/REPLACE_THIS/",
+      })
+    ).not.toThrow();
+  });
 });
 
 // ── validatePortfolioData() ──────────────────────────────────────────────────

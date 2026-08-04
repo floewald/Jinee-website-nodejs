@@ -62,6 +62,9 @@ npm run dev
 | `npm run build` | Full production build: images → Next.js → static `out/` |
 | `npm run build:images` | Run image pipeline only (WebP conversion + manifests) |
 | `npm run build:next` | Next.js build only (skip image pipeline) |
+| `npm run validate:manifests` | Validate committed portfolio/image manifests without rebuilding images |
+| `npm run check:pre-commit` | Run the local commit gate (`lint-staged` + manifest validation) |
+| `npm run check:pre-push` | Run the full local push gate (lint, tests, manifest validation, Next build) |
 | `npm run lint` | ESLint across all TS/TSX files |
 | `npm run type-check` | TypeScript compiler check (no emit) |
 | `npm run test` | Run Jest unit + component tests |
@@ -166,6 +169,16 @@ npm run dev
 | [docs/ADDING-PROJECTS.md](docs/ADDING-PROJECTS.md) | Content editors | Step-by-step guide for adding new portfolio projects |
 | [docs/IMPROVEMENTS.md](docs/IMPROVEMENTS.md) | Developers | Completed backlog items and deferred items summary |
 | [docs/MIGRATION-PROGRESS.md](docs/MIGRATION-PROGRESS.md) | Developers | Migration phases summary and deferred items |
+
+---
+
+## Local Quality Gates
+
+`git commit` runs `npm run check:pre-commit`, which applies `lint-staged` fixes/tests to staged TS/TSX files and validates the committed manifests.
+
+`git push` runs `npm run check:pre-push`, which executes lint, the full Jest suite, manifest validation, and `next build` locally before the push is sent.
+
+These hooks save GitHub Actions minutes, but they are still local hooks and can be bypassed with `--no-verify`. The deploy workflow keeps the cheaper build/output verification on GitHub as a remote safety net.
 
 ---
 

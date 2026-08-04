@@ -181,7 +181,7 @@ The Social Media index page is section-driven by `src/content/portfolio/social-m
 - **`sections`** — ordered array of `{ key, label }` objects. Each entry defines one display section (currently `lifestyle` and `editorial`). Add, remove, or reorder entries here to change what sections appear and in which order. The page component reads this array at build time.
 - **`projects`** — array of social media project objects (same shape as other portfolio manifests, with the extra `category` and `instagramUrl` fields). Set `category` on each project to the matching section `key` so it appears in that section.
 
-Projects whose `category` does not match any defined section key are simply not shown on the index page.
+Visible projects must define both a real `instagramUrl` (direct Instagram `p/` or `reel/` link) and a matching `category`. The manifest schema rejects scaffold placeholders such as `REPLACE_THIS`, so broken social-media links fail during validation instead of silently falling back in the UI.
 
 The `.gallery-item` container uses `will-change: transform` to force a GPU compositing layer, ensuring `overflow: hidden` + `border-radius` correctly clips scaled images on hover.
 
@@ -246,16 +246,28 @@ E2E tests target `http://localhost:3000` (configurable in `playwright.config.ts`
 
 ## Pre-commit Hooks
 
-[Husky](https://typicode.github.io/husky/) runs `lint-staged` automatically before each `git commit`. For staged `.ts`/`.tsx` files, it runs:
+[Husky](https://typicode.github.io/husky/) runs `npm run check:pre-commit` automatically before each `git commit`. That local gate does two things:
 
 1. `eslint --fix` — auto-fixes lint issues on staged files
 2. `jest --bail --findRelatedTests` — runs only tests related to changed files (stops on first failure)
+3. `npm run validate:manifests` — validates committed portfolio/image manifests, including social-media links and categories
 
 To skip the pre-commit hook in an emergency:
 
 ```bash
 git commit --no-verify -m "your message"  # use sparingly
 ```
+
+## Pre-push Hook
+
+Before every `git push`, Husky runs `npm run check:pre-push` locally:
+
+1. `npm run lint`
+2. `npm test -- --runInBand`
+3. `npm run validate:manifests`
+4. `npm run build:next`
+
+This catches the expensive failures locally to save GitHub Actions minutes. It is still a local hook, so `git push --no-verify` can bypass it; the deploy workflow keeps remote build/output verification as a backstop.
 
 ---
 

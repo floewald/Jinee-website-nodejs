@@ -281,6 +281,8 @@ npm run test:e2e
 
 Tests run automatically before every `git commit` (via Husky). If they fail, the commit is blocked. Fix the error shown, then commit again.
 
+Before every `git push`, Husky also runs the heavier local gate (`npm run check:pre-push`): lint, the full Jest suite, manifest validation, and `next build`.
+
 ---
 
 ## Troubleshooting

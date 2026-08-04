@@ -34,7 +34,7 @@ For content workflow see [ADDING-PROJECTS.md](ADDING-PROJECTS.md).
 |--------|-------|
 | Static routes generated | 44 |
 | Sitemap URLs | 40 (9 static + 31 project detail pages) |
-| Unit tests | 381 passing, 47 suites |
+| Unit tests | 386 passing, 47 suites |
 | E2E tests | 37 passing (Playwright, Chromium) |
 | Visual regression tests | 22 (11 routes × 2 browsers) |
 | TypeScript errors | 0 |

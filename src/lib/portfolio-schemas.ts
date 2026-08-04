@@ -3,6 +3,23 @@ import type { ProjectType } from "@/types/portfolio";
 
 // ── Sub-schemas ──────────────────────────────────────────────────────────────
 
+const PLACEHOLDER_INSTAGRAM_TOKEN = "REPLACE_THIS";
+
+function isInstagramPostUrl(value: string): boolean {
+  try {
+    const url = new URL(value);
+    const host = url.hostname.replace(/^www\./, "");
+    const [kind, id] = url.pathname.split("/").filter(Boolean);
+    return host === "instagram.com" && ["p", "reel"].includes(kind ?? "") && Boolean(id);
+  } catch {
+    return false;
+  }
+}
+
+function hasPlaceholderInstagramId(value: string): boolean {
+  return value.toUpperCase().includes(PLACEHOLDER_INSTAGRAM_TOKEN);
+}
+
 const PortfolioCardSchema = z.object({
   cardTitle: z.string().min(1),
   thumbnail: z.string().min(1),
@@ -56,6 +73,40 @@ export const SocialMediaProjectSchema = BaseProjectSchema.extend({
   instagramUrl: z.string().url().optional(),
   category: z.enum(["lifestyle", "editorial"]).optional(),
   tags: z.array(z.string()).optional(),
+}).superRefine((project, ctx) => {
+  const isVisible = project.visible !== false;
+
+  if (project.instagramUrl && !isInstagramPostUrl(project.instagramUrl)) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["instagramUrl"],
+      message: "instagramUrl must be a direct Instagram post or reel URL",
+    });
+  }
+
+  if (!isVisible) return;
+
+  if (!project.instagramUrl) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["instagramUrl"],
+      message: "Visible social-media projects must define instagramUrl",
+    });
+  } else if (hasPlaceholderInstagramId(project.instagramUrl)) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["instagramUrl"],
+      message: "Replace the scaffold instagramUrl placeholder before publishing",
+    });
+  }
+
+  if (!project.category) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["category"],
+      message: "Visible social-media projects must define category",
+    });
+  }
 });
 
 // ── Social-media manifest (sections + projects) ─────────────────────────────

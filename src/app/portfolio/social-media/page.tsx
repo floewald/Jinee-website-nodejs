@@ -33,8 +33,7 @@ export default function SocialMediaIndexPage() {
       <div className={cx(instagramSection, "instagram-section")} style={colStyle}>
         <RevealGrid className={cx(instagramPreviews, "instagram-previews")}>
           {projects.map((project) => {
-            const href = project.instagramUrl ?? "/portfolio/social-media/";
-            const isExternal = !!project.instagramUrl;
+            const href = project.instagramUrl!;
             return (
               <Link
                 key={project.slug}
@@ -45,9 +44,8 @@ export default function SocialMediaIndexPage() {
                   SOCIAL_MEDIA_CARD_MODE && instagramPreviewCard,
                   SOCIAL_MEDIA_CARD_MODE && "instagram-preview--card",
                 )}
-                {...(isExternal
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <div className={cx(instagramPreviewThumb, "instagram-preview__thumb")}>
                   <Image

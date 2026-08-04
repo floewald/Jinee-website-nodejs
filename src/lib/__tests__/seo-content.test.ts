@@ -8,7 +8,7 @@
  *  - JSON-LD required fields are present on all video projects
  */
 
-import { videoProjects, getProjectBySlug } from "@/lib/portfolio-config";
+import { videoProjects, getProjectBySlug, getVideoCards } from "@/lib/portfolio-config";
 import { getProjectSlideshowImages } from "@/lib/gallery-images";
 
 describe("social-media-addiction project", () => {
@@ -49,7 +49,7 @@ describe("social-media-addiction project", () => {
 });
 
 describe("video portfolio card ordering", () => {
-  const cardProjects = videoProjects.filter((p) => p.portfolioCard);
+  const cardProjects = getVideoCards();
 
   it("has 23 projects with portfolio cards", () => {
     expect(cardProjects.length).toBe(23);
