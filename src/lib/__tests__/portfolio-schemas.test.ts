@@ -60,7 +60,10 @@ const VALID_SOCIAL = {
   description: "Motivational Instagram content",
   heading: "Content Creator | 📍 Singapore",
   ogImage: "https://jineechen.com/assets/social-media/ig-motivational/img-800.webp",
-  hasGallery: true,
+  hasGallery: false,
+  instagramUrl: "https://www.instagram.com/reel/abc123/",
+  category: "lifestyle" as const,
+  tags: ["#motivation", "#mindset"],
 };
 
 // ── PhotographyProjectSchema ─────────────────────────────────────────────────
@@ -156,6 +159,35 @@ describe("SocialMediaProjectSchema", () => {
   it("rejects when hasGallery is missing", () => {
     const { hasGallery: _h, ...without } = VALID_SOCIAL;
     expect(() => SocialMediaProjectSchema.parse(without)).toThrow();
+  });
+
+  it("rejects visible projects without an instagramUrl", () => {
+    const { instagramUrl: _u, ...without } = VALID_SOCIAL;
+    expect(() => SocialMediaProjectSchema.parse(without)).toThrow(/instagramUrl/);
+  });
+
+  it("rejects visible projects with the scaffold instagramUrl placeholder", () => {
+    expect(() =>
+      SocialMediaProjectSchema.parse({
+        ...VALID_SOCIAL,
+        instagramUrl: "https://www.instagram.com/reel/REPLACE_THIS/",
+      })
+    ).toThrow(/placeholder/i);
+  });
+
+  it("rejects visible projects without a category", () => {
+    const { category: _c, ...without } = VALID_SOCIAL;
+    expect(() => SocialMediaProjectSchema.parse(without)).toThrow(/category/);
+  });
+
+  it("allows hidden scaffold entries to keep a placeholder instagramUrl until ready", () => {
+    expect(() =>
+      SocialMediaProjectSchema.parse({
+        ...VALID_SOCIAL,
+        visible: false,
+        instagramUrl: "https://www.instagram.com/reel/REPLACE_THIS/",
+      })
+    ).not.toThrow();
   });
 });
 

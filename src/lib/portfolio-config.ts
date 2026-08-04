@@ -145,18 +145,19 @@ export function getPhotographyCards(): PhotographyProject[] {
   return photographyProjects.filter((p) => p.portfolioCard && p.visible !== false);
 }
 
-/** All video projects that have a portfolioCard, in JSON array order */
+/** All visible video projects that have a portfolioCard, in JSON array order */
 export function getVideoCards(): VideoProject[] {
-  return videoProjects.filter((p) => p.portfolioCard);
+  return videoProjects.filter((p) => p.portfolioCard && p.visible !== false);
 }
 
-/** All social-media projects that have a portfolioCard, in JSON array order */
+/** All visible social-media projects that have a portfolioCard, in JSON array order */
 export function getSocialMediaCards(): SocialMediaProject[] {
-  return socialMediaProjects.filter((p) => p.portfolioCard);
+  return socialMediaProjects.filter((p) => p.portfolioCard && p.visible !== false);
 }
 
-/** Canonical URL path for a project */
+/** Canonical internal portfolio path for a project */
 export function projectPath(project: PortfolioProject): string {
+  if (project.type === "social-media") return "/portfolio/social-media/";
   return `/portfolio/${project.type}/${project.slug}/`;
 }
 

@@ -66,11 +66,15 @@ describe("buildSkeletonEntry()", () => {
     expect((entry as { videos: unknown[] }).videos).toHaveLength(1);
   });
 
-  it("builds a social-media skeleton with correct type and hasGallery", () => {
+  it("builds a social-media skeleton that matches the current Instagram-link flow", () => {
     const entry = buildSkeletonEntry("social-media", "ig-reel", "IG Reel");
     expect(entry.type).toBe("social-media");
     expect(entry.slug).toBe("ig-reel");
-    expect((entry as { hasGallery: boolean }).hasGallery).toBe(true);
+    expect((entry as { hasGallery: boolean }).hasGallery).toBe(false);
+    expect((entry as { visible: boolean }).visible).toBe(false);
+    expect((entry as { instagramUrl: string }).instagramUrl).toContain("instagram.com");
+    expect((entry as { instagramUrl: string }).instagramUrl).toContain("REPLACE_THIS");
+    expect((entry as { category: string }).category).toBe("lifestyle");
   });
 
   it("embeds the slug in the ogImage URL", () => {

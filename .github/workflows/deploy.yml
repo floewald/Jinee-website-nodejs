@@ -73,6 +73,8 @@ jobs:
         run: npm ci
 
       # 4. Build the static site → produces the out/ directory
+      #    Lint + unit tests run locally in the Husky pre-push hook to avoid
+      #    burning GitHub Action minutes on every deploy-triggering push.
       #    images.json manifests are committed to git, so validate:manifests works
       #    without regenerating images. Heavy image files are handled by deploy-assets.
       - name: Build static site

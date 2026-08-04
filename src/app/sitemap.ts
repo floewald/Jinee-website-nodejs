@@ -1,10 +1,6 @@
 import { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/constants";
-import {
-  photographyProjects,
-  videoProjects,
-  socialMediaProjects,
-} from "@/lib/portfolio-config";
+import { getSlugsByType } from "@/lib/portfolio-config";
 
 // Required for Next.js static export (`output: 'export'`)
 export const dynamic = "force-static";
@@ -24,35 +20,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/privacy/`, changeFrequency: "yearly", priority: 0.2, lastModified },
   ];
 
-  const photographyRoutes: MetadataRoute.Sitemap = photographyProjects.map(
-    (p) => ({
-      url: `${SITE_URL}/portfolio/photography/${p.slug}/`,
+  const photographyRoutes: MetadataRoute.Sitemap = getSlugsByType("photography").map(
+    (slug) => ({
+      url: `${SITE_URL}/portfolio/photography/${slug}/`,
       changeFrequency: "monthly",
       priority: 0.6,
       lastModified,
     })
   );
 
-  const videoRoutes: MetadataRoute.Sitemap = videoProjects.map((p) => ({
-    url: `${SITE_URL}/portfolio/video/${p.slug}/`,
+  const videoRoutes: MetadataRoute.Sitemap = getSlugsByType("video").map((slug) => ({
+    url: `${SITE_URL}/portfolio/video/${slug}/`,
     changeFrequency: "monthly",
     priority: 0.6,
     lastModified,
   }));
 
-  const socialMediaRoutes: MetadataRoute.Sitemap = socialMediaProjects.map(
-    (p) => ({
-      url: `${SITE_URL}/portfolio/social-media/${p.slug}/`,
-      changeFrequency: "monthly",
-      priority: 0.6,
-      lastModified,
-    })
-  );
-
   return [
     ...staticRoutes,
     ...photographyRoutes,
     ...videoRoutes,
-    ...socialMediaRoutes,
   ];
 }

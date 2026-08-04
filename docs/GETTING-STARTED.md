@@ -137,9 +137,11 @@ src/
 │   │   └── page.tsx       ← Contact page: /contact/
 │   ├── portfolio/
 │   │   ├── page.tsx       ← Portfolio overview: /portfolio/
+│   │   ├── photography/page.tsx          ← Photography index: /portfolio/photography/
 │   │   ├── photography/[slug]/page.tsx   ← Individual photo project page
+│   │   ├── video/page.tsx                ← Video index: /portfolio/video/
 │   │   ├── video/[slug]/page.tsx         ← Individual video project page
-│   │   └── social-media/[slug]/page.tsx
+│   │   └── social-media/page.tsx         ← Social media index: /portfolio/social-media/
 │   └── globals.css        ← ALL custom CSS lives here
 │
 ├── components/            ← Reusable React building blocks
@@ -278,6 +280,8 @@ npm run test:e2e
 ```
 
 Tests run automatically before every `git commit` (via Husky). If they fail, the commit is blocked. Fix the error shown, then commit again.
+
+Before every `git push`, Husky also runs the heavier local gate (`npm run check:pre-push`): lint, the full Jest suite, manifest validation, and `next build`.
 
 ---
 

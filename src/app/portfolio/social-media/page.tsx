@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { cx } from "@/styled-system/css";
-import { socialMediaProjects, socialMediaSections, projectPath } from "@/lib/portfolio-config";
+import { socialMediaProjects, socialMediaSections } from "@/lib/portfolio-config";
 import { SOCIAL_MEDIA_PREVIEW_COLUMNS, SOCIAL_MEDIA_CARD_MODE } from "@/lib/constants";
 import RevealGrid from "@/components/portfolio/RevealGrid";
 import {
@@ -33,8 +33,7 @@ export default function SocialMediaIndexPage() {
       <div className={cx(instagramSection, "instagram-section")} style={colStyle}>
         <RevealGrid className={cx(instagramPreviews, "instagram-previews")}>
           {projects.map((project) => {
-            const href = project.instagramUrl ?? projectPath(project);
-            const isExternal = !!project.instagramUrl;
+            const href = project.instagramUrl!;
             return (
               <Link
                 key={project.slug}
@@ -45,9 +44,8 @@ export default function SocialMediaIndexPage() {
                   SOCIAL_MEDIA_CARD_MODE && instagramPreviewCard,
                   SOCIAL_MEDIA_CARD_MODE && "instagram-preview--card",
                 )}
-                {...(isExternal
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <div className={cx(instagramPreviewThumb, "instagram-preview__thumb")}>
                   <Image

@@ -105,18 +105,19 @@ export default function HeroSlideshow({
     <section className={cx(heroSectionStyle, "hero-section")} aria-label="Hero slideshow">
       {getRenderedSlideIndices(slides.length, current).map((i) => {
         const slide = slides[i];
+        const isActive = i === current;
         return (
         <div
           key={slide.src}
           className={cx(
             heroSlide,
             "hero-slide",
-            i === current && heroSlideActive,
-            i === current && "hero-slide--active",
+            isActive && heroSlideActive,
+            isActive && "hero-slide--active",
             fit === "white" && heroSlideWhiteBg,
             fit === "white" && "hero-slide--white-bg",
           )}
-          aria-hidden={i !== current}
+          aria-hidden={!isActive}
         >
           {fit === "blur" && (
             <div
@@ -130,8 +131,10 @@ export default function HeroSlideshow({
             alt={slide.alt}
             width={1600}
             height={900}
-            priority={i === 0}
-            loading="eager"
+            // Keep only the visible hero image on the eager/high-priority path.
+            // Adjacent slides stay rendered for the crossfade, but load lazily.
+            priority={isActive}
+            loading={isActive ? "eager" : "lazy"}
             className={cx(
               heroImgStyle,
               "hero-img",

@@ -108,10 +108,10 @@ function socialMediaSkeleton(slug: string, title: string) {
     description: `<!-- Add 120-160 character SEO description for ${title} -->`,
     heading: "Content Creator | 📍 Singapore",
     ogImage: `https://jineechen.com/assets/social-media/${slug}/${slug}-1-800.webp`,
-    hasGallery: true,
-    portfolioCard: {
-      cardTitle: title,
-      thumbnail: `/assets/social-media/${slug}/${slug}-1-800.webp`,
-    },
+    visible: false,
+    hasGallery: false,
+    instagramUrl: "https://www.instagram.com/reel/REPLACE_THIS/",
+    category: "lifestyle" as const,
+    tags: ["#tag1", "#tag2", "#tag3"],
   };
 }

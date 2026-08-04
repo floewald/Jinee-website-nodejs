@@ -97,4 +97,13 @@ describe("HeroSlideshow", () => {
     expect(timerSpy).not.toHaveBeenCalled();
     timerSpy.mockRestore();
   });
+
+  it("only eagerly loads the active slide", () => {
+    const { container } = render(<HeroSlideshow slides={SLIDES} intervalMs={1000} />);
+    const images = container.querySelectorAll("img");
+
+    expect(images[0]).toHaveAttribute("loading", "eager");
+    expect(images[1]).toHaveAttribute("loading", "lazy");
+    expect(images[2]).toHaveAttribute("loading", "lazy");
+  });
 });

@@ -168,8 +168,7 @@ export default function PortfolioPage() {
           <div className={cx(instagramSection, "instagram-section")} style={{ "--sm-preview-cols": SOCIAL_MEDIA_PREVIEW_COLUMNS } as React.CSSProperties}>
             <RevealGrid className={cx(instagramPreviews, "instagram-previews")}>
             {socialMediaPreviews.map((project) => {
-              const href = project.instagramUrl ?? projectPath(project);
-              const isExternal = !!project.instagramUrl;
+              const href = project.instagramUrl!;
               return (
                 <Link
                   key={project.slug}
@@ -180,9 +179,8 @@ export default function PortfolioPage() {
                     SOCIAL_MEDIA_CARD_MODE && instagramPreviewCard,
                     SOCIAL_MEDIA_CARD_MODE && "instagram-preview--card",
                   )}
-                  {...(isExternal
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <div className={cx(instagramPreviewThumb, "instagram-preview__thumb")}>
                     <Image

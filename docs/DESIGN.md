@@ -364,7 +364,7 @@ directly as a safety net.
 | DX scripts (manifest validator, scaffold logic, portfolio schemas) | `src/lib/__tests__/` | ~33 tests |
 | App pages (not-found, error, sitemap) | `src/app/__tests__/` | ~10 tests |
 
-**Total: 254 unit tests, 33 suites**
+**Total: 386 unit/component tests, 47 suites**
 
 Approach: test-first (TDD) — failing test written before every module. Each test file
 co-located with the implementation via `__tests__/` sibling directories.
@@ -385,18 +385,17 @@ co-located with the implementation via `__tests__/` sibling directories.
 
 1. `eslint --fix` on staged JS/TS files
 2. `jest --findRelatedTests` on staged files — only runs tests for changed files; fast feedback
+3. `validate:manifests` — validates committed portfolio/image manifests before commit
 
 ### 8.4 CI (GitHub Actions)
 
 ```
 npm ci
-npm run lint
-npm run type-check
-npx jest --ci --no-coverage
-npm run build          # also runs validate:manifests
+npm run validate:manifests
+npm run build:next
 ```
 
-Build output check: verifies `out/` directory and `out/index.html` exist.
+Build output check: verifies `out/` directory and `out/index.html` exist. Lint and unit tests run locally in Husky pre-push to save GitHub Actions minutes, so the remote workflow stays focused on deploy-critical build verification.
 
 ---
 

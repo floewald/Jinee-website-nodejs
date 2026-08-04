@@ -80,6 +80,11 @@ describe("getVideoCards", () => {
     const cards = getVideoCards();
     cards.forEach((p) => expect(p.portfolioCard).toBeDefined());
   });
+
+  it("returns only visible video card projects", () => {
+    const cards = getVideoCards();
+    cards.forEach((p) => expect(p.visible).not.toBe(false));
+  });
 });
 
 describe("projectPath", () => {
@@ -93,6 +98,11 @@ describe("projectPath", () => {
   it("returns the canonical URL path for a video project", () => {
     const project = getProjectBySlug("stuck-low-pay")!;
     expect(projectPath(project)).toBe("/portfolio/video/stuck-low-pay/");
+  });
+
+  it("returns the social-media index path for a social-media project", () => {
+    const project = getProjectBySlug("ig-motivational")!;
+    expect(projectPath(project)).toBe("/portfolio/social-media/");
   });
 });
 
