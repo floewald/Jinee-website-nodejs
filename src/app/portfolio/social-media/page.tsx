@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { cx } from "@/styled-system/css";
-import { socialMediaProjects, socialMediaSections, projectPath } from "@/lib/portfolio-config";
+import { socialMediaProjects, socialMediaSections } from "@/lib/portfolio-config";
 import { SOCIAL_MEDIA_PREVIEW_COLUMNS, SOCIAL_MEDIA_CARD_MODE } from "@/lib/constants";
 import RevealGrid from "@/components/portfolio/RevealGrid";
 import {
@@ -33,7 +33,7 @@ export default function SocialMediaIndexPage() {
       <div className={cx(instagramSection, "instagram-section")} style={colStyle}>
         <RevealGrid className={cx(instagramPreviews, "instagram-previews")}>
           {projects.map((project) => {
-            const href = project.instagramUrl ?? projectPath(project);
+            const href = project.instagramUrl ?? "/portfolio/social-media/";
             const isExternal = !!project.instagramUrl;
             return (
               <Link

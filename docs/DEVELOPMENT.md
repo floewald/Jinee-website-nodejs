@@ -130,7 +130,7 @@ Create `src/app/your-page/page.tsx`. It will be exported as `out/your-page/index
 
 Export a `metadata` object (or `generateMetadata` function) at the top of the file for SEO.
 
-Existing static pages: `/`, `/contact/`, `/portfolio/photography/[slug]/`, `/portfolio/video/[slug]/`, `/portfolio/social-media/[slug]/`.
+Existing static pages: `/`, `/contact/`, `/portfolio/photography/[slug]/`, `/portfolio/video/[slug]/`, `/portfolio/social-media/`.
 
 ### Adding a new component
 
@@ -181,7 +181,7 @@ The Social Media index page is section-driven by `src/content/portfolio/social-m
 - **`sections`** — ordered array of `{ key, label }` objects. Each entry defines one display section (currently `lifestyle` and `editorial`). Add, remove, or reorder entries here to change what sections appear and in which order. The page component reads this array at build time.
 - **`projects`** — array of social media project objects (same shape as other portfolio manifests, with the extra `category` and `instagramUrl` fields). Set `category` on each project to the matching section `key` so it appears in that section.
 
-Projects whose `category` does not match any defined section key are simply not shown on the index page (but their individual project pages still exist).
+Projects whose `category` does not match any defined section key are simply not shown on the index page.
 
 The `.gallery-item` container uses `will-change: transform` to force a GPU compositing layer, ensuring `overflow: hidden` + `border-radius` correctly clips scaled images on hover.
 

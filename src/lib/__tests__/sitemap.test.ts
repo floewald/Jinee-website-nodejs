@@ -3,7 +3,9 @@
  *
  * Tests verify:
  *  - All static routes are present
- *  - All portfolio project routes are included
+ *  - All visible photography and video detail routes are included
+ *  - Hidden detail routes are excluded
+ *  - Social media remains index-only (no detail URLs in sitemap)
  *  - The new social-media-addiction project is represented
  *  - Priorities and frequencies are correct
  *  - All URLs start with the site URL and end with a trailing slash
@@ -20,6 +22,10 @@ import sitemap from "@/app/sitemap";
 describe("sitemap()", () => {
   const entries = sitemap();
   const urls = entries.map((e) => e.url);
+  const visiblePhotographyProjects = photographyProjects.filter((p) => p.visible !== false);
+  const visibleVideoProjects = videoProjects.filter((p) => p.visible !== false);
+  const hiddenPhotographyProjects = photographyProjects.filter((p) => p.visible === false);
+  const hiddenVideoProjects = videoProjects.filter((p) => p.visible === false);
 
   it("returns an array of entries", () => {
     expect(Array.isArray(entries)).toBe(true);
@@ -71,14 +77,20 @@ describe("sitemap()", () => {
   });
 
   describe("photography project routes", () => {
-    it("includes all photography projects", () => {
-      photographyProjects.forEach((p) => {
+    it("includes all visible photography projects", () => {
+      visiblePhotographyProjects.forEach((p) => {
         expect(urls).toContain(`${SITE_URL}/portfolio/photography/${p.slug}/`);
       });
     });
 
+    it("excludes hidden photography projects", () => {
+      hiddenPhotographyProjects.forEach((p) => {
+        expect(urls).not.toContain(`${SITE_URL}/portfolio/photography/${p.slug}/`);
+      });
+    });
+
     it("photography projects have priority 0.6", () => {
-      photographyProjects.forEach((p) => {
+      visiblePhotographyProjects.forEach((p) => {
         const entry = entries.find(
           (e) => e.url === `${SITE_URL}/portfolio/photography/${p.slug}/`
         );
@@ -88,9 +100,15 @@ describe("sitemap()", () => {
   });
 
   describe("video project routes", () => {
-    it("includes all video projects", () => {
-      videoProjects.forEach((p) => {
+    it("includes all visible video projects", () => {
+      visibleVideoProjects.forEach((p) => {
         expect(urls).toContain(`${SITE_URL}/portfolio/video/${p.slug}/`);
+      });
+    });
+
+    it("excludes hidden video projects", () => {
+      hiddenVideoProjects.forEach((p) => {
+        expect(urls).not.toContain(`${SITE_URL}/portfolio/video/${p.slug}/`);
       });
     });
 
@@ -99,7 +117,7 @@ describe("sitemap()", () => {
     });
 
     it("video projects have priority 0.6", () => {
-      videoProjects.forEach((p) => {
+      visibleVideoProjects.forEach((p) => {
         const entry = entries.find(
           (e) => e.url === `${SITE_URL}/portfolio/video/${p.slug}/`
         );
@@ -108,10 +126,10 @@ describe("sitemap()", () => {
     });
   });
 
-  describe("social-media project routes", () => {
-    it("includes all social-media projects", () => {
+  describe("social-media routes", () => {
+    it("does not include individual social-media project routes", () => {
       socialMediaProjects.forEach((p) => {
-        expect(urls).toContain(
+        expect(urls).not.toContain(
           `${SITE_URL}/portfolio/social-media/${p.slug}/`
         );
       });
@@ -122,9 +140,8 @@ describe("sitemap()", () => {
     const staticCount = 9; // home, about, contact, portfolio, 3 categories, imprint, privacy
     const expected =
       staticCount +
-      photographyProjects.length +
-      videoProjects.length +
-      socialMediaProjects.length;
+      visiblePhotographyProjects.length +
+      visibleVideoProjects.length;
     expect(entries.length).toBe(expected);
   });
 });

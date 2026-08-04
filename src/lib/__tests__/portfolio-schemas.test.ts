@@ -60,7 +60,10 @@ const VALID_SOCIAL = {
   description: "Motivational Instagram content",
   heading: "Content Creator | 📍 Singapore",
   ogImage: "https://jineechen.com/assets/social-media/ig-motivational/img-800.webp",
-  hasGallery: true,
+  hasGallery: false,
+  instagramUrl: "https://www.instagram.com/reel/abc123/",
+  category: "lifestyle" as const,
+  tags: ["#motivation", "#mindset"],
 };
 
 // ── PhotographyProjectSchema ─────────────────────────────────────────────────

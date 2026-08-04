@@ -235,38 +235,16 @@ npm run build
 
 ## Adding a Social Media Project
 
-### Step 1: Decide content type
+### Step 1: Prepare the preview image
 
-Social media projects can be either:
-
-- **Gallery** (`hasGallery: true`) — shows a curated image grid, same as photography
-- **Custom** (`hasGallery: false`) — shows a custom text/HTML message (e.g., link to Instagram)
-
-### Step 2: Add images (if gallery)
-
-Place images in `assets-raw/social-media/my-social-project/`, then run
+Place the preview image in `assets-raw/social-media/my-social-project/`, then run
 `npm run build` (or `npm run build:images` for image-only iteration).
 
-### Step 3: Add the project config
+### Step 2: Add the project config
 
-Open `src/content/portfolio/social-media.json` and add a new entry to the JSON array:
-
-**Gallery variant:**
-
-```json
-{
-  "type": "social-media",
-  "slug": "my-social-project",
-  "title": "My Social Media Project",
-  "description": "Short description.",
-  "heading": "📱 Social Media | My Category",
-  "ogImage": "https://jineechen.com/assets/social-media/my-social-project/img-001-800.webp",
-  "hasGallery": true,
-  "imageCount": 20
-}
-```
-
-**Custom content variant:**
+Open `src/content/portfolio/social-media.json` and add a new entry to the `projects` array.
+The current live site does **not** generate individual social-media detail pages. Each preview links
+directly to `instagramUrl`, and optional `tags` render below the thumbnail when card mode is on.
 
 ```json
 {
@@ -275,9 +253,11 @@ Open `src/content/portfolio/social-media.json` and add a new entry to the JSON a
   "title": "Motivational Content | Social Media",
   "description": "Social Media Content",
   "heading": "📱 Social Media | Motivational Content",
-  "ogImage": "https://jineechen.com/assets/social-media/ig-motivational/preview-800.webp",
+  "ogImage": "https://jineechen.com/assets/social-media/ig-motivational/ig-motivational-800.webp",
   "hasGallery": false,
-  "customContent": "<p>Check out my content on <a href=\"https://www.instagram.com/\" target=\"_blank\" rel=\"noopener\">Instagram</a>.</p>"
+  "instagramUrl": "https://www.instagram.com/reel/REPLACE_THIS/",
+  "category": "lifestyle",
+  "tags": ["#motivation", "#mindset", "#lifestyle"]
 }
 ```
 
@@ -302,7 +282,7 @@ To temporarily hide a project without deleting it:
 2. Add `"visible": false` to the project entry
 3. Rebuild and deploy
 
-The page will no longer appear in category listings or the portfolio hub, but the URL will still resolve. To make it completely inaccessible, also remove or comment out the entry.
+The project will no longer appear in category listings or the portfolio hub. For photography and video projects, the detail page is no longer exported on the next build, so the old URL becomes a 404.
 
 ---
 

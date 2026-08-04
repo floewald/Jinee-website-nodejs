@@ -137,9 +137,11 @@ src/
 │   │   └── page.tsx       ← Contact page: /contact/
 │   ├── portfolio/
 │   │   ├── page.tsx       ← Portfolio overview: /portfolio/
+│   │   ├── photography/page.tsx          ← Photography index: /portfolio/photography/
 │   │   ├── photography/[slug]/page.tsx   ← Individual photo project page
+│   │   ├── video/page.tsx                ← Video index: /portfolio/video/
 │   │   ├── video/[slug]/page.tsx         ← Individual video project page
-│   │   └── social-media/[slug]/page.tsx
+│   │   └── social-media/page.tsx         ← Social media index: /portfolio/social-media/
 │   └── globals.css        ← ALL custom CSS lives here
 │
 ├── components/            ← Reusable React building blocks

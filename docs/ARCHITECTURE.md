@@ -162,9 +162,8 @@ Photography / Video category index pages (src/app/portfolio/{photography,video}/
 Video project page (src/app/portfolio/video/[slug]/page.tsx)
 └─ VideoPlayer[]          — lazy-loaded YouTube embeds via IntersectionObserver
 
-Social media project page (src/app/portfolio/social-media/[slug]/page.tsx)
-├─ GalleryWithLightbox (optional) — hasGallery flag in config
-└─ CustomContent (optional) — raw HTML from config
+Social media index page (src/app/portfolio/social-media/page.tsx)
+└─ RevealGrid             — external Instagram previews grouped by section, with optional hashtag card bodies
 ```
 
 ---

@@ -1,34 +1,44 @@
 {
-  "timestamp": "2026-04-14T22:55:04.557Z",
+  "timestamp": "2026-07-28T18:59:13.418Z",
   "pages": {
     "/": {
-      "score": 59,
+      "score": 75,
       "metrics": {
-        "FCP": 1228,
-        "LCP": 29826,
-        "TBT": 40,
-        "CLS": 0.3147,
-        "SI": 2961
+        "FCP": 1225,
+        "LCP": 12617,
+        "TBT": 45,
+        "CLS": 0,
+        "SI": 1225
       }
     },
     "/portfolio/": {
-      "score": 66,
+      "score": 77,
       "metrics": {
-        "FCP": 1215,
-        "LCP": 48923,
+        "FCP": 1212,
+        "LCP": 6582,
         "TBT": 19,
         "CLS": 0,
-        "SI": 11019
+        "SI": 1212
       }
     },
-    "/portfolio/photography/": {
-      "score": 65,
+    "/portfolio/video/": {
+      "score": 80,
       "metrics": {
-        "FCP": 756,
-        "LCP": 28829,
+        "FCP": 1210,
+        "LCP": 5347,
         "TBT": 19,
         "CLS": 0,
-        "SI": 12099
+        "SI": 1210
+      }
+    },
+    "/portfolio/video/food-wasted/": {
+      "score": 88,
+      "metrics": {
+        "FCP": 1207,
+        "LCP": 3853,
+        "TBT": 18,
+        "CLS": 0,
+        "SI": 1207
       }
     }
   }

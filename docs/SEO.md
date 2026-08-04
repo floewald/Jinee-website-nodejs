@@ -162,7 +162,7 @@ robots: { index: false, follow: false },
 
 ### SEO-9 — Add BreadcrumbList structured data to portfolio category and project pages
 
-**Files**: `src/app/portfolio/photography/page.tsx`, `src/app/portfolio/video/page.tsx`, `src/app/portfolio/social-media/page.tsx`, `src/app/portfolio/[category]/[slug]/page.tsx`  
+**Files**: `src/app/portfolio/photography/page.tsx`, `src/app/portfolio/video/page.tsx`, `src/app/portfolio/social-media/page.tsx`, `src/app/portfolio/photography/[slug]/page.tsx`, `src/app/portfolio/video/[slug]/page.tsx`
 **Problem**: No breadcrumb structured data. Google uses `BreadcrumbList` to annotate search results with `/Portfolio > Photography > Event Photography` style links (breadcrumb rich result).
 
 **Fix example** (photography category page):

@@ -168,7 +168,7 @@ export default function PortfolioPage() {
           <div className={cx(instagramSection, "instagram-section")} style={{ "--sm-preview-cols": SOCIAL_MEDIA_PREVIEW_COLUMNS } as React.CSSProperties}>
             <RevealGrid className={cx(instagramPreviews, "instagram-previews")}>
             {socialMediaPreviews.map((project) => {
-              const href = project.instagramUrl ?? projectPath(project);
+              const href = project.instagramUrl ?? "/portfolio/social-media/";
               const isExternal = !!project.instagramUrl;
               return (
                 <Link

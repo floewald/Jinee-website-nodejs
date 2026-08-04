@@ -82,9 +82,11 @@ npm run dev
 │   │   ├── page.tsx           # Homepage (/, all 5 sections)
 │   │   ├── portfolio/
 │   │   │   ├── page.tsx       # Portfolio hub
+│   │   │   ├── photography/page.tsx
 │   │   │   ├── photography/[slug]/page.tsx
+│   │   │   ├── video/page.tsx
 │   │   │   ├── video/[slug]/page.tsx
-│   │   │   └── social-media/[slug]/page.tsx
+│   │   │   └── social-media/page.tsx
 │   │   ├── imprint/page.tsx
 │   │   └── privacy/page.tsx
 │   ├── components/
@@ -114,8 +116,8 @@ npm run dev
 │   └── content/
 │       └─ portfolio/
 │           ├─ photography.json  # Photography project definitions (9 projects)
-│           ├─ videography.json # Video project definitions (15 projects)
-│           ├─ social-media.json # Social media project definitions (3 projects)
+│           ├─ videography.json # Video project definitions (26 projects)
+│           ├─ social-media.json # Social media project definitions (27 projects)
 │           └─ index-config.json # Homepage featured section config
 ├── public/
 │   ├── assets/                # Images, fonts (symlinked from Jinee_website/assets/)
