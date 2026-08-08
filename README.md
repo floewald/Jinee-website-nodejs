@@ -140,13 +140,16 @@ npm run dev
 ├── docs/                      # Developer & contributor documentation
 │   ├── GLOSSARY.md
 │   ├── ARCHITECTURE.md
+│   ├── QUALITY-AND-DELIVERY.md
 │   ├── DEVELOPMENT.md
 │   ├── DEPLOYMENT.md
 │   ├── ADDING-PROJECTS.md
 │   ├── REQUIREMENTS.md
 │   ├── DESIGN.md
 │   ├── IMPROVEMENTS.md
+│   ├── retrospectives/
 │   └── MIGRATION-PROGRESS.md
+├── CONTRIBUTING.md            # Lightweight branch / PR / quality workflow
 ├── Jinee_website/             # Original site (kept as reference)
 ├── next.config.ts
 ├─ postcss.config.mjs
@@ -161,10 +164,12 @@ npm run dev
 |----------|----------|---------|
 | [docs/GETTING-STARTED.md](docs/GETTING-STARTED.md) | **New developers** | Complete beginner's guide — zero-knowledge intro to the tech stack, first-time setup, and day-to-day workflow |
 | [docs/GLOSSARY.md](docs/GLOSSARY.md) | Everyone | Shared vocabulary for repo-specific terms, motion patterns, and gallery concepts |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Contributors | Fast path for branch naming, PR flow, issue closing, testing, and merge conventions |
 | [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) | Developers / PMs | Functional and non-functional requirements; deferred items |
 | [docs/DESIGN.md](docs/DESIGN.md) | Developers | Detailed software design: modules, data model, algorithms, security, testing |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Developers | Component hierarchy, data flow, image pipeline, PHP endpoints |
 | [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | Developers | Full local setup, running PHP side-by-side, debugging |
+| [docs/QUALITY-AND-DELIVERY.md](docs/QUALITY-AND-DELIVERY.md) | Contributors | Lightweight quality harness: branches, PRs, hooks, TDD expectations, and retrospectives |
 | [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | Developers | FTP build & deploy, `.htaccess` redirects, smoke test |
 | [docs/ADDING-PROJECTS.md](docs/ADDING-PROJECTS.md) | Content editors | Step-by-step guide for adding new portfolio projects |
 | [docs/IMPROVEMENTS.md](docs/IMPROVEMENTS.md) | Developers | Completed backlog items and deferred items summary |
