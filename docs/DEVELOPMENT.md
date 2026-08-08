@@ -269,6 +269,8 @@ Before every `git push`, Husky runs `npm run check:pre-push` locally:
 
 This catches the expensive failures locally to save GitHub Actions minutes. It is still a local hook, so `git push --no-verify` can bypass it; the deploy workflow keeps remote build/output verification as a backstop.
 
+For the broader workflow around branch naming, PR issue-closing keywords, TDD expectations, and lightweight retrospectives, see [../CONTRIBUTING.md](../CONTRIBUTING.md) and [QUALITY-AND-DELIVERY.md](QUALITY-AND-DELIVERY.md).
+
 ---
 
 ## Code Style
