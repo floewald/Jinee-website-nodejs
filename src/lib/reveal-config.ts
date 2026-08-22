@@ -62,7 +62,7 @@ export const SOCIAL_PREVIEW_REVEAL_PRESET = {
   entryOffsetPx: 100,
   settleOffsetPx: 300,
   offsetPx: 60,
-  exitStartPx: 40,
+  exitStartPx: -60,
   exitRangePx: 280,
   exitOffsetPx: 18,
   exitEndOpacity: 0.32,
