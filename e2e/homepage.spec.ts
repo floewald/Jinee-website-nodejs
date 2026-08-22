@@ -58,4 +58,14 @@ test.describe("Homepage", () => {
     const emailLink = page.locator("footer a[href='mailto:hello@jineechen.com']");
     await expect(emailLink).toBeAttached();
   });
+
+  test("reveal debug query param exposes live gallery tile state", async ({ page }) => {
+    await page.goto("/?revealDebug=1");
+
+    await page.mouse.wheel(0, 500);
+
+    const tickTile = page.locator(".gallery-item[data-reveal-debug-enabled='true'][data-reveal-debug-phase='tick']").first();
+    await expect(tickTile).toBeAttached();
+    await expect(tickTile).toHaveAttribute("data-reveal-debug-summary", /tick:/);
+  });
 });

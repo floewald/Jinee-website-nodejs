@@ -13,6 +13,7 @@
     "check:pre-commit": "npx lint-staged && npm run validate:manifests",
     "check:pre-push": "npm run lint && npm test -- --runInBand && npm run validate:manifests && npm run build:next",
     "create-project": "node scripts/create-project.mjs",
+    "download:youtube-thumbnail": "node scripts/download-youtube-thumbnail.mjs",
     "generate:lqip": "node scripts/generate-lqip.mjs",
     "start": "next start",
     "lint": "eslint",

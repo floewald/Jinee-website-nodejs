@@ -66,6 +66,15 @@ describe("buildSkeletonEntry()", () => {
     expect((entry as { videos: unknown[] }).videos).toHaveLength(1);
   });
 
+  it("prefills the video embed URL when a YouTube ID is provided", () => {
+    const entry = buildSkeletonEntry("video", "my-doc", "My Documentary", {
+      videoId: "dQw4w9WgXcQ",
+    });
+    expect((entry as { videos: Array<{ embedUrl: string }> }).videos[0]?.embedUrl).toBe(
+      "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    );
+  });
+
   it("builds a social-media skeleton that matches the current Instagram-link flow", () => {
     const entry = buildSkeletonEntry("social-media", "ig-reel", "IG Reel");
     expect(entry.type).toBe("social-media");

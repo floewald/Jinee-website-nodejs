@@ -1,6 +1,8 @@
 import {
   clampRevealProgress,
+  getRevealExitProgressFromTop,
   getRevealProgressFromRect,
+  isInRevealExitBand,
   shouldSettleImmediately,
 } from "@/lib/reveal-progress";
 
@@ -66,5 +68,135 @@ describe("reveal-progress", () => {
     });
 
     expect(early).toBeLessThan(late);
+  });
+
+  it("decreases exit progress as the item moves toward and above the top edge", () => {
+    const early = getRevealExitProgressFromTop({
+      top: 220,
+      exitStartPx: 220,
+      exitRangePx: 280,
+    });
+    const late = getRevealExitProgressFromTop({
+      top: 40,
+      exitStartPx: 220,
+      exitRangePx: 280,
+    });
+
+    expect(early).toBeGreaterThan(late);
+  });
+
+  it("keeps exit motion inactive inside the entry-side hysteresis zone", () => {
+    expect(
+      isInRevealExitBand({
+        top: 80,
+        exitStartPx: 90,
+        exitHysteresisPx: 16,
+        wasExiting: false,
+      })
+    ).toBe(false);
+  });
+
+  it("keeps exit motion active inside the release-side hysteresis zone", () => {
+    expect(
+      isInRevealExitBand({
+        top: 100,
+        exitStartPx: 90,
+        exitHysteresisPx: 16,
+        wasExiting: true,
+      })
+    ).toBe(true);
+  });
+
+  it("releases exit motion once the tile is clearly below the hysteresis band", () => {
+    expect(
+      isInRevealExitBand({
+        top: 108,
+        exitStartPx: 90,
+        exitHysteresisPx: 16,
+        wasExiting: true,
+      })
+    ).toBe(false);
+  });
+
+  it("keeps exit motion inactive when a tile has only barely started clipping", () => {
+    expect(
+      isInRevealExitBand({
+        top: -10,
+        exitStartPx: 0,
+        exitHysteresisPx: 12,
+        exitVisibleRatio: 0.92,
+        exitVisibleRatioThreshold: 0.72,
+        exitVisibleRatioHysteresis: 0.08,
+        wasExiting: false,
+      })
+    ).toBe(false);
+  });
+
+  it("starts exit motion once a clipped tile falls below the visible-ratio threshold", () => {
+    expect(
+      isInRevealExitBand({
+        top: -72,
+        exitStartPx: 0,
+        exitHysteresisPx: 12,
+        exitVisibleRatio: 0.64,
+        exitVisibleRatioThreshold: 0.72,
+        exitVisibleRatioHysteresis: 0.08,
+        wasExiting: false,
+      })
+    ).toBe(true);
+  });
+
+  it("keeps project-gallery exit inactive while a tall portrait still has most of its height visible", () => {
+    expect(
+      isInRevealExitBand({
+        top: -64,
+        exitStartPx: 75,
+        exitHysteresisPx: 10,
+        exitVisibleRatio: 0.88,
+        exitVisibleRatioThreshold: 0.75,
+        exitVisibleRatioHysteresis: 0.08,
+        wasExiting: false,
+      })
+    ).toBe(false);
+  });
+
+  it("allows project-gallery exit once the same top position belongs to a shorter tile", () => {
+    expect(
+      isInRevealExitBand({
+        top: -64,
+        exitStartPx: 75,
+        exitHysteresisPx: 10,
+        exitVisibleRatio: 0.74,
+        exitVisibleRatioThreshold: 0.75,
+        exitVisibleRatioHysteresis: 0.08,
+        wasExiting: false,
+      })
+    ).toBe(true);
+  });
+
+  it("can use a pure top-edge exit gate when a layout should ignore height differences", () => {
+    expect(
+      isInRevealExitBand({
+        top: -24,
+        exitStartPx: 0,
+        exitHysteresisPx: 12,
+        exitVisibleRatio: 0.88,
+        wasExiting: false,
+      })
+    ).toBe(true);
+  });
+
+  it("holds exit motion until visible ratio clearly recovers above the hysteresis band", () => {
+    expect(
+      isInRevealExitBand({
+        top: 6,
+        exitStartPx: 0,
+        exitHysteresisPx: 12,
+        exitVisibleRatio: 0.76,
+        exitVisibleRatioThreshold: 0.72,
+        exitVisibleRatioHysteresis: 0.08,
+        wasExiting: true,
+      })
+    ).toBe(true);
   });
 });

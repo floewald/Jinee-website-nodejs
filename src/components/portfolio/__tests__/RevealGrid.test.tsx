@@ -73,4 +73,33 @@ describe("RevealGrid", () => {
       .results[0].value;
     expect(mockObserver.observe).toHaveBeenCalledTimes(2);
   });
+
+  it("observes out-of-range .instagram-preview children with the social preset hook", () => {
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(
+        () =>
+          ({
+            top: 2000,
+            bottom: 2711,
+            left: 0,
+            right: 400,
+            width: 400,
+            height: 711,
+            x: 0,
+            y: 2000,
+            toJSON: () => ({}),
+          }) as DOMRect
+      );
+
+    render(
+      <RevealGrid>
+        <a className="instagram-preview">Preview 1</a>
+        <a className="instagram-preview">Preview 2</a>
+      </RevealGrid>
+    );
+    const mockObserver = (global.IntersectionObserver as jest.Mock).mock
+      .results[0].value;
+    expect(mockObserver.observe).toHaveBeenCalledTimes(2);
+  });
 });

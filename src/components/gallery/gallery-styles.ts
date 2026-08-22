@@ -63,6 +63,7 @@ export const galleryPlaceholderSurface = css({
 /** `gallery-item` — clickable image wrapper */
 export const galleryItem = css({
   display: "block",
+  position: "relative",
   border: "none",
   background: "none",
   padding: 0,
@@ -71,8 +72,30 @@ export const galleryItem = css({
   borderRadius: "var(--radius-md)",
   width: "100%",
   opacity: "var(--reveal-opacity, 1)",
-  transform: "translateY(var(--reveal-translate-y, 0px))",
+  transform: "translate3d(0, var(--reveal-translate-y, 0px), 0)",
   willChange: "opacity, transform",
+  backfaceVisibility: "hidden",
+  '&[data-reveal-debug-enabled="true"]': {
+    boxShadow: "inset 0 0 0 1px rgba(214, 82, 42, 0.9)",
+  },
+  '&[data-reveal-debug-enabled="true"]::after': {
+    content: "attr(data-reveal-debug-summary)",
+    position: "absolute",
+    top: "0.45rem",
+    left: "0.45rem",
+    zIndex: 2,
+    maxWidth: "calc(100% - 0.9rem)",
+    padding: "0.3rem 0.4rem",
+    borderRadius: "0.45rem",
+    background: "rgba(18, 15, 12, 0.78)",
+    color: "#fff7f1",
+    fontSize: "0.58rem",
+    lineHeight: 1.35,
+    fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    whiteSpace: "pre-line",
+    textAlign: "left",
+    pointerEvents: "none",
+  },
 });
 
 /** `gallery-item__trigger` — inner button in selection mode */
@@ -93,5 +116,13 @@ export const galleryImg = css({
   height: "auto",
   display: "block",
   borderRadius: 0,
+  WebkitMaskImage:
+    "linear-gradient(to bottom, transparent 0%, #000 var(--reveal-exit-mask-start, 0%), #000 100%)",
+  maskImage:
+    "linear-gradient(to bottom, transparent 0%, #000 var(--reveal-exit-mask-start, 0%), #000 100%)",
+  WebkitMaskRepeat: "no-repeat",
+  maskRepeat: "no-repeat",
+  WebkitMaskSize: "100% 100%",
+  maskSize: "100% 100%",
   transition: "transform 0.35s ease",
 });

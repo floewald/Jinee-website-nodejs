@@ -40,6 +40,62 @@ export const VIDEO_REVEAL_PRESET = {
   entryOffsetPx: 100,
   settleOffsetPx: 200,
   offsetPx: 60,
+  exitStartPx: 180,
+  exitRangePx: 240,
+  exitOffsetPx: 24,
+  exitEndOpacity: 0.38,
+} as const;
+
+export const TEASER_REVEAL_PRESET = {
+  startOpacity: 0.15,
+  entryOffsetPx: 100,
+  settleOffsetPx: 300,
+  offsetPx: 60,
+  exitStartPx: 75,
+  exitRangePx: 280,
+  exitOffsetPx: 18,
+  exitEndOpacity: 0.32,
+} as const;
+
+export const SOCIAL_PREVIEW_REVEAL_PRESET = {
+  startOpacity: 0.15,
+  entryOffsetPx: 100,
+  settleOffsetPx: 300,
+  offsetPx: 60,
+  exitStartPx: 40,
+  exitRangePx: 280,
+  exitOffsetPx: 18,
+  exitEndOpacity: 0.32,
+} as const;
+
+export const GALLERY_REVEAL_PRESET = {
+  startOpacity: 0.15,
+  entryOffsetPx: 100,
+  settleOffsetPx: 300,
+  offsetPx: 60,
+  exitStartPx: 75,
+  exitRangePx: 220,
+  exitHysteresisPx: 10,
+  exitVisibleRatioThresholdLandscape: 2,
+  exitVisibleRatioThresholdPortrait: 0.55,
+  exitVisibleRatioHysteresis: 0.08,
+  exitOffsetPx: 12,
+  exitEndOpacity: 0.52,
+  exitMaskMaxStartPercent: 14,
+} as const;
+
+export const COLLAGE_REVEAL_PRESET = {
+  startOpacity: 0.15,
+  entryOffsetPx: 100,
+  settleOffsetPx: 320,
+  offsetPx: 56,
+  exitGateMode: "top",
+  exitStartPx: 0,
+  exitRangePx: 160,
+  exitHysteresisPx: 12,
+  exitOffsetPx: 6,
+  exitEndOpacity: 0.9,
+  exitMaskMaxStartPercent: 0,
 } as const;
 
 export const GRID_REVEAL_PRESET = {

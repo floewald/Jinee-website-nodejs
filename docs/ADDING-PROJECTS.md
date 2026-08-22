@@ -10,12 +10,24 @@ Make sure your development environment is running. If you haven't set it up yet,
 
 The basic workflow for any content change is:
 
-1. Add/edit the content (images + JSON config)
-2. Run `npm run build` (this already runs `npm run build:images` first)
+1. Create or switch to a feature branch first. Do not work directly on `main`.
+2. Add/edit the content (images + JSON config)
+3. Run `npm run build` (this already runs `npm run build:images` first)
 4. Deploy the new `out/` folder to the server
 
 For faster iteration while editing images only, you can still run
 `npm run build:images` directly before `npm run build`.
+
+For most new portfolio entries, start with:
+
+```bash
+npm run create-project
+```
+
+That scaffolds the folder and JSON entry for you. For video projects, you can
+paste a YouTube URL during the prompt and the script will also try to download
+the thumbnail into `assets-raw/videography/<slug>/<slug>-1.jpg` by calling the
+sibling `../yt-thumb-down` repo (or the path in `YT_THUMB_DOWN_PATH`).
 
 ---
 
@@ -167,12 +179,35 @@ Open `out/portfolio/photography/my-new-project/index.html` in your browser to pr
 
 ## Adding a Video Project
 
-### Step 1: Upload to YouTube
+### Step 1: Scaffold the project
+
+Run:
+
+```bash
+npm run create-project
+```
+
+Choose `video`, enter the slug and title, then paste the YouTube URL or ID when
+prompted. The scaffold will:
+
+- create `assets-raw/videography/<slug>/`
+- append a starter entry to `src/content/portfolio/videography.json`
+- prefill `videos[0].embedUrl` when it can parse the YouTube ID
+- download the first project thumbnail into `<slug>-1.jpg` when
+  `../yt-thumb-down` is available
+
+If you want to retry the thumbnail step later, run:
+
+```bash
+npm run download:youtube-thumbnail -- --type video --slug my-video-project --youtube https://www.youtube.com/watch?v=dQw4w9WgXcQ
+```
+
+### Step 2: Upload to YouTube
 
 Upload the video(s) to YouTube and note the video ID from the URL:
 `https://www.youtube.com/watch?v=`**`dQw4w9WgXcQ`** ← this is the ID
 
-### Step 2: Add a thumbnail image (optional)
+### Step 3: Add a thumbnail image (optional)
 
 If you want a custom thumbnail for the project (instead of the YouTube auto-thumbnail), add it:
 
@@ -183,7 +218,7 @@ assets-raw/videography/my-video-project/thumbnail.jpg
 Run `npm run build` to generate WebP versions and update the static export.
 For image-only iteration, `npm run build:images` is also available.
 
-### Step 3: Add the video project config
+### Step 4: Add the video project config
 
 Open `src/content/portfolio/videography.json` and add a new entry to the JSON array:
 
@@ -194,7 +229,8 @@ Open `src/content/portfolio/videography.json` and add a new entry to the JSON ar
   "title": "Client Name | Video Series Title",
   "description": "Short description (120–160 chars).",
   "longDescription": "Longer intro paragraph shown at the top of the project page. Can be multiple sentences.",
-  "heading": "📍 Singapore | Producer | Director | Videographer",
+  "heading": "Producer | Director | Videographer",
+  "location": "📍 Singapore",
   "ogImage": "https://jineechen.com/assets/videography/my-video-project/thumbnail-800.webp",
   "videos": [
     {
@@ -224,8 +260,9 @@ Open `src/content/portfolio/videography.json` and add a new entry to the JSON ar
 - `portfolioCard` is optional — omit if you don't want a card on the portfolio category page
 - `portfolioCard.previewImages`: optional array of 2–3 image paths (use `-800.webp`). When provided, the card auto-cycles through the images. If the project folder has multiple `*-800.webp` thumbnails, add up to 3 here.
 - `showSlideshow` is not used for video projects (video pages show YouTube embeds, not a photo slideshow)
+- Use `description`, `longDescription`, and per-episode `videos[].description` to describe the story, subject, or format. Do not repeat what Jinee did there — the `heading` already carries the role description.
 
-### Step 4: Build
+### Step 5: Build
 
 ```bash
 npm run build

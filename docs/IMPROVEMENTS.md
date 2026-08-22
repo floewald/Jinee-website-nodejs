@@ -52,6 +52,7 @@ For the technical design see [DESIGN.md](DESIGN.md).
 | Frontend API URLs updated to `/backend/…` prefix (FR-04.8) | Requires live FTP server |
 | FTP deployment smoke test (NFR-06.7) | Requires live FTP server |
 | Lighthouse / visual regression / OG debugger | Requires deployed site |
+| Remove temporary reveal debug helpers and archive the collage reveal FTA once Safari/Chrome/mobile behavior is verified | Temporary investigation scaffolding |
 | TinaCMS (Phase 7) | Deferred indefinitely |
 | Pinch-to-zoom in lightbox | Deferred — tap-to-zoom (2.2×) covers use case; would need gesture library |
 | Safe area insets (`env(safe-area-inset-*)`) | Deferred — only needed if PWA mode is planned |

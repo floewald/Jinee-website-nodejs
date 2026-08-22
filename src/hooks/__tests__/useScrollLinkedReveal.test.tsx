@@ -1,18 +1,21 @@
 import { act, render, screen } from "@testing-library/react";
 import { useEffect, useRef } from "react";
 import { useScrollLinkedReveal } from "@/hooks/useScrollLinkedReveal";
+import { COLLAGE_REVEAL_PRESET } from "@/lib/reveal-config";
 import { RevealState } from "@/lib/reveal-state";
 
 let surfaceTop = 0;
+let surfaceWidth = 300;
+let surfaceHeight = 200;
 
 function makeRect(top: number) {
   return {
     top,
-    bottom: top + 200,
+    bottom: top + surfaceHeight,
     left: 0,
-    right: 300,
-    width: 300,
-    height: 200,
+    right: surfaceWidth,
+    width: surfaceWidth,
+    height: surfaceHeight,
     x: 0,
     y: top,
     toJSON: () => ({}),
@@ -46,11 +49,13 @@ function TestSurface({
   initialRevealState,
   resetKey,
   surfaceId = "surface",
+  options,
 }: {
   initialTop: number;
   initialRevealState?: Exclude<RevealState, "eligible">;
   resetKey?: string;
   surfaceId?: string;
+  options?: Record<string, number | string | undefined>;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -61,7 +66,10 @@ function TestSurface({
   useScrollLinkedReveal(
     ref,
     ".reveal-target",
-    resetKey === undefined ? undefined : { resetKey }
+    {
+      ...(options ?? {}),
+      ...(resetKey === undefined ? {} : { resetKey }),
+    }
   );
 
   return (
@@ -99,6 +107,12 @@ function fireScrollFrame({ top }: { top: number }) {
   });
 }
 
+function armExitMotion() {
+  act(() => {
+    window.dispatchEvent(new WheelEvent("wheel"));
+  });
+}
+
 const rafCallbacks: FrameRequestCallback[] = [];
 
 describe("useScrollLinkedReveal", () => {
@@ -126,6 +140,9 @@ describe("useScrollLinkedReveal", () => {
     MockIntersectionObserver.instances = [];
     rafCallbacks.length = 0;
     surfaceTop = 0;
+    surfaceWidth = 300;
+    surfaceHeight = 200;
+    window.history.replaceState({}, "", "/");
     (window.requestAnimationFrame as jest.Mock).mockClear();
     (window.cancelAnimationFrame as jest.Mock).mockClear();
 
@@ -139,6 +156,12 @@ describe("useScrollLinkedReveal", () => {
       configurable: true,
       writable: true,
       value: 1200,
+    });
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 0,
     });
 
     jest
@@ -227,5 +250,452 @@ describe("useScrollLinkedReveal", () => {
     expect(MockIntersectionObserver.instances[1].observe).toHaveBeenCalledWith(
       screen.getByTestId("two")
     );
+  });
+
+  it("keeps scroll-linked items active after entry when exit motion is enabled", () => {
+    render(
+      <TestSurface
+        initialTop={980}
+        options={{
+          exitStartPx: 220,
+          exitRangePx: 280,
+          exitOffsetPx: 18,
+          exitEndOpacity: 0.32,
+        }}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 300,
+    });
+    fireScrollFrame({ top: 540 });
+
+    expect(surface).not.toHaveAttribute("data-reveal-state", "settled");
+    expect(MockIntersectionObserver.instances[0].unobserve).not.toHaveBeenCalledWith(
+      surface
+    );
+  });
+
+  it("does not apply the exit fade to an initially visible item before the user scrolls", () => {
+    render(
+      <TestSurface
+        initialTop={120}
+        options={{
+          exitStartPx: 220,
+          exitRangePx: 280,
+          exitOffsetPx: 18,
+          exitEndOpacity: 0.32,
+        }}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+    fireScrollFrame({ top: 120 });
+
+    expect(surface).not.toHaveAttribute("data-reveal-state", "settled");
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+  });
+
+  it("publishes live reveal debug state when the query param is enabled", () => {
+    window.history.replaceState({}, "", "/?revealDebug=1");
+
+    render(
+      <TestSurface
+        initialTop={120}
+        options={{
+          exitStartPx: 220,
+          exitRangePx: 280,
+          exitOffsetPx: 18,
+          exitEndOpacity: 0.32,
+        }}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+    fireScrollFrame({ top: 120 });
+
+    expect(surface).toHaveAttribute("data-reveal-debug-enabled", "true");
+    expect(surface).toHaveAttribute("data-reveal-debug-phase", "tick");
+    expect(surface).toHaveAttribute("data-reveal-debug-reason", "hold-visible-before-scroll");
+    expect(surface.getAttribute("data-reveal-debug-summary")).toContain(
+      "tick:hold-visible-before-scroll"
+    );
+  });
+
+  it("keeps initially visible tiles locked at full entry after scroll arms exit motion", () => {
+    render(
+      <TestSurface
+        initialTop={520}
+        options={{
+          exitStartPx: 220,
+          exitRangePx: 280,
+          exitOffsetPx: 18,
+          exitEndOpacity: 0.32,
+        }}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+    armExitMotion();
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 120,
+    });
+    fireScrollFrame({ top: 460 });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+  });
+
+  it("applies a separate exit fade once exit motion is armed by user scroll intent", () => {
+    render(
+      <TestSurface
+        initialTop={980}
+        options={{
+          exitStartPx: 220,
+          exitRangePx: 280,
+          exitOffsetPx: 18,
+          exitEndOpacity: 0.32,
+        }}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+    armExitMotion();
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 600,
+    });
+    fireScrollFrame({ top: 120 });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 640,
+    });
+    fireScrollFrame({ top: 80 });
+
+    expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(1);
+    expect(Number.parseFloat(surface.style.getPropertyValue("--reveal-translate-y"))).toBeLessThan(0);
+  });
+
+  it("keeps the tile fully shown while it hovers inside the configured exit hysteresis zone", () => {
+    render(
+      <TestSurface
+        initialTop={980}
+        options={{
+          exitStartPx: 90,
+          exitRangePx: 200,
+          exitOffsetPx: 10,
+          exitEndOpacity: 0.72,
+          exitHysteresisPx: 16,
+        }}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+    armExitMotion();
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 600,
+    });
+    fireScrollFrame({ top: 80 });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+  });
+
+  it("does not arm exit fade from wheel intent alone when scroll position did not change", () => {
+    render(
+      <TestSurface
+        initialTop={980}
+        options={{
+          exitStartPx: 90,
+          exitRangePx: 200,
+          exitOffsetPx: 10,
+          exitEndOpacity: 0.72,
+          exitHysteresisPx: 16,
+        }}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+    armExitMotion();
+    fireScrollFrame({ top: 60 });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+  });
+
+  it("starts the exit fade once the tile moves past the exit hysteresis zone", () => {
+    render(
+      <TestSurface
+        initialTop={980}
+        options={{
+          exitStartPx: 90,
+          exitRangePx: 200,
+          exitOffsetPx: 10,
+          exitEndOpacity: 0.72,
+          exitHysteresisPx: 16,
+        }}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+    armExitMotion();
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 620,
+    });
+    fireScrollFrame({ top: 60 });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 660,
+    });
+    fireScrollFrame({ top: 20 });
+
+    expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(1);
+    expect(Number.parseFloat(surface.style.getPropertyValue("--reveal-translate-y"))).toBeLessThan(0);
+  });
+
+  it("keeps collage tiles fully shown while their top edge is still inside the viewport", () => {
+    render(
+      <TestSurface
+        initialTop={980}
+        options={COLLAGE_REVEAL_PRESET}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+    armExitMotion();
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 620,
+    });
+    fireScrollFrame({ top: 40 });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+  });
+
+  it("starts collage exit only after enough of the tile has actually clipped past the top edge", () => {
+    render(
+      <TestSurface
+        initialTop={980}
+        options={COLLAGE_REVEAL_PRESET}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+    armExitMotion();
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 808,
+    });
+    fireScrollFrame({ top: -8 });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 816,
+    });
+    fireScrollFrame({ top: -16 });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 856,
+    });
+    fireScrollFrame({ top: -56 });
+
+    expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(1);
+    expect(Number.parseFloat(surface.style.getPropertyValue("--reveal-translate-y"))).toBeLessThan(0);
+  });
+
+  it("lets tall collage tiles exit on the same top-edge rule as shorter tiles", () => {
+    surfaceWidth = 300;
+    surfaceHeight = 684;
+
+    render(
+      <TestSurface
+        initialTop={980}
+        options={COLLAGE_REVEAL_PRESET}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+    armExitMotion();
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 816,
+    });
+    fireScrollFrame({ top: -16 });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 896,
+    });
+    fireScrollFrame({ top: -96 });
+
+    expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(1);
+    expect(Number.parseFloat(surface.style.getPropertyValue("--reveal-translate-y"))).toBeLessThan(0);
+  });
+
+  it("re-activates a still-visible exit tile on scroll after a spurious observer leave", () => {
+    render(
+      <TestSurface
+        initialTop={980}
+        options={COLLAGE_REVEAL_PRESET}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+    armExitMotion();
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 928,
+    });
+    fireScrollFrame({ top: -48 });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 1008,
+    });
+    fireScrollFrame({ top: -128 });
+
+    expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(1);
+    expect(Number.parseFloat(surface.style.getPropertyValue("--reveal-translate-y"))).toBeLessThan(0);
+
+    fireObserverEntry({ target: surface, isIntersecting: false });
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 928,
+    });
+    fireScrollFrame({ top: -48 });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+  });
+
+  it("starts exit from a smooth anchor when a visible-ratio gate opens late", () => {
+    surfaceWidth = 300;
+    surfaceHeight = 554;
+
+    render(
+      <TestSurface
+        initialTop={256}
+        options={{
+          exitStartPx: 75,
+          exitRangePx: 220,
+          exitOffsetPx: 12,
+          exitEndOpacity: 0.52,
+          exitVisibleRatioThreshold: 0.75,
+          exitVisibleRatioHysteresis: 0.08,
+        }}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+    fireScrollFrame({ top: 256 });
+    armExitMotion();
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 400,
+    });
+    fireScrollFrame({ top: -144 });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 440,
+    });
+    fireScrollFrame({ top: -184 });
+
+    expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(1);
+    expect(Number.parseFloat(surface.style.getPropertyValue("--reveal-translate-y"))).toBeLessThan(0);
+  });
+
+  it("lets portrait tiles hold longer than landscape tiles when aspect-specific thresholds are configured", () => {
+    surfaceWidth = 300;
+    surfaceHeight = 554;
+
+    render(
+      <TestSurface
+        initialTop={256}
+        options={{
+          exitStartPx: 75,
+          exitRangePx: 220,
+          exitOffsetPx: 12,
+          exitEndOpacity: 0.52,
+          exitVisibleRatioThresholdLandscape: 0.75,
+          exitVisibleRatioThresholdPortrait: 0.55,
+          exitVisibleRatioHysteresis: 0.08,
+        }}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+    fireScrollFrame({ top: 256 });
+    armExitMotion();
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 360,
+    });
+    fireScrollFrame({ top: -104 });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
   });
 });

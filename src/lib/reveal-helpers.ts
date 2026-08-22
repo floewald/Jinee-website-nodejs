@@ -22,9 +22,13 @@ export interface RevealAnimationOptions {
   easing?: string;
 }
 
+export const REVEAL_LAYOUT_INVALIDATED_EVENT = "reveal:layout-invalidated";
+
 const CSS_REVEAL_PROGRESS = "--reveal-progress";
 const CSS_REVEAL_OPACITY = "--reveal-opacity";
 const CSS_REVEAL_TRANSLATE_Y = "--reveal-translate-y";
+const CSS_REVEAL_EXIT_PROGRESS = "--reveal-exit-progress";
+const CSS_REVEAL_EXIT_MASK_START = "--reveal-exit-mask-start";
 
 function prefersReducedMotion() {
   return typeof window !== "undefined" &&
@@ -124,16 +128,59 @@ export function applyRevealProgress(
   offsetPx = REVEAL_OFFSET_PX,
   startOpacity = REVEAL_START_OPACITY
 ) {
-  const clampedProgress = clampRevealProgress(progress);
-  const opacity = startOpacity + (1 - startOpacity) * clampedProgress;
-  const translateY = offsetPx * (1 - clampedProgress);
+  applyBidirectionalRevealProgress(item, {
+    entryProgress: progress,
+    entryOffsetPx: offsetPx,
+    startOpacity,
+  });
+}
 
-  item.style.setProperty(CSS_REVEAL_PROGRESS, `${clampedProgress}`);
+export function applyBidirectionalRevealProgress(
+  item: HTMLElement,
+  input: {
+    entryProgress: number;
+    entryOffsetPx?: number;
+    startOpacity?: number;
+    exitProgress?: number;
+    exitOffsetPx?: number;
+    exitEndOpacity?: number;
+    exitMaskMaxStartPercent?: number;
+  }
+) {
+  const entryProgress = clampRevealProgress(input.entryProgress);
+  const exitProgress = clampRevealProgress(input.exitProgress ?? 1);
+  const startOpacity = input.startOpacity ?? REVEAL_START_OPACITY;
+  const exitEndOpacity = input.exitEndOpacity ?? startOpacity;
+  const exitMaskMaxStartPercent = input.exitMaskMaxStartPercent ?? 0;
+  const entryOpacity = startOpacity + (1 - startOpacity) * entryProgress;
+  const exitOpacity = exitEndOpacity + (1 - exitEndOpacity) * exitProgress;
+  const opacity = Math.min(entryOpacity, exitOpacity);
+  const translateY =
+    (input.entryOffsetPx ?? REVEAL_OFFSET_PX) * (1 - entryProgress) -
+    (input.exitOffsetPx ?? 0) * (1 - exitProgress);
+  const combinedProgress = Math.min(entryProgress, exitProgress);
+  const exitMaskStartPercent = exitMaskMaxStartPercent * (1 - exitProgress);
+
+  item.style.setProperty(CSS_REVEAL_PROGRESS, `${combinedProgress}`);
   item.style.setProperty(CSS_REVEAL_OPACITY, `${opacity}`);
   item.style.setProperty(CSS_REVEAL_TRANSLATE_Y, `${translateY}px`);
+  item.style.setProperty(CSS_REVEAL_EXIT_PROGRESS, `${exitProgress}`);
+  item.style.setProperty(CSS_REVEAL_EXIT_MASK_START, `${exitMaskStartPercent}%`);
 }
 
 export function settleScrollLinkedReveal(item: HTMLElement) {
   applyRevealProgress(item, 1, 0, 1);
   markRevealSettled(item);
+}
+
+export function showScrollLinkedReveal(item: HTMLElement) {
+  applyRevealProgress(item, 1, 0, 1);
+}
+
+export function notifyRevealLayoutInvalidated() {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  window.dispatchEvent(new Event(REVEAL_LAYOUT_INVALIDATED_EVENT));
 }

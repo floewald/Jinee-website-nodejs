@@ -2,7 +2,10 @@
 
 import { useRef, type ReactNode } from "react";
 import { useScrollLinkedReveal } from "@/hooks/useScrollLinkedReveal";
-import { GRID_REVEAL_PRESET } from "@/lib/reveal-config";
+import {
+  SOCIAL_PREVIEW_REVEAL_PRESET,
+  TEASER_REVEAL_PRESET,
+} from "@/lib/reveal-config";
 import { cx } from "@/styled-system/css";
 import { revealGrid } from "./featured-styles";
 
@@ -12,7 +15,8 @@ interface RevealGridProps {
   className?: string;
 }
 
-const REVEAL_TARGET_SELECTOR = ".project-card, .instagram-preview";
+const PROJECT_CARD_SELECTOR = ".project-card";
+const SOCIAL_PREVIEW_SELECTOR = ".instagram-preview";
 
 /**
  * Thin client wrapper that adds fail-open scroll-linked motion to teaser
@@ -21,7 +25,8 @@ const REVEAL_TARGET_SELECTOR = ".project-card, .instagram-preview";
  */
 export default function RevealGrid({ children, className }: RevealGridProps) {
   const ref = useRef<HTMLDivElement>(null);
-  useScrollLinkedReveal(ref, REVEAL_TARGET_SELECTOR, GRID_REVEAL_PRESET);
+  useScrollLinkedReveal(ref, PROJECT_CARD_SELECTOR, TEASER_REVEAL_PRESET);
+  useScrollLinkedReveal(ref, SOCIAL_PREVIEW_SELECTOR, SOCIAL_PREVIEW_REVEAL_PRESET);
 
   return (
     <div ref={ref} className={cx(revealGrid, className)}>

@@ -3,6 +3,7 @@ import path from "node:path";
 import { render, screen, fireEvent } from "@testing-library/react";
 import GalleryGrid from "@/components/gallery/GalleryGrid";
 import type { GalleryImage } from "@/components/gallery/Lightbox";
+import { REVEAL_LAYOUT_INVALIDATED_EVENT } from "@/lib/reveal-helpers";
 
 jest.mock("next/image", () => ({
   __esModule: true,
@@ -80,6 +81,7 @@ describe("GalleryGrid", () => {
   beforeEach(() => {
     animateMock.mockReset();
     MockIntersectionObserver.instances = [];
+    window.history.replaceState({}, "", "/");
     Object.defineProperty(window, "scrollY", {
       configurable: true,
       writable: true,
@@ -203,7 +205,21 @@ describe("GalleryGrid", () => {
     expect(window.getComputedStyle(firstItem!).opacity).not.toBe("0");
   });
 
-  it("settles visible gallery items from image load events after scroll", () => {
+  it("invalidates reveal layout when an image finishes loading", () => {
+    const dispatchEventSpy = jest.spyOn(window, "dispatchEvent");
+
+    render(<GalleryGrid images={IMAGES} onImageClick={jest.fn()} />);
+
+    const image = screen.getByRole("img", { name: "Photo A" });
+    fireEvent.load(image);
+
+    expect(dispatchEventSpy).toHaveBeenCalledWith(expect.any(Event));
+    expect(dispatchEventSpy.mock.calls.some(([event]) => event.type === REVEAL_LAYOUT_INVALIDATED_EVENT))
+      .toBe(true);
+    expect(image.closest(".gallery-item")).toHaveAttribute("data-reveal-image-loaded", "true");
+  });
+
+  it("does not reset a visible gallery item from image load after the user has scrolled", () => {
     const rectVisibleInViewport = {
       top: 40,
       bottom: 240,
@@ -229,9 +245,13 @@ describe("GalleryGrid", () => {
     render(<GalleryGrid images={IMAGES} onImageClick={jest.fn()} />);
 
     const image = screen.getByRole("img", { name: "Photo A" });
+    const item = image.closest(".gallery-item") as HTMLElement;
+    item.style.setProperty("--reveal-opacity", "0.5");
+    item.style.setProperty("--reveal-translate-y", "-8px");
+
     fireEvent.load(image);
 
-    expect(animateMock).not.toHaveBeenCalled();
-    expect(image.closest(".gallery-item")).toHaveAttribute("data-reveal-state", "settled");
+    expect(item.style.getPropertyValue("--reveal-opacity")).toBe("0.5");
+    expect(item.style.getPropertyValue("--reveal-translate-y")).toBe("-8px");
   });
 });
