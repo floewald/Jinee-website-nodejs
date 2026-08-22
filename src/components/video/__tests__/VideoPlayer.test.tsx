@@ -191,9 +191,10 @@ describe("VideoPlayer", () => {
     expect(ioInstances[0].observe).toHaveBeenCalledTimes(rows.length);
   });
 
-  it("settles a row to full opacity once the observer reports it on-screen", () => {
+  it("shows a row at full opacity once the observer reports it on-screen", () => {
     // Soft-nav recovery: even if a row first measured off-screen, once it is
-    // reported intersecting/visible the shared hook settles it to full opacity.
+    // reported intersecting/visible the shared hook drives it to the fully
+    // shown state while keeping it eligible for later exit motion.
     stubRect({ top: 100, bottom: 300 }); // on-screen
     render(<VideoPlayer videos={[videos[0]]} />);
     const item = document.querySelector(".video-episode-row") as HTMLElement;
@@ -211,7 +212,9 @@ describe("VideoPlayer", () => {
       );
     });
 
-    expect(item.getAttribute("data-reveal-state")).toBe("settled");
+    expect(item.getAttribute("data-reveal-state")).toBeNull();
+    expect(item.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(item.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
   });
 
   it("eager-renders the first two iframes even when the intersection gate is closed", () => {

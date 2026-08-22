@@ -179,6 +179,27 @@
   },
   {
     "type": "video",
+    "slug": "retirement-aging",
+    "title": "8world | Presenter Insights",
+    "description": "8world Presenter Insights feature on a 64-year-old man who rethinks retirement after a life event forces him to confront aging.",
+    "longDescription": "This 8world Presenter Insights episode follows a 64-year-old man who has no plans to retire until a personal experience forces him to reckon more seriously with aging. The piece frames retirement less as a fixed milestone than as an emotional negotiation with identity, purpose, and the realities of growing older.",
+    "heading": "Producer | Director | Writer",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/retirement-aging/retirement-aging-1-800.webp",
+    "videos": [
+      {
+        "title": "Presenter Insights | At 64, he doesn't want to retire; an experience made him seriously face aging.",
+        "embedUrl": "https://www.youtube.com/embed/x7U6OarM2vk",
+        "uploadDate": "2026-08-19T03:00:22-07:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "8world | Presenter Insights",
+      "thumbnail": "/assets/videography/retirement-aging/retirement-aging-1-800.webp"
+    }
+  },
+  {
+    "type": "video",
     "slug": "re-old-times",
     "title": "8World | Fun转时光",
     "description": "Documentary series exploring Singapore's heritage and nostalgic locations.",
@@ -788,7 +809,6 @@
         "/assets/videography/guardians-vietnam/guardians-vietnam-1-800.webp",
         "/assets/videography/guardians-vietnam/guardians-vietnam-2-800.webp"
       ]
-
     }
   },
   {

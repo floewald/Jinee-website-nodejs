@@ -30,3 +30,46 @@ export function getRevealProgressFromRect(input: {
 
   return clampRevealProgress(raw);
 }
+
+export function getRevealExitProgressFromTop(input: {
+  top: number;
+  exitStartPx: number;
+  exitRangePx: number;
+}) {
+  const end = input.exitStartPx - input.exitRangePx;
+  const raw = (input.top - end) / Math.max(1, input.exitStartPx - end);
+
+  return clampRevealProgress(raw);
+}
+
+export function isInRevealExitBand(input: {
+  top: number;
+  exitStartPx: number;
+  exitHysteresisPx?: number;
+  exitVisibleRatio?: number;
+  exitVisibleRatioThreshold?: number;
+  exitVisibleRatioHysteresis?: number;
+  wasExiting: boolean;
+}) {
+  const exitHysteresisPx = Math.max(0, input.exitHysteresisPx ?? 0);
+  const enterThreshold = input.exitStartPx - exitHysteresisPx;
+  const leaveThreshold = input.exitStartPx + exitHysteresisPx;
+  const exitVisibleRatioThreshold = input.exitVisibleRatioThreshold;
+  const exitVisibleRatioHysteresis = Math.max(0, input.exitVisibleRatioHysteresis ?? 0);
+  const exitVisibleRatio = input.exitVisibleRatio ?? 1;
+  const hasVisibleRatioGate =
+    typeof exitVisibleRatioThreshold === "number" &&
+    typeof input.exitVisibleRatio === "number";
+
+  const meetsEnterRatioThreshold =
+    !hasVisibleRatioGate || exitVisibleRatio <= exitVisibleRatioThreshold;
+  const meetsLeaveRatioThreshold =
+    !hasVisibleRatioGate ||
+    exitVisibleRatio <= exitVisibleRatioThreshold + exitVisibleRatioHysteresis;
+
+  if (input.wasExiting) {
+    return input.top <= leaveThreshold && meetsLeaveRatioThreshold;
+  }
+
+  return input.top <= enterThreshold && meetsEnterRatioThreshold;
+}

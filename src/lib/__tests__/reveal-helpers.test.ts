@@ -64,4 +64,27 @@ describe("reveal-helpers", () => {
       expect(revealState.markRevealSettled).toHaveBeenCalledWith(item);
     });
   });
+
+  it("combines entry and exit motion into shared reveal css variables", () => {
+    const { applyBidirectionalRevealProgress } = jest.requireActual(
+      "@/lib/reveal-helpers"
+    ) as typeof import("@/lib/reveal-helpers");
+
+    const item = document.createElement("div");
+
+    applyBidirectionalRevealProgress(item, {
+      entryProgress: 1,
+      entryOffsetPx: 60,
+      startOpacity: 0.15,
+      exitProgress: 0.75,
+      exitOffsetPx: 24,
+      exitEndOpacity: 0.35,
+      exitMaskMaxStartPercent: 20,
+    });
+
+    expect(item.style.getPropertyValue("--reveal-opacity")).toBe("0.8375");
+    expect(item.style.getPropertyValue("--reveal-translate-y")).toBe("-6px");
+    expect(item.style.getPropertyValue("--reveal-exit-progress")).toBe("0.75");
+    expect(item.style.getPropertyValue("--reveal-exit-mask-start")).toBe("5%");
+  });
 });

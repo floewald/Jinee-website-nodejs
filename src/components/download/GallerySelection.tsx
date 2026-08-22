@@ -4,10 +4,10 @@ import { useRef } from "react";
 import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { cx } from "@/styled-system/css";
-import { settleScrollLinkedReveal } from "@/lib/reveal-helpers";
+import { hasUserScrolledSinceLoad, showScrollLinkedReveal } from "@/lib/reveal-helpers";
 import { isActuallyVisibleInViewport } from "@/lib/reveal-state";
 import { useScrollLinkedReveal } from "@/hooks/useScrollLinkedReveal";
-import { GRID_REVEAL_PRESET } from "@/lib/reveal-config";
+import { GALLERY_REVEAL_PRESET } from "@/lib/reveal-config";
 import type { GalleryImage } from "@/components/gallery/Lightbox";
 import {
   projectGallery,
@@ -52,7 +52,7 @@ export default function GallerySelection({
   // photography images reveal identically. The selection/checkbox UI is the only
   // thing that differs between the two galleries.
   useScrollLinkedReveal(containerRef, ".gallery-item", {
-    ...GRID_REVEAL_PRESET,
+    ...GALLERY_REVEAL_PRESET,
     resetKey: revealKey,
   });
 
@@ -60,8 +60,12 @@ export default function GallerySelection({
     // Load is recovery-only: if the tile is already visible, settle it so a late
     // image decode never leaves it mid-fade; otherwise leave it to the observer.
     const item = e.currentTarget.closest(".gallery-item");
-    if (item instanceof HTMLElement && isActuallyVisibleInViewport(item)) {
-      settleScrollLinkedReveal(item);
+    if (
+      item instanceof HTMLElement &&
+      isActuallyVisibleInViewport(item) &&
+      !hasUserScrolledSinceLoad()
+    ) {
+      showScrollLinkedReveal(item);
     }
   }
 

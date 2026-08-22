@@ -1,13 +1,15 @@
 "use client";
 
-import { useRef, type SyntheticEvent } from "react";
+import { useId, useRef, type SyntheticEvent } from "react";
 import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { cx } from "@/styled-system/css";
 import { useScrollLinkedReveal } from "@/hooks/useScrollLinkedReveal";
-import { GRID_REVEAL_PRESET } from "@/lib/reveal-config";
-import { settleScrollLinkedReveal } from "@/lib/reveal-helpers";
-import { isActuallyVisibleInViewport } from "@/lib/reveal-state";
+import {
+  COLLAGE_REVEAL_PRESET,
+  GALLERY_REVEAL_PRESET,
+} from "@/lib/reveal-config";
+import { notifyRevealLayoutInvalidated } from "@/lib/reveal-helpers";
 import type { GalleryImage } from "./Lightbox";
 import {
   projectGallery,
@@ -39,12 +41,14 @@ export default function GalleryGrid({
   onImageClick,
   useColumnsLayout = false,
 }: GalleryGridProps) {
+  const galleryInstanceId = useId().replace(/:/g, "");
   const containerRef = useRef<HTMLDivElement>(null);
   const revealKey = `${useColumnsLayout ? "columns" : "masonry"}:${images
     .map((image) => image.srcFull ?? image.src)
     .join("|")}`;
+  const revealPreset = useColumnsLayout ? COLLAGE_REVEAL_PRESET : GALLERY_REVEAL_PRESET;
   useScrollLinkedReveal(containerRef, ".gallery-item", {
-    ...GRID_REVEAL_PRESET,
+    ...revealPreset,
     resetKey: revealKey,
   });
 
@@ -59,14 +63,19 @@ export default function GalleryGrid({
 
   function handleImageLoad(e: SyntheticEvent<HTMLImageElement>) {
     const item = e.currentTarget.closest(".gallery-item");
-    if (item instanceof HTMLElement && isActuallyVisibleInViewport(item)) {
-      settleScrollLinkedReveal(item);
+    if (item instanceof HTMLElement) {
+      item.dataset.revealImageLoaded = "true";
     }
+    notifyRevealLayoutInvalidated();
   }
 
   const galleryItems = images.map((img, i) => (
     <button
       key={`${img.src}-${i}`}
+      data-gallery-index={i}
+      data-gallery-alt={img.alt}
+      data-gallery-src={img.srcFull ?? img.src}
+      data-reveal-debug-id={`${galleryInstanceId}:${i}`}
       className={cx(
         inColumns ? galleryColsItem : undefined,
         galleryItem,

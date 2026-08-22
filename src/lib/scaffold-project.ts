@@ -1,5 +1,6 @@
 import path from "path";
 import type { ProjectType } from "@/types/portfolio";
+import { getYouTubeEmbedUrl } from "@/lib/youtube";
 
 // Root of the repository — resolves correctly from any nested import location
 const ROOT = path.resolve(__dirname, "../../..");
@@ -43,6 +44,10 @@ type SkeletonEntry =
   | ReturnType<typeof videoSkeleton>
   | ReturnType<typeof socialMediaSkeleton>;
 
+interface BuildSkeletonOptions {
+  videoId?: string | null;
+}
+
 /**
  * Builds a skeleton portfolio JSON entry for the given type, slug, and title.
  * The result is a ready-to-insert object that satisfies the Zod schema.
@@ -50,10 +55,11 @@ type SkeletonEntry =
 export function buildSkeletonEntry(
   type: ProjectType,
   slug: string,
-  title: string
+  title: string,
+  options: BuildSkeletonOptions = {}
 ): SkeletonEntry {
   if (type === "photography") return photographySkeleton(slug, title);
-  if (type === "video") return videoSkeleton(slug, title);
+  if (type === "video") return videoSkeleton(slug, title, options.videoId ?? null);
   return socialMediaSkeleton(slug, title);
 }
 
@@ -76,7 +82,7 @@ function photographySkeleton(slug: string, title: string) {
   };
 }
 
-function videoSkeleton(slug: string, title: string) {
+function videoSkeleton(slug: string, title: string, videoId: string | null) {
   return {
     type: "video" as const,
     slug,
@@ -89,7 +95,7 @@ function videoSkeleton(slug: string, title: string) {
     videos: [
       {
         title: `<!-- Add video title -->`,
-        embedUrl: "https://www.youtube.com/embed/REPLACE_THIS_ID",
+        embedUrl: videoId ? getYouTubeEmbedUrl(videoId) : "https://www.youtube.com/embed/REPLACE_THIS_ID",
         uploadDate: new Date().toISOString().replace(/\.\d+Z$/, "+08:00"),
       },
     ],

@@ -172,7 +172,9 @@ describe("GallerySelection", () => {
     fireEvent.load(image);
 
     expect(animateMock).not.toHaveBeenCalled();
-    expect(image.closest(".gallery-item")).toHaveAttribute("data-reveal-state", "settled");
+    expect(image.closest(".gallery-item")).not.toHaveAttribute("data-reveal-state");
+    expect(image.closest(".gallery-item")?.style.getPropertyValue("--reveal-opacity")).toBe("");
+    expect(image.closest(".gallery-item")?.style.getPropertyValue("--reveal-translate-y")).toBe("");
   });
 
   it("does not settle a selection tile on image load while it is only in the pre-entry band", () => {
