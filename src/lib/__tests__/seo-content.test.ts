@@ -51,8 +51,8 @@ describe("social-media-addiction project", () => {
 describe("video portfolio card ordering", () => {
   const cardProjects = getVideoCards();
 
-  it("has 23 projects with portfolio cards", () => {
-    expect(cardProjects.length).toBe(23);
+  it("has 24 projects with portfolio cards", () => {
+    expect(cardProjects.length).toBe(24);
   });
 
   it("order matches lineup defined in videography.json", () => {
@@ -63,6 +63,7 @@ describe("video portfolio card ordering", () => {
       "singer-jasmin-sokko",
       "food-wasted",
       "health-wang-zhen",
+      "retirement-aging",
       "re-old-times",
       "scdf-project",
       "blind-kitchen-chefs",
