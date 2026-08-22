@@ -9,13 +9,16 @@ Use this skill when the task is to add a new portfolio project or finish a scaff
 
 ## Workflow
 
-1. Read the source brief first.
+1. Create or switch to a feature branch first.
+   Do not work directly on `main`.
+
+2. Read the source brief first.
    Extract project type, display title, slug hints, role, location, media links, and whether new raw images are needed.
 
-2. Choose the slug before editing content.
+3. Choose the slug before editing content.
    Use lowercase hyphenated words. If the natural name is only one broad word, add a second descriptive word.
 
-3. Start with the local scaffold.
+4. Start with the local scaffold.
 
 ```bash
 npm run create-project -- --type <photography|video|social-media> --slug <slug> --title "<title>"
@@ -27,13 +30,13 @@ For video projects, include the YouTube URL or ID:
 npm run create-project -- --type video --slug <slug> --title "<title>" --youtube "<url-or-id>"
 ```
 
-4. Use the existing thumbnail tool through the repo wrapper.
+5. Use the existing thumbnail tool through the repo wrapper.
    `npm run create-project` already calls `npm run download:youtube-thumbnail` for video projects when `--youtube` is provided.
 
    The wrapper uses the sibling `../yt-thumb-down` repo by default.
    If the downloader lives elsewhere, set `YT_THUMB_DOWN_PATH`.
 
-5. Fill the generated content entry.
+6. Fill the generated content entry.
    Main files:
    - `src/content/portfolio/photography.json`
    - `src/content/portfolio/videography.json`
@@ -41,14 +44,15 @@ npm run create-project -- --type video --slug <slug> --title "<title>" --youtube
 
    Keep `portfolioCard.thumbnail` and `ogImage` aligned with the first generated `-800.webp` image.
    For video projects, use the source upload timestamp when available instead of today’s date.
+   Write descriptions about the subject, story, or format. Do not repeat what Jinee did there — the `heading` already carries the role description.
 
-6. Build images when raw assets changed.
+7. Build images when raw assets changed.
 
 ```bash
 npm run build:images
 ```
 
-7. Validate the final result with the real production path.
+8. Validate the final result with the real production path.
 
 ```bash
 npm run build
@@ -65,6 +69,7 @@ npm run build
 ## Guardrails
 
 - Do not create duplicate slugs.
+- Do not work on `main`; create or reuse a feature branch before editing.
 - Prefer updating an existing entry when the project already exists.
 - For video projects, keep the first raw thumbnail named `<slug>-1.jpg` or `<slug>-1.png` so the generated paths stay predictable.
 - After scaffolding, replace placeholders instead of leaving generic copy behind.

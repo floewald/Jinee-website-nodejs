@@ -10,9 +10,10 @@ Make sure your development environment is running. If you haven't set it up yet,
 
 The basic workflow for any content change is:
 
-1. Add/edit the content (images + JSON config)
-2. Run `npm run build` (this already runs `npm run build:images` first)
-3. Deploy the new `out/` folder to the server
+1. Create or switch to a feature branch first. Do not work directly on `main`.
+2. Add/edit the content (images + JSON config)
+3. Run `npm run build` (this already runs `npm run build:images` first)
+4. Deploy the new `out/` folder to the server
 
 For faster iteration while editing images only, you can still run
 `npm run build:images` directly before `npm run build`.
@@ -259,6 +260,7 @@ Open `src/content/portfolio/videography.json` and add a new entry to the JSON ar
 - `portfolioCard` is optional — omit if you don't want a card on the portfolio category page
 - `portfolioCard.previewImages`: optional array of 2–3 image paths (use `-800.webp`). When provided, the card auto-cycles through the images. If the project folder has multiple `*-800.webp` thumbnails, add up to 3 here.
 - `showSlideshow` is not used for video projects (video pages show YouTube embeds, not a photo slideshow)
+- Use `description`, `longDescription`, and per-episode `videos[].description` to describe the story, subject, or format. Do not repeat what Jinee did there — the `heading` already carries the role description.
 
 ### Step 5: Build
 
