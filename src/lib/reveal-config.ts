@@ -14,7 +14,10 @@
 export const REVEAL_DURATION_MS = 1500;
 export const REVEAL_OFFSET_PX = 50;
 export const REVEAL_EASING = "cubic-bezier(0.22, 1, 0.36, 1)";
+export const REVEAL_SCROLL_LINKED_EASING = REVEAL_EASING;
 export const REVEAL_SCROLL_LINKED_TRANSITION_MS = 180;
+export const REVEAL_SCROLL_LINKED_RELAXED_EASING = "cubic-bezier(0.2, 0.8, 0.2, 1)";
+export const REVEAL_SCROLL_LINKED_RELAXED_TRANSITION_MS = 280;
 export const REVEAL_PROGRESS_ENTRY_OFFSET_PX = 120;
 export const REVEAL_PROGRESS_SETTLE_OFFSET_PX = 24;
 export const REVEAL_BOTTOM_BUFFER_PX = 10;
@@ -74,12 +77,11 @@ export const GALLERY_REVEAL_PRESET = {
   entryOffsetPx: 100,
   settleOffsetPx: 300,
   offsetPx: 60,
+  exitGateMode: "top",
+  exitAnchorMode: "configured-start",
   exitStartPx: 75,
   exitRangePx: 220,
   exitHysteresisPx: 10,
-  exitVisibleRatioThresholdLandscape: 2,
-  exitVisibleRatioThresholdPortrait: 0.55,
-  exitVisibleRatioHysteresis: 0.08,
   exitOffsetPx: 12,
   exitEndOpacity: 0.52,
   exitMaskMaxStartPercent: 14,
@@ -90,13 +92,17 @@ export const COLLAGE_REVEAL_PRESET = {
   entryOffsetPx: 100,
   settleOffsetPx: 320,
   offsetPx: 56,
-  exitGateMode: "top",
-  exitStartPx: 0,
-  exitRangePx: 160,
+  exitGateMode: "top-and-visible-ratio",
+  exitAnchorMode: "current-top",
+  exitStartPx: -8,
+  exitRangePx: 140,
   exitHysteresisPx: 12,
-  exitOffsetPx: 6,
-  exitEndOpacity: 0.84,
-  exitMaskMaxStartPercent: 8,
+  exitOffsetPx: 8,
+  exitEndOpacity: 0.62,
+  exitMaskMaxStartPercent: 12,
+  exitVisibleRatioThresholdLandscape: 0.8,
+  exitVisibleRatioThresholdPortrait: 0.62,
+  exitVisibleRatioHysteresis: 0.06,
 } as const;
 
 export const GRID_REVEAL_PRESET = {

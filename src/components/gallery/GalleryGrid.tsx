@@ -17,6 +17,7 @@ import {
   galleryCols,
   galleryColsItem,
   galleryItem,
+  galleryItemRelaxedReveal,
   galleryImg,
 } from "./gallery-styles";
 
@@ -78,6 +79,7 @@ export default function GalleryGrid({
       data-reveal-debug-id={`${galleryInstanceId}:${i}`}
       className={cx(
         inColumns ? galleryColsItem : undefined,
+        inColumns ? galleryItemRelaxedReveal : undefined,
         galleryItem,
         "gallery-item",
       )}

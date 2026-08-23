@@ -1,6 +1,6 @@
 import { css } from "@/styled-system/css";
 import {
-  REVEAL_EASING,
+  REVEAL_SCROLL_LINKED_EASING,
   REVEAL_SCROLL_LINKED_TRANSITION_MS,
 } from "@/lib/reveal-config";
 
@@ -8,7 +8,7 @@ export const scrollLinkedRevealSurface = {
   opacity: "var(--reveal-opacity, 1)",
   transform: "translateY(var(--reveal-translate-y, 0px))",
   willChange: "opacity, transform",
-  transition: `opacity ${REVEAL_SCROLL_LINKED_TRANSITION_MS}ms ${REVEAL_EASING}, transform ${REVEAL_SCROLL_LINKED_TRANSITION_MS}ms ${REVEAL_EASING}`,
+  transition: `opacity ${REVEAL_SCROLL_LINKED_TRANSITION_MS}ms ${REVEAL_SCROLL_LINKED_EASING}, transform ${REVEAL_SCROLL_LINKED_TRANSITION_MS}ms ${REVEAL_SCROLL_LINKED_EASING}`,
 } as const;
 
 export const revealGrid = css({

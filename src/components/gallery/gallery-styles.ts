@@ -1,8 +1,12 @@
 import {
-  REVEAL_EASING,
+  REVEAL_SCROLL_LINKED_EASING,
+  REVEAL_SCROLL_LINKED_RELAXED_EASING,
+  REVEAL_SCROLL_LINKED_RELAXED_TRANSITION_MS,
   REVEAL_SCROLL_LINKED_TRANSITION_MS,
 } from "@/lib/reveal-config";
 import { css } from "@/styled-system/css";
+
+const galleryRevealTransition = `opacity var(--reveal-transition-ms, ${REVEAL_SCROLL_LINKED_TRANSITION_MS}ms) var(--reveal-transition-easing, ${REVEAL_SCROLL_LINKED_EASING}), transform var(--reveal-transition-ms, ${REVEAL_SCROLL_LINKED_TRANSITION_MS}ms) var(--reveal-transition-easing, ${REVEAL_SCROLL_LINKED_EASING})`;
 
 /** `project-gallery` — flex container for react-masonry-css */
 export const projectGallery = css({
@@ -78,7 +82,7 @@ export const galleryItem = css({
   opacity: "var(--reveal-opacity, 1)",
   transform: "translate3d(0, var(--reveal-translate-y, 0px), 0)",
   willChange: "opacity, transform",
-  transition: `opacity ${REVEAL_SCROLL_LINKED_TRANSITION_MS}ms ${REVEAL_EASING}, transform ${REVEAL_SCROLL_LINKED_TRANSITION_MS}ms ${REVEAL_EASING}`,
+  transition: galleryRevealTransition,
   backfaceVisibility: "hidden",
   '&[data-reveal-debug-enabled="true"]': {
     boxShadow: "inset 0 0 0 1px rgba(214, 82, 42, 0.9)",
@@ -101,6 +105,11 @@ export const galleryItem = css({
     textAlign: "left",
     pointerEvents: "none",
   },
+});
+
+export const galleryItemRelaxedReveal = css({
+  "--reveal-transition-ms": `${REVEAL_SCROLL_LINKED_RELAXED_TRANSITION_MS}ms`,
+  "--reveal-transition-easing": REVEAL_SCROLL_LINKED_RELAXED_EASING,
 });
 
 /** `gallery-item__trigger` — inner button in selection mode */

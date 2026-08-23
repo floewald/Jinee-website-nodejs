@@ -34,6 +34,7 @@ interface ScrollLinkedRevealOptions {
   offsetPx?: number;
   startOpacity?: number;
   exitGateMode?: "top" | "top-and-visible-ratio";
+  exitAnchorMode?: "current-top" | "configured-start";
   exitStartPx?: number;
   exitRangePx?: number;
   exitOffsetPx?: number;
@@ -57,6 +58,7 @@ export function useScrollLinkedReveal(
   const offsetPx = options.offsetPx ?? REVEAL_OFFSET_PX;
   const startOpacity = options.startOpacity ?? REVEAL_START_OPACITY;
   const exitGateMode = options.exitGateMode ?? "top-and-visible-ratio";
+  const exitAnchorMode = options.exitAnchorMode ?? "current-top";
   const exitStartPx = options.exitStartPx;
   const exitRangePx = options.exitRangePx ?? 0;
   const exitOffsetPx = options.exitOffsetPx ?? 0;
@@ -216,13 +218,16 @@ export function useScrollLinkedReveal(
                 wasExiting,
               })
             : false;
-          if (isExiting && !wasExiting) {
+          const shouldAnchorExitFromCurrentTop = exitAnchorMode === "current-top";
+          if (shouldAnchorExitFromCurrentTop && isExiting && !wasExiting) {
             exitAnchorTops.set(item, rect.top);
-          } else if (!isExiting) {
+          } else if (!isExiting || !shouldAnchorExitFromCurrentTop) {
             exitAnchorTops.delete(item);
           }
           exitBandStates.set(item, isExiting);
-          const exitAnchorTop = exitAnchorTops.get(item) ?? exitStartPx;
+          const exitAnchorTop = shouldAnchorExitFromCurrentTop
+            ? exitAnchorTops.get(item) ?? exitStartPx
+            : exitStartPx;
           const exitProgress = isExiting
             ? getRevealExitProgressFromTop({
                 top: rect.top,
@@ -551,6 +556,7 @@ export function useScrollLinkedReveal(
     offsetPx,
     startOpacity,
     exitGateMode,
+    exitAnchorMode,
     exitStartPx,
     exitRangePx,
     exitOffsetPx,
