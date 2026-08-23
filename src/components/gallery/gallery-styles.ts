@@ -1,3 +1,7 @@
+import {
+  REVEAL_EASING,
+  REVEAL_SCROLL_LINKED_TRANSITION_MS,
+} from "@/lib/reveal-config";
 import { css } from "@/styled-system/css";
 
 /** `project-gallery` — flex container for react-masonry-css */
@@ -74,6 +78,7 @@ export const galleryItem = css({
   opacity: "var(--reveal-opacity, 1)",
   transform: "translate3d(0, var(--reveal-translate-y, 0px), 0)",
   willChange: "opacity, transform",
+  transition: `opacity ${REVEAL_SCROLL_LINKED_TRANSITION_MS}ms ${REVEAL_EASING}, transform ${REVEAL_SCROLL_LINKED_TRANSITION_MS}ms ${REVEAL_EASING}`,
   backfaceVisibility: "hidden",
   '&[data-reveal-debug-enabled="true"]': {
     boxShadow: "inset 0 0 0 1px rgba(214, 82, 42, 0.9)",

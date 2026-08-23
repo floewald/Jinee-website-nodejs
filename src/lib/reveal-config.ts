@@ -14,6 +14,7 @@
 export const REVEAL_DURATION_MS = 1500;
 export const REVEAL_OFFSET_PX = 50;
 export const REVEAL_EASING = "cubic-bezier(0.22, 1, 0.36, 1)";
+export const REVEAL_SCROLL_LINKED_TRANSITION_MS = 180;
 export const REVEAL_PROGRESS_ENTRY_OFFSET_PX = 120;
 export const REVEAL_PROGRESS_SETTLE_OFFSET_PX = 24;
 export const REVEAL_BOTTOM_BUFFER_PX = 10;
@@ -94,8 +95,8 @@ export const COLLAGE_REVEAL_PRESET = {
   exitRangePx: 160,
   exitHysteresisPx: 12,
   exitOffsetPx: 6,
-  exitEndOpacity: 0.9,
-  exitMaskMaxStartPercent: 0,
+  exitEndOpacity: 0.84,
+  exitMaskMaxStartPercent: 8,
 } as const;
 
 export const GRID_REVEAL_PRESET = {
