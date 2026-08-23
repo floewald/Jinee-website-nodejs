@@ -33,12 +33,17 @@ interface ScrollLinkedRevealOptions {
   settleOffsetPx?: number;
   offsetPx?: number;
   startOpacity?: number;
+  debugLabel?: string;
   exitGateMode?: "top" | "top-and-visible-ratio";
   exitAnchorMode?: "current-top" | "configured-start";
+  exitAnchorModePortrait?: "current-top" | "configured-start";
+  exitAnchorModeLandscape?: "current-top" | "configured-start";
   exitStartPx?: number;
   exitRangePx?: number;
   exitOffsetPx?: number;
   exitEndOpacity?: number;
+  exitEndOpacityPortrait?: number;
+  exitEndOpacityLandscape?: number;
   exitMaskMaxStartPercent?: number;
   exitHysteresisPx?: number;
   exitVisibleRatioThreshold?: number;
@@ -57,12 +62,17 @@ export function useScrollLinkedReveal(
   const settleOffsetPx = options.settleOffsetPx ?? REVEAL_PROGRESS_SETTLE_OFFSET_PX;
   const offsetPx = options.offsetPx ?? REVEAL_OFFSET_PX;
   const startOpacity = options.startOpacity ?? REVEAL_START_OPACITY;
+  const debugLabel = options.debugLabel;
   const exitGateMode = options.exitGateMode ?? "top-and-visible-ratio";
   const exitAnchorMode = options.exitAnchorMode ?? "current-top";
+  const exitAnchorModePortrait = options.exitAnchorModePortrait;
+  const exitAnchorModeLandscape = options.exitAnchorModeLandscape;
   const exitStartPx = options.exitStartPx;
   const exitRangePx = options.exitRangePx ?? 0;
   const exitOffsetPx = options.exitOffsetPx ?? 0;
   const exitEndOpacity = options.exitEndOpacity;
+  const exitEndOpacityPortrait = options.exitEndOpacityPortrait;
+  const exitEndOpacityLandscape = options.exitEndOpacityLandscape;
   const exitMaskMaxStartPercent = options.exitMaskMaxStartPercent;
   const exitHysteresisPx = options.exitHysteresisPx ?? 0;
   const exitVisibleRatioThreshold = options.exitVisibleRatioThreshold;
@@ -76,6 +86,24 @@ export function useScrollLinkedReveal(
     const root = ref.current;
     if (!root) return;
     const revealDebugEnabled = isRevealDebugEnabled();
+    const getVisualDebugState = (
+      entryProgress: number,
+      exitProgress: number,
+      resolvedExitEndOpacity: number,
+      resolvedExitMaskMaxStartPercent: number
+    ) => {
+      const resolvedEntryProgress = Math.min(1, Math.max(0, entryProgress));
+      const resolvedExitProgress = Math.min(1, Math.max(0, exitProgress));
+      const entryOpacity = startOpacity + (1 - startOpacity) * resolvedEntryProgress;
+      const exitOpacity =
+        resolvedExitEndOpacity + (1 - resolvedExitEndOpacity) * resolvedExitProgress;
+
+      return {
+        computedOpacity: Math.min(entryOpacity, exitOpacity),
+        exitMaskStartPercent:
+          resolvedExitMaskMaxStartPercent * (1 - resolvedExitProgress),
+      };
+    };
 
     // Reduced-motion users keep the fail-open default (CSS `--reveal-opacity`
     // resolves to 1): content is fully visible and static, no scroll-linked
@@ -145,12 +173,21 @@ export function useScrollLinkedReveal(
         const isVisible = isActuallyVisibleInViewport(item);
         const intersectionRatio = intersectionRatios.get(item);
         const aspectMode = layoutHeight > layoutWidth ? "portrait" : "landscape";
+        const itemExitAnchorMode =
+          aspectMode === "portrait"
+            ? exitAnchorModePortrait ?? exitAnchorMode
+            : exitAnchorModeLandscape ?? exitAnchorMode;
         const itemExitVisibleRatioThreshold =
           exitGateMode === "top"
             ? undefined
             : aspectMode === "portrait"
               ? exitVisibleRatioThresholdPortrait ?? exitVisibleRatioThreshold
               : exitVisibleRatioThresholdLandscape ?? exitVisibleRatioThreshold;
+        const itemExitEndOpacity =
+          aspectMode === "portrait"
+            ? exitEndOpacityPortrait ?? exitEndOpacity ?? startOpacity
+            : exitEndOpacityLandscape ?? exitEndOpacity ?? startOpacity;
+        const itemExitMaskMaxStartPercent = exitMaskMaxStartPercent ?? 0;
         const progress = getRevealProgressFromRect({
           top: layoutTop,
           bottom: layoutBottom,
@@ -171,14 +208,15 @@ export function useScrollLinkedReveal(
               startOpacity,
               exitProgress: 1,
               exitOffsetPx,
-              exitEndOpacity,
-              exitMaskMaxStartPercent,
+              exitEndOpacity: itemExitEndOpacity,
+              exitMaskMaxStartPercent: itemExitMaskMaxStartPercent,
             });
             setRevealDebugSnapshot(
               item,
               {
                 phase: "tick",
                 reason: "hold-visible-before-scroll",
+                surfaceLabel: debugLabel,
                 state: getRevealState(item),
                 scrollY: window.scrollY,
                 top: rect.top,
@@ -186,6 +224,12 @@ export function useScrollLinkedReveal(
                 rawTop: rawRect.top,
                 rawBottom: rawRect.bottom,
                 translateY,
+                ...getVisualDebugState(
+                  1,
+                  1,
+                  itemExitEndOpacity,
+                  itemExitMaskMaxStartPercent
+                ),
                 visibleRatio,
                 exitAnchorTop: exitStartPx,
                 exitVisibleRatioThresholdUsed: itemExitVisibleRatioThreshold,
@@ -218,7 +262,7 @@ export function useScrollLinkedReveal(
                 wasExiting,
               })
             : false;
-          const shouldAnchorExitFromCurrentTop = exitAnchorMode === "current-top";
+          const shouldAnchorExitFromCurrentTop = itemExitAnchorMode === "current-top";
           if (shouldAnchorExitFromCurrentTop && isExiting && !wasExiting) {
             exitAnchorTops.set(item, rect.top);
           } else if (!isExiting || !shouldAnchorExitFromCurrentTop) {
@@ -242,8 +286,8 @@ export function useScrollLinkedReveal(
             startOpacity,
             exitProgress,
             exitOffsetPx,
-            exitEndOpacity,
-            exitMaskMaxStartPercent,
+            exitEndOpacity: itemExitEndOpacity,
+            exitMaskMaxStartPercent: itemExitMaskMaxStartPercent,
           });
           setRevealDebugSnapshot(
             item,
@@ -254,6 +298,7 @@ export function useScrollLinkedReveal(
                 : entryLockedItems.has(item)
                   ? "entry-locked-steady"
                   : "entry-or-steady",
+              surfaceLabel: debugLabel,
               state: getRevealState(item),
               scrollY: window.scrollY,
               top: rect.top,
@@ -261,6 +306,12 @@ export function useScrollLinkedReveal(
               rawTop: rawRect.top,
               rawBottom: rawRect.bottom,
               translateY,
+              ...getVisualDebugState(
+                entryProgress,
+                exitProgress,
+                itemExitEndOpacity,
+                itemExitMaskMaxStartPercent
+              ),
               visibleRatio,
               exitAnchorTop,
               exitVisibleRatioThresholdUsed: itemExitVisibleRatioThreshold,
@@ -287,6 +338,7 @@ export function useScrollLinkedReveal(
           {
             phase: "tick",
             reason: progress >= 1 ? "settle-ready" : "entry-only",
+            surfaceLabel: debugLabel,
             state: getRevealState(item),
             scrollY: window.scrollY,
             top: rect.top,
@@ -294,6 +346,12 @@ export function useScrollLinkedReveal(
             rawTop: rawRect.top,
             rawBottom: rawRect.bottom,
             translateY,
+            ...getVisualDebugState(
+              progress,
+              1,
+              itemExitEndOpacity,
+              itemExitMaskMaxStartPercent
+            ),
             visibleRatio,
             exitAnchorTop: exitStartPx,
             exitVisibleRatioThresholdUsed: itemExitVisibleRatioThreshold,
@@ -406,6 +464,7 @@ export function useScrollLinkedReveal(
                 {
                   phase: "observer",
                   reason: "enter",
+                  surfaceLabel: debugLabel,
                   state: getRevealState(item),
                   intersecting: true,
                   intersectionRatio: entry.intersectionRatio,
@@ -425,6 +484,7 @@ export function useScrollLinkedReveal(
                 {
                   phase: "observer",
                   reason: "leave",
+                  surfaceLabel: debugLabel,
                   state: getRevealState(item),
                   intersecting: false,
                   intersectionRatio: entry.intersectionRatio,
@@ -452,6 +512,7 @@ export function useScrollLinkedReveal(
               {
                 phase: "observer",
                 reason: "enter",
+                surfaceLabel: debugLabel,
                 state: getRevealState(item),
                 intersecting: true,
                 intersectionRatio: entry.intersectionRatio,
@@ -471,6 +532,7 @@ export function useScrollLinkedReveal(
             {
               phase: "observer",
               reason: "leave",
+              surfaceLabel: debugLabel,
               state: getRevealState(item),
               intersecting: false,
               intersectionRatio: entry.intersectionRatio,
@@ -555,12 +617,17 @@ export function useScrollLinkedReveal(
     settleOffsetPx,
     offsetPx,
     startOpacity,
+    debugLabel,
     exitGateMode,
     exitAnchorMode,
+    exitAnchorModePortrait,
+    exitAnchorModeLandscape,
     exitStartPx,
     exitRangePx,
     exitOffsetPx,
     exitEndOpacity,
+    exitEndOpacityPortrait,
+    exitEndOpacityLandscape,
     exitMaskMaxStartPercent,
     exitHysteresisPx,
     exitVisibleRatioThreshold,

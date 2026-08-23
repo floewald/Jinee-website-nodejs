@@ -526,7 +526,7 @@ describe("useScrollLinkedReveal", () => {
     expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
   });
 
-  it("starts collage landscape exit smoothly only after enough of the tile has clipped past the top edge", () => {
+  it("starts collage landscape exit while the tile is still visible below the top band", () => {
     render(
       <TestSurface
         initialTop={980}
@@ -554,18 +554,13 @@ describe("useScrollLinkedReveal", () => {
     });
     fireScrollFrame({ top: -36 });
 
-    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
-    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+    const earlyOpacity = Number(surface.style.getPropertyValue("--reveal-opacity"));
+    const earlyTranslateY = Number.parseFloat(
+      surface.style.getPropertyValue("--reveal-translate-y")
+    );
 
-    Object.defineProperty(window, "scrollY", {
-      configurable: true,
-      writable: true,
-      value: 876,
-    });
-    fireScrollFrame({ top: -76 });
-
-    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
-    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+    expect(earlyOpacity).toBeLessThan(1);
+    expect(earlyTranslateY).toBeLessThan(0);
 
     Object.defineProperty(window, "scrollY", {
       configurable: true,
@@ -574,8 +569,12 @@ describe("useScrollLinkedReveal", () => {
     });
     fireScrollFrame({ top: -116 });
 
-    expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(1);
-    expect(Number.parseFloat(surface.style.getPropertyValue("--reveal-translate-y"))).toBeLessThan(0);
+    expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(
+      earlyOpacity
+    );
+    expect(
+      Number.parseFloat(surface.style.getPropertyValue("--reveal-translate-y"))
+    ).toBeLessThan(earlyTranslateY);
   });
 
   it("lets tall collage tiles hold longer before exit so portrait fades do not start too early", () => {
@@ -641,18 +640,13 @@ describe("useScrollLinkedReveal", () => {
     });
     fireScrollFrame({ top: -36 });
 
-    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
-    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+    const exitOpacity = Number(surface.style.getPropertyValue("--reveal-opacity"));
+    const exitTranslateY = Number.parseFloat(
+      surface.style.getPropertyValue("--reveal-translate-y")
+    );
 
-    Object.defineProperty(window, "scrollY", {
-      configurable: true,
-      writable: true,
-      value: 876,
-    });
-    fireScrollFrame({ top: -76 });
-
-    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
-    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+    expect(exitOpacity).toBeLessThan(1);
+    expect(exitTranslateY).toBeLessThan(0);
 
     Object.defineProperty(window, "scrollY", {
       configurable: true,
@@ -661,8 +655,12 @@ describe("useScrollLinkedReveal", () => {
     });
     fireScrollFrame({ top: -116 });
 
-    expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(1);
-    expect(Number.parseFloat(surface.style.getPropertyValue("--reveal-translate-y"))).toBeLessThan(0);
+    expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(
+      exitOpacity
+    );
+    expect(
+      Number.parseFloat(surface.style.getPropertyValue("--reveal-translate-y"))
+    ).toBeLessThan(exitTranslateY);
 
     fireObserverEntry({ target: surface, isIntersecting: false });
 
@@ -673,8 +671,12 @@ describe("useScrollLinkedReveal", () => {
     });
     fireScrollFrame({ top: -116 });
 
-    expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(1);
-    expect(Number.parseFloat(surface.style.getPropertyValue("--reveal-translate-y"))).toBeLessThan(0);
+    expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(
+      exitOpacity
+    );
+    expect(
+      Number.parseFloat(surface.style.getPropertyValue("--reveal-translate-y"))
+    ).toBeLessThan(exitTranslateY);
   });
 
   it("starts exit from a smooth anchor when a visible-ratio gate opens late", () => {

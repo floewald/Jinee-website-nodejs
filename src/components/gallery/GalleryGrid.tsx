@@ -50,6 +50,7 @@ export default function GalleryGrid({
   const revealPreset = useColumnsLayout ? COLLAGE_REVEAL_PRESET : GALLERY_REVEAL_PRESET;
   useScrollLinkedReveal(containerRef, ".gallery-item", {
     ...revealPreset,
+    debugLabel: useColumnsLayout ? "homepage-collage" : "gallery-masonry",
     resetKey: revealKey,
   });
 
