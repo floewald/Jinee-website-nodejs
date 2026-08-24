@@ -636,6 +636,16 @@ describe("useScrollLinkedReveal", () => {
     Object.defineProperty(window, "scrollY", {
       configurable: true,
       writable: true,
+      value: 808,
+    });
+    fireScrollFrame({ top: -8 });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
       value: 836,
     });
     fireScrollFrame({ top: -36 });

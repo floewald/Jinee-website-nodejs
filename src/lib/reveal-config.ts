@@ -94,7 +94,7 @@ export const COLLAGE_REVEAL_PRESET = {
   offsetPx: 56,
   exitGateMode: "top-and-visible-ratio",
   exitAnchorMode: "current-top",
-  exitAnchorModeLandscape: "configured-start",
+  exitAnchorModeLandscape: "current-top",
   exitStartPx: 96,
   exitRangePx: 280,
   exitHysteresisPx: 12,
@@ -102,7 +102,7 @@ export const COLLAGE_REVEAL_PRESET = {
   exitEndOpacity: 0.20,
   exitEndOpacityPortrait: 0.12,
   exitMaskMaxStartPercent: 14,
-  exitVisibleRatioThresholdLandscape: 0.95,
+  exitVisibleRatioThresholdLandscape: 0.98,
   exitVisibleRatioThresholdPortrait: 0.62,
   exitVisibleRatioHysteresis: 0.06,
 } as const;
