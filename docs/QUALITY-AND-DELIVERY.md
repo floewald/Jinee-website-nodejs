@@ -9,6 +9,7 @@ This repo should have useful guardrails without turning every change into a cere
 - prefer local fast feedback over burning remote CI minutes
 - use more process only when the risk actually rises
 - capture surprises found during verification so the next slice starts smarter
+- treat docs as part of the harness because good context speeds up implementation and debugging
 
 ## Branch And Pull Request Contract
 
@@ -41,6 +42,11 @@ Remote safety net:
 
 - the deploy workflow still verifies the build output on GitHub
 - local hooks can be bypassed with `--no-verify`, so they are guardrails, not enforcement
+
+Local is the source of truth for quality checks in this repo.
+
+- prefer running checks on your machine before push instead of adding a separate PR CI gate
+- preserve GitHub Action minutes for deploy verification and production-facing work
 
 ## TDD And Review Expectations
 
@@ -86,9 +92,28 @@ Skip the ceremony for typo-only, docs-only, or clearly mechanical maintenance.
 
 Fast feedback beats repeatedly paying the full-suite cost.
 
+## Docs As Harness
+
+Update docs in the same slice when you change:
+
+- behavior visible to users
+- architecture or data flow
+- local scripts, commands, or workflows
+- debugging approach or troubleshooting advice
+- guardrails, hooks, or verification expectations
+
+Prefer updating the smallest doc that future you will actually look at first:
+
+- `README.md` for repo map and quick-start context
+- `docs/DEVELOPMENT.md` for day-to-day commands and workflows
+- `docs/ARCHITECTURE.md` for real system behavior and data flow
+- `docs/QUALITY-AND-DELIVERY.md` for the harness itself
+
+When docs drift from the code, the harness weakens. Stale context slows debugging, onboarding, and safe follow-up changes.
+
 ## Retrospectives And Learnings
 
-For non-trivial slices, record short learnings either in the PR body or in `docs/retrospectives/`.
+For non-trivial slices, record short lessons learned either in the PR body or in `docs/retrospectives/`.
 
 Use this shape:
 
@@ -96,9 +121,12 @@ Use this shape:
 - what went wrong
 - discovered during verification
 - guardrails added
+- context updated
 - follow-ups
 
 Retrospectives should stay brief. If a lesson does not affect future work, do not turn it into a permanent process rule.
+
+If the lesson changes how we should build, debug, or verify similar work next time, update the relevant doc in the same slice instead of leaving the learning trapped in a PR comment.
 
 ## Definition Of Done
 
@@ -106,8 +134,9 @@ A slice is done when:
 
 - the intended scope is complete
 - relevant tests or validation passed
-- docs were updated if behavior or workflow changed
+- docs were updated if behavior, workflow, architecture, or debugging guidance changed
 - obvious dead links, dead routes, or config drift were checked
+- useful lessons learned were captured for non-trivial slices
 - meaningful tradeoffs or follow-ups are noted
 
 ## Repository Settings To Prefer
