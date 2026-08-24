@@ -44,7 +44,7 @@ export const VIDEO_REVEAL_PRESET = {
   entryOffsetPx: 100,
   settleOffsetPx: 200,
   offsetPx: 60,
-  exitStartPx: 180,
+  exitStartPx: 40,
   exitRangePx: 240,
   exitOffsetPx: 24,
   exitEndOpacity: 0.38,
