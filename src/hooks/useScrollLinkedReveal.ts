@@ -58,6 +58,7 @@ export function useScrollLinkedReveal(
   selector: string,
   options: ScrollLinkedRevealOptions = {}
 ) {
+  const MAX_STABLE_LAYOUT_DRIFT_PX = 120;
   const entryOffsetPx = options.entryOffsetPx ?? REVEAL_PROGRESS_ENTRY_OFFSET_PX;
   const settleOffsetPx = options.settleOffsetPx ?? REVEAL_PROGRESS_SETTLE_OFFSET_PX;
   const offsetPx = options.offsetPx ?? REVEAL_OFFSET_PX;
@@ -132,6 +133,20 @@ export function useScrollLinkedReveal(
     let exitMotionPending = false;
     let lastScrollY = window.scrollY;
 
+    const clearStableLayoutMetrics = (item: HTMLElement) => {
+      stableDocumentTops.delete(item);
+      stableHeights.delete(item);
+      stableWidths.delete(item);
+      exitAnchorTops.delete(item);
+      exitBandStates.delete(item);
+    };
+
+    const clearStableLayoutMetricsWithinRoot = () => {
+      root
+        .querySelectorAll<HTMLElement>(selector)
+        .forEach((item) => clearStableLayoutMetrics(item));
+    };
+
     const tick = () => {
       active.forEach((item) => {
         if (getRevealState(item) !== "eligible") {
@@ -149,13 +164,27 @@ export function useScrollLinkedReveal(
           stableWidths.set(item, measuredRect.width);
         }
 
-        const stableDocumentTop = stableDocumentTops.get(item);
-        const layoutHeight = stableHeights.get(item) ?? measuredRect.height;
-        const layoutWidth = stableWidths.get(item) ?? measuredRect.width;
-        const layoutTop =
+        let stableDocumentTop = stableDocumentTops.get(item);
+        let layoutHeight = stableHeights.get(item) ?? measuredRect.height;
+        let layoutWidth = stableWidths.get(item) ?? measuredRect.width;
+        let layoutTop =
           typeof stableDocumentTop === "number"
             ? stableDocumentTop - window.scrollY
             : measuredRect.top;
+        if (
+          typeof stableDocumentTop === "number" &&
+          Math.abs(rawRect.top - layoutTop) > MAX_STABLE_LAYOUT_DRIFT_PX
+        ) {
+          stableDocumentTop = measuredRect.top + window.scrollY;
+          layoutTop = measuredRect.top;
+          layoutHeight = measuredRect.height;
+          layoutWidth = measuredRect.width;
+          stableDocumentTops.set(item, stableDocumentTop);
+          stableHeights.set(item, layoutHeight);
+          stableWidths.set(item, layoutWidth);
+          exitAnchorTops.delete(item);
+          exitBandStates.delete(item);
+        }
         const layoutBottom = layoutTop + layoutHeight;
         const translateY = rawRect.top - layoutTop;
         const rect = {
@@ -400,6 +429,11 @@ export function useScrollLinkedReveal(
       scheduleTick();
     };
 
+    const handleLayoutInvalidated = () => {
+      clearStableLayoutMetricsWithinRoot();
+      refreshVisibleItems();
+    };
+
     const armExitMotion = () => {
       if (exitMotionArmed) return;
       exitMotionArmed = true;
@@ -588,7 +622,7 @@ export function useScrollLinkedReveal(
     window.addEventListener("wheel", noteExitMotionIntent, { passive: true });
     window.addEventListener("touchmove", noteExitMotionIntent, { passive: true });
     window.addEventListener("keydown", noteExitMotionIntentFromKeyboard);
-    window.addEventListener(REVEAL_LAYOUT_INVALIDATED_EVENT, refreshVisibleItems);
+    window.addEventListener(REVEAL_LAYOUT_INVALIDATED_EVENT, handleLayoutInvalidated);
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", scheduleTick);
 
@@ -606,7 +640,7 @@ export function useScrollLinkedReveal(
       window.removeEventListener("wheel", noteExitMotionIntent);
       window.removeEventListener("touchmove", noteExitMotionIntent);
       window.removeEventListener("keydown", noteExitMotionIntentFromKeyboard);
-      window.removeEventListener(REVEAL_LAYOUT_INVALIDATED_EVENT, refreshVisibleItems);
+      window.removeEventListener(REVEAL_LAYOUT_INVALIDATED_EVENT, handleLayoutInvalidated);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", scheduleTick);
     };

@@ -2,6 +2,7 @@ import { act, render, screen } from "@testing-library/react";
 import { useEffect, useRef } from "react";
 import { useScrollLinkedReveal } from "@/hooks/useScrollLinkedReveal";
 import { COLLAGE_REVEAL_PRESET, GALLERY_REVEAL_PRESET } from "@/lib/reveal-config";
+import { REVEAL_LAYOUT_INVALIDATED_EVENT } from "@/lib/reveal-helpers";
 import { RevealState } from "@/lib/reveal-state";
 
 let surfaceTop = 0;
@@ -502,6 +503,40 @@ describe("useScrollLinkedReveal", () => {
 
     expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(1);
     expect(Number.parseFloat(surface.style.getPropertyValue("--reveal-translate-y"))).toBeLessThan(0);
+  });
+
+  it("drops stale cached layout metrics after a gallery layout invalidation", () => {
+    surfaceWidth = 300;
+    surfaceHeight = 684;
+
+    render(
+      <TestSurface
+        initialTop={980}
+        options={GALLERY_REVEAL_PRESET}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+    armExitMotion();
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 1060,
+    });
+    fireScrollFrame({ top: -140 });
+
+    expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(1);
+    expect(Number.parseFloat(surface.style.getPropertyValue("--reveal-translate-y"))).toBeLessThan(0);
+
+    surfaceTop = 124;
+    act(() => {
+      window.dispatchEvent(new Event(REVEAL_LAYOUT_INVALIDATED_EVENT));
+      rafCallbacks.splice(0).forEach((callback) => callback(performance.now()));
+    });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
   });
 
   it("keeps collage tiles fully shown while their top edge is still inside the viewport", () => {
