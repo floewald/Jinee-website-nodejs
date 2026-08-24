@@ -17,6 +17,7 @@ import {
   galleryCols,
   galleryColsItem,
   galleryItem,
+  galleryItemRelaxedReveal,
   galleryImg,
 } from "./gallery-styles";
 
@@ -49,6 +50,7 @@ export default function GalleryGrid({
   const revealPreset = useColumnsLayout ? COLLAGE_REVEAL_PRESET : GALLERY_REVEAL_PRESET;
   useScrollLinkedReveal(containerRef, ".gallery-item", {
     ...revealPreset,
+    debugLabel: useColumnsLayout ? "homepage-collage" : "gallery-masonry",
     resetKey: revealKey,
   });
 
@@ -78,6 +80,7 @@ export default function GalleryGrid({
       data-reveal-debug-id={`${galleryInstanceId}:${i}`}
       className={cx(
         inColumns ? galleryColsItem : undefined,
+        inColumns ? galleryItemRelaxedReveal : undefined,
         galleryItem,
         "gallery-item",
       )}

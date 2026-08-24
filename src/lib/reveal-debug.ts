@@ -1,6 +1,7 @@
 export interface RevealDebugSnapshot {
   phase: string;
   reason?: string;
+  surfaceLabel?: string;
   state?: string;
   scrollY?: number;
   top?: number;
@@ -8,6 +9,8 @@ export interface RevealDebugSnapshot {
   rawTop?: number;
   rawBottom?: number;
   translateY?: number;
+  computedOpacity?: number;
+  exitMaskStartPercent?: number;
   visibleRatio?: number;
   exitAnchorTop?: number;
   exitVisibleRatioThresholdUsed?: number;
@@ -64,10 +67,13 @@ interface RevealDebugRow {
   sequence: number;
   phase: string;
   reason: string;
+  surfaceLabel: string | null;
   scrollY: number | null;
   top: number | null;
   rawTop: number | null;
   translateY: number | null;
+  computedOpacity: number | null;
+  exitMaskStartPercent: number | null;
   visibleRatio: number | null;
   exitAnchorTop: number | null;
   exitVisibleRatioThresholdUsed: number | null;
@@ -86,12 +92,16 @@ interface RevealDebugFlipRow {
   nextSequence: number;
   prevReason: string;
   nextReason: string;
+  prevSurfaceLabel: string | null;
+  nextSurfaceLabel: string | null;
   prevScrollY: number | null;
   nextScrollY: number | null;
   deltaScrollY: number | null;
   prevTop: number | null;
   nextTop: number | null;
   deltaTop: number | null;
+  prevOpacity: number | null;
+  nextOpacity: number | null;
   prevVisibleRatio: number | null;
   nextVisibleRatio: number | null;
   prevExitProgress: number | null;
@@ -205,10 +215,13 @@ function toRevealDebugRow(event: RevealDebugEventRecord): RevealDebugRow {
     sequence: event.sequence,
     phase: event.phase,
     reason: event.reason ?? "",
+    surfaceLabel: event.surfaceLabel ?? null,
     scrollY: event.scrollY ?? null,
     top: event.top ?? null,
     rawTop: event.rawTop ?? null,
     translateY: event.translateY ?? null,
+    computedOpacity: event.computedOpacity ?? null,
+    exitMaskStartPercent: event.exitMaskStartPercent ?? null,
     visibleRatio: event.visibleRatio ?? null,
     exitAnchorTop: event.exitAnchorTop ?? null,
     exitVisibleRatioThresholdUsed: event.exitVisibleRatioThresholdUsed ?? null,
@@ -316,6 +329,8 @@ function getRevealDebugFlips(rows: RevealDebugRow[]) {
       nextSequence: current.sequence,
       prevReason: previous.reason,
       nextReason: current.reason,
+      prevSurfaceLabel: previous.surfaceLabel,
+      nextSurfaceLabel: current.surfaceLabel,
       prevScrollY: previous.scrollY,
       nextScrollY: current.scrollY,
       deltaScrollY:
@@ -328,6 +343,8 @@ function getRevealDebugFlips(rows: RevealDebugRow[]) {
         previous.top === null || current.top === null
           ? null
           : current.top - previous.top,
+      prevOpacity: previous.computedOpacity,
+      nextOpacity: current.computedOpacity,
       prevVisibleRatio: previous.visibleRatio,
       nextVisibleRatio: current.visibleRatio,
       prevExitProgress: previous.exitProgress,
@@ -420,11 +437,14 @@ function appendRevealDebugEvent(
   const existingItemEvents = store.byItem[itemId] ?? [];
   const lastEvent = existingEvents[existingEvents.length - 1];
   if (lastEvent && [
+    lastEvent.surfaceLabel ?? "",
     lastEvent.itemId,
     lastEvent.phase ?? "",
     lastEvent.reason ?? "",
     formatDebugNumber(lastEvent.top, 0),
     formatDebugNumber(lastEvent.rawTop, 0),
+    formatDebugNumber(lastEvent.computedOpacity, 2),
+    formatDebugNumber(lastEvent.exitMaskStartPercent, 1),
     formatDebugNumber(lastEvent.visibleRatio, 2),
     formatDebugNumber(lastEvent.entryProgress, 2),
     formatDebugNumber(lastEvent.exitProgress, 2),
@@ -486,11 +506,13 @@ export function setRevealDebugSnapshot(
   item.dataset.revealDebugSummary = [
     `tile ${tileIndex}`,
     `item ${item.dataset.revealDebugId ?? "-"}`,
+    `surface ${snapshot.surfaceLabel ?? "-"}`,
     `${snapshot.phase}:${snapshot.reason ?? "-"}`,
     `state ${snapshot.state ?? "-"}`,
     `scroll ${formatDebugNumber(snapshot.scrollY, 0)}`,
     `top ${formatDebugNumber(snapshot.top, 1)} bottom ${formatDebugNumber(snapshot.bottom, 1)}`,
     `raw ${formatDebugNumber(snapshot.rawTop, 1)} -> ${formatDebugNumber(snapshot.translateY, 1)}`,
+    `opacity ${formatDebugNumber(snapshot.computedOpacity)} mask ${formatDebugNumber(snapshot.exitMaskStartPercent)}`,
     `ratio ${formatDebugNumber(snapshot.visibleRatio)}`,
     `exit-anchor ${formatDebugNumber(snapshot.exitAnchorTop, 1)} gate ${formatDebugNumber(snapshot.exitVisibleRatioThresholdUsed)} ${snapshot.aspectMode ?? "-"}`,
     `entry ${formatDebugNumber(snapshot.entryProgress)}`,
@@ -503,12 +525,15 @@ export function setRevealDebugSnapshot(
 
   const historyEntry = [
     `tile:${tileIndex}`,
+    `surface:${snapshot.surfaceLabel ?? "-"}`,
     snapshot.phase ?? "-",
     snapshot.reason ?? "-",
     `y:${formatDebugNumber(snapshot.scrollY, 0)}`,
     `t:${formatDebugNumber(snapshot.top, 0)}`,
     `raw:${formatDebugNumber(snapshot.rawTop, 0)}`,
     `ty:${formatDebugNumber(snapshot.translateY, 1)}`,
+    `op:${formatDebugNumber(snapshot.computedOpacity, 2)}`,
+    `mask:${formatDebugNumber(snapshot.exitMaskStartPercent, 1)}`,
     `r:${formatDebugNumber(snapshot.visibleRatio, 2)}`,
     `ea:${formatDebugNumber(snapshot.exitAnchorTop, 0)}`,
     `gate:${formatDebugNumber(snapshot.exitVisibleRatioThresholdUsed, 2)}`,
@@ -521,12 +546,15 @@ export function setRevealDebugSnapshot(
     `x:${formatDebugBoolean(snapshot.exiting)}`,
   ].join(" ");
   const historyKey = [
+    snapshot.surfaceLabel ?? "",
     snapshot.phase ?? "",
     snapshot.reason ?? "",
     formatDebugNumber(snapshot.scrollY, 0),
     formatDebugNumber(snapshot.top, 0),
     formatDebugNumber(snapshot.rawTop, 0),
     formatDebugNumber(snapshot.translateY, 1),
+    formatDebugNumber(snapshot.computedOpacity, 2),
+    formatDebugNumber(snapshot.exitMaskStartPercent, 1),
     formatDebugNumber(snapshot.visibleRatio, 2),
     formatDebugNumber(snapshot.exitAnchorTop, 0),
     formatDebugNumber(snapshot.exitVisibleRatioThresholdUsed, 2),

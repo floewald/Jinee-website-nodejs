@@ -43,7 +43,7 @@ out/  (static HTML/CSS/JS)    backend/ (PHP)
 assets-raw/
   photography/my-project/IMG_001.jpg   (original, high-res)
        │
-       ▼ scripts/generate-webp.sh (cwebp or ImageMagick, quality 85)
+       ▼ scripts/build-images.sh → scripts/build-images.mjs
        │
 public/assets/
   photography/my-project/
@@ -52,7 +52,7 @@ public/assets/
     IMG_001-1600.webp    (large, 1600px wide — lightbox)
 ```
 
-The `scripts/generate-manifests.js` script scans `public/assets/` and writes `images.json` per project folder. React components read these manifests to render gallery grids.
+`scripts/build-images.sh` is the main entry point for the image pipeline. It delegates to `scripts/build-images.mjs`, which converts source assets, writes `images.json` manifests per project folder, and regenerates the app icons. React components read those manifests to render gallery grids.
 
 ### Contact form flow
 

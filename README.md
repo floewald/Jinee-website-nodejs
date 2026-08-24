@@ -132,9 +132,9 @@ npm run dev
 │   └── manifest.php           # Image manifest endpoint
 ├── scripts/                   # Image build pipeline + DX tools
 │   ├── build-images.sh
-│   ├── generate-webp.sh
-│   ├── generate-manifests.js
+│   ├── build-images.mjs
 │   ├── create-project.mjs     # Interactive project scaffold CLI
+│   ├── generate-lqip.mjs
 │   └── validate-manifests.mjs # Build-time manifest checker
 ├── e2e/                       # Playwright end-to-end tests
 ├── docs/                      # Developer & contributor documentation
