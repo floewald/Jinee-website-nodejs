@@ -129,7 +129,7 @@ jobs:
       #    WARNING: clean_slate=true deletes all files in server-dir first — assets will be
       #    wiped too, so only use it when you intend a full redeploy (deploy-assets must also run).
       - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
@@ -173,7 +173,7 @@ jobs:
 
       # build:images writes directly to public/assets/ — no build:next needed here
       - name: Upload assets via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
@@ -194,7 +194,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Upload raw assets via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
@@ -270,7 +270,7 @@ jobs:
       # → download_config.php lands at  FTP_BACKEND_DIR/download/
       # → contact/config.php    lands at  FTP_BACKEND_DIR/contact/
       - name: Upload download_config.php via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
@@ -281,7 +281,7 @@ jobs:
           dangerous-clean-slate: false
 
       - name: Upload contact config.php via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
@@ -305,7 +305,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy backend PHP scripts via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
