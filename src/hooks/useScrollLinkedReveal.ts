@@ -434,6 +434,20 @@ export function useScrollLinkedReveal(
       refreshVisibleItems();
     };
 
+    // A card can move after its own geometry was cached: fonts may swap in,
+    // images can finish decoding, and back/forward navigation can restore a
+    // page at a different scroll position. Start from fresh layout metrics in
+    // all of those cases rather than letting an old position drive opacity.
+    const handlePageShown = () => {
+      handleLayoutInvalidated();
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        handleLayoutInvalidated();
+      }
+    };
+
     const armExitMotion = () => {
       if (exitMotionArmed) return;
       exitMotionArmed = true;
@@ -599,6 +613,18 @@ export function useScrollLinkedReveal(
         .forEach((item) => observeItem(item));
     };
 
+    // Transforms applied by this hook do not trigger ResizeObserver, but a
+    // genuine resize does. Treat it as a layout invalidation so cached document
+    // positions never survive a responsive reflow or late content sizing.
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver === "function") {
+      resizeObserver = new ResizeObserver(() => {
+        handleLayoutInvalidated();
+      });
+      resizeObserver.observe(root);
+      initialItems.forEach((item) => resizeObserver?.observe(item));
+    }
+
     initialItems.forEach(observeItem);
     refreshVisibleItems();
 
@@ -613,20 +639,46 @@ export function useScrollLinkedReveal(
     if (typeof MutationObserver === "function") {
       mutationObserver = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
-          mutation.addedNodes.forEach(observeWithin);
+          mutation.addedNodes.forEach((node) => {
+            observeWithin(node);
+            if (node instanceof HTMLElement && (node.matches(selector) || node.querySelector(selector))) {
+              if (node.matches(selector)) {
+                resizeObserver?.observe(node);
+              }
+              node
+                .querySelectorAll<HTMLElement>(selector)
+                .forEach((item) => resizeObserver?.observe(item));
+              handleLayoutInvalidated();
+            }
+          });
         });
       });
       mutationObserver.observe(root, { childList: true, subtree: true });
     }
 
+    let disposed = false;
+    void document.fonts?.ready.then(() => {
+      if (!disposed) {
+        handleLayoutInvalidated();
+      }
+    });
+
     window.addEventListener("wheel", noteExitMotionIntent, { passive: true });
     window.addEventListener("touchmove", noteExitMotionIntent, { passive: true });
+    // Scrollbar drags do not dispatch wheel or touch events. A pointer press
+    // makes their following scroll eligible to arm exit motion as well.
+    window.addEventListener("pointerdown", noteExitMotionIntent, { passive: true });
+    window.addEventListener("mousedown", noteExitMotionIntent, { passive: true });
     window.addEventListener("keydown", noteExitMotionIntentFromKeyboard);
     window.addEventListener(REVEAL_LAYOUT_INVALIDATED_EVENT, handleLayoutInvalidated);
+    window.addEventListener("load", handlePageShown);
+    window.addEventListener("pageshow", handlePageShown);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", scheduleTick);
+    window.addEventListener("resize", handleLayoutInvalidated);
 
     return () => {
+      disposed = true;
       if (rafId) {
         window.cancelAnimationFrame(rafId);
       }
@@ -637,12 +689,18 @@ export function useScrollLinkedReveal(
       }
       observer.disconnect();
       mutationObserver?.disconnect();
+      resizeObserver?.disconnect();
       window.removeEventListener("wheel", noteExitMotionIntent);
       window.removeEventListener("touchmove", noteExitMotionIntent);
+      window.removeEventListener("pointerdown", noteExitMotionIntent);
+      window.removeEventListener("mousedown", noteExitMotionIntent);
       window.removeEventListener("keydown", noteExitMotionIntentFromKeyboard);
       window.removeEventListener(REVEAL_LAYOUT_INVALIDATED_EVENT, handleLayoutInvalidated);
+      window.removeEventListener("load", handlePageShown);
+      window.removeEventListener("pageshow", handlePageShown);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", scheduleTick);
+      window.removeEventListener("resize", handleLayoutInvalidated);
     };
   }, [
     ref,

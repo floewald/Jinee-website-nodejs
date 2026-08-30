@@ -45,6 +45,23 @@ class MockIntersectionObserver {
   }
 }
 
+class MockResizeObserver {
+  callback: ResizeObserverCallback;
+  observe = jest.fn();
+  disconnect = jest.fn();
+  unobserve = jest.fn();
+  static instances: MockResizeObserver[] = [];
+
+  constructor(callback: ResizeObserverCallback) {
+    this.callback = callback;
+    MockResizeObserver.instances.push(this);
+  }
+
+  fire() {
+    this.callback([], this as unknown as ResizeObserver);
+  }
+}
+
 function TestSurface({
   initialTop,
   initialRevealState,
@@ -131,6 +148,11 @@ describe("useScrollLinkedReveal", () => {
       }),
     });
 
+    Object.defineProperty(window, "ResizeObserver", {
+      writable: true,
+      value: MockResizeObserver,
+    });
+
     Object.defineProperty(window, "cancelAnimationFrame", {
       writable: true,
       value: jest.fn(),
@@ -139,6 +161,7 @@ describe("useScrollLinkedReveal", () => {
 
   beforeEach(() => {
     MockIntersectionObserver.instances = [];
+    MockResizeObserver.instances = [];
     rafCallbacks.length = 0;
     surfaceTop = 0;
     surfaceWidth = 300;
@@ -537,6 +560,75 @@ describe("useScrollLinkedReveal", () => {
 
     expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
     expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+  });
+
+  it("drops cached layout metrics when a card resizes after loading", () => {
+    surfaceWidth = 300;
+    surfaceHeight = 684;
+
+    render(
+      <TestSurface
+        initialTop={980}
+        options={GALLERY_REVEAL_PRESET}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+    armExitMotion();
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 1060,
+    });
+    fireScrollFrame({ top: -140 });
+
+    expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(1);
+
+    surfaceTop = 124;
+    act(() => {
+      MockResizeObserver.instances[0].fire();
+      rafCallbacks.splice(0).forEach((callback) => callback(performance.now()));
+    });
+
+    expect(surface.style.getPropertyValue("--reveal-opacity")).toBe("1");
+    expect(surface.style.getPropertyValue("--reveal-translate-y")).toBe("0px");
+  });
+
+  it("arms exit motion after pointer input so scrollbar drags are handled", () => {
+    render(
+      <TestSurface
+        initialTop={980}
+        options={{
+          exitStartPx: 90,
+          exitRangePx: 200,
+          exitOffsetPx: 10,
+          exitEndOpacity: 0.72,
+        }}
+      />
+    );
+    const surface = screen.getByTestId("surface");
+    fireObserverEntry({ target: surface });
+
+    act(() => {
+      window.dispatchEvent(new MouseEvent("mousedown"));
+    });
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 660,
+    });
+    fireScrollFrame({ top: 20 });
+
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      writable: true,
+      value: 700,
+    });
+    fireScrollFrame({ top: -20 });
+
+    expect(Number(surface.style.getPropertyValue("--reveal-opacity"))).toBeLessThan(1);
+    expect(Number.parseFloat(surface.style.getPropertyValue("--reveal-translate-y"))).toBeLessThan(0);
   });
 
   it("keeps collage tiles fully shown while their top edge is still inside the viewport", () => {
