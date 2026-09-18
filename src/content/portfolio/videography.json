@@ -332,6 +332,28 @@
   },
   {
     "type": "video",
+    "slug": "taiwan-news-industry",
+    "title": "星星之火：新聞人的一生志業",
+    "description": "A Taiwanese documentary on the news industry’s digital disruption, commercial pressures, and enduring public-interest values.",
+    "longDescription": "This documentary brings together Taiwanese news professionals across generations to consider how journalism can adapt as digital platforms reshape audience attention and media revenue. Their reflections on professional purpose, public trust, and industry change frame the future of news as a shared civic question.",
+    "heading": "Producer",
+    "location": "📍 Taipei, Taiwan",
+    "ogImage": "https://jineechen.com/assets/videography/taiwan-news-industry/taiwan-news-industry-1-800.webp",
+    "videos": [
+      {
+        "title": "星星之火：新聞人的一生志業",
+        "embedUrl": "https://www.youtube.com/embed/VbKKjTxyxII",
+        "description": "Taiwanese news professionals reflect on digital disruption, commercial pressure, public trust, and the civic purpose of journalism.",
+        "uploadDate": "2021-07-11T11:08:40-07:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "星星之火：新聞人的一生志業",
+      "thumbnail": "/assets/videography/taiwan-news-industry/taiwan-news-industry-1-800.webp"
+    }
+  },
+  {
+    "type": "video",
     "slug": "lunch-with-us",
     "title": "CNA Insider | Lunch With Us",
     "description": "CNA Insider food series exploring affordable, character-rich meals across Singapore and Taipei.",
@@ -673,6 +695,72 @@
         "/assets/videography/i-fell/i-fell-1-800.webp",
         "/assets/videography/i-fell/i-fell-2-800.webp"
       ]
+    }
+  },
+  {
+    "type": "video",
+    "slug": "healthcare-heroes-alcohol-care",
+    "title": "CNA Insider | Healthcare Heroes",
+    "description": "CNA Insider’s Healthcare Heroes follows Khoo Teck Puat Hospital’s home-visit programme supporting people with alcohol misuse to reduce repeat A&E visits.",
+    "longDescription": "At Singapore’s Khoo Teck Puat Hospital, a community nurse and social worker visit people with alcohol-misuse issues at home, addressing the practical and psychosocial conditions that drive repeat emergency-department visits. The film follows a non-judgmental model of care built around trust, realistic goals, and referrals to longer-term support.",
+    "heading": "Producer | Director | Videographer",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/healthcare-heroes-alcohol-care/healthcare-heroes-alcohol-care-1-800.webp",
+    "videos": [
+      {
+        "title": "The Hospital That Helps Alcoholics Stay Out Of The A&E | Healthcare Heroes",
+        "embedUrl": "https://www.youtube.com/embed/9jSaLjCz2DI",
+        "description": "A community nurse and social worker support people with alcohol-misuse issues at home, helping to prevent repeat emergency-department visits through trust and practical care.",
+        "uploadDate": "2023-06-17T06:00:13-07:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA Insider | Healthcare Heroes",
+      "thumbnail": "/assets/videography/healthcare-heroes-alcohol-care/healthcare-heroes-alcohol-care-1-800.webp"
+    }
+  },
+  {
+    "type": "video",
+    "slug": "joshimath-sinking-town",
+    "title": "CNA Insider | Joshimath",
+    "description": "CNA Insider examines the collapse risk facing Joshimath, an Indian Himalayan pilgrimage town built on unstable ground.",
+    "longDescription": "After buildings collapsed and residents were displaced in early 2023, this report traces why Joshimath’s terrain is so vulnerable. It links landslide debris, poorly planned drainage, rapid construction, and climate pressure to a warning for mountain towns across the Himalayas.",
+    "heading": "Video Editor",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/joshimath-sinking-town/joshimath-sinking-town-1-800.webp",
+    "videos": [
+      {
+        "title": "Why Is Joshimath, India’s Himalayan Holy Town, Sinking?",
+        "embedUrl": "https://www.youtube.com/embed/nMIA7u84Lxo",
+        "description": "A report on why unstable terrain, development, and climate pressure have put Joshimath’s residents and buildings at growing risk.",
+        "uploadDate": "2023-09-11T06:00:39-07:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA Insider | Joshimath",
+      "thumbnail": "/assets/videography/joshimath-sinking-town/joshimath-sinking-town-1-800.webp"
+    }
+  },
+  {
+    "type": "video",
+    "slug": "malware-scam-phone-hijack",
+    "title": "CNA Insider | Malware Scam",
+    "description": "CNA Insider explains how a malicious app can give scammers control of a phone and drain a victim’s bank account.",
+    "longDescription": "Through a malware-scam case, this explainer shows how a seemingly legitimate social-media advert can lead to remote control of a victim’s phone. It identifies warning signs of infection and the urgent steps to take before further loss.",
+    "heading": "Video Editor",
+    "location": "📍 Singapore",
+    "ogImage": "https://jineechen.com/assets/videography/malware-scam-phone-hijack/malware-scam-phone-hijack-1-800.webp",
+    "videos": [
+      {
+        "title": "A Scammer Hijacked My Phone: How To Tell If You’ve Got Malware And What To Do",
+        "embedUrl": "https://www.youtube.com/embed/ev0sdThXNRs",
+        "description": "An explainer on how malicious apps let scammers remotely control phones, the warning signs to look for, and what to do urgently.",
+        "uploadDate": "2023-11-23T05:00:26-08:00"
+      }
+    ],
+    "portfolioCard": {
+      "cardTitle": "CNA Insider | Malware Scam",
+      "thumbnail": "/assets/videography/malware-scam-phone-hijack/malware-scam-phone-hijack-1-800.webp"
     }
   },
   {

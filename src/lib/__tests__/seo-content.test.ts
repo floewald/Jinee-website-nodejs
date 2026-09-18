@@ -51,8 +51,8 @@ describe("social-media-addiction project", () => {
 describe("video portfolio card ordering", () => {
   const cardProjects = getVideoCards();
 
-  it("has 24 projects with portfolio cards", () => {
-    expect(cardProjects.length).toBe(24);
+  it("has 28 projects with portfolio cards", () => {
+    expect(cardProjects.length).toBe(28);
   });
 
   it("order matches lineup defined in videography.json", () => {
@@ -67,6 +67,7 @@ describe("video portfolio card ordering", () => {
       "re-old-times",
       "scdf-project",
       "blind-kitchen-chefs",
+      "taiwan-news-industry",
       "lunch-with-us",
       "fertility-rate-sgp",
       "social-media-addiction",
@@ -77,6 +78,9 @@ describe("video portfolio card ordering", () => {
       "stay-at-home-dad",
       "lion-dancers",
       "i-fell",
+      "healthcare-heroes-alcohol-care",
+      "joshimath-sinking-town",
+      "malware-scam-phone-hijack",
       "mark-your-calendar",
       "red-dot-detectives",
       "i-eat-therefore",
