@@ -14,7 +14,7 @@ Resolve all errors **and warnings** before finishing. Do not leave a task in a s
 
 ## Project overview
 
-- **Stack**: Next.js 16.2.1 / React 19 / TypeScript / static export (`output: export`)
+- **Stack**: Next.js 16.2.3 / React 19 / TypeScript / static export (`output: export`)
 - **Root workspace**: `/Users/florianewald/Documents/01_git_projects/Jinee-website-nodejs`
 - **Next.js app**: `src/` (root workspace is the Next.js project; `nextapp/` is a secondary reference copy)
 - **Content**: JSON manifests in `src/content/portfolio/` validated by Zod schemas in `src/lib/portfolio-schemas.ts`

@@ -289,12 +289,12 @@ page.tsx  [Server]
 └── VideoPlayer[]            [Client]  — one per video; lazy via IntersectionObserver
 ```
 
-### CSS Specificity Conventions (`globals.css`)
+### Styling Conventions
 
-All component styles live in a single `globals.css` file processed by Tailwind v4 via
-`@import "tailwindcss"`.  Tailwind wraps its output in `@layer` blocks (`base`,
-`components`, `utilities`); all hand-written rules sit **outside** any layer so they
-always beat Tailwind's generated styles.
+Component styling lives in focused Panda CSS `*-styles.ts` modules and uses
+`css()`/`cx()` utilities. `globals.css` contains only global rules, design tokens,
+font setup, and intentionally shared selectors. Tailwind v4 is included only for its
+base reset; do not add Tailwind utility classes or rely on Tailwind layer precedence.
 
 **Section backgrounds** — `.section-bg-white` and `.section-bg-charcoal` apply full-bleed
 background colour plus `color` inheritance.  The charcoal section sets `color: #fff` and
