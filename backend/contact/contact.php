@@ -222,7 +222,7 @@ if (!empty($errors)) {
 // Prevent header injection in email fields
 $clean_email = preg_replace('/[\r\n]+/', '', $email);
 
-$subject = "Website enquiry from {$first} {$last}";
+$subject = "New message from your Jinee Chen website contact form — {$first} {$last}";
 $body = "Name: {$first} {$last}\nEmail: {$clean_email}\nPhone: {$phone}\nConsent: {$consent} (ts: {$consent_ts})\n\nMessage:\n{$message}\n\nIP: {$_SERVER['REMOTE_ADDR']}\nUA: {$_SERVER['HTTP_USER_AGENT']}\n";
 
 // Prepare recipients as array (allow comma-separated list in config or array)
