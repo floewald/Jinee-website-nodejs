@@ -76,7 +76,7 @@ with pixel-perfect visual regression validation.
 | b95b952 | Nav submenu hover: border-bottom underline (matching top-level links) | ✅ |
 | 2fc30d4 | 4 visual bugs: instagram card flex layout, contact link color, imprint/privacy container, primary button visibility | ✅ |
 
-### Remaining in globals.css (~380 lines — intentionally kept):
+### Remaining in globals.css (~380 lines — intentionally kept)
 
 | Category | Lines | Reason |
 |----------|-------|--------|

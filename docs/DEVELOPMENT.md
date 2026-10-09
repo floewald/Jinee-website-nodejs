@@ -275,7 +275,7 @@ For the broader workflow around branch naming, PR issue-closing keywords, TDD ex
 
 ## Code Style
 
-- **No class naming conflicts**: Tailwind utility classes are co-located with JSX markup; no separate CSS files except for complex animations
+- **Styling**: use Panda CSS `css()`/`cx()` utilities and the focused `*-styles.ts` modules. `globals.css` is reserved for global rules, design tokens, and font setup; Tailwind is present only for its base reset.
 - **Component files**: PascalCase (`GalleryGrid.tsx`)
 - **Hooks**: camelCase, `use` prefix (`useSwipe.ts`)
 - **Types**: `src/types/*.ts`, interfaces over `type` aliases for object shapes
@@ -301,7 +301,7 @@ Do **not** edit files directly in `public/assets/` — they are generated and ma
 Install the recommended extensions for the best DX:
 
 - **ESLint** (`dbaeumer.vscode-eslint`)
-- **Tailwind CSS IntelliSense** (`bradlc.vscode-tailwindcss`)
+- **Panda CSS IntelliSense** (optional, if preferred by the editor)
 - **Prettier** (`esbenp.prettier-vscode`)
 - **TypeScript** (built-in, ensure `typescript.tsdk` is set to workspace version)
 - **Playwright Test** (`ms-playwright.playwright`)

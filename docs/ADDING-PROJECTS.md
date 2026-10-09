@@ -336,22 +336,11 @@ The page will no longer exist in `out/` after rebuilding. Old links will return 
 
 ---
 
-## Using TinaCMS (Visual Editor)
+## Content editing workflow
 
-Once [Phase 7 of the migration](MIGRATION-PROGRESS.md) is complete, you can edit all project metadata visually in the browser without touching JSON files:
-
-```bash
-npm run tina
-# → Open http://localhost:4001/admin in your browser
-```
-
-The visual editor lets you:
-
-- Add/edit/remove projects with a form interface
-- Preview changes before saving
-- All changes save directly to the JSON files (committed with Git)
-
-The underlying JSON structure stays the same — you can always switch back to editing JSON directly.
+TinaCMS is deferred indefinitely. Edit the versioned JSON manifests directly and use
+`npm run create-project` when creating a project; both workflows are validated during
+the normal quality checks.
 
 ---
 
@@ -378,4 +367,4 @@ You can now control border radius and homepage collage hover zoom from central s
   - Constant: `SLIDESHOW_CYCLE_MS` (default: 4000 ms)
   - Controls both the hero slideshow and project card slideshows.
 
-Once [Phase 7 (TinaCMS)](MIGRATION-PROGRESS.md) is complete, these will be editable via the visual editor.
+These settings are edited in code and deployed through the normal workflow.
