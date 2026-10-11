@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { cx } from "@/styled-system/css";
 import { videoProjects, getSlugsByType } from "@/lib/portfolio-config";
 import VideoPlayer from "@/components/video/VideoPlayer";
+import { SITE_URL } from "@/lib/constants";
+import { getYouTubeVideoId, getYouTubeThumbnailUrl } from "@/lib/youtube";
 import { sectionTitleDivider } from "@/components/portfolio/featured-styles";
 import {
   projectPage,
@@ -51,14 +53,29 @@ export default async function VideoProjectPage({
   const project = videoProjects.find((p) => p.slug === slug);
   if (!project) notFound();
 
+  const videoObjects = project.videos.flatMap((video) => {
+    // External links are not videos playable on this page. Unknown dates are
+    // omitted from markup until verified, rather than publishing invented data.
+    if (!video.embedUrl || !video.uploadDate) return [];
+    const videoId = getYouTubeVideoId(video.embedUrl);
+    const description = (Array.isArray(video.description)
+      ? video.description.filter((line) => line.trim()).join(" ")
+      : video.description?.trim()) || project.description;
+    const thumbnail = video.previewImage
+      ? new URL(video.previewImage, SITE_URL).href
+      : videoId ? getYouTubeThumbnailUrl(videoId) : project.ogImage;
+    return [{
+      "@type": "VideoObject",
+      name: video.title,
+      description,
+      thumbnailUrl: [thumbnail],
+      embedUrl: video.embedUrl,
+      uploadDate: video.uploadDate,
+    }];
+  });
   const videoJsonLd = {
     "@context": "https://schema.org",
-    "@type": "VideoObject",
-    name: project.videos[0]?.title ?? project.title,
-    description: project.description,
-    thumbnailUrl: [project.ogImage],
-    embedUrl: project.videos[0]?.embedUrl,
-    uploadDate: project.videos[0]?.uploadDate ?? "2023-01-01T00:00:00+08:00",
+    "@graph": videoObjects,
   };
   const descriptionParagraphs = project.longDescription
     ? (Array.isArray(project.longDescription)
@@ -69,10 +86,10 @@ export default async function VideoProjectPage({
 
   return (
     <main className={cx(projectPage, "project-page", "container")}>
-      <script
+      {videoObjects.length > 0 && <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoJsonLd) }}
-      />
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoJsonLd).replace(/</g, "\\u003c") }}
+      />}
       <h1 className={cx(projectHeading, "project-heading")}>{project.title}</h1>
       <hr className={cx(sectionTitleDivider, "section-title-divider")} aria-hidden="true" />
       <div className={cx(videoProjectHeader, "video-project-header")}>

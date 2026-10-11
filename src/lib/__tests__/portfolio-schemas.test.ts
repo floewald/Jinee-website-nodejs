@@ -102,6 +102,15 @@ describe("PhotographyProjectSchema", () => {
 // ── VideoProjectSchema ───────────────────────────────────────────────────────
 
 describe("VideoProjectSchema", () => {
+  it("accepts an unknown upload date without forcing a placeholder", () => {
+    const { uploadDate: _date, ...video } = VALID_VIDEO.videos[0];
+    expect(() => VideoProjectSchema.parse({ ...VALID_VIDEO, videos: [video] })).not.toThrow();
+  });
+
+  it.each(["not-a-date", "2026-02-30T00:00:00+08:00", "2026-01-01T00:00:00"])("rejects invalid or timezone-free upload date %s", (uploadDate) => {
+    expect(() => VideoProjectSchema.parse({ ...VALID_VIDEO, videos: [{ ...VALID_VIDEO.videos[0], uploadDate }] })).toThrow();
+  });
+
   it("accepts a valid video project", () => {
     expect(() => VideoProjectSchema.parse(VALID_VIDEO)).not.toThrow();
   });

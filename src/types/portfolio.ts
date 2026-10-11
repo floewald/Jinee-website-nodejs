@@ -45,8 +45,8 @@ export interface VideoItem {
   previewImage?: string;
   /** Episode-side copy shown alongside the video player */
   description?: string | string[];
-  /** ISO 8601 date string with timezone, e.g. "2023-01-01T00:00:00+08:00" */
-  uploadDate: string;
+  /** Verified source publication timestamp with timezone; omit when unknown. */
+  uploadDate?: string;
 }
 
 export interface VideoProject extends BaseProject {

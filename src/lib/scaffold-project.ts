@@ -96,7 +96,6 @@ function videoSkeleton(slug: string, title: string, videoId: string | null) {
       {
         title: `<!-- Add video title -->`,
         embedUrl: videoId ? getYouTubeEmbedUrl(videoId) : "https://www.youtube.com/embed/REPLACE_THIS_ID",
-        uploadDate: new Date().toISOString().replace(/\.\d+Z$/, "+08:00"),
       },
     ],
     portfolioCard: {

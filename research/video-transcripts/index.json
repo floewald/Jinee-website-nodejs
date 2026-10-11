@@ -1,0 +1,637 @@
+{
+  "preferredLanguages": [
+    "en",
+    "zh-Hans",
+    "zh-Hant",
+    "zh",
+    "zh-TW",
+    "zh-CN"
+  ],
+  "videos": [
+    {
+      "slug": "stuck-low-pay",
+      "title": "Stuck With Low Pay, How Taiwan's Young Graduates Cope With High Costs | Asia's Stuck Generation.",
+      "sourceUrl": "https://www.youtube.com/embed/I2CK-j-pR7M",
+      "videoId": "I2CK-j-pR7M",
+      "publishDate": "2023-07-28T06:00:22-07:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:19.699Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=I2CK-j-pR7M! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "father-son-suhaimi",
+      "title": "\"There's A Lot Of Expectation\": Growing Up As Comedian Suhaimi Yusof's Son | On The Red Dot",
+      "sourceUrl": "https://www.youtube.com/embed/b7YuRUi9B4s",
+      "videoId": "b7YuRUi9B4s",
+      "publishDate": "2026-06-22T07:00:24-07:00",
+      "status": "available",
+      "segmentCount": 433,
+      "transcript": "b7YuRUi9B4s/transcript.json",
+      "retrievedAt": "2026-10-11T18:44:43.475Z"
+    },
+    {
+      "slug": "7-days-archery",
+      "title": "7 Days, I Can Do It | Celebrity Chef Eric Teo Learns Archery in 7 Days",
+      "sourceUrl": "https://www.youtube.com/embed/EFe2vDcFMRE",
+      "videoId": "EFe2vDcFMRE",
+      "publishDate": "2026-04-22T21:00:12-07:00",
+      "status": "available",
+      "segmentCount": 606,
+      "transcript": "EFe2vDcFMRE/transcript.json",
+      "retrievedAt": "2026-10-11T18:44:45.602Z"
+    },
+    {
+      "slug": "7-days-archery",
+      "title": "7 Days, I Can Do It | 36 Arrows, 300 Points — Can Chef Eric Teo Do It?",
+      "sourceUrl": "https://www.youtube.com/embed/B0IURhVM0TE",
+      "videoId": "B0IURhVM0TE",
+      "publishDate": "2026-04-25T04:45:01-07:00",
+      "status": "available",
+      "segmentCount": 244,
+      "transcript": "B0IURhVM0TE/transcript.json",
+      "retrievedAt": "2026-10-11T18:44:48.015Z"
+    },
+    {
+      "slug": "singer-jasmin-sokko",
+      "title": "Singer Jasmine Sokko On Chasing Her Music Dreams: Every Dream Is Equally Worthy | Dear Singapore",
+      "sourceUrl": "https://www.youtube.com/embed/wTf9xqfCJcA",
+      "videoId": "wTf9xqfCJcA",
+      "publishDate": "2025-10-09T05:01:48-07:00",
+      "status": "available",
+      "segmentCount": 110,
+      "transcript": "wTf9xqfCJcA/transcript.json",
+      "retrievedAt": "2026-10-11T18:44:50.160Z"
+    },
+    {
+      "slug": "food-wasted",
+      "title": "Why Are We Throwing Away Perfectly Edible Food? | Food, Wasted 1/3",
+      "sourceUrl": "https://www.youtube.com/embed/cKjnKcCKve8",
+      "videoId": "cKjnKcCKve8",
+      "publishDate": "2021-03-13T05:00:09-08:00",
+      "status": "available",
+      "segmentCount": 402,
+      "transcript": "cKjnKcCKve8/transcript.json",
+      "retrievedAt": "2026-10-11T18:44:52.910Z"
+    },
+    {
+      "slug": "food-wasted",
+      "title": "Can Urban Farming Fix Our Broken Relationship With Food? | Food, Wasted 3/3",
+      "sourceUrl": "https://www.youtube.com/embed/Cmh3S9EpvXA",
+      "videoId": "Cmh3S9EpvXA",
+      "publishDate": "2021-03-13T05:00:04-08:00",
+      "status": "available",
+      "segmentCount": 442,
+      "transcript": "Cmh3S9EpvXA/transcript.json",
+      "retrievedAt": "2026-10-11T18:44:55.305Z"
+    },
+    {
+      "slug": "health-wang-zhen",
+      "title": "【看见主播 | 王征】40+这么吃，才不会发福？外食族必看",
+      "sourceUrl": "https://www.youtube.com/embed/hJn7y2VvjQs",
+      "videoId": "hJn7y2VvjQs",
+      "publishDate": "2026-03-05T02:01:05-08:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:25.146Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=hJn7y2VvjQs! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "health-wang-zhen",
+      "title": "【看见主播 | 王征】40岁后最危险的不是压力",
+      "sourceUrl": "https://www.youtube.com/embed/wzVyJJ10vlo",
+      "videoId": "wzVyJJ10vlo",
+      "publishDate": "2026-04-29T01:00:56-07:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:26.173Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=wzVyJJ10vlo! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "health-wang-zhen",
+      "title": "【看见主播 | 王征】40岁后你以为的健康，可能是错觉",
+      "sourceUrl": "https://www.youtube.com/embed/E1bhkM_Ees4",
+      "videoId": "E1bhkM_Ees4",
+      "publishDate": "2026-05-21T01:00:11-07:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:27.348Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=E1bhkM_Ees4! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "health-wang-zhen",
+      "title": "【看见主播 | 王征】女性40+，身体正在发生什么变化？",
+      "sourceUrl": "https://www.youtube.com/embed/n4xH6jyliQE",
+      "videoId": "n4xH6jyliQE",
+      "publishDate": "2026-06-18T01:00:37-07:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:28.059Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=n4xH6jyliQE! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "retirement-aging",
+      "title": "Presenter Insights | At 64, he doesn't want to retire; an experience made him seriously face aging.",
+      "sourceUrl": "https://www.youtube.com/embed/x7U6OarM2vk",
+      "videoId": "x7U6OarM2vk",
+      "publishDate": "2026-08-19T03:00:22-07:00",
+      "status": "available",
+      "segmentCount": 183,
+      "transcript": "x7U6OarM2vk/transcript.json",
+      "retrievedAt": "2026-10-11T18:45:07.175Z"
+    },
+    {
+      "slug": "retirement-aging",
+      "title": "Presenter Insights | He Retired. Suddenly, No One Needed Him. \"I Became a Nobody.\"",
+      "sourceUrl": "https://www.youtube.com/embed/euvDjOD29Ng",
+      "videoId": "euvDjOD29Ng",
+      "publishDate": "2026-08-26T03:00:14-07:00",
+      "status": "available",
+      "segmentCount": 177,
+      "transcript": "euvDjOD29Ng/transcript.json",
+      "retrievedAt": "2026-10-11T18:45:09.021Z"
+    },
+    {
+      "slug": "re-old-times",
+      "title": "Fun转时光 | 彻夜卷发、鱼尾狮穿上身 80年代美姐难当! - Katong",
+      "sourceUrl": "https://www.youtube.com/embed/Hs4ecUtdvW0",
+      "videoId": "Hs4ecUtdvW0",
+      "publishDate": "2025-12-15T02:00:22-08:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:30.210Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=Hs4ecUtdvW0! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "re-old-times",
+      "title": "Fun转时光 | 旧时的余东璇街 是戏院美食街 - Wayang Street",
+      "sourceUrl": "https://www.youtube.com/embed/IAEqvuE6H80",
+      "videoId": "IAEqvuE6H80",
+      "publishDate": "2025-12-18T02:01:44-08:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:31.016Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=IAEqvuE6H80! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "re-old-times",
+      "title": "Fun转时光 | 皇家山六七十年代超好玩 探索昔日回忆的三宝! - Fort Canning",
+      "sourceUrl": "https://www.youtube.com/embed/NYUWI5N6D1I",
+      "videoId": "NYUWI5N6D1I",
+      "publishDate": "2025-12-22T02:05:00-08:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:31.617Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=NYUWI5N6D1I! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "re-old-times",
+      "title": "Fun转时光 | \"五丛树脚\"吃沙爹 老一辈独有的吃法 - Satay Club",
+      "sourceUrl": "https://www.youtube.com/embed/oysT20DT3Lw",
+      "videoId": "oysT20DT3Lw",
+      "publishDate": "2025-12-25T02:01:23-08:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:32.387Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=oysT20DT3Lw! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "re-old-times",
+      "title": "Fun转时光 | 桥北路消失的光影记忆：光华大戏院 - Jubilee Theatre",
+      "sourceUrl": "https://www.youtube.com/embed/m_sUOM-go7E",
+      "videoId": "m_sUOM-go7E",
+      "publishDate": "2025-12-29T02:02:03-08:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:33.178Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=m_sUOM-go7E! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "scdf-project",
+      "title": "SCDF Officers React To Abusive Calls, Emotional Cases And Ambulance-Blocking Drivers",
+      "sourceUrl": "https://www.youtube.com/embed/CHc3Gd4Y4VM",
+      "videoId": "CHc3Gd4Y4VM",
+      "publishDate": "2024-12-05T05:00:20-08:00",
+      "status": "available",
+      "segmentCount": 244,
+      "transcript": "CHc3Gd4Y4VM/transcript.json",
+      "retrievedAt": "2026-10-11T18:45:21.292Z"
+    },
+    {
+      "slug": "scdf-project",
+      "title": "On Call With Singapore's SCDF Emergency Medical Services: When Minutes Can Mean Life Or Death",
+      "sourceUrl": "https://www.youtube.com/embed/9PjWLStxWCc",
+      "videoId": "9PjWLStxWCc",
+      "publishDate": "2024-03-07T05:00:06-08:00",
+      "status": "available",
+      "segmentCount": 416,
+      "transcript": "9PjWLStxWCc/transcript.json",
+      "retrievedAt": "2026-10-11T18:45:23.845Z"
+    },
+    {
+      "slug": "blind-kitchen-chefs",
+      "title": "Episode 1: We're Chefs, We're Partly Blind & We're Opening A Cafe",
+      "sourceUrl": "https://www.youtube.com/embed/Mc-Eg2Ehv2g",
+      "videoId": "Mc-Eg2Ehv2g",
+      "publishDate": "2023-03-09T05:00:15-08:00",
+      "status": "available",
+      "segmentCount": 224,
+      "transcript": "Mc-Eg2Ehv2g/transcript.json",
+      "retrievedAt": "2026-10-11T18:45:26.044Z"
+    },
+    {
+      "slug": "blind-kitchen-chefs",
+      "title": "Episode 2: A Chef Makes A Shock Exit, But Why?",
+      "sourceUrl": "https://www.youtube.com/embed/BWNsK8-QzjU",
+      "videoId": "BWNsK8-QzjU",
+      "publishDate": "2023-03-10T05:00:06-08:00",
+      "status": "available",
+      "segmentCount": 316,
+      "transcript": "BWNsK8-QzjU/transcript.json",
+      "retrievedAt": "2026-10-11T18:45:29.648Z"
+    },
+    {
+      "slug": "blind-kitchen-chefs",
+      "title": "Episode 3: I Hire A Chef With Cerebral Palsy, 3 Days Before Opening",
+      "sourceUrl": "https://www.youtube.com/embed/40ixbtJvP98",
+      "videoId": "40ixbtJvP98",
+      "publishDate": "2023-03-11T05:00:02-08:00",
+      "status": "available",
+      "segmentCount": 176,
+      "transcript": "40ixbtJvP98/transcript.json",
+      "retrievedAt": "2026-10-11T18:45:31.488Z"
+    },
+    {
+      "slug": "taiwan-news-industry",
+      "title": "星星之火：新聞人的一生志業",
+      "sourceUrl": "https://www.youtube.com/embed/VbKKjTxyxII",
+      "videoId": "VbKKjTxyxII",
+      "publishDate": "2021-07-11T11:08:40-07:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:37.555Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=VbKKjTxyxII! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "lunch-with-us",
+      "title": "Budget 'Fast-Food' Hopping In Taiwan: From Vegetarian to Pork Cheap Eats | Taipei",
+      "sourceUrl": "https://www.youtube.com/embed/Y1St1wL66l4",
+      "videoId": "Y1St1wL66l4",
+      "publishDate": "2025-05-29T21:00:43-07:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:38.560Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=Y1St1wL66l4! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "lunch-with-us",
+      "title": "S$6 Michelin Meals at Indian-Pakistani Hawker Stall in Tekka | Singapore",
+      "sourceUrl": "https://www.youtube.com/embed/C-vwkA4zGco",
+      "videoId": "C-vwkA4zGco",
+      "publishDate": "2025-06-04T21:00:28-07:00",
+      "status": "available",
+      "segmentCount": 180,
+      "transcript": "C-vwkA4zGco/transcript.json",
+      "retrievedAt": "2026-10-11T18:45:38.249Z"
+    },
+    {
+      "slug": "lunch-with-us",
+      "title": "Taiwan-style Bento Meals With Old-School Touch & Retro Vibe | Taipei",
+      "sourceUrl": "https://www.youtube.com/embed/uN64AgpxHAU",
+      "videoId": "uN64AgpxHAU",
+      "publishDate": "2025-05-30T21:01:04-07:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:40.135Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=uN64AgpxHAU! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "lunch-with-us",
+      "title": "Taiwan's Karaoke Cabbie Takes Us To Comfort Food 'Club' | Taipei",
+      "sourceUrl": "https://www.youtube.com/embed/wX9KKu0cpOo",
+      "videoId": "wX9KKu0cpOo",
+      "publishDate": "2025-05-29T21:01:09-07:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:40.746Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=wX9KKu0cpOo! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "fertility-rate-sgp",
+      "title": "Frontline | Fertility rate falls to 0.87 Are Singaporeans going extinct?!",
+      "sourceUrl": "https://www.youtube.com/embed/p5xyxnfQVlk",
+      "videoId": "p5xyxnfQVlk",
+      "publishDate": "2026-04-15T06:51:53-07:00",
+      "status": "available",
+      "segmentCount": 496,
+      "transcript": "p5xyxnfQVlk/transcript.json",
+      "retrievedAt": "2026-10-11T18:45:45.347Z"
+    },
+    {
+      "slug": "fertility-rate-sgp",
+      "title": "Frontline | Who Says Caring for Parents Is Only for Women?",
+      "sourceUrl": "https://www.youtube.com/embed/Up8c6SZ5s-w",
+      "videoId": "Up8c6SZ5s-w",
+      "publishDate": "2026-05-30T19:30:27-07:00",
+      "status": "available",
+      "segmentCount": 319,
+      "transcript": "Up8c6SZ5s-w/transcript.json",
+      "retrievedAt": "2026-10-11T18:45:47.653Z"
+    },
+    {
+      "slug": "fertility-rate-sgp",
+      "title": "前线追踪 | 假按摩，真色情？ 前私会党候选帮主揭乱象内幕",
+      "sourceUrl": "https://www.youtube.com/embed/nBP1A1oEq9k",
+      "videoId": "nBP1A1oEq9k",
+      "publishDate": "2026-06-20T16:30:27-07:00",
+      "status": "available",
+      "segmentCount": 416,
+      "transcript": "nBP1A1oEq9k/transcript.json",
+      "retrievedAt": "2026-10-11T18:45:50.041Z"
+    },
+    {
+      "slug": "social-media-addiction",
+      "title": "前线追踪 | 深陷社媒四年 他删光所有应用",
+      "sourceUrl": "https://www.youtube.com/embed/tZ5tjTqomvg",
+      "videoId": "tZ5tjTqomvg",
+      "publishDate": "2026-02-24T03:56:52-08:00",
+      "status": "available",
+      "segmentCount": 164,
+      "transcript": "tZ5tjTqomvg/transcript.json",
+      "retrievedAt": "2026-10-11T18:45:53.074Z"
+    },
+    {
+      "slug": "into-the-gym",
+      "title": "坤達對決世界球后戴資穎，看小戴挑戰100秒20宮格羽球準度挑戰！【 EP1 】",
+      "sourceUrl": "https://www.youtube.com/embed/By-B1i4-ycM",
+      "videoId": "By-B1i4-ycM",
+      "publishDate": "2020-10-02T06:00:02-07:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:44.884Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=By-B1i4-ycM! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "into-the-gym",
+      "title": "坤達揪Joeman健身，意外發現防綠帽神器【EP2】",
+      "sourceUrl": "https://www.youtube.com/embed/GMptm0xWmDE",
+      "videoId": "GMptm0xWmDE",
+      "publishDate": "2020-10-09T06:00:04-07:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:45.540Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=GMptm0xWmDE! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "into-the-gym",
+      "title": "坤達揪 法國人酷KU健身，進階版炸裂胸肌訓練。KU：竟然有這種方法？！【EP3】feat.酷的夢",
+      "sourceUrl": "https://www.youtube.com/embed/VWjZghxpRIQ",
+      "videoId": "VWjZghxpRIQ",
+      "publishDate": "2020-10-16T06:00:09-07:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:46.288Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=VWjZghxpRIQ! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "into-the-gym",
+      "title": "袁艾菲為金鐘獻上深V裸背，坤達以美背三式相助艾菲【EP4】",
+      "sourceUrl": "https://www.youtube.com/embed/2Edw6oepr4Q",
+      "videoId": "2Edw6oepr4Q",
+      "publishDate": "2020-10-23T06:00:01-07:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:47.317Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=2Edw6oepr4Q! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "into-the-gym",
+      "title": "每朝女神張景嵐性感報到！獨家小蠻腰健身菜單，坤達:「我們可以偷偷的⋯」【EP5】",
+      "sourceUrl": "https://www.youtube.com/embed/euwdFe45FCo",
+      "videoId": "euwdFe45FCo",
+      "publishDate": "2020-10-30T06:00:17-07:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:48.090Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=euwdFe45FCo! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "into-the-gym",
+      "title": "全壘打大賽！坤達蔡哥拚盡尊嚴，努力揮擊。陳晨威：讓你們拿鋁棒【EP6】",
+      "sourceUrl": "https://www.youtube.com/embed/Uw2HHGLbybg",
+      "videoId": "Uw2HHGLbybg",
+      "publishDate": "2020-11-06T05:00:11-08:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:49.064Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=Uw2HHGLbybg! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "into-the-gym",
+      "title": "雙生鬥士 Yin&Yei 籃壇帥度破表，籃球一哥 坤達表情逐漸母湯！【EP7】",
+      "sourceUrl": "https://www.youtube.com/embed/ydZs8oBhySQ",
+      "videoId": "ydZs8oBhySQ",
+      "publishDate": "2020-11-13T05:00:13-08:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:49.729Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=ydZs8oBhySQ! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "into-the-gym",
+      "title": "UFC八角鐵籠的終極格鬥賽？ 夢多直誇天才！坤達：我有看第一神拳？！【EP8】",
+      "sourceUrl": "https://www.youtube.com/embed/KhUUDk4-4bs",
+      "videoId": "KhUUDk4-4bs",
+      "publishDate": "2020-11-20T05:00:07-08:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:50.612Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=KhUUDk4-4bs! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "into-the-gym",
+      "title": "坤達使出回憶殺！Johnson@mirror眾星開箱體驗！【EP9】坤達一打十超精彩健身魔鏡開箱合集",
+      "sourceUrl": "https://www.youtube.com/embed/Tftq_1S8FYw",
+      "videoId": "Tftq_1S8FYw",
+      "publishDate": "2020-11-27T05:00:30-08:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:51.561Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=Tftq_1S8FYw! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "uniqlo",
+      "title": "We Try UNIQLO’s Private Shopping Services, For Customers With Special Needs",
+      "sourceUrl": "https://www.youtube.com/embed/HWArUxR66qc",
+      "videoId": "HWArUxR66qc",
+      "publishDate": "2023-12-18T05:00:11-08:00",
+      "status": "available",
+      "segmentCount": 278,
+      "transcript": "HWArUxR66qc/transcript.json",
+      "retrievedAt": "2026-10-11T18:46:13.672Z"
+    },
+    {
+      "slug": "living-with-chronic-pain",
+      "title": "Living With Chronic Pain That Even Doctors Don’t Believe - This Is Fibromyalgia",
+      "sourceUrl": "https://www.youtube.com/embed/cxNqO_RsdqM",
+      "videoId": "cxNqO_RsdqM",
+      "publishDate": "2024-01-19T20:00:16-08:00",
+      "status": "available",
+      "segmentCount": 335,
+      "transcript": "cxNqO_RsdqM/transcript.json",
+      "retrievedAt": "2026-10-11T18:46:16.376Z"
+    },
+    {
+      "slug": "work-in-sgp",
+      "title": "I Build Robots For A Living. Here's Why I Chose To Work In Singapore & How I'm Giving Back",
+      "sourceUrl": "https://www.youtube.com/embed/asVm61iRhmA",
+      "videoId": "asVm61iRhmA",
+      "publishDate": "2024-11-14T05:00:03-08:00",
+      "status": "request-blocked",
+      "checkedAt": "2026-10-11T18:52:14.598Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=asVm61iRhmA! This is most likely caused by:\n\nYouTube is blocking requests from your IP. This usually is due to one of the following reasons:\n- You have done too many requests and your IP has been blocked by YouTube\n- You are doing requests from an IP belonging to a cloud provider (like AWS, Google Cloud Platform, Azure, etc.). Unfortunately, most IPs from cloud providers are blocked by YouTube.\n\nWays to work around this are explained in the \"Working around IP bans\" section of the README (https://github.com/jdepoix/youtube-transcript-api?tab=readme-ov-file#working-around-ip-bans-requestblocked-or-ipblocked-exception).\n\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "stay-at-home-dad",
+      "title": "I Spent 14 Years As A Stay-At-Home Dad For My Son. Here's Why It's Time To Reclaim My Life",
+      "sourceUrl": "https://www.youtube.com/embed/8nRIG_hO_PU",
+      "videoId": "8nRIG_hO_PU",
+      "publishDate": "2024-06-15T06:00:07-07:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:54.910Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=8nRIG_hO_PU! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "lion-dancers",
+      "title": "Gen Z Lion Dancers Of TikTok Fame: Is Passion Enough?",
+      "sourceUrl": "https://www.youtube.com/embed/k_FZwxEskO4",
+      "videoId": "k_FZwxEskO4",
+      "publishDate": "2024-09-24T06:00:47-07:00",
+      "status": "available",
+      "segmentCount": 202,
+      "transcript": "k_FZwxEskO4/transcript.json",
+      "retrievedAt": "2026-10-11T18:46:23.719Z"
+    },
+    {
+      "slug": "i-fell",
+      "title": "I Fell For An Investment Scam: Here's How They Got Me",
+      "sourceUrl": "https://www.youtube.com/embed/QMt3EdPC7-Q",
+      "videoId": "QMt3EdPC7-Q",
+      "publishDate": "2022-10-25T06:19:10-07:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:47:56.593Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=QMt3EdPC7-Q! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "i-fell",
+      "title": "I Fell For A Love Scam: How They Made It Seem So Real",
+      "sourceUrl": "https://www.youtube.com/embed/bzWprvJyzZs",
+      "videoId": "bzWprvJyzZs",
+      "publishDate": "2022-10-21T05:30:12-07:00",
+      "status": "request-blocked",
+      "checkedAt": "2026-10-11T18:47:57.658Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=bzWprvJyzZs! This is most likely caused by:\n\nYouTube is blocking requests from your IP. This usually is due to one of the following reasons:\n- You have done too many requests and your IP has been blocked by YouTube\n- You are doing requests from an IP belonging to a cloud provider (like AWS, Google Cloud Platform, Azure, etc.). Unfortunately, most IPs from cloud providers are blocked by YouTube.\n\nWays to work around this are explained in the \"Working around IP bans\" section of the README (https://github.com/jdepoix/youtube-transcript-api?tab=readme-ov-file#working-around-ip-bans-requestblocked-or-ipblocked-exception).\n\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "healthcare-heroes-alcohol-care",
+      "title": "The Hospital That Helps Alcoholics Stay Out Of The A&E | Healthcare Heroes",
+      "sourceUrl": "https://www.youtube.com/embed/9jSaLjCz2DI",
+      "videoId": "9jSaLjCz2DI",
+      "publishDate": "2023-06-17T06:00:13-07:00",
+      "status": "request-blocked",
+      "checkedAt": "2026-10-11T18:47:58.275Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=9jSaLjCz2DI! This is most likely caused by:\n\nYouTube is blocking requests from your IP. This usually is due to one of the following reasons:\n- You have done too many requests and your IP has been blocked by YouTube\n- You are doing requests from an IP belonging to a cloud provider (like AWS, Google Cloud Platform, Azure, etc.). Unfortunately, most IPs from cloud providers are blocked by YouTube.\n\nWays to work around this are explained in the \"Working around IP bans\" section of the README (https://github.com/jdepoix/youtube-transcript-api?tab=readme-ov-file#working-around-ip-bans-requestblocked-or-ipblocked-exception).\n\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "joshimath-sinking-town",
+      "title": "Why Is Joshimath, India’s Himalayan Holy Town, Sinking?",
+      "sourceUrl": "https://www.youtube.com/embed/nMIA7u84Lxo",
+      "videoId": "nMIA7u84Lxo",
+      "publishDate": "2023-09-11T06:00:39-07:00",
+      "status": "request-blocked",
+      "checkedAt": "2026-10-11T18:47:58.865Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=nMIA7u84Lxo! This is most likely caused by:\n\nYouTube is blocking requests from your IP. This usually is due to one of the following reasons:\n- You have done too many requests and your IP has been blocked by YouTube\n- You are doing requests from an IP belonging to a cloud provider (like AWS, Google Cloud Platform, Azure, etc.). Unfortunately, most IPs from cloud providers are blocked by YouTube.\n\nWays to work around this are explained in the \"Working around IP bans\" section of the README (https://github.com/jdepoix/youtube-transcript-api?tab=readme-ov-file#working-around-ip-bans-requestblocked-or-ipblocked-exception).\n\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "malware-scam-phone-hijack",
+      "title": "A Scammer Hijacked My Phone: How To Tell If You’ve Got Malware And What To Do",
+      "sourceUrl": "https://www.youtube.com/embed/ev0sdThXNRs",
+      "videoId": "ev0sdThXNRs",
+      "publishDate": "2023-11-23T05:00:26-08:00",
+      "status": "request-blocked",
+      "checkedAt": "2026-10-11T18:47:59.610Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=ev0sdThXNRs! This is most likely caused by:\n\nYouTube is blocking requests from your IP. This usually is due to one of the following reasons:\n- You have done too many requests and your IP has been blocked by YouTube\n- You are doing requests from an IP belonging to a cloud provider (like AWS, Google Cloud Platform, Azure, etc.). Unfortunately, most IPs from cloud providers are blocked by YouTube.\n\nWays to work around this are explained in the \"Working around IP bans\" section of the README (https://github.com/jdepoix/youtube-transcript-api?tab=readme-ov-file#working-around-ip-bans-requestblocked-or-ipblocked-exception).\n\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "mark-your-calendar",
+      "title": "EP10 萬聖節Halloween | Host: 龐蕾馨(Kate Pang )、謝穎澤(Estovan)",
+      "sourceUrl": "https://www.mewatch.sg/watch/Mark-Your-Calendar-E10-59403",
+      "videoId": null,
+      "status": "external-platform",
+      "reason": "The YouTube transcriber cannot retrieve mewatch captions."
+    },
+    {
+      "slug": "mark-your-calendar",
+      "title": "EP11 屠妖節 Deepavali | Host: 王偉良、冼慧(Amelia)",
+      "sourceUrl": "https://www.mewatch.sg/watch/Mark-Your-Calendar-E11-59523",
+      "videoId": null,
+      "status": "external-platform",
+      "reason": "The YouTube transcriber cannot retrieve mewatch captions."
+    },
+    {
+      "slug": "mark-your-calendar",
+      "title": "EP12 冬至 Winter Solstice | Host: 王偉良、何怡萱",
+      "sourceUrl": "https://www.mewatch.sg/watch/Mark-Your-Calendar-E12-59165",
+      "videoId": null,
+      "status": "external-platform",
+      "reason": "The YouTube transcriber cannot retrieve mewatch captions."
+    },
+    {
+      "slug": "mark-your-calendar",
+      "title": "EP13 聖誕節 Christmas | Host: 王偉良、冼慧(Amelia)",
+      "sourceUrl": "https://www.mewatch.sg/watch/Mark-Your-Calendar-E13-33639",
+      "videoId": null,
+      "status": "external-platform",
+      "reason": "The YouTube transcriber cannot retrieve mewatch captions."
+    },
+    {
+      "slug": "red-dot-detectives",
+      "title": "S1 EP6 Little India | Host: 葉慧馨+曾思涵",
+      "sourceUrl": "https://www.mewatch.sg/watch/Little-Red-Dot-Detectives-E6-Little-India-108949",
+      "videoId": null,
+      "status": "external-platform",
+      "reason": "The YouTube transcriber cannot retrieve mewatch captions."
+    },
+    {
+      "slug": "red-dot-detectives",
+      "title": "S2 EP5 Ang Mo Kio | Host: 葉慧馨+冼恩",
+      "sourceUrl": "https://www.mewatch.sg/watch/Little-Red-Dot-Detectives-S2-E5-180385",
+      "videoId": null,
+      "status": "external-platform",
+      "reason": "The YouTube transcriber cannot retrieve mewatch captions."
+    },
+    {
+      "slug": "i-eat-therefore",
+      "title": "I Eat Therefore I am | 我食。故我在 | E10",
+      "sourceUrl": "https://www.mewatch.sg/watch/I-Eat-Therefore-I-am-E10-78693",
+      "videoId": null,
+      "status": "external-platform",
+      "reason": "The YouTube transcriber cannot retrieve mewatch captions."
+    },
+    {
+      "slug": "guardians-vietnam",
+      "title": "The Guardians 守護者| Vietnam 越南 | Infotainment | E9",
+      "sourceUrl": "https://www.mewatch.sg/watch/The-Guardians-E9-Vietnam-70547",
+      "videoId": null,
+      "status": "external-platform",
+      "reason": "The YouTube transcriber cannot retrieve mewatch captions."
+    },
+    {
+      "slug": "marigold-ad",
+      "title": "Marigold TVC Campaign",
+      "sourceUrl": "https://www.youtube.com/embed/wSXQ0gUa2tQ",
+      "videoId": "wSXQ0gUa2tQ",
+      "publishDate": "2020-01-09T20:37:09-08:00",
+      "status": "captions-disabled",
+      "checkedAt": "2026-10-11T18:48:00.238Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=wSXQ0gUa2tQ! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "ministry-of-manpower",
+      "title": "Ministry of Manpower Singapore - Dormitory Awards 2017.",
+      "sourceUrl": "https://www.youtube.com/embed/lY_HuVLU7uQ",
+      "videoId": "lY_HuVLU7uQ",
+      "publishDate": "2017-03-14T07:23:09-07:00",
+      "status": "request-blocked",
+      "checkedAt": "2026-10-11T18:48:00.933Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=lY_HuVLU7uQ! This is most likely caused by:\n\nYouTube is blocking requests from your IP. This usually is due to one of the following reasons:\n- You have done too many requests and your IP has been blocked by YouTube\n- You are doing requests from an IP belonging to a cloud provider (like AWS, Google Cloud Platform, Azure, etc.). Unfortunately, most IPs from cloud providers are blocked by YouTube.\n\nWays to work around this are explained in the \"Working around IP bans\" section of the README (https://github.com/jdepoix/youtube-transcript-api?tab=readme-ov-file#working-around-ip-bans-requestblocked-or-ipblocked-exception).\n\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "slug": "nescafe-ad",
+      "title": "Nestlé TVC Campaign",
+      "sourceUrl": "https://www.youtube.com/embed/EiNFvWEuZ8Q",
+      "videoId": "EiNFvWEuZ8Q",
+      "publishDate": "2017-08-02T20:27:20-07:00",
+      "status": "request-blocked",
+      "checkedAt": "2026-10-11T18:48:01.675Z",
+      "reason": "Error: could not download transcript: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=EiNFvWEuZ8Q! This is most likely caused by:\n\nYouTube is blocking requests from your IP. This usually is due to one of the following reasons:\n- You have done too many requests and your IP has been blocked by YouTube\n- You are doing requests from an IP belonging to a cloud provider (like AWS, Google Cloud Platform, Azure, etc.). Unfortunately, most IPs from cloud providers are blocked by YouTube.\n\nWays to work around this are explained in the \"Working around IP bans\" section of the README (https://github.com/jdepoix/youtube-transcript-api?tab=readme-ov-file#working-around-ip-bans-requestblocked-or-ipblocked-exception).\n\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    }
+  ]
+}

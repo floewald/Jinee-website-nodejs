@@ -55,7 +55,7 @@ describe("buildSkeletonEntry()", () => {
     expect(entry.slug).toBe("event-photography");
     expect(entry.title).toBe("Event Photography");
     expect((entry as { enableDownload: boolean }).enableDownload).toBe(false);
-    expect(entry.portfolioCard).toBeDefined();
+    expect("portfolioCard" in entry ? entry.portfolioCard : undefined).toBeDefined();
   });
 
   it("builds a video skeleton with correct type and videos array", () => {
@@ -73,6 +73,11 @@ describe("buildSkeletonEntry()", () => {
     expect((entry as { videos: Array<{ embedUrl: string }> }).videos[0]?.embedUrl).toBe(
       "https://www.youtube.com/embed/dQw4w9WgXcQ"
     );
+  });
+
+  it("leaves the publish date unknown until it is verified from the video source", () => {
+    const entry = buildSkeletonEntry("video", "my-doc", "My Documentary");
+    expect((entry as { videos: Array<{ uploadDate?: string }> }).videos[0].uploadDate).toBeUndefined();
   });
 
   it("builds a social-media skeleton that matches the current Instagram-link flow", () => {
@@ -93,7 +98,7 @@ describe("buildSkeletonEntry()", () => {
 
   it("embeds the slug in the thumbnail path", () => {
     const entry = buildSkeletonEntry("video", "my-video", "My Video");
-    expect(entry.portfolioCard!.thumbnail).toContain("my-video");
+    expect("portfolioCard" in entry ? entry.portfolioCard?.thumbnail : undefined).toContain("my-video");
   });
 });
 

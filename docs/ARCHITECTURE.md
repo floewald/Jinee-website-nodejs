@@ -266,8 +266,11 @@ interface SocialMediaProject extends BaseProject {
 
 interface VideoItem {
   title: string;
-  embedUrl: string;
-  uploadDate: string; // ISO8601
+  embedUrl?: string;
+  linkUrl?: string; // external-only videos, e.g. mewatch
+  previewImage?: string;
+  description?: string | string[];
+  uploadDate?: string; // verified ISO8601 source timestamp with timezone
 }
 
 interface PortfolioCard {

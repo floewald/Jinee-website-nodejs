@@ -33,7 +33,7 @@ const VideoItemSchema = z.object({
   linkUrl: z.string().url().optional(),
   previewImage: z.string().optional(),
   description: z.union([z.string(), z.array(z.string())]).optional(),
-  uploadDate: z.string().min(1),
+  uploadDate: z.iso.datetime({ offset: true }).optional(),
 }).refine((v) => v.embedUrl || v.linkUrl, {
   message: "VideoItem must have either embedUrl or linkUrl",
 });

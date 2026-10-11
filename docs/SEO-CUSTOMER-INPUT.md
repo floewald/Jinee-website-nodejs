@@ -84,13 +84,11 @@ for those portfolio pages too.
 
 ## 6. Video upload dates (SEO-11)
 
-Video pages have structured data (VideoObject) that Google uses for Video carousels in
-search results. Google requires a real `uploadDate` for each video. Currently the site
-falls back to `"2023-01-01"` when no date is set.
+Video pages emit episode-specific `VideoObject` structured data for embedded videos with a verified publish timestamp. The transcript/source audit verified all 54 YouTube timestamps and replaced 11 inaccurate dates. The eight external mewatch episodes still need verified timestamps; their old placeholder dates were removed. Unknown dates are omitted rather than replaced with a fallback.
 
-**Needed**: For each video project, provide the approximate publish / upload date (ISO format: `YYYY-MM-DD`).
+**Needed**: For mewatch episodes, provide a source for the original publish timestamp, including timezone if available. Those episodes are linked rather than embedded, so they do not emit an on-page `VideoObject`.
 
-**File to update**: `src/content/portfolio/videography.json` — add `"uploadDate": "YYYY-MM-DD"` to each `videos[]` entry
+**File to update**: `src/content/portfolio/videography.json` — set `videos[].uploadDate` only when a source timestamp is known, for example `"2026-03-01T10:00:00+08:00"`.
 
 ---
 

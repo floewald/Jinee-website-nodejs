@@ -35,6 +35,7 @@ Current local hooks are the main quality harness:
 - `pre-push` runs `npm run check:pre-push`
   - full lint
   - full Jest suite
+  - offline transcript collector tests
   - manifest validation
   - `next build`
 

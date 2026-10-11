@@ -255,12 +255,28 @@ Open `src/content/portfolio/videography.json` and add a new entry to the JSON ar
 **Notes:**
 
 - `embedUrl` format: `https://www.youtube.com/embed/{VIDEO_ID}` — replace `{VIDEO_ID}` with the YouTube ID
-- `uploadDate` format: ISO 8601 date and time with timezone (`+08:00` for Singapore time)
+- `uploadDate`: optional, verified source publish timestamp in ISO 8601 format with timezone. Omit it when unknown; the scaffold does not invent a date. Embedded videos without a verified date are shown normally but omitted from `VideoObject` markup.
 - Videos are shown in the order listed in the `videos` array
 - `portfolioCard` is optional — omit if you don't want a card on the portfolio category page
 - `portfolioCard.previewImages`: optional array of 2–3 image paths (use `-800.webp`). When provided, the card auto-cycles through the images. If the project folder has multiple `*-800.webp` thumbnails, add up to 3 here.
 - `showSlideshow` is not used for video projects (video pages show YouTube embeds, not a photo slideshow)
 - Use `description`, `longDescription`, and per-episode `videos[].description` to describe the story, subject, or format. Do not repeat what Jinee did there — the `heading` already carries the role description.
+
+### Optional: Review copy against source captions
+
+Use the sibling `../yt-transcript` tool to collect captions and YouTube publisher metadata for editorial review:
+
+```bash
+npm run download:video-transcripts -- --slug my-video-project
+```
+
+Omit `--slug` to process the portfolio. The command requires the sibling tool's existing `.venv` installation; follow its README for setup. Set `YT_TRANSCRIPT_PATH` to override the sibling repository location. Use `--force` to refresh cached sources or retry captions reported as disabled, and `--metadata-only` to fetch publisher metadata without requesting captions.
+
+Results live in `research/video-transcripts/`, outside the published site. The index records available captions, disabled captions, request blocks, and external platforms. Valid cached captions are reused. Requests are paced and further caption requests stop when YouTube reports an IP block. Failed downloads return a non-zero exit status while retaining successful sources; mewatch links are recorded as external and require another caption source.
+
+Compare caption passages and publisher copy with the existing summaries, checking names, places, episode counts, and the actual story. Auto-captions can contain recognition errors. Write original, readable descriptions; 120–160 characters is an editorial target for concise metadata, not a Google ranking rule. Review and apply source timestamps from `metadata.json` to `videos[].uploadDate`. The collector never rewrites portfolio content automatically and never runs during builds.
+
+Video pages emit one `VideoObject` per embedded episode with a verified date, using its episode description and thumbnail. Links to videos played only on another site do not produce an on-page `VideoObject`.
 
 ### Step 5: Build
 
