@@ -200,7 +200,6 @@ function buildSkeleton(type, slug, title, { videoId = null } = {}) {
         {
           title: `<!-- Add video title -->`,
           embedUrl: videoId ? buildYouTubeEmbedUrl(videoId) : "https://www.youtube.com/embed/REPLACE_THIS_ID",
-          uploadDate: new Date().toISOString().replace(/\.\d+Z$/, "+08:00"),
         },
       ],
       portfolioCard: {

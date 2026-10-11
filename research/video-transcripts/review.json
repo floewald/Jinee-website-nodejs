@@ -1,0 +1,140 @@
+{
+  "reviewDate": "2026-10-11",
+  "method": "Compared project and episode copy with available caption passages and archived publisher descriptions. Captions may contain recognition errors; names and locations were cross-checked against publisher copy. No claim of a full visual viewing of each video.",
+  "projectUpdates": {
+    "stuck-low-pay": {
+      "basis": "Publisher description and chapters in I2CK-j-pR7M/metadata.json; captions disabled.",
+      "description": "CNA Insider follows Taiwan's young graduates facing low wages, rising rents, long commutes, and decisions about working overseas.",
+      "longDescription": "This CNA Insider documentary follows young graduates in Taiwan who struggle to save despite university degrees and steady work. Their choices include commuting long distances to avoid Taipei rents, taking several jobs, and seeking work overseas. The film connects these personal accounts with stagnant wages, rising housing costs, and questions about social housing."
+    },
+    "father-son-suhaimi": {
+      "basis": "b7YuRUi9B4s/transcript.json and publisher description; family conversations and wedding expectations.",
+      "longDescription": "Actor-comedian Suhaimi Yusof and his youngest son Sufi spend three days together, talking about growing up with a famous father, expectations around marriage, and the impact of Suhaimi's stroke. This On The Red Dot portrait follows their disagreements and shared adventures as they find room for a more open father-son relationship."
+    },
+    "7-days-archery": {
+      "basis": "Both caption files confirm novice training, increasing distance, and the 36-arrow, 15-metre, 300-point challenge.",
+      "description": "8world follows chef Eric Teo from beginner archery lessons to a 36-arrow, 300-point challenge at 15 metres, all within seven days.",
+      "longDescription": "Chef Eric Teo takes on a seven-day archery challenge in this two-part 8world programme. The first episode follows his lessons in stance, drawing the bow, scoring, and shooting at increasing distances, including a session with national-team archers. In the finale, he must shoot 36 arrows at 15 metres and reach a target of 300 points."
+    },
+    "singer-jasmin-sokko": {
+      "basis": "wTf9xqfCJcA/transcript.json and publisher description; music, financial uncertainty, creative identity, and self-worth.",
+      "description": "CNA's Dear Singapore profiles singer and producer Jasmine Sokko as she pursues music, navigates uncertainty, and rethinks success.",
+      "longDescription": "Singaporean singer and music producer Jasmine Sokko reflects on choosing an unconventional career in a society that values stability and achievement. In this Dear Singapore film, she talks about her parents' financial concerns, the unpredictability of music, and finding self-worth beyond conventional measures of success."
+    },
+    "food-wasted": {
+      "basis": "Both caption files and publisher descriptions confirm food rescue organisations, consumer choices, rooftop farming, and home growing.",
+      "longDescription": "Two chapters from CNA Insider's Food, Wasted series examine how edible food is discarded and how city residents can reconnect with what they eat. The first follows food rescue efforts around unpopular cuts, imperfect produce, and near-expiry goods in Singapore, Hong Kong, and Taiwan. The third explores rooftop farms, community growing, and home gardens as ways to understand the effort behind food production."
+    },
+    "health-wang-zhen": {
+      "basis": "Four publisher descriptions; captions disabled. Describes reporting topics rather than offering medical advice.",
+      "description": "8world anchor Wang Zheng explores midlife health in Singapore, from hawker food and mental health to blood pressure, cholesterol, and menopause."
+    },
+    "re-old-times": {
+      "basis": "Five publisher descriptions; captions disabled. Specific lost landmarks replace a generic playground claim.",
+      "description": "Five 8world heritage stories revisit Katong, Wayang Street, Fort Canning, the Satay Club, and Jubilee Theatre through Singaporeans' memories.",
+      "longDescription": "This five-part Mandarin-language 8world series revisits Singapore through the memories of former residents, performers, and regular visitors. The stories move from Katong's pageant fashions and Wayang Street's theatres and hawkers to Fort Canning's National Theatre, Van Kleef Aquarium, and River Valley Swimming Pool. Other episodes recall the old Satay Club and the vanished Jubilee Theatre on North Bridge Road."
+    },
+    "scdf-project": {
+      "basis": "Both caption files and publisher descriptions; 995 triage, ambulance response, hospital handover, and officers' reflections.",
+      "description": "CNA Insider follows Singapore's SCDF 995 call takers and ambulance crews, then hears officers reflect on abuse, obstacles, and emotional cases.",
+      "longDescription": "Two CNA Insider films examine Singapore's emergency medical services. One follows a 995 call through triage, ambulance dispatch, paramedic response, and the resuscitation room at Singapore General Hospital, showing how non-emergency calls compete for resources. The companion film hears SCDF officers reflect on abusive callers, drivers blocking ambulances, difficult access, and cases that stay with them."
+    },
+    "blind-kitchen-chefs": {
+      "basis": "Three caption files and publisher descriptions; Kunyah Cafe, accessible workspace, chef departure, new hire, and opening day.",
+      "description": "CNA Insider's Our Blind Kitchen follows visually impaired chefs building Kunyah Cafe in Singapore, through kitchen adaptations and staffing setbacks.",
+      "longDescription": "Our Blind Kitchen follows social entrepreneur Aaron Yeoh and visually impaired cooks as they prepare to open Kunyah Cafe at Singapore Management University. Across three episodes, the team adapts the kitchen, tests its food, and confronts differences in working styles. A chef's departure leads to a new hire with cerebral palsy just days before opening, testing both the business and its ambition to create meaningful jobs for people with disabilities."
+    },
+    "lunch-with-us": {
+      "basis": "C-vwkA4zGco/transcript.json and all four publisher descriptions; Banqiao is in New Taipei City, rather than Taipei City.",
+      "description": "Four CNA Insider food stories explore Tekka Centre, Banqiao's cheap eats, retro Taipei bentos, and a karaoke cabbie's favourite lunch stop.",
+      "longDescription": "Four Lunch With Us stories explore everyday meals in Singapore and Taiwan with local guides. In Tekka Centre, chef Rathakrishnan visits South Asian stalls and Delhi Lahori's Indian-Pakistani set meals. The Taiwan episodes follow food entrepreneur Matt Chen through Banqiao in New Taipei City, writers to an old-school pork-chop bento restaurant in Taipei, and a karaoke cabbie to the Drivers' Club in Songshan."
+    },
+    "fertility-rate-sgp": {
+      "basis": "All three caption files and publisher descriptions. The old intro excluded the third episode and incorrectly called the page a two-episode pairing.",
+      "description": "8world Frontline reports explore Singapore's fertility decisions, male caregivers, and the hidden trade behind illicit massage parlours.",
+      "longDescription": "Three episodes from 8world's Frontline current-affairs programme examine different pressures in Singapore. One brings together people with contrasting experiences of parenthood, childlessness, and fertility treatment. Another follows men caring for parents and children while balancing work and exhaustion. The third investigates how borrowed licences and concealed operators enable illicit massage businesses, with perspectives from the massage industry, traditional Chinese medicine, and a former secret-society figure."
+    },
+    "social-media-addiction": {
+      "basis": "tZ5tjTqomvg/transcript.json; a 20-year-old's compulsive use, school restrictions, and guidance at home.",
+      "description": "8world Frontline follows a young Singaporean quitting compulsive social-media use, and examines school phone rules and families' responses.",
+      "longDescription": "This Frontline report follows a 20-year-old who deletes his social-media apps after four years of compulsive scrolling that affected his studies and motivation. It also visits Singapore schools with tighter phone rules and hears from students, parents, and a counsellor about whether school restrictions carry through to life at home."
+    },
+    "into-the-gym": {
+      "basis": "Nine publisher descriptions; eight guest episodes and a final highlights compilation, rather than nine distinct guest episodes.",
+      "description": "Johnson Health Tech's Taiwan web series pairs Kunda with athletes and creators for badminton, basketball, boxing, and fitness challenges.",
+      "longDescription": "Host Kunda joins athletes, entertainers, and creators in this Johnson Health Tech branded web series from Taiwan. Eight guest episodes combine sports challenges and workouts using the Johnson@Mirror fitness system, with appearances by badminton champion Tai Tzu-ying, Joeman, KU, and other guests. A ninth video brings together highlights from the season."
+    },
+    "uniqlo": {
+      "basis": "HWArUxR66qc/transcript.json and publisher description; the 2023 Access pilot and the Ang Mo Kio outlet.",
+      "description": "CNA Insider follows shoppers with visual, mobility, and sensory needs as they test UNIQLO's quiet-hour assisted shopping in Singapore.",
+      "longDescription": "This CNA Insider feature follows shoppers testing UNIQLO's 2023 Access pilot at its Ang Mo Kio outlet in Singapore. Their experiences show how quiet shopping hours, personal assistance, wider walkways, and an accessible fitting room can make a difference for people with visual impairments, wheelchair users, and people with autism or sensory sensitivities."
+    },
+    "living-with-chronic-pain": {
+      "basis": "cxNqO_RsdqM/transcript.json and publisher description; four personal accounts, delayed diagnoses, stigma, and support.",
+      "description": "Four people share life with fibromyalgia in this CNA Insider film, from delayed diagnoses and chronic pain to stigma and finding support.",
+      "longDescription": "Four people living with fibromyalgia describe chronic pain, fatigue, and the uncertainty of seeking a diagnosis when routine tests offer few answers. This CNA Insider documentary follows their experiences of being disbelieved, managing everyday life, and finding support from family, partners, and other people with the condition."
+    },
+    "work-in-sgp": {
+      "basis": "Publisher description; caption requests blocked. Company and subject names are confirmed in source copy.",
+      "description": "CNA Insider profiles Thai robotics engineer Krittin Kawkeeree at Singapore start-up dConstruct, building navigation systems and mentoring interns.",
+      "longDescription": "Thai-born robotics engineer Krittin Kawkeeree builds autonomous navigation systems at Singapore start-up dConstruct. This CNA Insider profile looks at how his work supports the company's robots and 3D mapping tools, and follows his role in training local interns to become engineers. The film was produced in partnership with Singapore's Ministry of Manpower."
+    },
+    "stay-at-home-dad": {
+      "basis": "Publisher description; captions disabled. The son's conditions and the father's tai chi are stated in source copy.",
+      "description": "CNA Insider follows Lee Kwong Luen, a Singapore father rebuilding his identity after 14 years caring for a son with autism and haemophilia B.",
+      "longDescription": "Lee Kwong Luen spent 14 years as a stay-at-home father caring for his son, who has autism and haemophilia B. In this CNA Insider portrait, he talks about criticism of his caregiving role, isolation, and depression. The film also follows how tai chi helps him begin to reclaim time and an identity of his own."
+    },
+    "lion-dancers": {
+      "basis": "k_FZwxEskO4/transcript.json and publisher description. Corrects the unsupported general history and adult-career framing.",
+      "description": "CNA Insider follows Nicolas Goh's young Singapore lion-dance troupe, recruited through TikTok, as they train, handle conflicts, and compete.",
+      "longDescription": "Second-generation lion dancer Nicolas Goh leads Singapore's Namyang Troupe Lion Dance Centre and recruits a young team through TikTok. This CNA Insider film follows the work behind their online performances as members train for competition, navigate school and national-service commitments, and challenge stereotypes about who can take part in lion dancing."
+    },
+    "i-fell": {
+      "basis": "Both publisher descriptions; one video has captions disabled and the other was blocked. Both combine romance and investment fraud.",
+      "description": "Two CNA Insider accounts show how romance and fake cryptocurrency investments drew scam victims in, and how the losses affected their lives.",
+      "longDescription": "Two first-person accounts reconstruct scams that combined online relationships with fake cryptocurrency investments. Nana describes how a TikTok conversation led to losses and conflict within her family. Samantha, a divorcee from Malaysia, recalls an Instagram contact who used romantic promises and secrecy to gain her trust. The films follow the warning signs they recognised afterwards and the personal cost of the fraud."
+    },
+    "healthcare-heroes-alcohol-care": {
+      "basis": "Publisher description; caption requests blocked. Names the existing hospital programme without adding treatment advice.",
+      "longDescription": "Khoo Teck Puat Hospital's Alcohol-Related Frequent Attenders programme supports patients who repeatedly visit A&E with alcohol-related problems. This Healthcare Heroes film follows a community nurse and social worker on home visits, where they build trust, address practical difficulties, and help patients set realistic goals or seek further support."
+    },
+    "joshimath-sinking-town": {
+      "basis": "Publisher description; caption requests blocked. An explainer excerpt from Insight, rather than an entire documentary.",
+      "description": "CNA Insider examines why India's Himalayan town of Joshimath is sinking, linking unstable ground, drainage, construction, and climate pressure."
+    },
+    "malware-scam-phone-hijack": {
+      "basis": "Publisher description; caption requests blocked. Describes the explainer's subject without presenting new financial or security advice.",
+      "description": "CNA Insider explains how social-media adverts can lead to phone malware and bank-account theft, with warning signs and a victim's account."
+    },
+    "marigold-ad": {
+      "basis": "Publisher description; captions disabled. Product identity only; no endorsement of the advert's health claims.",
+      "description": "A Marigold commercial introduces the Pink Guava flavour of its 0% Fat Yoghurt Drink, with fruit imagery and a focus on the product launch.",
+      "longDescription": "A product-launch commercial for Marigold's Pink Guava 0% Fat Yoghurt Drink, featuring the new flavour and the drink's fruit-juice and probiotic ingredients."
+    },
+    "nescafe-ad": {
+      "basis": "Publisher description; caption requests blocked. Confirms the specific product.",
+      "description": "A Nestle commercial introduces Nescafe Gold Cappuccino, using the coffee's aroma, Arabica beans, and milk foam to tell a product-launch story.",
+      "longDescription": "A commercial for Nestle's Nescafe Gold Cappuccino, introducing the product through its Arabica coffee, aroma, and milk foam."
+    }
+  },
+  "episodeUpdates": {
+    "EFe2vDcFMRE": "Chef Eric Teo learns stance, bow handling, and scoring, then practises at increasing distances. Coaching and a session with national-team archers test his early confidence as the seven-day challenge approaches.",
+    "B0IURhVM0TE": "On day seven, Eric Teo faces six rounds of six arrows at 15 metres. He must reach 300 points out of a possible 360, bringing the week's training to a final test of accuracy and composure.",
+    "cKjnKcCKve8": "Food rescue groups in Singapore, Hong Kong, and Taiwan find buyers for unpopular chicken cuts, imperfect produce, and near-expiry goods. The episode examines how consumer preferences and retail practices send edible food to waste.",
+    "Cmh3S9EpvXA": "Rooftop farms in Hong Kong, urban growing in Singapore, and home gardeners show how raising food can change attitudes to waste. The episode follows the effort of growing and composting as city residents reconnect with their meals.",
+    "NYUWI5N6D1I": "Former visitors and a veteran performer recall Fort Canning's National Theatre, Van Kleef Aquarium, and River Valley Swimming Pool. Their memories revisit the performances and family outings of Singapore in the 1960s and 1970s.",
+    "9PjWLStxWCc": "The film follows 995 call takers, ambulance dispatchers, and paramedics through urgent cases and hospital handovers. It also examines how false alarms and non-emergency calls divert resources from patients who need immediate help.",
+    "Mc-Eg2Ehv2g": "Aaron Yeoh brings together visually impaired cooks to open Kunyah Cafe at Singapore Management University. Kitchen adaptations, recipe testing, and an early tasting session reveal the practical demands of building an inclusive food business.",
+    "BWNsK8-QzjU": "The Kunyah Cafe team hosts dinners for its supporters, but different working styles lead to a chef's departure three weeks before opening. Founder Aaron Yeoh faces the challenge of balancing the business with the team's needs.",
+    "40ixbtJvP98": "A cook with cerebral palsy joins Kunyah Cafe shortly before launch. The team works through training, customer orders, and opening-day setbacks as it tests whether the cafe can create sustainable jobs for people with disabilities.",
+    "Y1St1wL66l4": "Food entrepreneur Matt Chen explores affordable meals in Banqiao, New Taipei City, from vegetarian dishes and oyster vermicelli to braised pork rice and handmade pork-ball soup. The story meets vendors keeping everyday lunches within reach.",
+    "C-vwkA4zGco": "Chef Rathakrishnan explores South Asian cooking at Tekka Centre in Singapore's Little India. At Delhi Lahori, he meets the owner behind Indian-Pakistani set meals and watches naan baked in a charcoal tandoor.",
+    "uN64AgpxHAU": "Writers Hsieh Yi An and Chu Yu Hsun visit Dong Yi Pork Chop in Taipei's Zhongzheng District. The retro restaurant and its co-founder open a conversation about Taiwanese bento meals, food history, and the venue's former dance-hall life.",
+    "wX9KKu0cpOo": "Karaoke cabbie Tu Ching-liang takes viewers to the Drivers' Club in Taipei's Songshan District. The long-running lunch stop serves pork rice, soup, and familiar dishes to cab drivers and a growing mix of visitors.",
+    "HWArUxR66qc": "Shoppers with different access needs test UNIQLO's quiet-hour assisted shopping at its Ang Mo Kio outlet. Their visits show where personal assistance, reduced noise, wider spaces, and fitting-room aids help, and where staff training matters.",
+    "k_FZwxEskO4": "Nicolas Goh recruits young lion dancers through TikTok and prepares his Namyang troupe for competition. The film follows training, attendance problems, and the effort of bringing together members from different backgrounds.",
+    "QMt3EdPC7-Q": "Nana describes how a conversation about her dog on TikTok developed into trust in a stranger and a fake investment scheme. Her account traces the loss of more than S$64,000 and the strain it placed on her family.",
+    "bzWprvJyzZs": "Samantha, a divorcee from Malaysia, recalls an Instagram relationship built on daily messages and promises of a shared future. The supposed partner steered her towards a fake cryptocurrency platform while asking her to keep the relationship secret."
+  },
+  "deferred": "The eight mewatch episodes lack a caption source here. Their story copy is retained and their known placeholder dates are removed. The hidden Ministry of Manpower video's empty publisher description is insufficient for a new factual summary; existing copy is retained."
+}

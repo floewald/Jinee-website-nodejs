@@ -10,6 +10,7 @@
 
 import { videoProjects, getProjectBySlug, getVideoCards } from "@/lib/portfolio-config";
 import { getProjectSlideshowImages } from "@/lib/gallery-images";
+import sourceIndex from "../../../research/video-transcripts/index.json";
 
 describe("social-media-addiction project", () => {
   const project = videoProjects.find((p) => p.slug === "social-media-addiction");
@@ -106,9 +107,22 @@ describe("video projects JSON-LD data completeness", () => {
     });
   });
 
-  it("every video project has an uploadDate on its first video", () => {
+  it("known upload dates are source timestamps rather than legacy placeholders", () => {
     videoProjects.forEach((p) => {
-      expect(p.videos[0].uploadDate).toBeTruthy();
+      p.videos.forEach((video) => {
+        if (!video.uploadDate) return;
+        expect(video.uploadDate).not.toBe("2023-01-01T00:00:00+08:00");
+        expect(Number.isFinite(Date.parse(video.uploadDate))).toBe(true);
+      });
+    });
+  });
+
+  it("uses the archived source timestamps for the videos reviewed in this audit", () => {
+    sourceIndex.videos.forEach((source) => {
+      if (!source.publishDate) return;
+      const project = videoProjects.find((p) => p.slug === source.slug);
+      const video = project?.videos.find((v) => v.embedUrl === source.sourceUrl);
+      expect(video?.uploadDate).toBe(source.publishDate);
     });
   });
 
