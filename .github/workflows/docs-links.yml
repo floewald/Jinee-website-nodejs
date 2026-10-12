@@ -13,7 +13,9 @@ jobs:
       - name: Check documentation links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --verbose --no-progress README.md CONTRIBUTING.md CLAUDE.md AGENTS.md docs/**/*.md
+          # Development-server URLs are valid documentation, but do not exist on GitHub runners.
+          # Public links, including video links, remain checked.
+          args: --verbose --no-progress --exclude-loopback README.md CONTRIBUTING.md CLAUDE.md AGENTS.md docs/**/*.md
           format: markdown
           output: lychee/out.md
           fail: true
